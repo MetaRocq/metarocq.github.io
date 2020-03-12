@@ -182,31 +182,31 @@ Team & Credits
 
 <center>
 <figure><img
-src="https://github.com/MetaCoq/metacoq/raw/gh-pages/assets/abhishek-anand.jpg"
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/abhishek-anand.jpg"
 alt="Abhishek Anand" width="150px" display="inline"/>
 <img
-src="https://github.com/MetaCoq/metacoq/raw/gh-pages/assets/danil-annenkov.jpeg"
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/danil-annenkov.jpeg"
 alt="Danil Annenkov" width="150px" display="inline"/>
 <img
-src="https://github.com/MetaCoq/metacoq/raw/gh-pages/assets/simon-boulier.jpg"
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/simon-boulier.jpg"
 alt="Simon Boulier" width="150px"/><br/>
 <img
-src="https://github.com/MetaCoq/metacoq/raw/gh-pages/assets/cyril-cohen.png"
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/cyril-cohen.png"
 alt="Cyril Cohen" width="150px"/>
 <img
-src="https://github.com/MetaCoq/metacoq/raw/gh-pages/assets/yannick-forster.jpg"
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/yannick-forster.jpg"
 alt="Yannick Forster" width="150px"/>
 <img
-src="https://github.com/MetaCoq/metacoq/raw/gh-pages/assets/gregory-malecha.jpg"
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/gregory-malecha.jpg"
 alt="Gregory Malecha" width="150px"/><br/>
 <img
-src="https://github.com/MetaCoq/metacoq/raw/gh-pages/assets/matthieu-sozeau.png"
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/matthieu-sozeau.png"
 alt="Matthieu Sozeau" width="150px"/>
 <img
-src="https://github.com/MetaCoq/metacoq/raw/gh-pages/assets/nicolas-tabareau.jpg"
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/nicolas-tabareau.jpg"
 alt="Nicolas Tabareau" width="150px"/>
 <img
-src="https://github.com/MetaCoq/metacoq/raw/gh-pages/assets/theo-winterhalter.jpg"
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/theo-winterhalter.jpg"
 alt="Théo Winterhalter" width="150px"/>
 
 <figcaption>MetaCoq is developed by (left to right) 
