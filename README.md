@@ -143,6 +143,18 @@ Otherwise the level is added to the current context. It is on by default.
 There is also an "opaque" universe `fresh_universe` which is unquoted to
 a fresh level when `Strict Unquote Universe Mode` is off.
 
+Dependency graph between files
+------------------------------
+
+Generated on 2020/03/20, sources [there](https://github.com/MetaCoq/metacoq/tree/master/dependency-graph).
+
+<center>
+<img src="https://raw.githubusercontent.com/MetaCoq/metacoq.github.io/master/assets/depgraph-2020-03-20.png"
+	 alt="Dependency graph" width="700px" display="inline"/>
+</center>
+
+
+
 Papers
 ======
 
