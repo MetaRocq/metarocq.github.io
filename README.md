@@ -298,5 +298,5 @@ of Coq, to get those you will need to activate the following repositories:
 Development
 -----------
 
-See the current master branch [README](https://github.com/MetaCoq/metacoq/tree/master)
+See the current development branch [README](https://github.com/MetaCoq/metacoq/tree/master)
 file for developer installation instructions.
