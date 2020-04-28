@@ -23,7 +23,8 @@ Project Summary
 
 At the center of this project is the Template-Coq quoting library for
 Coq. The project currently has a single repository extending
-Template-Coq with additional features:
+Template-Coq with additional features. Each directory has a `README.md` file
+describing its organization.
 
 [Template-Coq](https://github.com/MetaCoq/metacoq/tree/master/template-coq/theories)
 -------------
@@ -48,9 +49,9 @@ In addition to this representation of terms, Template Coq includes:
 -------
 
 A partial type-checker for the Calculus of Inductive Constructions,
-whose extraction to ML is runable as a plugin (using command `MetaCoq
+whose extraction to ML is runnable as a plugin (using command `MetaCoq
 Check foo`). This checker uses _fuel_, so it must be passed a number
-of maximal reduction steps to perfom when calling conversion, and is
+of maximal reduction steps to perform when calling conversion, and is
 NOT verified.
 
 [PCUIC](https://github.com/MetaCoq/metacoq/tree/master/pcuic/theories)
@@ -59,28 +60,36 @@ NOT verified.
 PCUIC, the Polymorphic Cumulative Calculus of Inductive Constructions is
 a cleaned up version of the term language of Coq and its associated
 type system, equivalent to the one of Coq. This version of the
-calculus has (partial) proofs of standard metatheoretical results:
+calculus has proofs of standard metatheoretical results:
 
 - Weakening for global declarations, weakening and substitution for
   local contexts.
 
 - Confluence of reduction using a notion of parallel reduction
 
-- Validity, Subject Reduction and Principality.
+- Context conversion and validity of typing.
+
+- Subject Reduction (case/cofix reduction excluded) 
+
+- Principality: every typeable term has a smallest type.
+
+- Elimination restrictions: the elimination restrictions ensure
+  that singleton elimination (from Prop to Type) is only allowed
+  on singleton inductives in Prop.
 
 [Safe Checker](https://github.com/MetaCoq/metacoq/tree/master/safechecker/theories)
 -----
 
 Implementation of a fuel-free and verified reduction machine, conversion
 checker and type checker for PCUIC. This relies on a postulate of 
-strong normalisation of the reduction relation of PCUIC on well-typed terms.
+strong normalization of the reduction relation of PCUIC on well-typed terms.
 The extracted safe checker is available in Coq through a new vernacular command:
 
     MetaCoq SafeCheck <term>
 
 After importing `MetaCoq.SafeChecker.Loader`.
 
-To roughly compare the time used to check a definition with Coq's vanila
+To roughly compare the time used to check a definition with Coq's vanilla
 type-checker, one can use:
 
     MetaCoq CoqCheck <term>
