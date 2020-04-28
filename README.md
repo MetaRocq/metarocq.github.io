@@ -182,8 +182,8 @@ Papers
 
 - ["The MetaCoq Project"](https://www.irif.fr/~sozeau/research/publications/drafts/The_MetaCoq_Project.pdf)
   Matthieu Sozeau, Abhishek Anand, Simon Boulier, Cyril Cohen, Yannick Forster, Fabian Kunze,
-  Gregory Malecha, Nicolas Tabareau and Théo Winterhalter.
-  Extended version of the ITP 2018 paper. Submitted, September 2019.
+  Gregory Malecha, Nicolas Tabareau and Théo Winterhalter. JAR, February 2020.
+  Extended version of the ITP 2018 paper.
 
   This includes a full documentation of the Template Monad and the typing rules of PCUIC.
 
