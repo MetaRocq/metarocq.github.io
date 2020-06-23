@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/MetaCoq/metacoq.svg?branch=coq-8.11)](https://travis-ci.org/MetaCoq/metacoq)
-[![Gitter](https://badges.gitter.im/coq/metacoq.svg)](https://gitter.im/coq/metacoq?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build Status](https://travis-ci.com/MetaCoq/metacoq.svg?branch=coq-8.11)](https://travis-ci.org/MetaCoq/metacoq)
+[![MetaCoq Chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://coq.zulipchat.com)
 
 MetaCoq is a project formalizing Coq in Coq and providing tools for
 manipulating Coq terms and developing certified plugins
