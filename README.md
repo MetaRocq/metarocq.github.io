@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/MetaCoq/metacoq.svg?branch=coq-8.11)](https://travis-ci.org/MetaCoq/metacoq)
+[![Build Status](https://travis-ci.com/MetaCoq/metacoq.svg?branch=coq-8.11)](https://travis-ci.com/MetaCoq/metacoq)
 [![MetaCoq Chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://coq.zulipchat.com)
 
 MetaCoq is a project formalizing Coq in Coq and providing tools for
