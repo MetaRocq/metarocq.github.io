@@ -42,4 +42,4 @@ The associated [release](https://zenodo.org/record/3544373/files/MetaCoq/metacoq
 contains the sources of the formalization. The general [documentation](documentation) of the MetaCoq project
 also applies to this version.
 
-[documentation]: https://metacoq.github.io/metacoq/#documentation
+[documentation]: https://metacoq.github.io/#documentation
