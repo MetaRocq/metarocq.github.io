@@ -155,10 +155,10 @@ a fresh level when `Strict Unquote Universe Mode` is off.
 Dependency graph between files
 ------------------------------
 
-Generated on 2020/03/20, sources [there](https://github.com/MetaCoq/metacoq/tree/master/dependency-graph).
+Generated on 2020/09/24, sources [there](https://github.com/MetaCoq/metacoq/tree/master/dependency-graph).
 
 <center>
-<img src="https://raw.githubusercontent.com/MetaCoq/metacoq.github.io/master/assets/depgraph-2020-03-20.png"
+<img src="https://raw.githubusercontent.com/MetaCoq/metacoq.github.io/master/assets/depgraph-2020-09-24.png"
 	 alt="Dependency graph" width="700px" display="inline"/>
 </center>
 
