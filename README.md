@@ -1,3 +1,9 @@
+# MetaCoq
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/MetaCoq/metacoq.github.io/master/assets/LOGO.png" alt="MetaCoq" width="50px"/>
+</p>
+
 [![Build Status](https://travis-ci.com/MetaCoq/metacoq.svg?branch=coq-8.11)](https://travis-ci.com/MetaCoq/metacoq)
 [![MetaCoq Chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://coq.zulipchat.com)
 
@@ -5,29 +11,47 @@ MetaCoq is a project formalizing Coq in Coq and providing tools for
 manipulating Coq terms and developing certified plugins
 (i.e. translations, compilers or tactics) in Coq.
 
+
 **Quick jump**
-- [Summary](#summary)
+- [Getting started](#getting-started)
+- [Installation instructions](#installation-instructions)
 - [Documentation](#documentation)
+- [Overview of the project](#overview-of-the-project)
 - [Papers](#papers)
-- [Team](#team--credits)
-- [Installing](#installation-instructions)
+- [Team & Credits](#team--credits)
+- [Bugs](#bugs)
 
-News
-====
 
-["Coq Coq Correct! Verification of Type Checking and Erasure for Coq, in Coq"](coqcoqcorrect),
-Matthieu Sozeau, Simon Boulier, Yannick Forster, Nicolas Tabareau and Théo Winterhalter, POPL 2020.
 
-Project Summary
-===============
+## Getting started
+
+- You may want to start with a [demo](https://github.com/MetaCoq/metacoq/tree/coq-8.11/examples/demo.v).
+
+- The current branch [documentation (as light coqdoc files)](https://metacoq.github.io/html/toc.html).
+
+- The [overview](#overview-of-the-project) of the different parts of the project.
+
+
+
+## Installation instructions
+
+See [INSTALL.md](https://github.com/MetaCoq/metacoq/tree/coq-8.11/INSTALL.md)
+
+
+
+## Documentation
+
+See [DOC.md](https://github.com/MetaCoq/metacoq/tree/coq-8.11/DOC.md)
+
+
+
+## Overview of the project
 
 At the center of this project is the Template-Coq quoting library for
 Coq. The project currently has a single repository extending
-Template-Coq with additional features. Each directory has a `README.md` file
-describing its organization.
+Template-Coq with additional features. Each extension is in dedicated folder.
 
-[Template-Coq](https://github.com/MetaCoq/metacoq/tree/master/template-coq/theories)
--------------
+### [Template-Coq](https://github.com/MetaCoq/metacoq/tree/coq-8.11/template-coq)
 
 Template-Coq is a quoting library for [Coq](http://coq.inria.fr). It
 takes `Coq` terms and constructs a representation of their syntax tree as
@@ -45,8 +69,8 @@ In addition to this representation of terms, Template Coq includes:
   checker, and inserting them in the global environment, in
   the style of MTac.
 
-[Checker](https://github.com/MetaCoq/metacoq/tree/master/checker/theories)
--------
+
+### [Checker](https://github.com/MetaCoq/metacoq/tree/coq-8.11/checker)
 
 A partial type-checker for the Calculus of Inductive Constructions,
 whose extraction to ML is runnable as a plugin (using command `MetaCoq
@@ -54,8 +78,8 @@ Check foo`). This checker uses _fuel_, so it must be passed a number
 of maximal reduction steps to perform when calling conversion, and is
 NOT verified.
 
-[PCUIC](https://github.com/MetaCoq/metacoq/tree/master/pcuic/theories)
------
+
+### [PCUIC](https://github.com/MetaCoq/metacoq/tree/coq-8.11/pcuic)
 
 PCUIC, the Polymorphic Cumulative Calculus of Inductive Constructions is
 a cleaned up version of the term language of Coq and its associated
@@ -69,7 +93,7 @@ calculus has proofs of standard metatheoretical results:
 
 - Context conversion and validity of typing.
 
-- Subject Reduction (case/cofix reduction excluded) 
+- Subject Reduction (case/cofix reduction excluded)
 
 - Principality: every typeable term has a smallest type.
 
@@ -77,11 +101,11 @@ calculus has proofs of standard metatheoretical results:
   that singleton elimination (from Prop to Type) is only allowed
   on singleton inductives in Prop.
 
-[Safe Checker](https://github.com/MetaCoq/metacoq/tree/master/safechecker/theories)
------
+
+### [Safe Checker](https://github.com/MetaCoq/metacoq/tree/coq-8.11/safechecker)
 
 Implementation of a fuel-free and verified reduction machine, conversion
-checker and type checker for PCUIC. This relies on a postulate of 
+checker and type checker for PCUIC. This relies on a postulate of
 strong normalization of the reduction relation of PCUIC on well-typed terms.
 The extracted safe checker is available in Coq through a new vernacular command:
 
@@ -94,8 +118,8 @@ type-checker, one can use:
 
     MetaCoq CoqCheck <term>
 
-[Erasure](https://github.com/MetaCoq/metacoq/tree/master/erasure/theories)
-----------
+
+### [Erasure](https://github.com/MetaCoq/metacoq/tree/coq-8.11/erasure)
 
 An erasure procedure to untyped lambda-calculus accomplishing the
 same as the Extraction plugin of Coq. The extracted safe erasure is
@@ -105,72 +129,33 @@ available in Coq through a new vernacular command:
 
 After importing `MetaCoq.Erasure.Loader`.
 
-[Translations](https://github.com/MetaCoq/metacoq/tree/master/translations)
-------------
+
+### [Translations](https://github.com/MetaCoq/metacoq/tree/coq-8.11/translations)
 
 Examples of translations built on top of this:
 
-- a parametricity plugin in [translations/param_original.v](https://github.com/MetaCoq/metacoq/tree/master/translations/param_original.v)
-- a plugin to negate funext in [translations/times_bool_fun.v](https://github.com/MetaCoq/metacoq/tree/master/translations/times_bool_fun.v)
+- a parametricity plugin in [translations/param_original.v](https://github.com/MetaCoq/metacoq/tree/coq-8.11/translations/param_original.v)
 
-Documentation
-=============
+- a plugin to negate funext in [translations/times_bool_fun.v](https://github.com/MetaCoq/metacoq/tree/coq-8.11/translations/times_bool_fun.v)
 
-- You may want to start with a [demo](https://github.com/MetaCoq/metacoq/tree/master/examples/demo.v)
-- The current master branch [documentation (as light coqdoc files)](html/toc.html).
+
+### Examples
+
 - An example Coq plugin built on the Template Monad, which can be used to
-  add a constructor to any inductive type is in [examples/add_constructor.v](https://github.com/MetaCoq/metacoq/tree/master/examples/add_constructor.v)
-- The test-suite files [test-suite/erasure_test.v](https://github.com/MetaCoq/metacoq/tree/master/test-suite/erasure_test.v)
-  and [test-suite/safechecker_test.v](https://github.com/MetaCoq/metacoq/tree/master/test-suite/safechecker_test.v) show example
+  add a constructor to any inductive type is in [examples/add_constructor.v](https://github.com/MetaCoq/metacoq/tree/coq-8.11/examples/add_constructor.v)
+
+- The test-suite files [test-suite/erasure_test.v](https://github.com/MetaCoq/metacoq/tree/coq-8.11/test-suite/erasure_test.v)
+  and [test-suite/safechecker_test.v](https://github.com/MetaCoq/metacoq/tree/coq-8.11/test-suite/safechecker_test.v) show example
   uses (and current limitations of) the verified checker and erasure.
 
-ident vs. qualid. vs kername
----------------------------
-
-MetaCoq uses three types convertible to `string` which have a different intended meaning:
-
-- `ident` is the type of identifiers, they should not contains any dot.
-  E.g. `nat`
-
-- `qualid` is the type of partially qualified names.
-  E.g. `Datatypes.nat`
-
-- `kername` is the type of fully qualified names.
-  E.g. `Coq.Init.Datatypes.nat`
-
-Quoting always produce fully qualified names. On the converse, unquoting allow to
-have only partially qualified names and rely on Coq to resolve them. The commands
-of the TemplateMonad also allow partially qualified names.
-
-Options
--------
-
-`Set / Unset Strict Unquote Universe Mode`. When this mode is on,
-the unquoting of a universe level fails if this level does not exists.
-Otherwise the level is added to the current context. It is on by default.
-
-There is also an "opaque" universe `fresh_universe` which is unquoted to
-a fresh level when `Strict Unquote Universe Mode` is off.
-
-Dependency graph between files
-------------------------------
-
-Generated on 2020/09/24, sources [there](https://github.com/MetaCoq/metacoq/tree/master/dependency-graph).
-
-<center>
-<img src="https://raw.githubusercontent.com/MetaCoq/metacoq.github.io/master/assets/depgraph-2020-09-24.png"
-	 alt="Dependency graph" width="700px" display="inline"/>
-</center>
 
 
+## Papers
 
-Papers
-======
-
-- ["Coq Coq Correct! Verification of Type Checking and Erasure for Coq, in Coq"](coqcoqcorrect)
+- ["Coq Coq Correct! Verification of Type Checking and Erasure for Coq, in Coq"](https://github.com/MetaCoq/metacoq/tree/CoqCoqCorrect)
   Matthieu Sozeau, Simon Boulier, Yannick Forster, Nicolas Tabareau
   and Théo Winterhalter. POPL 2020, New Orleans.
-  
+
 - ["Coq Coq Codet! Towards a Verified Toolchain for Coq in
   MetaCoq"](http://www.irif.fr/~sozeau/research/publications/Coq_Coq_Codet-CoqWS19.pdf)
   Matthieu Sozeau, Simon Boulier, Yannick Forster, Nicolas Tabareau and
@@ -198,16 +183,17 @@ Papers
 
 - The system was presented at [Coq'PL 2018](https://popl18.sigplan.org/event/coqpl-2018-typed-template-coq)
 
-Team & Credits
-=======
 
-<center>
-<figure><img
+
+## Team & Credits
+
+<p align="center">
+<img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/abhishek-anand.jpg"
-alt="Abhishek Anand" width="150px" display="inline"/>
+alt="Abhishek Anand" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/danil-annenkov.jpeg"
-alt="Danil Annenkov" width="150px" display="inline"/>
+alt="Danil Annenkov" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/simon-boulier.jpg"
 alt="Simon Boulier" width="150px"/><br/>
@@ -230,19 +216,18 @@ alt="Nicolas Tabareau" width="150px"/>
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/theo-winterhalter.jpg"
 alt="Théo Winterhalter" width="150px"/>
 
-<figcaption>MetaCoq is developed by (left to right) 
+MetaCoq is developed by (left to right)
 <a href="https://github.com/aa755">Abhishek Anand</a>,
 <a href="https://github.com/annenkov">Danil Annenkov</a>,
-<a href="https://github.com/simonboulier">Simon Boulier</a>,
+<a href="https://github.com/SimonBoulier">Simon Boulier</a>,
 <a href="https://github.com/CohenCyril">Cyril Cohen</a>,
 <a href="https://github.com/yforster">Yannick Forster</a>,
 <a href="https://github.com/gmalecha">Gregory Malecha</a>,
 <a href="https://github.com/mattam82">Matthieu Sozeau</a>,
 <a href="https://github.com/Tabareau">Nicolas Tabareau</a> and
 <a href="https://github.com/TheoWinterhalter">Théo Winterhalter</a>.
-</figcaption>
-</figure>
-</center>
+</p>
+
 
 ```
 Copyright (c) 2014-2020 Gregory Malecha
@@ -252,60 +237,10 @@ Copyright (c) 2018-2020 Danil Annenkov, Yannick Forster, Théo Winterhalter
 ```
 
 This software is distributed under the terms of the MIT license.
-See [LICENSE](https://github.com/MetaCoq/metacoq/tree/master/LICENSE) for details.
-
-Bugs
-====
-
-Please report any bugs (or feature requests) on the github [issue tracker](https://github.com/MetaCoq/metacoq/issues).
+See [LICENSE](https://github.com/MetaCoq/metacoq/tree/coq-8.11/LICENSE) for details.
 
 
-Installation instructions
-=========================
 
-Installing with OPAM
------------------
+## Bugs
 
-The easiest way to get all packages is through [`opam`](http://opam.ocaml.org).
-See [Coq's opam documentation](https://coq.inria.fr/opam-using.html)
-for installing an `opam` switch for Coq.
-See [releases](https://github.com/MetaCoq/metacoq/releases) and 
-[Coq's Package Index](https://coq.inria.fr/opam/www/) for information on 
-the available releases and opam packages. 
-
-To add the Coq repository to available `opam` packages, use:
-
-    # opam repo add coq-released https://coq.inria.fr/opam/released
-
-To update the list of available packages at any point use:
-
-    # opam update
-
-Then, simply issue:
-
-    # opam install coq-metacoq
-
-MetaCoq is split into multiple packages that get all installed using the
-`coq-metacoq` meta-package:
-
- - `coq-metacoq-template` for the Template Monad and quoting plugin
- - `coq-metacoq-checker` for the UNverified checker of template-coq terms
- - `coq-metacoq-pcuic` for the PCUIC development and proof of the
-   Template-Coq -> PCUIC translation
- - `coq-metacoq-safechecker` for the verified checker on PCUIC terms
- - `coq-metacoq-erasure` for the verifed erasure from PCUIC to
-   untyped lambda-calculus.
- - `coq-metacoq-translations` for example translations from type theory
-   to type theory: e.g. variants of parametricity.
-
-There are also `.dev` packages available in the `extra-dev` repository
-of Coq, to get those you will need to activate the following repositories:
-
-    opam repo add coq-core-dev https://coq.inria.fr/opam/core-dev
-    opam repo add coq-extra-dev https://coq.inria.fr/opam/extra-dev
-    
-Development
------------
-
-See the current development branch [README](https://github.com/MetaCoq/metacoq/tree/master)
-file for developer installation instructions.
+Please report any bugs or feature requests on the github [issue tracker](https://github.com/MetaCoq/metacoq/issues).
