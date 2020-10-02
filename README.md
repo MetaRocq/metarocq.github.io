@@ -207,6 +207,9 @@ alt="Yannick Forster" width="150px"/>
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/gregory-malecha.jpg"
 alt="Gregory Malecha" width="150px"/><br/>
 <img
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/jakob-botsch-nielsen.png"
+alt="Jakob Botsch Nielsen" width="150px"/><br/>
+<img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/matthieu-sozeau.png"
 alt="Matthieu Sozeau" width="150px"/>
 <img
@@ -223,6 +226,7 @@ MetaCoq is developed by (left to right)
 <a href="https://github.com/CohenCyril">Cyril Cohen</a>,
 <a href="https://github.com/yforster">Yannick Forster</a>,
 <a href="https://github.com/gmalecha">Gregory Malecha</a>,
+<a href="https://github.com/jakobbotsch">Jakob Botsch Nielsen</a>,
 <a href="https://github.com/mattam82">Matthieu Sozeau</a>,
 <a href="https://github.com/Tabareau">Nicolas Tabareau</a> and
 <a href="https://github.com/TheoWinterhalter">Théo Winterhalter</a>.
@@ -234,6 +238,7 @@ Copyright (c) 2014-2020 Gregory Malecha
 Copyright (c) 2015-2020 Abhishek Anand, Matthieu Sozeau
 Copyright (c) 2017-2020 Simon Boulier, Nicolas Tabareau, Cyril Cohen
 Copyright (c) 2018-2020 Danil Annenkov, Yannick Forster, Théo Winterhalter
+Copyright (c) 2020 Jakob Botsch Nielsen
 ```
 
 This software is distributed under the terms of the MIT license.
