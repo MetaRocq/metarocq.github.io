@@ -208,16 +208,17 @@ src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/gregory-male
 alt="Gregory Malecha" width="150px"/><br/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/jakob-botsch-nielsen.png"
-alt="Jakob Botsch Nielsen" width="150px"/><br/>
+alt="Jakob Botsch Nielsen" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/matthieu-sozeau.png"
 alt="Matthieu Sozeau" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/nicolas-tabareau.jpg"
-alt="Nicolas Tabareau" width="150px"/>
+alt="Nicolas Tabareau" width="150px"/><br/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/theo-winterhalter.jpg"
 alt="Théo Winterhalter" width="150px"/>
+
 
 MetaCoq is developed by (left to right)
 <a href="https://github.com/aa755">Abhishek Anand</a>,
