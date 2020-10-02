@@ -218,6 +218,7 @@ alt="Nicolas Tabareau" width="150px"/><br/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/theo-winterhalter.jpg"
 alt="Théo Winterhalter" width="150px"/>
+<br/>
 
 
 MetaCoq is developed by (left to right)
