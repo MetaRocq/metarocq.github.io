@@ -165,7 +165,7 @@ Examples of translations built on top of this:
   2019](https://staff.aist.go.jp/reynald.affeldt/coq2019/), September
   2019.
 
-- ["The MetaCoq Project"](https://www.irif.fr/~sozeau/research/publications/drafts/The_MetaCoq_Project.pdf)
+- ["The MetaCoq Project"](https://hal.inria.fr/hal-02167423)
   Matthieu Sozeau, Abhishek Anand, Simon Boulier, Cyril Cohen, Yannick Forster, Fabian Kunze,
   Gregory Malecha, Nicolas Tabareau and Théo Winterhalter. JAR, February 2020.
   Extended version of the ITP 2018 paper.
