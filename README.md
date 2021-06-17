@@ -157,7 +157,7 @@ Examples of translations built on top of this:
   and Théo Winterhalter. POPL 2020, New Orleans.
 
 - ["Coq Coq Codet! Towards a Verified Toolchain for Coq in
-  MetaCoq"](http://www.irif.fr/~sozeau/research/publications/Coq_Coq_Codet-CoqWS19.pdf)
+  MetaCoq"](https://sozeau.gitlabpages.inria.fr/www/research/publications/Coq_Coq_Codet-CoqWS19.pdf)
   Matthieu Sozeau, Simon Boulier, Yannick Forster, Nicolas Tabareau and
   Théo Winterhalter. Abstract and
   [presentation](http://www.ps.uni-saarland.de/~forster/downloads/slides-coqws19.pdf)
