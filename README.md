@@ -204,17 +204,20 @@ alt="Cyril Cohen" width="150px"/>
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/yannick-forster.jpg"
 alt="Yannick Forster" width="150px"/>
 <img
+src="https://www.meven.ac/images/moi.jpg"
+alt="Meven Lennon-Bertrand" width="150px"/><br/>
+<img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/gregory-malecha.jpg"
-alt="Gregory Malecha" width="150px"/><br/>
+alt="Gregory Malecha" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/jakob-botsch-nielsen.png"
 alt="Jakob Botsch Nielsen" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/matthieu-sozeau.png"
-alt="Matthieu Sozeau" width="150px"/>
+alt="Matthieu Sozeau" width="150px"/><br/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/nicolas-tabareau.jpg"
-alt="Nicolas Tabareau" width="150px"/><br/>
+alt="Nicolas Tabareau" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/theo-winterhalter.jpg"
 alt="Théo Winterhalter" width="150px"/>
@@ -227,6 +230,7 @@ MetaCoq is developed by (left to right)
 <a href="https://github.com/SimonBoulier">Simon Boulier</a>,
 <a href="https://github.com/CohenCyril">Cyril Cohen</a>,
 <a href="https://github.com/yforster">Yannick Forster</a>,
+<a href="https://www.meven.ac">Meven Lennon-Bertrand</a>,
 <a href="https://github.com/gmalecha">Gregory Malecha</a>,
 <a href="https://github.com/jakobbotsch">Jakob Botsch Nielsen</a>,
 <a href="https://github.com/mattam82">Matthieu Sozeau</a>,
@@ -236,11 +240,11 @@ MetaCoq is developed by (left to right)
 
 
 ```
-Copyright (c) 2014-2020 Gregory Malecha
-Copyright (c) 2015-2020 Abhishek Anand, Matthieu Sozeau
-Copyright (c) 2017-2020 Simon Boulier, Nicolas Tabareau, Cyril Cohen
-Copyright (c) 2018-2020 Danil Annenkov, Yannick Forster, Théo Winterhalter
-Copyright (c) 2020 Jakob Botsch Nielsen
+Copyright (c) 2014-2021 Gregory Malecha
+Copyright (c) 2015-2021 Abhishek Anand, Matthieu Sozeau
+Copyright (c) 2017-2021 Simon Boulier, Nicolas Tabareau, Cyril Cohen
+Copyright (c) 2018-2021 Danil Annenkov, Yannick Forster, Théo Winterhalter
+Copyright (c) 2020-2021 Jakob Botsch Nielsen, Meven Lennon-Bertrand
 ```
 
 This software is distributed under the terms of the MIT license.
