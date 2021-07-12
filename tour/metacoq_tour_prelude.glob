@@ -1,0 +1,222 @@
+DIGEST 723bd4e16baa238cfbca82844aa00c7e
+FMetaCoq.Examples.metacoq_tour_prelude
+R91:96 MetaCoq.Template.config <> <> lib
+R98:106 MetaCoq.Template.Universes <> <> lib
+R108:113 MetaCoq.Template.Loader <> <> lib
+R150:157 MetaCoq.PCUIC.PCUICAst <> <> lib
+R159:171 MetaCoq.PCUIC.PCUICAstUtils <> <> lib
+R173:183 MetaCoq.PCUIC.PCUICTyping <> <> lib
+R185:198 MetaCoq.PCUIC.PCUICLiftSubst <> <> lib
+R241:251 MetaCoq.SafeChecker.PCUICErrors <> <> lib
+R253:268 MetaCoq.SafeChecker.PCUICTypeChecker <> <> lib
+R270:285 MetaCoq.SafeChecker.PCUICSafeChecker <> <> lib
+R318:326 Equations.Prop.Equations <> <> lib
+def 664:668 <> bAnon
+R676:686 MetaCoq.Template.BasicAst <> binder_name proj
+R676:686 MetaCoq.Template.BasicAst <> binder_name proj
+R698:713 MetaCoq.Template.BasicAst <> binder_relevance proj
+R691:695 MetaCoq.Template.BasicAst <> nAnon constr
+R718:725 MetaCoq.Template.BasicAst <> Relevant constr
+def 742:747 <> bNamed
+binder 749:749 <> s:1
+R757:767 MetaCoq.Template.BasicAst <> binder_name proj
+R757:767 MetaCoq.Template.BasicAst <> binder_name proj
+R782:797 MetaCoq.Template.BasicAst <> binder_relevance proj
+R772:777 MetaCoq.Template.BasicAst <> nNamed constr
+R779:779 MetaCoq.Examples.metacoq_tour_prelude <> s:1 var
+R802:809 MetaCoq.Template.BasicAst <> Relevant constr
+def 827:831 <> tImpl
+binder 833:833 <> X:2
+binder 835:835 <> Y:3
+R840:844 MetaCoq.PCUIC.PCUICAst <> tProd constr
+R846:850 MetaCoq.Examples.metacoq_tour_prelude <> bAnon def
+R852:852 MetaCoq.Examples.metacoq_tour_prelude <> X:2 var
+R855:859 MetaCoq.PCUIC.PCUICLiftSubst <> lift0 syndef
+R863:863 MetaCoq.Examples.metacoq_tour_prelude <> Y:3 var
+def 879:882 <> univ
+R887:897 MetaCoq.Template.Universes Level Level constr
+def 948:951 <> gctx
+R955:968 MetaCoq.PCUIC.PCUICAst <> global_env_ext def
+R976:976 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R979:980 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1043:1043 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R977:978 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R981:995 MetaCoq.Template.Universes <> Monomorphic_ctx constr
+R997:997 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1021:1022 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1042:1042 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R998:1015 MetaCoq.Template.Universes LevelSet singleton def
+R1017:1020 MetaCoq.Examples.metacoq_tour_prelude <> univ def
+R1023:1041 MetaCoq.Template.Universes ConstraintSet empty def
+def 1212:1227 <> check_wf_env_ext
+R1233:1245 MetaCoq.Template.config <> checker_flags class
+binder 1230:1231 <> cf:4
+R1254:1263 MetaCoq.PCUIC.PCUICAst <> global_env def
+binder 1249:1250 <> Σ:5
+binder 1266:1267 <> id:6
+R1276:1289 MetaCoq.Template.Universes <> universes_decl ind
+binder 1270:1272 <> ext:7
+R1299:1306 MetaCoq.SafeChecker.PCUICErrors <> EnvCheck ind
+R1309:1310 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R1314:1316 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R1327:1329 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R1362:1362 Coq.Init.Specif <> ::type_scope:'{'_x_':'_x_'|'_x_'}' not
+R1317:1326 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext rec
+binder 1311:1313 <> Σ':8
+R1350:1352 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R1335:1348 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext_env proj
+R1330:1332 MetaCoq.Examples.metacoq_tour_prelude <> Σ':8 var
+R1353:1353 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1356:1357 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1361:1361 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1354:1355 MetaCoq.Examples.metacoq_tour_prelude <> Σ:5 var
+R1358:1360 MetaCoq.Examples.metacoq_tour_prelude <> ext:7 var
+R1372:1372 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R1380:1383 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R1399:1406 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R1384:1395 MetaCoq.SafeChecker.PCUICSafeChecker <> check_wf_env def
+R1397:1398 MetaCoq.Examples.metacoq_tour_prelude <> Σ:5 var
+R1373:1373 MetaCoq.Template.utils.MCPrelude <> :::'('_x_';'_x_')' not
+R1375:1376 MetaCoq.Template.utils.MCPrelude <> :::'('_x_';'_x_')' not
+R1379:1379 MetaCoq.Template.utils.MCPrelude <> :::'('_x_';'_x_')' not
+binder 1377:1378 <> pf:9
+binder 1374:1374 <> G:10
+binder 1373:1379 <> pat:11
+R1407:1407 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R1417:1420 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R1453:1460 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R1421:1436 MetaCoq.SafeChecker.PCUICSafeChecker <> check_wf_env_ext def
+R1438:1439 MetaCoq.Examples.metacoq_tour_prelude <> Σ:5 var
+R1441:1442 MetaCoq.Examples.metacoq_tour_prelude <> id:6 var
+R1446:1446 MetaCoq.Examples.metacoq_tour_prelude <> G:10 var
+R1450:1452 MetaCoq.Examples.metacoq_tour_prelude <> ext:7 var
+R1408:1408 MetaCoq.Template.utils.MCPrelude <> :::'('_x_';'_x_')' not
+R1411:1412 MetaCoq.Template.utils.MCPrelude <> :::'('_x_';'_x_')' not
+R1416:1416 MetaCoq.Template.utils.MCPrelude <> :::'('_x_';'_x_')' not
+binder 1413:1415 <> pf':12
+binder 1409:1410 <> G':13
+binder 1408:1416 <> pat:14
+R1461:1463 MetaCoq.Template.monad_utils <> ret meth
+R1466:1470 Coq.Init.Specif <> exist constr
+R1612:1618 Coq.Init.Logic <> eq_refl constr
+R1475:1488 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext_env proj
+R1475:1488 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext_env proj
+R1516:1528 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext_wf proj
+R1548:1563 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext_graph proj
+R1584:1602 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext_graph_wf proj
+R1493:1493 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1496:1497 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1501:1501 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1494:1495 MetaCoq.Examples.metacoq_tour_prelude <> Σ:5 var
+R1498:1500 MetaCoq.Examples.metacoq_tour_prelude <> ext:7 var
+R1568:1569 MetaCoq.Examples.metacoq_tour_prelude <> G':13 var
+def 1634:1650 <> kername_of_string
+R1657:1662 Coq.Strings.String <> string ind
+binder 1653:1653 <> s:15
+R1667:1673 MetaCoq.Template.BasicAst <> kername def
+R1680:1680 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1690:1691 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1693:1693 Coq.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1681:1686 MetaCoq.Template.BasicAst <> MPfile constr
+R1688:1689 Coq.Lists.List ListNotations ::list_scope:'['_']' not
+R1692:1692 MetaCoq.Examples.metacoq_tour_prelude <> s:15 var
+def 1708:1722 <> make_wf_env_ext
+R1728:1740 MetaCoq.Template.config <> checker_flags class
+binder 1725:1726 <> cf:16
+R1749:1762 MetaCoq.PCUIC.PCUICAst <> global_env_ext def
+binder 1744:1745 <> Σ:17
+R1767:1774 MetaCoq.SafeChecker.PCUICErrors <> EnvCheck ind
+R1776:1785 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext rec
+R1792:1793 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R1806:1810 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R1868:1873 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:''''_x_'<-'_x_';;'_x not
+R1811:1826 MetaCoq.Examples.metacoq_tour_prelude <> check_wf_env_ext def
+R1866:1867 MetaCoq.Template.utils.MCProd <> ::pair_scope:x_'.2' not
+R1864:1865 MetaCoq.Examples.metacoq_tour_prelude <> Σ:17 var
+R1834:1850 MetaCoq.Examples.metacoq_tour_prelude <> kername_of_string def
+R1830:1831 MetaCoq.Template.utils.MCProd <> ::pair_scope:x_'.1' not
+R1828:1829 MetaCoq.Examples.metacoq_tour_prelude <> Σ:17 var
+R1794:1798 Coq.Init.Specif <> exist constr
+binder 1804:1805 <> pf:18
+binder 1800:1802 <> Σ':19
+binder 1794:1805 <> pat:20
+R1874:1876 MetaCoq.Template.monad_utils <> ret meth
+R1878:1880 MetaCoq.Examples.metacoq_tour_prelude <> Σ':19 var
+def 1895:1905 <> gctx_wf_env
+R1909:1918 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext rec
+R1959:1973 MetaCoq.Examples.metacoq_tour_prelude <> make_wf_env_ext def
+R1975:1978 MetaCoq.Examples.metacoq_tour_prelude <> gctx def
+R2011:2021 MetaCoq.SafeChecker.PCUICErrors <> CorrectDecl constr
+R2011:2021 MetaCoq.SafeChecker.PCUICErrors <> CorrectDecl constr
+R1959:1973 MetaCoq.Examples.metacoq_tour_prelude <> make_wf_env_ext def
+R1975:1978 MetaCoq.Examples.metacoq_tour_prelude <> gctx def
+def 2199:2201 <> inh
+R2207:2219 MetaCoq.Template.config <> checker_flags class
+binder 2204:2205 <> cf:21
+R2228:2237 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext rec
+binder 2223:2224 <> Σ:22
+binder 2240:2241 <> Γ:23
+binder 2243:2243 <> T:24
+R2249:2252 MetaCoq.Template.utils.MCPrelude <> ::type_scope:'∑'_x_'..'_x_','_x not
+R2254:2255 MetaCoq.Template.utils.MCPrelude <> ::type_scope:'∑'_x_'..'_x_','_x not
+binder 2253:2253 <> t:25
+R2256:2259 MetaCoq.Template.utils.MCSquash <> :::'∥'_x_'∥' not
+R2276:2279 MetaCoq.Template.utils.MCSquash <> :::'∥'_x_'∥' not
+R2260:2265 MetaCoq.PCUIC.PCUICTyping <> typing ind
+R2275:2275 MetaCoq.Examples.metacoq_tour_prelude <> T:24 var
+R2273:2273 MetaCoq.Examples.metacoq_tour_prelude <> t:25 var
+R2270:2271 MetaCoq.Examples.metacoq_tour_prelude <> Γ:23 var
+R2267:2268 MetaCoq.Examples.metacoq_tour_prelude <> Σ:22 var
+def 2295:2303 <> check_inh
+R2309:2321 MetaCoq.Template.config <> checker_flags class
+binder 2306:2307 <> cf:26
+R2330:2339 MetaCoq.SafeChecker.PCUICSafeChecker <> wf_env_ext rec
+binder 2325:2326 <> Σ:27
+binder 2342:2343 <> Γ:28
+R2353:2356 MetaCoq.Template.utils.MCSquash <> :::'∥'_x_'∥' not
+R2371:2374 MetaCoq.Template.utils.MCSquash <> :::'∥'_x_'∥' not
+R2357:2365 MetaCoq.PCUIC.PCUICTyping <> :::'wf_local'_x_x not
+R2368:2368 MetaCoq.PCUIC.PCUICTyping <> :::'wf_local'_x_x not
+R2366:2367 MetaCoq.Examples.metacoq_tour_prelude <> Σ:27 var
+R2369:2370 MetaCoq.Examples.metacoq_tour_prelude <> Γ:28 var
+binder 2346:2349 <> wfΓ:29
+binder 2377:2377 <> t:30
+binder 2380:2380 <> T:31
+R2385:2397 MetaCoq.SafeChecker.PCUICErrors <> typing_result ind
+R2400:2402 MetaCoq.Examples.metacoq_tour_prelude <> inh def
+R2410:2410 MetaCoq.Examples.metacoq_tour_prelude <> T:31 var
+R2407:2408 MetaCoq.Examples.metacoq_tour_prelude <> Γ:28 var
+R2404:2405 MetaCoq.Examples.metacoq_tour_prelude <> Σ:27 var
+R2422:2425 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:x_'<-'_x_';;'_x not
+R2470:2475 MetaCoq.Template.monad_utils MCMonadNotation ::monad_scope:x_'<-'_x_';;'_x not
+R2426:2447 MetaCoq.SafeChecker.PCUICSafeChecker <> check_type_wf_env_fast def
+R2468:2468 MetaCoq.Examples.metacoq_tour_prelude <> T:31 var
+R2460:2460 MetaCoq.Examples.metacoq_tour_prelude <> t:30 var
+R2455:2458 MetaCoq.Examples.metacoq_tour_prelude <> wfΓ:29 var
+R2452:2453 MetaCoq.Examples.metacoq_tour_prelude <> Γ:28 var
+R2449:2450 MetaCoq.Examples.metacoq_tour_prelude <> Σ:27 var
+binder 2419:2421 <> prf:32
+R2476:2478 MetaCoq.Template.monad_utils <> ret meth
+R2480:2480 MetaCoq.Template.utils.MCPrelude <> :::'('_x_';'_x_')' not
+R2482:2483 MetaCoq.Template.utils.MCPrelude <> :::'('_x_';'_x_')' not
+R2487:2487 MetaCoq.Template.utils.MCPrelude <> :::'('_x_';'_x_')' not
+R2481:2481 MetaCoq.Examples.metacoq_tour_prelude <> t:30 var
+R2484:2486 MetaCoq.Examples.metacoq_tour_prelude <> prf:32 var
+R2544:2547 MetaCoq.Template.utils.MCSquash <> :::'∥'_x_'∥' not
+R2562:2565 MetaCoq.Template.utils.MCSquash <> :::'∥'_x_'∥' not
+R2548:2556 MetaCoq.PCUIC.PCUICTyping <> :::'wf_local'_x_x not
+R2558:2558 MetaCoq.PCUIC.PCUICTyping <> :::'wf_local'_x_x not
+R2544:2547 MetaCoq.Template.utils.MCSquash <> :::'∥'_x_'∥' not
+R2562:2565 MetaCoq.Template.utils.MCSquash <> :::'∥'_x_'∥' not
+R2548:2556 MetaCoq.PCUIC.PCUICTyping <> :::'wf_local'_x_x not
+R2558:2558 MetaCoq.PCUIC.PCUICTyping <> :::'wf_local'_x_x not
+R2570:2572 MetaCoq.Examples.metacoq_tour_prelude <> inh def
+R2570:2572 MetaCoq.Examples.metacoq_tour_prelude <> inh def
+R2947:2949 MetaCoq.Examples.metacoq_tour_prelude <> inh def
+R2947:2949 MetaCoq.Examples.metacoq_tour_prelude <> inh def
+R2613:2621 MetaCoq.Examples.metacoq_tour_prelude <> check_inh def
+R2709:2715 MetaCoq.SafeChecker.PCUICErrors <> Checked constr
+R2709:2715 MetaCoq.SafeChecker.PCUICErrors <> Checked constr
+R2746:2754 MetaCoq.SafeChecker.PCUICErrors <> TypeError constr
+R2746:2754 MetaCoq.SafeChecker.PCUICErrors <> TypeError constr
+R2795:2814 MetaCoq.SafeChecker.PCUICErrors <> string_of_type_error def
