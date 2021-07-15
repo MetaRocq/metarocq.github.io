@@ -100,98 +100,160 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
 </li>
 </ul>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon --></pre><div class="doc">
+<a id="lab2"></a><h2 class="section">The term AST</h2>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">From</span> MetaCoq.Template <span class="kn">Require</span> config utils All.</span></span><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">From</span> MetaCoq.Template <span class="kn">Require Import</span> BasicAst TemplateMonad monad_utils.</span></span><span class="alectryon-wsp">
+</span></span><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">From</span> MetaCoq.Template <span class="kn">Require Import</span> BasicAst Ast.</span></span><span class="alectryon-wsp">
 </span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk0" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk0"><span class="highlight"><span class="kn">Print</span> <span class="nf">Ast</span>.term.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">term</span> : <span class="kt">Type</span> :=
-    tRel : nat -&gt; Ast.term
-  | tVar : <span class="kn">ident</span> -&gt; Ast.term
-  | tEvar : nat -&gt; list Ast.term -&gt; Ast.term
-  | tSort : Universes.<span class="kn">Universe</span>.t -&gt; Ast.term
-  | tCast : Ast.term -&gt;
-            cast_kind -&gt; Ast.term -&gt; Ast.term
-  | tProd : aname -&gt; Ast.term -&gt; Ast.term -&gt; Ast.term
-  | tLambda : aname -&gt;
-              Ast.term -&gt; Ast.term -&gt; Ast.term
-  | tLetIn : aname -&gt;
-             Ast.term -&gt;
-             Ast.term -&gt; Ast.term -&gt; Ast.term
-  | tApp : Ast.term -&gt; list Ast.term -&gt; Ast.term
-  | tConst : kername -&gt;
-             Universes.<span class="kn">Instance</span>.t -&gt; Ast.term
-  | tInd : inductive -&gt;
-           Universes.<span class="kn">Instance</span>.t -&gt; Ast.term
+    tRel : nat -&gt; term
+  | tVar : <span class="kn">ident</span> -&gt; term
+  | tEvar : nat -&gt; list term -&gt; term
+  | tSort : <span class="kn">Universe</span>.t -&gt; term
+  | tCast : term -&gt; cast_kind -&gt; term -&gt; term
+  | tProd : aname -&gt; term -&gt; term -&gt; term
+  | tLambda : aname -&gt; term -&gt; term -&gt; term
+  | tLetIn : aname -&gt; term -&gt; term -&gt; term -&gt; term
+  | tApp : term -&gt; list term -&gt; term
+  | tConst : kername -&gt; <span class="kn">Instance</span>.t -&gt; term
+  | tInd : inductive -&gt; <span class="kn">Instance</span>.t -&gt; term
   | tConstruct : inductive -&gt;
-                 nat -&gt;
-                 Universes.<span class="kn">Instance</span>.t -&gt; Ast.term
+                 nat -&gt; <span class="kn">Instance</span>.t -&gt; term
   | tCase : inductive * nat * relevance -&gt;
-            Ast.term -&gt;
-            Ast.term -&gt;
-            list (nat * Ast.term) -&gt; Ast.term
-  | tProj : projection -&gt; Ast.term -&gt; Ast.term
-  | tFix : mfixpoint Ast.term -&gt; nat -&gt; Ast.term
-  | tCoFix : mfixpoint Ast.term -&gt; nat -&gt; Ast.term
-  | tInt : Int63.int -&gt; Ast.term
-  | tFloat : PrimFloat.float -&gt; Ast.term
+            term -&gt; term -&gt; list (nat * term) -&gt; term
+  | tProj : projection -&gt; term -&gt; term
+  | tFix : mfixpoint term -&gt; nat -&gt; term
+  | tCoFix : mfixpoint term -&gt; nat -&gt; term
+  | tInt : Int63.int -&gt; term
+  | tFloat : PrimFloat.float -&gt; term
 
-<span class="kn">Arguments</span> Ast.tRel _%nat_scope
-<span class="kn">Arguments</span> Ast.tEvar _%nat_scope _%list_scope
-<span class="kn">Arguments</span> Ast.tApp _ _%list_scope
-<span class="kn">Arguments</span> Ast.tConstruct _ _%nat_scope _
-<span class="kn">Arguments</span> Ast.tCase _ _ _ _%list_scope
-<span class="kn">Arguments</span> Ast.tFix _ _%nat_scope
-<span class="kn">Arguments</span> Ast.tCoFix _ _%nat_scope</span></blockquote></div></div></small><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk1" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk1"><span class="highlight"><span class="kn">Print</span> <span class="nf">Ast</span>.global_env.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">Ast.global_env = 
-list (kername * Ast.global_decl)
+<span class="kn">Arguments</span> tRel _%nat_scope
+<span class="kn">Arguments</span> tEvar _%nat_scope _%list_scope
+<span class="kn">Arguments</span> tApp _ _%list_scope
+<span class="kn">Arguments</span> tConstruct _ _%nat_scope _
+<span class="kn">Arguments</span> tCase _ _ _ _%list_scope
+<span class="kn">Arguments</span> tFix _ _%nat_scope
+<span class="kn">Arguments</span> tCoFix _ _%nat_scope</span></blockquote></div></div></small><span class="alectryon-wsp">
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk1" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk1"><span class="highlight"><span class="kn">Print</span> <span class="nf">Ast</span>.global_env.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">global_env = list (kername * global_decl)
      : <span class="kt">Type</span></span></blockquote></div></div></small><span class="alectryon-wsp">
 </span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk2" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk2"><span class="highlight"><span class="kn">Print</span> <span class="nf">Ast</span>.global_decl.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">global_decl</span> : <span class="kt">Type</span> :=
-    ConstantDecl : Ast.constant_body -&gt;
-                   Ast.global_decl
-  | InductiveDecl : Ast.mutual_inductive_body -&gt;
-                    Ast.global_decl</span></blockquote></div></div></small></span></pre><div class="doc">
-<a id="lab2"></a><h2 class="section">The Template monad</h2>
-</div><pre class="alectryon-io"><!-- Generator: Alectryon --></pre><div class="doc">
+    ConstantDecl : constant_body -&gt; global_decl
+  | InductiveDecl : mutual_inductive_body -&gt;
+                    global_decl</span></blockquote></div></div></small></span></pre><div class="doc">
 <a id="lab3"></a><h3 class="section">Reification/Quoting</h3>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">MetaCoq Quote Definition</span> <span class="nf">reifx</span> := (<span class="kr">fun</span> <span class="nv">x</span> : nat =&gt; x).</span></span><span class="alectryon-wsp">
 </span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk3" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk3"><span class="highlight"><span class="kn">Print</span> <span class="nf">reifx</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">reifx = 
-Ast.tLambda
+tLambda
   {|
     binder_name := nNamed <span class="s2">&quot;x&quot;</span>;
     binder_relevance := Relevant
   |}
-  (Ast.tInd
+  (tInd
      {|
        inductive_mind :=
          (MPfile [<span class="s2">&quot;Datatypes&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>], <span class="s2">&quot;nat&quot;</span>);
        inductive_ind := <span class="mi">0</span>
-     |} []) (Ast.tRel <span class="mi">0</span>)
-     : Ast.term</span></blockquote></div></div></small></span></pre><div class="doc">
+     |} []) (tRel <span class="mi">0</span>)
+     : term</span></blockquote></div></div></small></span></pre><div class="doc">
 <a id="lab4"></a><h3 class="section">Reflection/Unquoting</h3>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">MetaCoq Unquote Definition</span> <span class="nf">x</span> := 
-  (Ast.tConstruct (mkInd (MPfile [<span class="s2">&quot;Datatypes&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>], <span class="s2">&quot;nat&quot;</span>) <span class="mi">0</span>) <span class="mi">0</span> []).</span></span><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk4" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk4"><span class="highlight"><span class="kn">Print</span> <span class="nf">x</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">x = <span class="mi">0</span>
-     : nat</span></blockquote></div></div></small></span></pre><div class="doc">
-<a id="lab5"></a><h3 class="section">Monadic Meta-programs</h3>
-</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk5" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk5"><span class="highlight"><span class="kn">MetaCoq Run</span> (tmBind (tmQuote (<span class="mi">3</span> + <span class="mi">3</span>)) tmPrint).</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">(Ast.tApp
-   (Ast.tConst (MPfile [<span class="s2">&quot;Nat&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>], <span class="s2">&quot;add&quot;</span>)
-      [])
-   [Ast.tApp
-      (Ast.tConstruct
+  (Ast.tConstruct 
+    (mkInd (MPfile [<span class="s2">&quot;Datatypes&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>], <span class="s2">&quot;nat&quot;</span>) <span class="mi">0</span>) 
+    <span class="mi">1</span> []).</span></span><span class="alectryon-wsp">
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk4" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk4"><span class="highlight"><span class="kn">Print</span> <span class="nf">x</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">x = S
+     : nat -&gt; nat
+
+<span class="kn">Arguments</span> x _%nat_scope</span></blockquote></div></div></small></span></pre><div class="doc">
+<a id="lab5"></a><h2 class="section">The Template monad</h2>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">From</span> MetaCoq.Template <span class="kn">Require Import</span> TemplateMonad monad_utils.</span></span><span class="alectryon-wsp">
+</span></span><span class="alectryon-wsp"><span class="highlight">
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk5" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk5"><span class="highlight"><span class="kn">Print</span> <span class="nf">TemplateMonad</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight"><span class="kn">Inductive</span> <span class="nf">TemplateMonad</span>@{t u} : <span class="kt">Type</span> -&gt; <span class="kt">Prop</span> :=
+    tmReturn : <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>, A -&gt; TemplateMonad A
+  | tmBind : <span class="kr">forall</span> <span class="nv">A</span> <span class="nv">B</span> : <span class="kt">Type</span>,
+             TemplateMonad A -&gt;
+             (A -&gt; TemplateMonad B) -&gt; TemplateMonad B
+  | tmPrint : <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>, A -&gt; TemplateMonad unit
+  | tmMsg : string -&gt; TemplateMonad unit
+  | tmFail : <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+             string -&gt; TemplateMonad A
+  | tmEval : reductionStrategy -&gt;
+             <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>, A -&gt; TemplateMonad A
+  | tmLemma : <span class="kn">ident</span> -&gt;
+              <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>, TemplateMonad A
+  | tmDefinitionRed_ : bool -&gt;
+                       <span class="kn">ident</span> -&gt;
+                       option reductionStrategy -&gt;
+                       <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+                       A -&gt; TemplateMonad A
+  | tmAxiomRed : <span class="kn">ident</span> -&gt;
+                 option reductionStrategy -&gt;
+                 <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>, TemplateMonad A
+  | tmVariable : <span class="kn">ident</span> -&gt; <span class="kt">Type</span> -&gt; TemplateMonad unit
+  | tmFreshName : <span class="kn">ident</span> -&gt; TemplateMonad <span class="kn">ident</span>
+  | tmLocate : qualid -&gt;
+               TemplateMonad (list global_reference)
+  | tmCurrentModPath : unit -&gt; TemplateMonad modpath
+  | tmQuote : <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>, A -&gt; TemplateMonad term
+  | tmQuoteRecTransp : <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+                       A -&gt;
+                       bool -&gt; TemplateMonad program
+  | tmQuoteInductive : kername -&gt;
+                       TemplateMonad
+                         mutual_inductive_body
+  | tmQuoteUniverses : TemplateMonad ConstraintSet.t
+  | tmQuoteConstant : kername -&gt;
+                      bool -&gt;
+                      TemplateMonad constant_body
+  | tmMkInductive : mutual_inductive_entry -&gt;
+                    TemplateMonad unit
+  | tmUnquote : term -&gt; TemplateMonad typed_term
+  | tmUnquoteTyped : <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+                     term -&gt; TemplateMonad A
+  | tmExistingInstance : global_reference -&gt;
+                         TemplateMonad unit
+  | tmInferInstance : option reductionStrategy -&gt;
+                      <span class="kr">forall</span> <span class="nv">A</span> : <span class="kt">Type</span>,
+                      TemplateMonad
+                        (option_instance A)
+
+<span class="kn">Arguments</span> TemplateMonad _%type_scope
+<span class="kn">Arguments</span> tmReturn {A}%type_scope _
+<span class="kn">Arguments</span> tmBind {A B}%type_scope _ _%function_scope
+<span class="kn">Arguments</span> tmPrint {A}%type_scope _
+<span class="kn">Arguments</span> tmMsg _%string_scope
+<span class="kn">Arguments</span> tmFail {A}%type_scope _%string_scope
+<span class="kn">Arguments</span> tmEval _ {A}%type_scope _
+<span class="kn">Arguments</span> tmLemma _ _%type_scope
+<span class="kn">Arguments</span> tmDefinitionRed_ _%bool_scope _ _
+  {A}%type_scope _
+<span class="kn">Arguments</span> tmAxiomRed _ _ _%type_scope
+<span class="kn">Arguments</span> tmVariable _ _%type_scope
+<span class="kn">Arguments</span> tmQuote {A}%type_scope _
+<span class="kn">Arguments</span> tmQuoteRecTransp {A}%type_scope _
+  _%bool_scope
+<span class="kn">Arguments</span> tmQuoteConstant _ _%bool_scope
+<span class="kn">Arguments</span> tmUnquoteTyped _%type_scope _
+<span class="kn">Arguments</span> tmInferInstance _ _%type_scope</span></blockquote></div></div></small></span></pre><div class="doc">
+<a id="lab6"></a><h3 class="section">Monadic Meta-programs</h3>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk6" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk6"><span class="highlight"><span class="kn">MetaCoq Run</span> (tmBind (tmQuote (<span class="mi">3</span> + <span class="mi">3</span>)) tmPrint).</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">(tApp
+   (tConst (MPfile [<span class="s2">&quot;Nat&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>], <span class="s2">&quot;add&quot;</span>) [])
+   [tApp
+      (tConstruct
          {|
            inductive_mind :=
              (MPfile [<span class="s2">&quot;Datatypes&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>],
              <span class="s2">&quot;nat&quot;</span>);
            inductive_ind := <span class="mi">0</span>
          |} <span class="mi">1</span> [])
-      [Ast.tApp
-         (Ast.tConstruct
+      [tApp
+         (tConstruct
             {|
               inductive_mind :=
                 (MPfile [<span class="s2">&quot;Datatypes&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>],
                 <span class="s2">&quot;nat&quot;</span>);
               inductive_ind := <span class="mi">0</span>
             |} <span class="mi">1</span> [])
-         [Ast.tApp
-            (Ast.tConstruct
+         [tApp
+            (tConstruct
                {|
                  inductive_mind :=
                    (MPfile
@@ -199,7 +261,7 @@ Ast.tLambda
                    <span class="s2">&quot;nat&quot;</span>);
                  inductive_ind := <span class="mi">0</span>
                |} <span class="mi">1</span> [])
-            [Ast.tConstruct
+            [tConstruct
                {|
                  inductive_mind :=
                    (MPfile
@@ -207,31 +269,31 @@ Ast.tLambda
                    <span class="s2">&quot;nat&quot;</span>);
                  inductive_ind := <span class="mi">0</span>
                |} <span class="mi">0</span> []]]];
-   Ast.tApp
-     (Ast.tConstruct
+   tApp
+     (tConstruct
         {|
           inductive_mind :=
             (MPfile [<span class="s2">&quot;Datatypes&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>],
             <span class="s2">&quot;nat&quot;</span>);
           inductive_ind := <span class="mi">0</span>
         |} <span class="mi">1</span> [])
-     [Ast.tApp
-        (Ast.tConstruct
+     [tApp
+        (tConstruct
            {|
              inductive_mind :=
                (MPfile [<span class="s2">&quot;Datatypes&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>],
                <span class="s2">&quot;nat&quot;</span>);
              inductive_ind := <span class="mi">0</span>
            |} <span class="mi">1</span> [])
-        [Ast.tApp
-           (Ast.tConstruct
+        [tApp
+           (tConstruct
               {|
                 inductive_mind :=
                   (MPfile [<span class="s2">&quot;Datatypes&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>],
                   <span class="s2">&quot;nat&quot;</span>);
                 inductive_ind := <span class="mi">0</span>
               |} <span class="mi">1</span> [])
-           [Ast.tConstruct
+           [tConstruct
               {|
                 inductive_mind :=
                   (MPfile [<span class="s2">&quot;Datatypes&quot;</span>; <span class="s2">&quot;Init&quot;</span>; <span class="s2">&quot;Coq&quot;</span>],
@@ -243,10 +305,10 @@ Support for interaction
              qt &lt;- tmQuote t ;;
              t &lt;- tmEval <span class="kp">all</span> t ;;
              tmPrint qt ;; tmPrint t).</span></span><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk6" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk6"><span class="highlight"><span class="kn">Next Obligation</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">nat</span></div></blockquote></div></div></small><span class="alectryon-wsp">
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk7" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk7"><span class="highlight"><span class="kn">Next Obligation</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-goals"><blockquote class="alectryon-goal"><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">nat</span></div></blockquote></div></div></small><span class="alectryon-wsp">
 </span></span><span class="alectryon-wsp">  </span><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="bp">exact</span> (<span class="mi">3</span>+<span class="mi">2</span>).</span></span><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk7" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk7"><span class="highlight"><span class="kn">Defined</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">(Ast.tConst (MPfile [<span class="s2">&quot;SerTop&quot;</span>], <span class="s2">&quot;foo44&quot;</span>) [])</span></blockquote><blockquote class="alectryon-message"><span class="highlight"><span class="mi">5</span></span></blockquote></div></div></small></span></pre><div class="doc">
-<a id="lab6"></a><h2 class="section">PCUIC</h2>
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk8" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk8"><span class="highlight"><span class="kn">Defined</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">(tConst (MPfile [<span class="s2">&quot;SerTop&quot;</span>], <span class="s2">&quot;foo44&quot;</span>) [])</span></blockquote><blockquote class="alectryon-message"><span class="highlight"><span class="mi">5</span></span></blockquote></div></div></small></span></pre><div class="doc">
+<a id="lab7"></a><h2 class="section">PCUIC</h2>
 
   A specification of Coq's typing, reduction and conversion and its metatheory
 
@@ -268,9 +330,11 @@ Support for interaction
 
 </li>
 </ul>
-</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">From</span> MetaCoq.PCUIC <span class="kn">Require Import</span> PCUICAst PCUICReduction PCUICCumulativity PCUICPHOAS PCUICTyping PCUICSafeLemmata.</span></span><span class="alectryon-wsp">
+</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk9" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk9"><span class="highlight"><span class="kn">From</span> MetaCoq.PCUIC <span class="kn">Require Import</span> PCUICAst PCUICReduction PCUICCumulativity PCUICPHOAS PCUICTyping PCUICSafeLemmata.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;_ ,, _&quot;</span> was already used.
+[notation-overridden,parsing]</span></blockquote><blockquote class="alectryon-message"><span class="highlight"><span class="kn">Notation</span> <span class="s2">&quot;_ ,,, _&quot;</span> was already used.
+[notation-overridden,parsing]</span></blockquote></div></div></small><span class="alectryon-wsp">
 </span></span><span class="alectryon-wsp"><span class="highlight">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk8" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk8"><span class="highlight"><span class="kn">Print</span> <span class="nf">typing</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight"><span class="kn">Inductive</span>
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chka" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chka"><span class="highlight"><span class="kn">Print</span> <span class="nf">typing</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight"><span class="kn">Inductive</span>
 <span class="nf">typing</span> (<span class="nv">H</span> : config.checker_flags) (<span class="nv">Σ</span> : global_env_ext)
 (<span class="nv">Γ</span> : <span class="kp">context</span>)
   : PCUICAst.term -&gt; PCUICAst.term -&gt; <span class="kt">Type</span> :=
@@ -476,10 +540,10 @@ Support for interaction
 <span class="kn">Arguments</span> type_CoFix {H} _ _ _ _%nat_scope _ _ _ _ _ _
   _
 <span class="kn">Arguments</span> type_Cumul {H} _ _ _ _ _ _ _ _ _</span></blockquote></div></div></small></span></pre><div class="doc">
-<a id="lab7"></a><h3 class="section">Metatheory</h3>
+<a id="lab8"></a><h3 class="section">Metatheory</h3>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">From</span> MetaCoq.PCUIC <span class="kn">Require</span> PCUICConfluence PCUICSR PCUICPrincipality PCUICCanonicity.</span></span><span class="alectryon-wsp">
 </span></span><span class="alectryon-wsp"><span class="highlight">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk9" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk9"><span class="highlight"><span class="kn">Check</span> PCUICSR.subject_reduction.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICSR.subject_reduction
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chkb" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chkb"><span class="highlight"><span class="kn">Check</span> PCUICSR.subject_reduction.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICSR.subject_reduction
      : <span class="kr">forall</span> (<span class="nv">Σ</span> : global_env_ext) (<span class="nv">Γ</span> : <span class="kp">context</span>)
          (<span class="nv">t</span> <span class="nv">u</span> <span class="nv">T</span> : PCUICAst.term),
        <span class="kn">wf</span> Σ -&gt;
@@ -487,7 +551,7 @@ Support for interaction
        <span class="nb">red</span> Σ Γ t u -&gt; Σ;;; Γ |- u : T
 <span class="kn">where</span>
 <span class="nl">?cf</span> : [ |- config.checker_flags]</span></blockquote></div></div></small><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chka" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chka"><span class="highlight"><span class="kn">Check</span> PCUICConfluence.red_confluence.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICConfluence.red_confluence
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chkc" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chkc"><span class="highlight"><span class="kn">Check</span> PCUICConfluence.red_confluence.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICConfluence.red_confluence
      : <span class="kn">wf</span> <span class="nl">?Σ</span> -&gt;
        <span class="kr">forall</span> (<span class="nv">Γ</span> : <span class="kp">context</span>) (<span class="nv">t</span> <span class="nv">u</span> <span class="nv">v</span> : PCUICAst.term),
        <span class="nb">red</span> <span class="nl">?Σ</span> Γ t u -&gt;
@@ -497,7 +561,7 @@ Support for interaction
 <span class="kn">where</span>
 <span class="nl">?cf</span> : [ |- config.checker_flags]
 <span class="nl">?Σ</span> : [ |- global_env]</span></blockquote></div></div></small><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chkb" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chkb"><span class="highlight"><span class="kn">Check</span> PCUICPrincipality.principal_type.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICPrincipality.principal_type
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chkd" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chkd"><span class="highlight"><span class="kn">Check</span> PCUICPrincipality.principal_type.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICPrincipality.principal_type
      : <span class="kr">forall</span> <span class="nv">Σ</span> : global_env_ext,
        wf_ext Σ -&gt;
        <span class="kr">forall</span> (<span class="nv">Γ</span> : <span class="kp">context</span>) (<span class="nv">u</span> <span class="nv">A</span> : PCUICAst.term),
@@ -508,47 +572,29 @@ Support for interaction
          Σ;;; Γ |- C &lt;= B × Σ;;; Γ |- u : C
 <span class="kn">where</span>
 <span class="nl">?cf</span> : [ |- config.checker_flags]</span></blockquote></div></div></small><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chkc" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chkc"><span class="highlight"><span class="kn">Print</span> <span class="nf">PCUICCanonicity</span>.eval_ind_canonical.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICCanonicity.eval_ind_canonical = 
-<span class="kr">fun</span> (<span class="nv">cf</span> : config.checker_flags) (<span class="nv">Σ</span> : global_env_ext)
-  (<span class="nv">wfΣ</span> : wf Σ) (<span class="nv">t</span> : PCUICAst.term) (<span class="nv">i</span> : inductive)
-  (<span class="nv">u</span> : Instance.t) (<span class="nv">args</span> : list PCUICAst.term)
-  (<span class="nv">Ht</span> : Σ;;; [] |- t : mkApps (tInd i u) args)
-  (<span class="nv">t&#39;</span> : PCUICAst.term)
-  (<span class="nv">eval</span> : PCUICWcbvEval.<span class="kp">eval</span> Σ t t&#39;) =&gt;
-<span class="kr">let</span> <span class="nv">H</span> : PCUICLiftSubst.closedn #|[]| t :=
-  PCUICClosed.subject_closed wfΣ Ht <span class="kr">in</span>
-<span class="kr">let</span> <span class="nv">Ht0</span> :=
-  PCUICSR.subject_reduction Σ [] t t&#39;
-    (mkApps (tInd i u) args) wfΣ Ht
-    (PCUICCanonicity.wcbeval_red Σ t
-       (mkApps (tInd i u) args) t&#39; Ht <span class="kp">eval</span>) <span class="kr">in</span>
-<span class="kr">let</span> <span class="nv">axfree</span> := PCUICWcbvEval.eval_to_value Σ t t&#39; <span class="kp">eval</span>
-  <span class="kr">in</span>
-<span class="kr">let</span> <span class="nv">axfree0</span> :
-  PCUICCanonicity.axiom_free_value Σ [] t&#39; :=
-  PCUICCanonicity.value_axiom_free Σ t&#39; axfree <span class="kr">in</span>
-<span class="kr">let</span> <span class="nv">eval0</span> := PCUICCanonicity.eval_whne Σ t t&#39; H <span class="kp">eval</span>
-  <span class="kr">in</span>
-PCUICCanonicity.wh_normal_ind_discr Σ t&#39; i u args
-  axfree0 eval0 Ht0
-     : <span class="kr">forall</span> (<span class="nv">cf</span> : config.checker_flags)
-         (<span class="nv">Σ</span> : global_env_ext),
-       <span class="kn">wf</span> Σ -&gt;
-       <span class="kr">forall</span> (<span class="nv">t</span> : PCUICAst.term) (<span class="nv">i</span> : inductive)
-         (<span class="nv">u</span> : Instance.t) (<span class="nv">args</span> : list PCUICAst.term),
-       Σ;;; [] |- t : mkApps (tInd i u) args -&gt;
-       <span class="kr">forall</span> <span class="nv">t&#39;</span> : PCUICAst.term,
-       PCUICWcbvEval.<span class="kp">eval</span> Σ t t&#39; -&gt;
-       PCUICParallelReductionConfluence.construct_cofix_discr
-         (PCUICInductives.head t&#39;)
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chke" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chke"><span class="highlight"><span class="kn">About</span> PCUICCanonicity.eval_ind_canonical.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICCanonicity.eval_ind_canonical :
+<span class="kr">forall</span> {<span class="nv">cf</span> : config.checker_flags}
+  (<span class="nv">Σ</span> : global_env_ext),
+<span class="kn">wf</span> Σ -&gt;
+<span class="kr">forall</span> (<span class="nv">t</span> : PCUICAst.term) (<span class="nv">i</span> : inductive)
+  (<span class="nv">u</span> : Instance.t) (<span class="nv">args</span> : list PCUICAst.term),
+Σ;;; [] |- t : mkApps (tInd i u) args -&gt;
+<span class="kr">forall</span> <span class="nv">t&#39;</span> : PCUICAst.term,
+PCUICWcbvEval.<span class="kp">eval</span> Σ t t&#39; -&gt;
+PCUICParallelReductionConfluence.construct_cofix_discr
+  (PCUICInductives.head t&#39;)
 
+PCUICCanonicity.eval_ind_canonical <span class="kr">is</span> not universe polymorphic
 <span class="kn">Arguments</span> PCUICCanonicity.eval_ind_canonical {cf} _
-  {wfΣ} _ _ _ _%list_scope _ _ _</span></blockquote></div></div></small></span></pre><div class="doc">
-<a id="lab8"></a><h2 class="section">Safe Checker</h2>
+  {wfΣ} _ _ _ _%list_scope _ _ _
+PCUICCanonicity.eval_ind_canonical <span class="kr">is</span> opaque
+Expands to: Constant
+MetaCoq.PCUIC.PCUICCanonicity.eval_ind_canonical</span></blockquote></div></div></small></span></pre><div class="doc">
+<a id="lab9"></a><h2 class="section">Safe Checker</h2>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">From</span> MetaCoq.SafeChecker <span class="kn">Require Import</span> PCUICErrors PCUICTypeChecker 
   PCUICSafeChecker Loader.</span></span></span></pre><div class="doc">
-<a id="lab9"></a><h3 class="section">Verified conversion and type-checking</h3>
-</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chkd" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chkd"><span class="highlight"><span class="kn">Check</span> PCUICSafeConversion.isconv_term_sound.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICSafeConversion.isconv_term_sound
+<a id="lab10"></a><h3 class="section">Verified conversion and type-checking</h3>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chkf" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chkf"><span class="highlight"><span class="kn">Check</span> PCUICSafeConversion.isconv_term_sound.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICSafeConversion.isconv_term_sound
      : <span class="kr">forall</span> (<span class="nv">Σ</span> : global_env_ext) (<span class="nv">hΣ</span> : ∥ wf Σ ∥)
          (<span class="nv">Hφ</span> : ∥ on_udecl Σ.<span class="mi">1</span> Σ.<span class="mi">2</span> ∥)
          (<span class="nv">G</span> : uGraph.universes_graph)
@@ -563,7 +609,7 @@ PCUICCanonicity.wh_normal_ind_discr Σ t&#39; i u args
        conv_cum leq Σ Γ t1 t2
 <span class="kn">where</span>
 <span class="nl">?cf</span> : [ |- config.checker_flags]</span></blockquote></div></div></small><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chke" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chke"><span class="highlight"><span class="kn">Check</span> PCUICSafeConversion.isconv_term_complete.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICSafeConversion.isconv_term_complete
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk10" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk10"><span class="highlight"><span class="kn">Check</span> PCUICSafeConversion.isconv_term_complete.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">PCUICSafeConversion.isconv_term_complete
      : <span class="kr">forall</span> (<span class="nv">Σ</span> : global_env_ext) (<span class="nv">hΣ</span> : ∥ wf Σ ∥)
          (<span class="nv">Hφ</span> : ∥ on_udecl Σ.<span class="mi">1</span> Σ.<span class="mi">2</span> ∥)
          (<span class="nv">G</span> : uGraph.universes_graph)
@@ -578,7 +624,7 @@ PCUICCanonicity.wh_normal_ind_discr Σ t&#39; i u args
        ~ conv_cum leq Σ Γ t1 t2
 <span class="kn">where</span>
 <span class="nl">?cf</span> : [ |- config.checker_flags]</span></blockquote></div></div></small><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chkf" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chkf"><span class="highlight"><span class="kn">Check</span> PCUICSafeChecker.infer_wf_env.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">infer_wf_env
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk11" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk11"><span class="highlight"><span class="kn">Check</span> PCUICSafeChecker.infer_wf_env.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">infer_wf_env
      : <span class="kr">forall</span> (<span class="nv">Σ</span> : wf_env_ext)
          (<span class="nv">Γ</span> : PCUICEnvironment.<span class="kp">context</span>),
        ∥ wf_local Σ Γ ∥ -&gt;
@@ -589,14 +635,14 @@ PCUICCanonicity.wh_normal_ind_discr Σ t&#39; i u args
 <span class="nl">?cf</span> : [ |- config.checker_flags]</span></blockquote></div></div></small><span class="alectryon-wsp">
 </span></span><span class="alectryon-wsp"><span class="highlight">
 </span></span></pre><div class="doc">
-<a id="lab10"></a><h3 class="section">Type-checking Coq terms inside Coq</h3>
+<a id="lab11"></a><h3 class="section">Type-checking Coq terms inside Coq</h3>
 <div class="paragraph"> </div>
 
   We construct a proof of typing entirely within Coq, calling the typechecker to produce the derivation.
   The <span class="inlinecode"><span class="id" title="var">check_inh</span></span> function takes a term and a type and verifies type-checking.
   The tactic <span class="inlinecode"><span class="id" title="var">fill_inh</span></span> solves type inhabitance goals using <span class="inlinecode"><span class="id" title="var">check_inh</span></span>.
 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk10" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk10"><span class="highlight"><span class="kn">Check</span> check_inh.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">check_inh
+</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk12" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk12"><span class="highlight"><span class="kn">Check</span> check_inh.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">check_inh
      : <span class="kr">forall</span> (<span class="nv">Σ</span> : wf_env_ext)
          (<span class="nv">Γ</span> : PCUICEnvironment.<span class="kp">context</span>),
        ∥ wf_local Σ Γ ∥ -&gt;
@@ -605,16 +651,17 @@ PCUICCanonicity.wh_normal_ind_discr Σ t&#39; i u args
        typing_result (inh Σ Γ T)</span></blockquote></div></div></small></span></pre><div class="doc">
 We use a PHOAS input mode for reified terms (under <span class="inlinecode"></span> <span class="inlinecode">[!</span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">]</span> <span class="inlinecode"></span>), with a translation 
   to de Bruijn levels or indices for easier reading. 
-</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk11" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk11"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">identity_typing</span> (<span class="nv">u</span> := Universe.make univ): 
+</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk13" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk13"><span class="highlight"><span class="kn">Lemma</span> <span class="nf">identity_typing</span> (<span class="nv">u</span> := Universe.make univ): 
   inh gctx_wf_env [] [! Π X @(<span class="s2">&quot;X&quot;</span>, <span class="kt">Type</span> u),&#39;X → &#39;X].</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">u</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight"><span class="kn">Universe</span>.make univ</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight"><span class="kn">Universe</span>.t</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">inh gctx_wf_env [] [! Π X @ (<span class="s2">&quot;X&quot;</span>, <span class="kt">Type</span> u), &#39;X → &#39;X]</span></div></blockquote></div></div></small><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk12" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk12"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">u</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight"><span class="kn">Universe</span>.make univ</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight"><span class="kn">Universe</span>.t</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">inh gctx_wf_env [] [! Π X @ (<span class="s2">&quot;X&quot;</span>, <span class="kt">Type</span> u), &#39;X → &#39;X]</span></div></blockquote></div></div></small><span class="alectryon-wsp">
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk14" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk14"><span class="highlight"><span class="kn">Proof</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">u</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight"><span class="kn">Universe</span>.make univ</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight"><span class="kn">Universe</span>.t</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">inh gctx_wf_env [] [! Π X @ (<span class="s2">&quot;X&quot;</span>, <span class="kt">Type</span> u), &#39;X → &#39;X]</span></div></blockquote></div></div></small><span class="alectryon-wsp">
 </span></span><span class="alectryon-wsp"><span class="highlight">  <span class="c">(* We construct a term *)</span>
-</span></span><span class="alectryon-wsp">  </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk13" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk13"><span class="highlight"><span class="nb">set</span> (impl := [! <span class="kr">λ</span> <span class="nv">s</span> @ (<span class="s2">&quot;s&quot;</span>, <span class="kt">Type</span> u), <span class="kr">λ</span> <span class="nv">x</span> @ (<span class="s2">&quot;x&quot;</span>, &#39;s), &#39;x]).</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">u</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight"><span class="kn">Universe</span>.make univ</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight"><span class="kn">Universe</span>.t</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">impl</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight">[! <span class="kr">λ</span> <span class="nv">s</span> @ (<span class="s2">&quot;s&quot;</span>, <span class="kt">Type</span> u), <span class="kr">λ</span> <span class="nv">x</span> @ (<span class="s2">&quot;x&quot;</span>, &#39;s), &#39;x]</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight">myterm</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">inh gctx_wf_env [] [! Π X @ (<span class="s2">&quot;X&quot;</span>, <span class="kt">Type</span> u), &#39;X → &#39;X]</span></div></blockquote></div></div></small><span class="alectryon-wsp">
+</span></span><span class="alectryon-wsp">  </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk15" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk15"><span class="highlight"><span class="nb">set</span> (impl := [! <span class="kr">λ</span> <span class="nv">s</span> @ (<span class="s2">&quot;s&quot;</span>, <span class="kt">Type</span> u), <span class="kr">λ</span> <span class="nv">x</span> @ (<span class="s2">&quot;x&quot;</span>, &#39;s), &#39;x]).</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">u</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight"><span class="kn">Universe</span>.make univ</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight"><span class="kn">Universe</span>.t</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">impl</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight">[! <span class="kr">λ</span> <span class="nv">s</span> @ (<span class="s2">&quot;s&quot;</span>, <span class="kt">Type</span> u), <span class="kr">λ</span> <span class="nv">x</span> @ (<span class="s2">&quot;x&quot;</span>, &#39;s), &#39;x]</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight">myterm</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">inh gctx_wf_env [] [! Π X @ (<span class="s2">&quot;X&quot;</span>, <span class="kt">Type</span> u), &#39;X → &#39;X]</span></div></blockquote></div></div></small><span class="alectryon-wsp">
 </span></span><span class="alectryon-wsp"><span class="highlight">  <span class="c">(* Show that the empty context is well-formed  *)</span>
-</span></span><span class="alectryon-wsp">  </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk14" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk14"><span class="highlight"><span class="nb">assert</span> (wfΓ : ∥ wf_local gctx_wf_env [] ∥) <span class="bp">by</span> <span class="kp">do</span> <span class="mi">2</span> <span class="nb">constructor</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">u</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight"><span class="kn">Universe</span>.make univ</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight"><span class="kn">Universe</span>.t</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">impl</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight">[! <span class="kr">λ</span> <span class="nv">s</span> @ (<span class="s2">&quot;s&quot;</span>, <span class="kt">Type</span> u), <span class="kr">λ</span> <span class="nv">x</span> @ (<span class="s2">&quot;x&quot;</span>, &#39;s), &#39;x]</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight">myterm</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">wfΓ</span><span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight">∥ wf_local gctx_wf_env [] ∥</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">inh gctx_wf_env [] [! Π X @ (<span class="s2">&quot;X&quot;</span>, <span class="kt">Type</span> u), &#39;X → &#39;X]</span></div></blockquote></div></div></small><span class="alectryon-wsp">
+</span></span><span class="alectryon-wsp">  </span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk16" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk16"><span class="highlight"><span class="nb">assert</span> (wfΓ : ∥ wf_local gctx_wf_env [] ∥) 
+    <span class="bp">by</span> <span class="kp">do</span> <span class="mi">2</span> <span class="nb">constructor</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-goals"><blockquote class="alectryon-goal"><div class="goal-hyps"><div class="goal-hyp"><span class="hyp-names">u</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight"><span class="kn">Universe</span>.make univ</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight"><span class="kn">Universe</span>.t</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">impl</span><span><span class="hyp-body-block"><span class="hyp-punct">:=</span><span class="hyp-body"><span class="highlight">[! <span class="kr">λ</span> <span class="nv">s</span> @ (<span class="s2">&quot;s&quot;</span>, <span class="kt">Type</span> u), <span class="kr">λ</span> <span class="nv">x</span> @ (<span class="s2">&quot;x&quot;</span>, &#39;s), &#39;x]</span></span></span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight">myterm</span></span></span></span></div><div class="goal-hyp"><span class="hyp-names">wfΓ</span><span><span class="hyp-type-block"><span class="hyp-punct">:</span><span class="hyp-type"><span class="highlight">∥ wf_local gctx_wf_env [] ∥</span></span></span></span></div></div><span class="goal-separator"><hr></span><div class="goal-conclusion"><span class="highlight">inh gctx_wf_env [] [! Π X @ (<span class="s2">&quot;X&quot;</span>, <span class="kt">Type</span> u), &#39;X → &#39;X]</span></div></blockquote></div></div></small><span class="alectryon-wsp">
 </span></span><span class="alectryon-wsp"> </span><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight">fill_inh impl.</span></span><span class="alectryon-wsp">
 </span></span><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">Qed</span>.</span></span><span class="alectryon-wsp">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk15" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk15"><span class="highlight"><span class="kn">Print Assumptions</span> <span class="nf">identity_typing</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight"><span class="kn">Axioms</span>:
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk17" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk17"><span class="highlight"><span class="kn">Print Assumptions</span> <span class="nf">identity_typing</span>.</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight"><span class="kn">Axioms</span>:
 ProofIrrelevance.proof_irrelevance
   : <span class="kr">forall</span> (<span class="nv">P</span> : <span class="kt">Prop</span>) (<span class="nv">p1</span> <span class="nv">p2</span> : P), p1 = p2
 PCUICSN.normalisation
@@ -643,25 +690,27 @@ PCUICContextConversion.cofix_guard_context_cumulativity
       (<span class="nv">mfix</span> : mfixpoint PCUICAst.term),
     context_relation (cumul_decls Σ) Γ&#39; Γ -&gt;
     cofix_guard Σ Γ mfix -&gt; cofix_guard Σ Γ&#39; mfix</span></blockquote></div></div></small></span></pre><div class="doc">
-<a id="lab11"></a><h3 class="section">The extracted typechecker also runs in OCaml</h3>
-</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk16" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk16"><span class="highlight"><span class="kn">MetaCoq SafeCheck</span> (<span class="kr">fun</span> <span class="nv">x</span> : nat =&gt; x + <span class="mi">1</span>).</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">Quoting</span></blockquote><blockquote class="alectryon-message"><span class="highlight">Quoting executed <span class="kr">in</span>: <span class="mi">3</span>.<span class="mi">2901763916</span>e-<span class="mi">05</span>s</span></blockquote><blockquote class="alectryon-message"><span class="highlight">Universes added: </span></blockquote><blockquote class="alectryon-message"><span class="highlight">Checking executed <span class="kr">in</span>: <span class="mi">0</span>.<span class="mi">000385999679565</span>s</span></blockquote><blockquote class="alectryon-message"><span class="highlight">Environment <span class="kr">is</span> well-formed <span class="kn">and</span> Lambda(x,Ind(Coq.Init.Datatypes.nat,<span class="mi">0</span>,[]),App(App(Const(Coq.Init.Nat.add,[]),Rel(<span class="mi">0</span>)),App(Construct(Coq.Init.Datatypes.nat,<span class="mi">0</span>,<span class="mi">1</span>,[]),Construct(Coq.Init.Datatypes.nat,<span class="mi">0</span>,<span class="mi">0</span>,[])))) has type: Prod(x,Ind(Coq.Init.Datatypes.nat,<span class="mi">0</span>,[]),Ind(Coq.Init.Datatypes.nat,<span class="mi">0</span>,[]))</span></blockquote></div></div></small></span></pre><div class="doc">
-<a id="lab12"></a><h2 class="section">Erasure</h2>
+<a id="lab12"></a><h3 class="section">The extracted typechecker also runs in OCaml</h3>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk18" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk18"><span class="highlight"><span class="kn">MetaCoq SafeCheck</span> (<span class="kr">fun</span> <span class="nv">x</span> : nat =&gt; x + <span class="mi">1</span>).</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">Quoting</span></blockquote><blockquote class="alectryon-message"><span class="highlight">Quoting executed <span class="kr">in</span>: <span class="mi">0</span>.<span class="mi">000525951385498</span>s</span></blockquote><blockquote class="alectryon-message"><span class="highlight">Universes added: </span></blockquote><blockquote class="alectryon-message"><span class="highlight">Checking executed <span class="kr">in</span>: <span class="mi">0</span>.<span class="mi">00810885429382</span>s</span></blockquote><blockquote class="alectryon-message"><span class="highlight">Environment <span class="kr">is</span> well-formed <span class="kn">and</span> Lambda(x,Ind(Coq.Init.Datatypes.nat,<span class="mi">0</span>,[]),App(App(Const(Coq.Init.Nat.add,[]),Rel(<span class="mi">0</span>)),App(Construct(Coq.Init.Datatypes.nat,<span class="mi">0</span>,<span class="mi">1</span>,[]),Construct(Coq.Init.Datatypes.nat,<span class="mi">0</span>,<span class="mi">0</span>,[])))) has type: Prod(x,Ind(Coq.Init.Datatypes.nat,<span class="mi">0</span>,[]),Ind(Coq.Init.Datatypes.nat,<span class="mi">0</span>,[]))</span></blockquote></div></div></small></span></pre><div class="doc">
+<a id="lab13"></a><h2 class="section">Erasure</h2>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">From</span> MetaCoq.Erasure <span class="kn">Require Import</span> Erasure Loader.</span></span></span></pre><div class="doc">
-<a id="lab13"></a><h3 class="section">Running erasure live in Coq</h3>
+<a id="lab14"></a><h3 class="section">Running erasure live in Coq</h3>
 </div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><span class="alectryon-input"><span class="highlight"><span class="kn">Definition</span> <span class="nf">erase</span> {<span class="nv">A</span>} (<span class="nv">term</span> : A) : TemplateMonad unit := 
   p &lt;- tmQuoteRecTransp term true ;;
-  res &lt;- tmEval <span class="nb">lazy</span> (A:=string) (erase_and_print_template_program p) ;;
+  res &lt;- tmEval <span class="nb">lazy</span> (A:=string) (erase_and_print p) ;;
   tmMsg res.</span></span><span class="alectryon-wsp">
 </span></span><span class="alectryon-wsp"><span class="highlight">
-</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk17" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk17"><span class="highlight"><span class="kn">MetaCoq Run</span> (erase (<span class="kr">fun</span> <span class="nv">x</span> : nat =&gt; (<span class="kr">fun</span> (<span class="nv">A</span> : <span class="kt">Type</span>) (<span class="nv">a</span> : A) =&gt; a) nat x + <span class="mi">1</span>)).</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight"><span class="kr">fun</span> <span class="nv">x</span> : nat =&gt; Coq.Init.Nat.add ((<span class="kr">fun</span> <span class="nv">A</span> : <span class="kt">Type</span>([SerTop.<span class="mi">223</span>]) =&gt; <span class="kr">fun</span> <span class="nv">a</span> : A =&gt; a) nat x) (S O)
+</span></span><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk19" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk19"><span class="highlight"><span class="kn">MetaCoq Run</span> 
+  (erase (<span class="kr">fun</span> <span class="nv">x</span> : nat =&gt; 
+    (<span class="kr">fun</span> (<span class="nv">A</span> : <span class="kt">Type</span>) (<span class="nv">a</span> : A) =&gt; a) nat x + <span class="mi">1</span>)).</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight"><span class="kr">fun</span> <span class="nv">x</span> : nat =&gt; Coq.Init.Nat.add ((<span class="kr">fun</span> <span class="nv">A</span> : <span class="kt">Type</span>([SerTop.<span class="mi">223</span>]) =&gt; <span class="kr">fun</span> <span class="nv">a</span> : A =&gt; a) nat x) (S O)
  erases to: 
 <span class="kr">fun</span> <span class="nv">x</span> =&gt; Coq.Init.Nat.add ((<span class="kr">fun</span> <span class="nv">A</span> =&gt; <span class="kr">fun</span> <span class="nv">a</span> =&gt; a) ∎ x) (S O)</span></blockquote></div></div></small></span></pre><div class="doc">
-<a id="lab14"></a><h3 class="section">Running the extracted erasure function in ML</h3>
-</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk18" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk18"><span class="highlight"><span class="kn">MetaCoq Erase</span>
+<a id="lab15"></a><h3 class="section">Running the extracted erasure function in ML</h3>
+</div><pre class="alectryon-io"><!-- Generator: Alectryon --><span class="alectryon-sentence"><input class="alectryon-toggle" id="touring-metacoq-v-chk1a" style="display: none" type="checkbox"><label class="alectryon-input" for="touring-metacoq-v-chk1a"><span class="highlight"><span class="kn">MetaCoq Erase</span>
   ((<span class="kr">fun</span> (<span class="nv">X</span> : <span class="kt">Set</span>) (<span class="nv">x</span> : X) (<span class="nv">e</span> : x = x) =&gt;
                   <span class="kr">match</span> e <span class="kr">in</span> eq _ x&#39; <span class="kr">return</span> bool <span class="kr">with</span>
                   | eq_refl =&gt; true
-                  <span class="kr">end</span>)).</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">Quoting</span></blockquote><blockquote class="alectryon-message"><span class="highlight">Quoting executed <span class="kr">in</span>: <span class="mi">1</span>.<span class="mi">8835067749</span>e-<span class="mi">05</span>s</span></blockquote><blockquote class="alectryon-message"><span class="highlight">Erasing executed <span class="kr">in</span>: <span class="mi">5</span>.<span class="mi">79357147217</span>e-<span class="mi">05</span>s</span></blockquote><blockquote class="alectryon-message"><span class="highlight"><span class="kr">fun</span> <span class="nv">X</span> : <span class="kt">Type</span>([<span class="kt">Set</span>]) =&gt; <span class="kr">fun</span> <span class="nv">x</span> : X =&gt; <span class="kr">fun</span> <span class="nv">e</span> : eq X x x =&gt; <span class="kr">match</span> e <span class="kr">as</span> x&#39; <span class="kr">in</span> eq <span class="kr">return</span> <span class="kr">fun</span> <span class="nv">e0</span> : eq UnboundRel(<span class="mi">3</span>) X e =&gt; bool <span class="kr">with</span> 
+                  <span class="kr">end</span>)).</span></label><small class="alectryon-output"><div class="alectryon-output-sticky-wrapper"><div class="alectryon-messages"><blockquote class="alectryon-message"><span class="highlight">Quoting</span></blockquote><blockquote class="alectryon-message"><span class="highlight">Quoting executed <span class="kr">in</span>: <span class="mi">3</span>.<span class="mi">00407409668</span>e-<span class="mi">05</span>s</span></blockquote><blockquote class="alectryon-message"><span class="highlight">Erasing executed <span class="kr">in</span>: <span class="mi">0</span>.<span class="mi">00323104858398</span>s</span></blockquote><blockquote class="alectryon-message"><span class="highlight"><span class="kr">fun</span> <span class="nv">X</span> : <span class="kt">Type</span>([<span class="kt">Set</span>]) =&gt; <span class="kr">fun</span> <span class="nv">x</span> : X =&gt; <span class="kr">fun</span> <span class="nv">e</span> : eq X x x =&gt; <span class="kr">match</span> e <span class="kr">as</span> x&#39; <span class="kr">in</span> eq <span class="kr">return</span> <span class="kr">fun</span> <span class="nv">e0</span> : eq UnboundRel(<span class="mi">3</span>) X e =&gt; bool <span class="kr">with</span> 
 eq_refl =&gt; true
 <span class="kr">end</span>
 
