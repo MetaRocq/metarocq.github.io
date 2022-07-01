@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>MetaCoq.PCUIC.PCUICUnivLevels</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library MetaCoq.PCUIC.PCUICUnivLevels</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">fresh_levels</span> <span class="id" title="var">global_levels</span> <span class="id" title="var">levels</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.For_all</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⇒ ¬ <span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> <span class="id" title="var">global_levels</span>) <span class="id" title="var">levels</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ConstraintSet.For_all</span> (<span class="id" title="var">declared_cstr_levels</span> <span class="id" title="var">levels</span>) <span class="id" title="var">cstrs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constraints_levels_union</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">cstrs'</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs'</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> (<span class="id" title="var">ConstraintSet.union</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">cstrs'</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constraints_levels_union_left</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span> <span class="id" title="var">cstrs</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> (<span class="id" title="var">LevelSet.union</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span>) <span class="id" title="var">cstrs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constraints_levels_union_right</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span> <span class="id" title="var">cstrs</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels'</span> <span class="id" title="var">cstrs</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> (<span class="id" title="var">LevelSet.union</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span>) <span class="id" title="var">cstrs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constraints_levels_subset</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span> <span class="id" title="var">cstrs</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.Subset</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels'</span> <span class="id" title="var">cstrs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">on_udecl_spec</span> `{<span class="id" title="var">checker_flags</span>} <span class="id" title="var">Σ</span> (<span class="id" title="var">udecl</span> : <span class="id" title="var">universes_decl</span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">on_udecl</span> <span class="id" title="var">Σ</span> <span class="id" title="var">udecl</span> =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">levels</span> := <span class="id" title="var">levels_of_udecl</span> <span class="id" title="var">udecl</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">global_levels</span> := <span class="id" title="var">global_levels</span> <span class="id" title="var">Σ</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">all_levels</span> := <span class="id" title="var">LevelSet.union</span> <span class="id" title="var">levels</span> <span class="id" title="var">global_levels</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fresh_levels</span> <span class="id" title="var">global_levels</span> <span class="id" title="var">levels</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∧ <span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">all_levels</span> (<span class="id" title="var">constraints_of_udecl</span> <span class="id" title="var">udecl</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∧ <span class="id" title="var">satisfiable_udecl</span> <span class="id" title="var">Σ</span> <span class="id" title="var">udecl</span>.<br/>
+ 
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">on_udecl_prop_spec</span> `{<span class="id" title="var">checker_flags</span>} <span class="id" title="var">Σ</span> (<span class="id" title="var">udecl</span> : <span class="id" title="var">universes_decl</span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">on_udecl_prop</span> <span class="id" title="var">Σ</span> <span class="id" title="var">udecl</span> = <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">levels</span> := <span class="id" title="var">levels_of_udecl</span> <span class="id" title="var">udecl</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">global_levels</span> := <span class="id" title="var">global_levels</span> <span class="id" title="var">Σ</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">all_levels</span> := <span class="id" title="var">LevelSet.union</span> <span class="id" title="var">levels</span> <span class="id" title="var">global_levels</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">all_levels</span> (<span class="id" title="var">constraints_of_udecl</span> <span class="id" title="var">udecl</span>).<br/>
+ 
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <span class="id" title="var">levels_of_list</span> := <span class="id" title="var">LevelSetProp.of_list</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">levels_of_list_app</span> <span class="id" title="var">l</span> <span class="id" title="var">l'</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">levels_of_list</span> (<span class="id" title="var">l</span> ++ <span class="id" title="var">l'</span>) = <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.union</span> (<span class="id" title="var">levels_of_list</span> <span class="id" title="var">l</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">levels_of_list</span> <span class="id" title="var">l'</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">aulevels</span> <span class="id" title="var">inst</span> <span class="id" title="var">cstrs</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">AUContext.levels</span> (<span class="id" title="var">inst</span>, <span class="id" title="var">cstrs</span>) = <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSetProp.of_list</span> (<span class="id" title="tactic">unfold</span> #|<span class="id" title="var">inst</span>| <span class="id" title="var">Level.Var</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <span class="id" title="var">unfold_proper</span> {<span class="id" title="var">A</span>} : <span class="id" title="var">Proper</span> (<span class="id" title="var">eq</span> ==&gt; `=1` ==&gt; <span class="id" title="var">eq</span>) (@<span class="id" title="tactic">unfold</span> <span class="id" title="var">A</span>).<br/>
+
+<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">unfold_add</span> {<span class="id" title="var">A</span>} <span class="id" title="var">n</span> <span class="id" title="var">k</span> (<span class="id" title="var">f</span> : <span class="id" title="var">nat</span> → <span class="id" title="var">A</span>) : <span class="id" title="tactic">unfold</span> (<span class="id" title="var">n</span> + <span class="id" title="var">k</span>) <span class="id" title="var">f</span> = <span class="id" title="tactic">unfold</span> <span class="id" title="var">k</span> <span class="id" title="var">f</span> ++ <span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="var">f</span> (<span class="id" title="var">x</span> + <span class="id" title="var">k</span>)).<br/>
+
+<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">unfold_levels_app</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSetProp.of_list</span> (<span class="id" title="tactic">unfold</span> (<span class="id" title="var">n</span> + <span class="id" title="var">k</span>) <span class="id" title="var">Level.Var</span>) = <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.union</span> (<span class="id" title="var">LevelSetProp.of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">k</span> <span class="id" title="var">Level.Var</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">LevelSetProp.of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">i</span> ⇒ <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>)))).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">levels_of_list_spec</span> <span class="id" title="var">l</span> <span class="id" title="var">ls</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_list</span> <span class="id" title="var">ls</span>) ↔ <span class="id" title="var">In</span> <span class="id" title="var">l</span> <span class="id" title="var">ls</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">In_unfold</span> <span class="id" title="var">k</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">In</span> <span class="id" title="var">l</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="var">λ</span> <span class="id" title="var">i</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>))) ↔ ∃ <span class="id" title="var">k'</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">l</span> = <span class="id" title="var">Level.Var</span> <span class="id" title="var">k'</span> ∧ <span class="id" title="var">k</span> ≤ <span class="id" title="var">k'</span> &lt; <span class="id" title="var">k</span> + <span class="id" title="var">n</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">In_levels_of_list</span> <span class="id" title="var">k</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">i</span> ⇒ <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>)))) ↔<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">k'</span>, <span class="id" title="var">l</span> = <span class="id" title="var">Level.Var</span> <span class="id" title="var">k'</span> ∧ <span class="id" title="var">k</span> ≤ <span class="id" title="var">k'</span> &lt; <span class="id" title="var">k</span> + <span class="id" title="var">n</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">In_lift_level</span> <span class="id" title="var">k</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> : <span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="var">λ</span> <span class="id" title="var">i</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">Level.Var</span> <span class="id" title="var">i</span>))) ↔<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> (<span class="id" title="var">lift_level</span> <span class="id" title="var">k</span> <span class="id" title="var">l</span>) (<span class="id" title="var">levels_of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="var">λ</span> <span class="id" title="var">i</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>)))).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">not_var_lift</span> <span class="id" title="var">l</span> <span class="id" title="var">k</span> <span class="id" title="var">s</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LS.For_all</span> (<span class="id" title="var">λ</span> <span class="id" title="var">x</span> : <span class="id" title="var">LS.elt</span>, ~~ <span class="id" title="var">Level.is_var</span> <span class="id" title="var">x</span>) <span class="id" title="var">s</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> <span class="id" title="var">s</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> (<span class="id" title="var">lift_level</span> <span class="id" title="var">k</span> <span class="id" title="var">l</span>) <span class="id" title="var">s</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">declared_constraints_levels_lift</span> <span class="id" title="var">s</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span> <span class="id" title="var">cstrs</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LS.For_all</span> (<span class="id" title="var">λ</span> <span class="id" title="var">x</span> : <span class="id" title="var">LS.elt</span>, (<span class="id" title="var">negb</span> ∘ <span class="id" title="var">Level.is_var</span>) <span class="id" title="var">x</span>) <span class="id" title="var">s</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">LevelSet.union</span> (<span class="id" title="var">levels_of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="var">λ</span> <span class="id" title="var">i</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">Level.Var</span> <span class="id" title="var">i</span>))) <span class="id" title="var">s</span>) <span class="id" title="var">cstrs</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">LevelSet.union</span> (<span class="id" title="var">levels_of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="var">λ</span> <span class="id" title="var">i</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>)))) <span class="id" title="var">s</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">lift_constraints</span> <span class="id" title="var">k</span> <span class="id" title="var">cstrs</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">levels_of_cstr</span> (<span class="id" title="var">c</span> : <span class="id" title="var">ConstraintSet.elt</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> '(<span class="id" title="var">l</span>, <span class="id" title="var">d</span>, <span class="id" title="var">r</span>) := <span class="id" title="var">c</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.add</span> <span class="id" title="var">l</span> (<span class="id" title="var">LevelSet.add</span> <span class="id" title="var">r</span> <span class="id" title="var">LevelSet.empty</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">levels_of_cstrs</span> <span class="id" title="var">cstrs</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ConstraintSet.fold</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">c</span> <span class="id" title="var">acc</span> ⇒ <span class="id" title="var">LevelSet.union</span> (<span class="id" title="var">levels_of_cstr</span> <span class="id" title="var">c</span>) <span class="id" title="var">acc</span>) <span class="id" title="var">cstrs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">levels_of_cstrs_acc</span> <span class="id" title="var">l</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">acc</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> <span class="id" title="var">acc</span> ∨ <span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_cstrs</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">LevelSet.empty</span>) ↔<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_cstrs</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">acc</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">levels_of_cstrs_spec</span> <span class="id" title="var">l</span> <span class="id" title="var">cstrs</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_cstrs</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">LevelSet.empty</span>) ↔ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">d</span> <span class="id" title="var">r</span>, <span class="id" title="var">ConstraintSet.In</span> (<span class="id" title="var">l</span>, <span class="id" title="var">d</span>, <span class="id" title="var">r</span>) <span class="id" title="var">cstrs</span> ∨ <span class="id" title="var">ConstraintSet.In</span> (<span class="id" title="var">r</span>, <span class="id" title="var">d</span>, <span class="id" title="var">l</span>) <span class="id" title="var">cstrs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">declared_constraints_levels_in</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.Subset</span> (<span class="id" title="var">levels_of_cstrs</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">LevelSet.empty</span>) <span class="id" title="var">levels</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">In_variance_cstrs</span> <span class="id" title="var">l</span> <span class="id" title="var">d</span> <span class="id" title="var">r</span> <span class="id" title="var">v</span> <span class="id" title="var">i</span> <span class="id" title="var">i'</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ConstraintSet.In</span> (<span class="id" title="var">l</span>, <span class="id" title="var">d</span>, <span class="id" title="var">r</span>) (<span class="id" title="var">variance_cstrs</span> <span class="id" title="var">v</span> <span class="id" title="var">i</span> <span class="id" title="var">i'</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">In</span> <span class="id" title="var">l</span> <span class="id" title="var">i</span> ∨ <span class="id" title="var">In</span> <span class="id" title="var">l</span> <span class="id" title="var">i'</span>) ∧ (<span class="id" title="var">In</span> <span class="id" title="var">r</span> <span class="id" title="var">i</span> ∨ <span class="id" title="var">In</span> <span class="id" title="var">r</span> <span class="id" title="var">i'</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">In_lift</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span> : <span class="id" title="var">In</span> <span class="id" title="var">l</span> (<span class="id" title="var">map</span> (<span class="id" title="var">lift_level</span> <span class="id" title="var">k</span>) (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> <span class="id" title="var">Level.Var</span>)) ↔<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">In</span> <span class="id" title="var">l</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">i</span> ⇒ <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>))).<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

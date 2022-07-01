@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>MetaCoq.Erasure.EProgram</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library MetaCoq.Erasure.EProgram</h1>
+
+<div class="code">
+
+<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Obligation</span> <span class="id" title="keyword">Tactic</span> := <span class="id" title="tactic">program_simpl</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eprogram" class="idref" href="#eprogram"><span class="id" title="definition">eprogram</span></a> := (<a class="idref" href="MetaCoq.Erasure.EAst.html#global_context"><span class="id" title="abbreviation">EAst.global_context</span></a> <a class="idref" href="MetaCoq.Template.utils.html#8426aced733de3f9c0ab331518367c06"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">EAst.term</span></a>).<br/>
+<span class="id" title="keyword">Definition</span> <a id="eprogram_env" class="idref" href="#eprogram_env"><span class="id" title="definition">eprogram_env</span></a> := (<a class="idref" href="MetaCoq.Erasure.EEnvMap.html#GlobalContextMap.t"><span class="id" title="record">EEnvMap.GlobalContextMap.t</span></a> <a class="idref" href="MetaCoq.Template.utils.html#8426aced733de3f9c0ab331518367c06"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">EAst.term</span></a>).<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="wf_eprogram" class="idref" href="#wf_eprogram"><span class="id" title="definition">wf_eprogram</span></a> (<a id="efl:1" class="idref" href="#efl:1"><span class="id" title="binder">efl</span></a> : <a class="idref" href="MetaCoq.Erasure.EWellformed.html#EEnvFlags"><span class="id" title="class">EEnvFlags</span></a>) (<a id="p:2" class="idref" href="#p:2"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Erasure.EProgram.html#eprogram"><span class="id" title="definition">eprogram</span></a>) :=<br/>
+&nbsp;&nbsp;@<a class="idref" href="MetaCoq.Erasure.EWellformed.html#wf_glob"><span class="id" title="inductive">wf_glob</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#efl:1"><span class="id" title="variable">efl</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:2"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> @<a class="idref" href="MetaCoq.Erasure.EWellformed.html#wellformed"><span class="id" title="definition">wellformed</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#efl:1"><span class="id" title="variable">efl</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:2"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> 0 <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:2"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="wf_eprogram_env" class="idref" href="#wf_eprogram_env"><span class="id" title="definition">wf_eprogram_env</span></a> (<a id="efl:3" class="idref" href="#efl:3"><span class="id" title="binder">efl</span></a> : <a class="idref" href="MetaCoq.Erasure.EWellformed.html#EEnvFlags"><span class="id" title="class">EEnvFlags</span></a>) (<a id="p:4" class="idref" href="#p:4"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Erasure.EProgram.html#eprogram_env"><span class="id" title="definition">eprogram_env</span></a>) :=<br/>
+&nbsp;&nbsp;@<a class="idref" href="MetaCoq.Erasure.EWellformed.html#wf_glob"><span class="id" title="inductive">wf_glob</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#efl:3"><span class="id" title="variable">efl</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:4"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a>.(<a class="idref" href="MetaCoq.Erasure.EEnvMap.html#GlobalContextMap.global_decls"><span class="id" title="projection">global_decls</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> @<a class="idref" href="MetaCoq.Erasure.EWellformed.html#wellformed"><span class="id" title="definition">wellformed</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#efl:3"><span class="id" title="variable">efl</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:4"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a>.(<a class="idref" href="MetaCoq.Erasure.EEnvMap.html#GlobalContextMap.global_decls"><span class="id" title="projection">global_decls</span></a>) 0 <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:4"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eval_eprogram" class="idref" href="#eval_eprogram"><span class="id" title="definition">eval_eprogram</span></a> (<a id="wfl:5" class="idref" href="#wfl:5"><span class="id" title="binder">wfl</span></a> : <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#WcbvFlags"><span class="id" title="class">EWcbvEval.WcbvFlags</span></a>) (<a id="p:6" class="idref" href="#p:6"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Erasure.EProgram.html#eprogram"><span class="id" title="definition">eprogram</span></a>) (<a id="t:7" class="idref" href="#t:7"><span class="id" title="binder">t</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">EAst.term</span></a>) := <br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#eval"><span class="id" title="inductive">EWcbvEval.eval</span></a> (<span class="id" title="var">wfl</span>:=<a class="idref" href="MetaCoq.Erasure.EProgram.html#wfl:5"><span class="id" title="variable">wfl</span></a>) <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:6"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:6"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#t:7"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="closed_eprogram" class="idref" href="#closed_eprogram"><span class="id" title="definition">closed_eprogram</span></a> (<a id="p:8" class="idref" href="#p:8"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Erasure.EProgram.html#eprogram"><span class="id" title="definition">eprogram</span></a>) := <br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.EGlobalEnv.html#closed_env"><span class="id" title="definition">closed_env</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:8"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"><span class="id" title="notation">&amp;&amp;</span></a> <a class="idref" href="MetaCoq.Erasure.ELiftSubst.html#closedn"><span class="id" title="definition">ELiftSubst.closedn</span></a> 0 <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:8"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="closed_eprogram_env" class="idref" href="#closed_eprogram_env"><span class="id" title="definition">closed_eprogram_env</span></a> (<a id="p:9" class="idref" href="#p:9"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Erasure.EProgram.html#eprogram_env"><span class="id" title="definition">eprogram_env</span></a>) := <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="2ab75602e9b8af2ca6fd6dbdb1e68a19" class="idref" href="#2ab75602e9b8af2ca6fd6dbdb1e68a19"><span class="id" title="binder">Σ</span></a> := <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:9"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a>.(<a class="idref" href="MetaCoq.Erasure.EEnvMap.html#GlobalContextMap.global_decls"><span class="id" title="projection">global_decls</span></a>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.EGlobalEnv.html#closed_env"><span class="id" title="definition">closed_env</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#2ab75602e9b8af2ca6fd6dbdb1e68a19"><span class="id" title="variable">Σ</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"><span class="id" title="notation">&amp;&amp;</span></a> <a class="idref" href="MetaCoq.Erasure.ELiftSubst.html#closedn"><span class="id" title="definition">ELiftSubst.closedn</span></a> 0 <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:9"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eval_eprogram_env" class="idref" href="#eval_eprogram_env"><span class="id" title="definition">eval_eprogram_env</span></a> (<a id="wfl:11" class="idref" href="#wfl:11"><span class="id" title="binder">wfl</span></a> : <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#WcbvFlags"><span class="id" title="class">EWcbvEval.WcbvFlags</span></a>) (<a id="p:12" class="idref" href="#p:12"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Erasure.EProgram.html#eprogram_env"><span class="id" title="definition">eprogram_env</span></a>) (<a id="t:13" class="idref" href="#t:13"><span class="id" title="binder">t</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">EAst.term</span></a>) := <br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#eval"><span class="id" title="inductive">EWcbvEval.eval</span></a> (<span class="id" title="var">wfl</span>:=<a class="idref" href="MetaCoq.Erasure.EProgram.html#wfl:11"><span class="id" title="variable">wfl</span></a>) <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:12"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a>.(<a class="idref" href="MetaCoq.Erasure.EEnvMap.html#GlobalContextMap.global_decls"><span class="id" title="projection">global_decls</span></a>) <a class="idref" href="MetaCoq.Erasure.EProgram.html#p:12"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#t:13"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="wf_glob_fresh" class="idref" href="#wf_glob_fresh"><span class="id" title="lemma">wf_glob_fresh</span></a> {<a id="efl:14" class="idref" href="#efl:14"><span class="id" title="binder">efl</span></a> : <a class="idref" href="MetaCoq.Erasure.EWellformed.html#EEnvFlags"><span class="id" title="class">EEnvFlags</span></a>} <a id="a06fd18444dea9fc8d4ced3112dfed65" class="idref" href="#a06fd18444dea9fc8d4ced3112dfed65"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.Erasure.EWellformed.html#wf_glob"><span class="id" title="inductive">wf_glob</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#a06fd18444dea9fc8d4ced3112dfed65"><span class="id" title="variable">Σ</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Template.EnvMap.html#EnvMap.fresh_globals"><span class="id" title="inductive">EnvMap.EnvMap.fresh_globals</span></a> <a class="idref" href="MetaCoq.Erasure.EProgram.html#a06fd18444dea9fc8d4ced3112dfed65"><span class="id" title="variable">Σ</span></a>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

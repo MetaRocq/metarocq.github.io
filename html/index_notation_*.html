@@ -1,0 +1,1259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>typing_correctness</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<table>
+<tr>
+<td>Global Index</td>
+<td><a href="index_global_A.html">A</a></td>
+<td><a href="index_global_B.html">B</a></td>
+<td><a href="index_global_C.html">C</a></td>
+<td><a href="index_global_D.html">D</a></td>
+<td><a href="index_global_E.html">E</a></td>
+<td><a href="index_global_F.html">F</a></td>
+<td><a href="index_global_G.html">G</a></td>
+<td><a href="index_global_H.html">H</a></td>
+<td><a href="index_global_I.html">I</a></td>
+<td><a href="index_global_J.html">J</a></td>
+<td><a href="index_global_K.html">K</a></td>
+<td><a href="index_global_L.html">L</a></td>
+<td><a href="index_global_M.html">M</a></td>
+<td><a href="index_global_N.html">N</a></td>
+<td><a href="index_global_O.html">O</a></td>
+<td><a href="index_global_P.html">P</a></td>
+<td><a href="index_global_Q.html">Q</a></td>
+<td><a href="index_global_R.html">R</a></td>
+<td><a href="index_global_S.html">S</a></td>
+<td><a href="index_global_T.html">T</a></td>
+<td><a href="index_global_U.html">U</a></td>
+<td><a href="index_global_V.html">V</a></td>
+<td><a href="index_global_W.html">W</a></td>
+<td><a href="index_global_X.html">X</a></td>
+<td><a href="index_global_Y.html">Y</a></td>
+<td><a href="index_global_Z.html">Z</a></td>
+<td><a href="index_global__.html">_</a></td>
+<td><a href="index_global_*.html">other</a></td>
+<td>(75519 entries)</td>
+</tr>
+<tr>
+<td>Notation Index</td>
+<td>A</td>
+<td>B</td>
+<td><a href="index_notation_C.html">C</a></td>
+<td>D</td>
+<td><a href="index_notation_E.html">E</a></td>
+<td>F</td>
+<td><a href="index_notation_G.html">G</a></td>
+<td>H</td>
+<td><a href="index_notation_I.html">I</a></td>
+<td>J</td>
+<td><a href="index_notation_K.html">K</a></td>
+<td>L</td>
+<td><a href="index_notation_M.html">M</a></td>
+<td><a href="index_notation_N.html">N</a></td>
+<td>O</td>
+<td><a href="index_notation_P.html">P</a></td>
+<td>Q</td>
+<td>R</td>
+<td><a href="index_notation_S.html">S</a></td>
+<td><a href="index_notation_T.html">T</a></td>
+<td>U</td>
+<td><a href="index_notation_V.html">V</a></td>
+<td><a href="index_notation_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td><a href="index_notation_*.html">other</a></td>
+<td>(245 entries)</td>
+</tr>
+<tr>
+<td>Binder Index</td>
+<td><a href="index_binder_A.html">A</a></td>
+<td><a href="index_binder_B.html">B</a></td>
+<td><a href="index_binder_C.html">C</a></td>
+<td><a href="index_binder_D.html">D</a></td>
+<td><a href="index_binder_E.html">E</a></td>
+<td><a href="index_binder_F.html">F</a></td>
+<td><a href="index_binder_G.html">G</a></td>
+<td><a href="index_binder_H.html">H</a></td>
+<td><a href="index_binder_I.html">I</a></td>
+<td><a href="index_binder_J.html">J</a></td>
+<td><a href="index_binder_K.html">K</a></td>
+<td><a href="index_binder_L.html">L</a></td>
+<td><a href="index_binder_M.html">M</a></td>
+<td><a href="index_binder_N.html">N</a></td>
+<td><a href="index_binder_O.html">O</a></td>
+<td><a href="index_binder_P.html">P</a></td>
+<td><a href="index_binder_Q.html">Q</a></td>
+<td><a href="index_binder_R.html">R</a></td>
+<td><a href="index_binder_S.html">S</a></td>
+<td><a href="index_binder_T.html">T</a></td>
+<td><a href="index_binder_U.html">U</a></td>
+<td><a href="index_binder_V.html">V</a></td>
+<td><a href="index_binder_W.html">W</a></td>
+<td><a href="index_binder_X.html">X</a></td>
+<td><a href="index_binder_Y.html">Y</a></td>
+<td><a href="index_binder_Z.html">Z</a></td>
+<td><a href="index_binder__.html">_</a></td>
+<td><a href="index_binder_*.html">other</a></td>
+<td>(61331 entries)</td>
+</tr>
+<tr>
+<td>Module Index</td>
+<td><a href="index_module_A.html">A</a></td>
+<td><a href="index_module_B.html">B</a></td>
+<td><a href="index_module_C.html">C</a></td>
+<td><a href="index_module_D.html">D</a></td>
+<td><a href="index_module_E.html">E</a></td>
+<td><a href="index_module_F.html">F</a></td>
+<td><a href="index_module_G.html">G</a></td>
+<td>H</td>
+<td><a href="index_module_I.html">I</a></td>
+<td>J</td>
+<td><a href="index_module_K.html">K</a></td>
+<td><a href="index_module_L.html">L</a></td>
+<td><a href="index_module_M.html">M</a></td>
+<td><a href="index_module_N.html">N</a></td>
+<td><a href="index_module_O.html">O</a></td>
+<td><a href="index_module_P.html">P</a></td>
+<td>Q</td>
+<td><a href="index_module_R.html">R</a></td>
+<td><a href="index_module_S.html">S</a></td>
+<td><a href="index_module_T.html">T</a></td>
+<td><a href="index_module_U.html">U</a></td>
+<td><a href="index_module_V.html">V</a></td>
+<td><a href="index_module_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(144 entries)</td>
+</tr>
+<tr>
+<td>Variable Index</td>
+<td><a href="index_variable_A.html">A</a></td>
+<td><a href="index_variable_B.html">B</a></td>
+<td><a href="index_variable_C.html">C</a></td>
+<td>D</td>
+<td><a href="index_variable_E.html">E</a></td>
+<td><a href="index_variable_F.html">F</a></td>
+<td>G</td>
+<td>H</td>
+<td><a href="index_variable_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td>L</td>
+<td><a href="index_variable_M.html">M</a></td>
+<td><a href="index_variable_N.html">N</a></td>
+<td><a href="index_variable_O.html">O</a></td>
+<td>P</td>
+<td>Q</td>
+<td><a href="index_variable_R.html">R</a></td>
+<td><a href="index_variable_S.html">S</a></td>
+<td><a href="index_variable_T.html">T</a></td>
+<td>U</td>
+<td>V</td>
+<td><a href="index_variable_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(89 entries)</td>
+</tr>
+<tr>
+<td>Library Index</td>
+<td><a href="index_library_A.html">A</a></td>
+<td><a href="index_library_B.html">B</a></td>
+<td><a href="index_library_C.html">C</a></td>
+<td><a href="index_library_D.html">D</a></td>
+<td><a href="index_library_E.html">E</a></td>
+<td>F</td>
+<td>G</td>
+<td>H</td>
+<td><a href="index_library_I.html">I</a></td>
+<td>J</td>
+<td><a href="index_library_K.html">K</a></td>
+<td><a href="index_library_L.html">L</a></td>
+<td><a href="index_library_M.html">M</a></td>
+<td><a href="index_library_N.html">N</a></td>
+<td>O</td>
+<td><a href="index_library_P.html">P</a></td>
+<td>Q</td>
+<td><a href="index_library_R.html">R</a></td>
+<td><a href="index_library_S.html">S</a></td>
+<td><a href="index_library_T.html">T</a></td>
+<td><a href="index_library_U.html">U</a></td>
+<td>V</td>
+<td><a href="index_library_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(236 entries)</td>
+</tr>
+<tr>
+<td>Lemma Index</td>
+<td><a href="index_lemma_A.html">A</a></td>
+<td><a href="index_lemma_B.html">B</a></td>
+<td><a href="index_lemma_C.html">C</a></td>
+<td><a href="index_lemma_D.html">D</a></td>
+<td><a href="index_lemma_E.html">E</a></td>
+<td><a href="index_lemma_F.html">F</a></td>
+<td><a href="index_lemma_G.html">G</a></td>
+<td><a href="index_lemma_H.html">H</a></td>
+<td><a href="index_lemma_I.html">I</a></td>
+<td>J</td>
+<td><a href="index_lemma_K.html">K</a></td>
+<td><a href="index_lemma_L.html">L</a></td>
+<td><a href="index_lemma_M.html">M</a></td>
+<td><a href="index_lemma_N.html">N</a></td>
+<td><a href="index_lemma_O.html">O</a></td>
+<td><a href="index_lemma_P.html">P</a></td>
+<td><a href="index_lemma_Q.html">Q</a></td>
+<td><a href="index_lemma_R.html">R</a></td>
+<td><a href="index_lemma_S.html">S</a></td>
+<td><a href="index_lemma_T.html">T</a></td>
+<td><a href="index_lemma_U.html">U</a></td>
+<td><a href="index_lemma_V.html">V</a></td>
+<td><a href="index_lemma_W.html">W</a></td>
+<td><a href="index_lemma_X.html">X</a></td>
+<td>Y</td>
+<td><a href="index_lemma_Z.html">Z</a></td>
+<td>_</td>
+<td>other</td>
+<td>(6913 entries)</td>
+</tr>
+<tr>
+<td>Constructor Index</td>
+<td><a href="index_constructor_A.html">A</a></td>
+<td><a href="index_constructor_B.html">B</a></td>
+<td><a href="index_constructor_C.html">C</a></td>
+<td><a href="index_constructor_D.html">D</a></td>
+<td><a href="index_constructor_E.html">E</a></td>
+<td><a href="index_constructor_F.html">F</a></td>
+<td><a href="index_constructor_G.html">G</a></td>
+<td><a href="index_constructor_H.html">H</a></td>
+<td><a href="index_constructor_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td><a href="index_constructor_L.html">L</a></td>
+<td><a href="index_constructor_M.html">M</a></td>
+<td><a href="index_constructor_N.html">N</a></td>
+<td><a href="index_constructor_O.html">O</a></td>
+<td><a href="index_constructor_P.html">P</a></td>
+<td><a href="index_constructor_Q.html">Q</a></td>
+<td><a href="index_constructor_R.html">R</a></td>
+<td><a href="index_constructor_S.html">S</a></td>
+<td><a href="index_constructor_T.html">T</a></td>
+<td><a href="index_constructor_U.html">U</a></td>
+<td><a href="index_constructor_V.html">V</a></td>
+<td><a href="index_constructor_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(1141 entries)</td>
+</tr>
+<tr>
+<td>Axiom Index</td>
+<td><a href="index_axiom_A.html">A</a></td>
+<td>B</td>
+<td><a href="index_axiom_C.html">C</a></td>
+<td>D</td>
+<td>E</td>
+<td><a href="index_axiom_F.html">F</a></td>
+<td><a href="index_axiom_G.html">G</a></td>
+<td>H</td>
+<td>I</td>
+<td>J</td>
+<td>K</td>
+<td>L</td>
+<td>M</td>
+<td><a href="index_axiom_N.html">N</a></td>
+<td>O</td>
+<td>P</td>
+<td>Q</td>
+<td>R</td>
+<td>S</td>
+<td><a href="index_axiom_T.html">T</a></td>
+<td><a href="index_axiom_U.html">U</a></td>
+<td>V</td>
+<td>W</td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(34 entries)</td>
+</tr>
+<tr>
+<td>Inductive Index</td>
+<td><a href="index_inductive_A.html">A</a></td>
+<td><a href="index_inductive_B.html">B</a></td>
+<td><a href="index_inductive_C.html">C</a></td>
+<td><a href="index_inductive_D.html">D</a></td>
+<td><a href="index_inductive_E.html">E</a></td>
+<td><a href="index_inductive_F.html">F</a></td>
+<td><a href="index_inductive_G.html">G</a></td>
+<td><a href="index_inductive_H.html">H</a></td>
+<td><a href="index_inductive_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td><a href="index_inductive_L.html">L</a></td>
+<td><a href="index_inductive_M.html">M</a></td>
+<td><a href="index_inductive_N.html">N</a></td>
+<td><a href="index_inductive_O.html">O</a></td>
+<td><a href="index_inductive_P.html">P</a></td>
+<td><a href="index_inductive_Q.html">Q</a></td>
+<td><a href="index_inductive_R.html">R</a></td>
+<td><a href="index_inductive_S.html">S</a></td>
+<td><a href="index_inductive_T.html">T</a></td>
+<td><a href="index_inductive_U.html">U</a></td>
+<td><a href="index_inductive_V.html">V</a></td>
+<td><a href="index_inductive_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(269 entries)</td>
+</tr>
+<tr>
+<td>Projection Index</td>
+<td><a href="index_projection_A.html">A</a></td>
+<td><a href="index_projection_B.html">B</a></td>
+<td><a href="index_projection_C.html">C</a></td>
+<td><a href="index_projection_D.html">D</a></td>
+<td><a href="index_projection_E.html">E</a></td>
+<td><a href="index_projection_F.html">F</a></td>
+<td><a href="index_projection_G.html">G</a></td>
+<td><a href="index_projection_H.html">H</a></td>
+<td><a href="index_projection_I.html">I</a></td>
+<td>J</td>
+<td><a href="index_projection_K.html">K</a></td>
+<td><a href="index_projection_L.html">L</a></td>
+<td><a href="index_projection_M.html">M</a></td>
+<td><a href="index_projection_N.html">N</a></td>
+<td><a href="index_projection_O.html">O</a></td>
+<td><a href="index_projection_P.html">P</a></td>
+<td><a href="index_projection_Q.html">Q</a></td>
+<td><a href="index_projection_R.html">R</a></td>
+<td><a href="index_projection_S.html">S</a></td>
+<td><a href="index_projection_T.html">T</a></td>
+<td><a href="index_projection_U.html">U</a></td>
+<td><a href="index_projection_V.html">V</a></td>
+<td><a href="index_projection_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td><a href="index_projection_*.html">other</a></td>
+<td>(443 entries)</td>
+</tr>
+<tr>
+<td>Section Index</td>
+<td><a href="index_section_A.html">A</a></td>
+<td><a href="index_section_B.html">B</a></td>
+<td><a href="index_section_C.html">C</a></td>
+<td><a href="index_section_D.html">D</a></td>
+<td><a href="index_section_E.html">E</a></td>
+<td><a href="index_section_F.html">F</a></td>
+<td><a href="index_section_G.html">G</a></td>
+<td>H</td>
+<td><a href="index_section_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td><a href="index_section_L.html">L</a></td>
+<td><a href="index_section_M.html">M</a></td>
+<td><a href="index_section_N.html">N</a></td>
+<td><a href="index_section_O.html">O</a></td>
+<td><a href="index_section_P.html">P</a></td>
+<td>Q</td>
+<td><a href="index_section_R.html">R</a></td>
+<td><a href="index_section_S.html">S</a></td>
+<td><a href="index_section_T.html">T</a></td>
+<td><a href="index_section_U.html">U</a></td>
+<td><a href="index_section_V.html">V</a></td>
+<td><a href="index_section_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(296 entries)</td>
+</tr>
+<tr>
+<td>Instance Index</td>
+<td><a href="index_instance_A.html">A</a></td>
+<td><a href="index_instance_B.html">B</a></td>
+<td><a href="index_instance_C.html">C</a></td>
+<td><a href="index_instance_D.html">D</a></td>
+<td><a href="index_instance_E.html">E</a></td>
+<td><a href="index_instance_F.html">F</a></td>
+<td><a href="index_instance_G.html">G</a></td>
+<td>H</td>
+<td><a href="index_instance_I.html">I</a></td>
+<td><a href="index_instance_J.html">J</a></td>
+<td><a href="index_instance_K.html">K</a></td>
+<td><a href="index_instance_L.html">L</a></td>
+<td><a href="index_instance_M.html">M</a></td>
+<td><a href="index_instance_N.html">N</a></td>
+<td><a href="index_instance_O.html">O</a></td>
+<td><a href="index_instance_P.html">P</a></td>
+<td><a href="index_instance_Q.html">Q</a></td>
+<td><a href="index_instance_R.html">R</a></td>
+<td><a href="index_instance_S.html">S</a></td>
+<td><a href="index_instance_T.html">T</a></td>
+<td><a href="index_instance_U.html">U</a></td>
+<td><a href="index_instance_V.html">V</a></td>
+<td><a href="index_instance_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td><a href="index_instance_Z.html">Z</a></td>
+<td>_</td>
+<td>other</td>
+<td>(604 entries)</td>
+</tr>
+<tr>
+<td>Abbreviation Index</td>
+<td><a href="index_abbreviation_A.html">A</a></td>
+<td><a href="index_abbreviation_B.html">B</a></td>
+<td><a href="index_abbreviation_C.html">C</a></td>
+<td><a href="index_abbreviation_D.html">D</a></td>
+<td><a href="index_abbreviation_E.html">E</a></td>
+<td><a href="index_abbreviation_F.html">F</a></td>
+<td><a href="index_abbreviation_G.html">G</a></td>
+<td><a href="index_abbreviation_H.html">H</a></td>
+<td><a href="index_abbreviation_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td><a href="index_abbreviation_L.html">L</a></td>
+<td><a href="index_abbreviation_M.html">M</a></td>
+<td><a href="index_abbreviation_N.html">N</a></td>
+<td><a href="index_abbreviation_O.html">O</a></td>
+<td><a href="index_abbreviation_P.html">P</a></td>
+<td>Q</td>
+<td><a href="index_abbreviation_R.html">R</a></td>
+<td><a href="index_abbreviation_S.html">S</a></td>
+<td><a href="index_abbreviation_T.html">T</a></td>
+<td><a href="index_abbreviation_U.html">U</a></td>
+<td><a href="index_abbreviation_V.html">V</a></td>
+<td><a href="index_abbreviation_W.html">W</a></td>
+<td>X</td>
+<td><a href="index_abbreviation_Y.html">Y</a></td>
+<td>Z</td>
+<td>_</td>
+<td><a href="index_abbreviation_*.html">other</a></td>
+<td>(248 entries)</td>
+</tr>
+<tr>
+<td>Definition Index</td>
+<td><a href="index_definition_A.html">A</a></td>
+<td><a href="index_definition_B.html">B</a></td>
+<td><a href="index_definition_C.html">C</a></td>
+<td><a href="index_definition_D.html">D</a></td>
+<td><a href="index_definition_E.html">E</a></td>
+<td><a href="index_definition_F.html">F</a></td>
+<td><a href="index_definition_G.html">G</a></td>
+<td><a href="index_definition_H.html">H</a></td>
+<td><a href="index_definition_I.html">I</a></td>
+<td><a href="index_definition_J.html">J</a></td>
+<td><a href="index_definition_K.html">K</a></td>
+<td><a href="index_definition_L.html">L</a></td>
+<td><a href="index_definition_M.html">M</a></td>
+<td><a href="index_definition_N.html">N</a></td>
+<td><a href="index_definition_O.html">O</a></td>
+<td><a href="index_definition_P.html">P</a></td>
+<td><a href="index_definition_Q.html">Q</a></td>
+<td><a href="index_definition_R.html">R</a></td>
+<td><a href="index_definition_S.html">S</a></td>
+<td><a href="index_definition_T.html">T</a></td>
+<td><a href="index_definition_U.html">U</a></td>
+<td><a href="index_definition_V.html">V</a></td>
+<td><a href="index_definition_W.html">W</a></td>
+<td><a href="index_definition_X.html">X</a></td>
+<td>Y</td>
+<td><a href="index_definition_Z.html">Z</a></td>
+<td><a href="index_definition__.html">_</a></td>
+<td><a href="index_definition_*.html">other</a></td>
+<td>(3386 entries)</td>
+</tr>
+<tr>
+<td>Record Index</td>
+<td><a href="index_record_A.html">A</a></td>
+<td><a href="index_record_B.html">B</a></td>
+<td><a href="index_record_C.html">C</a></td>
+<td><a href="index_record_D.html">D</a></td>
+<td><a href="index_record_E.html">E</a></td>
+<td><a href="index_record_F.html">F</a></td>
+<td><a href="index_record_G.html">G</a></td>
+<td><a href="index_record_H.html">H</a></td>
+<td><a href="index_record_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td>L</td>
+<td><a href="index_record_M.html">M</a></td>
+<td><a href="index_record_N.html">N</a></td>
+<td><a href="index_record_O.html">O</a></td>
+<td><a href="index_record_P.html">P</a></td>
+<td><a href="index_record_Q.html">Q</a></td>
+<td><a href="index_record_R.html">R</a></td>
+<td><a href="index_record_S.html">S</a></td>
+<td><a href="index_record_T.html">T</a></td>
+<td><a href="index_record_U.html">U</a></td>
+<td><a href="index_record_V.html">V</a></td>
+<td><a href="index_record_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(140 entries)</td>
+</tr>
+</table>
+<hr/><a id="notation_*"></a><h2>other (notation)</h2>
+<a href="MetaCoq.Template.utils.bytestring.html#da3fc5e689cedcb9491dd6dad17e0422">_ ++ _ (bs_scope)</a> [in <a href="MetaCoq.Template.utils.bytestring.html">MetaCoq.Template.utils.bytestring</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#76214fa316f18d720833e810bbfd71fb">_ ^-1 (equiv_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#::equiv_scope:x_'oE'_x">_ oE _ (equiv_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#::equiv_scope:'1'">1 (equiv_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#76214fa316f18d720833e810bbfd71fb">_ ^-1 (equiv_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#::equiv_scope:x_'oE'_x">_ oE _ (equiv_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#::equiv_scope:'1'">1 (equiv_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Erasure.EAst.html#357222032a0f8bce9d9267f3659ce6f3">_ ,, _ (erasure)</a> [in <a href="MetaCoq.Erasure.EAst.html">MetaCoq.Erasure.EAst</a>]<br/>
+<a href="MetaCoq.Erasure.ELiftSubst.html#05a94e814dd3dfc2d0a748b2d951a789">_ { _ := _ } (erasure)</a> [in <a href="MetaCoq.Erasure.ELiftSubst.html">MetaCoq.Erasure.ELiftSubst</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'..2'">_ ..2 (fibration_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'..1'">_ ..1 (fibration_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.2'">_ .2 (fibration_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.1'">_ .1 (fibration_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae">( _ ; _ ) (fibration_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#::fibration_scope:x_'..2'">_ ..2 (fibration_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#::fibration_scope:x_'..1'">_ ..1 (fibration_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#::fibration_scope:x_'.2'">_ .2 (fibration_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#::fibration_scope:x_'.1'">_ .1 (fibration_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#9302c87983df9fcf813fed38017558ae">( _ ; _ ) (fibration_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae">_ ^-1 (function_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#::function_scope:x_'oD'_x">_ oD _ (function_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#::function_scope:x_'o'_x">_ o _ (function_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#f3f2d22838b594a6e5dbfb541ecf90ae">_ ^-1 (function_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#::function_scope:x_'oD'_x">_ oD _ (function_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#::function_scope:x_'o'_x">_ o _ (function_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.SafeChecker.PCUICSafeReduce.html#c291183902a7f37f27173cc42ed86b4c">` _ (metacoq_scope)</a> [in <a href="MetaCoq.SafeChecker.PCUICSafeReduce.html">MetaCoq.SafeChecker.PCUICSafeReduce</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#6675fa71c56a871a8be61e5f2cbd545b">! (metacoq_scope)</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'">_ .2 (pair_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'">_ .1 (pair_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#3b607a272444a2e3acbecfa52b796d2a">_ @@ _ (path_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d">_ ^ (path_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#da4283005a63bc086811fc2e64b35356">_ @ _ (path_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#2b82354f12c687608f5c1ade3e7ee37d">_ # _ (path_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#::path_scope:'1'">1 (path_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#3b607a272444a2e3acbecfa52b796d2a">_ @@ _ (path_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#6bc2e8b4a6e295632a90f5f35132db8d">_ ^ (path_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#da4283005a63bc086811fc2e64b35356">_ @ _ (path_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#2b82354f12c687608f5c1ade3e7ee37d">_ # _ (path_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#::path_scope:'1'">1 (path_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#8760d10920ef9f4b4747f9cea6faa617">_ ⊢ _ ≤[ _ ] _ ✓ (pcuic)</a> [in <a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html">MetaCoq.PCUIC.PCUICWellScopedCumulativity</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#dd149138cc3be009a9bac2373ceb8438">_ ⊢ _ ≤ _ (pcuic)</a> [in <a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html">MetaCoq.PCUIC.PCUICWellScopedCumulativity</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#8249679dbd26c3790f32ed1c0d47bbe1">_ ⊢ _ = _ (pcuic)</a> [in <a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html">MetaCoq.PCUIC.PCUICWellScopedCumulativity</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#20b53201b069ccee4b17c13deb1c7d3c">_ ⊢ _ ≤[ _ ] _ (pcuic)</a> [in <a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html">MetaCoq.PCUIC.PCUICWellScopedCumulativity</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICContextConversion.html#985f0fb4885414625000ecd8a63b7415">_ ⊢ _ ⇝ _ (pcuic)</a> [in <a href="MetaCoq.PCUIC.PCUICContextConversion.html">MetaCoq.PCUIC.PCUICContextConversion</a>]<br/>
+<a href="MetaCoq.Translations.times_bool_fun.html#95bfcc885202f724eb3f71389abbb842">( _ ; _ ) (prod_scope)</a> [in <a href="MetaCoq.Translations.times_bool_fun.html">MetaCoq.Translations.times_bool_fun</a>]<br/>
+<a href="MetaCoq.Translations.sigma.html#::sigma_scope:x_'.2'">_ .2 (sigma_scope)</a> [in <a href="MetaCoq.Translations.sigma.html">MetaCoq.Translations.sigma</a>]<br/>
+<a href="MetaCoq.Translations.sigma.html#::sigma_scope:x_'.1'">_ .1 (sigma_scope)</a> [in <a href="MetaCoq.Translations.sigma.html">MetaCoq.Translations.sigma</a>]<br/>
+<a href="MetaCoq.Translations.sigma.html#4ad04a5dd625e5db79d4df5e2eaf8292">( _ ; _ ) (sigma_scope)</a> [in <a href="MetaCoq.Translations.sigma.html">MetaCoq.Translations.sigma</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#64b62961f3506563337ecca5e1172b0a">⇑^ _ _ (sigma_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html">MetaCoq.PCUIC.PCUICSigmaCalculus</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#999cdb9531c4ecd731abe269ac7560c5">_ ⋅n _ (sigma_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html">MetaCoq.PCUIC.PCUICSigmaCalculus</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#a4a32b8308f1780dad4635c3c275ed92">↑^ _ (sigma_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html">MetaCoq.PCUIC.PCUICSigmaCalculus</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#cdf5d3dd42c21ebe3fd7367b65e1b81d">_ ∘s _ (sigma_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html">MetaCoq.PCUIC.PCUICSigmaCalculus</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#1fd3a2c396e34e34a86464bd59ba64ce">↑ (sigma_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html">MetaCoq.PCUIC.PCUICSigmaCalculus</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#817df323adfd0755c3de9ec712e1a568">_ ⋅ _ (sigma_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html">MetaCoq.PCUIC.PCUICSigmaCalculus</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#16384ce131f47c8f429428a74ad5dc38">_ .[ _ ] (sigma_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html">MetaCoq.PCUIC.PCUICSigmaCalculus</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#4b9883794a2e9843718e6f0f20137aef">_ =2 _ (signature_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html">MetaCoq.PCUIC.PCUICSigmaCalculus</a>]<br/>
+<a href="MetaCoq.Template.utils.html#ee0c685eaa3e4bb6fc08727e7542b6f9">_ ^ _ (string_scope2)</a> [in <a href="MetaCoq.Template.utils.html">MetaCoq.Template.utils</a>]<br/>
+<a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html#2156277975d910c7729e1eb34893c780">_ ;;; _ |- _ ◃ _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html">MetaCoq.PCUIC.Bidirectional.BDTyping</a>]<br/>
+<a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html#e5e2c8b58d59263dd3ef7fdd28f1a2d0">_ ;;; _ |- _ ▹{ _ } ( _ , _ ) (type_scope)</a> [in <a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html">MetaCoq.PCUIC.Bidirectional.BDTyping</a>]<br/>
+<a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html#ba275c629abef9b1fb9a1488eb7e3172">_ ;;; _ |- _ ▹Π ( _ , _ , _ ) (type_scope)</a> [in <a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html">MetaCoq.PCUIC.Bidirectional.BDTyping</a>]<br/>
+<a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html#707f18806b9c6c5459796f0e7eb6c13a">_ ;;; _ |- _ ▹□ _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html">MetaCoq.PCUIC.Bidirectional.BDTyping</a>]<br/>
+<a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html#7d12f9d53f0b9126052444bb63d23b40">_ ;;; _ |- _ ▹ _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html">MetaCoq.PCUIC.Bidirectional.BDTyping</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICCumulativity.html#306f7598d6d2dad3db9c83c8c8d63501">_ ;;; _ |- _ &lt;= _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICCumulativity.html">MetaCoq.PCUIC.PCUICCumulativity</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICCumulativity.html#0201439ba92dba5389e79c0ab5c9e4d4">_ ;;; _ |- _ = _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICCumulativity.html">MetaCoq.PCUIC.PCUICCumulativity</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICCumulativity.html#33bb734dc2f1c35e2c18cb80e80b3dc2">_ ;;; _ |- _ &lt;=[ _ ] _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICCumulativity.html">MetaCoq.PCUIC.PCUICCumulativity</a>]<br/>
+<a href="MetaCoq.Translations.times_bool_fun.html#57f4926fe686c2f5c985fad93ee01cfb">_ × _ (type_scope)</a> [in <a href="MetaCoq.Translations.times_bool_fun.html">MetaCoq.Translations.times_bool_fun</a>]<br/>
+<a href="MetaCoq.Erasure.EArities.html#8eea4fcc58937245cc053290caf32e0d">_ ;;; _ |- _ ~~ _ (type_scope)</a> [in <a href="MetaCoq.Erasure.EArities.html">MetaCoq.Erasure.EArities</a>]<br/>
+<a href="MetaCoq.Erasure.EArities.html#2ea695762777284e304c0ed60ef8a5fb">_ ⊢p _ ▷ _ (type_scope)</a> [in <a href="MetaCoq.Erasure.EArities.html">MetaCoq.Erasure.EArities</a>]<br/>
+<a href="MetaCoq.Template.Typing.html#::type_scope:'wf_local'_x_x">wf_local _ _ (type_scope)</a> [in <a href="MetaCoq.Template.Typing.html">MetaCoq.Template.Typing</a>]<br/>
+<a href="MetaCoq.Template.Typing.html#41b22a1465690d4777852776dc1e5d8d">_ ;;; _ |- _ : _ (type_scope)</a> [in <a href="MetaCoq.Template.Typing.html">MetaCoq.Template.Typing</a>]<br/>
+<a href="MetaCoq.Template.Typing.html#306f7598d6d2dad3db9c83c8c8d63501">_ ;;; _ |- _ &lt;= _ (type_scope)</a> [in <a href="MetaCoq.Template.Typing.html">MetaCoq.Template.Typing</a>]<br/>
+<a href="MetaCoq.Template.Typing.html#0201439ba92dba5389e79c0ab5c9e4d4">_ ;;; _ |- _ = _ (type_scope)</a> [in <a href="MetaCoq.Template.Typing.html">MetaCoq.Template.Typing</a>]<br/>
+<a href="MetaCoq.Erasure.ErasureCorrectness.html#2e8ed575ebe580f39f6106f499cffee0">_ ⊢ _ ▷ _ (type_scope)</a> [in <a href="MetaCoq.Erasure.ErasureCorrectness.html">MetaCoq.Erasure.ErasureCorrectness</a>]<br/>
+<a href="MetaCoq.Erasure.ErasureCorrectness.html#a098a2ba5bd8753d4eb93078c029fdd9">_ |-p _ ▷ _ (type_scope)</a> [in <a href="MetaCoq.Erasure.ErasureCorrectness.html">MetaCoq.Erasure.ErasureCorrectness</a>]<br/>
+<a href="MetaCoq.Erasure.EDeps.html#2e8ed575ebe580f39f6106f499cffee0">_ ⊢ _ ▷ _ (type_scope)</a> [in <a href="MetaCoq.Erasure.EDeps.html">MetaCoq.Erasure.EDeps</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSubstitution.html#48a58a568c211531a5851f04decdb67b">_ ;;; _ |-[ _ ] _ = _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSubstitution.html">MetaCoq.PCUIC.PCUICSubstitution</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSubstitution.html#0fd87580800423a4338d98ce864e5c91">_ ;;; _ |-[ _ ] _ &lt;= _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSubstitution.html">MetaCoq.PCUIC.PCUICSubstitution</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSubstitution.html#974c6be1a76ab338f20e65a5b3149d86">_ ;;; _ |-[ _ ] _ &lt;=[ _ ] _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICSubstitution.html">MetaCoq.PCUIC.PCUICSubstitution</a>]<br/>
+<a href="MetaCoq.Template.utils.html#8426aced733de3f9c0ab331518367c06">_ * _ (type_scope2)</a> [in <a href="MetaCoq.Template.utils.html">MetaCoq.Template.utils</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICEquality.html#168cbf32f50b22b46448a278eb834e6c">_ ⊢ _ &lt;==[ _ , _ ] _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICEquality.html">MetaCoq.PCUIC.PCUICEquality</a>]<br/>
+<a href="MetaCoq.Translations.sigma.html#57f4926fe686c2f5c985fad93ee01cfb">_ × _ (type_scope)</a> [in <a href="MetaCoq.Translations.sigma.html">MetaCoq.Translations.sigma</a>]<br/>
+<a href="MetaCoq.Translations.sigma.html#94e052c6337a815c52cda44eea9df276">∃ _ .. _ , _ (type_scope)</a> [in <a href="MetaCoq.Translations.sigma.html">MetaCoq.Translations.sigma</a>]<br/>
+<a href="MetaCoq.Translations.sigma.html#7ee4b62afcf1f9e6cf58856afcd3436d">{ _ : _ &amp;&amp; _ } (type_scope)</a> [in <a href="MetaCoq.Translations.sigma.html">MetaCoq.Translations.sigma</a>]<br/>
+<a href="MetaCoq.Translations.sigma.html#07bba0292ebef781f3099290fad5492b">{ _ &amp;&amp; _ } (type_scope)</a> [in <a href="MetaCoq.Translations.sigma.html">MetaCoq.Translations.sigma</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#ef93fc0aa5631a2954ee48fa80bbfa3a">_ ;;; _ ⊢ _ = _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html">MetaCoq.PCUIC.PCUICWellScopedCumulativity</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#43af61ccfec5746413cd06bf5ba9ae4f">_ ;;; _ ⊢ _ ≤ _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html">MetaCoq.PCUIC.PCUICWellScopedCumulativity</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#35217f73df56646eb74cda65149cc63c">_ ;;; _ ⊢ _ ≤[ _ ] _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html">MetaCoq.PCUIC.PCUICWellScopedCumulativity</a>]<br/>
+<a href="MetaCoq.Template.Checker.html#fbbfb55f1ee0a61e0473fa0799e34e17">() (type_scope)</a> [in <a href="MetaCoq.Template.Checker.html">MetaCoq.Template.Checker</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#068136b784cb569aaadfa01f234d5c01">_ &lt;~&gt; _ (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#2596316c6f2ff161cb03e25fd8914390">_ == _ (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a">_ = _ (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#b8b2ebc8e1a8b9aa935c0702efb5dccf">_ = _ :&gt; _ (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#cc5e56ba3765e2d6b17e66d19b966f1d">{ _ : _ &amp; _ } (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT.html#a883bdd010993579f99d60b3775bcf54">exists _ .. _ , _ (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT.html">MetaCoq.Translations.MiniHoTT</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html#1f35f587ed0a5cdd6b152b079b93cb12">_ ⊢ _ =s _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html">MetaCoq.PCUIC.PCUICCumulativitySpec</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html#fea4968a737cd11ca752247558b167be">_ ⊢ _ ≤s _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html">MetaCoq.PCUIC.PCUICCumulativitySpec</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html#1411080c4059cda8348902d49f107567">_ ⊢ _ ≤s[ _ ] _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html">MetaCoq.PCUIC.PCUICCumulativitySpec</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html#1d3dfa739ee50d540ac2196d4ac26646">_ ;;; _ ⊢ _ ≤s[ _ ] _ (type_scope)</a> [in <a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html">MetaCoq.PCUIC.PCUICCumulativitySpec</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#1f8246a8b9755a049a26b0af15a9ac60">[ × _ , _ , _ , _ , _ , _ , _ , _ , _ &amp; _ ] (type_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#3ecbe522f45f61aa06ccb27f24307be2">[ × _ , _ , _ , _ , _ , _ , _ , _ &amp; _ ] (type_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#4b925310ecfbce352cf039779425acc2">[ × _ , _ , _ , _ , _ , _ , _ &amp; _ ] (type_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#1ab70d7846f865c9fe97fa3803732456">[ × _ , _ , _ , _ , _ , _ &amp; _ ] (type_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#b64593218057f166129e09a12d214ced">[ × _ , _ , _ , _ , _ &amp; _ ] (type_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#5acdc49a53cb0c88d730a6161981a83f">[ × _ , _ , _ , _ &amp; _ ] (type_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#e1d373c00c5388a2c7aaca322473d464">[ × _ , _ , _ &amp; _ ] (type_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#bd8134d210bd52bab4e4b61c65bf150a">[ × _ , _ &amp; _ ] (type_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#f919c36d9c14c2301311156eed0a89fa">[ × _ &amp; _ ] (type_scope)</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#068136b784cb569aaadfa01f234d5c01">_ &lt;~&gt; _ (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#2596316c6f2ff161cb03e25fd8914390">_ == _ (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#6cd0f7b28b6092304087c7049437bb1a">_ = _ (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#b8b2ebc8e1a8b9aa935c0702efb5dccf">_ = _ :&gt; _ (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#cc5e56ba3765e2d6b17e66d19b966f1d">{ _ : _ &amp; _ } (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Translations.MiniHoTT_paths.html#a883bdd010993579f99d60b3775bcf54">exists _ .. _ , _ (type_scope)</a> [in <a href="MetaCoq.Translations.MiniHoTT_paths.html">MetaCoq.Translations.MiniHoTT_paths</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107">∑ _ .. _ , _ (type_scope)</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Translations.param_generous_packed.html#57f4926fe686c2f5c985fad93ee01cfb">_ × _ (type_scope)</a> [in <a href="MetaCoq.Translations.param_generous_packed.html">MetaCoq.Translations.param_generous_packed</a>]<br/>
+<a href="MetaCoq.Template.Universes.html#5f6947a0768b10c97a2423402675b3e3">⟦ _ ⟧_ _ (univ_scope)</a> [in <a href="MetaCoq.Template.Universes.html">MetaCoq.Template.Universes</a>]<br/>
+<a href="MetaCoq.Template.utils.MCCompare.html#ba833be838900083ee70361e89497afa">_ ?? _</a> [in <a href="MetaCoq.Template.utils.MCCompare.html">MetaCoq.Template.utils.MCCompare</a>]<br/>
+<a href="MetaCoq.Template.Universes.html#2069c293c95c271a185f7f719b9c1655">_ @[ _ ]</a> [in <a href="MetaCoq.Template.Universes.html">MetaCoq.Template.Universes</a>]<br/>
+<a href="MetaCoq.Template.Universes.html#fa53e7e2e4fd81994788c41fd8d89a68">_ ⊂_cs _</a> [in <a href="MetaCoq.Template.Universes.html">MetaCoq.Template.Universes</a>]<br/>
+<a href="MetaCoq.Template.Universes.html#09094a872fb7a05968e4ddd49fdab04a">_ =_cs _</a> [in <a href="MetaCoq.Template.Universes.html">MetaCoq.Template.Universes</a>]<br/>
+<a href="MetaCoq.Template.Universes.html#925810822442216d8fb810e42771d4a9">_ =_cset _</a> [in <a href="MetaCoq.Template.Universes.html">MetaCoq.Template.Universes</a>]<br/>
+<a href="MetaCoq.Template.Universes.html#c49d1dc2db4d25f04ad66f3507e65ffd">_ =_lset _</a> [in <a href="MetaCoq.Template.Universes.html">MetaCoq.Template.Universes</a>]<br/>
+<a href="MetaCoq.Template.BasicAst.html#b66601545ff7e22c5dcb7c86aa0cca21">_ ,, _</a> [in <a href="MetaCoq.Template.BasicAst.html">MetaCoq.Template.BasicAst</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICCumulativity.html#9bdcbce8ef2cd0921187c4d7eec3db2b">_ ⊢ _ &lt;===[ _ ] _</a> [in <a href="MetaCoq.PCUIC.PCUICCumulativity.html">MetaCoq.PCUIC.PCUICCumulativity</a>]<br/>
+<a href="MetaCoq.Translations.param_binary.html#b8382ebd4d1ecdc4b5385bb249fc75b4">_ &lt;= _</a> [in <a href="MetaCoq.Translations.param_binary.html">MetaCoq.Translations.param_binary</a>]<br/>
+<a href="MetaCoq.Template.utils.MCRelations.html#e8aac4a093c83da9a780e8c256235d19">_ &lt;~&gt; _</a> [in <a href="MetaCoq.Template.utils.MCRelations.html">MetaCoq.Template.utils.MCRelations</a>]<br/>
+<a href="MetaCoq.Template.Typing.html#c834ce53daa7a7155608f181b383a353">_ ;;; _ |- _ &lt;=[ _ ] _</a> [in <a href="MetaCoq.Template.Typing.html">MetaCoq.Template.Typing</a>]<br/>
+<a href="MetaCoq.PCUIC.utils.PCUICUtils.html#6c2457ae804a622a8d2296149d7ca7e6">_ ⊨ _ \ _ by _ ⨷ _</a> [in <a href="MetaCoq.PCUIC.utils.PCUICUtils.html">MetaCoq.PCUIC.utils.PCUICUtils</a>]<br/>
+<a href="MetaCoq.PCUIC.utils.PCUICUtils.html#efec32fceb805ef08cdbb98c16e791a9">_ ⊗ _</a> [in <a href="MetaCoq.PCUIC.utils.PCUICUtils.html">MetaCoq.PCUIC.utils.PCUICUtils</a>]<br/>
+<a href="MetaCoq.PCUIC.utils.PCUICUtils.html#0f317db03e20b6fc734e6a09952a5ed9">_ ⊩ _ ⨶ _</a> [in <a href="MetaCoq.PCUIC.utils.PCUICUtils.html">MetaCoq.PCUIC.utils.PCUICUtils</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSubstitution.html#50de1068d362cb456bdd4a5c98f60f39">_ ;;; _ |- _ = _ ✓</a> [in <a href="MetaCoq.PCUIC.PCUICSubstitution.html">MetaCoq.PCUIC.PCUICSubstitution</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSubstitution.html#27473aee2bc48aa1571403d6ede09cab">_ ;;; _ |- _ &lt;= _ ✓</a> [in <a href="MetaCoq.PCUIC.PCUICSubstitution.html">MetaCoq.PCUIC.PCUICSubstitution</a>]<br/>
+<a href="MetaCoq.Erasure.Extract.html#0343a91997e2a7c4174c89d27a2fb981">_ ;;; _ |- _ ⇝ℇ _</a> [in <a href="MetaCoq.Erasure.Extract.html">MetaCoq.Erasure.Extract</a>]<br/>
+<a href="MetaCoq.Template.Ast.html#94070bf4072b9cf1e91d0855ad508f5b">_ { _ := _ }</a> [in <a href="MetaCoq.Template.Ast.html">MetaCoq.Template.Ast</a>]<br/>
+<a href="MetaCoq.Template.common.uGraph.html#cc8252ebc6e52c3074659bd050e4b781">_ =_g _</a> [in <a href="MetaCoq.Template.common.uGraph.html">MetaCoq.Template.common.uGraph</a>]<br/>
+<a href="MetaCoq.Template.common.uGraph.html#0d9ab4f6d3bd625d8cd6626928e60096">_ =_gcs _</a> [in <a href="MetaCoq.Template.common.uGraph.html">MetaCoq.Template.common.uGraph</a>]<br/>
+<a href="MetaCoq.Template.utils.MCEquality.html#c315e69cfe64a7553bd8eefc2c065fa3">_ # _</a> [in <a href="MetaCoq.Template.utils.MCEquality.html">MetaCoq.Template.utils.MCEquality</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICEquality.html#42a1b1b20aa001df7956584d0b18d89e">_ ≡' _</a> [in <a href="MetaCoq.PCUIC.PCUICEquality.html">MetaCoq.PCUIC.PCUICEquality</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICEquality.html#8f9238d4eefe0b5c60a6c98165047666">_ ≡ _</a> [in <a href="MetaCoq.PCUIC.PCUICEquality.html">MetaCoq.PCUIC.PCUICEquality</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#30ca5c6e540a9e0f10490cd54315c0c4">_ ∘i _</a> [in <a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html">MetaCoq.PCUIC.PCUICSigmaCalculus</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICAlpha.html#5463eb4d26e0bc1543a59eba8c584512">_ ≡Γ _</a> [in <a href="MetaCoq.PCUIC.PCUICAlpha.html">MetaCoq.PCUIC.PCUICAlpha</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICAlpha.html#82311b5c556a8686b7b41fbd0747d526">_ ≡α _</a> [in <a href="MetaCoq.PCUIC.PCUICAlpha.html">MetaCoq.PCUIC.PCUICAlpha</a>]<br/>
+<a href="MetaCoq.Template.utils.ReflectEq.html#12489c9c79e91749bd1f337dd0c899e9">_ == _</a> [in <a href="MetaCoq.Template.utils.ReflectEq.html">MetaCoq.Template.utils.ReflectEq</a>]<br/>
+<a href="MetaCoq.SafeChecker.PCUICWfEnv.html#bac0a333394e2541f259f5481a301f86">_ ∼_ext _</a> [in <a href="MetaCoq.SafeChecker.PCUICWfEnv.html">MetaCoq.SafeChecker.PCUICWfEnv</a>]<br/>
+<a href="MetaCoq.SafeChecker.PCUICWfEnv.html#9897e19d536bda84609b8ab92c34be9b">_ ∼ _</a> [in <a href="MetaCoq.SafeChecker.PCUICWfEnv.html">MetaCoq.SafeChecker.PCUICWfEnv</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICAst.html#94070bf4072b9cf1e91d0855ad508f5b">_ { _ := _ }</a> [in <a href="MetaCoq.PCUIC.PCUICAst.html">MetaCoq.PCUIC.PCUICAst</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#56f76c3496e694b3bed8bac7841a1cca">_ ;;; _ ⊢ _ ⇝ _</a> [in <a href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html">MetaCoq.PCUIC.PCUICWellScopedCumulativity</a>]<br/>
+<a href="MetaCoq.Template.Reflect.html#e478f32d31bb742ef11764dfa2ef234f">_ ==? _</a> [in <a href="MetaCoq.Template.Reflect.html">MetaCoq.Template.Reflect</a>]<br/>
+<a href="MetaCoq.Template.ReflectAst.html#e478f32d31bb742ef11764dfa2ef234f">_ ==? _</a> [in <a href="MetaCoq.Template.ReflectAst.html">MetaCoq.Template.ReflectAst</a>]<br/>
+<a href="MetaCoq.Translations.standard_model.html#b8382ebd4d1ecdc4b5385bb249fc75b4">_ &lt;= _</a> [in <a href="MetaCoq.Translations.standard_model.html">MetaCoq.Translations.standard_model</a>]<br/>
+<a href="MetaCoq.PCUIC.Syntax.PCUICReflect.html#e478f32d31bb742ef11764dfa2ef234f">_ ==? _</a> [in <a href="MetaCoq.PCUIC.Syntax.PCUICReflect.html">MetaCoq.PCUIC.Syntax.PCUICReflect</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45">_ ;;; _ |- _ : _</a> [in <a href="MetaCoq.PCUIC.PCUICTyping.html">MetaCoq.PCUIC.PCUICTyping</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html#0dacab788270de3296ca4555f4f29f56">_ ;;; _ |- _ =s _</a> [in <a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html">MetaCoq.PCUIC.PCUICCumulativitySpec</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html#86728f814fe4f2035896b52bd15d228a">_ ;;; _ |- _ &lt;=s _</a> [in <a href="MetaCoq.PCUIC.PCUICCumulativitySpec.html">MetaCoq.PCUIC.PCUICCumulativitySpec</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#:::x_'.p2'">_ .p2</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#:::x_'.p1'">_ .p1</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.Template.utils.MCProd.html#52eddd74560fa276f934634af83eeaf4">_ × _</a> [in <a href="MetaCoq.Template.utils.MCProd.html">MetaCoq.Template.utils.MCProd</a>]<br/>
+<a href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#ff445d7b2f6b0b41c595c87c5e61870b">_ ;;; _ ⊢ _ : _</a> [in <a href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html">MetaCoq.PCUIC.Syntax.PCUICInstDef</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSR.html#7025655d614e22513b37cff8a2606208">_ ;;; _ ⊢ _ ⇝1 _</a> [in <a href="MetaCoq.PCUIC.PCUICSR.html">MetaCoq.PCUIC.PCUICSR</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#71c7d86a66a6e73466323c7a7bbc3c75">_ =2 _</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#65e39e13a0e7811abaf3f6b8fa112fed">_ =1 _</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#777d545f3df7a0e7c9a56d33a4f5d56c">_ .π2</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#9068efa82fa7bcf30341b045859b1c5b">_ .π1</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#c90061783c20674b3a3a6b46d343da03">_ ∘ _</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Translations.param_original.html#b8382ebd4d1ecdc4b5385bb249fc75b4">_ &lt;= _</a> [in <a href="MetaCoq.Translations.param_original.html">MetaCoq.Translations.param_original</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICReduction.html#fd5e6cf66006cae957f0a50c3e663246">_ ;;; _ |- _ ⇝* _</a> [in <a href="MetaCoq.PCUIC.PCUICReduction.html">MetaCoq.PCUIC.PCUICReduction</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICReduction.html#8a75a4cbf6fd0563060c50337a6614e9">_ ;;; _ |- _ ⇝ _</a> [in <a href="MetaCoq.PCUIC.PCUICReduction.html">MetaCoq.PCUIC.PCUICReduction</a>]<br/>
+<a href="MetaCoq.Translations.param_cheap_packed.html#:::'El'_x">El _</a> [in <a href="MetaCoq.Translations.param_cheap_packed.html">MetaCoq.Translations.param_cheap_packed</a>]<br/>
+<a href="MetaCoq.Translations.param_generous_packed.html#:::'El'_x">El _</a> [in <a href="MetaCoq.Translations.param_generous_packed.html">MetaCoq.Translations.param_generous_packed</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#:::'eta_compose'">eta_compose</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.PCUIC.Syntax.PCUICTactics.html#:::'lens'">lens</a> [in <a href="MetaCoq.PCUIC.Syntax.PCUICTactics.html">MetaCoq.PCUIC.Syntax.PCUICTactics</a>]<br/>
+<a href="MetaCoq.Template.utils.MCRelations.html#:::'precompose'">precompose</a> [in <a href="MetaCoq.Template.utils.MCRelations.html">MetaCoq.Template.utils.MCRelations</a>]<br/>
+<a href="MetaCoq.Translations.param_cheap_packed.html#:::'tsl_ty_param'">tsl_ty_param</a> [in <a href="MetaCoq.Translations.param_cheap_packed.html">MetaCoq.Translations.param_cheap_packed</a>]<br/>
+<a href="MetaCoq.Translations.param_generous_packed.html#:::'tsl_ty_param'">tsl_ty_param</a> [in <a href="MetaCoq.Translations.param_generous_packed.html">MetaCoq.Translations.param_generous_packed</a>]<br/>
+<a href="MetaCoq.Translations.param_cheap_packed.html#:::'TYPE'">TYPE</a> [in <a href="MetaCoq.Translations.param_cheap_packed.html">MetaCoq.Translations.param_cheap_packed</a>]<br/>
+<a href="MetaCoq.Translations.param_generous_packed.html#:::'TYPE'">TYPE</a> [in <a href="MetaCoq.Translations.param_generous_packed.html">MetaCoq.Translations.param_generous_packed</a>]<br/>
+<a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html#:::'wf_local_bd_rel'_x_x_x">wf_local_bd_rel _ _ _</a> [in <a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html">MetaCoq.PCUIC.Bidirectional.BDTyping</a>]<br/>
+<a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html#:::'wf_local_bd'_x_x">wf_local_bd _ _</a> [in <a href="MetaCoq.PCUIC.Bidirectional.BDTyping.html">MetaCoq.PCUIC.Bidirectional.BDTyping</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICTyping.html#:::'wf_local'_x_x">wf_local _ _</a> [in <a href="MetaCoq.PCUIC.PCUICTyping.html">MetaCoq.PCUIC.PCUICTyping</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICInductiveInversion.html#a9a0b33c1f7aa55888d16704fbe19a94">!! _</a> [in <a href="MetaCoq.PCUIC.PCUICInductiveInversion.html">MetaCoq.PCUIC.PCUICInductiveInversion</a>]<br/>
+<a href="MetaCoq.Template.utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9">#| _ |</a> [in <a href="MetaCoq.Template.utils.MCList.html">MetaCoq.Template.utils.MCList</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#5e8199556fae977bef533c8c83816eb1">( _ ; _ ; _ ; _ ; _ ; _ )</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#b33d2714c4564aaa9d9a20b4e40fd775">( _ ; _ ; _ ; _ ; _ )</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#10ad76a80d07304ebf924e74a1314ea7">( _ ; _ ; _ ; _ )</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#cdd198d55a4475b214740b8083e472ab">( _ ; _ ; _ )</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#7957360534ce47b451efaf295515cd1d">( _ ; _ )</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.Checker.html#f5cb26d96fc0400fc3c881290947e554">()</a> [in <a href="MetaCoq.Template.Checker.html">MetaCoq.Template.Checker</a>]<br/>
+<a href="MetaCoq.Template.Universes.html#d676d1184dda0c9420567b6587a9c159">(=_cs)</a> [in <a href="MetaCoq.Template.Universes.html">MetaCoq.Template.Universes</a>]<br/>
+<a href="MetaCoq.Template.Universes.html#94dd2e6e810f16ca1cabb0bffd66d7a5">(=_cset)</a> [in <a href="MetaCoq.Template.Universes.html">MetaCoq.Template.Universes</a>]<br/>
+<a href="MetaCoq.Template.Universes.html#a16fed083831df212b7344c0f6ed7fff">(=_lset)</a> [in <a href="MetaCoq.Template.Universes.html">MetaCoq.Template.Universes</a>]<br/>
+<a href="MetaCoq.Template.common.uGraph.html#ab3b8dfdc3b63070913aa9ac76fba377">(=_g)</a> [in <a href="MetaCoq.Template.common.uGraph.html">MetaCoq.Template.common.uGraph</a>]<br/>
+<a href="MetaCoq.Template.common.uGraph.html#d1c74f3ae57514bea72dc66bb9484c1b">(=_gcs)</a> [in <a href="MetaCoq.Template.common.uGraph.html">MetaCoq.Template.common.uGraph</a>]<br/>
+<a href="MetaCoq.Template.Universes.html#cdc5199563542c9214b1e02c9d18b817">(⊂_cs)</a> [in <a href="MetaCoq.Template.Universes.html">MetaCoq.Template.Universes</a>]<br/>
+<a href="MetaCoq.Template.Loader.html#718bcc50d47fdc3f494b25555b8a784b">&lt;% _ %&gt;</a> [in <a href="MetaCoq.Template.Loader.html">MetaCoq.Template.Loader</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a">`=1`</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.Template.utils.MCPrelude.html#50c236bc22b68b42aab5a050cb4c4c6d">`=2`</a> [in <a href="MetaCoq.Template.utils.MCPrelude.html">MetaCoq.Template.utils.MCPrelude</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICAlpha.html#360e797dd2b30b49506160cb175ec9d4">`≡Γ`</a> [in <a href="MetaCoq.PCUIC.PCUICAlpha.html">MetaCoq.PCUIC.PCUICAlpha</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICAlpha.html#499be1b84d35766a709b081f71e9a549">`≡α`</a> [in <a href="MetaCoq.PCUIC.PCUICAlpha.html">MetaCoq.PCUIC.PCUICAlpha</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#53381d4046a55425b79d983532cca692">⇑ _</a> [in <a href="MetaCoq.PCUIC.PCUICSigmaCalculus.html">MetaCoq.PCUIC.PCUICSigmaCalculus</a>]<br/>
+<a href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118">∥ _ ∥</a> [in <a href="MetaCoq.Template.utils.MCSquash.html">MetaCoq.Template.utils.MCSquash</a>]<br/>
+<a href="MetaCoq.PCUIC.PCUICInductiveInversion.html#2ceb7077c3bf8b12080c8d5350dd98ec">⋆</a> [in <a href="MetaCoq.PCUIC.PCUICInductiveInversion.html">MetaCoq.PCUIC.PCUICInductiveInversion</a>]<br/>
+<a href="MetaCoq.Template.common.uGraph.html#2519cb04e0ff2d0c3e327bff7307da31">⎩ _ ⎭</a> [in <a href="MetaCoq.Template.common.uGraph.html">MetaCoq.Template.common.uGraph</a>]<br/>
+<br/><br/><hr/><table>
+<tr>
+<td>Global Index</td>
+<td><a href="index_global_A.html">A</a></td>
+<td><a href="index_global_B.html">B</a></td>
+<td><a href="index_global_C.html">C</a></td>
+<td><a href="index_global_D.html">D</a></td>
+<td><a href="index_global_E.html">E</a></td>
+<td><a href="index_global_F.html">F</a></td>
+<td><a href="index_global_G.html">G</a></td>
+<td><a href="index_global_H.html">H</a></td>
+<td><a href="index_global_I.html">I</a></td>
+<td><a href="index_global_J.html">J</a></td>
+<td><a href="index_global_K.html">K</a></td>
+<td><a href="index_global_L.html">L</a></td>
+<td><a href="index_global_M.html">M</a></td>
+<td><a href="index_global_N.html">N</a></td>
+<td><a href="index_global_O.html">O</a></td>
+<td><a href="index_global_P.html">P</a></td>
+<td><a href="index_global_Q.html">Q</a></td>
+<td><a href="index_global_R.html">R</a></td>
+<td><a href="index_global_S.html">S</a></td>
+<td><a href="index_global_T.html">T</a></td>
+<td><a href="index_global_U.html">U</a></td>
+<td><a href="index_global_V.html">V</a></td>
+<td><a href="index_global_W.html">W</a></td>
+<td><a href="index_global_X.html">X</a></td>
+<td><a href="index_global_Y.html">Y</a></td>
+<td><a href="index_global_Z.html">Z</a></td>
+<td><a href="index_global__.html">_</a></td>
+<td><a href="index_global_*.html">other</a></td>
+<td>(75519 entries)</td>
+</tr>
+<tr>
+<td>Notation Index</td>
+<td>A</td>
+<td>B</td>
+<td><a href="index_notation_C.html">C</a></td>
+<td>D</td>
+<td><a href="index_notation_E.html">E</a></td>
+<td>F</td>
+<td><a href="index_notation_G.html">G</a></td>
+<td>H</td>
+<td><a href="index_notation_I.html">I</a></td>
+<td>J</td>
+<td><a href="index_notation_K.html">K</a></td>
+<td>L</td>
+<td><a href="index_notation_M.html">M</a></td>
+<td><a href="index_notation_N.html">N</a></td>
+<td>O</td>
+<td><a href="index_notation_P.html">P</a></td>
+<td>Q</td>
+<td>R</td>
+<td><a href="index_notation_S.html">S</a></td>
+<td><a href="index_notation_T.html">T</a></td>
+<td>U</td>
+<td><a href="index_notation_V.html">V</a></td>
+<td><a href="index_notation_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td><a href="index_notation_*.html">other</a></td>
+<td>(245 entries)</td>
+</tr>
+<tr>
+<td>Binder Index</td>
+<td><a href="index_binder_A.html">A</a></td>
+<td><a href="index_binder_B.html">B</a></td>
+<td><a href="index_binder_C.html">C</a></td>
+<td><a href="index_binder_D.html">D</a></td>
+<td><a href="index_binder_E.html">E</a></td>
+<td><a href="index_binder_F.html">F</a></td>
+<td><a href="index_binder_G.html">G</a></td>
+<td><a href="index_binder_H.html">H</a></td>
+<td><a href="index_binder_I.html">I</a></td>
+<td><a href="index_binder_J.html">J</a></td>
+<td><a href="index_binder_K.html">K</a></td>
+<td><a href="index_binder_L.html">L</a></td>
+<td><a href="index_binder_M.html">M</a></td>
+<td><a href="index_binder_N.html">N</a></td>
+<td><a href="index_binder_O.html">O</a></td>
+<td><a href="index_binder_P.html">P</a></td>
+<td><a href="index_binder_Q.html">Q</a></td>
+<td><a href="index_binder_R.html">R</a></td>
+<td><a href="index_binder_S.html">S</a></td>
+<td><a href="index_binder_T.html">T</a></td>
+<td><a href="index_binder_U.html">U</a></td>
+<td><a href="index_binder_V.html">V</a></td>
+<td><a href="index_binder_W.html">W</a></td>
+<td><a href="index_binder_X.html">X</a></td>
+<td><a href="index_binder_Y.html">Y</a></td>
+<td><a href="index_binder_Z.html">Z</a></td>
+<td><a href="index_binder__.html">_</a></td>
+<td><a href="index_binder_*.html">other</a></td>
+<td>(61331 entries)</td>
+</tr>
+<tr>
+<td>Module Index</td>
+<td><a href="index_module_A.html">A</a></td>
+<td><a href="index_module_B.html">B</a></td>
+<td><a href="index_module_C.html">C</a></td>
+<td><a href="index_module_D.html">D</a></td>
+<td><a href="index_module_E.html">E</a></td>
+<td><a href="index_module_F.html">F</a></td>
+<td><a href="index_module_G.html">G</a></td>
+<td>H</td>
+<td><a href="index_module_I.html">I</a></td>
+<td>J</td>
+<td><a href="index_module_K.html">K</a></td>
+<td><a href="index_module_L.html">L</a></td>
+<td><a href="index_module_M.html">M</a></td>
+<td><a href="index_module_N.html">N</a></td>
+<td><a href="index_module_O.html">O</a></td>
+<td><a href="index_module_P.html">P</a></td>
+<td>Q</td>
+<td><a href="index_module_R.html">R</a></td>
+<td><a href="index_module_S.html">S</a></td>
+<td><a href="index_module_T.html">T</a></td>
+<td><a href="index_module_U.html">U</a></td>
+<td><a href="index_module_V.html">V</a></td>
+<td><a href="index_module_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(144 entries)</td>
+</tr>
+<tr>
+<td>Variable Index</td>
+<td><a href="index_variable_A.html">A</a></td>
+<td><a href="index_variable_B.html">B</a></td>
+<td><a href="index_variable_C.html">C</a></td>
+<td>D</td>
+<td><a href="index_variable_E.html">E</a></td>
+<td><a href="index_variable_F.html">F</a></td>
+<td>G</td>
+<td>H</td>
+<td><a href="index_variable_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td>L</td>
+<td><a href="index_variable_M.html">M</a></td>
+<td><a href="index_variable_N.html">N</a></td>
+<td><a href="index_variable_O.html">O</a></td>
+<td>P</td>
+<td>Q</td>
+<td><a href="index_variable_R.html">R</a></td>
+<td><a href="index_variable_S.html">S</a></td>
+<td><a href="index_variable_T.html">T</a></td>
+<td>U</td>
+<td>V</td>
+<td><a href="index_variable_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(89 entries)</td>
+</tr>
+<tr>
+<td>Library Index</td>
+<td><a href="index_library_A.html">A</a></td>
+<td><a href="index_library_B.html">B</a></td>
+<td><a href="index_library_C.html">C</a></td>
+<td><a href="index_library_D.html">D</a></td>
+<td><a href="index_library_E.html">E</a></td>
+<td>F</td>
+<td>G</td>
+<td>H</td>
+<td><a href="index_library_I.html">I</a></td>
+<td>J</td>
+<td><a href="index_library_K.html">K</a></td>
+<td><a href="index_library_L.html">L</a></td>
+<td><a href="index_library_M.html">M</a></td>
+<td><a href="index_library_N.html">N</a></td>
+<td>O</td>
+<td><a href="index_library_P.html">P</a></td>
+<td>Q</td>
+<td><a href="index_library_R.html">R</a></td>
+<td><a href="index_library_S.html">S</a></td>
+<td><a href="index_library_T.html">T</a></td>
+<td><a href="index_library_U.html">U</a></td>
+<td>V</td>
+<td><a href="index_library_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(236 entries)</td>
+</tr>
+<tr>
+<td>Lemma Index</td>
+<td><a href="index_lemma_A.html">A</a></td>
+<td><a href="index_lemma_B.html">B</a></td>
+<td><a href="index_lemma_C.html">C</a></td>
+<td><a href="index_lemma_D.html">D</a></td>
+<td><a href="index_lemma_E.html">E</a></td>
+<td><a href="index_lemma_F.html">F</a></td>
+<td><a href="index_lemma_G.html">G</a></td>
+<td><a href="index_lemma_H.html">H</a></td>
+<td><a href="index_lemma_I.html">I</a></td>
+<td>J</td>
+<td><a href="index_lemma_K.html">K</a></td>
+<td><a href="index_lemma_L.html">L</a></td>
+<td><a href="index_lemma_M.html">M</a></td>
+<td><a href="index_lemma_N.html">N</a></td>
+<td><a href="index_lemma_O.html">O</a></td>
+<td><a href="index_lemma_P.html">P</a></td>
+<td><a href="index_lemma_Q.html">Q</a></td>
+<td><a href="index_lemma_R.html">R</a></td>
+<td><a href="index_lemma_S.html">S</a></td>
+<td><a href="index_lemma_T.html">T</a></td>
+<td><a href="index_lemma_U.html">U</a></td>
+<td><a href="index_lemma_V.html">V</a></td>
+<td><a href="index_lemma_W.html">W</a></td>
+<td><a href="index_lemma_X.html">X</a></td>
+<td>Y</td>
+<td><a href="index_lemma_Z.html">Z</a></td>
+<td>_</td>
+<td>other</td>
+<td>(6913 entries)</td>
+</tr>
+<tr>
+<td>Constructor Index</td>
+<td><a href="index_constructor_A.html">A</a></td>
+<td><a href="index_constructor_B.html">B</a></td>
+<td><a href="index_constructor_C.html">C</a></td>
+<td><a href="index_constructor_D.html">D</a></td>
+<td><a href="index_constructor_E.html">E</a></td>
+<td><a href="index_constructor_F.html">F</a></td>
+<td><a href="index_constructor_G.html">G</a></td>
+<td><a href="index_constructor_H.html">H</a></td>
+<td><a href="index_constructor_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td><a href="index_constructor_L.html">L</a></td>
+<td><a href="index_constructor_M.html">M</a></td>
+<td><a href="index_constructor_N.html">N</a></td>
+<td><a href="index_constructor_O.html">O</a></td>
+<td><a href="index_constructor_P.html">P</a></td>
+<td><a href="index_constructor_Q.html">Q</a></td>
+<td><a href="index_constructor_R.html">R</a></td>
+<td><a href="index_constructor_S.html">S</a></td>
+<td><a href="index_constructor_T.html">T</a></td>
+<td><a href="index_constructor_U.html">U</a></td>
+<td><a href="index_constructor_V.html">V</a></td>
+<td><a href="index_constructor_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(1141 entries)</td>
+</tr>
+<tr>
+<td>Axiom Index</td>
+<td><a href="index_axiom_A.html">A</a></td>
+<td>B</td>
+<td><a href="index_axiom_C.html">C</a></td>
+<td>D</td>
+<td>E</td>
+<td><a href="index_axiom_F.html">F</a></td>
+<td><a href="index_axiom_G.html">G</a></td>
+<td>H</td>
+<td>I</td>
+<td>J</td>
+<td>K</td>
+<td>L</td>
+<td>M</td>
+<td><a href="index_axiom_N.html">N</a></td>
+<td>O</td>
+<td>P</td>
+<td>Q</td>
+<td>R</td>
+<td>S</td>
+<td><a href="index_axiom_T.html">T</a></td>
+<td><a href="index_axiom_U.html">U</a></td>
+<td>V</td>
+<td>W</td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(34 entries)</td>
+</tr>
+<tr>
+<td>Inductive Index</td>
+<td><a href="index_inductive_A.html">A</a></td>
+<td><a href="index_inductive_B.html">B</a></td>
+<td><a href="index_inductive_C.html">C</a></td>
+<td><a href="index_inductive_D.html">D</a></td>
+<td><a href="index_inductive_E.html">E</a></td>
+<td><a href="index_inductive_F.html">F</a></td>
+<td><a href="index_inductive_G.html">G</a></td>
+<td><a href="index_inductive_H.html">H</a></td>
+<td><a href="index_inductive_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td><a href="index_inductive_L.html">L</a></td>
+<td><a href="index_inductive_M.html">M</a></td>
+<td><a href="index_inductive_N.html">N</a></td>
+<td><a href="index_inductive_O.html">O</a></td>
+<td><a href="index_inductive_P.html">P</a></td>
+<td><a href="index_inductive_Q.html">Q</a></td>
+<td><a href="index_inductive_R.html">R</a></td>
+<td><a href="index_inductive_S.html">S</a></td>
+<td><a href="index_inductive_T.html">T</a></td>
+<td><a href="index_inductive_U.html">U</a></td>
+<td><a href="index_inductive_V.html">V</a></td>
+<td><a href="index_inductive_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(269 entries)</td>
+</tr>
+<tr>
+<td>Projection Index</td>
+<td><a href="index_projection_A.html">A</a></td>
+<td><a href="index_projection_B.html">B</a></td>
+<td><a href="index_projection_C.html">C</a></td>
+<td><a href="index_projection_D.html">D</a></td>
+<td><a href="index_projection_E.html">E</a></td>
+<td><a href="index_projection_F.html">F</a></td>
+<td><a href="index_projection_G.html">G</a></td>
+<td><a href="index_projection_H.html">H</a></td>
+<td><a href="index_projection_I.html">I</a></td>
+<td>J</td>
+<td><a href="index_projection_K.html">K</a></td>
+<td><a href="index_projection_L.html">L</a></td>
+<td><a href="index_projection_M.html">M</a></td>
+<td><a href="index_projection_N.html">N</a></td>
+<td><a href="index_projection_O.html">O</a></td>
+<td><a href="index_projection_P.html">P</a></td>
+<td><a href="index_projection_Q.html">Q</a></td>
+<td><a href="index_projection_R.html">R</a></td>
+<td><a href="index_projection_S.html">S</a></td>
+<td><a href="index_projection_T.html">T</a></td>
+<td><a href="index_projection_U.html">U</a></td>
+<td><a href="index_projection_V.html">V</a></td>
+<td><a href="index_projection_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td><a href="index_projection_*.html">other</a></td>
+<td>(443 entries)</td>
+</tr>
+<tr>
+<td>Section Index</td>
+<td><a href="index_section_A.html">A</a></td>
+<td><a href="index_section_B.html">B</a></td>
+<td><a href="index_section_C.html">C</a></td>
+<td><a href="index_section_D.html">D</a></td>
+<td><a href="index_section_E.html">E</a></td>
+<td><a href="index_section_F.html">F</a></td>
+<td><a href="index_section_G.html">G</a></td>
+<td>H</td>
+<td><a href="index_section_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td><a href="index_section_L.html">L</a></td>
+<td><a href="index_section_M.html">M</a></td>
+<td><a href="index_section_N.html">N</a></td>
+<td><a href="index_section_O.html">O</a></td>
+<td><a href="index_section_P.html">P</a></td>
+<td>Q</td>
+<td><a href="index_section_R.html">R</a></td>
+<td><a href="index_section_S.html">S</a></td>
+<td><a href="index_section_T.html">T</a></td>
+<td><a href="index_section_U.html">U</a></td>
+<td><a href="index_section_V.html">V</a></td>
+<td><a href="index_section_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(296 entries)</td>
+</tr>
+<tr>
+<td>Instance Index</td>
+<td><a href="index_instance_A.html">A</a></td>
+<td><a href="index_instance_B.html">B</a></td>
+<td><a href="index_instance_C.html">C</a></td>
+<td><a href="index_instance_D.html">D</a></td>
+<td><a href="index_instance_E.html">E</a></td>
+<td><a href="index_instance_F.html">F</a></td>
+<td><a href="index_instance_G.html">G</a></td>
+<td>H</td>
+<td><a href="index_instance_I.html">I</a></td>
+<td><a href="index_instance_J.html">J</a></td>
+<td><a href="index_instance_K.html">K</a></td>
+<td><a href="index_instance_L.html">L</a></td>
+<td><a href="index_instance_M.html">M</a></td>
+<td><a href="index_instance_N.html">N</a></td>
+<td><a href="index_instance_O.html">O</a></td>
+<td><a href="index_instance_P.html">P</a></td>
+<td><a href="index_instance_Q.html">Q</a></td>
+<td><a href="index_instance_R.html">R</a></td>
+<td><a href="index_instance_S.html">S</a></td>
+<td><a href="index_instance_T.html">T</a></td>
+<td><a href="index_instance_U.html">U</a></td>
+<td><a href="index_instance_V.html">V</a></td>
+<td><a href="index_instance_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td><a href="index_instance_Z.html">Z</a></td>
+<td>_</td>
+<td>other</td>
+<td>(604 entries)</td>
+</tr>
+<tr>
+<td>Abbreviation Index</td>
+<td><a href="index_abbreviation_A.html">A</a></td>
+<td><a href="index_abbreviation_B.html">B</a></td>
+<td><a href="index_abbreviation_C.html">C</a></td>
+<td><a href="index_abbreviation_D.html">D</a></td>
+<td><a href="index_abbreviation_E.html">E</a></td>
+<td><a href="index_abbreviation_F.html">F</a></td>
+<td><a href="index_abbreviation_G.html">G</a></td>
+<td><a href="index_abbreviation_H.html">H</a></td>
+<td><a href="index_abbreviation_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td><a href="index_abbreviation_L.html">L</a></td>
+<td><a href="index_abbreviation_M.html">M</a></td>
+<td><a href="index_abbreviation_N.html">N</a></td>
+<td><a href="index_abbreviation_O.html">O</a></td>
+<td><a href="index_abbreviation_P.html">P</a></td>
+<td>Q</td>
+<td><a href="index_abbreviation_R.html">R</a></td>
+<td><a href="index_abbreviation_S.html">S</a></td>
+<td><a href="index_abbreviation_T.html">T</a></td>
+<td><a href="index_abbreviation_U.html">U</a></td>
+<td><a href="index_abbreviation_V.html">V</a></td>
+<td><a href="index_abbreviation_W.html">W</a></td>
+<td>X</td>
+<td><a href="index_abbreviation_Y.html">Y</a></td>
+<td>Z</td>
+<td>_</td>
+<td><a href="index_abbreviation_*.html">other</a></td>
+<td>(248 entries)</td>
+</tr>
+<tr>
+<td>Definition Index</td>
+<td><a href="index_definition_A.html">A</a></td>
+<td><a href="index_definition_B.html">B</a></td>
+<td><a href="index_definition_C.html">C</a></td>
+<td><a href="index_definition_D.html">D</a></td>
+<td><a href="index_definition_E.html">E</a></td>
+<td><a href="index_definition_F.html">F</a></td>
+<td><a href="index_definition_G.html">G</a></td>
+<td><a href="index_definition_H.html">H</a></td>
+<td><a href="index_definition_I.html">I</a></td>
+<td><a href="index_definition_J.html">J</a></td>
+<td><a href="index_definition_K.html">K</a></td>
+<td><a href="index_definition_L.html">L</a></td>
+<td><a href="index_definition_M.html">M</a></td>
+<td><a href="index_definition_N.html">N</a></td>
+<td><a href="index_definition_O.html">O</a></td>
+<td><a href="index_definition_P.html">P</a></td>
+<td><a href="index_definition_Q.html">Q</a></td>
+<td><a href="index_definition_R.html">R</a></td>
+<td><a href="index_definition_S.html">S</a></td>
+<td><a href="index_definition_T.html">T</a></td>
+<td><a href="index_definition_U.html">U</a></td>
+<td><a href="index_definition_V.html">V</a></td>
+<td><a href="index_definition_W.html">W</a></td>
+<td><a href="index_definition_X.html">X</a></td>
+<td>Y</td>
+<td><a href="index_definition_Z.html">Z</a></td>
+<td><a href="index_definition__.html">_</a></td>
+<td><a href="index_definition_*.html">other</a></td>
+<td>(3386 entries)</td>
+</tr>
+<tr>
+<td>Record Index</td>
+<td><a href="index_record_A.html">A</a></td>
+<td><a href="index_record_B.html">B</a></td>
+<td><a href="index_record_C.html">C</a></td>
+<td><a href="index_record_D.html">D</a></td>
+<td><a href="index_record_E.html">E</a></td>
+<td><a href="index_record_F.html">F</a></td>
+<td><a href="index_record_G.html">G</a></td>
+<td><a href="index_record_H.html">H</a></td>
+<td><a href="index_record_I.html">I</a></td>
+<td>J</td>
+<td>K</td>
+<td>L</td>
+<td><a href="index_record_M.html">M</a></td>
+<td><a href="index_record_N.html">N</a></td>
+<td><a href="index_record_O.html">O</a></td>
+<td><a href="index_record_P.html">P</a></td>
+<td><a href="index_record_Q.html">Q</a></td>
+<td><a href="index_record_R.html">R</a></td>
+<td><a href="index_record_S.html">S</a></td>
+<td><a href="index_record_T.html">T</a></td>
+<td><a href="index_record_U.html">U</a></td>
+<td><a href="index_record_V.html">V</a></td>
+<td><a href="index_record_W.html">W</a></td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>_</td>
+<td>other</td>
+<td>(140 entries)</td>
+</tr>
+</table>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

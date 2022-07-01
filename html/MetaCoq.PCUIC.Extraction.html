@@ -19,10 +19,13 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.Extraction</h1>
 
 <div class="code">
+
+<br/>
 </div>
 
 <div class="doc">
-Extraction setup for the pcuic phase of MetaCoq.
+<a id="lab32"></a><h1 class="section">Extraction setup for the pcuic phase of MetaCoq.</h1>
+
 
 <div class="paragraph"> </div>
 
@@ -33,12 +36,7 @@ Extraction setup for the pcuic phase of MetaCoq.
 <div class="code">
 
 <br/>
-
-<br/>
-<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.9.0/stdlib//Coq.Init.Decimal.html#int"><span class="id" title="inductive">Decimal.int</span></a> ⇒ <span class="id" title="var">unit</span> [ "(fun _ -&gt; ())" "(fun _ -&gt; ())" ] "(fun _ _ _ -&gt; assert false)".<br/>
-
-<br/>
-<span class="id" title="keyword">Extraction</span> <span class="id" title="var">Blacklist</span> <span class="id" title="var">config</span> <span class="id" title="var">uGraph</span> <span class="id" title="var">universes</span> <span class="id" title="var">Ast</span> <span class="id" title="var">String</span> <span class="id" title="var">List</span> <span class="id" title="var">Logic</span> <span class="id" title="var">Logic0</span> <span class="id" title="var">Nat</span> <span class="id" title="var">Int</span><br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="var">Blacklist</span> <span class="id" title="var">Classes</span> <span class="id" title="var">config</span> <span class="id" title="var">uGraph</span> <span class="id" title="var">universes</span> <span class="id" title="var">Ast</span> <span class="id" title="var">String</span> <span class="id" title="var">List</span> <span class="id" title="var">Logic</span> <span class="id" title="var">Logic0</span> <span class="id" title="var">Nat</span> <span class="id" title="var">Int</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">UnivSubst</span> <span class="id" title="var">Typing</span> <span class="id" title="var">Checker</span> <span class="id" title="var">Retyping</span> <span class="id" title="var">OrderedType</span> <span class="id" title="var">Classes</span> <span class="id" title="var">equality</span>.<br/>
 
 <br/>
@@ -63,12 +61,14 @@ Extraction setup for the pcuic phase of MetaCoq.
 <span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Prop.DepElim.solution_left</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">MCEquality.transport</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">Signature</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">Classes</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">ssreflect</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">CMorphisms</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICAst</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICAstUtils</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICUtils</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICInduction</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICUnivSubst</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICLiftSubst</span>.<br/>
@@ -76,9 +76,6 @@ Extraction setup for the pcuic phase of MetaCoq.
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">EqDecInstances</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICEquality</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICTyping</span>.<br/>
-<span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICChecker</span>.<br/>
-<span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICRetyping</span>.<br/>
-<span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICMetaTheory</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">TemplateToPCUIC</span>.<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Library</span> <span class="id" title="var">PCUICPretty</span>.<br/>
 <span class="id" title="keyword">Cd</span> "..".<br/>

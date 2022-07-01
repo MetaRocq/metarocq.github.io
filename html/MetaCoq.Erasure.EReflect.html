@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>MetaCoq.Erasure.EReflect</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library MetaCoq.Erasure.EReflect</h1>
+
+<div class="code">
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a id="EqDec_term" class="idref" href="#EqDec_term"><span class="id" title="instance">EqDec_term</span></a> : <span class="id" title="class">EqDec</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">term</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a id="ReflectEq_term" class="idref" href="#ReflectEq_term"><span class="id" title="instance">ReflectEq_term</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq.ReflectEq</span></a> <span class="id" title="var">_</span> :=<br/>
+&nbsp;&nbsp;@<a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#EqDec_ReflectEq"><span class="id" title="definition">EqDec_ReflectEq</span></a> <span class="id" title="var">_</span> <a class="idref" href="MetaCoq.Erasure.EReflect.html#EqDec_term"><span class="id" title="instance">EqDec_term</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eqb_constant_body" class="idref" href="#eqb_constant_body"><span class="id" title="definition">eqb_constant_body</span></a> (<a id="x:1" class="idref" href="#x:1"><span class="id" title="binder">x</span></a> <a id="y:2" class="idref" href="#y:2"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#constant_body"><span class="id" title="record">constant_body</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> (<a class="idref" href="MetaCoq.Erasure.EAst.html#cst_body"><span class="id" title="projection">cst_body</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#x:1"><span class="id" title="variable">x</span></a>) (<a class="idref" href="MetaCoq.Erasure.EAst.html#cst_body"><span class="id" title="projection">cst_body</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#y:2"><span class="id" title="variable">y</span></a>).<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a id="reflect_constant_body" class="idref" href="#reflect_constant_body"><span class="id" title="instance">reflect_constant_body</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#constant_body"><span class="id" title="record">constant_body</span></a> := <br/>
+&nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_constant_body"><span class="id" title="definition">eqb_constant_body</span></a> |}.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eqb_constructor_body" class="idref" href="#eqb_constructor_body"><span class="id" title="definition">eqb_constructor_body</span></a> (<a id="x:3" class="idref" href="#x:3"><span class="id" title="binder">x</span></a> <a id="y:4" class="idref" href="#y:4"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#constructor_body"><span class="id" title="record">constructor_body</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Erasure.EReflect.html#x:3"><span class="id" title="variable">x</span></a>.(<a class="idref" href="MetaCoq.Erasure.EAst.html#cstr_name"><span class="id" title="projection">cstr_name</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#x:3"><span class="id" title="variable">x</span></a>.(<a class="idref" href="MetaCoq.Erasure.EAst.html#cstr_nargs"><span class="id" title="projection">cstr_nargs</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#12489c9c79e91749bd1f337dd0c899e9"><span class="id" title="notation">==</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Erasure.EReflect.html#y:4"><span class="id" title="variable">y</span></a>.(<a class="idref" href="MetaCoq.Erasure.EAst.html#cstr_name"><span class="id" title="projection">cstr_name</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#y:4"><span class="id" title="variable">y</span></a>.(<a class="idref" href="MetaCoq.Erasure.EAst.html#cstr_nargs"><span class="id" title="projection">cstr_nargs</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a id="reflect_constructor_body" class="idref" href="#reflect_constructor_body"><span class="id" title="instance">reflect_constructor_body</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#constructor_body"><span class="id" title="record">constructor_body</span></a> := <br/>
+&nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_constructor_body"><span class="id" title="definition">eqb_constructor_body</span></a> |}.<br/>
+<span class="id" title="keyword">Definition</span> <a id="eqb_projection_body" class="idref" href="#eqb_projection_body"><span class="id" title="definition">eqb_projection_body</span></a> (<a id="x:5" class="idref" href="#x:5"><span class="id" title="binder">x</span></a> <a id="y:6" class="idref" href="#y:6"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#projection_body"><span class="id" title="record">projection_body</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.EReflect.html#x:5"><span class="id" title="variable">x</span></a>.(<a class="idref" href="MetaCoq.Erasure.EAst.html#proj_name"><span class="id" title="projection">proj_name</span></a>) <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#12489c9c79e91749bd1f337dd0c899e9"><span class="id" title="notation">==</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#y:6"><span class="id" title="variable">y</span></a>.(<a class="idref" href="MetaCoq.Erasure.EAst.html#proj_name"><span class="id" title="projection">proj_name</span></a>).<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a id="reflect_projection_body" class="idref" href="#reflect_projection_body"><span class="id" title="instance">reflect_projection_body</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#projection_body"><span class="id" title="record">projection_body</span></a> := <br/>
+&nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_projection_body"><span class="id" title="definition">eqb_projection_body</span></a> |}.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eqb_one_inductive_body" class="idref" href="#eqb_one_inductive_body"><span class="id" title="definition">eqb_one_inductive_body</span></a> (<a id="x:7" class="idref" href="#x:7"><span class="id" title="binder">x</span></a> <a id="y:8" class="idref" href="#y:8"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#one_inductive_body"><span class="id" title="record">one_inductive_body</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> (<a id="n:9" class="idref" href="#n:9"><span class="id" title="binder">n</span></a>, <a id="i:10" class="idref" href="#i:10"><span class="id" title="binder">i</span></a>, <a id="k:11" class="idref" href="#k:11"><span class="id" title="binder">k</span></a>, <a id="c:12" class="idref" href="#c:12"><span class="id" title="binder">c</span></a>, <a id="p:13" class="idref" href="#p:13"><span class="id" title="binder">p</span></a>) := <a class="idref" href="MetaCoq.Erasure.EReflect.html#x:7"><span class="id" title="variable">x</span></a> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> (<a id="n':14" class="idref" href="#n':14"><span class="id" title="binder">n'</span></a>, <a id="i':15" class="idref" href="#i':15"><span class="id" title="binder">i'</span></a>, <a id="k':16" class="idref" href="#k':16"><span class="id" title="binder">k'</span></a>, <a id="c':17" class="idref" href="#c':17"><span class="id" title="binder">c'</span></a>, <a id="p':18" class="idref" href="#p':18"><span class="id" title="binder">p'</span></a>) := <a class="idref" href="MetaCoq.Erasure.EReflect.html#y:8"><span class="id" title="variable">y</span></a> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#n:9"><span class="id" title="variable">n</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#n':14"><span class="id" title="variable">n'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"><span class="id" title="notation">&amp;&amp;</span></a> <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#i:10"><span class="id" title="variable">i</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#i':15"><span class="id" title="variable">i'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"><span class="id" title="notation">&amp;&amp;</span></a> <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#k:11"><span class="id" title="variable">k</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#k':16"><span class="id" title="variable">k'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"><span class="id" title="notation">&amp;&amp;</span></a> <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#c:12"><span class="id" title="variable">c</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#c':17"><span class="id" title="variable">c'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"><span class="id" title="notation">&amp;&amp;</span></a> <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#p:13"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#p':18"><span class="id" title="variable">p'</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a id="reflect_one_inductive_body" class="idref" href="#reflect_one_inductive_body"><span class="id" title="instance">reflect_one_inductive_body</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#one_inductive_body"><span class="id" title="record">one_inductive_body</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eqb_mutual_inductive_body" class="idref" href="#eqb_mutual_inductive_body"><span class="id" title="definition">eqb_mutual_inductive_body</span></a> (<a id="x:19" class="idref" href="#x:19"><span class="id" title="binder">x</span></a> <a id="y:20" class="idref" href="#y:20"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> (<a id="n:21" class="idref" href="#n:21"><span class="id" title="binder">n</span></a>, <a id="b:22" class="idref" href="#b:22"><span class="id" title="binder">b</span></a>) := <a class="idref" href="MetaCoq.Erasure.EReflect.html#x:19"><span class="id" title="variable">x</span></a> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> (<a id="n':23" class="idref" href="#n':23"><span class="id" title="binder">n'</span></a>, <a id="b':24" class="idref" href="#b':24"><span class="id" title="binder">b'</span></a>) := <a class="idref" href="MetaCoq.Erasure.EReflect.html#y:20"><span class="id" title="variable">y</span></a> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#n:21"><span class="id" title="variable">n</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#n':23"><span class="id" title="variable">n'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"><span class="id" title="notation">&amp;&amp;</span></a> <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#b:22"><span class="id" title="variable">b</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#b':24"><span class="id" title="variable">b'</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a id="reflect_mutual_inductive_body" class="idref" href="#reflect_mutual_inductive_body"><span class="id" title="instance">reflect_mutual_inductive_body</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a> := <br/>
+&nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_mutual_inductive_body"><span class="id" title="definition">eqb_mutual_inductive_body</span></a> |}.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eqb_global_decl" class="idref" href="#eqb_global_decl"><span class="id" title="definition">eqb_global_decl</span></a> <a id="x:25" class="idref" href="#x:25"><span class="id" title="binder">x</span></a> <a id="y:26" class="idref" href="#y:26"><span class="id" title="binder">y</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaCoq.Erasure.EReflect.html#x:25"><span class="id" title="variable">x</span></a>, <a class="idref" href="MetaCoq.Erasure.EReflect.html#y:26"><span class="id" title="variable">y</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Erasure.EAst.html#ConstantDecl"><span class="id" title="constructor">ConstantDecl</span></a> <span class="id" title="var">cst</span>, <a class="idref" href="MetaCoq.Erasure.EAst.html#ConstantDecl"><span class="id" title="constructor">ConstantDecl</span></a> <span class="id" title="var">cst'</span> ⇒ <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <span class="id" title="var">cst</span> <span class="id" title="var">cst'</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Erasure.EAst.html#InductiveDecl"><span class="id" title="constructor">InductiveDecl</span></a> <span class="id" title="var">mib</span>, <a class="idref" href="MetaCoq.Erasure.EAst.html#InductiveDecl"><span class="id" title="constructor">InductiveDecl</span></a> <span class="id" title="var">mib'</span> ⇒ <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <span class="id" title="var">mib</span> <span class="id" title="var">mib'</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">_</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a id="reflect_global_decl" class="idref" href="#reflect_global_decl"><span class="id" title="instance">reflect_global_decl</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#global_decl"><span class="id" title="inductive">global_decl</span></a> :=<br/>
+&nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_global_decl"><span class="id" title="definition">eqb_global_decl</span></a> |}.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

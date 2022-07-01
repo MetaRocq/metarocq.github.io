@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>MetaCoq.Template.utils.MC_ExtrOCamlZPosInt</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library MetaCoq.Template.utils.MC_ExtrOCamlZPosInt</h1>
+
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Disclaimer: trying to obtain efficient certified programs
+    by extracting <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a></span> into <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Numbers.Cyclic.Int63.Uint63.html#int"><span class="id" title="abbreviation">int</span></a></span> is definitively *not* a good idea.
+    See the Disclaimer in <span class="inlinecode"><span class="id" title="var">ExtrOcamlNatInt</span></span>. 
+<div class="paragraph"> </div>
+
+ Mapping of <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Numbers.BinNums.html#positive"><span class="id" title="inductive">positive</span></a></span>, <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a></span>, <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Numbers.BinNums.html#N"><span class="id" title="inductive">N</span></a></span> into <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Numbers.Cyclic.Int63.Uint63.html#int"><span class="id" title="abbreviation">int</span></a></span>. The last strings
+    emulate the matching, see documentation of <span class="inlinecode"><span class="id" title="keyword">Extract</span></span> <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Numbers.BinNums.html#positive"><span class="id" title="inductive">positive</span></a> ⇒ <span class="id" title="var">int</span><br/>
+[ "(fun p-&gt;1+2*p)" "(fun p-&gt;2*p)" "1" ]<br/>
+"(fun f2p1 f2p f1 p -&gt;
+    if p&lt;=1 then f1 () else if p mod 2 = 0 then f2p (p/2) else f2p1 (p/2))".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> ⇒ <span class="id" title="var">int</span> [ "0" "" "(~-)" ]<br/>
+"(fun f0 fp fn z -&gt; if z=0 then f0 () else if z&gt;0 then fp z else fn (-z))".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Numbers.BinNums.html#N"><span class="id" title="inductive">N</span></a> ⇒ <span class="id" title="var">int</span> [ "0" "" ]<br/>
+"(fun f0 fp n -&gt; if n=0 then f0 () else fp n)".<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Nota: the "" above is used as an identity function "(fun p-&gt;p)" 
+<div class="paragraph"> </div>
+
+ Efficient (but uncertified) versions for usual functions 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Pos.add</span> ⇒ "(+)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Pos.succ</span> ⇒ "Stdlib.succ".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Pos.pred</span> ⇒ "fun n -&gt; Stdlib.max 1 (n-1)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Pos.sub</span> ⇒ "fun n m -&gt; Stdlib.max 1 (n-m)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Pos.mul</span> ⇒ "( * )".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Pos.min</span> ⇒ "Stdlib.min".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Pos.max</span> ⇒ "Stdlib.max".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Pos.compare</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;"fun x y -&gt; if x=y then Eq else if x&lt;y then Lt else Gt".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Pos.compare_cont</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;"fun c x y -&gt; if x=y then Eq else if x&lt;y then Lt else Gt".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">N.add</span> ⇒ "(+)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">N.succ</span> ⇒ "Stdlib.succ".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">N.pred</span> ⇒ "fun n -&gt; Stdlib.max 0 (n-1)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">N.sub</span> ⇒ "fun n m -&gt; Stdlib.max 0 (n-m)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">N.mul</span> ⇒ "( * )".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">N.min</span> ⇒ "Stdlib.min".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">N.max</span> ⇒ "Stdlib.max".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">N.div</span> ⇒ "fun a b -&gt; if b=0 then 0 else a/b".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">N.modulo</span> ⇒ "fun a b -&gt; if b=0 then a else a mod b".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">N.compare</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;"fun x y -&gt; if x=y then Eq else if x&lt;y then Lt else Gt".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.add</span> ⇒ "(+)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.succ</span> ⇒ "Stdlib.succ".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.pred</span> ⇒ "Stdlib.pred".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.sub</span> ⇒ "(-)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.mul</span> ⇒ "( * )".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.opp</span> ⇒ "(~-)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.abs</span> ⇒ "Stdlib.abs".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.min</span> ⇒ "Stdlib.min".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.max</span> ⇒ "Stdlib.max".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.compare</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;"fun x y -&gt; if x=y then Eq else if x&lt;y then Lt else Gt".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.of_N</span> ⇒ "fun p -&gt; p".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Z.abs_N</span> ⇒ "Stdlib.abs".<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Z.div and Z.modulo are quite complex to define in terms of (/) and (mod).
+    For the moment we don't even try 
+</div>
+<div class="code">
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

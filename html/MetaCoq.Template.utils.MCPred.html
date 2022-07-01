@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>MetaCoq.Template.utils.MCPred</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library MetaCoq.Template.utils.MCPred</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="predA" class="idref" href="#predA"><span class="id" title="definition">predA</span></a> {<a id="A:1" class="idref" href="#A:1"><span class="id" title="binder">A</span></a>} (<a id="p:2" class="idref" href="#p:2"><span class="id" title="binder">p</span></a> <a id="q:3" class="idref" href="#q:3"><span class="id" title="binder">q</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#pred"><span class="id" title="definition">pred</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#A:1"><span class="id" title="variable">A</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#pred"><span class="id" title="definition">pred</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#A:1"><span class="id" title="variable">A</span></a> := (<span class="id" title="keyword">fun</span> <a id="i:4" class="idref" href="#i:4"><span class="id" title="binder">i</span></a> ⇒ <a class="idref" href="MetaCoq.Template.utils.MCPred.html#p:2"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#i:4"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#a133e82bab56729f895f9b2b31e837cd"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#q:3"><span class="id" title="variable">q</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#i:4"><span class="id" title="variable">i</span></a>).<br/>
+
+<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <a id="orP_Proper" class="idref" href="#orP_Proper"><span class="id" title="instance">orP_Proper</span></a> {<a id="A:5" class="idref" href="#A:5"><span class="id" title="binder">A</span></a>} : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a>) (@<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#predU"><span class="id" title="definition">predU</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#A:5"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <a id="andP_Proper" class="idref" href="#andP_Proper"><span class="id" title="instance">andP_Proper</span></a> <a id="A:6" class="idref" href="#A:6"><span class="id" title="binder">A</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a>) (@<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#predI"><span class="id" title="definition">predI</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#A:6"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <a id="implP_Proper" class="idref" href="#implP_Proper"><span class="id" title="instance">implP_Proper</span></a> {<a id="A:7" class="idref" href="#A:7"><span class="id" title="binder">A</span></a>} : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a>) (@<a class="idref" href="MetaCoq.Template.utils.MCPred.html#predA"><span class="id" title="definition">predA</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#A:7"><span class="id" title="variable">A</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="orPL" class="idref" href="#orPL"><span class="id" title="lemma">orPL</span></a> (<a id="p:8" class="idref" href="#p:8"><span class="id" title="binder">p</span></a> <a id="q:9" class="idref" href="#q:9"><span class="id" title="binder">q</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) : <a class="idref" href="MetaCoq.Template.utils.MCPred.html#predA"><span class="id" title="definition">predA</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#p:8"><span class="id" title="variable">p</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#predU"><span class="id" title="definition">predU</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#p:8"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#q:9"><span class="id" title="variable">q</span></a>) <a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#65e39e13a0e7811abaf3f6b8fa112fed"><span class="id" title="notation">=1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#xpredT"><span class="id" title="abbreviation">xpredT</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="orPR" class="idref" href="#orPR"><span class="id" title="lemma">orPR</span></a> (<a id="p:10" class="idref" href="#p:10"><span class="id" title="binder">p</span></a> <a id="q:11" class="idref" href="#q:11"><span class="id" title="binder">q</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) <a id="i:12" class="idref" href="#i:12"><span class="id" title="binder">i</span></a> : <a class="idref" href="MetaCoq.Template.utils.MCPred.html#q:11"><span class="id" title="variable">q</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#i:12"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#predU"><span class="id" title="definition">predU</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#p:10"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPred.html#q:11"><span class="id" title="variable">q</span></a>) <a class="idref" href="MetaCoq.Template.utils.MCPred.html#i:12"><span class="id" title="variable">i</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

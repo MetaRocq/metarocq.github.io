@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>MetaCoq.Template.TemplateProgram</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library MetaCoq.Template.TemplateProgram</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a id="lab94"></a><h1 class="section">Definition of programs in template-coq, well-typed terms and provided transformations</h1>
+
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="template_program" class="idref" href="#template_program"><span class="id" title="definition">template_program</span></a> := <a class="idref" href="MetaCoq.Template.Ast.html#Env.program"><span class="id" title="definition">Ast.Env.program</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Well-typedness of template programs 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="wt_template_program" class="idref" href="#wt_template_program"><span class="id" title="definition">wt_template_program</span></a> {<a id="cf:1" class="idref" href="#cf:1"><span class="id" title="binder">cf</span></a> : <a class="idref" href="MetaCoq.Template.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>} (<a id="p:2" class="idref" href="#p:2"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Template.TemplateProgram.html#template_program"><span class="id" title="definition">template_program</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="eb9571817dd417966f307c3a9de8fe7f" class="idref" href="#eb9571817dd417966f307c3a9de8fe7f"><span class="id" title="binder">Σ</span></a> := <a class="idref" href="MetaCoq.Template.Ast.html#Env.empty_ext"><span class="id" title="definition">Ast.Env.empty_ext</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:2"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Typing.html#wf_ext"><span class="id" title="class">wf_ext</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#eb9571817dd417966f307c3a9de8fe7f"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.Template.utils.MCProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="T:4" class="idref" href="#T:4"><span class="id" title="binder">T</span></a><a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#eb9571817dd417966f307c3a9de8fe7f"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#41b22a1465690d4777852776dc1e5d8d"><span class="id" title="notation">;;;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#41b22a1465690d4777852776dc1e5d8d"><span class="id" title="notation">|-</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:2"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#41b22a1465690d4777852776dc1e5d8d"><span class="id" title="notation">:</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#T:4"><span class="id" title="variable">T</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Evaluation relation on template programs 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eval_template_program" class="idref" href="#eval_template_program"><span class="id" title="definition">eval_template_program</span></a> (<a id="p:5" class="idref" href="#p:5"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#Env.program"><span class="id" title="definition">Ast.Env.program</span></a>) (<a id="v:6" class="idref" href="#v:6"><span class="id" title="binder">v</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">Ast.term</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.WcbvEval.html#eval"><span class="id" title="inductive">WcbvEval.eval</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:5"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:5"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#v:6"><span class="id" title="variable">v</span></a> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
