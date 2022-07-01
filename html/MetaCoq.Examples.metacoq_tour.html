@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>MetaCoq.Examples.metacoq_tour</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library MetaCoq.Examples.metacoq_tour</h1>
+
+<div class="code">
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+MetaCoq is: 
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> The "template-coq" monad, dealing with reification of terms 
+    and environments.
+
+</li>
+<li> The PCUIC development of the syntactic metatheory of Coq.
+
+</li>
+<li> The SafeChecker package implementing reduction, conversion 
+    and typechecking in a sound and complete way.
+
+</li>
+<li> The Erasure package implementing verified extraction to 
+    untyped lambda-calculus
+
+</li>
+</ul>
+
+</div>
+<div class="code">
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">Ast.term</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="foo" class="idref" href="#foo"><span class="id" title="definition">foo</span></a> := (<span class="id" title="keyword">fun</span> <a id="x:2" class="idref" href="#x:2"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <span class="id" title="keyword">fun</span> <a id="x:3" class="idref" href="#x:3"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#x:3"><span class="id" title="variable">x</span></a>).<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#reifx'"><span class="id" title="definition">reifx'</span></a>.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Print</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#typing"><span class="id" title="inductive">typing</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_Sort"><span class="id" title="constructor">type_Sort</span></a>.<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_LetIn"><span class="id" title="constructor">type_LetIn</span></a>.<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_Const"><span class="id" title="constructor">type_Const</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#subject_reduction"><span class="id" title="lemma">PCUICSR.subject_reduction</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Verified conversion and type-checking 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeConversion.html#isconv_term_sound"><span class="id" title="lemma">PCUICSafeConversion.isconv_term_sound</span></a>.<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeConversion.html#isconv_term_complete"><span class="id" title="lemma">PCUICSafeConversion.isconv_term_complete</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeChecker.html#infer_wf_env"><span class="id" title="definition">PCUICSafeChecker.infer_wf_env</span></a>.<br/>
+</div>
+
+<div class="doc">
+Proof of completeness is near completion. 
+<div class="paragraph"> </div>
+
+ Verified retyping: from a term that is known to be well-typeable, 
+  compute its principal type. Very common in tactics to avoid retypechecking 
+  the whole term. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeRetyping.html#type_of"><span class="id" title="definition">type_of</span></a>.<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeRetyping.html#type_of_subtype"><span class="id" title="definition">type_of_subtype</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#check_inh"><span class="id" title="definition">check_inh</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We construct a proof of typing entirely within Coq, calling the typechecker to produce the derivation 
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+The extracted typechecker also runs in OCaml 
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Erasure 
+</div>
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Running erasure live in Coq 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="test" class="idref" href="#test"><span class="id" title="definition">test</span></a> (<a id="p:10" class="idref" href="#p:10"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#Env.program"><span class="id" title="definition">Ast.Env.program</span></a>) : <a class="idref" href="MetaCoq.Template.utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.Erasure.html#erase_and_print_template_program"><span class="id" title="definition">erase_and_print_template_program</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#p:10"><span class="id" title="variable">p</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="zerocst" class="idref" href="#zerocst"><span class="id" title="definition">zerocst</span></a> := <span class="id" title="keyword">Eval</span> <span class="id" title="tactic">lazy</span> <span class="id" title="tactic">in</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#test"><span class="id" title="definition">test</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#zero"><span class="id" title="definition">zero</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="singleton_elim" class="idref" href="#singleton_elim"><span class="id" title="definition">singleton_elim</span></a> := <br/>
+&nbsp;&nbsp;((<span class="id" title="keyword">fun</span> (<a id="X:11" class="idref" href="#X:11"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Set</span>) (<a id="x:12" class="idref" href="#x:12"><span class="id" title="binder">x</span></a> : <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#X:11"><span class="id" title="variable">X</span></a>) (<a id="e:13" class="idref" href="#e:13"><span class="id" title="binder">e</span></a> : <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#x:12"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#x:12"><span class="id" title="variable">x</span></a>) ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#e:13"><span class="id" title="variable">e</span></a> <span class="id" title="tactic">in</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <span class="id" title="var">_</span> <span class="id" title="var">x'</span> <span class="id" title="keyword">return</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>)).<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Conclusion: Status of MetaCoq 
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> Correctness and complete typechecker for (a large fragment of) Coq.
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> All metatheory proofs are finished. Compared to Coq's implementation:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> full (max (i + k, j + l)) universe support (including a naïve acyclicity checking
+      algorithm)
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> partial support for SProp (in programs but not yet formalized typing rules)
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> approximate cumulative inductive types checking (not yet up to reduction)
+
+<div class="paragraph"> </div>
+
+
+</li>
+<li> missing eta-conversion: the plan is to use contravariant subtyping and eta-reduction, 
+      as in Coq CEP 47
+    
+    - missing template-polymorphism: we're studying a sort polymorphism extension 
+      (with G. Gilbert, K. Maillard and N. Tabareau) to subsume it completely.
+    
+    - missing modules and fast conversion machines.
+
+  - Much work to come on the template-coq side to ease meta-programming.
+
+  - Relation to CertiCoq: fast and verified correct erasure, not depending on type-checking
+    (only retyping).
+    
+    + CertiCoq needs to have all constructors eta-expanded, a proof of the
+      syntactic translation expanding constructors is in progress.
+    
+    + Otherwise the front-end part of CertiCoq is complete with proofs. 
+    
+    + Future work: handling of primitive types (ints, floats, arrays, ...)
+  
+
+
+</li>
+</ul>
+
+</li>
+</ul>
+</div>
+<div class="code">
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
