@@ -1,24 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.Translations.standard_model</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.Translations.standard_model</h1>
 
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a> <a class="idref" href="MetaCoq.Template.All.html#"><span class="id" title="library">All</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Translations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Translations.translation_utils.html#"><span class="id" title="library">translation_utils</span></a> <a class="idref" href="MetaCoq.Translations.sigma.html#"><span class="id" title="library">sigma</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.monad_utils.html#MCMonadNotation"><span class="id" title="module">MCMonadNotation</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Infix</span> <a id="b8382ebd4d1ecdc4b5385bb249fc75b4" class="idref" href="#b8382ebd4d1ecdc4b5385bb249fc75b4"><span class="id" title="notation">&quot;</span></a>≤" := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Arith.PeanoNat.html#Nat.leb"><span class="id" title="definition">Nat.leb</span></a>.<br/>
@@ -39,8 +51,11 @@
 </div>
 <div class="code">
 <span class="id" title="keyword">Print</span> <span class="id" title="var">Typing</span> <span class="id" title="var">Flags</span>.<br/>
+<span class="id" title="keyword">Unset</span> <span class="id" title="var">Guard</span> <span class="id" title="var">Checking</span>.<br/>
 
 <br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Quote</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">tUnit</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a>.<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Quote</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">ttt</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="kproj" class="idref" href="#kproj"><span class="id" title="definition">kproj</span></a> (<a id="k:2" class="idref" href="#k:2"><span class="id" title="binder">k</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) (<a id="t:3" class="idref" href="#t:3"><span class="id" title="binder">t</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">term</span></a>) :=<br/>
@@ -122,24 +137,30 @@
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="toto" class="idref" href="#toto"><span class="id" title="definition">toto</span></a> := <span class="id" title="keyword">fun</span> (<a id="f:45" class="idref" href="#f:45"><span class="id" title="binder">f</span></a> : <span class="id" title="keyword">∀</span> <a id="A:44" class="idref" href="#A:44"><span class="id" title="binder">A</span></a>, <a class="idref" href="MetaCoq.Translations.standard_model.html#A:44"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Translations.standard_model.html#A:44"><span class="id" title="variable">A</span></a>) ⇒ <a class="idref" href="MetaCoq.Translations.standard_model.html#f:45"><span class="id" title="variable">f</span></a> <span class="id" title="keyword">Type</span>.<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="MetaCoq.Translations.translation_utils.html#Translate"><span class="id" title="definition">Translate</span></a> <a class="idref" href="MetaCoq.Translations.translation_utils.html#emptyTC"><span class="id" title="definition">emptyTC</span></a> "toto").<br/>
 <span class="id" title="keyword">Check</span> (<a class="idref" href="MetaCoq.Translations.standard_model.html#52a6c7adcdedb2e05eb962cebc3bde77"><span class="id" title="definition">toto</span></a><a class="idref" href="MetaCoq.Translations.standard_model.html#52a6c7adcdedb2e05eb962cebc3bde77"><span class="id" title="definition">ᵗ</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <a id="A:46" class="idref" href="#A:46"><span class="id" title="binder">A</span></a>, <a class="idref" href="MetaCoq.Translations.standard_model.html#A:46"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Translations.standard_model.html#A:46"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>).<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="FALSE" class="idref" href="#FALSE"><span class="id" title="definition">FALSE</span></a> := <span class="id" title="keyword">∀</span> <a id="X:47" class="idref" href="#X:47"><span class="id" title="binder">X</span></a>, <a class="idref" href="MetaCoq.Translations.standard_model.html#X:47"><span class="id" title="variable">X</span></a>.<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a id="TC:48" class="idref" href="#TC:48"><span class="id" title="binder">TC</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="MetaCoq.Translations.translation_utils.html#Translate"><span class="id" title="definition">Translate</span></a> <a class="idref" href="MetaCoq.Translations.translation_utils.html#emptyTC"><span class="id" title="definition">emptyTC</span></a> "FALSE" <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">;;</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmPrint"><span class="id" title="constructor">tmPrint</span></a> "toto" <a class="idref" href="MetaCoq.Template.monad_utils.html#ad6f5869610c58e6b1cafcdf52bb7ae3"><span class="id" title="notation">;;</span></a><br/>
+&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Translations.translation_utils.html#Implement"><span class="id" title="definition">Implement</span></a> <a class="idref" href="MetaCoq.Translations.standard_model.html#TC:48"><span class="id" title="variable">TC</span></a> "a" (<span class="id" title="keyword">∀</span> (<a id="A:49" class="idref" href="#A:49"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Set</span>) (<a id="A0:50" class="idref" href="#A0:50"><span class="id" title="binder">A0</span></a> : <a class="idref" href="MetaCoq.Translations.standard_model.html#A:49"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Set</span>) (<a id="x:51" class="idref" href="#x:51"><span class="id" title="binder">x</span></a> : <a class="idref" href="MetaCoq.Translations.standard_model.html#A:49"><span class="id" title="variable">A</span></a>), <a class="idref" href="MetaCoq.Translations.standard_model.html#FALSE"><span class="id" title="definition">FALSE</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Translations.standard_model.html#A0:50"><span class="id" title="variable">A0</span></a> <a class="idref" href="MetaCoq.Translations.standard_model.html#x:51"><span class="id" title="variable">x</span></a>)).<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> <span class="id" title="var">X</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">X</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="T" class="idref" href="#T"><span class="id" title="definition">T</span></a> := <span class="id" title="keyword">∀</span> <a id="A:52" class="idref" href="#A:52"><span class="id" title="binder">A</span></a>, <a class="idref" href="MetaCoq.Translations.standard_model.html#A:52"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Translations.standard_model.html#A:52"><span class="id" title="variable">A</span></a>.<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="MetaCoq.Translations.translation_utils.html#Translate"><span class="id" title="definition">Translate</span></a> <a class="idref" href="MetaCoq.Translations.translation_utils.html#emptyTC"><span class="id" title="definition">emptyTC</span></a> "T").<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="tm" class="idref" href="#tm"><span class="id" title="definition">tm</span></a> := ((<span class="id" title="keyword">fun</span> <a id="A:53" class="idref" href="#A:53"><span class="id" title="binder">A</span></a> (<a id="x:54" class="idref" href="#x:54"><span class="id" title="binder">x</span></a>:<a class="idref" href="MetaCoq.Translations.standard_model.html#A:53"><span class="id" title="variable">A</span></a>) ⇒ <a class="idref" href="MetaCoq.Translations.standard_model.html#x:54"><span class="id" title="variable">x</span></a>) (<span class="id" title="keyword">Type</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>) (<span class="id" title="keyword">fun</span> <a id="x:55" class="idref" href="#x:55"><span class="id" title="binder">x</span></a> ⇒ <a class="idref" href="MetaCoq.Translations.standard_model.html#x:55"><span class="id" title="variable">x</span></a>)).<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="MetaCoq.Translations.translation_utils.html#Translate"><span class="id" title="definition">Translate</span></a> <a class="idref" href="MetaCoq.Translations.translation_utils.html#emptyTC"><span class="id" title="definition">emptyTC</span></a> "tm").<br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

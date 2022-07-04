@@ -1,29 +1,43 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.Template.monad_utils</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.Template.monad_utils</h1>
 
 <div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Arith.Arith.html#"><span class="id" title="library">Arith</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#"><span class="id" title="library">List</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.All_Forall.html#"><span class="id" title="library">All_Forall</span></a> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#"><span class="id" title="library">MCSquash</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span>.<br/>
 <span class="id" title="keyword">Coercion</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#is_true"><span class="id" title="definition">is_true</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#is_true"><span class="id" title="definition">:</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#is_true"><span class="id" title="definition">bool</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#is_true"><span class="id" title="definition">&gt;-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#is_true"><span class="id" title="definition">Sortclass</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#ListNotations"><span class="id" title="module">ListNotations</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Universe</span> <span class="id" title="var">Polymorphism</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Class</span> <a id="Monad" class="idref" href="#Monad"><span class="id" title="record">Monad@</span></a>{<span class="id" title="var">d</span> <span class="id" title="var">c</span>} (<a id="m:1" class="idref" href="#m:1"><span class="id" title="binder">m</span></a> : <span class="id" title="var">Type@</span>{<span class="id" title="var">d</span>} <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="var">Type@</span>{<span class="id" title="var">c</span>}) : <span class="id" title="keyword">Type</span> :=<br/>
@@ -39,6 +53,8 @@
 
 <br/>
 <span class="id" title="keyword">Module</span> <a id="MCMonadNotation" class="idref" href="#MCMonadNotation"><span class="id" title="module">MCMonadNotation</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">monad_scope</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Delimit</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">monad_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">monad</span>.<br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="c0f7708df476ab63a78f53086f844619" class="idref" href="#c0f7708df476ab63a78f53086f844619"><span class="id" title="notation">&quot;</span></a>c &gt;&gt;= f" := (@<a class="idref" href="MetaCoq.Template.monad_utils.html#bind"><span class="id" title="method">bind</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">c</span> <span class="id" title="var">f</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">monad_scope</span>.<br/>
@@ -66,6 +82,7 @@
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Template.monad_utils.html#MCMonadNotation"><span class="id" title="module">MCMonadNotation</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.monad_utils.html#MCMonadNotation"><span class="id" title="module">MCMonadNotation</span></a>.<br/>
 
 <br/>
 #[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <a id="option_monad" class="idref" href="#option_monad"><span class="id" title="instance">option_monad</span></a> : <a class="idref" href="MetaCoq.Template.monad_utils.html#Monad"><span class="id" title="class">Monad</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> :=<br/>
@@ -88,6 +105,7 @@
 |}.<br/>
 
 <br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">monad</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Section</span> <a id="MapOpt" class="idref" href="#MapOpt"><span class="id" title="section">MapOpt</span></a>.<br/>
@@ -223,6 +241,9 @@ monadic checks
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="Y:160" class="idref" href="#Y:160"><span class="id" title="binder">Y</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#monad_Alli:157"><span class="id" title="definition">monad_Alli</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#f:154"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#l:155"><span class="id" title="variable">l</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#n:156"><span class="id" title="variable">n</span></a>) <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">;;</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.monad_utils.html#ret"><span class="id" title="method">ret</span></a> <span class="id" title="var">_</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">sq</span>. <span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">assumption</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Program Fixpoint</span> <a id="monad_Alli_All" class="idref" href="#monad_Alli_All"><span class="id" title="definition">monad_Alli_All</span></a> {<a id="T:161" class="idref" href="#T:161"><span class="id" title="binder">T</span></a> : <span class="id" title="keyword">Type</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>} {<a id="M:162" class="idref" href="#M:162"><span class="id" title="binder">M</span></a> : <a class="idref" href="MetaCoq.Template.monad_utils.html#Monad"><span class="id" title="class">Monad</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#T:161"><span class="id" title="variable">T</span></a>} {<a id="A:163" class="idref" href="#A:163"><span class="id" title="binder">A</span></a>} {<a id="P:164" class="idref" href="#P:164"><span class="id" title="binder">P</span></a>} {<a id="Q:165" class="idref" href="#Q:165"><span class="id" title="binder">Q</span></a>} (<a id="f:168" class="idref" href="#f:168"><span class="id" title="binder">f</span></a> : <span class="id" title="keyword">∀</span> <a id="n:166" class="idref" href="#n:166"><span class="id" title="binder">n</span></a> <a id="x:167" class="idref" href="#x:167"><span class="id" title="binder">x</span></a>, <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#Q:165"><span class="id" title="variable">Q</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#x:167"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#T:161"><span class="id" title="variable">T</span></a> (<a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#P:164"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#n:166"><span class="id" title="variable">n</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#x:167"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>)) <a id="l:169" class="idref" href="#l:169"><span class="id" title="binder">l</span></a> <a id="n:170" class="idref" href="#n:170"><span class="id" title="binder">n</span></a> :<br/>
@@ -233,6 +254,15 @@ monadic checks
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="Y:175" class="idref" href="#Y:175"><span class="id" title="binder">Y</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#monad_Alli_All:171"><span class="id" title="definition">monad_Alli_All</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#f:168"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#l:169"><span class="id" title="variable">l</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#n:170"><span class="id" title="variable">n</span></a>) <span class="id" title="var">_</span> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">;;</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.monad_utils.html#ret"><span class="id" title="method">ret</span></a> <span class="id" title="var">_</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>. <span class="id" title="var">sq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="var">depelim</span> <span class="id" title="var">allq</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">sq</span>; <span class="id" title="var">now</span> <span class="id" title="var">depelim</span> <span class="id" title="var">allq</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">sq</span>. <span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">assumption</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Section</span> <a id="monad_Alli_nth" class="idref" href="#monad_Alli_nth"><span class="id" title="section">monad_Alli_nth</span></a>.<br/>
@@ -246,6 +276,12 @@ monadic checks
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="Y:192" class="idref" href="#Y:192"><span class="id" title="binder">Y</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#monad_Alli_nth_gen:185"><span class="id" title="definition">monad_Alli_nth_gen</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#l:180"><span class="id" title="variable">l</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#k:181"><span class="id" title="variable">k</span></a>) (<span class="id" title="keyword">fun</span> <a id="n:188" class="idref" href="#n:188"><span class="id" title="binder">n</span></a> <a id="x:189" class="idref" href="#x:189"><span class="id" title="binder">x</span></a> <a id="hnth:190" class="idref" href="#hnth:190"><span class="id" title="binder">hnth</span></a> ⇒ <a id="px:191" class="idref" href="#px:191"><span class="id" title="binder">px</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#f:184"><span class="id" title="variable">f</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#n:188"><span class="id" title="variable">n</span></a>) <a class="idref" href="MetaCoq.Template.monad_utils.html#x:189"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#hnth:190"><span class="id" title="variable">hnth</span></a><a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">;;</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#ret"><span class="id" title="method">ret</span></a> <span class="id" title="var">_</span>) <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">;;</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.monad_utils.html#ret"><span class="id" title="method">ret</span></a> <span class="id" title="var">_</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">sq</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Arith.PeanoNat.html#Nat.add_succ_r"><span class="id" title="lemma">Nat.add_succ_r</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">px</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">sq</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Arith.PeanoNat.html#Nat.add_0_r"><span class="id" title="lemma">Nat.add_0_r</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">X</span>. <span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="monad_Alli_nth" class="idref" href="#monad_Alli_nth"><span class="id" title="definition">monad_Alli_nth</span></a> <a id="l:193" class="idref" href="#l:193"><span class="id" title="binder">l</span></a> (<a id="f:196" class="idref" href="#f:196"><span class="id" title="binder">f</span></a> : <span class="id" title="keyword">∀</span> <a id="n:194" class="idref" href="#n:194"><span class="id" title="binder">n</span></a> <a id="x:195" class="idref" href="#x:195"><span class="id" title="binder">x</span></a>, <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#nth_error"><span class="id" title="definition">nth_error</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#l:193"><span class="id" title="variable">l</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#n:194"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#x:195"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#monad_Alli_nth.T"><span class="id" title="variable">T</span></a> (<a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#monad_Alli_nth.P"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#n:194"><span class="id" title="variable">n</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#x:195"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>)) : <a class="idref" href="MetaCoq.Template.monad_utils.html#monad_Alli_nth.T"><span class="id" title="variable">T</span></a> (<a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> @<a class="idref" href="MetaCoq.Template.utils.All_Forall.html#Alli"><span class="id" title="inductive">Alli</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#monad_Alli_nth.A"><span class="id" title="variable">A</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#monad_Alli_nth.P"><span class="id" title="variable">P</span></a> 0 <a class="idref" href="MetaCoq.Template.monad_utils.html#l:193"><span class="id" title="variable">l</span></a> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>) :=<br/>
@@ -265,17 +301,24 @@ monadic checks
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="Y:209" class="idref" href="#Y:209"><span class="id" title="binder">Y</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#monad_All_All:205"><span class="id" title="definition">monad_All_All</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#l:204"><span class="id" title="variable">l</span></a> <span class="id" title="var">_</span> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">;;</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.monad_utils.html#ret"><span class="id" title="method">ret</span></a> <span class="id" title="var">_</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>. <span class="id" title="var">sq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="var">depelim</span> <span class="id" title="var">allq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">sq</span>; <span class="id" title="var">now</span> <span class="id" title="var">depelim</span> <span class="id" title="var">allq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">sq</span>. <span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Defined</span>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Template.monad_utils.html#MonadAllAll"><span class="id" title="section">MonadAllAll</span></a>.<br/>
 
 <br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

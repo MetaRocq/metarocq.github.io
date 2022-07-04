@@ -1,29 +1,44 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.Erasure.Extract</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.Erasure.Extract</h1>
 
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICElimination.html#"><span class="id" title="library">PCUICElimination</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWcbvEval.html#"><span class="id" title="library">PCUICWcbvEval</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Erasure</span> <span class="id" title="keyword">Require</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#"><span class="id" title="library">EAst</span></a> <a class="idref" href="MetaCoq.Erasure.EGlobalEnv.html#"><span class="id" title="library">EGlobalEnv</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Module</span> <a id="E" class="idref" href="#E"><span class="id" title="module">E</span></a> := <a class="idref" href="MetaCoq.Erasure.EAst.html#"><span class="id" title="module">EAst</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">extraction_checker_flags</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="isErasable" class="idref" href="#isErasable"><span class="id" title="definition">isErasable</span></a> <a id="0101b9beac487b383a5ba2a8f6922788" class="idref" href="#0101b9beac487b383a5ba2a8f6922788"><span class="id" title="binder">Σ</span></a> <a id="da7a5918a812e0216f4a54d21f7406c4" class="idref" href="#da7a5918a812e0216f4a54d21f7406c4"><span class="id" title="binder">Γ</span></a> <a id="t:3" class="idref" href="#t:3"><span class="id" title="binder">t</span></a> := <a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="T:4" class="idref" href="#T:4"><span class="id" title="binder">T</span></a><a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#0101b9beac487b383a5ba2a8f6922788"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">;;;</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#da7a5918a812e0216f4a54d21f7406c4"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">|-</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#t:3"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">:</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#T:4"><span class="id" title="variable">T</span></a> <a class="idref" href="MetaCoq.Template.utils.MCProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#isArity"><span class="id" title="definition">isArity</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#T:4"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e03f39daf98516fa530d3f6f5a1b4d92"><span class="id" title="notation">+</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e03f39daf98516fa530d3f6f5a1b4d92"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="u:5" class="idref" href="#u:5"><span class="id" title="binder">u</span></a><a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Erasure.Extract.html#0101b9beac487b383a5ba2a8f6922788"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">;;;</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#da7a5918a812e0216f4a54d21f7406c4"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">|-</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#T:4"><span class="id" title="variable">T</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">:</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tSort"><span class="id" title="constructor">tSort</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#u:5"><span class="id" title="variable">u</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <br/>
@@ -181,6 +196,43 @@
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="646e4bc5bf1c33aade7489a0a12cfdca" class="idref" href="#646e4bc5bf1c33aade7489a0a12cfdca"><span class="id" title="binder">Γ</span></a> <a id="t:152" class="idref" href="#t:152"><span class="id" title="binder">t</span></a> <a id="t0:153" class="idref" href="#t0:153"><span class="id" title="binder">t0</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.Extract.html#4490fc2114c8436ece16d296ed53d878"><span class="id" title="variable">Σ</span></a><a class="idref" href="MetaCoq.Erasure.Extract.html#0343a91997e2a7c4174c89d27a2fb981"><span class="id" title="notation">;;;</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#646e4bc5bf1c33aade7489a0a12cfdca"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#0343a91997e2a7c4174c89d27a2fb981"><span class="id" title="notation">|-</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#t:152"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#0343a91997e2a7c4174c89d27a2fb981"><span class="id" title="notation">⇝</span></a><a class="idref" href="MetaCoq.Erasure.Extract.html#0343a91997e2a7c4174c89d27a2fb981"><span class="id" title="notation">ℇ</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#t0:153"><span class="id" title="variable">t0</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.Extract.html#P:70"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#646e4bc5bf1c33aade7489a0a12cfdca"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#t:152"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#t0:153"><span class="id" title="variable">t0</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fix</span> <span class="id" title="var">f</span> 4.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">Γ</span> <span class="id" title="var">t</span> <span class="id" title="var">et</span> <span class="id" title="var">er</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">move</span> <span class="id" title="var">f</span> <span class="id" title="tactic">at</span> <span class="id" title="var">top</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">er</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">solve</span> [<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| [<span class="id" title="var">H</span>: <span class="id" title="var">_</span> |- <span class="id" title="var">_</span>] ⇒ <span class="id" title="tactic">apply</span> <span class="id" title="var">H</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>; <span class="id" title="tactic">auto</span>].<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">Hevar</span>; [<span class="id" title="tactic">assumption</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">revert</span> <span class="id" title="var">l</span> <span class="id" title="var">l'</span> <span class="id" title="var">X</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fix</span> <span class="id" title="var">f'</span> 3.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">l</span> <span class="id" title="var">l'</span> [].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">now</span> <span class="id" title="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">constructor</span>; [<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">f</span>|<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">f'</span>].<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">Hcase</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">f</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="var">revert</span> <span class="id" title="var">brs</span> <span class="id" title="var">brs'</span> <span class="id" title="var">X</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fix</span> <span class="id" title="var">f'</span> 3.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">brs</span> <span class="id" title="var">brs'</span> []; [<span class="id" title="var">now</span> <span class="id" title="tactic">constructor</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">constructor</span>; [<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">f</span>|<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">f'</span>].<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">Hfix</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">revert</span> <span class="id" title="var">X</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="var">mfix</span> <span class="id" title="tactic">at</span> 1 3.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">mfix_gen</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">revert</span> <span class="id" title="var">mfix</span> <span class="id" title="var">mfix'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fix</span> <span class="id" title="var">f'</span> 3.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">mfix</span> <span class="id" title="var">mfix'</span> []; [<span class="id" title="var">now</span> <span class="id" title="tactic">constructor</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">a</span>. <span class="id" title="tactic">constructor</span>; [<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">f</span>|<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">f'</span>].<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">Hcofix</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">revert</span> <span class="id" title="var">X</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> <span class="id" title="var">mfix</span> <span class="id" title="tactic">at</span> 1 3.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">mfix_gen</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">revert</span> <span class="id" title="var">mfix</span> <span class="id" title="var">mfix'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fix</span> <span class="id" title="var">f'</span> 3.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">mfix</span> <span class="id" title="var">mfix'</span> []; [<span class="id" title="var">now</span> <span class="id" title="tactic">constructor</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">constructor</span>; [<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">f</span>|<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">f'</span>].<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="erases_constant_body" class="idref" href="#erases_constant_body"><span class="id" title="definition">erases_constant_body</span></a> (<a id="5854b9c8272a298e61fb008eccdcfef8" class="idref" href="#5854b9c8272a298e61fb008eccdcfef8"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.global_env_ext"><span class="id" title="definition">global_env_ext</span></a>) (<a id="cb:155" class="idref" href="#cb:155"><span class="id" title="binder">cb</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.constant_body"><span class="id" title="record">constant_body</span></a>) (<a id="cb':156" class="idref" href="#cb':156"><span class="id" title="binder">cb'</span></a> : <a class="idref" href="MetaCoq.Erasure.Extract.html#constant_body"><span class="id" title="record">E.constant_body</span></a>) :=<br/>
@@ -324,12 +376,10 @@
 <br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

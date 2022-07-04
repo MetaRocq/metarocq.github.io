@@ -1,21 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.PCUIC.PCUICTransform</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICTransform</h1>
 
 <div class="code">
@@ -26,10 +35,21 @@
 
 </div>
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a> <a class="idref" href="MetaCoq.Template.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#"><span class="id" title="library">Transform</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#"><span class="id" title="library">TemplateProgram</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#"><span class="id" title="module">TemplateProgram</span></a> (<span class="id" title="var">template_program</span>, <span class="id" title="var">wt_template_program</span>, <span class="id" title="var">eval_template_program</span>).<br/>
 
 <br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.TemplateToPCUIC.html#"><span class="id" title="library">TemplateToPCUIC</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICGlobalEnv.html#"><span class="id" title="library">PCUICGlobalEnv</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICEtaExpand.html#"><span class="id" title="library">PCUICEtaExpand</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICProgram.html#"><span class="id" title="library">PCUICProgram</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <a class="idref" href="MetaCoq.PCUIC.TemplateToPCUICWcbvEval.html#"><span class="id" title="library">TemplateToPCUICWcbvEval</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.TemplateToPCUICCorrectness.html#"><span class="id" title="library">TemplateToPCUICCorrectness</span></a> <br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.TemplateToPCUICExpanded.html#"><span class="id" title="library">TemplateToPCUICExpanded</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.Transform.html#Transform"><span class="id" title="module">Transform</span></a>.<br/>
 
 <br/>
 </div>
@@ -50,8 +70,18 @@
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="trans_template_program_wt" class="idref" href="#trans_template_program_wt"><span class="id" title="lemma">trans_template_program_wt</span></a> {<a id="cf:8" class="idref" href="#cf:8"><span class="id" title="binder">cf</span></a> : <a class="idref" href="MetaCoq.Template.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>} <a id="p:9" class="idref" href="#p:9"><span class="id" title="binder">p</span></a> (<a id="wtp:10" class="idref" href="#wtp:10"><span class="id" title="binder">wtp</span></a> : <a class="idref" href="MetaCoq.Template.TemplateProgram.html#wt_template_program"><span class="id" title="definition">wt_template_program</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#p:9"><span class="id" title="variable">p</span></a>) : <a class="idref" href="MetaCoq.PCUIC.PCUICProgram.html#wt_pcuic_program"><span class="id" title="definition">wt_pcuic_program</span></a> (<a class="idref" href="MetaCoq.PCUIC.TemplateToPCUIC.html#trans_template_program"><span class="id" title="definition">trans_template_program</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#p:9"><span class="id" title="variable">p</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>: <span class="id" title="var">p</span> <span class="id" title="var">wtp</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> [<span class="id" title="var">Σ</span> <span class="id" title="var">t</span>] [<span class="id" title="var">wfext</span> <span class="id" title="var">ht</span>].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.PCUICProgram.html#wt_pcuic_program"><span class="id" title="definition">wt_pcuic_program</span></a>, <a class="idref" href="MetaCoq.PCUIC.TemplateToPCUIC.html#trans_template_program"><span class="id" title="definition">trans_template_program</span></a>; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="tactic">split</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.TemplateToPCUICCorrectness.html#template_to_pcuic_env_ext"><span class="id" title="lemma">TemplateToPCUICCorrectness.template_to_pcuic_env_ext</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">wfext</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">wfext</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">ht</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">T</span> <span class="id" title="var">HT</span>]. <span class="id" title="tactic">∃</span> (<a class="idref" href="MetaCoq.PCUIC.TemplateToPCUIC.html#trans"><span class="id" title="definition">trans</span></a> (<a class="idref" href="MetaCoq.PCUIC.TemplateToPCUIC.html#trans_global_env"><span class="id" title="definition">trans_global_env</span></a> <span class="id" title="var">Σ</span>) <span class="id" title="var">T</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.TemplateToPCUICCorrectness.html#template_to_pcuic_typing"><span class="id" title="lemma">TemplateToPCUICCorrectness.template_to_pcuic_typing</span></a> (<span class="id" title="var">Σ</span> := <a class="idref" href="MetaCoq.Template.Ast.html#Env.empty_ext"><span class="id" title="definition">Ast.Env.empty_ext</span></a> <span class="id" title="var">Σ</span>) <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>). <span class="id" title="tactic">apply</span> <span class="id" title="var">wfext</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">HT</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Obligation</span> <span class="id" title="keyword">Tactic</span> := <span class="id" title="tactic">idtac</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Program Definition</span> <a id="template_to_pcuic_transform" class="idref" href="#template_to_pcuic_transform"><span class="id" title="definition">template_to_pcuic_transform</span></a> {<a id="cf:11" class="idref" href="#cf:11"><span class="id" title="binder">cf</span></a> : <a class="idref" href="MetaCoq.Template.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>} : <br/>
@@ -62,8 +92,24 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Transform.html#Transform.transform"><span class="id" title="projection">transform</span></a> <a id="p:13" class="idref" href="#p:13"><span class="id" title="binder">p</span></a> <span class="id" title="var">_</span> := <a class="idref" href="MetaCoq.PCUIC.TemplateToPCUIC.html#trans_template_program"><span class="id" title="definition">trans_template_program</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#p:13"><span class="id" title="variable">p</span></a> ;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Transform.html#Transform.post"><span class="id" title="projection">post</span></a> <a id="p:14" class="idref" href="#p:14"><span class="id" title="binder">p</span></a> := <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICProgram.html#wt_pcuic_program"><span class="id" title="definition">wt_pcuic_program</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#p:14"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICEtaExpand.html#expanded_pcuic_program"><span class="id" title="definition">PCUICEtaExpand.expanded_pcuic_program</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#p:14"><span class="id" title="variable">p</span></a>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Transform.html#Transform.obseq"><span class="id" title="projection">obseq</span></a> := <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#template_to_pcuic_obseq"><span class="id" title="definition">template_to_pcuic_obseq</span></a> |}.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">cf</span> <span class="id" title="var">p</span> [[<span class="id" title="var">wtp</span>] <span class="id" title="var">etap</span>].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; [<span class="id" title="tactic">split</span>|].<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#trans_template_program_wt"><span class="id" title="lemma">trans_template_program_wt</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.TemplateToPCUICExpanded.html#expanded_trans_program"><span class="id" title="lemma">TemplateToPCUICExpanded.expanded_trans_program</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">etap</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">red</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">cf</span> [<span class="id" title="var">Σ</span> <span class="id" title="var">t</span>] <span class="id" title="var">v</span> [[]].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#eval_pcuic_program"><span class="id" title="definition">eval_pcuic_program</span></a>, <a class="idref" href="MetaCoq.Template.TemplateProgram.html#eval_template_program"><span class="id" title="definition">eval_template_program</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="tactic">intros</span> [<span class="id" title="var">ev</span>].<br/>
+&nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.TemplateToPCUICWcbvEval.html#trans_wcbvEval"><span class="id" title="lemma">TemplateToPCUICWcbvEval.trans_wcbvEval</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">ev</span>; <span class="id" title="tactic">eauto</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">X</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eexists</span>; <span class="id" title="tactic">split</span>; <span class="id" title="tactic">split</span>; <span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.TemplateToPCUICCorrectness.html#template_to_pcuic_env"><span class="id" title="lemma">TemplateToPCUICCorrectness.template_to_pcuic_env</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">X</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">X</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">wfΣ</span> [<span class="id" title="var">T</span> <span class="id" title="var">HT</span>]]. <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Template.TypingWf.html#typing_wf"><span class="id" title="lemma">TypingWf.typing_wf</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">HT</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">HT</span>. <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICExpandLets.html#"><span class="id" title="library">PCUICExpandLets</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICExpandLetsCorrectness.html#"><span class="id" title="library">PCUICExpandLetsCorrectness</span></a>.<br/>
 
 <br/>
 </div>
@@ -88,14 +134,29 @@ Expansion of let bindings in constructor types / case branches.
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Transform.html#Transform.transform"><span class="id" title="projection">transform</span></a> <a id="p:21" class="idref" href="#p:21"><span class="id" title="binder">p</span></a> <a id="hp:22" class="idref" href="#hp:22"><span class="id" title="binder">hp</span></a> := <a class="idref" href="MetaCoq.PCUIC.PCUICExpandLets.html#expand_lets_program"><span class="id" title="definition">expand_lets_program</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#p:21"><span class="id" title="variable">p</span></a>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Transform.html#Transform.post"><span class="id" title="projection">post</span></a> <a id="p:23" class="idref" href="#p:23"><span class="id" title="binder">p</span></a> := <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICProgram.html#wt_pcuic_program"><span class="id" title="definition">wt_pcuic_program</span></a> (<span class="id" title="var">cf</span>:=<a class="idref" href="MetaCoq.PCUIC.PCUICExpandLetsCorrectness.html#cf'"><span class="id" title="definition">PCUICExpandLetsCorrectness.cf'</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#cf:19"><span class="id" title="variable">cf</span></a>) <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#p:23"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICEtaExpand.html#expanded_pcuic_program"><span class="id" title="definition">PCUICEtaExpand.expanded_pcuic_program</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#p:23"><span class="id" title="variable">p</span></a>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Transform.html#Transform.obseq"><span class="id" title="projection">obseq</span></a> := <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#let_expansion_obseq"><span class="id" title="definition">let_expansion_obseq</span></a> |}.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">cf</span> [<span class="id" title="var">Σ</span> <span class="id" title="var">t</span>] [[[<span class="id" title="var">wfext</span> <span class="id" title="var">ht</span>]] <span class="id" title="var">etap</span>].<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="tactic">split</span>. <span class="id" title="var">sq</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.PCUICProgram.html#build_global_env_map"><span class="id" title="definition">build_global_env_map</span></a>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.PCUICProgram.html#global_env_ext_map_global_env_ext"><span class="id" title="definition">global_env_ext_map_global_env_ext</span></a>. <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICExpandLetsCorrectness.html#trans_wf_ext"><span class="id" title="lemma">PCUICExpandLetsCorrectness.trans_wf_ext</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">wfext</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">wfext</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">ht</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">T</span> <span class="id" title="var">HT</span>]. <span class="id" title="tactic">∃</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICExpandLets.html#trans"><span class="id" title="definition">PCUICExpandLets.trans</span></a> <span class="id" title="var">T</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICExpandLetsCorrectness.html#pcuic_expand_lets"><span class="id" title="lemma">PCUICExpandLetsCorrectness.pcuic_expand_lets</span></a> <span class="id" title="var">Σ</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>) ⇒ //.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">wfext</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICExpandLetsCorrectness.html#trans_wf_ext"><span class="id" title="lemma">PCUICExpandLetsCorrectness.trans_wf_ext</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">wfext</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">wfext</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICExpandLetsCorrectness.html#expanded_expand_lets_program"><span class="id" title="lemma">expanded_expand_lets_program</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">red</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">cf</span> [<span class="id" title="var">Σ</span> <span class="id" title="var">t</span>] <span class="id" title="var">v</span> [[]].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#eval_pcuic_program"><span class="id" title="definition">eval_pcuic_program</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="tactic">intros</span> [<span class="id" title="var">ev</span>]. <span class="id" title="tactic">destruct</span> <span class="id" title="var">X</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICExpandLetsCorrectness.html#trans_wcbveval"><span class="id" title="lemma">PCUICExpandLetsCorrectness.trans_wcbveval</span></a> (<span class="id" title="var">Σ</span>:=<a class="idref" href="MetaCoq.PCUIC.PCUICProgram.html#global_env_ext_map_global_env_ext"><span class="id" title="definition">global_env_ext_map_global_env_ext</span></a> <span class="id" title="var">Σ</span>)) <span class="id" title="tactic">in</span> <span class="id" title="var">ev</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eexists</span>; <span class="id" title="tactic">split</span>; <span class="id" title="tactic">split</span>; <span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">s</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">T</span> <span class="id" title="var">HT</span>]. <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.Typing.PCUICClosedTyp.html#subject_closed"><span class="id" title="lemma">PCUICClosedTyp.subject_closed</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">HT</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

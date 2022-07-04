@@ -1,38 +1,152 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.Erasure.EReflect</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.Erasure.EReflect</h1>
 
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a> <a class="idref" href="MetaCoq.Template.BasicAst.html#"><span class="id" title="library">BasicAst</span></a> <a class="idref" href="MetaCoq.Template.Reflect.html#"><span class="id" title="library">Reflect</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Erasure</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#"><span class="id" title="library">EAst</span></a> <a class="idref" href="MetaCoq.Erasure.EInduction.html#"><span class="id" title="library">EInduction</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Local Ltac</span> <span class="id" title="var">finish</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">h</span> := <span class="id" title="tactic">fresh</span> "h" <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">right</span> ;<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">e</span> : ?<span class="id" title="var">t</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> ?<span class="id" title="var">u</span> |- <span class="id" title="var">_</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">h</span> ; <span class="id" title="tactic">apply</span> <span class="id" title="var">e</span> ; <span class="id" title="var">now</span> <span class="id" title="tactic">inversion</span> <span class="id" title="var">h</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Local Ltac</span> <span class="id" title="var">fcase</span> <span class="id" title="var">c</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">e</span> := <span class="id" title="tactic">fresh</span> "e" <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">case</span> <span class="id" title="var">c</span> ; <span class="id" title="tactic">intro</span> <span class="id" title="var">e</span> ; [ <span class="id" title="tactic">subst</span> ; <span class="id" title="tactic">try</span> (<span class="id" title="tactic">left</span> ; <span class="id" title="tactic">reflexivity</span>) | <span class="id" title="var">finish</span> ].<br/>
 
 <br/>
+<span class="id" title="keyword">Local Ltac</span> <span class="id" title="var">term_dec_tac</span> <span class="id" title="var">term_dec</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">t</span> : <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">term</span></a>, <span class="id" title="var">u</span> : <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">term</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="var">fcase</span> (<span class="id" title="var">term_dec</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <span class="id" title="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="var">fcase</span> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Arith.PeanoNat.html#Nat.eq_dec"><span class="id" title="lemma">Nat.eq_dec</span></a> <span class="id" title="var">n</span> <span class="id" title="var">m</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">i</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#ident"><span class="id" title="definition">ident</span></a>, <span class="id" title="var">i'</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#ident"><span class="id" title="definition">ident</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="var">fcase</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">i</span> <span class="id" title="var">i'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">i</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#kername"><span class="id" title="definition">kername</span></a>, <span class="id" title="var">i'</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#kername"><span class="id" title="definition">kername</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="var">fcase</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">i</span> <span class="id" title="var">i'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">i</span> : <a class="idref" href="MetaCoq.Template.utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a>, <span class="id" title="var">i'</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#kername"><span class="id" title="definition">kername</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="var">fcase</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">i</span> <span class="id" title="var">i'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">n</span> : <a class="idref" href="MetaCoq.Template.BasicAst.html#name"><span class="id" title="inductive">name</span></a>, <span class="id" title="var">n'</span> : <a class="idref" href="MetaCoq.Template.BasicAst.html#name"><span class="id" title="inductive">name</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="var">fcase</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">n</span> <span class="id" title="var">n'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">i</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#inductive"><span class="id" title="record">inductive</span></a>, <span class="id" title="var">i'</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#inductive"><span class="id" title="record">inductive</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="var">fcase</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">i</span> <span class="id" title="var">i'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#inductive"><span class="id" title="record">inductive</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>, <span class="id" title="var">y</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#inductive"><span class="id" title="record">inductive</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> |- <span class="id" title="var">_</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fcase</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#projection"><span class="id" title="record">projection</span></a>, <span class="id" title="var">y</span> : <a class="idref" href="MetaCoq.Template.Kernames.html#projection"><span class="id" title="record">projection</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="var">fcase</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">nodec</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">bot</span> := <span class="id" title="tactic">fresh</span> "bot" <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">solve</span> [ <span class="id" title="tactic">constructor</span> ; <span class="id" title="tactic">intro</span> <span class="id" title="var">bot</span> ; <span class="id" title="tactic">inversion</span> <span class="id" title="var">bot</span> ; <span class="id" title="tactic">subst</span> ; <span class="id" title="tactic">tauto</span> ].<br/>
 
 <br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="var">NoConfusionHom</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">term</span></a>.<br/>
 
 <br/>
 #[<span class="id" title="var">global</span>]<br/>
 <span class="id" title="keyword">Instance</span> <a id="EqDec_term" class="idref" href="#EqDec_term"><span class="id" title="instance">EqDec_term</span></a> : <span class="id" title="class">EqDec</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">term</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">induction</span> <span class="id" title="var">x</span> <span class="id" title="keyword">using</span> <a class="idref" href="MetaCoq.Erasure.EInduction.html#term_forall_list_ind"><span class="id" title="lemma">term_forall_list_ind</span></a> ; <span class="id" title="tactic">intro</span> <span class="id" title="var">t</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">t</span> ; <span class="id" title="tactic">try</span> (<span class="id" title="tactic">right</span> ; <span class="id" title="tactic">discriminate</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="var">term_dec_tac</span> <span class="id" title="var">term_dec</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">left</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="var">revert</span> <span class="id" title="var">l0</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">X</span> ; <span class="id" title="tactic">intro</span> <span class="id" title="var">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">destruct</span> <span class="id" title="var">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">left</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">right</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">destruct</span> <span class="id" title="var">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">right</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHX</span> <span class="id" title="var">l0</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">p</span> <span class="id" title="var">t</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">left</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">e</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHx</span> <span class="id" title="var">t</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>; <span class="id" title="tactic">left</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHx1</span> <span class="id" title="var">t1</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHx2</span> <span class="id" title="var">t2</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">left</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHx1</span> <span class="id" title="var">t1</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHx2</span> <span class="id" title="var">t2</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">left</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="var">revert</span> <span class="id" title="var">l</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">X</span> ; <span class="id" title="tactic">intro</span> <span class="id" title="var">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">destruct</span> <span class="id" title="var">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">left</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">right</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">destruct</span> <span class="id" title="var">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">right</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHX</span> <span class="id" title="var">l0</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">p</span> <span class="id" title="var">t</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">e</span>. <span class="id" title="tactic">subst</span>; <span class="id" title="tactic">left</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHx</span> <span class="id" title="var">t</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="var">revert</span> <span class="id" title="var">l0</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">IHx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">X</span> ; <span class="id" title="tactic">intro</span> <span class="id" title="var">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">destruct</span> <span class="id" title="var">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">left</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">right</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">destruct</span> <span class="id" title="var">l0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">right</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHX</span> <span class="id" title="var">l0</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">p</span> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> <span class="id" title="var">p1</span>)) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="definition">eq_dec</span> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#fst"><span class="id" title="definition">fst</span></a> <span class="id" title="var">x</span>) (<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#fst"><span class="id" title="definition">fst</span></a> <span class="id" title="var">p1</span>)) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span>, <span class="id" title="var">p1</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">e</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHx</span> <span class="id" title="var">t</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">left</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="var">revert</span> <span class="id" title="var">m0</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">X</span> ; <span class="id" title="tactic">intro</span> <span class="id" title="var">m0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">destruct</span> <span class="id" title="var">m0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">left</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">right</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">destruct</span> <span class="id" title="var">m0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">right</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">destruct</span> (<span class="id" title="var">p</span> (<a class="idref" href="MetaCoq.Erasure.EAst.html#dbody"><span class="id" title="projection">dbody</span></a> <span class="id" title="var">d</span>)) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHX</span> <span class="id" title="var">m0</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span>, <span class="id" title="var">d</span> ; <span class="id" title="tactic">subst</span>. <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">dname</span> <span class="id" title="var">dname0</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">e0</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">rarg</span> <span class="id" title="var">rarg0</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">left</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="var">revert</span> <span class="id" title="var">m0</span>. <span class="id" title="tactic">induction</span> <span class="id" title="var">X</span> ; <span class="id" title="tactic">intro</span> <span class="id" title="var">m0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">destruct</span> <span class="id" title="var">m0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">left</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">right</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">destruct</span> <span class="id" title="var">m0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">right</span>. <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">destruct</span> (<span class="id" title="var">p</span> (<a class="idref" href="MetaCoq.Erasure.EAst.html#dbody"><span class="id" title="projection">dbody</span></a> <span class="id" title="var">d</span>)) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">IHX</span> <span class="id" title="var">m0</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span>, <span class="id" title="var">d</span> ; <span class="id" title="tactic">subst</span>. <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">dname</span> <span class="id" title="var">dname0</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">e0</span>. <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="definition">eq_dec</span> <span class="id" title="var">rarg</span> <span class="id" title="var">rarg0</span>) ; <span class="id" title="var">nodec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span>. <span class="id" title="tactic">left</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
 #[<span class="id" title="var">global</span>]<br/>
@@ -47,6 +161,13 @@
 #[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>]<br/>
 <span class="id" title="keyword">Instance</span> <a id="reflect_constant_body" class="idref" href="#reflect_constant_body"><span class="id" title="instance">reflect_constant_body</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#constant_body"><span class="id" title="record">constant_body</span></a> := <br/>
 &nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_constant_body"><span class="id" title="definition">eqb_constant_body</span></a> |}.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">revert</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>; <span class="id" title="tactic">intros</span> [] [].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_constant_body"><span class="id" title="definition">eqb_constant_body</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span> -[<span class="id" title="var">eqb</span>].<br/>
+&nbsp;&nbsp;<span class="id" title="var">finish_reflect</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="eqb_constructor_body" class="idref" href="#eqb_constructor_body"><span class="id" title="definition">eqb_constructor_body</span></a> (<a id="x:3" class="idref" href="#x:3"><span class="id" title="binder">x</span></a> <a id="y:4" class="idref" href="#y:4"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#constructor_body"><span class="id" title="record">constructor_body</span></a>) :=<br/>
@@ -56,6 +177,12 @@
 #[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>]<br/>
 <span class="id" title="keyword">Instance</span> <a id="reflect_constructor_body" class="idref" href="#reflect_constructor_body"><span class="id" title="instance">reflect_constructor_body</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#constructor_body"><span class="id" title="record">constructor_body</span></a> := <br/>
 &nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_constructor_body"><span class="id" title="definition">eqb_constructor_body</span></a> |}.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_constructor_body"><span class="id" title="definition">eqb_constructor_body</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span>, <span class="id" title="var">y</span>; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">case</span>: <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb_spec"><span class="id" title="method">eqb_spec</span></a>; <span class="id" title="tactic">intros</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">congruence</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="eqb_projection_body" class="idref" href="#eqb_projection_body"><span class="id" title="definition">eqb_projection_body</span></a> (<a id="x:5" class="idref" href="#x:5"><span class="id" title="binder">x</span></a> <a id="y:6" class="idref" href="#y:6"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#projection_body"><span class="id" title="record">projection_body</span></a>) :=<br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.EReflect.html#x:5"><span class="id" title="variable">x</span></a>.(<a class="idref" href="MetaCoq.Erasure.EAst.html#proj_name"><span class="id" title="projection">proj_name</span></a>) <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#12489c9c79e91749bd1f337dd0c899e9"><span class="id" title="notation">==</span></a> <a class="idref" href="MetaCoq.Erasure.EReflect.html#y:6"><span class="id" title="variable">y</span></a>.(<a class="idref" href="MetaCoq.Erasure.EAst.html#proj_name"><span class="id" title="projection">proj_name</span></a>).<br/>
 
@@ -63,6 +190,12 @@
 #[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>]<br/>
 <span class="id" title="keyword">Instance</span> <a id="reflect_projection_body" class="idref" href="#reflect_projection_body"><span class="id" title="instance">reflect_projection_body</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#projection_body"><span class="id" title="record">projection_body</span></a> := <br/>
 &nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_projection_body"><span class="id" title="definition">eqb_projection_body</span></a> |}.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_projection_body"><span class="id" title="definition">eqb_projection_body</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span>, <span class="id" title="var">y</span>; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">case</span>: <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb_spec"><span class="id" title="method">eqb_spec</span></a>; <span class="id" title="tactic">intros</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">congruence</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="eqb_one_inductive_body" class="idref" href="#eqb_one_inductive_body"><span class="id" title="definition">eqb_one_inductive_body</span></a> (<a id="x:7" class="idref" href="#x:7"><span class="id" title="binder">x</span></a> <a id="y:8" class="idref" href="#y:8"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#one_inductive_body"><span class="id" title="record">one_inductive_body</span></a>) :=<br/>
@@ -73,6 +206,11 @@
 <br/>
 #[<span class="id" title="var">global</span>]<br/>
 <span class="id" title="keyword">Instance</span> <a id="reflect_one_inductive_body" class="idref" href="#reflect_one_inductive_body"><span class="id" title="instance">reflect_one_inductive_body</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#one_inductive_body"><span class="id" title="record">one_inductive_body</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">refine</span> {| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_one_inductive_body"><span class="id" title="definition">eqb_one_inductive_body</span></a> |}.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> [] [].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_one_inductive_body"><span class="id" title="definition">eqb_one_inductive_body</span></a>; <span class="id" title="var">finish_reflect</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="eqb_mutual_inductive_body" class="idref" href="#eqb_mutual_inductive_body"><span class="id" title="definition">eqb_mutual_inductive_body</span></a> (<a id="x:19" class="idref" href="#x:19"><span class="id" title="binder">x</span></a> <a id="y:20" class="idref" href="#y:20"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a>) :=<br/>
@@ -84,6 +222,11 @@
 #[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>]<br/>
 <span class="id" title="keyword">Instance</span> <a id="reflect_mutual_inductive_body" class="idref" href="#reflect_mutual_inductive_body"><span class="id" title="instance">reflect_mutual_inductive_body</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a> := <br/>
 &nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_mutual_inductive_body"><span class="id" title="definition">eqb_mutual_inductive_body</span></a> |}.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">revert</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>; <span class="id" title="tactic">intros</span> [] [].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_mutual_inductive_body"><span class="id" title="definition">eqb_mutual_inductive_body</span></a>; <span class="id" title="var">finish_reflect</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="eqb_global_decl" class="idref" href="#eqb_global_decl"><span class="id" title="definition">eqb_global_decl</span></a> <a id="x:25" class="idref" href="#x:25"><span class="id" title="binder">x</span></a> <a id="y:26" class="idref" href="#y:26"><span class="id" title="binder">y</span></a> :=<br/>
@@ -97,14 +240,18 @@
 #[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>]<br/>
 <span class="id" title="keyword">Instance</span> <a id="reflect_global_decl" class="idref" href="#reflect_global_decl"><span class="id" title="instance">reflect_global_decl</span></a> : <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#global_decl"><span class="id" title="inductive">global_decl</span></a> :=<br/>
 &nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Template.utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_global_decl"><span class="id" title="definition">eqb_global_decl</span></a> |}.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">revert</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Erasure.EReflect.html#eqb_global_decl"><span class="id" title="definition">eqb_global_decl</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> [] []; <span class="id" title="var">finish_reflect</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

@@ -1,32 +1,53 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.Erasure.Erasure</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.Erasure.Erasure</h1>
 
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.Transform.html#"><span class="id" title="library">Transform</span></a> <a class="idref" href="MetaCoq.Template.utils.bytestring.html#"><span class="id" title="library">bytestring</span></a> <a class="idref" href="MetaCoq.Template.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a> <a class="idref" href="MetaCoq.Template.EtaExpand.html#"><span class="id" title="library">EtaExpand</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICProgram.html#"><span class="id" title="library">PCUICProgram</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.SafeChecker</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICErrors.html#"><span class="id" title="library">PCUICErrors</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#"><span class="id" title="library">PCUICWfEnvImpl</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Erasure</span> <span class="id" title="keyword">Require</span> <a class="idref" href="MetaCoq.Erasure.EAstUtils.html#"><span class="id" title="library">EAstUtils</span></a> <a class="idref" href="MetaCoq.Erasure.ErasureFunction.html#"><span class="id" title="library">ErasureFunction</span></a> <a class="idref" href="MetaCoq.Erasure.ErasureCorrectness.html#"><span class="id" title="library">ErasureCorrectness</span></a> <a class="idref" href="MetaCoq.Erasure.EPretty.html#"><span class="id" title="library">EPretty</span></a> <a class="idref" href="MetaCoq.Erasure.Extract.html#"><span class="id" title="library">Extract</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Erasure</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Erasure.ETransform.html#"><span class="id" title="library">ETransform</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICProgram.html#"><span class="id" title="module">PCUICProgram</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTransform.html#"><span class="id" title="module">PCUICTransform</span></a> (<span class="id" title="var">template_to_pcuic_transform</span>, <span class="id" title="var">pcuic_expand_lets_transform</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.bytestring.html#"><span class="id" title="module">bytestring</span></a>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">bs</span>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">string_scope2</span>.<br/>
 
 <br/>
 
 <br/>
-
-<br/>
-
-<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.Transform.html#Transform"><span class="id" title="module">Transform</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Obligation</span> <span class="id" title="keyword">Tactic</span> := <span class="id" title="tactic">program_simpl</span>.<br/>
@@ -35,6 +56,7 @@
 #[<span class="id" title="var">local</span>] <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">extraction_checker_flags</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#"><span class="id" title="module">EWcbvEval</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Program Definition</span> <a id="erasure_pipeline" class="idref" href="#erasure_pipeline"><span class="id" title="definition">erasure_pipeline</span></a> {<a id="guard:1" class="idref" href="#guard:1"><span class="id" title="binder">guard</span></a> : <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#abstract_guard_impl"><span class="id" title="class">abstract_guard_impl</span></a>} (<a id="efl:2" class="idref" href="#efl:2"><span class="id" title="binder">efl</span></a> := <a class="idref" href="MetaCoq.Erasure.EWellformed.html#all_env_flags"><span class="id" title="definition">EWellformed.all_env_flags</span></a>) :<br/>
@@ -62,8 +84,13 @@
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.ETransform.html#inline_projections_optimization"><span class="id" title="definition">inline_projections_optimization</span></a> (<span class="id" title="var">fl</span> := <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#target_wcbv_flags"><span class="id" title="definition">EWcbvEval.target_wcbv_flags</span></a>) (<span class="id" title="var">wcon</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a>) (<span class="id" title="var">hastrel</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a>) (<span class="id" title="var">hastbox</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a>).<br/>
 
 <br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Erasure.EGlobalEnv.html#"><span class="id" title="module">EGlobalEnv</span></a> <a class="idref" href="MetaCoq.Erasure.EWellformed.html#"><span class="id" title="module">EWellformed</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">split</span> ⇒ //. <span class="id" title="var">sq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Erasure.ETransform.html#expanded_eprogram_env_expanded_eprogram_cstrs"><span class="id" title="lemma">ETransform.expanded_eprogram_env_expanded_eprogram_cstrs</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="run_erase_program" class="idref" href="#run_erase_program"><span class="id" title="definition">run_erase_program</span></a> {<a id="guard:3" class="idref" href="#guard:3"><span class="id" title="binder">guard</span></a> : <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#abstract_guard_impl"><span class="id" title="class">abstract_guard_impl</span></a>} := <a class="idref" href="MetaCoq.Template.Transform.html#Transform.run"><span class="id" title="definition">run</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#erasure_pipeline"><span class="id" title="definition">erasure_pipeline</span></a>.<br/>
@@ -77,11 +104,15 @@
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.ETransform.html#remove_params_fast_optimization"><span class="id" title="definition">remove_params_fast_optimization</span></a> (<span class="id" title="var">wcon</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a>)  <span class="id" title="var">_</span> <a class="idref" href="MetaCoq.Template.Transform.html#41a41e67965da0db3deedf90048574e3"><span class="id" title="notation">▷</span></a> <br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.ETransform.html#rebuild_wf_env_transform"><span class="id" title="definition">rebuild_wf_env_transform</span></a> (<span class="id" title="var">efl</span> := <a class="idref" href="MetaCoq.Erasure.ERemoveParams.html#switch_no_params"><span class="id" title="definition">ERemoveParams.switch_no_params</span></a> <a class="idref" href="MetaCoq.Erasure.EWellformed.html#all_env_flags"><span class="id" title="definition">EWellformed.all_env_flags</span></a>) <a class="idref" href="MetaCoq.Template.Transform.html#41a41e67965da0db3deedf90048574e3"><span class="id" title="notation">▷</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.ETransform.html#optimize_prop_discr_optimization"><span class="id" title="definition">optimize_prop_discr_optimization</span></a> (<span class="id" title="var">efl</span> := <a class="idref" href="MetaCoq.Erasure.ERemoveParams.html#switch_no_params"><span class="id" title="definition">ERemoveParams.switch_no_params</span></a> <a class="idref" href="MetaCoq.Erasure.EWellformed.html#all_env_flags"><span class="id" title="definition">EWellformed.all_env_flags</span></a>) (<span class="id" title="var">wcon</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a>) (<span class="id" title="var">hastrel</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a>) (<span class="id" title="var">hastbox</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a>).<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">split</span> ⇒ //. <span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Erasure.ETransform.html#expanded_eprogram_env_expanded_eprogram_cstrs"><span class="id" title="lemma">ETransform.expanded_eprogram_env_expanded_eprogram_cstrs</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="run_erase_program_fast" class="idref" href="#run_erase_program_fast"><span class="id" title="definition">run_erase_program_fast</span></a> {<a id="guard:6" class="idref" href="#guard:6"><span class="id" title="binder">guard</span></a> : <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#abstract_guard_impl"><span class="id" title="class">abstract_guard_impl</span></a>} := <a class="idref" href="MetaCoq.Template.Transform.html#Transform.run"><span class="id" title="definition">run</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#erasure_pipeline_fast"><span class="id" title="definition">erasure_pipeline_fast</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">string_scope</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Axiom</span> <a id="fake_guard_impl_properties" class="idref" href="#fake_guard_impl_properties"><span class="id" title="axiom">fake_guard_impl_properties</span></a> : <br/>
@@ -92,6 +123,9 @@
 <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#guard"><span class="id" title="method">PCUICTyping.guard</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#fix_cofix:7"><span class="id" title="variable">fix_cofix</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#cb3edd5393c7bbdf625595792a237037"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#a27a3f5be2c643b658176c4fa6dd32d6"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#mfix:10"><span class="id" title="variable">mfix</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;-&gt;'_x"><span class="id" title="notation">↔</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#fake_guard_impl"><span class="id" title="definition">fake_guard_impl</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#fix_cofix:7"><span class="id" title="variable">fix_cofix</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#cb3edd5393c7bbdf625595792a237037"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#a27a3f5be2c643b658176c4fa6dd32d6"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#mfix:10"><span class="id" title="variable">mfix</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Global</span> <span class="id" title="var">Program</span> <span class="id" title="keyword">Instance</span> <a id="fake_guard_impl" class="idref" href="#fake_guard_impl"><span class="id" title="instance">fake_guard_impl</span></a> : <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#abstract_guard_impl"><span class="id" title="class">abstract_guard_impl</span></a> :=<br/>
+{| <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#guard_impl"><span class="id" title="method">guard_impl</span></a> := <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#fake_guard_impl"><span class="id" title="definition">fake_guard_impl</span></a> |}.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Erasure.Erasure.html#fake_guard_impl_properties"><span class="id" title="axiom">fake_guard_impl_properties</span></a>. <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 </div>
@@ -113,20 +147,44 @@ This uses the retyping-based erasure and assumes that the global environment and
 &nbsp;&nbsp;: <a class="idref" href="MetaCoq.Template.utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="p':17" class="idref" href="#p':17"><span class="id" title="binder">p'</span></a> := <a class="idref" href="MetaCoq.Erasure.Erasure.html#run_erase_program"><span class="id" title="definition">run_erase_program</span></a> (<a class="idref" href="MetaCoq.Template.EtaExpand.html#eta_expand_program"><span class="id" title="definition">eta_expand_program</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#p:16"><span class="id" title="variable">p</span></a>) <span class="id" title="var">_</span> <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Transform.html#time"><span class="id" title="definition">time</span></a> "Pretty printing" <a class="idref" href="MetaCoq.Erasure.EPretty.html#print_program"><span class="id" title="definition">EPretty.print_program</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#p':17"><span class="id" title="variable">p'</span></a>.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">ht</span> : <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#wt_template_program"><span class="id" title="definition">TemplateProgram.wt_template_program</span></a> <span class="id" title="var">p</span> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>) <span class="id" title="tactic">by</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Erasure.Erasure.html#assume_that_we_only_erase_on_welltyped_programs"><span class="id" title="axiom">assume_that_we_only_erase_on_welltyped_programs</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Erasure.Erasure.html#assume_that_we_only_erase_on_welltyped_programs"><span class="id" title="axiom">assume_that_we_only_erase_on_welltyped_programs</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">red</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">ht</span> <span class="id" title="keyword">as</span> [[<span class="id" title="var">wfext</span> [<span class="id" title="var">T</span> <span class="id" title="var">ht</span>]]].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="var">cbn</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Template.EtaExpand.html#eta_expand_global_env_expanded"><span class="id" title="lemma">EtaExpand.eta_expand_global_env_expanded</span></a>. <span class="id" title="tactic">eapply</span> <span class="id" title="var">wfext</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Template.EtaExpand.html#expanded_env_irrel"><span class="id" title="lemma">EtaExpand.expanded_env_irrel</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">epose</span> <span class="id" title="var">proof</span> (<a class="idref" href="MetaCoq.Template.EtaExpand.html#eta_expand_expanded"><span class="id" title="lemma">EtaExpand.eta_expand_expanded</span></a> (<span class="id" title="var">Σ</span> := <a class="idref" href="MetaCoq.Template.Ast.html#Env.empty_ext"><span class="id" title="definition">Ast.Env.empty_ext</span></a> <span class="id" title="var">p</span><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <span class="id" title="var">p</span><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <span class="id" title="var">T</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">forward</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">wfext</span>. <span class="id" title="tactic">specialize</span> (<span class="id" title="var">H</span> <span class="id" title="var">ht</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">forward</span> <span class="id" title="var">H</span> <span class="id" title="tactic">by</span> <span class="id" title="tactic">constructor</span>. <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">p</span> <span class="id" title="keyword">as</span> [ [] ]; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×. <span class="id" title="tactic">exact</span> <span class="id" title="var">H</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Program Definition</span> <a id="erase_fast_and_print_template_program" class="idref" href="#erase_fast_and_print_template_program"><span class="id" title="definition">erase_fast_and_print_template_program</span></a> {<a id="cf:18" class="idref" href="#cf:18"><span class="id" title="binder">cf</span></a> : <a class="idref" href="MetaCoq.Template.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>} (<a id="p:19" class="idref" href="#p:19"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#Env.program"><span class="id" title="definition">Ast.Env.program</span></a>)<br/>
 &nbsp;&nbsp;: <a class="idref" href="MetaCoq.Template.utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="p':20" class="idref" href="#p':20"><span class="id" title="binder">p'</span></a> := <a class="idref" href="MetaCoq.Erasure.Erasure.html#run_erase_program_fast"><span class="id" title="definition">run_erase_program_fast</span></a> (<a class="idref" href="MetaCoq.Template.EtaExpand.html#eta_expand_program"><span class="id" title="definition">eta_expand_program</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#p:19"><span class="id" title="variable">p</span></a>) <span class="id" title="var">_</span> <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Transform.html#time"><span class="id" title="definition">time</span></a> "pretty-printing" <a class="idref" href="MetaCoq.Erasure.EPretty.html#print_program"><span class="id" title="definition">EPretty.print_program</span></a> <a class="idref" href="MetaCoq.Erasure.Erasure.html#p':20"><span class="id" title="variable">p'</span></a>.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">ht</span> : <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#wt_template_program"><span class="id" title="definition">TemplateProgram.wt_template_program</span></a> <span class="id" title="var">p</span> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>) <span class="id" title="tactic">by</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Erasure.Erasure.html#assume_that_we_only_erase_on_welltyped_programs"><span class="id" title="axiom">assume_that_we_only_erase_on_welltyped_programs</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Erasure.Erasure.html#assume_that_we_only_erase_on_welltyped_programs"><span class="id" title="axiom">assume_that_we_only_erase_on_welltyped_programs</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">red</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">ht</span> <span class="id" title="keyword">as</span> [[<span class="id" title="var">wfext</span> [<span class="id" title="var">T</span> <span class="id" title="var">ht</span>]]].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="var">cbn</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Template.EtaExpand.html#eta_expand_global_env_expanded"><span class="id" title="lemma">EtaExpand.eta_expand_global_env_expanded</span></a>. <span class="id" title="tactic">eapply</span> <span class="id" title="var">wfext</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Template.EtaExpand.html#expanded_env_irrel"><span class="id" title="lemma">EtaExpand.expanded_env_irrel</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">epose</span> <span class="id" title="var">proof</span> (<a class="idref" href="MetaCoq.Template.EtaExpand.html#eta_expand_expanded"><span class="id" title="lemma">EtaExpand.eta_expand_expanded</span></a> (<span class="id" title="var">Σ</span> := <a class="idref" href="MetaCoq.Template.Ast.html#Env.empty_ext"><span class="id" title="definition">Ast.Env.empty_ext</span></a> <span class="id" title="var">p</span><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <span class="id" title="var">p</span><a class="idref" href="MetaCoq.Template.utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <span class="id" title="var">T</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">forward</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">wfext</span>. <span class="id" title="tactic">specialize</span> (<span class="id" title="var">H</span> <span class="id" title="var">ht</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="var">forward</span> <span class="id" title="var">H</span> <span class="id" title="tactic">by</span> <span class="id" title="tactic">constructor</span>. <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">p</span> <span class="id" title="keyword">as</span> [ [] ]; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×. <span class="id" title="tactic">exact</span> <span class="id" title="var">H</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

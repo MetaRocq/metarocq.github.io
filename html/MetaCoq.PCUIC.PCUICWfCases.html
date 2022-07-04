@@ -1,21 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.PCUIC.PCUICWfCases</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICWfCases</h1>
 
 <div class="code">
@@ -74,36 +83,60 @@ Well-formedness of all the case nodes appearing in the term.
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">rename_wf_predicateb</span> <span class="id" title="var">mdecl</span> <span class="id" title="var">idecl</span> <span class="id" title="var">p</span> <span class="id" title="var">f</span> :<br/>
 <span class="id" title="var">wf_predicateb</span> <span class="id" title="var">mdecl</span> <span class="id" title="var">idecl</span> (<span class="id" title="var">rename_predicate</span> <span class="id" title="tactic">rename</span> <span class="id" title="var">f</span> <span class="id" title="var">p</span>) = <span class="id" title="var">wf_predicateb</span> <span class="id" title="var">mdecl</span> <span class="id" title="var">idecl</span> <span class="id" title="var">p</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">wf_predicateb</span> /<span class="id" title="var">rename_predicate</span>.<br/>
+<span class="id" title="var">now</span> <span class="id" title="var">len</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">map_branch_wf_branchb</span> <span class="id" title="var">cdecl</span> <span class="id" title="var">b</span> <span class="id" title="var">f</span> :<br/>
 <span class="id" title="var">wf_branchb</span> <span class="id" title="var">cdecl</span> (<span class="id" title="var">map_branch</span> <span class="id" title="var">f</span> <span class="id" title="var">b</span>) = <span class="id" title="var">wf_branchb</span> <span class="id" title="var">cdecl</span> <span class="id" title="var">b</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> /<span class="id" title="var">wf_branchb</span> /<span class="id" title="var">map_branch</span> /=.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">forallb2_impl</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span>} (<span class="id" title="var">p</span> <span class="id" title="var">q</span> : <span class="id" title="var">A</span> → <span class="id" title="var">B</span> → <span class="id" title="var">bool</span>) <span class="id" title="var">l</span> <span class="id" title="var">l'</span> :<br/>
 &nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>, <span class="id" title="var">p</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> → <span class="id" title="var">q</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) →<br/>
 &nbsp;&nbsp;<span class="id" title="var">forallb2</span> <span class="id" title="var">p</span> <span class="id" title="var">l</span> <span class="id" title="var">l'</span> → <span class="id" title="var">forallb2</span> <span class="id" title="var">q</span> <span class="id" title="var">l</span> <span class="id" title="var">l'</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">hpq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">l</span> <span class="id" title="tactic">in</span> <span class="id" title="var">l'</span> |- *; <span class="id" title="tactic">destruct</span> <span class="id" title="var">l'</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">move</span>/<span class="id" title="var">andP</span>⇒ [] /<span class="id" title="var">hpq</span> → /<span class="id" title="var">IHl</span> →.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">forallb2_ext</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span>} (<span class="id" title="var">p</span> <span class="id" title="var">q</span> : <span class="id" title="var">A</span> → <span class="id" title="var">B</span> → <span class="id" title="var">bool</span>) <span class="id" title="var">l</span> <span class="id" title="var">l'</span> :<br/>
 &nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>, <span class="id" title="var">p</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> = <span class="id" title="var">q</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) →<br/>
 &nbsp;&nbsp;<span class="id" title="var">forallb2</span> <span class="id" title="var">p</span> <span class="id" title="var">l</span> <span class="id" title="var">l'</span> = <span class="id" title="var">forallb2</span> <span class="id" title="var">q</span> <span class="id" title="var">l</span> <span class="id" title="var">l'</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">hpq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">l</span> <span class="id" title="tactic">in</span> <span class="id" title="var">l'</span> |- *; <span class="id" title="tactic">destruct</span> <span class="id" title="var">l'</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">hpq</span> <span class="id" title="var">IHl</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">forallb2_map_r</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span>} (<span class="id" title="var">p</span> : <span class="id" title="var">A</span> → <span class="id" title="var">B</span> → <span class="id" title="var">bool</span>) <span class="id" title="var">f</span> <span class="id" title="var">l</span> (<span class="id" title="var">l'</span> : <span class="id" title="var">list</span> <span class="id" title="var">C</span>) :<br/>
 &nbsp;&nbsp;<span class="id" title="var">forallb2</span> <span class="id" title="var">p</span> <span class="id" title="var">l</span> (<span class="id" title="var">map</span> <span class="id" title="var">f</span> <span class="id" title="var">l'</span>) = <span class="id" title="var">forallb2</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> ⇒ <span class="id" title="var">p</span> <span class="id" title="var">x</span> (<span class="id" title="var">f</span> <span class="id" title="var">y</span>)) <span class="id" title="var">l</span> <span class="id" title="var">l'</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> -(<span class="id" title="var">map_id</span> <span class="id" title="var">l</span>) <span class="id" title="var">forallb2_map</span> <span class="id" title="var">map_id</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <span class="id" title="var">rename_wf_branchesb</span> <span class="id" title="var">idecl</span> <span class="id" title="var">brs</span> (<span class="id" title="var">f</span> : <span class="id" title="var">branch</span> <span class="id" title="var">term</span> → <span class="id" title="var">term</span> → <span class="id" title="var">term</span>) :<br/>
 &nbsp;&nbsp;<span class="id" title="var">wf_branchesb</span> <span class="id" title="var">idecl</span> (<span class="id" title="var">map</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">br</span> ⇒ <span class="id" title="var">map_branch</span> (<span class="id" title="var">f</span> <span class="id" title="var">br</span>) <span class="id" title="var">br</span>) <span class="id" title="var">brs</span>) = <span class="id" title="var">wf_branchesb</span> <span class="id" title="var">idecl</span> <span class="id" title="var">brs</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">wf_branchesb</span> /<span class="id" title="var">map_branch</span> /=.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">forallb2_map_r</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">forallb2_ext</span> ⇒ <span class="id" title="var">cdecl</span> <span class="id" title="var">b</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">map_branch_wf_branchb</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

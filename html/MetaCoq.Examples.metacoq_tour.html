@@ -1,26 +1,40 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.Examples.metacoq_tour</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.Examples.metacoq_tour</h1>
 
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <a class="idref" href="MetaCoq.Template.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a> <a class="idref" href="MetaCoq.Template.All.html#"><span class="id" title="library">All</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.TemplateMonad.html#"><span class="id" title="library">TemplateMonad</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICReduction.html#"><span class="id" title="library">PCUICReduction</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#"><span class="id" title="library">PCUICCumulativity</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#"><span class="id" title="library">PCUICSafeLemmata</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.monad_utils.html#MCMonadNotation"><span class="id" title="module">MCMonadNotation</span></a>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">bs_scope</span>.<br/>
 
 <br/>
 </div>
@@ -57,12 +71,24 @@ MetaCoq is:
 <span class="id" title="keyword">Print</span> <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">Ast.term</span></a>.<br/>
 
 <br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Quote</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">reifx</span> := (<span class="id" title="keyword">fun</span> <a id="x:1" class="idref" href="#x:1"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#x:1"><span class="id" title="variable">x</span></a>).<br/>
 <span class="id" title="keyword">Definition</span> <a id="foo" class="idref" href="#foo"><span class="id" title="definition">foo</span></a> := (<span class="id" title="keyword">fun</span> <a id="x:2" class="idref" href="#x:2"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <span class="id" title="keyword">fun</span> <a id="x:3" class="idref" href="#x:3"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#x:3"><span class="id" title="variable">x</span></a>).<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Quote</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">reifx'</span> := <span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="keyword">fun</span> <a id="x:4" class="idref" href="#x:4"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <span class="id" title="keyword">let</span> <a id="y:5" class="idref" href="#y:5"><span class="id" title="binder">y</span></a> := <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#x:4"><span class="id" title="variable">x</span></a> <span class="id" title="tactic">in</span> <span class="id" title="keyword">fun</span> <a id="x:6" class="idref" href="#x:6"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> ⇒ <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#y:5"><span class="id" title="variable">y</span></a>).<br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#reifx'"><span class="id" title="definition">reifx'</span></a>.<br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Unquote</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">x</span> := <br/>
+&nbsp;&nbsp;(<a class="idref" href="MetaCoq.Template.Ast.html#tConstruct"><span class="id" title="constructor">Ast.tConstruct</span></a> (<a class="idref" href="MetaCoq.Template.Kernames.html#mkInd"><span class="id" title="constructor">mkInd</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Template.Kernames.html#MPfile"><span class="id" title="constructor">MPfile</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a>"Datatypes"<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> "Init"<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> "Coq"<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> "nat"<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> 0) 0 <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>).<br/>
 
 <br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmBind"><span class="id" title="constructor">tmBind</span></a> (<a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmQuote"><span class="id" title="constructor">tmQuote</span></a> (3 <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> 3)) <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmPrint"><span class="id" title="constructor">tmPrint</span></a>).<br/>
 
 <br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a id="t:7" class="idref" href="#t:7"><span class="id" title="binder">t</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmLemma"><span class="id" title="constructor">tmLemma</span></a> "foo44" <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">;;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="qt:8" class="idref" href="#qt:8"><span class="id" title="binder">qt</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmQuote"><span class="id" title="constructor">tmQuote</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#t:7"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">;;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="t:9" class="idref" href="#t:9"><span class="id" title="binder">t</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">&lt;-</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmEval"><span class="id" title="constructor">tmEval</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Common.html#all"><span class="id" title="constructor">all</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#t:7"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#6bec7af38cdf877f357faf8f1699c8f9"><span class="id" title="notation">;;</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmPrint"><span class="id" title="constructor">tmPrint</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#qt:8"><span class="id" title="variable">qt</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#ad6f5869610c58e6b1cafcdf52bb7ae3"><span class="id" title="notation">;;</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmPrint"><span class="id" title="constructor">tmPrint</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#t:9"><span class="id" title="variable">t</span></a>).<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (3<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a>2).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
 
@@ -75,6 +101,7 @@ MetaCoq is:
 <span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_Const"><span class="id" title="constructor">type_Const</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#"><span class="id" title="library">PCUICSR</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#subject_reduction"><span class="id" title="lemma">PCUICSR.subject_reduction</span></a>.<br/>
@@ -88,6 +115,7 @@ Verified conversion and type-checking
 <div class="code">
 
 <br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.SafeChecker</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICErrors.html#"><span class="id" title="library">PCUICErrors</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnv.html#"><span class="id" title="library">PCUICWfEnv</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#"><span class="id" title="library">PCUICWfEnvImpl</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICTypeChecker.html#"><span class="id" title="library">PCUICTypeChecker</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeChecker.html#"><span class="id" title="library">PCUICSafeChecker</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeRetyping.html#"><span class="id" title="library">PCUICSafeRetyping</span></a> <a class="idref" href="MetaCoq.SafeChecker.Loader.html#"><span class="id" title="library">Loader</span></a>.<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeConversion.html#isconv_term_sound"><span class="id" title="lemma">PCUICSafeConversion.isconv_term_sound</span></a>.<br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeConversion.html#isconv_term_complete"><span class="id" title="lemma">PCUICSafeConversion.isconv_term_complete</span></a>.<br/>
 
@@ -108,6 +136,7 @@ Proof of completeness is near completion.
 <span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeRetyping.html#type_of_subtype"><span class="id" title="definition">type_of_subtype</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Examples</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#"><span class="id" title="library">metacoq_tour_prelude</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#check_inh"><span class="id" title="definition">check_inh</span></a>.<br/>
@@ -135,6 +164,7 @@ The extracted typechecker also runs in OCaml
 Erasure 
 </div>
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Erasure</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Erasure.Erasure.html#"><span class="id" title="library">Erasure</span></a> <a class="idref" href="MetaCoq.Erasure.Loader.html#"><span class="id" title="library">Loader</span></a>.<br/>
 
 <br/>
 </div>
@@ -147,6 +177,7 @@ Running erasure live in Coq
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.Erasure.html#erase_and_print_template_program"><span class="id" title="definition">erase_and_print_template_program</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#p:10"><span class="id" title="variable">p</span></a>.<br/>
 
 <br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Quote</span> <span class="id" title="var">Recursively</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">zero</span> := 0.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="zerocst" class="idref" href="#zerocst"><span class="id" title="definition">zerocst</span></a> := <span class="id" title="keyword">Eval</span> <span class="id" title="tactic">lazy</span> <span class="id" title="tactic">in</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#test"><span class="id" title="definition">test</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#zero"><span class="id" title="definition">zero</span></a>.<br/>
@@ -159,8 +190,10 @@ Running erasure live in Coq
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>)).<br/>
 
 <br/>
-
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmEval"><span class="id" title="constructor">tmEval</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Common.html#lazy"><span class="id" title="constructor">lazy</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#singleton_elim"><span class="id" title="definition">singleton_elim</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#c0f7708df476ab63a78f53086f844619"><span class="id" title="notation">&gt;&gt;=</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmQuoteRec"><span class="id" title="definition">tmQuoteRec</span></a> <a class="idref" href="MetaCoq.Template.monad_utils.html#c0f7708df476ab63a78f53086f844619"><span class="id" title="notation">&gt;&gt;=</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="p:16" class="idref" href="#p:16"><span class="id" title="binder">p</span></a> ⇒ <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmEval"><span class="id" title="constructor">tmEval</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Common.html#lazy"><span class="id" title="constructor">lazy</span></a> (<a class="idref" href="MetaCoq.Examples.metacoq_tour.html#test"><span class="id" title="definition">test</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#p:16"><span class="id" title="variable">p</span></a>) <a class="idref" href="MetaCoq.Template.monad_utils.html#c0f7708df476ab63a78f53086f844619"><span class="id" title="notation">&gt;&gt;=</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmPrint"><span class="id" title="constructor">tmPrint</span></a>). 
 <br/>
+<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Erase</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#singleton_elim"><span class="id" title="definition">singleton_elim</span></a>.<br/>
 
 <br/>
 </div>
@@ -234,12 +267,10 @@ Conclusion: Status of MetaCoq
 <br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

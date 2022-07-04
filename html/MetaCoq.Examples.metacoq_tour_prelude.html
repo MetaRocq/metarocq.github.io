@@ -1,26 +1,42 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.Examples.metacoq_tour_prelude</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.Examples.metacoq_tour_prelude</h1>
 
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Template.Universes.html#"><span class="id" title="library">Universes</span></a> <a class="idref" href="MetaCoq.Template.Loader.html#"><span class="id" title="library">Loader</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSN.html#"><span class="id" title="library">PCUICSN</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICLiftSubst.html#"><span class="id" title="library">PCUICLiftSubst</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.SafeChecker</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICErrors.html#"><span class="id" title="library">PCUICErrors</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnv.html#"><span class="id" title="library">PCUICWfEnv</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#"><span class="id" title="library">PCUICWfEnvImpl</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICTypeChecker.html#"><span class="id" title="library">PCUICTypeChecker</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeChecker.html#"><span class="id" title="library">PCUICSafeChecker</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span>.<br/>
 
 <br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.monad_utils.html#MCMonadNotation"><span class="id" title="module">MCMonadNotation</span></a>.<br/>
+<span class="id" title="keyword">Global</span> <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">default_checker_flags</span>.<br/>
+<span class="id" title="keyword">Global</span> <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">default_normalizing</span>.<br/>
 
 <br/>
 
@@ -54,6 +70,9 @@ We use the environment checker to produce the proof that gctx, which is a single
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Template.Kernames.html#MPfile"><span class="id" title="constructor">MPfile</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#s:4"><span class="id" title="variable">s</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Global</span> <span class="id" title="var">Program</span> <span class="id" title="keyword">Instance</span> <a id="fake_guard_impl" class="idref" href="#fake_guard_impl"><span class="id" title="instance">fake_guard_impl</span></a> : <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#abstract_guard_impl"><span class="id" title="class">abstract_guard_impl</span></a> :=<br/>
+{| <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#guard_impl"><span class="id" title="method">guard_impl</span></a> := <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#fake_guard_impl"><span class="id" title="definition">fake_guard_impl</span></a> |}.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>. <span class="id" title="var">Admitted</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="make_wf_env_ext" class="idref" href="#make_wf_env_ext"><span class="id" title="definition">make_wf_env_ext</span></a> (<a id="48bbc240c70629f9166b6605559525f0" class="idref" href="#48bbc240c70629f9166b6605559525f0"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.global_env_ext"><span class="id" title="definition">global_env_ext</span></a>) : <a class="idref" href="MetaCoq.SafeChecker.PCUICErrors.html#EnvCheck"><span class="id" title="inductive">EnvCheck</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#wf_env_ext"><span class="id" title="record">wf_env_ext</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#wf_env_ext"><span class="id" title="record">wf_env_ext</span></a> :=<br/>
@@ -62,6 +81,13 @@ We use the environment checker to produce the proof that gctx, which is a single
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="gctx_wf_env" class="idref" href="#gctx_wf_env"><span class="id" title="definition">gctx_wf_env</span></a> : <a class="idref" href="MetaCoq.SafeChecker.PCUICWfEnvImpl.html#wf_env_ext"><span class="id" title="record">wf_env_ext</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">wf_proof</span> := <span class="id" title="tactic">eval</span> <span class="id" title="tactic">hnf</span> <span class="id" title="tactic">in</span> (<a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#make_wf_env_ext"><span class="id" title="definition">make_wf_env_ext</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#gctx"><span class="id" title="definition">gctx</span></a>) <span class="id" title="tactic">in</span> <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">wf_proof</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="MetaCoq.SafeChecker.PCUICErrors.html#CorrectDecl"><span class="id" title="constructor">CorrectDecl</span></a> <span class="id" title="var">_</span> ?<span class="id" title="var">x</span> ⇒ <span class="id" title="tactic">exact</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">fail</span> "Couldn't prove the global environment is well-formed"<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
 </div>
@@ -81,14 +107,26 @@ There is always a proof of `forall x : Sort s, x -&gt; x`
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.monad_utils.html#ret"><span class="id" title="method">ret</span></a> <a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#t:18"><span class="id" title="variable">t</span></a><a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#prf:20"><span class="id" title="variable">prf</span></a><a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">)</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">fill_inh</span> <span class="id" title="var">t</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">lazymatch</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;[ <span class="id" title="var">wfΓ</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> , <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#:::'wf_local'_x_x"><span class="id" title="notation">wf_local</span></a> <span class="id" title="var">_</span> ?<span class="id" title="var">Γ</span> <a class="idref" href="MetaCoq.Template.utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> |- <a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#inh"><span class="id" title="definition">inh</span></a> ?<span class="id" title="var">Σ</span> ?<span class="id" title="var">Γ</span> ?<span class="id" title="var">T</span> ] ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">t</span> := <span class="id" title="var">uconstr</span>:(<a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#check_inh"><span class="id" title="definition">check_inh</span></a> <span class="id" title="var">Σ</span> <span class="id" title="var">Γ</span> <span class="id" title="var">wfΓ</span> <span class="id" title="var">t</span> (<span class="id" title="var">T</span>:=<span class="id" title="var">T</span>)) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">proof</span> := <span class="id" title="tactic">eval</span> <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">t</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">proof</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaCoq.SafeChecker.PCUICErrors.html#Checked"><span class="id" title="constructor">Checked</span></a> ?<span class="id" title="var">d</span> ⇒ <span class="id" title="var">exact_no_check</span> <span class="id" title="var">d</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaCoq.SafeChecker.PCUICErrors.html#TypeError"><span class="id" title="constructor">TypeError</span></a> ?<span class="id" title="var">e</span> ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">str</span> := <span class="id" title="tactic">eval</span> <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> (<a class="idref" href="MetaCoq.SafeChecker.PCUICErrors.html#string_of_type_error"><span class="id" title="definition">string_of_type_error</span></a> <span class="id" title="var">Σ</span> <span class="id" title="var">e</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">fail</span> "Failed to inhabit " <span class="id" title="var">T</span> " : " <span class="id" title="var">str</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">fail</span> "Anomaly: unexpected return value: " <span class="id" title="var">proof</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;| [ |- <a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#inh"><span class="id" title="definition">inh</span></a> <span class="id" title="var">_</span> ?<span class="id" title="var">Γ</span> <span class="id" title="var">_</span> ] ⇒ <span class="id" title="tactic">fail</span> "Missing local wellformedness assumption for" <span class="id" title="var">Γ</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

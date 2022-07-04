@@ -1,24 +1,35 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.PCUIC.utils.PCUICPretty</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.PCUIC.utils.PCUICPretty</h1>
 
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a>.<br/>
 
 <br/>
 </div>
@@ -134,6 +145,7 @@
 <span class="id" title="keyword">Module</span> <a id="PrintTermTree" class="idref" href="#PrintTermTree"><span class="id" title="module">PrintTermTree</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Section</span> <a id="PrintTermTree.env" class="idref" href="#PrintTermTree.env"><span class="id" title="section">env</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Context</span> (<a id="ea478fd00cb4a06cc640b1b27bf65159" class="idref" href="#ea478fd00cb4a06cc640b1b27bf65159"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.global_env_ext"><span class="id" title="definition">global_env_ext</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.bytestring.html#Tree"><span class="id" title="module">bytestring.Tree</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="24edda653e1f457813104c40ca3ae400" class="idref" href="#24edda653e1f457813104c40ca3ae400"><span class="id" title="notation">&quot;</span></a>^" := <a class="idref" href="MetaCoq.Template.utils.bytestring.html#Tree.append"><span class="id" title="constructor">append</span></a>.<br/>
 
 <br/>
@@ -293,6 +305,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICPretty.html#PrintTermTree.env"><span class="id" title="section">env</span></a>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.bytestring.html#Tree"><span class="id" title="module">bytestring.Tree</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Infix</span> <a id="0aa43aae98ed5ba1a66e2ab3f770c59e" class="idref" href="#0aa43aae98ed5ba1a66e2ab3f770c59e"><span class="id" title="notation">&quot;</span></a>^" := <a class="idref" href="MetaCoq.Template.utils.bytestring.html#Tree.append"><span class="id" title="constructor">append</span></a>.<br/>
 
 <br/>
@@ -374,12 +387,10 @@
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.utils.bytestring.html#Tree.to_string"><span class="id" title="definition">Tree.to_string</span></a> (<a class="idref" href="MetaCoq.PCUIC.utils.PCUICPretty.html#print_program"><span class="id" title="definition">PrintTermTree.print_program</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICPretty.html#short:130"><span class="id" title="variable">short</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICPretty.html#prefix:131"><span class="id" title="variable">prefix</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICPretty.html#p:132"><span class="id" title="variable">p</span></a>).<br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

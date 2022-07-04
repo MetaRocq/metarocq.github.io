@@ -1,26 +1,47 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.PCUIC.Syntax.PCUICInstDef</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.PCUIC.Syntax.PCUICInstDef</h1>
 
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#"><span class="id" title="library">Morphisms</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#"><span class="id" title="library">PCUICCases</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInduction.html#"><span class="id" title="library">PCUICInduction</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICLiftSubst.html#"><span class="id" title="library">PCUICLiftSubst</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICUnivSubst.html#"><span class="id" title="library">PCUICUnivSubst</span></a> <br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICEquality.html#"><span class="id" title="library">PCUICEquality</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICOnFreeVars.html#"><span class="id" title="library">PCUICOnFreeVars</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#"><span class="id" title="library">PCUICSigmaCalculus</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICRenameDef.html#"><span class="id" title="library">PCUICRenameDef</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations.Prop.DepElim</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="keyword">Equations</span> <span class="id" title="var">With</span> <span class="id" title="var">UIP</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Keyed</span> <span class="id" title="var">Unification</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Default</span> <span class="id" title="keyword">Goal</span> <span class="id" title="var">Selector</span> "!".<br/>
 <span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">cf</span> : <a class="idref" href="MetaCoq.Template.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>.<br/>
 
 <br/>
@@ -33,6 +54,7 @@
 <div class="code">
 
 <br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">sigma_scope</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="inst_context" class="idref" href="#inst_context"><span class="id" title="definition">inst_context</span></a> <a id="037d1dbc1a02d6ef6874dcc89df346e1" class="idref" href="#037d1dbc1a02d6ef6874dcc89df346e1"><span class="id" title="binder">σ</span></a> (<a id="da7a5918a812e0216f4a54d21f7406c4" class="idref" href="#da7a5918a812e0216f4a54d21f7406c4"><span class="id" title="binder">Γ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.context"><span class="id" title="definition">context</span></a>) : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.context"><span class="id" title="definition">context</span></a> :=<br/>
@@ -40,6 +62,11 @@
 
 <br/>
 #[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <a id="inst_context_ext" class="idref" href="#inst_context_ext"><span class="id" title="instance">inst_context_ext</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="MetaCoq.Template.utils.MCPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a>) <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#inst_context"><span class="id" title="definition">inst_context</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">Hfg</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> →.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Template.BasicAst.html#fold_context_k_ext"><span class="id" title="lemma">fold_context_k_ext</span></a> ⇒ <span class="id" title="var">i</span> <span class="id" title="var">t</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">Hfg</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="inst_decl" class="idref" href="#inst_decl"><span class="id" title="definition">inst_decl</span></a> <a id="cd01c1f8eba18116122f50d6eb622af2" class="idref" href="#cd01c1f8eba18116122f50d6eb622af2"><span class="id" title="binder">σ</span></a> <a id="d:5" class="idref" href="#d:5"><span class="id" title="binder">d</span></a> := <a class="idref" href="MetaCoq.Template.BasicAst.html#map_decl"><span class="id" title="definition">map_decl</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#inst"><span class="id" title="definition">inst</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#cd01c1f8eba18116122f50d6eb622af2"><span class="id" title="variable">σ</span></a>) <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#d:5"><span class="id" title="variable">d</span></a>.<br/>
@@ -48,7 +75,8 @@
 <span class="id" title="keyword">Definition</span> <a id="inst_context_snoc0" class="idref" href="#inst_context_snoc0"><span class="id" title="definition">inst_context_snoc0</span></a> <a id="s:6" class="idref" href="#s:6"><span class="id" title="binder">s</span></a> <a id="de9bdb4e9c2be34cf9b5e2f20d66b06e" class="idref" href="#de9bdb4e9c2be34cf9b5e2f20d66b06e"><span class="id" title="binder">Γ</span></a> <a id="d:8" class="idref" href="#d:8"><span class="id" title="binder">d</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#inst_context"><span class="id" title="definition">inst_context</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#s:6"><span class="id" title="variable">s</span></a> (<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#d:8"><span class="id" title="variable">d</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#de9bdb4e9c2be34cf9b5e2f20d66b06e"><span class="id" title="variable">Γ</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#inst_context"><span class="id" title="definition">inst_context</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#s:6"><span class="id" title="variable">s</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#de9bdb4e9c2be34cf9b5e2f20d66b06e"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.Template.BasicAst.html#b66601545ff7e22c5dcb7c86aa0cca21"><span class="id" title="notation">,,</span></a> <a class="idref" href="MetaCoq.Template.BasicAst.html#map_decl"><span class="id" title="definition">map_decl</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#inst"><span class="id" title="definition">inst</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#64b62961f3506563337ecca5e1172b0a"><span class="id" title="notation">⇑^</span></a><a class="idref" href="MetaCoq.Template.utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#de9bdb4e9c2be34cf9b5e2f20d66b06e"><span class="id" title="variable">Γ</span></a><a class="idref" href="MetaCoq.Template.utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#s:6"><span class="id" title="variable">s</span></a>)) <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#d:8"><span class="id" title="variable">d</span></a>.<br/>
- #[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Rewrite</span> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#inst_context_snoc0"><span class="id" title="definition">inst_context_snoc0</span></a> : <span class="id" title="var">sigma</span>.<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#inst_context"><span class="id" title="definition">inst_context</span></a>. <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <a class="idref" href="MetaCoq.Template.BasicAst.html#fold_context_k_snoc0"><span class="id" title="lemma">fold_context_k_snoc0</span></a>. <span class="id" title="keyword">Qed</span>.<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Rewrite</span> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#inst_context_snoc0"><span class="id" title="definition">inst_context_snoc0</span></a> : <span class="id" title="var">sigma</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="inst_mutual_inductive_body" class="idref" href="#inst_mutual_inductive_body"><span class="id" title="definition">inst_mutual_inductive_body</span></a> <a id="72e868d13abb05ece78ff9e6f5f88467" class="idref" href="#72e868d13abb05ece78ff9e6f5f88467"><span class="id" title="binder">σ</span></a> <a id="m:10" class="idref" href="#m:10"><span class="id" title="binder">m</span></a> :=<br/>
@@ -92,12 +120,10 @@ This is let-preservation
 &nbsp;&nbsp;(<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#well_subst"><span class="id" title="definition">well_subst</span></a> <span class="id" title="var">Σ</span> <span class="id" title="var">Γ</span> σ <span class="id" title="var">Δ</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="var">Δ</span>, σ, <span class="id" title="var">Γ</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>).<br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

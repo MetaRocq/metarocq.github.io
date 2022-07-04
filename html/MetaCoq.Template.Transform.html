@@ -1,21 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.Template.Transform</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.Template.Transform</h1>
 
 <div class="code">
@@ -30,6 +39,12 @@ Generic transofmations from one language to another,
 <div class="code">
 
 <br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.bytestring.html#"><span class="id" title="module">bytestring</span></a>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">bs</span>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">string_scope2</span>.<br/>
 
 <br/>
 
@@ -72,6 +87,7 @@ Generic transofmations from one language to another,
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Opt"><span class="id" title="section">Opt</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.t"><span class="id" title="record">t</span></a> : <span class="id" title="tactic">clear</span> <span class="id" title="var">implicits</span>.<br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="Transform.self_transform" class="idref" href="#Transform.self_transform"><span class="id" title="definition">self_transform</span></a> <a id="program:37" class="idref" href="#program:37"><span class="id" title="binder">program</span></a> <a id="value:38" class="idref" href="#value:38"><span class="id" title="binder">value</span></a> <a id="eval:39" class="idref" href="#eval:39"><span class="id" title="binder">eval</span></a> <a id="eval':40" class="idref" href="#eval':40"><span class="id" title="binder">eval'</span></a> := <a class="idref" href="MetaCoq.Template.Transform.html#Transform.t"><span class="id" title="record">t</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#program:37"><span class="id" title="variable">program</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#program:37"><span class="id" title="variable">program</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#value:38"><span class="id" title="variable">value</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#value:38"><span class="id" title="variable">value</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#eval:39"><span class="id" title="variable">eval</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#eval':40"><span class="id" title="variable">eval'</span></a>.<br/>
@@ -85,6 +101,7 @@ Generic transofmations from one language to another,
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="eval'':49" class="idref" href="#eval'':49"><span class="id" title="binder">eval''</span></a> : <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.program''"><span class="id" title="variable">program''</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.value''"><span class="id" title="variable">value''</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>}.<br/>
 
 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Obligation</span> <span class="id" title="keyword">Tactic</span> := <span class="id" title="tactic">idtac</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Program Definition</span> <a id="Transform.compose" class="idref" href="#Transform.compose"><span class="id" title="definition">compose</span></a> (<a id="o:50" class="idref" href="#o:50"><span class="id" title="binder">o</span></a> : <a class="idref" href="MetaCoq.Template.Transform.html#Transform.t"><span class="id" title="record">t</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.program"><span class="id" title="variable">program</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.program'"><span class="id" title="variable">program'</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.value"><span class="id" title="variable">value</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.value'"><span class="id" title="variable">value'</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.eval"><span class="id" title="variable">eval</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.eval'"><span class="id" title="variable">eval'</span></a>) (<a id="o':51" class="idref" href="#o':51"><span class="id" title="binder">o'</span></a> : <a class="idref" href="MetaCoq.Template.Transform.html#Transform.t"><span class="id" title="record">t</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.program'"><span class="id" title="variable">program'</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.program''"><span class="id" title="variable">program''</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.value'"><span class="id" title="variable">value'</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.value''"><span class="id" title="variable">value''</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.eval'"><span class="id" title="variable">eval'</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.eval''"><span class="id" title="variable">eval''</span></a>) <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="hpp:53" class="idref" href="#hpp:53"><span class="id" title="binder">hpp</span></a> : (<span class="id" title="keyword">∀</span> <a id="p:52" class="idref" href="#p:52"><span class="id" title="binder">p</span></a>, <a class="idref" href="MetaCoq.Template.Transform.html#o:50"><span class="id" title="variable">o</span></a>.(<a class="idref" href="MetaCoq.Template.Transform.html#Transform.post"><span class="id" title="projection">post</span></a>) <a class="idref" href="MetaCoq.Template.Transform.html#p:52"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#o':51"><span class="id" title="variable">o'</span></a>.(<a class="idref" href="MetaCoq.Template.Transform.html#Transform.pre"><span class="id" title="projection">pre</span></a>) <a class="idref" href="MetaCoq.Template.Transform.html#p:52"><span class="id" title="variable">p</span></a>)) : <a class="idref" href="MetaCoq.Template.Transform.html#Transform.t"><span class="id" title="record">t</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.program"><span class="id" title="variable">program</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.program''"><span class="id" title="variable">program''</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.value"><span class="id" title="variable">value</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.value''"><span class="id" title="variable">value''</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.eval"><span class="id" title="variable">eval</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp.eval''"><span class="id" title="variable">eval''</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{| <br/>
@@ -94,23 +111,39 @@ Generic transofmations from one language to another,
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Transform.html#Transform.post"><span class="id" title="projection">post</span></a> := <a class="idref" href="MetaCoq.Template.Transform.html#o':51"><span class="id" title="variable">o'</span></a>.(<a class="idref" href="MetaCoq.Template.Transform.html#Transform.post"><span class="id" title="projection">post</span></a>);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Transform.html#Transform.obseq"><span class="id" title="projection">obseq</span></a> <a id="g:56" class="idref" href="#g:56"><span class="id" title="binder">g</span></a> <a id="g':57" class="idref" href="#g':57"><span class="id" title="binder">g'</span></a> <a id="v:58" class="idref" href="#v:58"><span class="id" title="binder">v</span></a> <a id="v':59" class="idref" href="#v':59"><span class="id" title="binder">v'</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">∃</span></a> <a id="g'':60" class="idref" href="#g'':60"><span class="id" title="binder">g''</span></a> <a id="v'':61" class="idref" href="#v'':61"><span class="id" title="binder">v''</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#o:50"><span class="id" title="variable">o</span></a>.(<a class="idref" href="MetaCoq.Template.Transform.html#Transform.obseq"><span class="id" title="projection">obseq</span></a>) <a class="idref" href="MetaCoq.Template.Transform.html#g:56"><span class="id" title="variable">g</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#g'':60"><span class="id" title="variable">g''</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#v:58"><span class="id" title="variable">v</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#v'':61"><span class="id" title="variable">v''</span></a> <a class="idref" href="MetaCoq.Template.utils.MCProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#o':51"><span class="id" title="variable">o'</span></a>.(<a class="idref" href="MetaCoq.Template.Transform.html#Transform.obseq"><span class="id" title="projection">obseq</span></a>) <a class="idref" href="MetaCoq.Template.Transform.html#g'':60"><span class="id" title="variable">g''</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#g':57"><span class="id" title="variable">g'</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#v'':61"><span class="id" title="variable">v''</span></a> <a class="idref" href="MetaCoq.Template.Transform.html#v':59"><span class="id" title="variable">v'</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|}.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">o</span> <span class="id" title="var">o'</span> <span class="id" title="var">hpp</span> <span class="id" title="var">inp</span> <span class="id" title="var">pre</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">o'</span>.(<a class="idref" href="MetaCoq.Template.Transform.html#Transform.correctness"><span class="id" title="projection">correctness</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">o</span> <span class="id" title="var">o'</span> <span class="id" title="var">hpp</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">p</span> <span class="id" title="var">v</span> <span class="id" title="var">pr</span> <span class="id" title="var">ev</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> (<span class="id" title="var">o</span>.(<a class="idref" href="MetaCoq.Template.Transform.html#Transform.preservation"><span class="id" title="projection">preservation</span></a>) <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">pr</span>) <span class="id" title="tactic">in</span> <span class="id" title="var">ev</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">ev</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">ev</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v'</span> [<span class="id" title="var">ev</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">epose</span> <span class="id" title="var">proof</span> (<span class="id" title="var">o'</span>.(<a class="idref" href="MetaCoq.Template.Transform.html#Transform.preservation"><span class="id" title="projection">preservation</span></a>) (<span class="id" title="var">o</span>.(<a class="idref" href="MetaCoq.Template.Transform.html#Transform.transform"><span class="id" title="projection">transform</span></a>) <span class="id" title="var">p</span> <span class="id" title="var">pr</span>) <span class="id" title="var">v'</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">H0</span> (<span class="id" title="var">hpp</span> <span class="id" title="var">_</span> (<span class="id" title="var">o</span>.(<a class="idref" href="MetaCoq.Template.Transform.html#Transform.correctness"><span class="id" title="projection">correctness</span></a>) <span class="id" title="var">_</span> <span class="id" title="var">pr</span>)) <span class="id" title="var">ev</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v''</span> [<span class="id" title="var">ev'</span> <span class="id" title="var">obs'</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">v''</span>. <span class="id" title="tactic">constructor</span> ⇒ //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="MetaCoq.Template.Transform.html#Transform.transform"><span class="id" title="projection">transform</span></a> <span class="id" title="var">o</span> <span class="id" title="var">p</span> <span class="id" title="var">pr</span>), <span class="id" title="var">v'</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Template.Transform.html#Transform.Comp"><span class="id" title="section">Comp</span></a>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">transform_scope</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Bind Scope</span> <span class="id" title="var">transform_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">t</span>.<br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a id="41a41e67965da0db3deedf90048574e3" class="idref" href="#41a41e67965da0db3deedf90048574e3"><span class="id" title="notation">&quot;</span></a> o ▷ o' " := (<a class="idref" href="MetaCoq.Template.Transform.html#Transform.compose"><span class="id" title="definition">Transform.compose</span></a> <span class="id" title="var">o</span> <span class="id" title="var">o'</span> <span class="id" title="var">_</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">transform_scope</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">transform_scope</span>.<br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Template.Transform.html#Transform"><span class="id" title="module">Transform</span></a>.<br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

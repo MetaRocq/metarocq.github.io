@@ -1,24 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.Template.Checker</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.Template.Checker</h1>
 
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Template.Environment.html#"><span class="id" title="library">Environment</span></a> <a class="idref" href="MetaCoq.Template.Ast.html#"><span class="id" title="library">Ast</span></a> <a class="idref" href="MetaCoq.Template.AstUtils.html#"><span class="id" title="library">AstUtils</span></a> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.LiftSubst.html#"><span class="id" title="library">LiftSubst</span></a> <a class="idref" href="MetaCoq.Template.UnivSubst.html#"><span class="id" title="library">UnivSubst</span></a> <a class="idref" href="MetaCoq.Template.common.uGraph.html#"><span class="id" title="library">uGraph</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#"><span class="id" title="library">Typing</span></a>.<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.monad_utils.html#MCMonadNotation"><span class="id" title="module">MCMonadNotation</span></a>.<br/>
 
 <br/>
 </div>
@@ -29,19 +41,21 @@
 
 <div class="paragraph"> </div>
 
-  Implemets <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Checker.html#typecheck_program"><span class="id" title="definition">typecheck_program</span></a></span> which returns an error and
+  Implemets <span class="inlinecode"><span class="id" title="var">typecheck_program</span></span> which returns an error and
   on success should guarantee that the term has the given type.
   Currently uses fuel to implement reduction and is unverified.
 
 <div class="paragraph"> </div>
 
-  This file implements reduction with a stack machine <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Checker.html#reduce_stack"><span class="id" title="definition">reduce_stack</span></a></span>,
-  conversion/cumulativity with the first-order fast-path heuristic <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Checker.html#isconv"><span class="id" title="definition">isconv</span></a></span>
+  This file implements reduction with a stack machine <span class="inlinecode"><span class="id" title="var">reduce_stack</span></span>,
+  conversion/cumulativity with the first-order fast-path heuristic <span class="inlinecode"><span class="id" title="var">isconv</span></span>
   that are used to type-check terms in reasonable time. 
 </div>
 <div class="code">
 
 <br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> " () " := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#unit"><span class="id" title="inductive">Datatypes.unit</span></a> : <span class="id" title="var">type_scope</span>.<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Notation</span> " () " := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#tt"><span class="id" title="constructor">tt</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Module</span> <a id="RedFlags" class="idref" href="#RedFlags"><span class="id" title="module">RedFlags</span></a>.<br/>
@@ -105,6 +119,8 @@
 <span class="id" title="keyword">Inductive</span> <a id="typing_result" class="idref" href="#typing_result"><span class="id" title="inductive">typing_result</span></a> (<a id="A:35" class="idref" href="#A:35"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) :=<br/>
 | <a id="Checked" class="idref" href="#Checked"><span class="id" title="constructor">Checked</span></a> (<a id="a:38" class="idref" href="#a:38"><span class="id" title="binder">a</span></a> : <a class="idref" href="MetaCoq.Template.Checker.html#A:35"><span class="id" title="variable">A</span></a>)<br/>
 | <a id="TypeError" class="idref" href="#TypeError"><span class="id" title="constructor">TypeError</span></a> (<a id="t:39" class="idref" href="#t:39"><span class="id" title="binder">t</span></a> : <a class="idref" href="MetaCoq.Template.Checker.html#type_error"><span class="id" title="inductive">type_error</span></a>).<br/>
+<span class="id" title="keyword">Global Arguments</span> <a class="idref" href="MetaCoq.Template.Checker.html#Checked"><span class="id" title="constructor">Checked</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">a</span>.<br/>
+<span class="id" title="keyword">Global Arguments</span> <a class="idref" href="MetaCoq.Template.Checker.html#TypeError"><span class="id" title="constructor">TypeError</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">t</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Global Instance</span> <a id="typing_monad" class="idref" href="#typing_monad"><span class="id" title="instance">typing_monad</span></a> : <a class="idref" href="MetaCoq.Template.monad_utils.html#Monad"><span class="id" title="class">Monad</span></a> <a class="idref" href="MetaCoq.Template.Checker.html#typing_result"><span class="id" title="inductive">typing_result</span></a> :=<br/>
@@ -918,6 +934,8 @@ TODO check branches
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Template.Checker.html#Typecheck"><span class="id" title="section">Typecheck</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Template.monad_utils.html#bind"><span class="id" title="method">bind</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> ! <span class="id" title="var">_</span>.<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">monad</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="default_fuel" class="idref" href="#default_fuel"><span class="id" title="definition">default_fuel</span></a> : <a class="idref" href="MetaCoq.Template.utils.MCUtils.html#Fuel"><span class="id" title="class">Fuel</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Arith.PeanoNat.html#Nat.pow"><span class="id" title="definition">Nat.pow</span></a> 2 14.<br/>
@@ -944,6 +962,8 @@ TODO check branches
 &nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <a id="EnvCheck" class="idref" href="#EnvCheck"><span class="id" title="inductive">EnvCheck</span></a> (<a id="A:382" class="idref" href="#A:382"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) :=<br/>
 &nbsp;&nbsp;| <a id="CorrectDecl" class="idref" href="#CorrectDecl"><span class="id" title="constructor">CorrectDecl</span></a> (<a id="a:385" class="idref" href="#a:385"><span class="id" title="binder">a</span></a> : <a class="idref" href="MetaCoq.Template.Checker.html#A:382"><span class="id" title="variable">A</span></a>)<br/>
 &nbsp;&nbsp;| <a id="EnvError" class="idref" href="#EnvError"><span class="id" title="constructor">EnvError</span></a> (<a id="e:386" class="idref" href="#e:386"><span class="id" title="binder">e</span></a> : <a class="idref" href="MetaCoq.Template.Checker.html#env_error"><span class="id" title="inductive">env_error</span></a>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Global Arguments</span> <a class="idref" href="MetaCoq.Template.Checker.html#EnvError"><span class="id" title="constructor">EnvError</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">e</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Global Arguments</span> <a class="idref" href="MetaCoq.Template.Checker.html#CorrectDecl"><span class="id" title="constructor">CorrectDecl</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">a</span>.<br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Instance</span> <a id="envcheck_monad" class="idref" href="#envcheck_monad"><span class="id" title="instance">envcheck_monad</span></a> : <a class="idref" href="MetaCoq.Template.monad_utils.html#Monad"><span class="id" title="class">Monad</span></a> <a class="idref" href="MetaCoq.Template.Checker.html#EnvCheck"><span class="id" title="inductive">EnvCheck</span></a> :=<br/>
@@ -1047,12 +1067,10 @@ TODO check branches
 <br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>

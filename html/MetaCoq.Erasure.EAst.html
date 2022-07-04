@@ -1,24 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>MetaCoq.Erasure.EAst</title>
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
 </head>
 
-<body>
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
 
-<div id="page">
+    <span class="button" id="toggle-proofs"></span>
 
-<div id="header">
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
 </div>
-
-<div id="main">
-
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
 <h1 class="libtitle">Library MetaCoq.Erasure.EAst</h1>
 
 <div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.utils.html#"><span class="id" title="library">utils</span></a> <a class="idref" href="MetaCoq.Template.BasicAst.html#"><span class="id" title="library">BasicAst</span></a> <a class="idref" href="MetaCoq.Template.Universes.html#"><span class="id" title="library">Universes</span></a>.<br/>
 </div>
 
 <div class="doc">
@@ -28,16 +38,22 @@
 <div class="paragraph"> </div>
 
   These are the terms produced by extraction: compared to kernel terms,
-  all proofs and types are translated to <span class="inlinecode"><a class="idref" href="MetaCoq.Erasure.ESpineView.html#TermSpineView.tBox"><span class="id" title="constructor">tBox</span></a></span> or erased (type annotations
+  all proofs and types are translated to <span class="inlinecode"><span class="id" title="var">tBox</span></span> or erased (type annotations
   at lambda and let-ins, types of fix/cofixpoints), applications
   are in binary form and casts are removed.  
 </div>
 <div class="code">
 
 <br/>
+<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">erasure</span>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">erasure</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Record</span> <a id="def" class="idref" href="#def"><span class="id" title="record">def</span></a> (<a id="term:1" class="idref" href="#term:1"><span class="id" title="binder">term</span></a> : <span class="id" title="keyword">Set</span>) := { <a id="dname" class="idref" href="#dname"><span class="id" title="projection">dname</span></a> : <a class="idref" href="MetaCoq.Template.BasicAst.html#name"><span class="id" title="inductive">name</span></a>; <a id="dbody" class="idref" href="#dbody"><span class="id" title="projection">dbody</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#term:1"><span class="id" title="variable">term</span></a>; <a id="rarg" class="idref" href="#rarg"><span class="id" title="projection">rarg</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> }.<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#def"><span class="id" title="record">def</span></a>.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#dname"><span class="id" title="projection">dname</span></a> {<span class="id" title="var">term</span>} <span class="id" title="var">d</span>.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#dbody"><span class="id" title="projection">dbody</span></a> {<span class="id" title="var">term</span>} <span class="id" title="var">d</span>.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#rarg"><span class="id" title="projection">rarg</span></a> {<span class="id" title="var">term</span>} <span class="id" title="var">d</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="map_def" class="idref" href="#map_def"><span class="id" title="definition">map_def</span></a> {<a id="term:6" class="idref" href="#term:6"><span class="id" title="binder">term</span></a> : <span class="id" title="keyword">Set</span>} (<a id="f:7" class="idref" href="#f:7"><span class="id" title="binder">f</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#term:6"><span class="id" title="variable">term</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#term:6"><span class="id" title="variable">term</span></a>) (<a id="d:8" class="idref" href="#d:8"><span class="id" title="binder">d</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#def"><span class="id" title="record">def</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#term:6"><span class="id" title="variable">term</span></a>) :=<br/>
@@ -68,8 +84,10 @@
 | <a id="tCoFix" class="idref" href="#tCoFix"><span class="id" title="constructor">tCoFix</span></a>     : <a class="idref" href="MetaCoq.Erasure.EAst.html#mfixpoint"><span class="id" title="definition">mfixpoint</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#term:13"><span class="id" title="inductive">term</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#term:13"><span class="id" title="inductive">term</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">term</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Bind Scope</span> <span class="id" title="var">erasure</span> <span class="id" title="keyword">with</span> <span class="id" title="var">term</span>.<br/>
 
 <br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="mkApps" class="idref" href="#mkApps"><span class="id" title="definition">mkApps</span></a> <a id="t:15" class="idref" href="#t:15"><span class="id" title="binder">t</span></a> <a id="us:16" class="idref" href="#us:16"><span class="id" title="binder">us</span></a> :=<br/>
@@ -154,9 +172,9 @@
 </span>
 <div class="paragraph"> </div>
 
-  then, in <span class="inlinecode"><span class="id" title="var">i</span></span>th block, <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Ast.html#mind_entry_params"><span class="id" title="projection">mind_entry_params</span></a></span> is <span class="inlinecode"><span class="id" title="var">xn</span>:<span class="id" title="var">Xn</span>;...;<span class="id" title="var">x1</span>:<span class="id" title="var">X1</span></span>;
-  <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Ast.html#mind_entry_arity"><span class="id" title="projection">mind_entry_arity</span></a></span> is <span class="inlinecode"><span class="id" title="var">Ai</span></span>, defined in context <span class="inlinecode"><span class="id" title="var">x1</span>:<span class="id" title="var">X1</span>;...;<span class="id" title="var">xn</span>:<span class="id" title="var">Xn</span></span>;
-  <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Ast.html#mind_entry_lc"><span class="id" title="projection">mind_entry_lc</span></a></span> is <span class="inlinecode"><span class="id" title="var">Ti1</span>;...;<span class="id" title="var">Tini</span></span>, defined in context
+  then, in <span class="inlinecode"><span class="id" title="var">i</span></span>th block, <span class="inlinecode"><span class="id" title="var">mind_entry_params</span></span> is <span class="inlinecode"><span class="id" title="var">xn</span>:<span class="id" title="var">Xn</span>;...;<span class="id" title="var">x1</span>:<span class="id" title="var">X1</span></span>;
+  <span class="inlinecode"><span class="id" title="var">mind_entry_arity</span></span> is <span class="inlinecode"><span class="id" title="var">Ai</span></span>, defined in context <span class="inlinecode"><span class="id" title="var">x1</span>:<span class="id" title="var">X1</span>;...;<span class="id" title="var">xn</span>:<span class="id" title="var">Xn</span></span>;
+  <span class="inlinecode"><span class="id" title="var">mind_entry_lc</span></span> is <span class="inlinecode"><span class="id" title="var">Ti1</span>;...;<span class="id" title="var">Tini</span></span>, defined in context
   <span class="inlinecode"><span class="id" title="var">A'1</span>;...;<span class="id" title="var">A'p</span>;<span class="id" title="var">x1</span>:<span class="id" title="var">X1</span>;...;<span class="id" title="var">xn</span>:<span class="id" title="var">Xn</span></span> where <span class="inlinecode"><span class="id" title="var">A'i</span></span> is <span class="inlinecode"><span class="id" title="var">Ai</span></span> generalized over
   <span class="inlinecode"><span class="id" title="var">x1</span>:<span class="id" title="var">X1</span>;...;<span class="id" title="var">xn</span>:<span class="id" title="var">Xn</span></span>.
 
@@ -244,6 +262,7 @@ Local (de Bruijn) context
 <span class="id" title="keyword">Definition</span> <a id="context" class="idref" href="#context"><span class="id" title="definition">context</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#context_decl"><span class="id" title="record">context_decl</span></a>.<br/>
 
 <br/>
+<span class="id" title="keyword">Bind Scope</span> <span class="id" title="var">erasure</span> <span class="id" title="keyword">with</span> <span class="id" title="keyword">context</span>.<br/>
 
 <br/>
 </div>
@@ -291,18 +310,20 @@ Last declaration first
 &nbsp;&nbsp;&nbsp;&nbsp;<a id="cstr_name" class="idref" href="#cstr_name"><span class="id" title="projection">cstr_name</span></a> : <a class="idref" href="MetaCoq.Template.Kernames.html#ident"><span class="id" title="definition">ident</span></a>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a id="cstr_nargs" class="idref" href="#cstr_nargs"><span class="id" title="projection">cstr_nargs</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <br/>
 &nbsp;&nbsp;}.<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#constructor_body"><span class="id" title="record">constructor_body</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Record</span> <a id="projection_body" class="idref" href="#projection_body"><span class="id" title="record">projection_body</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="var">mkProjection</span> {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a id="proj_name" class="idref" href="#proj_name"><span class="id" title="projection">proj_name</span></a> : <a class="idref" href="MetaCoq.Template.Kernames.html#ident"><span class="id" title="definition">ident</span></a>;<br/>
 &nbsp;&nbsp;}.<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#projection_body"><span class="id" title="record">projection_body</span></a>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-See <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Environment.html#Environment.one_inductive_body"><span class="id" title="record">one_inductive_body</span></a></span> from <span class="inlinecode"><span class="id" title="var">declarations.ml</span></span>. 
+See <span class="inlinecode"><span class="id" title="var">one_inductive_body</span></span> from <span class="inlinecode"><span class="id" title="var">declarations.ml</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Record</span> <a id="one_inductive_body" class="idref" href="#one_inductive_body"><span class="id" title="record">one_inductive_body</span></a> : <span class="id" title="keyword">Set</span> := {<br/>
@@ -311,17 +332,19 @@ See <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Environment
 &nbsp;&nbsp;<a id="ind_kelim" class="idref" href="#ind_kelim"><span class="id" title="projection">ind_kelim</span></a> : <a class="idref" href="MetaCoq.Template.Universes.html#allowed_eliminations"><span class="id" title="inductive">allowed_eliminations</span></a>; <br/>
 &nbsp;&nbsp;<a id="ind_ctors" class="idref" href="#ind_ctors"><span class="id" title="projection">ind_ctors</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#constructor_body"><span class="id" title="record">constructor_body</span></a>;<br/>
 &nbsp;&nbsp;<a id="ind_projs" class="idref" href="#ind_projs"><span class="id" title="projection">ind_projs</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#projection_body"><span class="id" title="record">projection_body</span></a>  }.<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#one_inductive_body"><span class="id" title="record">one_inductive_body</span></a>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
-See <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Environment.html#Environment.mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a></span> from <span class="inlinecode"><span class="id" title="var">declarations.ml</span></span>. 
+See <span class="inlinecode"><span class="id" title="var">mutual_inductive_body</span></span> from <span class="inlinecode"><span class="id" title="var">declarations.ml</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Record</span> <a id="mutual_inductive_body" class="idref" href="#mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a> := {<br/>
 &nbsp;&nbsp;<a id="ind_npars" class="idref" href="#ind_npars"><span class="id" title="projection">ind_npars</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>;<br/>
 &nbsp;&nbsp;<a id="ind_bodies" class="idref" href="#ind_bodies"><span class="id" title="projection">ind_bodies</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#one_inductive_body"><span class="id" title="record">one_inductive_body</span></a> }.<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="cstr_arity" class="idref" href="#cstr_arity"><span class="id" title="definition">cstr_arity</span></a> (<a id="mdecl:76" class="idref" href="#mdecl:76"><span class="id" title="binder">mdecl</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a>) (<a id="cdecl:77" class="idref" href="#cdecl:77"><span class="id" title="binder">cdecl</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#constructor_body"><span class="id" title="record">constructor_body</span></a>) := <br/>
@@ -331,7 +354,7 @@ See <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Environment
 </div>
 
 <div class="doc">
-See <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Environment.html#Environment.constant_body"><span class="id" title="record">constant_body</span></a></span> from <span class="inlinecode"><span class="id" title="var">declarations.ml</span></span> 
+See <span class="inlinecode"><span class="id" title="var">constant_body</span></span> from <span class="inlinecode"><span class="id" title="var">declarations.ml</span></span> 
 </div>
 <div class="code">
 <span class="id" title="keyword">Record</span> <a id="constant_body" class="idref" href="#constant_body"><span class="id" title="record">constant_body</span></a> := { <a id="cst_body" class="idref" href="#cst_body"><span class="id" title="projection">cst_body</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">term</span></a> }.<br/>
@@ -340,6 +363,7 @@ See <span class="inlinecode"><a class="idref" href="MetaCoq.Template.Environment
 <span class="id" title="keyword">Inductive</span> <a id="global_decl" class="idref" href="#global_decl"><span class="id" title="inductive">global_decl</span></a> :=<br/>
 | <a id="ConstantDecl" class="idref" href="#ConstantDecl"><span class="id" title="constructor">ConstantDecl</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#constant_body"><span class="id" title="record">constant_body</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#global_decl:80"><span class="id" title="inductive">global_decl</span></a><br/>
 | <a id="InductiveDecl" class="idref" href="#InductiveDecl"><span class="id" title="constructor">InductiveDecl</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#global_decl:80"><span class="id" title="inductive">global_decl</span></a>.<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#global_decl"><span class="id" title="inductive">global_decl</span></a>.<br/>
 
 <br/>
 </div>
@@ -373,12 +397,10 @@ A context of global declarations
 <span class="id" title="keyword">Definition</span> <a id="program" class="idref" href="#program"><span class="id" title="definition">program</span></a> : <span class="id" title="keyword">Type</span> := <a class="idref" href="MetaCoq.Erasure.EAst.html#global_declarations"><span class="id" title="definition">global_declarations</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">term</span></a>.<br/>
 </div>
 </div>
-
 <div id="footer">
-<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
 </div>
-
 </div>
-
 </body>
+
 </html>
