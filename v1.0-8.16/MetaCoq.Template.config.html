@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaCoq.Template.config</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Class</span> <a id="checker_flags" class="idref" href="#checker_flags"><span class="id" title="record">checker_flags</span></a> := {<br/>
+&nbsp;&nbsp;<br/>
+<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<a id="check_univs" class="idref" href="#check_univs"><span class="id" title="projection">check_univs</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ;<br/>
+<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<a id="prop_sub_type" class="idref" href="#prop_sub_type"><span class="id" title="projection">prop_sub_type</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ;<br/>
+<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<a id="indices_matter" class="idref" href="#indices_matter"><span class="id" title="projection">indices_matter</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ;<br/>
+<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<a id="lets_in_constructor_types" class="idref" href="#lets_in_constructor_types"><span class="id" title="projection">lets_in_constructor_types</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a><br/>
+}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Should correspond to Coq 
+</div>
+<div class="code">
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Instance</span> <a id="default_checker_flags" class="idref" href="#default_checker_flags"><span class="id" title="instance">default_checker_flags</span></a> : <a class="idref" href="MetaCoq.Template.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a> := {|<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#check_univs"><span class="id" title="method">check_univs</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> ;<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#prop_sub_type"><span class="id" title="method">prop_sub_type</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>;<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#indices_matter"><span class="id" title="method">indices_matter</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>;<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#lets_in_constructor_types"><span class="id" title="method">lets_in_constructor_types</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><br/>
+|}.<br/>
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Instance</span> <a id="type_in_type" class="idref" href="#type_in_type"><span class="id" title="instance">type_in_type</span></a> : <a class="idref" href="MetaCoq.Template.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a> := {|<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#check_univs"><span class="id" title="method">check_univs</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a> ;<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#prop_sub_type"><span class="id" title="method">prop_sub_type</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>;<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#indices_matter"><span class="id" title="method">indices_matter</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>;<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#lets_in_constructor_types"><span class="id" title="method">lets_in_constructor_types</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a><br/>
+|}.<br/>
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Instance</span> <a id="extraction_checker_flags" class="idref" href="#extraction_checker_flags"><span class="id" title="instance">extraction_checker_flags</span></a> : <a class="idref" href="MetaCoq.Template.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a> := {|<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#check_univs"><span class="id" title="method">check_univs</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a> ;<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#prop_sub_type"><span class="id" title="method">prop_sub_type</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>;<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#indices_matter"><span class="id" title="method">indices_matter</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>;<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.config.html#lets_in_constructor_types"><span class="id" title="method">lets_in_constructor_types</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a><br/>
+|}.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

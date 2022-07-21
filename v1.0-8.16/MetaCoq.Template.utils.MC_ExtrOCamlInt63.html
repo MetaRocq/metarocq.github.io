@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaCoq.Template.utils.MC_ExtrOCamlInt63</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Extraction to OCaml of native 63-bit machine integers. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="var">Uint63</span> <span class="id" title="var">Sint63</span> <span class="id" title="keyword">Extraction</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Basic data types used by some primitive operators. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <span class="id" title="var">bool</span> ⇒ <span class="id" title="var">bool</span> [ <span class="id" title="var">true</span> <span class="id" title="var">false</span> ].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <span class="id" title="var">prod</span> ⇒ "( * )" [ "" ].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <span class="id" title="var">DoubleType.carry</span> ⇒ "MCUint63.carry" [ "MCUint63.C0" "MCUint63.C1" ].<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Primitive types and operators. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.int</span> ⇒ "MCUint63.t".<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Uint63.int</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.lsl</span> ⇒ "MCUint63.l_sl".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.lsr</span> ⇒ "MCUint63.l_sr".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.asr</span> ⇒ "MCUint63.a_sr".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.land</span> ⇒ "MCUint63.l_and".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.lor</span> ⇒ "MCUint63.l_or".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.lxor</span> ⇒ "MCUint63.l_xor".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.add</span> ⇒ "MCUint63.add".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.sub</span> ⇒ "MCUint63.sub".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.mul</span> ⇒ "MCUint63.mul".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.mulc</span> ⇒ "MCUint63.mulc".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.div</span> ⇒ "MCUint63.div".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.mod</span> ⇒ "MCUint63.rem".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.div</span> ⇒ "MCUint63.divs".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.rem</span> ⇒ "MCUint63.rems".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.eqb</span> ⇒ "MCUint63.equal".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.ltb</span> ⇒ "MCUint63.lt".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.leb</span> ⇒ "MCUint63.le".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.ltb</span> ⇒ "MCUint63.lts".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.leb</span> ⇒ "MCUint63.les".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.addc</span> ⇒ "MCUint63.addc".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.addcarryc</span> ⇒ "MCUint63.addcarryc".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.subc</span> ⇒ "MCUint63.subc".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.subcarryc</span> ⇒ "MCUint63.subcarryc".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.diveucl</span> ⇒ "MCUint63.diveucl".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.diveucl_21</span> ⇒ "MCUint63.div21".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.addmuldiv</span> ⇒ "MCUint63.addmuldiv".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.compare</span> ⇒<br/>
+&nbsp;&nbsp;"fun x y -&gt; match MCUint63.compare x y with 0 -&gt; Eq | c when c &lt; 0 -&gt; Lt | _ -&gt; Gt".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.compare</span> ⇒<br/>
+&nbsp;&nbsp;"fun x y -&gt; match MCUint63.compares x y with 0 -&gt; Eq | c when c &lt; 0 -&gt; Lt | _ -&gt; Gt".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.head0</span> ⇒ "MCUint63.head0".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.tail0</span> ⇒ "MCUint63.tail0".<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

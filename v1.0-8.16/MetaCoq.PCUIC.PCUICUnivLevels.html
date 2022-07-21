@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaCoq.PCUIC.PCUICUnivLevels</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">fresh_levels</span> <span class="id" title="var">global_levels</span> <span class="id" title="var">levels</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.For_all</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⇒ ¬ <span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> <span class="id" title="var">global_levels</span>) <span class="id" title="var">levels</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ConstraintSet.For_all</span> (<span class="id" title="var">declared_cstr_levels</span> <span class="id" title="var">levels</span>) <span class="id" title="var">cstrs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constraints_levels_union</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">cstrs'</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs'</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> (<span class="id" title="var">ConstraintSet.union</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">cstrs'</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">decl</span> <span class="id" title="var">decl'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">declared_constraints_levels</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">inx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">ConstraintSetProp.FM.union_1</span> <span class="id" title="tactic">in</span> <span class="id" title="var">inx</span> <span class="id" title="keyword">as</span> [].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <span class="id" title="var">decl</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <span class="id" title="var">decl'</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constraints_levels_union_left</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span> <span class="id" title="var">cstrs</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> (<span class="id" title="var">LevelSet.union</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span>) <span class="id" title="var">cstrs</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">declared_constraints_levels</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">hx</span> <span class="id" title="var">x</span> <span class="id" title="var">inx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">hx</span> <span class="id" title="var">x</span> <span class="id" title="var">inx</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span> <span class="id" title="keyword">as</span> [[<span class="id" title="var">l</span> <span class="id" title="var">d</span>] <span class="id" title="var">r</span>]. <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">hx</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSetFact.union_2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">hx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSetFact.union_2</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constraints_levels_union_right</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span> <span class="id" title="var">cstrs</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels'</span> <span class="id" title="var">cstrs</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> (<span class="id" title="var">LevelSet.union</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span>) <span class="id" title="var">cstrs</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">declared_constraints_levels</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">hx</span> <span class="id" title="var">x</span> <span class="id" title="var">inx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">hx</span> <span class="id" title="var">x</span> <span class="id" title="var">inx</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span> <span class="id" title="keyword">as</span> [[<span class="id" title="var">l</span> <span class="id" title="var">d</span>] <span class="id" title="var">r</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">hx</span>; <span class="id" title="tactic">split</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSetFact.union_3</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSetFact.union_3</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constraints_levels_subset</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span> <span class="id" title="var">cstrs</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.Subset</span> <span class="id" title="var">levels</span> <span class="id" title="var">levels'</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels'</span> <span class="id" title="var">cstrs</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">declared_constraints_levels</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">hx</span> <span class="id" title="var">sub</span> <span class="id" title="var">x</span> <span class="id" title="var">inx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">hx</span> <span class="id" title="var">x</span> <span class="id" title="var">inx</span>). <span class="id" title="tactic">red</span> <span class="id" title="tactic">in</span> <span class="id" title="var">hx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span> <span class="id" title="keyword">as</span> [[<span class="id" title="var">l</span> <span class="id" title="var">d</span>] <span class="id" title="var">r</span>]; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">red</span> <span class="id" title="tactic">in</span> <span class="id" title="var">inx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <span class="id" title="var">sub</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <span class="id" title="var">sub</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">on_udecl_spec</span> `{<span class="id" title="var">checker_flags</span>} <span class="id" title="var">Σ</span> (<span class="id" title="var">udecl</span> : <span class="id" title="var">universes_decl</span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">on_udecl</span> <span class="id" title="var">Σ</span> <span class="id" title="var">udecl</span> =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">levels</span> := <span class="id" title="var">levels_of_udecl</span> <span class="id" title="var">udecl</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">global_levels</span> := <span class="id" title="var">global_levels</span> <span class="id" title="var">Σ</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">all_levels</span> := <span class="id" title="var">LevelSet.union</span> <span class="id" title="var">levels</span> <span class="id" title="var">global_levels</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fresh_levels</span> <span class="id" title="var">global_levels</span> <span class="id" title="var">levels</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∧ <span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">all_levels</span> (<span class="id" title="var">constraints_of_udecl</span> <span class="id" title="var">udecl</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∧ <span class="id" title="var">satisfiable_udecl</span> <span class="id" title="var">Σ</span> <span class="id" title="var">udecl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">unfold</span> <span class="id" title="var">on_udecl</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">on_udecl_prop_spec</span> `{<span class="id" title="var">checker_flags</span>} <span class="id" title="var">Σ</span> (<span class="id" title="var">udecl</span> : <span class="id" title="var">universes_decl</span>) :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">on_udecl_prop</span> <span class="id" title="var">Σ</span> <span class="id" title="var">udecl</span> = <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">levels</span> := <span class="id" title="var">levels_of_udecl</span> <span class="id" title="var">udecl</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">global_levels</span> := <span class="id" title="var">global_levels</span> <span class="id" title="var">Σ</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">all_levels</span> := <span class="id" title="var">LevelSet.union</span> <span class="id" title="var">levels</span> <span class="id" title="var">global_levels</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">all_levels</span> (<span class="id" title="var">constraints_of_udecl</span> <span class="id" title="var">udecl</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <span class="id" title="var">levels_of_list</span> := <span class="id" title="var">LevelSetProp.of_list</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">levels_of_list_app</span> <span class="id" title="var">l</span> <span class="id" title="var">l'</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">levels_of_list</span> (<span class="id" title="var">l</span> ++ <span class="id" title="var">l'</span>) = <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.union</span> (<span class="id" title="var">levels_of_list</span> <span class="id" title="var">l</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">levels_of_list</span> <span class="id" title="var">l'</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">LevelSetProp.of_list</span> <span class="id" title="var">fold_right_app</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">l</span>; <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">LevelSet.eq_leibniz</span>. <span class="id" title="tactic">red</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">LevelSet_union_empty</span> //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">LevelSet.eq_leibniz</span>. <span class="id" title="tactic">red</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHl</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">LevelSetProp.union_add</span> //.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">aulevels</span> <span class="id" title="var">inst</span> <span class="id" title="var">cstrs</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">AUContext.levels</span> (<span class="id" title="var">inst</span>, <span class="id" title="var">cstrs</span>) = <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSetProp.of_list</span> (<span class="id" title="tactic">unfold</span> #|<span class="id" title="var">inst</span>| <span class="id" title="var">Level.Var</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">mapi_unfold</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <span class="id" title="var">unfold_proper</span> {<span class="id" title="var">A</span>} : <span class="id" title="var">Proper</span> (<span class="id" title="var">eq</span> ==&gt; `=1` ==&gt; <span class="id" title="var">eq</span>) (@<span class="id" title="tactic">unfold</span> <span class="id" title="var">A</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> → <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">eqfg</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">y</span>; <span class="id" title="var">cbn</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">f_equal</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">f_equal</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">eqfg</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">unfold_add</span> {<span class="id" title="var">A</span>} <span class="id" title="var">n</span> <span class="id" title="var">k</span> (<span class="id" title="var">f</span> : <span class="id" title="var">nat</span> → <span class="id" title="var">A</span>) : <span class="id" title="tactic">unfold</span> (<span class="id" title="var">n</span> + <span class="id" title="var">k</span>) <span class="id" title="var">f</span> = <span class="id" title="tactic">unfold</span> <span class="id" title="var">k</span> <span class="id" title="var">f</span> ++ <span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="var">f</span> (<span class="id" title="var">x</span> + <span class="id" title="var">k</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">n</span> <span class="id" title="tactic">in</span> <span class="id" title="var">k</span> |- ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">app_nil_r</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHn</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">app_assoc</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">unfold_levels_app</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSetProp.of_list</span> (<span class="id" title="tactic">unfold</span> (<span class="id" title="var">n</span> + <span class="id" title="var">k</span>) <span class="id" title="var">Level.Var</span>) = <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.union</span> (<span class="id" title="var">LevelSetProp.of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">k</span> <span class="id" title="var">Level.Var</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">LevelSetProp.of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">i</span> ⇒ <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>)))).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">unfold_add</span> <span class="id" title="var">levels_of_list_app</span> //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">setoid_rewrite</span> <span class="id" title="var">Nat.add_comm</span> <span class="id" title="tactic">at</span> 1.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">levels_of_list_spec</span> <span class="id" title="var">l</span> <span class="id" title="var">ls</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_list</span> <span class="id" title="var">ls</span>) ↔ <span class="id" title="var">In</span> <span class="id" title="var">l</span> <span class="id" title="var">ls</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">LevelSetProp.of_list_1</span> <span class="id" title="var">InA_In_eq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">In_unfold</span> <span class="id" title="var">k</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">In</span> <span class="id" title="var">l</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="var">λ</span> <span class="id" title="var">i</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>))) ↔ ∃ <span class="id" title="var">k'</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">l</span> = <span class="id" title="var">Level.Var</span> <span class="id" title="var">k'</span> ∧ <span class="id" title="var">k</span> ≤ <span class="id" title="var">k'</span> &lt; <span class="id" title="var">k</span> + <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>; <span class="id" title="var">cbn</span> ⇒ //. <span class="id" title="tactic">firstorder</span>. <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>. <span class="id" title="tactic">intros</span> [] % <span class="id" title="var">in_app_or</span> ⇒ //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">IHn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">k'</span> [<span class="id" title="var">eq</span> <span class="id" title="var">lt</span>]]. <span class="id" title="tactic">subst</span> <span class="id" title="var">l</span>; <span class="id" title="tactic">∃</span> <span class="id" title="var">k'</span>. <span class="id" title="tactic">intuition</span> <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> []; <span class="id" title="tactic">subst</span> ⇒ //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<span class="id" title="var">k</span> + <span class="id" title="var">n</span>). <span class="id" title="tactic">intuition</span> <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> [<span class="id" title="var">k'</span> [-&gt; <span class="id" title="var">lt</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span>/<span class="id" title="var">in_or_app</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">eq_dec</span> <span class="id" title="var">k'</span> (<span class="id" title="var">k</span> + <span class="id" title="var">n</span>)). <span class="id" title="tactic">subst</span> <span class="id" title="var">k'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">right</span> ⇒ //. <span class="id" title="var">cbn</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">left</span>. <span class="id" title="tactic">eapply</span> <span class="id" title="var">IHn</span>. <span class="id" title="tactic">∃</span> <span class="id" title="var">k'</span>; <span class="id" title="tactic">intuition</span> <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">In_levels_of_list</span> <span class="id" title="var">k</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">i</span> ⇒ <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>)))) ↔<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">k'</span>, <span class="id" title="var">l</span> = <span class="id" title="var">Level.Var</span> <span class="id" title="var">k'</span> ∧ <span class="id" title="var">k</span> ≤ <span class="id" title="var">k'</span> &lt; <span class="id" title="var">k</span> + <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">LevelSetProp.of_list_1</span> <span class="id" title="var">InA_In_eq</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">In_unfold</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">In_lift_level</span> <span class="id" title="var">k</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> : <span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="var">λ</span> <span class="id" title="var">i</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">Level.Var</span> <span class="id" title="var">i</span>))) ↔<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> (<span class="id" title="var">lift_level</span> <span class="id" title="var">k</span> <span class="id" title="var">l</span>) (<span class="id" title="var">levels_of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="var">λ</span> <span class="id" title="var">i</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>)))).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">move</span>/(<span class="id" title="var">In_levels_of_list</span> 0) ⇒ [<span class="id" title="var">k'</span> [-&gt; <span class="id" title="var">l'lt</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">In_levels_of_list</span>. <span class="id" title="tactic">∃</span> (<span class="id" title="var">k</span> + <span class="id" title="var">k'</span>); <span class="id" title="var">cbn</span>; <span class="id" title="tactic">intuition</span> <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">move</span>/(<span class="id" title="var">In_levels_of_list</span> <span class="id" title="var">k</span>) ⇒ [<span class="id" title="var">k'</span> [<span class="id" title="var">eq</span> <span class="id" title="var">l'lt</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> (<span class="id" title="var">In_levels_of_list</span> 0).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">l</span>; <span class="id" title="var">noconf</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">∃</span> <span class="id" title="var">n0</span>; <span class="id" title="var">cbn</span>; <span class="id" title="tactic">intuition</span> <span class="id" title="var">lia</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">not_var_lift</span> <span class="id" title="var">l</span> <span class="id" title="var">k</span> <span class="id" title="var">s</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LS.For_all</span> (<span class="id" title="var">λ</span> <span class="id" title="var">x</span> : <span class="id" title="var">LS.elt</span>, ~~ <span class="id" title="var">Level.is_var</span> <span class="id" title="var">x</span>) <span class="id" title="var">s</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> <span class="id" title="var">s</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> (<span class="id" title="var">lift_level</span> <span class="id" title="var">k</span> <span class="id" title="var">l</span>) <span class="id" title="var">s</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">H</span> <span class="id" title="var">_</span> <span class="id" title="var">H0</span>). <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">l</span>; <span class="id" title="var">cbn</span> ⇒ //.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">declared_constraints_levels_lift</span> <span class="id" title="var">s</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span> <span class="id" title="var">cstrs</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LS.For_all</span> (<span class="id" title="var">λ</span> <span class="id" title="var">x</span> : <span class="id" title="var">LS.elt</span>, (<span class="id" title="var">negb</span> ∘ <span class="id" title="var">Level.is_var</span>) <span class="id" title="var">x</span>) <span class="id" title="var">s</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">LevelSet.union</span> (<span class="id" title="var">levels_of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="var">λ</span> <span class="id" title="var">i</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">Level.Var</span> <span class="id" title="var">i</span>))) <span class="id" title="var">s</span>) <span class="id" title="var">cstrs</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">LevelSet.union</span> (<span class="id" title="var">levels_of_list</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="var">λ</span> <span class="id" title="var">i</span> : <span class="id" title="var">nat</span>, <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>)))) <span class="id" title="var">s</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">lift_constraints</span> <span class="id" title="var">k</span> <span class="id" title="var">cstrs</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">declared_constraints_levels</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">hs</span> <span class="id" title="var">ha</span> [[<span class="id" title="var">l</span> <span class="id" title="var">d</span>] <span class="id" title="var">r</span>] <span class="id" title="var">inx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">In_lift_constraints</span> <span class="id" title="tactic">in</span> <span class="id" title="var">inx</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">c'</span> [<span class="id" title="var">eq</span> <span class="id" title="var">incs</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">ha</span> <span class="id" title="var">_</span> <span class="id" title="var">incs</span>). <span class="id" title="tactic">destruct</span> <span class="id" title="var">c'</span> <span class="id" title="keyword">as</span> [[<span class="id" title="var">l'</span> <span class="id" title="var">d'</span>] <span class="id" title="var">r'</span>]; <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">eq</span>; <span class="id" title="var">noconf</span> <span class="id" title="var">eq</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">ha</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">inl'</span> <span class="id" title="var">inr'</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">LevelSetFact.union_1</span> <span class="id" title="tactic">in</span> <span class="id" title="var">inl'</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">LevelSetFact.union_1</span> <span class="id" title="tactic">in</span> <span class="id" title="var">inr'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">LevelSet.union_spec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">inl'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">left</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">In_lift_level</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">right</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">not_var_lift</span> ⇒ //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">LevelSet.union_spec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">inr'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">left</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">In_lift_level</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">right</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">not_var_lift</span> ⇒ //.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">levels_of_cstr</span> (<span class="id" title="var">c</span> : <span class="id" title="var">ConstraintSet.elt</span>) :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> '(<span class="id" title="var">l</span>, <span class="id" title="var">d</span>, <span class="id" title="var">r</span>) := <span class="id" title="var">c</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.add</span> <span class="id" title="var">l</span> (<span class="id" title="var">LevelSet.add</span> <span class="id" title="var">r</span> <span class="id" title="var">LevelSet.empty</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">levels_of_cstrs</span> <span class="id" title="var">cstrs</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ConstraintSet.fold</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">c</span> <span class="id" title="var">acc</span> ⇒ <span class="id" title="var">LevelSet.union</span> (<span class="id" title="var">levels_of_cstr</span> <span class="id" title="var">c</span>) <span class="id" title="var">acc</span>) <span class="id" title="var">cstrs</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">levels_of_cstrs_acc</span> <span class="id" title="var">l</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">acc</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> <span class="id" title="var">acc</span> ∨ <span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_cstrs</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">LevelSet.empty</span>) ↔<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_cstrs</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">acc</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">levels_of_cstrs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> !<span class="id" title="var">ConstraintSet.fold_spec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> (<span class="id" title="var">ConstraintSet.elements</span> <span class="id" title="var">cstrs</span>) <span class="id" title="tactic">in</span> <span class="id" title="var">acc</span> |- × ⇒ /=.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>. <span class="id" title="tactic">intros</span> []; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> []. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHl0</span>. <span class="id" title="tactic">left</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSetFact.union_3</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHl0</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> []. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHl0</span>. <span class="id" title="tactic">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.union_spec</span>. <span class="id" title="tactic">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.union_spec</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> ⇒ //. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHl0</span>. <span class="id" title="tactic">right</span> ⇒ //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHl0</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> [].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.union_spec</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> ⇒ //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">right</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHl0</span>. <span class="id" title="tactic">left</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">LevelSet.union_spec</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">left</span>. <span class="id" title="tactic">right</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">IHl0</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">right</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">levels_of_cstrs_spec</span> <span class="id" title="var">l</span> <span class="id" title="var">cstrs</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.In</span> <span class="id" title="var">l</span> (<span class="id" title="var">levels_of_cstrs</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">LevelSet.empty</span>) ↔ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">d</span> <span class="id" title="var">r</span>, <span class="id" title="var">ConstraintSet.In</span> (<span class="id" title="var">l</span>, <span class="id" title="var">d</span>, <span class="id" title="var">r</span>) <span class="id" title="var">cstrs</span> ∨ <span class="id" title="var">ConstraintSet.In</span> (<span class="id" title="var">r</span>, <span class="id" title="var">d</span>, <span class="id" title="var">l</span>) <span class="id" title="var">cstrs</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> -<span class="id" title="var">levels_of_cstrs_acc</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> []. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>: <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">levels_of_cstrs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">ConstraintSetProp.fold_rec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">s'</span> <span class="id" title="var">em</span> <span class="id" title="var">inl</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">inl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">a</span> <span class="id" title="var">s'</span> <span class="id" title="var">s''</span> <span class="id" title="var">inx</span> <span class="id" title="var">ninx</span> <span class="id" title="var">na</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">x</span> <span class="id" title="keyword">as</span> [[<span class="id" title="var">l'</span> <span class="id" title="var">d</span>] <span class="id" title="var">r</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.union_spec</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> [].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.add_spec</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> []; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">d</span>, <span class="id" title="var">r</span>. <span class="id" title="tactic">left</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">na</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.add_spec</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span> <span class="id" title="keyword">as</span> []; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">d</span>, <span class="id" title="var">l'</span>. <span class="id" title="tactic">right</span>; <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">na</span>. <span class="id" title="tactic">inversion</span> <span class="id" title="var">H0</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">H</span> <span class="id" title="var">H0</span>) <span class="id" title="keyword">as</span> [<span class="id" title="var">d'</span> [<span class="id" title="var">r'</span> <span class="id" title="var">h</span>]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">d'</span>, <span class="id" title="var">r'</span>. <span class="id" title="tactic">red</span> <span class="id" title="tactic">in</span> <span class="id" title="var">na</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">h</span>. <span class="id" title="tactic">destruct</span> (<span class="id" title="var">na</span> (<span class="id" title="var">l</span>, <span class="id" title="var">d'</span>, <span class="id" title="var">r'</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">firstorder</span>. <span class="id" title="tactic">firstorder</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> [<span class="id" title="var">d</span> [<span class="id" title="var">r</span> [<span class="id" title="var">indr</span>|<span class="id" title="var">indr</span>]]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">levels_of_cstrs</span>. <span class="id" title="tactic">right</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>: <span class="id" title="var">indr</span>; <span class="id" title="tactic">eapply</span> <span class="id" title="var">ConstraintSetProp.fold_rec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">specialize</span> (<span class="id" title="var">H</span> <span class="id" title="var">_</span> <span class="id" title="var">indr</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">a</span> <span class="id" title="var">s'</span> <span class="id" title="var">s''</span> <span class="id" title="var">inx</span> <span class="id" title="var">inx'</span> <span class="id" title="var">add</span> <span class="id" title="var">inih</span> <span class="id" title="var">ihih'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.union_spec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">add</span> <span class="id" title="tactic">in</span> <span class="id" title="var">ihih'</span> <span class="id" title="keyword">as</span> []; <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.add_spec</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">left</span>. <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">right</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">levels_of_cstrs</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>: <span class="id" title="var">indr</span>; <span class="id" title="tactic">eapply</span> <span class="id" title="var">ConstraintSetProp.fold_rec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">specialize</span> (<span class="id" title="var">H</span> <span class="id" title="var">_</span> <span class="id" title="var">indr</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span> <span class="id" title="var">a</span> <span class="id" title="var">s'</span> <span class="id" title="var">s''</span> <span class="id" title="var">inx</span> <span class="id" title="var">inx'</span> <span class="id" title="var">add</span> <span class="id" title="var">inih</span> <span class="id" title="var">ihih'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.union_spec</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">add</span> <span class="id" title="tactic">in</span> <span class="id" title="var">ihih'</span> <span class="id" title="keyword">as</span> []; <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">left</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.add_spec</span>. <span class="id" title="tactic">right</span>. <span class="id" title="tactic">eapply</span> <span class="id" title="var">LevelSet.add_spec</span>; <span class="id" title="var">now</span> <span class="id" title="tactic">left</span>. <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">declared_constraints_levels_in</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">LevelSet.Subset</span> (<span class="id" title="var">levels_of_cstrs</span> <span class="id" title="var">cstrs</span> <span class="id" title="var">LevelSet.empty</span>) <span class="id" title="var">levels</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declared_constraints_levels</span> <span class="id" title="var">levels</span> <span class="id" title="var">cstrs</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">declared_constraints_levels</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">sub</span> [[<span class="id" title="var">l</span> <span class="id" title="var">d</span>] <span class="id" title="var">r</span>] <span class="id" title="var">inx</span>. <span class="id" title="tactic">red</span> <span class="id" title="tactic">in</span> <span class="id" title="var">sub</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>. <span class="id" title="tactic">apply</span> (<span class="id" title="var">sub</span> <span class="id" title="var">l</span>). <span class="id" title="tactic">eapply</span> <span class="id" title="var">levels_of_cstrs_spec</span>. <span class="id" title="tactic">do</span> 2 <span class="id" title="tactic">eexists</span>; <span class="id" title="tactic">firstorder</span> <span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">sub</span> <span class="id" title="var">r</span>). <span class="id" title="tactic">eapply</span> <span class="id" title="var">levels_of_cstrs_spec</span>. <span class="id" title="tactic">do</span> 2 <span class="id" title="tactic">eexists</span>; <span class="id" title="tactic">firstorder</span> <span class="id" title="tactic">eauto</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">In_variance_cstrs</span> <span class="id" title="var">l</span> <span class="id" title="var">d</span> <span class="id" title="var">r</span> <span class="id" title="var">v</span> <span class="id" title="var">i</span> <span class="id" title="var">i'</span> : <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ConstraintSet.In</span> (<span class="id" title="var">l</span>, <span class="id" title="var">d</span>, <span class="id" title="var">r</span>) (<span class="id" title="var">variance_cstrs</span> <span class="id" title="var">v</span> <span class="id" title="var">i</span> <span class="id" title="var">i'</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">In</span> <span class="id" title="var">l</span> <span class="id" title="var">i</span> ∨ <span class="id" title="var">In</span> <span class="id" title="var">l</span> <span class="id" title="var">i'</span>) ∧ (<span class="id" title="var">In</span> <span class="id" title="var">r</span> <span class="id" title="var">i</span> ∨ <span class="id" title="var">In</span> <span class="id" title="var">r</span> <span class="id" title="var">i'</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">v</span> <span class="id" title="tactic">in</span> <span class="id" title="var">i</span>, <span class="id" title="var">i'</span> |- *; <span class="id" title="tactic">destruct</span> <span class="id" title="var">i</span>, <span class="id" title="var">i'</span>; <span class="id" title="tactic">intros</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">solve</span> [<span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span>].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">a</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">IHv</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="var">cbn</span>. <span class="id" title="tactic">firstorder</span> <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">ConstraintSet.add_spec</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> []. <span class="id" title="var">noconf</span> <span class="id" title="var">H</span>. <span class="id" title="var">cbn</span>; <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">IHv</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">ConstraintSet.add_spec</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span> <span class="id" title="keyword">as</span> []. <span class="id" title="var">noconf</span> <span class="id" title="var">H</span>. <span class="id" title="var">cbn</span>; <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <span class="id" title="var">IHv</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">In_lift</span> <span class="id" title="var">l</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span> : <span class="id" title="var">In</span> <span class="id" title="var">l</span> (<span class="id" title="var">map</span> (<span class="id" title="var">lift_level</span> <span class="id" title="var">k</span>) (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> <span class="id" title="var">Level.Var</span>)) ↔<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">In</span> <span class="id" title="var">l</span> (<span class="id" title="tactic">unfold</span> <span class="id" title="var">n</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">i</span> ⇒ <span class="id" title="var">Level.Var</span> (<span class="id" title="var">k</span> + <span class="id" title="var">i</span>))).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>; <span class="id" title="var">cbn</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>: <span class="id" title="var">H1</span>; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">map_app</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> [] % <span class="id" title="var">in_app_or</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span>/<span class="id" title="var">in_or_app</span>. <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span>/<span class="id" title="var">in_or_app</span>. <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>: <span class="id" title="var">H1</span>; <span class="id" title="tactic">intros</span> [] % <span class="id" title="var">in_app_or</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">map_app</span>. <span class="id" title="tactic">apply</span>/<span class="id" title="var">in_or_app</span>. <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">map_app</span>. <span class="id" title="tactic">apply</span>/<span class="id" title="var">in_or_app</span>. <span class="id" title="tactic">firstorder</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>
