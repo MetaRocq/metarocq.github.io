@@ -1,0 +1,511 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaCoq.Template.utils.LibHypsNaming</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+This file is a set of tactical (mainly "!! t" where t is a tactic)
+    and tactics (!intros, !destruct etc), that automatically rename
+    new hypothesis after applying a tactic. The names chosen for
+    hypothesis is programmable using Ltac. See examples in comment
+    below.
+
+<div class="paragraph"> </div>
+
+    Comments welcome. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16+rc1/stdlib//Coq.ZArith.ZArith.html#"><span class="id" title="library">ZArith</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab147"></a><h2 class="section">The custom renaming tactic</h2>
+
+  This tactic should be redefined along a coq development, it should
+  return a fresh name build from an hypothesis h and its type th. It
+  should fail if no name is found, so that the fallback scheme is
+  called.
+
+<div class="paragraph"> </div>
+
+  Typical use, in increasing order of complexity, approximatively
+  equivalent to the decreasing order of interest.
+
+<div class="paragraph"> </div>
+
+<pre>
+Ltac my_rename_hyp h th :=
+  match th with
+    | (ind1 _ _ _ _) =&gt; fresh "ind1"
+    | (ind2 _ _) =&gt; fresh "ind2"
+    | f1 _ _ = true =&gt; fresh "f_eq_true"
+    | f1 _ _ = false =&gt; fresh "f_eq_false"
+    | f1 _ _ = _ =&gt; fresh "f_eq"
+    | ind3 ?h ?x =&gt; fresh "ind3_" h
+    | ind3 _ ?x =&gt; fresh "ind3" (* if fresh h failed above *)
+
+    (* Sometime we want to look for the name of another hypothesis to
+       name h. For example here we want to rename hypothesis h into
+       "type_of_foo" if there is some H of type [type_of foo = Some
+       h]. *)
+    | type =&gt; (* See if we find something of which h is the type: *)
+              match reverse goal with
+              | H: type_of ?x = Some h =&gt; fresh "type_of_" x
+              end
+
+    | _ =&gt; previously_defined_renaming_tac1 th (* cumulative with previously defined renaming tactics *)
+    | _ =&gt; previously_defined_renaming_tac2 th
+  end.
+
+(* Overwrite the definition of rename_hyp using the ::= operator. :*)
+
+Ltac rename_hyp ::= my_rename_hyp.&gt;&gt; *)
+
+Ltac rename_hyp h ht := match true with true =&gt; fail | _ =&gt; fresh "hh" end.
+
+Ltac rename_hyp_prefx h ht :=
+  let res := rename_hyp h ht in
+  fresh "h_" res.
+
+(** ** The default fallback renaming strategy
+  This is used if the user-defined renaming scheme fails to give a name
+  to a hypothesis. [th] is the type of the hypothesis. *)
+Ltac fallback_rename_hyp h th :=
+  match th with
+    | _ =&gt; rename_hyp h th
+    | true = Nat.eqb _ _ =&gt; fresh "beqnat_true"
+    | Nat.eqb _ _ = true =&gt; fresh "beqnat_true"
+    | false = Nat.eqb _ _ =&gt; fresh "beqnat_false"
+    | Nat.eqb _ _ = false =&gt; fresh "beqnat_false"
+    | Nat.eqb _ _ = _ =&gt; fresh "beqnat"
+    | Zeq_bool _ _ = true =&gt; fresh "eq_Z_true"
+    | Zeq_bool _ _ = false =&gt; fresh "eq_Z_false"
+    | true = Zeq_bool _ _ =&gt; fresh "eq_Z_true"
+    | false = Zeq_bool _ _ =&gt; fresh "eq_Z_false"
+    | Zeq_bool _ _ = _ =&gt; fresh "eq_Z"
+    | _ = Zeq_bool _ _ =&gt; fresh "eq_Z"
+    | ?f = _ =&gt; fresh "eq_" f
+    | ?f _ = _ =&gt; fresh "eq_" f
+    | ?f _ _ = _ =&gt; fresh "eq_" f
+    | ?f _ _ _ = _ =&gt; fresh "eq_" f
+    | ?f _ _ _ _ = _ =&gt; fresh "eq_" f
+    | ?f _ _ _ _ _ = _ =&gt; fresh "eq_" f
+    | ?f _ _ _ _ _ _ = _ =&gt; fresh "eq_" f
+    | ?f _ _ _ _ _ _ _ = _ =&gt; fresh "eq_" f
+    | ?f _ _ _ _ _ _ _ _ = _ =&gt; fresh "eq_" f
+    | _ = ?f =&gt; fresh "eq_" f
+    | _ = ?f _  =&gt; fresh "eq_" f
+    | _ = ?f _ _  =&gt; fresh "eq_" f
+    | _ = ?f _ _ _  =&gt; fresh "eq_" f
+    | _ = ?f _ _ _ _  =&gt; fresh "eq_" f
+    | _ = ?f _ _ _ _ _  =&gt; fresh "eq_" f
+    | _ = ?f _ _ _ _ _ _  =&gt; fresh "eq_" f
+    | _ = ?f _ _ _ _ _ _ _  =&gt; fresh "eq_" f
+    | _ = ?f _ _ _ _ _ _ _ _  =&gt; fresh "eq_" f
+    | @eq bool _ true =&gt; fresh "eq_bool_true"
+    | @eq bool _ false =&gt; fresh "eq_bool_false"
+    | @eq bool true _ =&gt; fresh "eq_bool_true"
+    | @eq bool false _ =&gt; fresh "eq_bool_false"
+    | @eq bool _ _ =&gt; fresh "eq_bool"
+    | @eq nat _ true =&gt; fresh "eq_nat_true"
+    | @eq nat _ false =&gt; fresh "eq_nat_false"
+    | @eq nat true _ =&gt; fresh "eq_nat_true"
+    | @eq nat false _ =&gt; fresh "eq_nat_false"
+    | @eq nat _ _ =&gt; fresh "eq_nat"
+    | ?x &lt;&gt; _ =&gt; fresh "neq_" x
+    | _ &lt;&gt; ?x =&gt; fresh "neq_" x
+    | _ &lt;&gt; _ =&gt; fresh "neq"
+    | _ = _ =&gt; fresh "eq"
+    | _ /\ _ =&gt; fresh "and"
+    | _ \/ _ =&gt; fresh "or"
+    | @ex _ _ =&gt; fresh "ex"
+    | ?x &lt; ?y =&gt; fresh "lt_" x "_" y
+    | ?x &lt; _ =&gt; fresh "lt_" x
+    | _ &lt; _ =&gt; fresh "lt"
+    | ?x &lt;= ?y =&gt; fresh "le_" x "_" y
+    | ?x &lt;= _ =&gt; fresh "le_" x
+    | _ &lt;= _ =&gt; fresh "le"
+    | ?x &gt; ?y =&gt; fresh "gt_" x "_" y
+    | ?x &gt; _ =&gt; fresh "gt_" x
+    | _ &gt; _ =&gt; fresh "gt"
+    | ?x &gt;= ?y =&gt; fresh "ge_" x "_" y
+    | ?x &gt;= _ =&gt; fresh "ge_" x
+    | _ &gt;= _ =&gt; fresh "ge"
+
+    | (?x &lt; ?y)%Z =&gt; fresh "lt_" x "_" y
+    | (?x &lt; _)%Z =&gt; fresh "lt_" x
+    | (_ &lt; _)%Z =&gt; fresh "lt"
+    | (?x &lt;= ?y)%Z =&gt; fresh "le_" x "_" y
+    | (?x &lt;= _)%Z =&gt; fresh "le_" x
+    | (_ &lt;= _)%Z =&gt; fresh "le"
+    | (?x &gt; ?y)%Z =&gt; fresh "gt_" x "_" y
+    | (?x &gt; _)%Z =&gt; fresh "gt_" x
+    | (_ &gt; _)%Z =&gt; fresh "gt"
+    | (?x &gt;= ?y)%Z =&gt; fresh "ge_" x "_" y
+    | (?x &gt;= _)%Z =&gt; fresh "ge_" x
+    | (_ &gt;= _)%Z =&gt; fresh "ge"
+    | ~ (_ = _) =&gt; fail 1(* h_neq already dealt by fallback *)
+    | ~ ?th' =&gt;
+      let sufx := fallback_rename_hyp h th' in
+      fresh "neg_" sufx
+    | ~ ?th' =&gt; fresh "neg"
+    (* Order is important here: *)
+    | ?A -&gt; ?B =&gt;
+      let nme := fallback_rename_hyp h B in
+      fresh "impl_" nme
+    | forall z:?A , ?B =&gt;
+      fresh "forall_" z
+  end.
+
+Inductive HypPrefixes :=
+  | HypNone
+  | HypH_
+  | HypH.
+
+(* One should rename this if needed *)
+Ltac prefixable_eq_neq h th :=
+  match th with
+  | eq _ _ =&gt; HypH
+  | ~ (eq _ _) =&gt; HypH
+  | _ =&gt; HypH_
+  end.
+
+Ltac prefixable h th := prefixable_eq_neq h th.
+
+(* Add prefix except if not a Prop or if prefixable says otherwise. *)
+Ltac add_prefix h th nme :=
+  match type of th with
+  | Prop =&gt;
+    match prefixable h th with
+    | HypH_ =&gt; fresh "h_" nme
+    | HypH =&gt; fresh "h" nme
+    | HypNone =&gt; nme
+    end
+  | _ =&gt; nme
+  end.
+
+Ltac fallback_rename_hyp_prefx h th :=
+  let res := fallback_rename_hyp h th in
+  add_prefix h th res.
+  (* fresh "h_" res. *)
+
+
+
+(* Add this if you want hyps of typr ~ P to be renamed like if of type
+   P but prefixed by "neg_" *)
+Ltac rename_hyp_neg h th :=
+  match th with
+  | ~ (_ = _) =&gt; fail 1(* h_neq already dealt by fallback *)
+  | ~ ?th' =&gt;
+    let sufx := fallback_rename_hyp h th' in
+    fresh "neg_" sufx
+  | ~ ?th' =&gt; fresh "neg"
+  | _ =&gt; fail
+  end.
+
+(* Credit for the harvesting of hypothesis: Jonathan Leivant *)
+Ltac harvest_hyps harvester := constr:(ltac:(harvester; constructor) : True).
+
+Ltac revert_clearbody_all :=
+  repeat lazymatch goal with H:_ |- _ =&gt; try clearbody H; revert H end.
+
+Ltac all_hyps := harvest_hyps revert_clearbody_all.
+
+Ltac next_hyp hs step last :=
+  lazymatch hs with
+  | (?hs' ?H) =&gt; step H hs'
+  | _ =&gt; last
+  end.
+
+Ltac map_hyps tac hs :=
+  idtac;
+  let rec step H hs := next_hyp hs step idtac; tac H in
+  next_hyp hs step idtac.
+
+(* Renames hypothesis H if it is not in old_hyps. Use user defined
+   renaming scheme, and fall back to the default one of it fails. *)
+Ltac rename_if_not_old old_hyps H :=
+  lazymatch old_hyps with
+  | context[H] =&gt; idtac
+  | _ =&gt;
+    match type of H with
+(*    | ?th =&gt;
+      let dummy_name := fresh "dummy" in
+      rename H into dummy_name; (* this renaming makes the renaming more or less
+                                   idempotent, it is backtracked if the
+                                   rename_hyp below fails. *)
+        let newname := rename_hyp dummy_name th in
+        rename dummy_name into newname*)
+    | ?th =&gt;
+      let dummy_name := fresh "dummy" in
+      rename H into dummy_name; (* this renaming makes the renaming more or less
+                                   idempotent, it is backtracked if the
+                                   rename_hyp below fails. *)
+        let newname := fallback_rename_hyp_prefx dummy_name th in
+        rename dummy_name into newname
+    | _ =&gt; idtac (* "no renaming pattern for " H *)
+    end
+  end.
+
+Ltac rename_new_hyps tac :=
+  let old_hyps := all_hyps in
+  let renam H := rename_if_not_old old_hyps H in
+  tac;
+  let new_hyps := all_hyps in
+  map_hyps renam new_hyps.
+
+Ltac rename_all_hyps :=
+  let renam H := rename_if_not_old (I) H in
+  let hyps := all_hyps in
+  map_hyps renam hyps.
+
+Ltac autorename H := rename_if_not_old (I) H.
+
+Tactic Notation "!!" tactic3(Tac) := (rename_new_hyps Tac).
+Tactic Notation "!!" tactic3(Tac) constr(h) :=
+  (rename_new_hyps (Tac h)).
+
+Ltac subst_if_not_old old_hyps H :=
+  match old_hyps with
+  | context [H] =&gt; idtac
+  | _ =&gt;
+    match type of H with
+    | ?x = ?y =&gt; subst x
+    | ?x = ?y =&gt; subst y
+    | _ =&gt; idtac
+    end
+  end.
+
+Ltac subst_new_hyps tac :=
+  let old_hyps := all_hyps in
+  let substnew H := subst_if_not_old old_hyps H in
+  tac
+  ; let new_hyps := all_hyps in
+    map_hyps substnew new_hyps.
+
+(* do we need a syntax for this. *)
+(* Tactic Notation "" tactic3(Tac) := subst_new_hyps Tac. *)
+
+(* !!! tac performs tac, then subst with new hypothesis, then rename
+remaining new hyps. *)
+Tactic Notation "!!!" tactic3(Tac) := !! (subst_new_hyps Tac).
+
+
+(** ** Renaming Tacticals *)
+
+(** [!! tactic] (resp. [!! tactic h] and []:: tactic h1 h2) performs
+  [tactic] (resp. [tactic h] and [tactic h1 h2]) and renames all new
+  hypothesis. During the process all previously known hypothesis (but
+  [h], [h1] and [h2]) are marked. It may happen that this mark get in
+  the way during the execution of &lt;&lt;tactic&gt;&gt;. We might try to find a
+  better way to mark hypothesis. *)
+
+(* Tactic Notation "!!" tactic3(T) := idall; T ; rename_hyps. *)
+(* Tactic Notation "!!" tactic3(T) constr(h) := *)
+(*   idall; try unid h; (T h) ; try id_ify h; rename_hyps. *)
+(* begin hide *)
+(* Tactic Notation "!!" tactic3(T) constr(h) constr(h2) := *)
+(*   idall; try unid h;try unid h2; (T h h2) ; *)
+(*   try id_ify h;try id_ify h2; rename_hyps. *)
+(* end hide *)
+
+(** ** Specific redefinition of usual tactics. *)
+
+(** Note that for example !!induction h doesn not work because
+ "destruct" is not a ltac function by itself, it is already a
+ notation. Hence the special definitions below for this kind of
+ tactics: induction ddestruct inversion etc. *)
+
+
+Ltac decomp_ex h :=
+  match type of h with
+  | @ex _ (fun x =&gt; _) =&gt; let x' := fresh x in let h1 := fresh in destruct h as [x' h1]; decomp_ex h1
+  | @sig _ (fun x =&gt; _) =&gt; let x' := fresh x in let h1 := fresh in destruct h as [x' h1]; decomp_ex h1
+  | @sig2 _ (fun x =&gt; _) (fun _ =&gt; _) =&gt; let x' := fresh x in
+                                         let h1 := fresh in
+                                         let h2 := fresh in
+                                         destruct h as [x' h1 h2];
+                                         decomp_ex h1;
+                                         decomp_ex h2
+  | @sigT _ (fun x =&gt; _) =&gt; let x' := fresh x in let h1 := fresh in destruct h as [x' h1]; decomp_ex h1
+  | @sigT2 _ (fun x =&gt; _) (fun _ =&gt; _) =&gt; let x' := fresh x in
+                                          let h1 := fresh in
+                                          let h2 := fresh in
+                                          destruct h as [x' h1 h2]; decomp_ex h1; decomp_ex h2
+  | and _ _ =&gt; let h1 := fresh in let h2 := fresh in destruct h as [h1 h2]; decomp_ex h1; decomp_ex h2
+  | or _ _ =&gt; let h' := fresh in destruct h as [h' | h']; [decomp_ex h' | decomp_ex h' ]
+  | _ =&gt; idtac
+  end.
+
+
+
+(* decompose and ex and or at once. TODO: generalize. *)
+(* clear may fail if h is not a hypname *)
+(* Tactic Notation "decomp" hyp(h) :=
+   (!! (idtac;decomp_ex h)). *) (* Why do I need this idtac? Without it no rename happens. *)
+
+ Tactic Notation "decomp" constr(c) :=
+   match goal with
+   | _ =&gt;
+     let h := fresh "h_decomp" in
+     pose proof c as h;
+     (!! (idtac;decomp_ex c)); try clear h (* Why do I need this idtac? Without it no rename happens. *)
+   end.
+(*
+Lemma foo : forall x, { aa:nat | (aa = x /\ x=aa) &amp; (aa = aa /\ aa= x) } -&gt; False.
+Proof.
+  intros x H.
+  decomp H.
+Abort.
+
+Lemma foo : { aa:False &amp; True  } -&gt; False.
+Proof.
+  intros H.
+  decomp H.
+Abort.
+
+
+Lemma foo : { aa:False &amp; True &amp; False  } -&gt; False.
+Proof.
+  intros H.
+  decomp H.
+Abort.
+*)
+
+Tactic Notation "!induction" constr(h) := !! (induction h).
+Tactic Notation "!destruct" constr(h) := !! (destruct h).
+
+Tactic Notation "!destruct" constr(h) "!eqn:" ident(id) :=
+  (!!(destruct h eqn:id; revert id));intro id.
+Tactic Notation "!destruct" constr(h) "!eqn:?" := (!!(destruct h eqn:?)).
+
+Tactic Notation "!inversion" hyp(h) := !!! (inversion h).
+Tactic Notation "!invclear" hyp(h) := !!! (inversion h;clear h).
+Tactic Notation "!assert" constr(h) := !! (assert h).
+
+Tactic Notation "!intros" := !!intros.
+
+Tactic Notation "!intro" := !!intro.
+
+Tactic Notation "!intros" "until" ident(id)
+  := intros until id; !intros.
+
+Tactic Notation "!intros" simple_intropattern(id1)
+  := !! intro id1.
+
+Tactic Notation "!intros" ident(id1) ident(id2)
+  := intros id1 id2; !intros.
+Tactic Notation "!intros" ident(id1) ident(id2) ident(id3)
+  := intros id1 id2 id3; !!intros.
+Tactic Notation "!intros" ident(id1) ident(id2) ident(id3) ident(id4)
+  := intros id1 id2 id3 id4; !!intros.
+
+Tactic Notation "!intros" ident(id1) ident(id2) ident(id3) ident(id4) ident(id5)
+  := intros id1 id2 id3 id4 id5; !!intros.
+Tactic Notation "!intros" ident(id1) ident(id2) ident(id3) ident(id4) ident(id5) ident(id6)
+  := intros id1 id2 id3 id4 id5 id6; !!intros.
+
+
+(** Some more tactic not specially dedicated to renaming. *)
+
+(* This performs the map from "top" to "bottom" (from older to younger hyps). *)
+Ltac map_hyps_rev tac hs :=
+  idtac;
+  let rec step H hs := tac H ; next_hyp hs step idtac in
+  next_hyp hs step idtac.
+
+Ltac map_all_hyps tac := map_hyps tac all_hyps.
+Ltac map_all_hyps_rev tac := map_hyps_rev tac all_hyps.
+
+(* A tactic which moves up a hypothesis if it sort is Type or Set. *)
+Ltac move_up_types H := match type of H with
+                        | ?T =&gt; match type of T with
+                                | Prop =&gt; idtac
+                                | Set =&gt; move H at top
+                                | Type =&gt; move H at top
+                                end
+                        end.
+
+(* Iterating the tactic on all hypothesis. Moves up all Set/Type
+   variables to the top. Really useful with [Set Compact Context]
+   which is no yet commited in coq-trunk. *)
+Ltac up_type := map_all_hyps_rev move_up_types.
+
+(* A full example: *)
+(*
+Ltac rename_hyp_2 h th :=
+  match th with
+  | true = false =&gt; fresh "trueEQfalse"
+  end.
+
+Ltac rename_hyp ::= rename_hyp_2.
+
+Lemma foo: forall x y,
+    x &lt;= y -&gt;
+    x = y -&gt;
+    ~1 &lt; 0 -&gt;
+    (0 &lt; 1 -&gt; ~(true=false)) -&gt;
+    (forall w w',w &lt; w' -&gt; ~(true=false)) -&gt;
+    (0 &lt; 1 -&gt; ~(1&lt;0)) -&gt;
+    (0 &lt; 1 -&gt; 1&lt;0) -&gt; 0 &lt; 1.
+  (* auto naming at intro: *)
+ !intros.
+ Undo.
+ (* intros first, rename after: *)
+ intros.
+ rename_all_hyps.
+ Undo.
+ (* intros first, rename some hyp only: *)
+ intros.
+ autorename H0.
+ (* put !! before a tactic to rename all new hyps: *)
+ rename_all_hyps.
+ !!destruct h_le_x_y eqn:?.
+ - auto with arith.
+ - auto with arith.
+Qed.
+*)</pre>
+</div>
+<div class="code">
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>
