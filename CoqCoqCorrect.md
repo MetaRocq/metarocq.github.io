@@ -39,7 +39,7 @@ Sources [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3544373.svg)](https:
 -------
 
 The associated [release](https://zenodo.org/record/3544373/files/MetaCoq/metacoq-CoqCoqCorrect.zip?download=1)
-contains the sources of the formalization. The general [documentation](documentation) of the MetaCoq project
+contains the sources of the formalization. The general [documentation] of the MetaCoq project
 also applies to this version.
 
 [documentation]: https://metacoq.github.io/#documentation
