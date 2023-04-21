@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaCoq.Erasure.Typed.ResultMonad</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.monad_utils.html#"><span class="id" title="library">monad_utils</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a id="result" class="idref" href="#result"><span class="id" title="inductive">result</span></a> <a id="T:1" class="idref" href="#T:1"><span class="id" title="binder">T</span></a> <a id="E:2" class="idref" href="#E:2"><span class="id" title="binder">E</span></a> :=<br/>
+| <a id="Ok" class="idref" href="#Ok"><span class="id" title="constructor">Ok</span></a> (<a id="t:5" class="idref" href="#t:5"><span class="id" title="binder">t</span></a> : <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#T:1"><span class="id" title="variable">T</span></a>)<br/>
+| <a id="Err" class="idref" href="#Err"><span class="id" title="constructor">Err</span></a> (<a id="e:6" class="idref" href="#e:6"><span class="id" title="binder">e</span></a> : <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#E:2"><span class="id" title="variable">E</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#Ok"><span class="id" title="constructor">Ok</span></a> {<span class="id" title="var">_</span> <span class="id" title="var">_</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#Err"><span class="id" title="constructor">Err</span></a> {<span class="id" title="var">_</span> <span class="id" title="var">_</span>}.<br/>
+
+<br/>
+<span class="id" title="keyword">Global Instance</span> <a id="Monad_result" class="idref" href="#Monad_result"><span class="id" title="instance">Monad_result</span></a> {<a id="E:7" class="idref" href="#E:7"><span class="id" title="binder">E</span></a>} : <a class="idref" href="MetaCoq.Utils.monad_utils.html#Monad"><span class="id" title="class">Monad</span></a> (<span class="id" title="keyword">fun</span> <a id="T:8" class="idref" href="#T:8"><span class="id" title="binder">T</span></a> ⇒ <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#result"><span class="id" title="inductive">result</span></a> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#T:8"><span class="id" title="variable">T</span></a> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#E:7"><span class="id" title="variable">E</span></a>) :=<br/>
+&nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Utils.monad_utils.html#ret"><span class="id" title="method">ret</span></a> <span class="id" title="var">_</span> <a id="t:9" class="idref" href="#t:9"><span class="id" title="binder">t</span></a> := <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#Ok"><span class="id" title="constructor">Ok</span></a> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#t:9"><span class="id" title="variable">t</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.monad_utils.html#bind"><span class="id" title="method">bind</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a id="mt:10" class="idref" href="#mt:10"><span class="id" title="binder">mt</span></a> <a id="f:11" class="idref" href="#f:11"><span class="id" title="binder">f</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#mt:10"><span class="id" title="variable">mt</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#Ok"><span class="id" title="constructor">Ok</span></a> <span class="id" title="var">t</span> ⇒ <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#f:11"><span class="id" title="variable">f</span></a> <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#Err"><span class="id" title="constructor">Err</span></a> <span class="id" title="var">e</span> ⇒ <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#Err"><span class="id" title="constructor">Err</span></a> <span class="id" title="var">e</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span> |}.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="map_error" class="idref" href="#map_error"><span class="id" title="definition">map_error</span></a> {<a id="T:13" class="idref" href="#T:13"><span class="id" title="binder">T</span></a> <a id="E1:14" class="idref" href="#E1:14"><span class="id" title="binder">E1</span></a> <a id="E2:15" class="idref" href="#E2:15"><span class="id" title="binder">E2</span></a>} (<a id="f:16" class="idref" href="#f:16"><span class="id" title="binder">f</span></a> : <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#E1:14"><span class="id" title="variable">E1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#E2:15"><span class="id" title="variable">E2</span></a>) (<a id="r:17" class="idref" href="#r:17"><span class="id" title="binder">r</span></a> : <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#result"><span class="id" title="inductive">result</span></a> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#T:13"><span class="id" title="variable">T</span></a> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#E1:14"><span class="id" title="variable">E1</span></a>) : <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#result"><span class="id" title="inductive">result</span></a> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#T:13"><span class="id" title="variable">T</span></a> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#E2:15"><span class="id" title="variable">E2</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#r:17"><span class="id" title="variable">r</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#Ok"><span class="id" title="constructor">Ok</span></a> <span class="id" title="var">t</span> ⇒ <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#Ok"><span class="id" title="constructor">Ok</span></a> <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#Err"><span class="id" title="constructor">Err</span></a> <span class="id" title="var">e</span> ⇒ <a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#Err"><span class="id" title="constructor">Err</span></a> (<a class="idref" href="MetaCoq.Erasure.Typed.ResultMonad.html#f:16"><span class="id" title="variable">f</span></a> <span class="id" title="var">e</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

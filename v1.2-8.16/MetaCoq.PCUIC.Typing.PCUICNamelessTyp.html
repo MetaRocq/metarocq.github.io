@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaCoq.PCUIC.Typing.PCUICNamelessTyp</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.RelationClasses.html#"><span class="id" title="library">RelationClasses</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInduction.html#"><span class="id" title="library">PCUICInduction</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICLiftSubst.html#"><span class="id" title="library">PCUICLiftSubst</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICEquality.html#"><span class="id" title="library">PCUICEquality</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICReduction.html#"><span class="id" title="library">PCUICReduction</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICPosition.html#"><span class="id" title="library">PCUICPosition</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICUnivSubst.html#"><span class="id" title="library">PCUICUnivSubst</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICNamelessDef.html#"><span class="id" title="library">PCUICNamelessDef</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICGuardCondition.html#"><span class="id" title="library">PCUICGuardCondition</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICNamelessConv.html#"><span class="id" title="library">PCUICNamelessConv</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICConversion.html#"><span class="id" title="library">PCUICConversion</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#"><span class="id" title="library">PCUICWellScopedCumulativity</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICOnFreeVars.html#"><span class="id" title="library">PCUICOnFreeVars</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICOnFreeVarsConv.html#"><span class="id" title="library">PCUICOnFreeVarsConv</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICConfluence.html#"><span class="id" title="library">PCUICConfluence</span></a> <a class="idref" href="MetaCoq.PCUIC.Typing.PCUICClosedTyp.html#"><span class="id" title="library">PCUICClosedTyp</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICClosed.html#"><span class="id" title="library">PCUICClosed</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#"><span class="id" title="library">PCUICSigmaCalculus</span></a> .<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations.Prop.DepElim</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">cf</span> : <a class="idref" href="MetaCoq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Typing does not rely on name annotations of binders.
+
+<div class="paragraph"> </div>
+
+  We prove this by constructing a type-preserving translation to
+  terms where all binders are anonymous. An alternative would be to
+  be parametrically polymorphic everywhere on the binder name type.
+  This would allow to add implicit information too. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Set</span> <span class="id" title="var">Keyed</span> <span class="id" title="var">Unification</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Default</span> <span class="id" title="keyword">Goal</span> <span class="id" title="var">Selector</span> "!".<br/>
+
+<br/>
+
+<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library SafeTemplateChecker</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Program</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">utils</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">config</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">AstUtils</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">PCUICAst</span> <span class="id" title="var">PCUICAstUtils</span> <span class="id" title="var">PCUICTyping</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">PCUICSN</span> <span class="id" title="var">BDToPCUIC</span> <span class="id" title="var">PCUICProgram</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.SafeChecker</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">PCUICErrors</span> <span class="id" title="var">PCUICSafeChecker</span> <span class="id" title="var">PCUICWfEnv</span> <span class="id" title="var">PCUICWfEnvImpl</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">MCMonadNotation</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.TemplatePCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">TemplateToPCUIC</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">trans_program</span> (<span class="id" title="var">p</span> : <span class="id" title="var">Ast.Env.program</span>) : <span class="id" title="var">program</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">Σ'</span> := <span class="id" title="var">trans_global_env</span> <span class="id" title="var">p</span>.1 <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;(<span class="id" title="var">Σ'</span>, <span class="id" title="var">trans</span> <span class="id" title="var">Σ'</span> <span class="id" title="var">p</span>.2).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">EnvCheck_wf_env_ext</span> {<span class="id" title="var">cf</span>:<span class="id" title="var">checker_flags</span>} {<span class="id" title="var">guard</span> : <span class="id" title="var">abstract_guard_impl</span>} := <span class="id" title="var">EnvCheck</span> <span class="id" title="var">wf_env_ext</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">Monad_EnvCheck_wf_env_ext</span> {<span class="id" title="var">cf</span>:<span class="id" title="var">checker_flags</span>} {<span class="id" title="var">guard</span> : <span class="id" title="var">abstract_guard_impl</span>} : <span class="id" title="var">Monad</span> <span class="id" title="var">EnvCheck_wf_env_ext</span> := <span class="id" title="var">_</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Program Definition</span> <span class="id" title="var">infer_template_program</span> {<span class="id" title="var">cf</span> : <span class="id" title="var">checker_flags</span>} {<span class="id" title="var">nor</span> : <span class="id" title="var">normalizing_flags</span>} {<span class="id" title="var">guard</span> : <span class="id" title="var">abstract_guard_impl</span>}<br/>
+&nbsp;&nbsp;(<span class="id" title="var">p</span> : <span class="id" title="var">Ast.Env.program</span>) φ<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;{<span class="id" title="var">normalization_in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="keyword">∀</span> (<span class="id" title="var">g</span> : <span class="id" title="var">global_decl</span>) (<span class="id" title="var">Hdecls'</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">X</span> : <span class="id" title="var">X_env_type</span> <span class="id" title="var">optimized_abstract_env_impl</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">Σ0</span> : <span class="id" title="var">global_env</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Σ0</span> ∼ <span class="id" title="var">X</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Σ0</span> =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">universes</span> := (<span class="id" title="var">trans_program</span> <span class="id" title="var">p</span>).1;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declarations</span> := <span class="id" title="var">skipn</span> <span class="id" title="var">Hdecls'</span> (<span class="id" title="var">declarations</span> (<span class="id" title="var">trans_program</span> <span class="id" title="var">p</span>).1);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">retroknowledge</span> := <span class="id" title="var">retroknowledge</span> (<span class="id" title="var">trans_program</span> <span class="id" title="var">p</span>).1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|}) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">X'</span> : <span class="id" title="var">X_env_ext_type</span> <span class="id" title="var">optimized_abstract_env_impl</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">check_wf_env_ext_prop</span> <span class="id" title="var">optimized_abstract_env_impl</span> <span class="id" title="var">X</span> <span class="id" title="var">X'</span> (<span class="id" title="var">universes_decl_of_decl</span> <span class="id" title="var">g</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">Σ0</span> : <span class="id" title="var">global_env_ext</span>, <span class="id" title="var">wf_ext</span> <span class="id" title="var">Σ0</span> → <span class="id" title="var">Σ0</span> ∼<span class="id" title="var">_ext</span> <span class="id" title="var">X'</span> → <span class="id" title="var">NormalizationIn</span> <span class="id" title="var">Σ0</span>}<br/>
+&nbsp;&nbsp;{<span class="id" title="var">normalization_in'</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> : <span class="id" title="var">X_env_ext_type</span> <span class="id" title="var">optimized_abstract_env_impl</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" title="var">trans_program</span> <span class="id" title="var">p</span>).1, φ) ∼<span class="id" title="var">_ext</span> <span class="id" title="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">Σ</span> : <span class="id" title="var">global_env_ext</span>, <span class="id" title="var">wf_ext</span> <span class="id" title="var">Σ</span> → <span class="id" title="var">Σ</span> ∼<span class="id" title="var">_ext</span> <span class="id" title="var">x</span> → <span class="id" title="var">NormalizationIn</span> <span class="id" title="var">Σ</span>}<br/>
+&nbsp;&nbsp;: <span class="id" title="var">EnvCheck_wf_env_ext</span> (<span class="id" title="keyword">let</span> <span class="id" title="var">p'</span> := <span class="id" title="var">trans_program</span> <span class="id" title="var">p</span> <span class="id" title="tactic">in</span> ∑ <span class="id" title="var">A</span>, { <span class="id" title="var">X</span> : <span class="id" title="var">wf_env_ext</span> |<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;∥ (<span class="id" title="var">p'</span>.1, φ) = <span class="id" title="var">X</span>.(<span class="id" title="var">wf_env_ext_reference</span>).(<span class="id" title="var">reference_impl_env_ext</span>) × <span class="id" title="var">wf_ext</span> (<span class="id" title="var">p'</span>.1, φ) ×  (<span class="id" title="var">p'</span>.1, φ) ;;; [] |- <span class="id" title="var">p'</span>.2 : <span class="id" title="var">A</span> ∥ }) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">pp</span> &lt;- <span class="id" title="var">typecheck_program</span> (<span class="id" title="var">cf</span> := <span class="id" title="var">cf</span>) (<span class="id" title="var">nor</span>:=<span class="id" title="var">nor</span>) <span class="id" title="var">optimized_abstract_env_impl</span> (<span class="id" title="var">trans_program</span> <span class="id" title="var">p</span>) φ ;;<br/>
+&nbsp;&nbsp;<span class="id" title="var">ret</span> (<span class="id" title="var">pp</span>.π1 ; (<span class="id" title="var">exist</span> (<span class="id" title="var">proj1_sig</span> <span class="id" title="var">pp</span>.π2) <span class="id" title="var">_</span>)).<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">sq</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">split</span>; <span class="id" title="tactic">eauto</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">p0</span>; <span class="id" title="tactic">split</span>; <span class="id" title="tactic">eauto</span>. <span class="id" title="tactic">eapply</span> <span class="id" title="var">infering_typing</span>; <span class="id" title="var">tea</span>. <span class="id" title="tactic">eapply</span> <span class="id" title="var">w</span>. <span class="id" title="tactic">constructor</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Program Definition</span> <span class="id" title="var">infer_and_print_template_program</span> {<span class="id" title="var">cf</span> : <span class="id" title="var">checker_flags</span>} {<span class="id" title="var">nor</span> : <span class="id" title="var">normalizing_flags</span>} {<span class="id" title="var">guard</span> : <span class="id" title="var">abstract_guard_impl</span>}<br/>
+&nbsp;&nbsp;(<span class="id" title="var">p</span> : <span class="id" title="var">Ast.Env.program</span>) φ<br/>
+<br/>
+&nbsp;&nbsp;{<span class="id" title="var">normalization_in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="keyword">∀</span> (<span class="id" title="var">g</span> : <span class="id" title="var">global_decl</span>) (<span class="id" title="var">Hdecls'</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">X</span> : <span class="id" title="var">X_env_type</span> <span class="id" title="var">optimized_abstract_env_impl</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">∀</span> <span class="id" title="var">Σ0</span> : <span class="id" title="var">global_env</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Σ0</span> ∼ <span class="id" title="var">X</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Σ0</span> =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">universes</span> := (<span class="id" title="var">trans_program</span> <span class="id" title="var">p</span>).1;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">declarations</span> := <span class="id" title="var">skipn</span> <span class="id" title="var">Hdecls'</span> (<span class="id" title="var">declarations</span> (<span class="id" title="var">trans_program</span> <span class="id" title="var">p</span>).1);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">retroknowledge</span> := <span class="id" title="var">retroknowledge</span> (<span class="id" title="var">trans_program</span> <span class="id" title="var">p</span>).1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|}) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">X'</span> : <span class="id" title="var">X_env_ext_type</span> <span class="id" title="var">optimized_abstract_env_impl</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">check_wf_env_ext_prop</span> <span class="id" title="var">optimized_abstract_env_impl</span> <span class="id" title="var">X</span> <span class="id" title="var">X'</span> (<span class="id" title="var">universes_decl_of_decl</span> <span class="id" title="var">g</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">Σ0</span> : <span class="id" title="var">global_env_ext</span>, <span class="id" title="var">wf_ext</span> <span class="id" title="var">Σ0</span> → <span class="id" title="var">Σ0</span> ∼<span class="id" title="var">_ext</span> <span class="id" title="var">X'</span> → <span class="id" title="var">NormalizationIn</span> <span class="id" title="var">Σ0</span>}<br/>
+&nbsp;&nbsp;{<span class="id" title="var">normalization_in'</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="keyword">∀</span> <span class="id" title="var">x</span> : <span class="id" title="var">X_env_ext_type</span> <span class="id" title="var">optimized_abstract_env_impl</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" title="var">trans_program</span> <span class="id" title="var">p</span>).1, φ) ∼<span class="id" title="var">_ext</span> <span class="id" title="var">x</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">Σ</span> : <span class="id" title="var">global_env_ext</span>, <span class="id" title="var">wf_ext</span> <span class="id" title="var">Σ</span> → <span class="id" title="var">Σ</span> ∼<span class="id" title="var">_ext</span> <span class="id" title="var">x</span> → <span class="id" title="var">NormalizationIn</span> <span class="id" title="var">Σ</span>}  : <span class="id" title="var">string</span> + <span class="id" title="var">string</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">infer_template_program</span> (<span class="id" title="var">cf</span>:=<span class="id" title="var">cf</span>) <span class="id" title="var">p</span> φ <span class="id" title="keyword">return</span> <span class="id" title="var">string</span> + <span class="id" title="var">string</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">CorrectDecl</span> <span class="id" title="var">t</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">Σ'</span> := <span class="id" title="var">trans_global_env</span> <span class="id" title="var">p</span>.1 <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">inl</span> ("Environment is well-formed and " ^ <span class="id" title="var">string_of_term</span> (<span class="id" title="var">trans</span> <span class="id" title="var">Σ'</span> <span class="id" title="var">p</span>.2) ^<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" has type: " ^ <span class="id" title="var">string_of_term</span> <span class="id" title="var">t</span>.π1)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">EnvError</span> <span class="id" title="var">Σ</span> (<span class="id" title="var">AlreadyDeclared</span> <span class="id" title="var">id</span>) ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">inr</span> ("Already declared: " ^ <span class="id" title="var">id</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">EnvError</span> <span class="id" title="var">Σ</span> (<span class="id" title="var">IllFormedDecl</span> <span class="id" title="var">id</span> <span class="id" title="var">e</span>) ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">inr</span> ("Type error: " ^ <span class="id" title="var">string_of_type_error</span> <span class="id" title="var">Σ</span> <span class="id" title="var">e</span> ^ ", while checking " ^ <span class="id" title="var">id</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

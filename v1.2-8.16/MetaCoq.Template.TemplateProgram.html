@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaCoq.Template.TemplateProgram</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a id="lab101"></a><h1 class="section">Definition of programs in template-coq, well-typed terms and provided transformations</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Common.Transform.html#"><span class="id" title="library">Transform</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Ast.html#"><span class="id" title="library">Ast</span></a>           <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Typing.html#"><span class="id" title="library">Typing</span></a>        <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.WcbvEval.html#"><span class="id" title="library">WcbvEval</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.TemplateEnvMap.html#"><span class="id" title="library">TemplateEnvMap</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="template_program" class="idref" href="#template_program"><span class="id" title="definition">template_program</span></a> := <a class="idref" href="MetaCoq.Template.Ast.html#Env.program"><span class="id" title="definition">Ast.Env.program</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="template_program_env" class="idref" href="#template_program_env"><span class="id" title="definition">template_program_env</span></a> := (<a class="idref" href="MetaCoq.Template.TemplateEnvMap.html#GlobalEnvMap.t"><span class="id" title="record">TemplateEnvMap.GlobalEnvMap.t</span></a> <a class="idref" href="MetaCoq.Utils.utils.html#8426aced733de3f9c0ab331518367c06"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">Ast.term</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Well-typedness of template programs 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="wt_template_program" class="idref" href="#wt_template_program"><span class="id" title="definition">wt_template_program</span></a> {<a id="cf:1" class="idref" href="#cf:1"><span class="id" title="binder">cf</span></a> : <a class="idref" href="MetaCoq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>} (<a id="p:2" class="idref" href="#p:2"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Template.TemplateProgram.html#template_program"><span class="id" title="definition">template_program</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="eb9571817dd417966f307c3a9de8fe7f" class="idref" href="#eb9571817dd417966f307c3a9de8fe7f"><span class="id" title="binder">Σ</span></a> := <a class="idref" href="MetaCoq.Template.Ast.html#Env.empty_ext"><span class="id" title="definition">Ast.Env.empty_ext</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:2"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Typing.html#wf_ext"><span class="id" title="definition">wf_ext</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#eb9571817dd417966f307c3a9de8fe7f"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.Utils.MCProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaCoq.Utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="T:4" class="idref" href="#T:4"><span class="id" title="binder">T</span></a><a class="idref" href="MetaCoq.Utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#eb9571817dd417966f307c3a9de8fe7f"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#41b22a1465690d4777852776dc1e5d8d"><span class="id" title="notation">;;;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#41b22a1465690d4777852776dc1e5d8d"><span class="id" title="notation">|-</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:2"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#41b22a1465690d4777852776dc1e5d8d"><span class="id" title="notation">:</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#T:4"><span class="id" title="variable">T</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Evaluation relation on template programs 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eval_template_program" class="idref" href="#eval_template_program"><span class="id" title="definition">eval_template_program</span></a> (<a id="p:5" class="idref" href="#p:5"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#Env.program"><span class="id" title="definition">Ast.Env.program</span></a>) (<a id="v:6" class="idref" href="#v:6"><span class="id" title="binder">v</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">Ast.term</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.WcbvEval.html#eval"><span class="id" title="inductive">WcbvEval.eval</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:5"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:5"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#v:6"><span class="id" title="variable">v</span></a> <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Well-typedness of template programs with efficient environments 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="wt_template_program_env" class="idref" href="#wt_template_program_env"><span class="id" title="definition">wt_template_program_env</span></a> {<a id="cf:7" class="idref" href="#cf:7"><span class="id" title="binder">cf</span></a> : <a class="idref" href="MetaCoq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>} (<a id="p:8" class="idref" href="#p:8"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Template.TemplateProgram.html#template_program_env"><span class="id" title="definition">template_program_env</span></a>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="2ff76d4cddec082cd899c55bae9fabf3" class="idref" href="#2ff76d4cddec082cd899c55bae9fabf3"><span class="id" title="binder">Σ</span></a> := <a class="idref" href="MetaCoq.Template.Ast.html#Env.empty_ext"><span class="id" title="definition">Ast.Env.empty_ext</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:8"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Typing.html#wf_ext"><span class="id" title="definition">wf_ext</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#2ff76d4cddec082cd899c55bae9fabf3"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.Utils.MCProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaCoq.Utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="T:10" class="idref" href="#T:10"><span class="id" title="binder">T</span></a><a class="idref" href="MetaCoq.Utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#2ff76d4cddec082cd899c55bae9fabf3"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#41b22a1465690d4777852776dc1e5d8d"><span class="id" title="notation">;;;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#41b22a1465690d4777852776dc1e5d8d"><span class="id" title="notation">|-</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:8"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#41b22a1465690d4777852776dc1e5d8d"><span class="id" title="notation">:</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#T:10"><span class="id" title="variable">T</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Evaluation relation on template programs 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="eval_template_program_env" class="idref" href="#eval_template_program_env"><span class="id" title="definition">eval_template_program_env</span></a> (<a id="p:11" class="idref" href="#p:11"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Template.TemplateProgram.html#template_program_env"><span class="id" title="definition">template_program_env</span></a>) (<a id="v:12" class="idref" href="#v:12"><span class="id" title="binder">v</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">Ast.term</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.WcbvEval.html#eval"><span class="id" title="inductive">WcbvEval.eval</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:11"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:11"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#v:12"><span class="id" title="variable">v</span></a> <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.Transform.html#Transform"><span class="id" title="module">Transform</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a id="wt_template_program_fresh" class="idref" href="#wt_template_program_fresh"><span class="id" title="lemma">wt_template_program_fresh</span></a> {<a id="cf:13" class="idref" href="#cf:13"><span class="id" title="binder">cf</span></a> : <a class="idref" href="MetaCoq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>} <a id="p:14" class="idref" href="#p:14"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#wt_template_program"><span class="id" title="definition">wt_template_program</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:14"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Common.EnvMap.html#EnvMap.fresh_globals"><span class="id" title="inductive">EnvMap.EnvMap.fresh_globals</span></a> (<a class="idref" href="MetaCoq.Template.Ast.html#Env.declarations"><span class="id" title="projection">declarations</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:14"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">intros</span> [[<span class="id" title="var">wfΣ</span> <span class="id" title="var">_</span>]]. <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Template.TemplateEnvMap.html#wf_fresh_globals"><span class="id" title="lemma">TemplateEnvMap.wf_fresh_globals</span></a>, <span class="id" title="var">wfΣ</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="make_template_program_env" class="idref" href="#make_template_program_env"><span class="id" title="definition">make_template_program_env</span></a> {<a id="cf:15" class="idref" href="#cf:15"><span class="id" title="binder">cf</span></a> : <a class="idref" href="MetaCoq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>} (<a id="p:16" class="idref" href="#p:16"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Template.TemplateProgram.html#template_program"><span class="id" title="definition">template_program</span></a>) (<a id="wtp:17" class="idref" href="#wtp:17"><span class="id" title="binder">wtp</span></a> : <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#wt_template_program"><span class="id" title="definition">wt_template_program</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:16"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>) : <a class="idref" href="MetaCoq.Template.TemplateProgram.html#template_program_env"><span class="id" title="definition">template_program_env</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Template.TemplateEnvMap.html#GlobalEnvMap.make"><span class="id" title="definition">GlobalEnvMap.make</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:16"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> (<a class="idref" href="MetaCoq.Template.TemplateProgram.html#wt_template_program_fresh"><span class="id" title="lemma">wt_template_program_fresh</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:16"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#wtp:17"><span class="id" title="variable">wtp</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:16"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We kludge the normalization assumptions by parameterizing over a continuation of "what will be done to the program later" as well as what properties we'll need of it 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Program Definition</span> <a id="build_template_program_env" class="idref" href="#build_template_program_env"><span class="id" title="definition">build_template_program_env</span></a> {<a id="cf:18" class="idref" href="#cf:18"><span class="id" title="binder">cf</span></a> : <a class="idref" href="MetaCoq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>} <a id="K:19" class="idref" href="#K:19"><span class="id" title="binder">K</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Common.Transform.html#Transform.t"><span class="id" title="record">Transform.t</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#template_program"><span class="id" title="definition">template_program</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#template_program_env"><span class="id" title="definition">template_program_env</span></a> <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">Ast.term</span></a> <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">Ast.term</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#eval_template_program"><span class="id" title="definition">eval_template_program</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#eval_template_program_env"><span class="id" title="definition">eval_template_program_env</span></a> :=<br/>
+&nbsp;&nbsp;{| <a class="idref" href="MetaCoq.Common.Transform.html#Transform.name"><span class="id" title="projection">name</span></a> := "rebuilding environment lookup table";<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Common.Transform.html#Transform.pre"><span class="id" title="projection">pre</span></a> <a id="p:20" class="idref" href="#p:20"><span class="id" title="binder">p</span></a> := <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#wt_template_program"><span class="id" title="definition">wt_template_program</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:20"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <span class="id" title="keyword">∀</span> <a id="pf:21" class="idref" href="#pf:21"><span class="id" title="binder">pf</span></a>, <a class="idref" href="MetaCoq.Template.TemplateProgram.html#K:19"><span class="id" title="variable">K</span></a> (<a class="idref" href="MetaCoq.Template.TemplateEnvMap.html#GlobalEnvMap.make"><span class="id" title="definition">GlobalEnvMap.make</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:20"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> (<a class="idref" href="MetaCoq.Template.TemplateProgram.html#wt_template_program_fresh"><span class="id" title="lemma">wt_template_program_fresh</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:20"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#pf:21"><span class="id" title="variable">pf</span></a>)) : <span class="id" title="keyword">Prop</span> ;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Common.Transform.html#Transform.transform"><span class="id" title="projection">transform</span></a> <a id="p:22" class="idref" href="#p:22"><span class="id" title="binder">p</span></a> <a id="pre:23" class="idref" href="#pre:23"><span class="id" title="binder">pre</span></a> := <a class="idref" href="MetaCoq.Template.TemplateProgram.html#make_template_program_env"><span class="id" title="definition">make_template_program_env</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:22"><span class="id" title="variable">p</span></a> (<a class="idref" href="MetaCoq.Utils.MCProd.html#proj1"><span class="id" title="definition">proj1</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#pre:23"><span class="id" title="variable">pre</span></a>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Common.Transform.html#Transform.post"><span class="id" title="projection">post</span></a> <a id="p:24" class="idref" href="#p:24"><span class="id" title="binder">p</span></a> := <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#wt_template_program_env"><span class="id" title="definition">wt_template_program_env</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:24"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#K:19"><span class="id" title="variable">K</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#p:24"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Common.Transform.html#Transform.obseq"><span class="id" title="projection">obseq</span></a> <a id="g:25" class="idref" href="#g:25"><span class="id" title="binder">g</span></a> <a id="g':26" class="idref" href="#g':26"><span class="id" title="binder">g'</span></a> <a id="v:27" class="idref" href="#v:27"><span class="id" title="binder">v</span></a> <a id="v':28" class="idref" href="#v':28"><span class="id" title="binder">v'</span></a> := <a class="idref" href="MetaCoq.Template.TemplateProgram.html#v:27"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Template.TemplateProgram.html#v':28"><span class="id" title="variable">v'</span></a> |}.<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="tactic">∃</span> <span class="id" title="var">v</span>. <span class="id" title="var">cbn</span>; <span class="id" title="tactic">split</span>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>
