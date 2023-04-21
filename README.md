@@ -247,23 +247,26 @@ alt="Cyril Cohen" width="150px"/>
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/yannick-forster.jpg"
 alt="Yannick Forster" width="150px"/>
 <img
+src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/jason-gross.jpg" alt="Jason Gross"
+width="150px"/><br/>
+<img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/meven-lennon-bertrand.jpeg"
-alt="Meven Lennon-Bertrand" width="150px"/><br/>
+alt="Meven Lennon-Bertrand" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/kenji-maillard.jpg"
 alt="Kenji Maillard" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/gregory-malecha.jpg"
-alt="Gregory Malecha" width="150px"/>
+alt="Gregory Malecha" width="150px"/><br/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/jakob-botsch-nielsen.png"
-alt="Jakob Botsch Nielsen" width="150px"/><br/>
+alt="Jakob Botsch Nielsen" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/matthieu-sozeau.png"
 alt="Matthieu Sozeau" width="150px"/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/nicolas-tabareau.jpg"
-alt="Nicolas Tabareau" width="150px"/>
+alt="Nicolas Tabareau" width="150px"/><br/>
 <img
 src="https://github.com/MetaCoq/metacoq.github.io/raw/master/assets/theo-winterhalter.jpg"
 alt="Théo Winterhalter" width="150px"/>
@@ -276,6 +279,7 @@ MetaCoq is developed by (left to right)
 <a href="https://github.com/SimonBoulier">Simon Boulier</a>,
 <a href="https://github.com/CohenCyril">Cyril Cohen</a>,
 <a href="https://github.com/yforster">Yannick Forster</a>,
+<a href="https://jasongross.github.io">Jason Gross</a>,
 <a href="https://www.meven.ac">Meven Lennon-Bertrand</a>,
 <a href="https://github.com/kyoDralliam">Kenji Maillard</a>,
 <a href="https://github.com/gmalecha">Gregory Malecha</a>,
