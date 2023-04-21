@@ -30,6 +30,7 @@
 <div class="code">
 
 <br/>
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.RelationClasses.html#"><span class="id" title="library">RelationClasses</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Structures.OrderedTypeAlt.html#"><span class="id" title="library">OrderedTypeAlt</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.FSets.FMapAVL.html#"><span class="id" title="library">FMapAVL</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.FSets.FMapFacts.html#"><span class="id" title="library">FMapFacts</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a> <a class="idref" href="MetaCoq.Utils.canonicaltries.String2pos.html#"><span class="id" title="library">String2pos</span></a> <a class="idref" href="MetaCoq.Utils.canonicaltries.CanonicalTries.html#"><span class="id" title="library">CanonicalTries</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Common.uGraph.html#"><span class="id" title="library">uGraph</span></a> <a class="idref" href="MetaCoq.Common.Reflect.html#"><span class="id" title="library">Reflect</span></a> <a class="idref" href="MetaCoq.Common.BasicAst.html#"><span class="id" title="library">BasicAst</span></a> <a class="idref" href="MetaCoq.Common.Kernames.html#"><span class="id" title="library">Kernames</span></a>.<br/>
@@ -37,12 +38,14 @@
 <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.canonicaltries.String2pos.html#"><span class="id" title="module">String2pos</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Implementation&nbsp;of&nbsp;environment&nbsp;lookup&nbsp;using&nbsp;efficient&nbsp;maps&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> (<span class="id" title="var">cf</span>:<a class="idref" href="MetaCoq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>).<br/>
 
 <br/>
 <span class="id" title="keyword">Module</span> <a id="EnvMap" class="idref" href="#EnvMap"><span class="id" title="module">EnvMap</span></a>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;We&nbsp;keep&nbsp;the&nbsp;definition&nbsp;of&nbsp;EnvMap&nbsp;polymorphic&nbsp;over&nbsp;the&nbsp;data&nbsp;associated&nbsp;to&nbsp;a&nbsp;kername&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Section</span> <a id="EnvMap.Poly" class="idref" href="#EnvMap.Poly"><span class="id" title="section">Poly</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="A:1" class="idref" href="#A:1"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>}.<br/>
 
@@ -95,8 +98,37 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Lemma&nbsp;of_global_env_comm&nbsp;{cf:checker_flags}&nbsp;g&nbsp;d&nbsp;d'&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;fresh_global&nbsp;d.1&nbsp;(d'&nbsp;::&nbsp;g)&nbsp;-&gt;&nbsp;fresh_global&nbsp;d'.1&nbsp;g&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;equal&nbsp;(of_global_env&nbsp;(add_global_decl&nbsp;(add_global_decl&nbsp;g&nbsp;d')&nbsp;d))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(of_global_env&nbsp;(add_global_decl&nbsp;(add_global_decl&nbsp;g&nbsp;d)&nbsp;d')).<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;hwf&nbsp;hwf'.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;unfold_equal.&nbsp;intros&nbsp;i.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;cbn&nbsp;-<span class="inlinecode"><span class="id" title="var">lookup</span></span>.&nbsp;unfold&nbsp;KernameMapFact.uncurry.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;(eq_dec&nbsp;i&nbsp;d'.1).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;subst.&nbsp;rewrite&nbsp;gso.&nbsp;depelim&nbsp;hwf.&nbsp;apply&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;gss&nbsp;//.&nbsp;rewrite&nbsp;gss&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;destruct&nbsp;(eq_dec&nbsp;i&nbsp;d.1);&nbsp;<span class="inlinecode"><span class="id" title="tactic">subst</span></span> <span class="inlinecode"><span class="id" title="var">i</span>|</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;rewrite&nbsp;gss&nbsp;//.&nbsp;rewrite&nbsp;gso&nbsp;//&nbsp;gss&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;rewrite&nbsp;!gso&nbsp;//.<br/>
+&nbsp;&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Lemma&nbsp;add_comm&nbsp;g&nbsp;d&nbsp;d'&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;d.1&nbsp;&lt;&gt;&nbsp;d'.1&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;equal&nbsp;(add&nbsp;d.1&nbsp;d.2&nbsp;(add&nbsp;d'.1&nbsp;d'.2&nbsp;g))&nbsp;(add&nbsp;d'.1&nbsp;d'.2&nbsp;(add&nbsp;d.1&nbsp;d.2&nbsp;g)).<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;hwf.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;cbn.&nbsp;apply&nbsp;unfold_equal.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;i.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;(eq_dec&nbsp;i&nbsp;d'.1).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;subst.&nbsp;rewrite&nbsp;gso&nbsp;//.&nbsp;congruence.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;gss&nbsp;//&nbsp;gss&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;destruct&nbsp;(eq_dec&nbsp;i&nbsp;d.1);&nbsp;<span class="inlinecode"><span class="id" title="tactic">subst</span></span> <span class="inlinecode"><span class="id" title="var">i</span>|</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;rewrite&nbsp;gss&nbsp;//&nbsp;gso&nbsp;//&nbsp;!gss&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;rewrite&nbsp;!gso&nbsp;//.<br/>
+&nbsp;&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="EnvMap.fresh_global" class="idref" href="#EnvMap.fresh_global"><span class="id" title="definition">fresh_global</span></a> (<a id="s:22" class="idref" href="#s:22"><span class="id" title="binder">s</span></a> : <a class="idref" href="MetaCoq.Common.Kernames.html#kername"><span class="id" title="definition">kername</span></a>) (<a id="g:23" class="idref" href="#g:23"><span class="id" title="binder">g</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="MetaCoq.Common.Kernames.html#kername"><span class="id" title="definition">kername</span></a> <a class="idref" href="MetaCoq.Utils.MCProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaCoq.Common.EnvMap.html#EnvMap.Poly.A"><span class="id" title="variable">A</span></a>)) :=<br/>
@@ -250,6 +282,245 @@
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Common.EnvMap.html#EnvMap"><span class="id" title="module">EnvMap</span></a>.<br/>
 
 <br/>
+<span class="comment">(*<br/>
+<br/>
+Module&nbsp;EnvMap'.<br/>
+<br/>
+Section&nbsp;Poly.<br/>
+Context&nbsp;{A&nbsp;:&nbsp;Type}.<br/>
+<br/>
+&nbsp;&nbsp;Definition&nbsp;t&nbsp;:=&nbsp;PTree.tree&nbsp;A.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;bool_cons_pos_inj&nbsp;a&nbsp;a'&nbsp;p&nbsp;p'&nbsp;:&nbsp;bool_cons_pos&nbsp;a&nbsp;p&nbsp;=&nbsp;bool_cons_pos&nbsp;a'&nbsp;p'&nbsp;-&gt;&nbsp;a&nbsp;=&nbsp;a'&nbsp;/\&nbsp;p&nbsp;=&nbsp;p'.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;a,&nbsp;a';&nbsp;cbn;&nbsp;try&nbsp;discriminate;&nbsp;intros&nbsp;<span class="inlinecode">=</span>&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;ascii_cons_pos_inj&nbsp;a&nbsp;a'&nbsp;p&nbsp;p'&nbsp;:&nbsp;ascii_cons_pos&nbsp;a&nbsp;p&nbsp;=&nbsp;ascii_cons_pos&nbsp;a'&nbsp;p'&nbsp;-&gt;&nbsp;a&nbsp;=&nbsp;a'&nbsp;/\&nbsp;p&nbsp;=&nbsp;p'.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;ascii_cons_pos.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;a,&nbsp;a'.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;repeat&nbsp;move/bool_cons_pos_inj&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>&nbsp;?;&nbsp;subst;&nbsp;auto.<br/>
+&nbsp;&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;pos_of_string_inj&nbsp;s&nbsp;s'&nbsp;:&nbsp;pos_of_string&nbsp;s&nbsp;=&nbsp;pos_of_string&nbsp;s'&nbsp;-&gt;&nbsp;s&nbsp;=&nbsp;s'.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;induction&nbsp;s&nbsp;in&nbsp;s'&nbsp;|-&nbsp;*;&nbsp;destruct&nbsp;s'&nbsp;=&gt;&nbsp;/=&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;a.&nbsp;cbn.&nbsp;destruct&nbsp;b;&nbsp;cbn;&nbsp;discriminate.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;a.&nbsp;cbn.&nbsp;destruct&nbsp;b;&nbsp;cbn;&nbsp;discriminate.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;move/ascii_cons_pos_inj.&nbsp;intuition&nbsp;f_equal;&nbsp;auto.<br/>
+&nbsp;&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Fixpoint&nbsp;pos_succ&nbsp;(p&nbsp;:&nbsp;positive)&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;p&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;xH&nbsp;=&gt;&nbsp;xO&nbsp;xH<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;xO&nbsp;p&nbsp;=&gt;&nbsp;xI&nbsp;p<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;xI&nbsp;p&nbsp;=&gt;&nbsp;xO&nbsp;(pos_succ&nbsp;p)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;end.<br/>
+<br/>
+&nbsp;&nbsp;Fixpoint&nbsp;listencoding&nbsp;(p&nbsp;:&nbsp;positive)&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;p&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;xH&nbsp;=&gt;&nbsp;xO&nbsp;(xI&nbsp;xH)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;xO&nbsp;p&nbsp;=&gt;&nbsp;xO&nbsp;(xO&nbsp;(listencoding&nbsp;p))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;xI&nbsp;p&nbsp;=&gt;&nbsp;xI&nbsp;(xI&nbsp;(listencoding&nbsp;p))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;end.<br/>
+<br/>
+&nbsp;&nbsp;Fixpoint&nbsp;posapp&nbsp;(p&nbsp;:&nbsp;positive)&nbsp;(q&nbsp;:&nbsp;positive)&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;p&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;xH&nbsp;=&gt;&nbsp;q<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;xI&nbsp;p&nbsp;=&gt;&nbsp;xI&nbsp;(posapp&nbsp;p&nbsp;q)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;xO&nbsp;p&nbsp;=&gt;&nbsp;xO&nbsp;(posapp&nbsp;p&nbsp;q)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;end.<br/>
+<br/>
+&nbsp;&nbsp;Definition&nbsp;pos_cons&nbsp;(hd&nbsp;:&nbsp;positive)&nbsp;(tl&nbsp;:&nbsp;positive)&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;posapp&nbsp;(listencoding&nbsp;hd)&nbsp;(posapp&nbsp;(xO&nbsp;(xI&nbsp;xH))&nbsp;tl).<br/>
+<br/>
+&nbsp;&nbsp;Fixpoint&nbsp;pos_of_stringlist&nbsp;(l&nbsp;:&nbsp;list&nbsp;string)&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;l&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<span class="inlinecode"></span>&nbsp;=&gt;&nbsp;xH<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;x&nbsp;::&nbsp;l&nbsp;=&gt;&nbsp;pos_cons&nbsp;(pos_of_string&nbsp;x)&nbsp;(pos_of_stringlist&nbsp;l)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;end.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;pos_app_inj&nbsp;p1&nbsp;p2&nbsp;q1&nbsp;q2&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;posapp&nbsp;(listencoding&nbsp;p1)&nbsp;q1&nbsp;=&nbsp;posapp&nbsp;(listencoding&nbsp;p2)&nbsp;q2&nbsp;-&gt;&nbsp;p1&nbsp;=&nbsp;p2&nbsp;/\&nbsp;q1&nbsp;=&nbsp;q2.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;induction&nbsp;p1&nbsp;in&nbsp;p2,&nbsp;q1,&nbsp;q2&nbsp;|-&nbsp;*;&nbsp;destruct&nbsp;p2;&nbsp;cbn;&nbsp;try&nbsp;congruence.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;try&nbsp;now&nbsp;firstorder&nbsp;congruence.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;H.&nbsp;depelim&nbsp;H.&nbsp;symmetry&nbsp;in&nbsp;H.&nbsp;firstorder&nbsp;congruence.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;H.&nbsp;depelim&nbsp;H.&nbsp;symmetry&nbsp;in&nbsp;H.&nbsp;firstorder&nbsp;congruence.<br/>
+&nbsp;&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;pos_cons_inj&nbsp;hd&nbsp;hd'&nbsp;tl&nbsp;tl'&nbsp;:&nbsp;pos_cons&nbsp;hd&nbsp;tl&nbsp;=&nbsp;pos_cons&nbsp;hd'&nbsp;tl'&nbsp;-&gt;&nbsp;hd&nbsp;=&nbsp;hd'&nbsp;/\&nbsp;tl&nbsp;=&nbsp;tl'.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;pos_cons.&nbsp;intros.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;pos_app_inj&nbsp;in&nbsp;H&nbsp;as&nbsp;<span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">H</span></span>.&nbsp;cbn&nbsp;in&nbsp;H.&nbsp;depelim&nbsp;H.&nbsp;eauto.<br/>
+&nbsp;&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;pos_of_stringlist_inj&nbsp;l1&nbsp;l2&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;pos_of_stringlist&nbsp;l1&nbsp;=&nbsp;pos_of_stringlist&nbsp;l2&nbsp;-&gt;&nbsp;l1&nbsp;=&nbsp;l2.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;induction&nbsp;l1&nbsp;in&nbsp;l2&nbsp;|-&nbsp;*;&nbsp;destruct&nbsp;l2;&nbsp;cbn;&nbsp;try&nbsp;congruence.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;destruct&nbsp;s;&nbsp;cbn.&nbsp;congruence.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;a;&nbsp;cbn;&nbsp;destruct&nbsp;b;&nbsp;cbn;&nbsp;congruence.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;destruct&nbsp;a;&nbsp;cbn.&nbsp;congruence.&nbsp;destruct&nbsp;a;&nbsp;cbn;&nbsp;destruct&nbsp;b;&nbsp;cbn;&nbsp;congruence.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;<span class="inlinecode">?</span> <span class="inlinecode">%</span> <span class="inlinecode"><span class="id" title="var">pos_of_string_inj</span></span>&nbsp;*)</span><br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">pos_of_dirpath_cont</span> (<span class="id" title="var">d</span> : <span class="id" title="var">dirpath</span>) (<span class="id" title="var">cont</span> : <span class="id" title="var">positive</span>) : <span class="id" title="var">positive</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">d</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">hd</span> :: <span class="id" title="var">tl</span> ⇒ <span class="id" title="var">pos_of_string_cont</span> <span class="id" title="var">hd</span> (<span class="id" title="var">pos_of_dirpath_cont</span> <span class="id" title="var">tl</span> <span class="id" title="var">cont</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| [] ⇒ <span class="id" title="var">cont</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">pos_of_nat_cont</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">cont</span> : <span class="id" title="var">positive</span>) : <span class="id" title="var">positive</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <span class="id" title="var">cont</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="var">pos_succ</span> (<span class="id" title="var">pos_of_nat_cont</span> <span class="id" title="var">x</span> <span class="id" title="var">cont</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">pos_of_modpath_cont</span> (<span class="id" title="var">m</span> : <span class="id" title="var">modpath</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">positive</span>) : <span class="id" title="var">positive</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">m</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">MPfile</span> <span class="id" title="var">d</span> ⇒ <span class="id" title="var">pos_of_dirpath_cont</span> <span class="id" title="var">d</span> <span class="id" title="var">p</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">MPbound</span> <span class="id" title="var">d</span> <span class="id" title="var">i</span> <span class="id" title="var">k</span> ⇒ <span class="id" title="var">pos_of_dirpath_cont</span> <span class="id" title="var">d</span> (<span class="id" title="var">pos_of_string_cont</span> <span class="id" title="var">i</span> (<span class="id" title="var">pos_of_nat_cont</span> <span class="id" title="var">k</span> <span class="id" title="var">p</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">MPdot</span> <span class="id" title="var">m</span> <span class="id" title="var">i</span> ⇒ <span class="id" title="var">pos_of_modpath_cont</span> <span class="id" title="var">m</span> (<span class="id" title="var">pos_of_string_cont</span> <span class="id" title="var">i</span> <span class="id" title="var">p</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">pos_of_kername</span> (<span class="id" title="var">k</span> : <span class="id" title="var">kername</span>) : <span class="id" title="var">positive</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">pos_of_modpath_cont</span> <span class="id" title="var">k</span>.1 (<span class="id" title="var">pos_of_string</span> <span class="id" title="var">k</span>.2).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">pos_of_kername_inj</span> <span class="id" title="var">k</span> <span class="id" title="var">k'</span> : <span class="id" title="var">pos_of_kername</span> <span class="id" title="var">k</span> = <span class="id" title="var">pos_of_kername</span> <span class="id" title="var">k'</span> → <span class="id" title="var">k</span> = <span class="id" title="var">k'</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">k</span>; <span class="id" title="tactic">destruct</span> <span class="id" title="var">k'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">pos_of_kername</span>. <span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">a</span>; <span class="id" title="tactic">destruct</span> <span class="id" title="var">m</span> ⇒ /= //.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>. <span class="comment">(*&nbsp;TODO&nbsp;*)</span><br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">empty</span> : <span class="id" title="var">t</span> := <span class="id" title="var">PTree.empty</span> <span class="id" title="var">_</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">lookup</span> (<span class="id" title="var">k</span> : <span class="id" title="var">kername</span>) (<span class="id" title="var">env</span> : <span class="id" title="var">t</span>) : <span class="id" title="var">option</span> <span class="id" title="var">global_decl</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">PTree.get</span> (<span class="id" title="var">pos_of_kername</span> <span class="id" title="var">k</span>) <span class="id" title="var">env</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">add</span> (<span class="id" title="var">k</span> : <span class="id" title="var">kername</span>) (<span class="id" title="var">g</span> : <span class="id" title="var">global_decl</span>) (<span class="id" title="var">env</span> : <span class="id" title="var">t</span>) : <span class="id" title="var">t</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">PTree.set</span> (<span class="id" title="var">pos_of_kername</span> <span class="id" title="var">k</span>) <span class="id" title="var">g</span> <span class="id" title="var">env</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">of_global_env</span> (<span class="id" title="var">g</span> : <span class="id" title="var">global_env</span>) : <span class="id" title="var">t</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">List.fold_left</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">genv</span> <span class="id" title="var">decl</span> ⇒ <span class="id" title="var">add</span> <span class="id" title="var">decl</span>.1 <span class="id" title="var">decl</span>.2 <span class="id" title="var">genv</span>) <span class="id" title="var">g</span> <span class="id" title="var">empty</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">repr</span> (<span class="id" title="var">g</span> : <span class="id" title="var">global_env</span>) (<span class="id" title="var">e</span> : <span class="id" title="var">t</span>) := <span class="id" title="var">e</span> = <span class="id" title="var">of_global_env</span> <span class="id" title="var">g</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Arguments</span> <span class="id" title="var">PTree.set</span> : <span class="id" title="tactic">simpl</span> <span class="id" title="var">never</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">of_global_env_comm</span> {<span class="id" title="var">cf</span>:<span class="id" title="var">checker_flags</span>} <span class="id" title="var">g</span> <span class="id" title="var">d</span> <span class="id" title="var">d'</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fresh_global</span> <span class="id" title="var">d</span>.1 (<span class="id" title="var">d'</span> :: <span class="id" title="var">g</span>) → <span class="id" title="var">fresh_global</span> <span class="id" title="var">d'</span>.1 <span class="id" title="var">g</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">of_global_env</span> (<span class="id" title="var">d</span> :: <span class="id" title="var">d'</span> :: <span class="id" title="var">g</span>) = <span class="id" title="var">of_global_env</span> (<span class="id" title="var">d'</span> :: <span class="id" title="var">d</span> :: <span class="id" title="var">g</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">hwf</span> <span class="id" title="var">hwf'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="tactic">f_equal</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">PTree.extensionality</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">i</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">add</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">eq_dec</span> <span class="id" title="var">i</span> (<span class="id" title="var">pos_of_kername</span> <span class="id" title="var">d'</span>.1)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">PTree.gss</span> <span class="id" title="var">PTree.gso</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">pos_of_kername_inj</span> <span class="id" title="tactic">in</span> <span class="id" title="var">eq</span>. <span class="id" title="var">depelim</span> <span class="id" title="var">hwf</span>. <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">congruence</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">PTree.gss</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <span class="id" title="var">PTree.gso</span> //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">eq_dec</span> <span class="id" title="var">i</span> (<span class="id" title="var">pos_of_kername</span> <span class="id" title="var">d</span>.1)); [<span class="id" title="tactic">subst</span> <span class="id" title="var">i</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">rewrite</span> !<span class="id" title="var">PTree.gss</span> //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">rewrite</span> !<span class="id" title="var">PTree.gso</span> //.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">add_comm</span> <span class="id" title="var">g</span> <span class="id" title="var">d</span> <span class="id" title="var">d'</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">d</span>.1 ≠ <span class="id" title="var">d'</span>.1 → <span class="id" title="var">add</span> <span class="id" title="var">d</span>.1 <span class="id" title="var">d</span>.2 (<span class="id" title="var">add</span> <span class="id" title="var">d'</span>.1 <span class="id" title="var">d'</span>.2 <span class="id" title="var">g</span>) = <span class="id" title="var">add</span> <span class="id" title="var">d'</span>.1 <span class="id" title="var">d'</span>.2 (<span class="id" title="var">add</span> <span class="id" title="var">d</span>.1 <span class="id" title="var">d</span>.2 <span class="id" title="var">g</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">hwf</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="tactic">unfold</span> <span class="id" title="var">add</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">PTree.extensionality</span>⇒ <span class="id" title="var">i</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">eq_dec</span> <span class="id" title="var">i</span> (<span class="id" title="var">pos_of_kername</span> <span class="id" title="var">d'</span>.1)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">PTree.gss</span> <span class="id" title="var">PTree.gso</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">pos_of_kername_inj</span> <span class="id" title="tactic">in</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">congruence</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">PTree.gss</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">destruct</span> (<span class="id" title="var">eq_dec</span> <span class="id" title="var">i</span> (<span class="id" title="var">pos_of_kername</span> <span class="id" title="var">d</span>.1)); [<span class="id" title="tactic">subst</span> <span class="id" title="var">i</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">rewrite</span> !<span class="id" title="var">PTree.gss</span> // <span class="id" title="var">PTree.gso</span> // !<span class="id" title="var">PTree.gss</span> //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">rewrite</span> !<span class="id" title="var">PTree.gso</span> //.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <span class="id" title="var">fresh_globals</span> : <span class="id" title="var">global_env</span> → <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">fresh_globals_empty</span> : <span class="id" title="var">fresh_globals</span> []<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">fresh_globals_cons</span> <span class="id" title="var">kn</span> <span class="id" title="var">d</span> <span class="id" title="var">g</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fresh_globals</span> <span class="id" title="var">g</span> → <span class="id" title="var">fresh_global</span> <span class="id" title="var">kn</span> <span class="id" title="var">g</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fresh_globals</span> ((<span class="id" title="var">kn</span>, <span class="id" title="var">d</span>) :: <span class="id" title="var">g</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Derive</span> <span class="id" title="var">Signature</span> <span class="id" title="keyword">for</span> <span class="id" title="var">fresh_globals</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">fold_left_cons</span> <span class="id" title="var">d</span> <span class="id" title="var">g</span> <span class="id" title="var">acc</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fold_left</span> (<span class="id" title="keyword">fun</span> (<span class="id" title="var">genv</span> : <span class="id" title="var">t</span>) (<span class="id" title="var">decl</span> : <span class="id" title="var">kername</span> × <span class="id" title="var">global_decl</span>) ⇒ <span class="id" title="var">add</span> <span class="id" title="var">decl</span>.1 <span class="id" title="var">decl</span>.2 <span class="id" title="var">genv</span>) (<span class="id" title="var">d</span> :: <span class="id" title="var">g</span>) <span class="id" title="var">acc</span> =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fold_left</span> (<span class="id" title="keyword">fun</span> (<span class="id" title="var">genv</span> : <span class="id" title="var">t</span>) (<span class="id" title="var">decl</span> : <span class="id" title="var">kername</span> × <span class="id" title="var">global_decl</span>) ⇒ <span class="id" title="var">add</span> <span class="id" title="var">decl</span>.1 <span class="id" title="var">decl</span>.2 <span class="id" title="var">genv</span>) <span class="id" title="var">g</span> (<span class="id" title="var">add</span> <span class="id" title="var">d</span>.1 <span class="id" title="var">d</span>.2 <span class="id" title="var">acc</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">of_global_env_cons</span> {<span class="id" title="var">cf</span>:<span class="id" title="var">checker_flags</span>} <span class="id" title="var">d</span> <span class="id" title="var">g</span> : <span class="id" title="var">fresh_globals</span> (<span class="id" title="var">d</span> :: <span class="id" title="var">g</span>) →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">of_global_env</span> (<span class="id" title="var">d</span> :: <span class="id" title="var">g</span>) = <span class="id" title="var">add</span> <span class="id" title="var">d</span>.1 <span class="id" title="var">d</span>.2 (<span class="id" title="var">of_global_env</span> <span class="id" title="var">g</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">of_global_env</span>. <span class="id" title="tactic">generalize</span> <span class="id" title="var">empty</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">g</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="var">cbn</span>; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">unfold</span> <span class="id" title="var">fresh_global</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">acc</span> <span class="id" title="var">hf</span>. <span class="id" title="var">depelim</span> <span class="id" title="var">hf</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">fold_left_cons</span>. <span class="id" title="tactic">rewrite</span> -<span class="id" title="var">IHg</span>. <span class="id" title="tactic">constructor</span>. <span class="id" title="var">now</span> <span class="id" title="var">depelim</span> <span class="id" title="var">hf</span>. <span class="id" title="var">now</span> <span class="id" title="var">depelim</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span>. <span class="id" title="tactic">f_equal</span>. <span class="id" title="tactic">rewrite</span> (<span class="id" title="var">add_comm</span> <span class="id" title="var">_</span> <span class="id" title="var">a</span> (<span class="id" title="var">kn</span>, <span class="id" title="var">d0</span>)) //. <span class="id" title="var">cbn</span>. <span class="id" title="var">now</span> <span class="id" title="var">depelim</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">wf_fresh_globals</span> {<span class="id" title="var">cf</span>} <span class="id" title="var">Σ</span> : <span class="id" title="keyword">wf</span> <span class="id" title="var">Σ</span> → <span class="id" title="var">fresh_globals</span> <span class="id" title="var">Σ</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">induction</span> 1; <span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">lookup_add</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span> <span class="id" title="var">g</span> : <span class="id" title="var">lookup</span> <span class="id" title="var">k</span> (<span class="id" title="var">add</span> <span class="id" title="var">k</span> <span class="id" title="var">v</span> <span class="id" title="var">g</span>) = <span class="id" title="var">Some</span> <span class="id" title="var">v</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">rewrite</span> /<span class="id" title="var">lookup</span> /<span class="id" title="var">add</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">PTree.gss</span> //. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">lookup_add_other</span> <span class="id" title="var">k</span> <span class="id" title="var">k'</span> <span class="id" title="var">v</span> <span class="id" title="var">g</span> : <span class="id" title="var">k</span> ≠ <span class="id" title="var">k'</span> → <span class="id" title="var">lookup</span> <span class="id" title="var">k</span> (<span class="id" title="var">add</span> <span class="id" title="var">k'</span> <span class="id" title="var">v</span> <span class="id" title="var">g</span>) = <span class="id" title="var">lookup</span> <span class="id" title="var">k</span> <span class="id" title="var">g</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">eqk</span>. <span class="id" title="tactic">rewrite</span> /<span class="id" title="var">lookup</span> /<span class="id" title="var">add</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">PTree.gso</span> //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>/<span class="id" title="var">pos_of_kername_inj</span>. <span class="id" title="tactic">congruence</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">lookup_env_head</span> <span class="id" title="var">d</span> <span class="id" title="var">g</span> : <span class="id" title="var">lookup_env</span> (<span class="id" title="var">d</span> :: <span class="id" title="var">g</span>) <span class="id" title="var">d</span>.1 = <span class="id" title="var">Some</span> <span class="id" title="var">d</span>.2.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> /<span class="id" title="var">lookup_env</span> <span class="id" title="var">eq_kername_refl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">lookup_spec</span> {<span class="id" title="var">cf</span> : <span class="id" title="var">checker_flags</span>} (<span class="id" title="var">g</span> : <span class="id" title="var">global_env</span>) (<span class="id" title="var">e</span> : <span class="id" title="var">t</span>) : <span class="id" title="keyword">wf</span> <span class="id" title="var">g</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">repr</span> <span class="id" title="var">g</span> <span class="id" title="var">e</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <span class="id" title="var">k</span>, <span class="id" title="var">lookup</span> <span class="id" title="var">k</span> <span class="id" title="var">e</span> = <span class="id" title="var">lookup_env</span> <span class="id" title="var">g</span> <span class="id" title="var">k</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="keyword">wf</span> → <span class="id" title="var">k</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">g</span> <span class="id" title="tactic">in</span> <span class="id" title="var">k</span>, <span class="id" title="keyword">wf</span> |- *; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">change</span> (<span class="id" title="var">eq_kername</span> <span class="id" title="var">k</span> <span class="id" title="var">a</span>.1) <span class="id" title="keyword">with</span> (<span class="id" title="var">eqb</span> <span class="id" title="var">k</span> <span class="id" title="var">a</span>.1).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<span class="id" title="var">eqb_spec</span> <span class="id" title="var">k</span> <span class="id" title="var">a</span>.1).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">subst</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">of_global_env_cons</span>; [<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">wf_fresh_globals</span>|].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">lookup_add</span> <span class="id" title="var">lookup_env_head</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> <span class="id" title="var">of_global_env_cons</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <span class="id" title="var">wf_fresh_globals</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">lookup_add_other</span> //. <span class="id" title="tactic">destruct</span> <span class="id" title="var">a</span>; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">lookup_env_cons_fresh</span> //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">n</span>. <span class="id" title="tactic">congruence</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">apply</span> <span class="id" title="var">IHg</span>. <span class="id" title="var">now</span> <span class="id" title="var">depelim</span> <span class="id" title="keyword">wf</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">EnvMap</span>. *)<br/>
 </div>
 </div>
 <div id="footer">

@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICValidity</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.Morphisms.html#"><span class="id" title="library">Morphisms</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
@@ -298,34 +299,34 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">∃</span> <span class="id" title="var">x</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Universe&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="MetaCoq.Common.Universes.html#Universe.super"><span class="id" title="definition">Universe.super</span></a> (<a class="idref" href="MetaCoq.Common.Universes.html#Universe.super"><span class="id" title="definition">Universe.super</span></a> <span class="id" title="var">u</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICWfUniverses.html#wf_universe_super"><span class="id" title="lemma">wf_universe_super</span></a>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Product&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eexists</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#isType_Sort_inv"><span class="id" title="lemma">isType_Sort_inv</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">X1</span>; <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#isType_Sort_inv"><span class="id" title="lemma">isType_Sort_inv</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">X3</span>; <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">econstructor</span>; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICWfUniverses.html#wf_universe_product"><span class="id" title="lemma">wf_universe_product</span></a>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Lambda&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">X3</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">bs</span> <span class="id" title="var">tybs</span>].<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#isType_Sort_inv"><span class="id" title="lemma">isType_Sort_inv</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">X1</span>; <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> (<a class="idref" href="MetaCoq.Common.Universes.html#Universe.sort_of_product"><span class="id" title="definition">Universe.sort_of_product</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">bs</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">auto</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Let&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#infer_typing_sort_impl"><span class="id" title="lemma">infer_typing_sort_impl</span></a> <span class="id" title="keyword">with</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#id"><span class="id" title="definition">id</span></a> <span class="id" title="var">X5</span>; <span class="id" title="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#id"><span class="id" title="definition">id</span></a> <span class="id" title="tactic">in</span> *; <span class="id" title="tactic">intros</span> <span class="id" title="var">Hs</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_Cumul"><span class="id" title="constructor">type_Cumul</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_LetIn"><span class="id" title="constructor">type_LetIn</span></a>; <span class="id" title="tactic">eauto</span>. <span class="id" title="tactic">econstructor</span>; <span class="id" title="var">pcuic</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICConversion.html#convSpec_cumulSpec"><span class="id" title="lemma">convSpec_cumulSpec</span></a>, <a class="idref" href="MetaCoq.PCUIC.PCUICConversion.html#red1_cumulSpec"><span class="id" title="lemma">red1_cumulSpec</span></a>; <span class="id" title="tactic">constructor</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Application&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#infer_typing_sort_impl"><span class="id" title="lemma">infer_typing_sort_impl</span></a> <span class="id" title="keyword">with</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#id"><span class="id" title="definition">id</span></a> <span class="id" title="var">X3</span>; <span class="id" title="tactic">unfold</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#id"><span class="id" title="definition">id</span></a> <span class="id" title="tactic">in</span> *; <span class="id" title="tactic">intros</span> <span class="id" title="var">Hs'</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>: (<a class="idref" href="MetaCoq.PCUIC.PCUICWfUniverses.html#typing_wf_universe"><span class="id" title="lemma">typing_wf_universe</span></a> <span class="id" title="keyword">wf</span> <span class="id" title="var">Hs'</span>) ⇒ <span class="id" title="var">wfs</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#substitution0"><span class="id" title="lemma">substitution0</span></a> (<span class="id" title="var">n</span> := <span class="id" title="var">na</span>) (<span class="id" title="var">T</span> := <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tSort"><span class="id" title="constructor">tSort</span></a> <span class="id" title="var">_</span>)); <span class="id" title="tactic">eauto</span>.<br/>
@@ -355,7 +356,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#isType_subst_instance_decl"><span class="id" title="lemma">isType_subst_instance_decl</span></a> (<span class="id" title="var">Γ</span>:=<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>)); <span class="id" title="tactic">eauto</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Inductive&nbsp;type&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="MetaCoq.PCUIC.Typing.PCUICWeakeningEnvTyp.html#on_declared_inductive"><span class="id" title="lemma">on_declared_inductive</span></a> <span class="id" title="var">isdecl</span>); <span class="id" title="var">pcuic</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">isdecl</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#onArity"><span class="id" title="projection">onArity</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">o0</span>.<br/>
@@ -364,7 +365,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#isType_subst_instance_decl"><span class="id" title="lemma">isType_subst_instance_decl</span></a> (<span class="id" title="var">Γ</span>:=<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>)); <span class="id" title="tactic">eauto</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Constructor&nbsp;type&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> (<a class="idref" href="MetaCoq.PCUIC.Typing.PCUICWeakeningEnvTyp.html#on_declared_constructor"><span class="id" title="lemma">on_declared_constructor</span></a> <span class="id" title="var">isdecl</span>) <span class="id" title="keyword">as</span> [[<span class="id" title="var">oni</span> <span class="id" title="var">oib</span>] [<span class="id" title="var">cs</span> [<span class="id" title="var">declc</span> <span class="id" title="var">onc</span>]]].<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_of_constructor"><span class="id" title="definition">type_of_constructor</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#infer_typing_sort_impl"><span class="id" title="lemma">infer_typing_sort_impl</span></a> <span class="id" title="keyword">with</span> <span class="id" title="var">_</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#on_ctype"><span class="id" title="projection">on_ctype</span></a> <span class="id" title="var">onc</span>); <span class="id" title="tactic">intros</span> <span class="id" title="var">Hs</span>.<br/>
@@ -377,7 +378,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.app_context_nil_l"><span class="id" title="lemma">app_context_nil_l</span></a>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Case&nbsp;predicate&nbsp;application&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">cu</span> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#consistent_instance_ext"><span class="id" title="definition">consistent_instance_ext</span></a> <span class="id" title="var">Σ</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.ind_universes"><span class="id" title="projection">ind_universes</span></a> <span class="id" title="var">mdecl</span>) (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#puinst"><span class="id" title="projection">puinst</span></a> <span class="id" title="var">p</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICInductives.html#isType_mkApps_Ind_inv"><span class="id" title="lemma">isType_mkApps_Ind_inv</span></a> <span class="id" title="keyword">wf</span> <span class="id" title="var">isdecl</span>) <span class="id" title="tactic">in</span> <span class="id" title="var">X7</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">parsubst</span> [<span class="id" title="var">argsubst</span> <span class="id" title="var">Hind</span>]];<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">intuition</span> <span class="id" title="tactic">auto</span>. }<br/>
@@ -428,7 +429,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICInductives.html#arity_spine_case_predicate"><span class="id" title="lemma">arity_spine_case_predicate</span></a>; <span class="id" title="var">tea</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Proj&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> <span class="id" title="var">proof</span> <span class="id" title="var">isdecl</span> <span class="id" title="keyword">as</span> <span class="id" title="var">isdecl'</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICInductives.html#declared_projection_type"><span class="id" title="lemma">declared_projection_type</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">isdecl'</span>; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICInductives.html#isType_mkApps_Ind_inv"><span class="id" title="lemma">isType_mkApps_Ind_inv</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">X2</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">parsubst</span> [<span class="id" title="var">argsubst</span> [<span class="id" title="var">sppar</span> <span class="id" title="var">sparg</span><br/>
@@ -457,16 +458,16 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assumption</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Fix&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Utils.All_Forall.html#nth_error_all"><span class="id" title="lemma">nth_error_all</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">X0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">s</span> <span class="id" title="var">Hs</span>]; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">pcuic</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;CoFix&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Utils.All_Forall.html#nth_error_all"><span class="id" title="lemma">nth_error_all</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">X0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">s</span> <span class="id" title="var">Hs</span>]; <span class="id" title="var">pcuic</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Primitive&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">X0</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">s</span> [<span class="id" title="var">hty</span> <span class="id" title="var">hbod</span> <span class="id" title="var">huniv</span>]].<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">∃</span> <span class="id" title="var">s@</span><a class="idref" href="MetaCoq.Common.Universes.html#2069c293c95c271a185f7f719b9c1655"><span class="id" title="notation">[</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><a class="idref" href="MetaCoq.Common.Universes.html#2069c293c95c271a185f7f719b9c1655"><span class="id" title="notation">]</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">change</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tSort"><span class="id" title="constructor">tSort</span></a> <span class="id" title="var">s@</span><a class="idref" href="MetaCoq.Common.Universes.html#2069c293c95c271a185f7f719b9c1655"><span class="id" title="notation">[</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><a class="idref" href="MetaCoq.Common.Universes.html#2069c293c95c271a185f7f719b9c1655"><span class="id" title="notation">]</span></a>) <span class="id" title="keyword">with</span> <a class="idref" href="MetaCoq.Common.Universes.html#2069c293c95c271a185f7f719b9c1655"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tSort"><span class="id" title="constructor">tSort</span></a> <span class="id" title="var">s</span><a class="idref" href="MetaCoq.Common.Universes.html#2069c293c95c271a185f7f719b9c1655"><span class="id" title="notation">)@[</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><a class="idref" href="MetaCoq.Common.Universes.html#2069c293c95c271a185f7f719b9c1655"><span class="id" title="notation">]</span></a>.<br/>
@@ -475,7 +476,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">huniv</span> //.<br/>
 
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;- <span class="comment">(*&nbsp;Conv&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">∃</span> <span class="id" title="var">s</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
@@ -503,9 +504,15 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;To&nbsp;deprecate&nbsp;*)</span><br/>
 <span class="id" title="keyword">Notation</span> <a id="validity_term" class="idref" href="#validity_term"><span class="id" title="abbreviation">validity_term</span></a> <span class="id" title="keyword">wf</span> <span class="id" title="var">Ht</span> := (<a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#validity"><span class="id" title="lemma">validity</span></a> (<span class="id" title="var">wfΣ</span>:=<span class="id" title="keyword">wf</span>) <span class="id" title="var">Ht</span>).<br/>
 
 <br/>
+<span class="comment">(*&nbsp;This&nbsp;corollary&nbsp;relies&nbsp;strongly&nbsp;on&nbsp;validity&nbsp;to&nbsp;ensure<br/>
+&nbsp;&nbsp;&nbsp;every&nbsp;type&nbsp;in&nbsp;the&nbsp;derivation&nbsp;is&nbsp;well-typed.<br/>
+&nbsp;&nbsp;&nbsp;It&nbsp;should&nbsp;be&nbsp;used&nbsp;instead&nbsp;of&nbsp;the&nbsp;weaker&nbsp;<span class="inlinecode"><span class="id" title="var">invert_type_mkApps</span></span>,<br/>
+&nbsp;&nbsp;&nbsp;which&nbsp;is&nbsp;only&nbsp;used&nbsp;as&nbsp;a&nbsp;stepping&nbsp;stone&nbsp;to&nbsp;validity.<br/>
+&nbsp;*)</span><br/>
 <span class="id" title="keyword">Lemma</span> <a id="inversion_mkApps" class="idref" href="#inversion_mkApps"><span class="id" title="lemma">inversion_mkApps</span></a> {<a id="cf:101" class="idref" href="#cf:101"><span class="id" title="binder">cf</span></a>} {<a id="ab1e0b0f726a60ee3c2011f894309cd3" class="idref" href="#ab1e0b0f726a60ee3c2011f894309cd3"><span class="id" title="binder">Σ</span></a>} {<a id="fd1663d20631168bc0c3860594fa6331" class="idref" href="#fd1663d20631168bc0c3860594fa6331"><span class="id" title="binder">wfΣ</span></a> :  <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#wf"><span class="id" title="class">wf</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#ab1e0b0f726a60ee3c2011f894309cd3"><span class="id" title="variable">Σ</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a>} {<a id="2442d437e44a11b697ceed8f817511d8" class="idref" href="#2442d437e44a11b697ceed8f817511d8"><span class="id" title="binder">Γ</span></a> <a id="f:105" class="idref" href="#f:105"><span class="id" title="binder">f</span></a> <a id="u:106" class="idref" href="#u:106"><span class="id" title="binder">u</span></a> <a id="T:107" class="idref" href="#T:107"><span class="id" title="binder">T</span></a>} :<br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#ab1e0b0f726a60ee3c2011f894309cd3"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">;;;</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#2442d437e44a11b697ceed8f817511d8"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">|-</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#mkApps"><span class="id" title="definition">mkApps</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#f:105"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#u:106"><span class="id" title="variable">u</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">:</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#T:107"><span class="id" title="variable">T</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="A:108" class="idref" href="#A:108"><span class="id" title="binder">A</span></a><a class="idref" href="MetaCoq.Utils.MCPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#ab1e0b0f726a60ee3c2011f894309cd3"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">;;;</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#2442d437e44a11b697ceed8f817511d8"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">|-</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#f:105"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">:</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#A:108"><span class="id" title="variable">A</span></a> <a class="idref" href="MetaCoq.Utils.MCProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICArities.html#typing_spine"><span class="id" title="inductive">typing_spine</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#ab1e0b0f726a60ee3c2011f894309cd3"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#2442d437e44a11b697ceed8f817511d8"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#A:108"><span class="id" title="variable">A</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#u:106"><span class="id" title="variable">u</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#T:107"><span class="id" title="variable">T</span></a>.<br/>

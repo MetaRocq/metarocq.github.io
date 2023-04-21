@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICGuardCondition</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a><br/>
@@ -35,6 +36,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICNamelessDef.html#"><span class="id" title="library">PCUICNamelessDef</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICRenameDef.html#"><span class="id" title="library">PCUICRenameDef</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#"><span class="id" title="library">PCUICInstDef</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;AXIOM&nbsp;postulate&nbsp;correctness&nbsp;of&nbsp;the&nbsp;guard&nbsp;condition&nbsp;checker&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="tFixCoFix" class="idref" href="#tFixCoFix"><span class="id" title="definition">tFixCoFix</span></a> (<a id="b:1" class="idref" href="#b:1"><span class="id" title="binder">b</span></a>:<a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#FixCoFix"><span class="id" title="inductive">FixCoFix</span></a>) := <span class="id" title="keyword">if</span> <a class="idref" href="MetaCoq.PCUIC.PCUICGuardCondition.html#b:1"><span class="id" title="variable">b</span></a> <span class="id" title="keyword">then</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tFix"><span class="id" title="constructor">tFix</span></a> <span class="id" title="keyword">else</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tCoFix"><span class="id" title="constructor">tCoFix</span></a>.<br/>

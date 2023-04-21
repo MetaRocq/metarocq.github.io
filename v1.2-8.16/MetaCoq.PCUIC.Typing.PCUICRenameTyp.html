@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.Typing.PCUICRenameTyp</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.Morphisms.html#"><span class="id" title="library">Morphisms</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
@@ -499,6 +500,41 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;cumul_decls_renameP&nbsp;{P&nbsp;Σ&nbsp;Γ&nbsp;Γ'&nbsp;Δ&nbsp;Δ'&nbsp;f}&nbsp;d&nbsp;d'&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;wf&nbsp;Σ.1&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;urenaming&nbsp;P&nbsp;Δ&nbsp;Γ&nbsp;f&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;urenaming&nbsp;P&nbsp;Δ'&nbsp;Γ'&nbsp;f&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;on_free_vars_decl&nbsp;P&nbsp;d&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;on_free_vars_decl&nbsp;P&nbsp;d'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;on_ctx_free_vars&nbsp;P&nbsp;Γ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;cumul_decls&nbsp;Σ&nbsp;Γ&nbsp;Γ'&nbsp;d&nbsp;d'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;cumul_decls&nbsp;Σ&nbsp;Δ&nbsp;Δ'&nbsp;(rename_decl&nbsp;f&nbsp;d)&nbsp;(rename_decl&nbsp;f&nbsp;d').<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;wf&nbsp;uren&nbsp;uren'&nbsp;ond&nbsp;ond'&nbsp;onΓ&nbsp;Hd;&nbsp;depelim&nbsp;Hd;&nbsp;constructor;&nbsp;tas;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(eapply&nbsp;convSpec_renameP&nbsp;||&nbsp;eapply&nbsp;cumulSpec_renameP);&nbsp;tea.<br/>
+&nbsp;&nbsp;*&nbsp;now&nbsp;move/andP:&nbsp;ond&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;*&nbsp;now&nbsp;move/andP:&nbsp;ond'&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;*&nbsp;now&nbsp;move/andP:&nbsp;ond&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;*&nbsp;now&nbsp;move/andP:&nbsp;ond'&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;conv_decls_renameP&nbsp;{P&nbsp;Σ&nbsp;Γ&nbsp;Γ'&nbsp;Δ&nbsp;Δ'&nbsp;f}&nbsp;d&nbsp;d'&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;wf&nbsp;Σ.1&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;urenaming&nbsp;P&nbsp;Δ&nbsp;Γ&nbsp;f&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;urenaming&nbsp;P&nbsp;Δ'&nbsp;Γ'&nbsp;f&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;on_free_vars_decl&nbsp;P&nbsp;d&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;on_free_vars_decl&nbsp;P&nbsp;d'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;on_ctx_free_vars&nbsp;P&nbsp;Γ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;conv_decls&nbsp;Σ&nbsp;Γ&nbsp;Γ'&nbsp;d&nbsp;d'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;conv_decls&nbsp;Σ&nbsp;Δ&nbsp;Δ'&nbsp;(rename_decl&nbsp;f&nbsp;d)&nbsp;(rename_decl&nbsp;f&nbsp;d').<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;wf&nbsp;uren&nbsp;uren'&nbsp;ond&nbsp;ond'&nbsp;onΓ&nbsp;Hd;&nbsp;depelim&nbsp;Hd;&nbsp;constructor;&nbsp;tas;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(eapply&nbsp;convSpec_renameP&nbsp;||&nbsp;eapply&nbsp;cumulSpec_renameP);&nbsp;tea.<br/>
+&nbsp;&nbsp;*&nbsp;now&nbsp;move/andP:&nbsp;ond&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;*&nbsp;now&nbsp;move/andP:&nbsp;ond'&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;*&nbsp;now&nbsp;move/andP:&nbsp;ond&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;*&nbsp;now&nbsp;move/andP:&nbsp;ond'&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="on_free_vars_ctx_onctx_k" class="idref" href="#on_free_vars_ctx_onctx_k"><span class="id" title="lemma">on_free_vars_ctx_onctx_k</span></a> <a id="P:60" class="idref" href="#P:60"><span class="id" title="binder">P</span></a> <a id="ctx:61" class="idref" href="#ctx:61"><span class="id" title="binder">ctx</span></a> :<br/>
@@ -529,8 +565,76 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;conv_ctx_renameP&nbsp;{Σ&nbsp;:&nbsp;global_env_ext}&nbsp;{P}&nbsp;{Γ&nbsp;Δ}&nbsp;{L&nbsp;R}&nbsp;f&nbsp;:<br/>
+&nbsp;&nbsp;wf&nbsp;Σ.1&nbsp;-&gt;<br/>
+&nbsp;&nbsp;urenaming&nbsp;P&nbsp;Δ&nbsp;Γ&nbsp;f&nbsp;-&gt;<br/>
+&nbsp;&nbsp;on_free_vars_ctx&nbsp;P&nbsp;L&nbsp;-&gt;<br/>
+&nbsp;&nbsp;on_free_vars_ctx&nbsp;P&nbsp;R&nbsp;-&gt;<br/>
+&nbsp;&nbsp;on_ctx_free_vars&nbsp;P&nbsp;Γ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;conv_context&nbsp;Σ&nbsp;(Γ&nbsp;,,,&nbsp;L)&nbsp;(Γ&nbsp;,,,&nbsp;R)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;conv_context&nbsp;Σ&nbsp;(Δ&nbsp;,,,&nbsp;rename_context&nbsp;f&nbsp;L)&nbsp;(Δ&nbsp;,,,&nbsp;rename_context&nbsp;f&nbsp;R).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;wf&nbsp;uren&nbsp;onL&nbsp;onL'&nbsp;onΓ&nbsp;H.<br/>
+&nbsp;&nbsp;rewrite&nbsp;/rename_context&nbsp;-&nbsp;!mapi_context_fold.<br/>
+&nbsp;&nbsp;pose&nbsp;proof&nbsp;(All2_fold_length&nbsp;H)&nbsp;as&nbsp;hlen.<br/>
+&nbsp;&nbsp;len&nbsp;in&nbsp;hlen.&nbsp;assert&nbsp;(|L| = |R|)&nbsp;by&nbsp;lia.<br/>
+&nbsp;&nbsp;eapply&nbsp;All2_fold_app_inv&nbsp;in&nbsp;H&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span>&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;eapply&nbsp;All2_fold_app;&nbsp;len&nbsp;=&gt;&nbsp;//;&nbsp;pcuic.<br/>
+&nbsp;&nbsp;{&nbsp;eapply&nbsp;conv_ctx_refl'.&nbsp;}<br/>
+&nbsp;&nbsp;move/on_free_vars_ctx_onctx_k:&nbsp;onL&nbsp;=&gt;&nbsp;onL.<br/>
+&nbsp;&nbsp;move/on_free_vars_ctx_onctx_k:&nbsp;onL'&nbsp;=&gt;&nbsp;onR.<br/>
+<br/>
+&nbsp;&nbsp;eapply&nbsp;All2_fold_mapi.<br/>
+&nbsp;&nbsp;eapply&nbsp;All2_fold_impl_ind_onctx_k;&nbsp;tea&nbsp;=&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;/=&nbsp;L'&nbsp;R'&nbsp;d&nbsp;d'&nbsp;IH&nbsp;onL'&nbsp;IH'&nbsp;ond&nbsp;ond'.<br/>
+&nbsp;&nbsp;simpl.<br/>
+&nbsp;&nbsp;rewrite&nbsp;!mapi_context_fold&nbsp;-/(rename_context&nbsp;f&nbsp;L')&nbsp;-/(rename_context&nbsp;f&nbsp;R').<br/>
+&nbsp;&nbsp;eapply&nbsp;conv_decls_renameP;&nbsp;eauto.<br/>
+&nbsp;&nbsp;+&nbsp;now&nbsp;eapply&nbsp;urenaming_context.<br/>
+&nbsp;&nbsp;+&nbsp;rewrite&nbsp;(All2_fold_length&nbsp;IH).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;eapply&nbsp;urenaming_context.<br/>
+&nbsp;&nbsp;+&nbsp;now&nbsp;eapply&nbsp;ondecl_on_free_vars_decl.<br/>
+&nbsp;&nbsp;+&nbsp;rewrite&nbsp;(All2_fold_length&nbsp;IH').<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;eapply&nbsp;ondecl_on_free_vars_decl.<br/>
+&nbsp;&nbsp;+&nbsp;rewrite&nbsp;on_ctx_free_vars_extend&nbsp;//&nbsp;onΓ.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;move/on_free_vars_ctx_onctx_k:&nbsp;onL'.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;cumul_ctx_renameP&nbsp;{Σ&nbsp;:&nbsp;global_env_ext}&nbsp;{P}&nbsp;{Γ&nbsp;Δ}&nbsp;{L&nbsp;R}&nbsp;f&nbsp;:<br/>
+&nbsp;&nbsp;wf&nbsp;Σ.1&nbsp;-&gt;<br/>
+&nbsp;&nbsp;urenaming&nbsp;P&nbsp;Δ&nbsp;Γ&nbsp;f&nbsp;-&gt;<br/>
+&nbsp;&nbsp;on_free_vars_ctx&nbsp;P&nbsp;L&nbsp;-&gt;<br/>
+&nbsp;&nbsp;on_free_vars_ctx&nbsp;P&nbsp;R&nbsp;-&gt;<br/>
+&nbsp;&nbsp;on_ctx_free_vars&nbsp;P&nbsp;Γ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;cumul_context&nbsp;Σ&nbsp;(Γ&nbsp;,,,&nbsp;L)&nbsp;(Γ&nbsp;,,,&nbsp;R)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;cumul_context&nbsp;Σ&nbsp;(Δ&nbsp;,,,&nbsp;rename_context&nbsp;f&nbsp;L)&nbsp;(Δ&nbsp;,,,&nbsp;rename_context&nbsp;f&nbsp;R).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;wf&nbsp;uren&nbsp;onL&nbsp;onL'&nbsp;onΓ&nbsp;H.<br/>
+&nbsp;&nbsp;rewrite&nbsp;/rename_context&nbsp;-&nbsp;!mapi_context_fold.<br/>
+&nbsp;&nbsp;pose&nbsp;proof&nbsp;(All2_fold_length&nbsp;H)&nbsp;as&nbsp;hlen.<br/>
+&nbsp;&nbsp;len&nbsp;in&nbsp;hlen.&nbsp;assert&nbsp;(|L| = |R|)&nbsp;by&nbsp;lia.<br/>
+&nbsp;&nbsp;eapply&nbsp;All2_fold_app_inv&nbsp;in&nbsp;H&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span>&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;eapply&nbsp;All2_fold_app;&nbsp;len&nbsp;=&gt;&nbsp;//;&nbsp;pcuic.<br/>
+&nbsp;&nbsp;{&nbsp;eapply&nbsp;cumul_ctx_refl'.&nbsp;}<br/>
+&nbsp;&nbsp;move/on_free_vars_ctx_onctx_k:&nbsp;onL&nbsp;=&gt;&nbsp;onL.<br/>
+&nbsp;&nbsp;move/on_free_vars_ctx_onctx_k:&nbsp;onL'&nbsp;=&gt;&nbsp;onR.<br/>
+<br/>
+&nbsp;&nbsp;eapply&nbsp;All2_fold_mapi.<br/>
+&nbsp;&nbsp;eapply&nbsp;All2_fold_impl_ind_onctx_k;&nbsp;tea&nbsp;=&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;/=&nbsp;L'&nbsp;R'&nbsp;d&nbsp;d'&nbsp;IH&nbsp;onL'&nbsp;IH'&nbsp;ond&nbsp;ond'.<br/>
+&nbsp;&nbsp;simpl.<br/>
+&nbsp;&nbsp;rewrite&nbsp;!mapi_context_fold&nbsp;-/(rename_context&nbsp;f&nbsp;L')&nbsp;-/(rename_context&nbsp;f&nbsp;R').<br/>
+&nbsp;&nbsp;eapply&nbsp;cumul_decls_renameP;&nbsp;eauto.<br/>
+&nbsp;&nbsp;+&nbsp;now&nbsp;eapply&nbsp;urenaming_context.<br/>
+&nbsp;&nbsp;+&nbsp;rewrite&nbsp;(All2_fold_length&nbsp;IH).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;eapply&nbsp;urenaming_context.<br/>
+&nbsp;&nbsp;+&nbsp;now&nbsp;eapply&nbsp;ondecl_on_free_vars_decl.<br/>
+&nbsp;&nbsp;+&nbsp;rewrite&nbsp;(All2_fold_length&nbsp;IH').<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;eapply&nbsp;ondecl_on_free_vars_decl.<br/>
+&nbsp;&nbsp;+&nbsp;rewrite&nbsp;on_ctx_free_vars_extend&nbsp;//&nbsp;onΓ.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;move/on_free_vars_ctx_onctx_k:&nbsp;onL'.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="subst1_inst" class="idref" href="#subst1_inst"><span class="id" title="lemma">subst1_inst</span></a> :<br/>
@@ -552,6 +656,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">reflexivity</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
+<span class="comment">(*&nbsp;Hint&nbsp;Rewrite&nbsp;@subst1_inst&nbsp;:&nbsp;sigma.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="rename_predicate_preturn" class="idref" href="#rename_predicate_preturn"><span class="id" title="lemma">rename_predicate_preturn</span></a> <a id="f:72" class="idref" href="#f:72"><span class="id" title="binder">f</span></a> <a id="p:73" class="idref" href="#p:73"><span class="id" title="binder">p</span></a> :<br/>
@@ -809,6 +914,7 @@ For an unconditional renaming defined on all variables in the source context
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">∃</span> <span class="id" title="var">s1</span>. <span class="id" title="tactic">eapply</span> <span class="id" title="var">ihA</span>; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">Σ</span> <span class="id" title="var">wfΣ</span> <span class="id" title="var">Γ</span> <span class="id" title="var">wfΓ</span> <span class="id" title="var">na</span> <span class="id" title="var">A</span> <span class="id" title="var">t</span> <span class="id" title="var">s1</span> <span class="id" title="var">B</span> <span class="id" title="var">X</span> <span class="id" title="var">hA</span> <span class="id" title="var">ihA</span> <span class="id" title="var">ht</span> <span class="id" title="var">iht</span> <span class="id" title="var">P</span> <span class="id" title="var">Δ</span> <span class="id" title="var">f</span> <span class="id" title="var">hf</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;/andP&nbsp;<span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">havB</span></span>.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">econstructor</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">eapply</span> <span class="id" title="var">ihA</span>; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;+ <span class="id" title="tactic">eapply</span> <span class="id" title="var">iht</span>; <span class="id" title="tactic">eauto</span>; <span class="id" title="tactic">simpl</span>.<br/>

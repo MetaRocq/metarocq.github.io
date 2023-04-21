@@ -28,12 +28,13 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.Conversion.PCUICWeakeningConfigConv</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.MCUtils.html#"><span class="id" title="library">MCUtils</span></a> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningConfig.html#"><span class="id" title="library">PCUICWeakeningConfig</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICEquality.html#"><span class="id" title="library">PCUICEquality</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICReduction.html#"><span class="id" title="library">PCUICReduction</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#"><span class="id" title="library">PCUICCumulativity</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativitySpec.html#"><span class="id" title="library">PCUICCumulativitySpec</span></a><br/>
-&nbsp;&nbsp;   <br/>
-&nbsp;&nbsp; .<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;PCUICContextSubst&nbsp;*)</span> <span class="comment">(*&nbsp;PCUICUnivSubst&nbsp;*)</span> <span class="comment">(*&nbsp;PCUICCases&nbsp;*)</span> <span class="comment">(*&nbsp;PCUICTyping&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;PCUICGuardCondition&nbsp;*)</span> <span class="comment">(*&nbsp;PCUICGlobalEnv&nbsp;*)</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span>.<br/>
 
 <br/>
@@ -83,6 +84,7 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;TODO:&nbsp;Factor&nbsp;with&nbsp;PCUICWeakeningEnvConv.R_global_instance_weaken_env&nbsp;*)</span><br/>
 <span class="id" title="keyword">Lemma</span> <a id="R_global_instance_weaken_subrel" class="idref" href="#R_global_instance_weaken_subrel"><span class="id" title="lemma">R_global_instance_weaken_subrel</span></a> <a id="c9c14b58eeeaee559bef0d4f884fa28f" class="idref" href="#c9c14b58eeeaee559bef0d4f884fa28f"><span class="id" title="binder">Σ</span></a> <a id="Re:35" class="idref" href="#Re:35"><span class="id" title="binder">Re</span></a> <a id="Re':36" class="idref" href="#Re':36"><span class="id" title="binder">Re'</span></a> <a id="Rle:37" class="idref" href="#Rle:37"><span class="id" title="binder">Rle</span></a> <a id="Rle':38" class="idref" href="#Rle':38"><span class="id" title="binder">Rle'</span></a> <a id="gr:39" class="idref" href="#gr:39"><span class="id" title="binder">gr</span></a> <a id="napp:40" class="idref" href="#napp:40"><span class="id" title="binder">napp</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.RelationClasses.html#subrelation"><span class="id" title="class">RelationClasses.subrelation</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICWeakeningConfigConv.html#Re:35"><span class="id" title="variable">Re</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICWeakeningConfigConv.html#Re':36"><span class="id" title="variable">Re'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.RelationClasses.html#subrelation"><span class="id" title="class">RelationClasses.subrelation</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICWeakeningConfigConv.html#Rle:37"><span class="id" title="variable">Rle</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICWeakeningConfigConv.html#Rle':38"><span class="id" title="variable">Rle'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -99,6 +101,7 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;TODO:&nbsp;Factor&nbsp;with&nbsp;PCUICWeakeningEnvConv.eq_term_upto_univ_weaken_env&nbsp;*)</span><br/>
 #[<span class="id" title="var">global</span>]<br/>
 <span class="id" title="keyword">Instance</span> <a id="eq_term_upto_univ_weaken_subrel" class="idref" href="#eq_term_upto_univ_weaken_subrel"><span class="id" title="instance">eq_term_upto_univ_weaken_subrel</span></a> <a id="b2fa38fbaf9e73dda3ce249d373db916" class="idref" href="#b2fa38fbaf9e73dda3ce249d373db916"><span class="id" title="binder">Σ</span></a> <a id="Re:42" class="idref" href="#Re:42"><span class="id" title="binder">Re</span></a> <a id="Re':43" class="idref" href="#Re':43"><span class="id" title="binder">Re'</span></a> <a id="Rle:44" class="idref" href="#Rle:44"><span class="id" title="binder">Rle</span></a> <a id="Rle':45" class="idref" href="#Rle':45"><span class="id" title="binder">Rle'</span></a> <a id="napp:46" class="idref" href="#napp:46"><span class="id" title="binder">napp</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.RelationClasses.html#subrelation"><span class="id" title="class">RelationClasses.subrelation</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICWeakeningConfigConv.html#Re:42"><span class="id" title="variable">Re</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICWeakeningConfigConv.html#Re':43"><span class="id" title="variable">Re'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -256,6 +259,10 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*<br/>
+[global] Hint Resolve weakening_config_conv_ctx : config.
+<span class="inlinecode"><span class="id" title="var">global</span></span>&nbsp;Hint&nbsp;Resolve&nbsp;weakening_config_cumul_ctx&nbsp;:&nbsp;config.<br/>
+*)</span><br/>
 </div>
 </div>
 <div id="footer">

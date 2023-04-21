@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICSR</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICTactics.html#"><span class="id" title="library">PCUICTactics</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICUtils.html#"><span class="id" title="library">PCUICUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICOnOne.html#"><span class="id" title="library">PCUICOnOne</span></a><br/>
@@ -63,6 +64,7 @@
 <span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Common.Universes.html#Universe.sort_of_product"><span class="id" title="definition">Universe.sort_of_product</span></a> : <span class="id" title="tactic">simpl</span> <span class="id" title="var">nomatch</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Preservation&nbsp;of&nbsp;wf_*fixpoint&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="wf_fixpoint_red1_type" class="idref" href="#wf_fixpoint_red1_type"><span class="id" title="lemma">wf_fixpoint_red1_type</span></a> {<a id="cf:1" class="idref" href="#cf:1"><span class="id" title="binder">cf</span></a> <a id="ebf069dbc779b42a15c441a6d39d5f83" class="idref" href="#ebf069dbc779b42a15c441a6d39d5f83"><span class="id" title="binder">Σ</span></a>} {<a id="9c77acedd153c05882e0fedfeff8f884" class="idref" href="#9c77acedd153c05882e0fedfeff8f884"><span class="id" title="binder">wfΣ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#wf"><span class="id" title="class">wf</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#ebf069dbc779b42a15c441a6d39d5f83"><span class="id" title="variable">Σ</span></a>} <a id="9cfd66c80bf9988ea8f7104e167ac5cd" class="idref" href="#9cfd66c80bf9988ea8f7104e167ac5cd"><span class="id" title="binder">Γ</span></a> <a id="mfix:5" class="idref" href="#mfix:5"><span class="id" title="binder">mfix</span></a> <a id="mfix1:6" class="idref" href="#mfix1:6"><span class="id" title="binder">mfix1</span></a> :<br/>
@@ -607,6 +609,15 @@ The crucial property on constructors of cumulative inductive types for type pres
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Instance&nbsp;conv_context_sym&nbsp;{cf}&nbsp;Σ&nbsp;{wfΣ&nbsp;:&nbsp;wf&nbsp;Σ}&nbsp;:&nbsp;CRelationClasses.Symmetric&nbsp;(All2_fold&nbsp;(conv_decls&nbsp;Σ)).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;x&nbsp;y.&nbsp;now&nbsp;apply&nbsp;conv_context_sym.<br/>
+Qed.<br/>
+<br/>
+Instance&nbsp;conv_context_trans&nbsp;{cf}&nbsp;Σ&nbsp;{wfΣ&nbsp;:&nbsp;wf&nbsp;Σ}&nbsp;:&nbsp;CRelationClasses.Transitive&nbsp;(All2_fold&nbsp;(conv_decls&nbsp;Σ)).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;x&nbsp;y&nbsp;z.&nbsp;now&nbsp;apply&nbsp;conv_context_trans.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="on_free_vars_ctx_set_binder_name" class="idref" href="#on_free_vars_ctx_set_binder_name"><span class="id" title="lemma">on_free_vars_ctx_set_binder_name</span></a> <a id="P:199" class="idref" href="#P:199"><span class="id" title="binder">P</span></a> <a id="5d76daa7e6f6e22d30d644bf263e59eb" class="idref" href="#5d76daa7e6f6e22d30d644bf263e59eb"><span class="id" title="binder">Γ</span></a> <a id="nas:201" class="idref" href="#nas:201"><span class="id" title="binder">nas</span></a> :<br/>
@@ -694,8 +705,40 @@ The crucial property on constructors of cumulative inductive types for type pres
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;conv_context_set_binder_name&nbsp;{cf}&nbsp;{Σ}&nbsp;{wfΣ&nbsp;:&nbsp;wf&nbsp;Σ}&nbsp;{Δ&nbsp;nas&nbsp;Γ&nbsp;Γ'}&nbsp;:<br/>
+&nbsp;&nbsp;All2&nbsp;(fun&nbsp;na&nbsp;decl&nbsp;=&gt;&nbsp;eq_binder_annot&nbsp;na&nbsp;decl.(decl_name))&nbsp;nas&nbsp;Γ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;conv_context_rel&nbsp;Σ&nbsp;Δ&nbsp;Γ&nbsp;Γ'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;conv_context_rel&nbsp;Σ&nbsp;Δ&nbsp;Γ&nbsp;(map2&nbsp;set_binder_name&nbsp;nas&nbsp;Γ').<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;hlen&nbsp;h.&nbsp;induction&nbsp;h&nbsp;in&nbsp;nas,&nbsp;hlen&nbsp;|-&nbsp;*;&nbsp;case:&nbsp;nas&nbsp;hlen&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;*&nbsp;constructor.<br/>
+&nbsp;&nbsp;*&nbsp;move=&gt;&nbsp;a&nbsp;l&nbsp;/=&nbsp;h.&nbsp;depelim&nbsp;h.<br/>
+&nbsp;&nbsp;*&nbsp;move=&gt;&nbsp;h';&nbsp;depelim&nbsp;h'.<br/>
+&nbsp;&nbsp;*&nbsp;move=&gt;&nbsp;a&nbsp;l&nbsp;/=&nbsp;h'.&nbsp;depelim&nbsp;h'.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;p;&nbsp;cbn;&nbsp;constructor;&nbsp;try&nbsp;constructor;&nbsp;cbn;&nbsp;eauto;&nbsp;try&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;IHh;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;specialize&nbsp;(IHh&nbsp;_&nbsp;h').&nbsp;now&nbsp;symmetry.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;IHh;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;symmetry.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;conv_context_set_binder_name_inv&nbsp;{cf}&nbsp;{Σ}&nbsp;{wfΣ&nbsp;:&nbsp;wf&nbsp;Σ}&nbsp;{Δ&nbsp;nas&nbsp;Γ&nbsp;Γ'}&nbsp;:<br/>
+&nbsp;&nbsp;All2&nbsp;(fun&nbsp;na&nbsp;decl&nbsp;=&gt;&nbsp;eq_binder_annot&nbsp;na&nbsp;decl.(decl_name))&nbsp;nas&nbsp;Γ'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;conv_context_rel&nbsp;Σ&nbsp;Δ&nbsp;Γ&nbsp;(map2&nbsp;set_binder_name&nbsp;nas&nbsp;Γ')&nbsp;-&gt;<br/>
+&nbsp;&nbsp;conv_context_rel&nbsp;Σ&nbsp;Δ&nbsp;Γ&nbsp;Γ'.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;hlen&nbsp;h.&nbsp;induction&nbsp;Γ'&nbsp;in&nbsp;nas,&nbsp;Γ,&nbsp;h,&nbsp;hlen&nbsp;|-&nbsp;*.<br/>
+&nbsp;&nbsp;*&nbsp;case:&nbsp;nas&nbsp;h&nbsp;hlen&nbsp;=&gt;&nbsp;h;&nbsp;depelim&nbsp;h;&nbsp;try&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;move=&gt;&nbsp;l&nbsp;h&nbsp;/=&nbsp;//.<br/>
+&nbsp;&nbsp;*&nbsp;depelim&nbsp;hlen.&nbsp;depelim&nbsp;h.&nbsp;depelim&nbsp;a0.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;a&nbsp;=&gt;&nbsp;//;&nbsp;noconf&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;constructor;&nbsp;auto.&nbsp;eapply&nbsp;IHΓ';&nbsp;tea.&nbsp;constructor;&nbsp;auto.&nbsp;simpl&nbsp;in&nbsp;e.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;transitivity&nbsp;x.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;a&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">na'</span></span> <span class="inlinecode">[<span class="id" title="var">b''</span>|]</span> <span class="inlinecode"><span class="id" title="var">ty'</span></span>;&nbsp;noconf&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;constructor;&nbsp;auto.&nbsp;eapply&nbsp;IHΓ';&nbsp;tea.&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;transitivity&nbsp;x.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="OnOne2_local_env_forget_types" class="idref" href="#OnOne2_local_env_forget_types"><span class="id" title="lemma">OnOne2_local_env_forget_types</span></a> <a id="P:249" class="idref" href="#P:249"><span class="id" title="binder">P</span></a> <a id="ctx:250" class="idref" href="#ctx:250"><span class="id" title="binder">ctx</span></a> <a id="ctx':251" class="idref" href="#ctx':251"><span class="id" title="binder">ctx'</span></a> :<br/>
@@ -709,9 +752,45 @@ The crucial property on constructors of cumulative inductive types for type pres
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;OnOne2_local_env_All&nbsp;Σ&nbsp;P&nbsp;Q&nbsp;R&nbsp;ctx&nbsp;ctx'&nbsp;:<br/>
+&nbsp;&nbsp;OnOne2_local_env&nbsp;(on_one_decl&nbsp;P)&nbsp;ctx&nbsp;ctx'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;All_local_env&nbsp;(lift_typing&nbsp;Q&nbsp;Σ)&nbsp;ctx&nbsp;-&gt;<br/>
+&nbsp;&nbsp;(forall&nbsp;Γ&nbsp;t&nbsp;t'&nbsp;ty,&nbsp;All_local_env&nbsp;(lift_typing&nbsp;R&nbsp;Σ)&nbsp;Γ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;lift_typing&nbsp;Q&nbsp;Σ&nbsp;Γ&nbsp;t&nbsp;ty&nbsp;-&gt;&nbsp;P&nbsp;Γ&nbsp;t&nbsp;t'&nbsp;-&gt;&nbsp;lift_typing&nbsp;R&nbsp;Σ&nbsp;Γ&nbsp;t'&nbsp;ty)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;(forall&nbsp;Γ,&nbsp;All_local_env&nbsp;(lift_typing&nbsp;Q&nbsp;Σ)&nbsp;Γ&nbsp;-&gt;&nbsp;All_local_env&nbsp;(lift_typing&nbsp;R&nbsp;Σ)&nbsp;Γ)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;All_local_env&nbsp;(lift_typing&nbsp;R&nbsp;Σ)&nbsp;ctx'.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;o&nbsp;a&nbsp;H.<br/>
+&nbsp;&nbsp;induction&nbsp;o&nbsp;in&nbsp;a&nbsp;|-&nbsp;*;&nbsp;simpl.<br/>
+&nbsp;&nbsp;-&nbsp;depelim&nbsp;p;&nbsp;depelim&nbsp;a;&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;l&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">Hs</span></span>;&nbsp;exists&nbsp;s.&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;specialize&nbsp;(H&nbsp;Γ&nbsp;t&nbsp;t'&nbsp;(Some&nbsp;(tSort&nbsp;s))).&nbsp;simpl&nbsp;in&nbsp;H.&nbsp;eauto.<br/>
+&nbsp;&nbsp;-&nbsp;depelim&nbsp;p;&nbsp;subst;&nbsp;auto.&nbsp;depelim&nbsp;a.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;l&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">s'</span></span> <span class="inlinecode"><span class="id" title="var">Hs</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;IH.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;s&nbsp;as&nbsp;<span class="inlinecode">[?</span> <span class="inlinecode">&lt;-]|[?</span> <span class="inlinecode">&lt;-]</span>;&nbsp;subst;&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;specialize&nbsp;(H&nbsp;Γ&nbsp;t&nbsp;t'&nbsp;None).&nbsp;eapply&nbsp;H;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;exists&nbsp;s'.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;specialize&nbsp;(H&nbsp;Γ&nbsp;b&nbsp;b&nbsp;(Some&nbsp;t')).&nbsp;eapply&nbsp;H;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;exists&nbsp;s'.<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;s';&nbsp;eauto.&nbsp;specialize&nbsp;(H&nbsp;Γ&nbsp;t'&nbsp;b&nbsp;t).&nbsp;eapply&nbsp;H.&nbsp;eauto.&nbsp;exact&nbsp;Hs.<br/>
+&nbsp;&nbsp;-&nbsp;f_equal;&nbsp;auto.<br/>
+Qed.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICContextReduction.html#"><span class="id" title="library">PCUICContextReduction</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICOnFreeVars.html#"><span class="id" title="library">PCUICOnFreeVars</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;red_one_decl_conv_context&nbsp;{cf}&nbsp;{Σ}&nbsp;{wfΣ&nbsp;:&nbsp;wf&nbsp;Σ}&nbsp;{Γ&nbsp;Δ&nbsp;Δ'}&nbsp;:<br/>
+&nbsp;&nbsp;OnOne2_local_env&nbsp;(on_one_decl&nbsp;(fun&nbsp;Δ&nbsp;:&nbsp;context&nbsp;=&gt;&nbsp;red1&nbsp;Σ&nbsp;(Γ&nbsp;,,,&nbsp;Δ)))&nbsp;Δ&nbsp;Δ'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;conv_context&nbsp;Σ&nbsp;(Γ&nbsp;,,,&nbsp;Δ)&nbsp;(Γ&nbsp;,,,&nbsp;Δ').<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;o.<br/>
+&nbsp;&nbsp;eapply&nbsp;red_ctx_conv_context.<br/>
+&nbsp;&nbsp;eapply&nbsp;red_ctx_red_context.<br/>
+&nbsp;&nbsp;eapply&nbsp;red_context_app.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;apply&nbsp;red_ctx_rel_red_context_rel;&nbsp;tea.<br/>
+&nbsp;&nbsp;constructor.&nbsp;exact&nbsp;o.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="red_one_decl_red_ctx" class="idref" href="#red_one_decl_red_ctx"><span class="id" title="lemma">red_one_decl_red_ctx</span></a> {<a id="cf:252" class="idref" href="#cf:252"><span class="id" title="binder">cf</span></a>} {<a id="ef4fce13bea55dc370f904a6127a3097" class="idref" href="#ef4fce13bea55dc370f904a6127a3097"><span class="id" title="binder">Σ</span></a>} {<a id="3c2e46629fe8cc788b1aefd9a5dc4765" class="idref" href="#3c2e46629fe8cc788b1aefd9a5dc4765"><span class="id" title="binder">wfΣ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#wf"><span class="id" title="class">wf</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#ef4fce13bea55dc370f904a6127a3097"><span class="id" title="variable">Σ</span></a>} {<a id="1756c46ad07a07cdcf5dfd0239a9bfb1" class="idref" href="#1756c46ad07a07cdcf5dfd0239a9bfb1"><span class="id" title="binder">Γ</span></a> <a id="738ade578e4fe9f012e3986b7b648893" class="idref" href="#738ade578e4fe9f012e3986b7b648893"><span class="id" title="binder">Δ</span></a> <a id="46612c2c66a31272763ba7873761ad05" class="idref" href="#46612c2c66a31272763ba7873761ad05"><span class="id" title="binder">Δ'</span></a>} :<br/>
@@ -782,6 +861,23 @@ The crucial property on constructors of cumulative inductive types for type pres
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;onone_red_cont_context_subst&nbsp;{cf}&nbsp;{Σ}&nbsp;{wfΣ&nbsp;:&nbsp;wf&nbsp;Σ}&nbsp;Γ&nbsp;s&nbsp;s'&nbsp;Δ&nbsp;Δ'&nbsp;:<br/>
+&nbsp;&nbsp;wf_local&nbsp;Σ&nbsp;(Γ&nbsp;,,,&nbsp;Δ'&nbsp;,,,&nbsp;Δ)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;untyped_subslet&nbsp;Γ&nbsp;(List.rev&nbsp;s)&nbsp;Δ'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;untyped_subslet&nbsp;Γ&nbsp;(List.rev&nbsp;s')&nbsp;Δ'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;OnOne2&nbsp;(red1&nbsp;Σ&nbsp;Γ)&nbsp;s&nbsp;s'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;conv_context&nbsp;Σ&nbsp;(Γ&nbsp;,,,&nbsp;subst_context&nbsp;(List.rev&nbsp;s)&nbsp;0&nbsp;Δ)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(Γ&nbsp;,,,&nbsp;subst_context&nbsp;(List.rev&nbsp;s')&nbsp;0&nbsp;Δ).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;wf&nbsp;us&nbsp;us'.<br/>
+&nbsp;&nbsp;intros.<br/>
+&nbsp;&nbsp;eapply&nbsp;conv_context_app.<br/>
+&nbsp;&nbsp;eapply&nbsp;(conv_ctx_subst&nbsp;(Γ''&nbsp;:=&nbsp;<span class="inlinecode"></span>)).&nbsp;exact&nbsp;wf.<br/>
+&nbsp;&nbsp;eapply&nbsp;conv_context_rel_app.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;eapply&nbsp;All2_rev.&nbsp;eapply&nbsp;OnOne2_All2;&nbsp;tea.<br/>
+&nbsp;&nbsp;intros.&nbsp;now&nbsp;eapply&nbsp;red_conv,&nbsp;red1_red.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;all:tea.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="ctx_inst_merge" class="idref" href="#ctx_inst_merge"><span class="id" title="lemma">ctx_inst_merge</span></a> {<a id="cf:286" class="idref" href="#cf:286"><span class="id" title="binder">cf</span></a>} {<a id="b81b43d02c4b43f61fdd7203ece36bc9" class="idref" href="#b81b43d02c4b43f61fdd7203ece36bc9"><span class="id" title="binder">Σ</span></a>} {<a id="d76c078ae0c9a28bd936bac9effcca92" class="idref" href="#d76c078ae0c9a28bd936bac9effcca92"><span class="id" title="binder">wfΣ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#wf"><span class="id" title="class">wf</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#b81b43d02c4b43f61fdd7203ece36bc9"><span class="id" title="variable">Σ</span></a>} <a id="1f276fc2c843b3c782b7389bd1fd9c45" class="idref" href="#1f276fc2c843b3c782b7389bd1fd9c45"><span class="id" title="binder">Γ</span></a> <a id="inst:290" class="idref" href="#inst:290"><span class="id" title="binder">inst</span></a> <a id="inst':291" class="idref" href="#inst':291"><span class="id" title="binder">inst'</span></a> <a id="c41f546b37cfd377807d9d414c2c2fad" class="idref" href="#c41f546b37cfd377807d9d414c2c2fad"><span class="id" title="binder">Δ</span></a> :<br/>
@@ -961,7 +1057,11 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#P:339"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#c07a1e3ee75d1e39acdb4554f7fee8b5"><span class="id" title="variable">Γ</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tCase"><span class="id" title="constructor">tCase</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#ci:422"><span class="id" title="variable">ci</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#p:423"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#c:425"><span class="id" title="variable">c</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#brs:426"><span class="id" title="variable">brs</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tCase"><span class="id" title="constructor">tCase</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#ci:422"><span class="id" title="variable">ci</span></a> (<a class="idref" href="MetaCoq.PCUIC.utils.PCUICOnOne.html#set_pparams"><span class="id" title="definition">set_pparams</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#p:423"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#params':424"><span class="id" title="variable">params'</span></a>) <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#c:425"><span class="id" title="variable">c</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#brs:426"><span class="id" title="variable">brs</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 <br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;(forall&nbsp;(Γ&nbsp;:&nbsp;context)&nbsp;(ci&nbsp;:&nbsp;case_info)&nbsp;p&nbsp;pcontext'&nbsp;c&nbsp;brs,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;OnOne2_local_env&nbsp;(on_one_decl&nbsp;(fun&nbsp;Γ'&nbsp;=&gt;&nbsp;P&nbsp;(Γ&nbsp;,,,&nbsp;Γ')))&nbsp;p.(pcontext)&nbsp;pcontext'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;P&nbsp;Γ&nbsp;(tCase&nbsp;ci&nbsp;p&nbsp;c&nbsp;brs)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(tCase&nbsp;ci&nbsp;(set_pcontext&nbsp;p&nbsp;pcontext')&nbsp;c&nbsp;brs))&nbsp;-&gt;<br/>
+*)</span><br/>
 &nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> (<a id="bdc6d7ac417489712a4e28cfb275f47f" class="idref" href="#bdc6d7ac417489712a4e28cfb275f47f"><span class="id" title="binder">Γ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.context"><span class="id" title="definition">context</span></a>) (<a id="ci:428" class="idref" href="#ci:428"><span class="id" title="binder">ci</span></a> : <a class="idref" href="MetaCoq.Common.BasicAst.html#case_info"><span class="id" title="record">case_info</span></a>) <a id="p:429" class="idref" href="#p:429"><span class="id" title="binder">p</span></a> <a id="preturn':430" class="idref" href="#preturn':430"><span class="id" title="binder">preturn'</span></a> <a id="c:431" class="idref" href="#c:431"><span class="id" title="binder">c</span></a> <a id="brs:432" class="idref" href="#brs:432"><span class="id" title="binder">brs</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#closed_red1"><span class="id" title="definition">closed_red1</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#e4e396109864c24ba7afd74253c39310"><span class="id" title="variable">Σ</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#bdc6d7ac417489712a4e28cfb275f47f"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.Common.Environment.html#49608ad29a449fb99e23f35a3e9f2749"><span class="id" title="notation">,,,</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#inst_case_predicate_context"><span class="id" title="definition">inst_case_predicate_context</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#p:429"><span class="id" title="variable">p</span></a>) <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#p:429"><span class="id" title="variable">p</span></a>.(<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#preturn"><span class="id" title="projection">preturn</span></a>) <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#preturn':430"><span class="id" title="variable">preturn'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#P0:335"><span class="id" title="variable">P0</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#bdc6d7ac417489712a4e28cfb275f47f"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.Common.Environment.html#49608ad29a449fb99e23f35a3e9f2749"><span class="id" title="notation">,,,</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#inst_case_predicate_context"><span class="id" title="definition">inst_case_predicate_context</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#p:429"><span class="id" title="variable">p</span></a>) <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#p:429"><span class="id" title="variable">p</span></a>.(<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#preturn"><span class="id" title="projection">preturn</span></a>) <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#preturn':430"><span class="id" title="variable">preturn'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1103,6 +1203,11 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<span class="id" title="keyword">let</span> <span class="id" title="var">T</span> := <span class="id" title="keyword">type</span> <span class="id" title="keyword">of</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#closed_red1_ind"><span class="id" title="lemma">closed_red1_ind</span></a> <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">T'</span> := <span class="id" title="tactic">eval</span> <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">T</span> <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#closed_red1_ind"><span class="id" title="lemma">closed_red1_ind</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::core_scope:x_':'_x"><span class="id" title="notation">:</span></a> <span class="id" title="var">T'</span>)).<br/>
+<span class="comment">(*<br/>
+Ltac&nbsp;revert_until&nbsp;x&nbsp;:=<br/>
+&nbsp;&nbsp;repeat&nbsp;lazymatch&nbsp;goal&nbsp;with<br/>
+&nbsp;&nbsp;|&nbsp;<span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"></span>&nbsp;=&gt;&nbsp;revert&nbsp;H<br/>
+&nbsp;&nbsp;end.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">invert_closed_red</span> <span class="id" title="var">H</span> :=<br/>
@@ -1601,7 +1706,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Contexts&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">auto</span>. <span class="id" title="tactic">intros</span> <span class="id" title="var">Γ'</span> <span class="id" title="var">Δ'</span> <span class="id" title="var">Δ</span> →.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">induction</span> 1.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="var">depelim</span> <span class="id" title="var">p</span>. <span class="id" title="tactic">subst</span>. <span class="id" title="var">depelim</span> <span class="id" title="var">X</span>. <span class="id" title="tactic">constructor</span>.<br/>
@@ -1648,7 +1753,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICOnOne.html#OnOne2_local_env_impl"><span class="id" title="lemma">OnOne2_local_env_impl</span></a>; <span class="id" title="var">tea</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> ???. <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICOnOne.html#on_one_decl_impl"><span class="id" title="lemma">on_one_decl_impl</span></a> ⇒ ???; <span class="id" title="tactic">firstorder</span>. }<br/>
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Rel&nbsp;delta&nbsp;reduction&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">heq_nth_error</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">decl</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">na</span> <span class="id" title="var">b</span> <span class="id" title="var">ty</span>]; <span class="id" title="var">noconf</span> <span class="id" title="var">H</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> <span class="id" title="var">proof</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#nth_error_All_local_env"><span class="id" title="lemma">PCUICValidity.nth_error_All_local_env</span></a> <span class="id" title="var">heq_nth_error</span> <span class="id" title="var">wfΓ</span>); <span class="id" title="tactic">eauto</span>.<br/>
@@ -1659,7 +1764,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.app_context"><span class="id" title="definition">app_context</span></a>; <span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#firstn_skipn"><span class="id" title="lemma">firstn_skipn</span></a>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Prod&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">eauto</span>. <span class="id" title="tactic">intuition</span> <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.Typing.PCUICContextConversionTyp.html#closed_context_conversion"><span class="id" title="lemma">closed_context_conversion</span></a> <span class="id" title="var">_</span> <span class="id" title="var">typeb</span>); <span class="id" title="var">pcuics</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">constructor</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#ws_cumul_ctx_pb_refl"><span class="id" title="lemma">ws_cumul_ctx_pb_refl</span></a>, <a class="idref" href="MetaCoq.PCUIC.Typing.PCUICClosedTyp.html#wf_local_closed_context"><span class="id" title="lemma">wf_local_closed_context</span></a>.<br/>
@@ -1667,7 +1772,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#closed_red1_red"><span class="id" title="lemma">closed_red1_red</span></a>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Lambda&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#type_Cumul_alt"><span class="id" title="lemma">type_Cumul_alt</span></a>. <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_Lambda"><span class="id" title="constructor">type_Lambda</span></a>; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intuition</span> <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.Typing.PCUICContextConversionTyp.html#closed_context_conversion"><span class="id" title="lemma">closed_context_conversion</span></a> <span class="id" title="var">_</span> <span class="id" title="var">typeb</span>); <span class="id" title="var">pcuics</span>.<br/>
@@ -1679,7 +1784,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">constructor</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">Hu</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;LetIn&nbsp;body&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#type_Cumul_alt"><span class="id" title="lemma">type_Cumul_alt</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (@<a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#substitution_let"><span class="id" title="lemma">substitution_let</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">Γ</span> <span class="id" title="var">n</span> <span class="id" title="var">b</span> <span class="id" title="var">b_ty</span> <span class="id" title="var">b'</span> <span class="id" title="var">b'_ty</span> <span class="id" title="var">typeb'</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#typing_wf_local"><span class="id" title="lemma">typing_wf_local</span></a> <span class="id" title="var">typeb'</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">wfd</span>.<br/>
@@ -1690,7 +1795,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#cumul_refl'"><span class="id" title="instance">cumul_refl'</span></a>. <span class="id" title="tactic">constructor</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;LetIn&nbsp;value&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#type_Cumul_alt"><span class="id" title="lemma">type_Cumul_alt</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">econstructor</span>; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.Typing.PCUICContextConversionTyp.html#closed_context_conversion"><span class="id" title="lemma">closed_context_conversion</span></a> <span class="id" title="var">_</span> <span class="id" title="var">typeb'</span>); <span class="id" title="var">pcuics</span>.<br/>
@@ -1702,7 +1807,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#cumul_refl'"><span class="id" title="instance">cumul_refl'</span></a>. <span class="id" title="tactic">constructor</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">Hu</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;LetIn&nbsp;type&nbsp;annotation&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">forall_u</span> <span class="id" title="var">_</span> <span class="id" title="var">Hu</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#type_Cumul_alt"><span class="id" title="lemma">type_Cumul_alt</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">econstructor</span>; <span class="id" title="tactic">eauto</span>.<br/>
@@ -1720,7 +1825,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#cumul_refl'"><span class="id" title="instance">cumul_refl'</span></a>. <span class="id" title="tactic">constructor</span>. <span class="id" title="tactic">apply</span> <span class="id" title="var">Hu</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Application&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#substitution0"><span class="id" title="lemma">substitution0</span></a>; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> <span class="id" title="var">proof</span> <span class="id" title="var">typet</span> <span class="id" title="keyword">as</span> <span class="id" title="var">typet'</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICInversion.html#inversion_Lambda"><span class="id" title="lemma">inversion_Lambda</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">typet'</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">s1</span> [<span class="id" title="var">B'</span> [<span class="id" title="var">Ht</span> [<span class="id" title="var">Hb</span> <span class="id" title="var">HU</span>]]]]=&gt;//.<br/>
@@ -1732,7 +1837,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">constructor</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#ws_cumul_ctx_pb_refl"><span class="id" title="lemma">ws_cumul_ctx_pb_refl</span></a>. <span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">auto</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Fixpoint&nbsp;unfolding&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">args</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'&lt;&gt;'_x"><span class="id" title="notation">≠</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>) <span class="id" title="tactic">by</span> (<span class="id" title="tactic">destruct</span> <span class="id" title="var">args</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> *; <span class="id" title="tactic">congruence</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">symmetry</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#tApp_mkApps_inj"><span class="id" title="lemma">tApp_mkApps_inj</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H3</span> <span class="id" title="keyword">as</span> [-&gt; <span class="id" title="var">Hu</span>]; <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#mkApps_nonempty"><span class="id" title="lemma">mkApps_nonempty</span></a>; <span class="id" title="tactic">auto</span>.<br/>
@@ -1747,7 +1852,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICArities.html#type_ws_cumul_pb"><span class="id" title="lemma">type_ws_cumul_pb</span></a>; <span class="id" title="tactic">eauto</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Application&nbsp;congruence&nbsp;for&nbsp;argument&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intuition</span> <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#type_Cumul_alt"><span class="id" title="lemma">type_Cumul_alt</span></a>; [<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_App"><span class="id" title="constructor">type_App</span></a>| |]; <span class="id" title="tactic">eauto</span> <span class="id" title="keyword">with</span> <span class="id" title="keyword">wf</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#validity"><span class="id" title="lemma">validity</span></a>.<br/>
@@ -1762,7 +1867,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> -(<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICOnFreeVars.html#shiftnP_add"><span class="id" title="lemma">shiftnP_add</span></a> 1) <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICOnFreeVars.html#addnP_shiftnP"><span class="id" title="lemma">addnP_shiftnP</span></a>. <span class="id" title="tactic">repeat</span> <span class="id" title="var">inv_on_free_vars</span> ⇒ //.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Constant&nbsp;unfolding&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="var">epose</span> <span class="id" title="var">proof</span> (<span class="id" title="var">H'</span> := <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#declared_constant_to_gen"><span class="id" title="lemma">declared_constant_to_gen</span></a> <span class="id" title="var">H</span>); <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="var">epose</span> <span class="id" title="var">proof</span> (<span class="id" title="var">H0'</span> := <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#declared_constant_to_gen"><span class="id" title="lemma">declared_constant_to_gen</span></a> <span class="id" title="var">H0</span>); <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="var">epose</span> <span class="id" title="var">proof</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICGlobalEnv.html#declared_constant_inj"><span class="id" title="lemma">declared_constant_inj</span></a> <span class="id" title="var">decl</span> <span class="id" title="var">decl0</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>); <span class="id" title="var">tea</span>; <span class="id" title="tactic">subst</span> <span class="id" title="var">decl</span>.<br/>
@@ -1781,7 +1886,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> @<a class="idref" href="MetaCoq.PCUIC.Typing.PCUICUnivSubstitutionTyp.html#typing_subst_instance_decl"><span class="id" title="lemma">typing_subst_instance_decl</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">Γ</span>:=<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>); <span class="id" title="var">tea</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;iota&nbsp;reduction&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">clear</span> <span class="id" title="var">forall_u</span> <span class="id" title="var">forall_u0</span> <span class="id" title="var">X</span> <span class="id" title="var">X0</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="var">epose</span> <span class="id" title="var">proof</span> (<span class="id" title="var">isdecl'</span> := <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#declared_inductive_to_gen"><span class="id" title="lemma">declared_inductive_to_gen</span></a> <span class="id" title="var">isdecl</span>); <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">X4</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">wfcpc</span> <span class="id" title="var">IHcpc</span>].<br/>
@@ -1805,6 +1910,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">typec'</span> <span class="id" title="keyword">as</span> [[[[[<span class="id" title="var">_</span> <span class="id" title="var">equ</span>] <span class="id" title="var">cu</span>] <span class="id" title="var">cu'</span>] <span class="id" title="var">eqargs</span>] [<span class="id" title="var">cparsubst</span> [<span class="id" title="var">cargsubst</span> [<span class="id" title="var">iparsubst</span> [<span class="id" title="var">iidxsubst</span> <span class="id" title="var">ci'</span>]]]]].<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">ci'</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">cparsubst0</span> <span class="id" title="var">iparsubst0</span> <span class="id" title="var">idxsubst0</span> <span class="id" title="var">subsidx</span> [<span class="id" title="var">s</span> [<span class="id" title="var">typectx</span> [<span class="id" title="var">Hpars</span> <span class="id" title="var">Hargs</span>]]]].<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> <span class="id" title="var">proof</span> (<a class="idref" href="MetaCoq.PCUIC.Typing.PCUICWeakeningEnvTyp.html#on_declared_constructor"><span class="id" title="lemma">on_declared_constructor</span></a> <span class="id" title="var">declc</span>) <span class="id" title="keyword">as</span> [[<span class="id" title="var">onind</span> <span class="id" title="var">oib</span>] [<span class="id" title="var">ctor_sorts</span> [<span class="id" title="var">hnth</span> <span class="id" title="var">onc</span>]]].<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;pose&nbsp;proof&nbsp;(PCUICContextSubst.context_subst_fun&nbsp;csubst&nbsp;(iparsubst0.(inst_ctx_subst))).&nbsp;subst&nbsp;iparsubst.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="var">epose</span> <span class="id" title="var">proof</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICInductiveInversion.html#constructor_cumulative_indices"><span class="id" title="lemma">constructor_cumulative_indices</span></a> <span class="id" title="var">declc</span> <span class="id" title="var">Hu</span> <span class="id" title="var">cu'</span> <span class="id" title="var">equ</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">cparsubst0</span> <span class="id" title="var">iparsubst0</span> <span class="id" title="var">Hpars</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">argctxu1</span> := <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.subst_context"><span class="id" title="definition">subst_context</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="tactic">in</span> <span class="id" title="var">X</span> |- ×.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">argctxu</span> := <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.subst_context"><span class="id" title="definition">subst_context</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="tactic">in</span> <span class="id" title="var">X</span> |- ×.<br/>
@@ -1910,6 +2016,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assumption</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">hb</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#case_branch_type"><span class="id" title="definition">case_branch_type</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> <span class="id" title="var">cbtyg</span> := (<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#case_branch_type_gen"><span class="id" title="definition">case_branch_type_gen</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Move&nbsp;back&nbsp;to&nbsp;the&nbsp;canonical&nbsp;branch&nbsp;context&nbsp;for&nbsp;the&nbsp;rest&nbsp;of&nbsp;the&nbsp;proof&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">transitivity</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#subst0"><span class="id" title="abbreviation">subst0</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#rev"><span class="id" title="definition">List.rev</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#skipn"><span class="id" title="definition">skipn</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.ind_npars"><span class="id" title="projection">ind_npars</span></a> <span class="id" title="var">mdecl</span>) <span class="id" title="var">args</span>)) (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.expand_lets"><span class="id" title="definition">expand_lets</span></a> <span class="id" title="var">prebrctx</span> <span class="id" title="var">cbtyg</span><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICContextConversion.html#ws_cumul_pb_eq_le"><span class="id" title="lemma">ws_cumul_pb_eq_le</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICConversion.html#substitution_ws_cumul_pb"><span class="id" title="lemma">substitution_ws_cumul_pb</span></a> (<span class="id" title="var">Γ''</span> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>)). <span class="id" title="tactic">eapply</span> <span class="id" title="var">spbrctx</span>.<br/>
@@ -2050,7 +2157,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Arith.PeanoNat.html#Nat.add_comm"><span class="id" title="lemma">Nat.add_comm</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /= !<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.context_assumptions_app"><span class="id" title="lemma">context_assumptions_app</span></a> /= <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.context_assumptions_subst_context"><span class="id" title="lemma">context_assumptions_subst_context</span></a> //<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.context_assumptions_subst_instance"><span class="id" title="lemma">context_assumptions_subst_instance</span></a> //. }<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;rewrite&nbsp;-subst_instance_app_ctx&nbsp;-subst_instance_expand_lets&nbsp;closedn_subst_instance.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">relativize</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.context_assumptions"><span class="id" title="definition">context_assumptions</span></a> <span class="id" title="var">_</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">erewrite</span> &lt;-(<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#expand_lets_subst_comm"><span class="id" title="lemma">expand_lets_subst_comm</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:{ <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> /<span class="id" title="var">argctxu1</span> !<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.context_assumptions_app"><span class="id" title="lemma">context_assumptions_app</span></a><br/>
@@ -2089,7 +2196,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">lenskip</span> <a class="idref" href="MetaCoq.PCUIC.PCUICConversion.html#expand_lets_app"><span class="id" title="lemma">expand_lets_app</span></a> /<span class="id" title="var">argctxu1</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.context_assumptions_subst_context"><span class="id" title="lemma">context_assumptions_subst_context</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.context_assumptions_subst_instance"><span class="id" title="lemma">context_assumptions_subst_instance</span></a> //. }<br/>
 <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;clear&nbsp;-H4&nbsp;pparamsl&nbsp;wfbrctx&nbsp;convbrctx&nbsp;cumargs&nbsp;wfcbc&nbsp;wfparsargs&nbsp;Hpars&nbsp;lenskip&nbsp;lenfirst&nbsp;lenpars&nbsp;heq_ind_npars&nbsp;wf&nbsp;cparsubst0&nbsp;idxsubst0&nbsp;iparsubst0&nbsp;isdecl&nbsp;declc.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">argctxu</span>. <span class="id" title="tactic">simpl</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> !<a class="idref" href="MetaCoq.Utils.MCList.html#map_map_compose"><span class="id" title="lemma">map_map_compose</span></a>. <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Utils.All_Forall.html#All_map_eq"><span class="id" title="lemma">All_map_eq</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Utils.All_Forall.html#All_impl"><span class="id" title="lemma">All_impl</span></a>.<br/>
@@ -2152,7 +2259,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#R_global_instance_cstr_irrelevant"><span class="id" title="lemma">R_global_instance_cstr_irrelevant</span></a> <span class="id" title="var">declc</span>).<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Case&nbsp;congruence:&nbsp;on&nbsp;a&nbsp;cofix,&nbsp;impossible&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#inversion_mkApps"><span class="id" title="lemma">inversion_mkApps</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">typec</span> <span class="id" title="keyword">as</span> [? [<span class="id" title="var">tcof</span> ?]] ⇒  //.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICInductiveInversion.html#type_tCoFix_inv"><span class="id" title="lemma">type_tCoFix_inv</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">tcof</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">d</span> [[[<span class="id" title="var">Hnth</span> <span class="id" title="var">wfcofix</span>] ?] ?]] ⇒ //.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#unfold_cofix"><span class="id" title="definition">unfold_cofix</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
@@ -2167,7 +2274,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">discriminate</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Case&nbsp;congruence&nbsp;on&nbsp;a&nbsp;parameter&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">eassert</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICSpine.html#ctx_inst"><span class="id" title="abbreviation">ctx_inst</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">Hctxi</span> <span class="id" title="tactic">by</span> (<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#ctx_inst_impl"><span class="id" title="lemma">ctx_inst_impl</span></a> <span class="id" title="keyword">with</span> (2 := <span class="id" title="var">X5</span>); <span class="id" title="var">now</span> <span class="id" title="tactic">intros</span> ? []).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">eassert</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvTyping.ctx_inst"><span class="id" title="inductive">PCUICEnvTyping.ctx_inst</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">X6</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#ctx_inst_impl"><span class="id" title="lemma">ctx_inst_impl</span></a> <span class="id" title="keyword">with</span> (2 := <span class="id" title="var">X5</span>). <span class="id" title="tactic">intros</span> ? ? ? ? [? <span class="id" title="var">r</span>]; <span class="id" title="tactic">exact</span> <span class="id" title="var">r</span>. }<br/>
@@ -2283,6 +2390,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">do</span> 2 <span class="id" title="var">forward</span> <span class="id" title="var">X9</span> <span class="id" title="tactic">by</span> <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICArities.html#type_ws_cumul_pb"><span class="id" title="lemma">type_ws_cumul_pb</span></a>; <span class="id" title="var">tea</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">econstructor</span>; <span class="id" title="var">tea</span>. <span class="id" title="var">all</span>: <span class="id" title="tactic">econstructor</span>; <span class="id" title="var">tea</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;The&nbsp;branches&nbsp;contexts&nbsp;also&nbsp;depend&nbsp;on&nbsp;the&nbsp;parameters.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Utils.All_Forall.html#All2i_nth_hyp"><span class="id" title="lemma">All2i_nth_hyp</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">X9</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#All2i_All2i_mix"><span class="id" title="lemma">All2i_All2i_mix</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">X8</span>; <span class="id" title="var">tea</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">X9</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.Utils.All_Forall.html#All2i_impl"><span class="id" title="lemma">All2i_impl</span></a> <span class="id" title="var">X8</span>); <span class="id" title="tactic">clear</span> <span class="id" title="var">X8</span>.<br/>
@@ -2400,7 +2508,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#wt_cumul_pb_refl"><span class="id" title="lemma">wt_cumul_pb_refl</span></a>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Case&nbsp;congruence&nbsp;on&nbsp;the&nbsp;return&nbsp;clause&nbsp;context&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">clear</span> <span class="id" title="var">IHHu</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">X0</span>, <span class="id" title="var">X4</span> <span class="id" title="keyword">as</span> [].<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">eassert</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICSpine.html#ctx_inst"><span class="id" title="abbreviation">ctx_inst</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">Hctxi</span> <span class="id" title="tactic">by</span> (<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#ctx_inst_impl"><span class="id" title="lemma">ctx_inst_impl</span></a> <span class="id" title="keyword">with</span> (2 := <span class="id" title="var">X5</span>); <span class="id" title="var">now</span> <span class="id" title="tactic">intros</span> ? []).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">eassert</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvTyping.ctx_inst"><span class="id" title="inductive">PCUICEnvTyping.ctx_inst</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">X6</span>.<br/>
@@ -2450,7 +2558,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">symmetry</span>; <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#closed_red1_ws_cumul_pb"><span class="id" title="lemma">closed_red1_ws_cumul_pb</span></a> ⇒ //.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Case&nbsp;congruence&nbsp;on&nbsp;discriminee&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">X0</span>, <span class="id" title="var">X4</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">eassert</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICSpine.html#ctx_inst"><span class="id" title="abbreviation">ctx_inst</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">Hctxi</span> <span class="id" title="tactic">by</span> (<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#ctx_inst_impl"><span class="id" title="lemma">ctx_inst_impl</span></a> <span class="id" title="keyword">with</span> (2 := <span class="id" title="var">X5</span>); <span class="id" title="var">now</span> <span class="id" title="tactic">intros</span> ? []).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">eassert</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvTyping.ctx_inst"><span class="id" title="inductive">PCUICEnvTyping.ctx_inst</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">X6</span>.<br/>
@@ -2481,7 +2589,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">move</span>/<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#andP"><span class="id" title="lemma">andP</span></a>: <span class="id" title="var">X0</span> ⇒ [].<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Case&nbsp;congruence&nbsp;on&nbsp;branches&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">X0</span>, <span class="id" title="var">X4</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">eassert</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICSpine.html#ctx_inst"><span class="id" title="abbreviation">ctx_inst</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">Hctxi</span> <span class="id" title="tactic">by</span> (<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#ctx_inst_impl"><span class="id" title="lemma">ctx_inst_impl</span></a> <span class="id" title="keyword">with</span> (2 := <span class="id" title="var">X5</span>); <span class="id" title="var">now</span> <span class="id" title="tactic">intros</span> ? []).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">eassert</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvTyping.ctx_inst"><span class="id" title="inductive">PCUICEnvTyping.ctx_inst</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) <span class="id" title="keyword">as</span> <span class="id" title="var">X6</span>.<br/>
@@ -2511,7 +2619,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSR.html#inst_case_branch_context_eq"><span class="id" title="lemma">inst_case_branch_context_eq</span></a> ⇒ //. <span class="id" title="tactic">apply</span> <span class="id" title="var">isdecl</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Proj&nbsp;CoFix&nbsp;reduction&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span>(<span class="id" title="var">typecofix</span> : <span class="id" title="var">Σ</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">;;;</span></a> <span class="id" title="var">Γ</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">|-</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tProj"><span class="id" title="constructor">tProj</span></a> <span class="id" title="var">p</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#mkApps"><span class="id" title="definition">mkApps</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tCoFix"><span class="id" title="constructor">tCoFix</span></a> <span class="id" title="var">mfix</span> <span class="id" title="var">idx</span>) <span class="id" title="var">args0</span>) <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">:</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#subst0"><span class="id" title="abbreviation">subst0</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#mkApps"><span class="id" title="definition">mkApps</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tCoFix"><span class="id" title="constructor">tCoFix</span></a> <span class="id" title="var">mfix</span> <span class="id" title="var">idx</span>) <span class="id" title="var">args0</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#rev"><span class="id" title="definition">List.rev</span></a> <span class="id" title="var">args</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="MetaCoq.Common.Universes.html#subst_instance"><span class="id" title="definition">subst_instance</span></a> <span class="id" title="var">u</span> <span class="id" title="var">pdecl</span>.(<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.proj_type"><span class="id" title="projection">proj_type</span></a>))).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">econstructor</span>; <span class="id" title="tactic">eauto</span>. }<br/>
@@ -2617,7 +2725,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICUnivSubstitutionConv.html#subst_instance_extended_subst"><span class="id" title="lemma">subst_instance_extended_subst</span></a> //.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Proj&nbsp;Constructor&nbsp;reduction&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> <span class="id" title="var">proof</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#validity"><span class="id" title="lemma">validity</span></a> <span class="id" title="var">typec</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">typec</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">pose</span> <span class="id" title="var">proof</span> <span class="id" title="var">typec</span> <span class="id" title="keyword">as</span> <span class="id" title="var">typec'</span>.<br/>
@@ -2743,6 +2851,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>⇒ <span class="id" title="var">Hu0</span>. <span class="id" title="tactic">rewrite</span> -<span class="id" title="var">Hty1</span> <span class="id" title="var">Hty2</span>. <span class="id" title="tactic">clear</span> <span class="id" title="var">decltyeq</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.PCUICInductives.html#projection_type'"><span class="id" title="definition">projection_type'</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">indsubst1</span> := <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#inds"><span class="id" title="definition">inds</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;set&nbsp;(indsubst&nbsp;:=&nbsp;ind_subst&nbsp;_&nbsp;_&nbsp;_).&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">projsubst</span> := <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.projs"><span class="id" title="definition">projs</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> !<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICUnivSubst.html#subst_instance_subst"><span class="id" title="lemma">subst_instance_subst</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICUnivSubst.html#subst_instance_lift"><span class="id" title="lemma">subst_instance_lift</span></a> !<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICUnivSubst.html#subst_instance_subst"><span class="id" title="lemma">subst_instance_subst</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">epose</span> <span class="id" title="var">proof</span> (<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICLiftSubst.html#commut_lift_subst_rec"><span class="id" title="lemma">commut_lift_subst_rec</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> 1 <span class="id" title="var">parg</span> <span class="id" title="var">parg</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="tactic">reflexivity</span>)) <span class="id" title="keyword">as</span> <span class="id" title="var">hnarg</span>.<br/>
@@ -2889,7 +2998,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>⇒ <span class="id" title="var">i'</span>. <span class="id" title="tactic">rewrite</span> /<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICOnFreeVars.html#shiftnP"><span class="id" title="definition">shiftnP</span></a> !<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Bool.Bool.html#orb_false_r"><span class="id" title="lemma">orb_false_r</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>/<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Arith.PeanoNat.html#Nat.ltb_lt"><span class="id" title="lemma">Nat.ltb_lt</span></a> ⇒ <span class="id" title="var">lt</span>. <span class="id" title="tactic">apply</span>/<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Arith.PeanoNat.html#Nat.ltb_lt"><span class="id" title="lemma">Nat.ltb_lt</span></a>. <span class="id" title="var">lia</span>. }<br/>
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Proj&nbsp;congruence:&nbsp;discriminee&nbsp;reduction&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICArities.html#type_ws_cumul_pb"><span class="id" title="lemma">type_ws_cumul_pb</span></a>; [<span class="id" title="tactic">econstructor</span>|..]; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICValidity.html#validity"><span class="id" title="lemma">validity</span></a>; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">instantiate</span> (1:= <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tProj"><span class="id" title="constructor">tProj</span></a> <span class="id" title="var">p</span> <span class="id" title="var">c</span>).<br/>
@@ -2922,12 +3031,12 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>/<a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#isType_open"><span class="id" title="lemma">isType_open</span></a> ⇒ /=. <span class="id" title="var">now</span> <span class="id" title="var">cbn</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Fix&nbsp;congruence&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#mkApps_Fix_spec"><span class="id" title="lemma">mkApps_Fix_spec</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H5</span>. <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H5</span>. <span class="id" title="tactic">subst</span> <span class="id" title="var">args</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">narg</span>; <span class="id" title="tactic">discriminate</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Fix&nbsp;congruence:&nbsp;type&nbsp;reduction&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span>(<span class="id" title="var">fixl</span> :<a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix</span><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix1</span><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a>) <span class="id" title="tactic">by</span> <span class="id" title="var">now</span> (<span class="id" title="tactic">rewrite</span> !<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#fix_context_length"><span class="id" title="lemma">fix_context_length</span></a>; <span class="id" title="tactic">apply</span> (<a class="idref" href="MetaCoq.Utils.All_Forall.html#OnOne2_length"><span class="id" title="lemma">OnOne2_length</span></a> <span class="id" title="var">X2</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span>(<span class="id" title="var">convctx</span> : <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#conv_context"><span class="id" title="abbreviation">conv_context</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#cumulAlgo_gen"><span class="id" title="inductive">cumulAlgo_gen</span></a> <span class="id" title="var">Σ</span> (<span class="id" title="var">Γ</span> <a class="idref" href="MetaCoq.Common.Environment.html#49608ad29a449fb99e23f35a3e9f2749"><span class="id" title="notation">,,,</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix</span>) (<span class="id" title="var">Γ</span> <a class="idref" href="MetaCoq.Common.Environment.html#49608ad29a449fb99e23f35a3e9f2749"><span class="id" title="notation">,,,</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix1</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">clear</span> -<span class="id" title="keyword">wf</span> <span class="id" title="var">wfΓ</span> <span class="id" title="var">X</span> <span class="id" title="var">X2</span> <span class="id" title="var">H2</span> <span class="id" title="var">fixl</span>.<br/>
@@ -3000,7 +3109,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICReduction.html#red1_red"><span class="id" title="lemma">red1_red</span></a>, <span class="id" title="tactic">red</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Fix&nbsp;congruence&nbsp;in&nbsp;body&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span>(<span class="id" title="var">fixl</span> :<a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix</span><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix1</span><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a>) <span class="id" title="tactic">by</span> <span class="id" title="var">now</span> (<span class="id" title="tactic">rewrite</span> !<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#fix_context_length"><span class="id" title="lemma">fix_context_length</span></a>; <span class="id" title="tactic">apply</span> (<a class="idref" href="MetaCoq.Utils.All_Forall.html#OnOne2_length"><span class="id" title="lemma">OnOne2_length</span></a> <span class="id" title="var">X2</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span>(<span class="id" title="var">convctx</span> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix1</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">clear</span> -<span class="id" title="keyword">wf</span> <span class="id" title="var">X2</span>.<br/>
@@ -3045,7 +3154,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>. <span class="id" title="var">noconf</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">H4</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;CoFix&nbsp;congruence:&nbsp;type&nbsp;reduction&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span>(<span class="id" title="var">fixl</span> :<a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix</span><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix1</span><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a>) <span class="id" title="tactic">by</span> <span class="id" title="var">now</span> (<span class="id" title="tactic">rewrite</span> !<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#fix_context_length"><span class="id" title="lemma">fix_context_length</span></a>; <span class="id" title="tactic">apply</span> (<a class="idref" href="MetaCoq.Utils.All_Forall.html#OnOne2_length"><span class="id" title="lemma">OnOne2_length</span></a> <span class="id" title="var">X2</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span>(<span class="id" title="var">convctx</span> : <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#conv_context"><span class="id" title="abbreviation">conv_context</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#cumulAlgo_gen"><span class="id" title="inductive">cumulAlgo_gen</span></a> <span class="id" title="var">Σ</span> (<span class="id" title="var">Γ</span> <a class="idref" href="MetaCoq.Common.Environment.html#49608ad29a449fb99e23f35a3e9f2749"><span class="id" title="notation">,,,</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix</span>) (<span class="id" title="var">Γ</span> <a class="idref" href="MetaCoq.Common.Environment.html#49608ad29a449fb99e23f35a3e9f2749"><span class="id" title="notation">,,,</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix1</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">clear</span> -<span class="id" title="keyword">wf</span> <span class="id" title="var">wfΓ</span> <span class="id" title="var">X</span> <span class="id" title="var">X2</span> <span class="id" title="var">H2</span> <span class="id" title="var">fixl</span>.<br/>
@@ -3117,7 +3226,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICReduction.html#red1_red"><span class="id" title="lemma">red1_red</span></a>, <span class="id" title="tactic">red</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;CoFix&nbsp;congruence&nbsp;in&nbsp;body&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span>(<span class="id" title="var">fixl</span> :<a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix</span><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix1</span><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a>) <span class="id" title="tactic">by</span> <span class="id" title="var">now</span> (<span class="id" title="tactic">rewrite</span> !<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#fix_context_length"><span class="id" title="lemma">fix_context_length</span></a>; <span class="id" title="tactic">apply</span> (<a class="idref" href="MetaCoq.Utils.All_Forall.html#OnOne2_length"><span class="id" title="lemma">OnOne2_length</span></a> <span class="id" title="var">X2</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">assert</span>(<span class="id" title="var">convctx</span> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.fix_context"><span class="id" title="definition">fix_context</span></a> <span class="id" title="var">mfix1</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">clear</span> -<span class="id" title="keyword">wf</span> <span class="id" title="var">X2</span>.<br/>
@@ -3162,7 +3271,7 @@ The subject reduction property of the system:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>. <span class="id" title="var">noconf</span> <span class="id" title="var">eq</span>. <span class="id" title="tactic">rewrite</span> <span class="id" title="var">H4</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Conversion&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">forall_u</span> <span class="id" title="var">_</span> <span class="id" title="var">Hu</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_Cumul"><span class="id" title="constructor">type_Cumul</span></a>; <span class="id" title="var">tea</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
@@ -3575,6 +3684,7 @@ The subject reduction property of the system:
 Keep at the end to not disturb asynchronous proof processing 
 </div>
 <div class="code">
+<span class="comment">(*&nbsp;Print&nbsp;Assumptions&nbsp;sr_red1.&nbsp;*)</span><br/>
 </div>
 </div>
 <div id="footer">

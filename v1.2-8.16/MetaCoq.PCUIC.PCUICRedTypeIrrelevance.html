@@ -105,6 +105,11 @@ Types of variables and names are irrelevant during reduction:
 <span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span> <span class="id" title="keyword">Type</span>. <span class="id" title="tactic">intros</span> [? [|]]; <span class="id" title="tactic">constructor</span>; <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;pres_let_bodies_sym&nbsp;:&nbsp;Symmetric&nbsp;pres_let_bodies.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;x&nbsp;y&nbsp;rel.<br/>
+&nbsp;&nbsp;depelim&nbsp;rel;&nbsp;constructor;&nbsp;now&nbsp;symmetry.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Global Instance</span> <a id="pres_let_bodies_trans" class="idref" href="#pres_let_bodies_trans"><span class="id" title="instance">pres_let_bodies_trans</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.CRelationClasses.html#Transitive"><span class="id" title="class">Transitive</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICRedTypeIrrelevance.html#pres_let_bodies"><span class="id" title="definition">pres_let_bodies</span></a>.<br/>
@@ -114,6 +119,8 @@ Types of variables and names are irrelevant during reduction:
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;pres_let_bodies_equiv&nbsp;:&nbsp;Equivalence&nbsp;pres_let_bodies.<br/>
+Proof.&nbsp;constructor;&nbsp;typeclasses&nbsp;eauto.&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="OnOne2All_All3" class="idref" href="#OnOne2All_All3"><span class="id" title="lemma">OnOne2All_All3</span></a> {<a id="A:13" class="idref" href="#A:13"><span class="id" title="binder">A</span></a> <a id="B:14" class="idref" href="#B:14"><span class="id" title="binder">B</span></a>} (<a id="P:15" class="idref" href="#P:15"><span class="id" title="binder">P</span></a> <a id="Q:16" class="idref" href="#Q:16"><span class="id" title="binder">Q</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICRedTypeIrrelevance.html#A:13"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICRedTypeIrrelevance.html#B:14"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICRedTypeIrrelevance.html#B:14"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>) <a id="l:17" class="idref" href="#l:17"><span class="id" title="binder">l</span></a> <a id="l':18" class="idref" href="#l':18"><span class="id" title="binder">l'</span></a> <a id="l'':19" class="idref" href="#l'':19"><span class="id" title="binder">l''</span></a> :<br/>

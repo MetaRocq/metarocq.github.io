@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Erasure.EArities</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
@@ -58,6 +59,7 @@
 <span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> (<span class="id" title="var">cf</span> : <a class="idref" href="MetaCoq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>) (<span class="id" title="var">Σ</span> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.global_env_ext"><span class="id" title="definition">global_env_ext</span></a>).<br/>
 
 <br/>
+<span class="comment">(*&nbsp;TODO&nbsp;move&nbsp;*)</span><br/>
 #[<span class="id" title="var">global</span>] <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">extends_refl</span>.<br/>
 
 <br/>
@@ -204,6 +206,7 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;if&nbsp;a&nbsp;constructor&nbsp;is&nbsp;a&nbsp;type&nbsp;or&nbsp;proof,&nbsp;it&nbsp;is&nbsp;a&nbsp;proof&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="declared_constructor_type_not_arity" class="idref" href="#declared_constructor_type_not_arity"><span class="id" title="lemma">declared_constructor_type_not_arity</span></a> {<a id="77616297ab8389c2db18b8aa996822b8" class="idref" href="#77616297ab8389c2db18b8aa996822b8"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.global_env_ext"><span class="id" title="definition">global_env_ext</span></a>} {<a id="76108179a7f0272adf7bd7dba240c61c" class="idref" href="#76108179a7f0272adf7bd7dba240c61c"><span class="id" title="binder">wfΣ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#wf"><span class="id" title="class">wf</span></a> <a class="idref" href="MetaCoq.Erasure.EArities.html#77616297ab8389c2db18b8aa996822b8"><span class="id" title="variable">Σ</span></a>} {<a id="298c8e20c162b01ed1bbedab9df30ec7" class="idref" href="#298c8e20c162b01ed1bbedab9df30ec7"><span class="id" title="binder">Γ</span></a>} {<a id="ind:64" class="idref" href="#ind:64"><span class="id" title="binder">ind</span></a> <a id="n:65" class="idref" href="#n:65"><span class="id" title="binder">n</span></a> <a id="mdecl:66" class="idref" href="#mdecl:66"><span class="id" title="binder">mdecl</span></a> <a id="idecl:67" class="idref" href="#idecl:67"><span class="id" title="binder">idecl</span></a> <a id="cdecl:68" class="idref" href="#cdecl:68"><span class="id" title="binder">cdecl</span></a> <a id="u:69" class="idref" href="#u:69"><span class="id" title="binder">u</span></a>} :<br/>
@@ -333,6 +336,7 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;if&nbsp;a&nbsp;cofixpoint&nbsp;is&nbsp;a&nbsp;type&nbsp;or&nbsp;proof,&nbsp;it&nbsp;is&nbsp;a&nbsp;proof&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="tCoFix_no_Type" class="idref" href="#tCoFix_no_Type"><span class="id" title="lemma">tCoFix_no_Type</span></a> (<a id="1fae2405502733773daa9dd3939f6e35" class="idref" href="#1fae2405502733773daa9dd3939f6e35"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.global_env_ext"><span class="id" title="definition">global_env_ext</span></a>) <a id="d026dae317ef64f38f5001f86b39608a" class="idref" href="#d026dae317ef64f38f5001f86b39608a"><span class="id" title="binder">Γ</span></a> <a id="mfix:125" class="idref" href="#mfix:125"><span class="id" title="binder">mfix</span></a> <a id="idx:126" class="idref" href="#idx:126"><span class="id" title="binder">idx</span></a> <a id="x1:127" class="idref" href="#x1:127"><span class="id" title="binder">x1</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#wf"><span class="id" title="class">wf</span></a> <a class="idref" href="MetaCoq.Erasure.EArities.html#1fae2405502733773daa9dd3939f6e35"><span class="id" title="variable">Σ</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -692,6 +696,8 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Thanks&nbsp;to&nbsp;the&nbsp;restriction&nbsp;to&nbsp;Prop&nbsp;&lt;/=&nbsp;Type,&nbsp;erasability&nbsp;is&nbsp;also&nbsp;closed&nbsp;by&nbsp;expansion<br/>
+&nbsp;&nbsp;on&nbsp;well-typed&nbsp;terms.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="Is_type_eval_inv" class="idref" href="#Is_type_eval_inv"><span class="id" title="lemma">Is_type_eval_inv</span></a> (<a id="997ee4d95757579da4f10261f924b415" class="idref" href="#997ee4d95757579da4f10261f924b415"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.global_env_ext"><span class="id" title="definition">global_env_ext</span></a>) <a id="t:221" class="idref" href="#t:221"><span class="id" title="binder">t</span></a> <a id="v:222" class="idref" href="#v:222"><span class="id" title="binder">v</span></a>:<br/>

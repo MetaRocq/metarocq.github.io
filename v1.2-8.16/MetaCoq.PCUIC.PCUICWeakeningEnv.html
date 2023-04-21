@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICWeakeningEnv</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a>.<br/>
@@ -259,6 +260,13 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="global_levels:80" class="idref" href="#global_levels:80"><span class="id" title="binder">global_levels</span></a> := <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#global_levels"><span class="id" title="definition">global_levels</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#15bb1c35edab98229a8cfae9c0763c1a"><span class="id" title="variable">Σ</span></a>.(<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.universes"><span class="id" title="projection">universes</span></a>) <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="all_levels:81" class="idref" href="#all_levels:81"><span class="id" title="binder">all_levels</span></a> := <a class="idref" href="MetaCoq.Common.Universes.html#LevelSet.union"><span class="id" title="definition">LevelSet.union</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#levels:79"><span class="id" title="variable">levels</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#global_levels:80"><span class="id" title="variable">global_levels</span></a> <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Common.Universes.html#ConstraintSet.For_all"><span class="id" title="definition">ConstraintSet.For_all</span></a> (<a class="idref" href="MetaCoq.Common.Universes.html#declared_cstr_levels"><span class="id" title="definition">declared_cstr_levels</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#all_levels:81"><span class="id" title="variable">all_levels</span></a>) (<a class="idref" href="MetaCoq.Common.Universes.html#constraints_of_udecl"><span class="id" title="definition">constraints_of_udecl</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#udecl:78"><span class="id" title="variable">udecl</span></a>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;/\&nbsp;match&nbsp;udecl&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Monomorphic_ctx&nbsp;ctx&nbsp;=&gt;&nbsp;LevelSet.for_all&nbsp;(negb&nbsp;∘&nbsp;Level.is_var)&nbsp;ctx.1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/\&nbsp;LevelSet.Subset&nbsp;ctx.1&nbsp;global_levels<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/\&nbsp;ConstraintSet.Subset&nbsp;ctx.2&nbsp;(global_constraints&nbsp;Σ)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/\&nbsp;satisfiable_udecl&nbsp;Σ.(universes)&nbsp;udecl<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;_&nbsp;=&gt;&nbsp;True<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="in_global_levels" class="idref" href="#in_global_levels"><span class="id" title="lemma">in_global_levels</span></a> <a id="l:82" class="idref" href="#l:82"><span class="id" title="binder">l</span></a> <a id="u:83" class="idref" href="#u:83"><span class="id" title="binder">u</span></a> :<br/>
@@ -415,6 +423,14 @@
 <span class="id" title="keyword">Hint Extern</span> 0 ⇒ <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#weakening_env_declared_projection"><span class="id" title="lemma">weakening_env_declared_projection</span></a> : <span class="id" title="var">extends</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;wf_extends&nbsp;{Σ&nbsp;Σ'}&nbsp;:&nbsp;wf&nbsp;Σ'&nbsp;-&gt;&nbsp;extends&nbsp;Σ&nbsp;Σ'&nbsp;-&gt;&nbsp;wf&nbsp;Σ.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;HΣ'&nbsp;<span class="inlinecode"><span class="id" title="var">univs</span></span> <span class="inlinecode"><span class="id" title="var">H</span></span>.&nbsp;simpl&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;split&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;-&nbsp;red.<br/>
+&nbsp;&nbsp;induction&nbsp;Σ'';&nbsp;auto.<br/>
+&nbsp;&nbsp;inv&nbsp;HΣ'.&nbsp;auto.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -446,6 +462,26 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span>; [<span class="id" title="var">now</span> <span class="id" title="tactic">left</span>|<span class="id" title="tactic">right</span>]; <span class="id" title="tactic">auto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Common.Universes.html#LevelSet.union_spec"><span class="id" title="lemma">LevelSet.union_spec</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H'</span>. <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Common.Universes.html#LevelSet.union_spec"><span class="id" title="lemma">LevelSet.union_spec</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H'</span>; [<span class="id" title="var">now</span> <span class="id" title="tactic">left</span>|<span class="id" title="tactic">right</span>]; <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*+&nbsp;revert&nbsp;H3.&nbsp;case_eq&nbsp;(universes_decl_of_decl&nbsp;d);&nbsp;trivial.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;ctx&nbsp;eq&nbsp;Hctx.&nbsp;repeat&nbsp;split.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;intros&nbsp;l&nbsp;Hl.&nbsp;simpl.&nbsp;replace&nbsp;(monomorphic_levels_decl&nbsp;d)&nbsp;with&nbsp;ctx.1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;apply&nbsp;in_global_levels.&nbsp;apply&nbsp;LevelSet.union_spec;&nbsp;now&nbsp;left.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;clear&nbsp;-eq.&nbsp;destruct&nbsp;d&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">c</span>|<span class="id" title="var">c</span></span>;&nbsp;cbn&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;destruct&nbsp;c;&nbsp;cbn&nbsp;in&nbsp;*;&nbsp;now&nbsp;rewrite&nbsp;eq.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;simpl.&nbsp;replace&nbsp;(monomorphic_constraints_decl&nbsp;d)&nbsp;with&nbsp;ctx.2.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;intros&nbsp;c&nbsp;Hc;&nbsp;apply&nbsp;ConstraintSet.union_spec;&nbsp;now&nbsp;left.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;clear&nbsp;-eq.&nbsp;destruct&nbsp;d&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">c</span>|<span class="id" title="var">c</span></span>;&nbsp;cbn&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;destruct&nbsp;c;&nbsp;cbn&nbsp;in&nbsp;*;&nbsp;now&nbsp;rewrite&nbsp;eq.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;clear&nbsp;-eq&nbsp;H4.&nbsp;destruct&nbsp;H4&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">Hv</span></span>.&nbsp;exists&nbsp;v.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;c&nbsp;Hc;&nbsp;apply&nbsp;(Hv&nbsp;c).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;ConstraintSet.union_spec&nbsp;in&nbsp;Hc;&nbsp;destruct&nbsp;Hc&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">Hc</span>|<span class="id" title="var">Hc</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;apply&nbsp;ConstraintSet.union_spec&nbsp;in&nbsp;Hc;&nbsp;destruct&nbsp;Hc&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">Hc</span>|<span class="id" title="var">Hc</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;apply&nbsp;ConstraintSet.union_spec.&nbsp;simpl&nbsp;in&nbsp;*.&nbsp;left;&nbsp;now&nbsp;rewrite&nbsp;eq.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;apply&nbsp;ConstraintSet.union_spec;&nbsp;left.&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;d&nbsp;as&nbsp;<span class="inlinecode">[?</span> <span class="inlinecode">?</span> <span class="inlinecode">[]]|[?</span> <span class="inlinecode">?</span> <span class="inlinecode">?</span> <span class="inlinecode">?</span> <span class="inlinecode">[]]</span>;&nbsp;simpl&nbsp;in&nbsp;*;&nbsp;tas;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;apply&nbsp;ConstraintSet.empty_spec&nbsp;in&nbsp;Hc.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;apply&nbsp;ConstraintSet.union_spec;&nbsp;now&nbsp;right.*)</span><br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">specialize</span> (<span class="id" title="var">IHwfΣ</span> <span class="id" title="var">HH</span>). <span class="id" title="var">revert</span> <span class="id" title="var">IHwfΣ</span> <span class="id" title="var">o</span>; <span class="id" title="tactic">clear</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">generalize</span> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#universes_decl_of_decl"><span class="id" title="definition">universes_decl_of_decl</span></a> <span class="id" title="var">decl</span>); <span class="id" title="tactic">intros</span> <span class="id" title="var">d'</span> <span class="id" title="var">HH</span> <span class="id" title="var">Hd</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#on_udecl_prop"><span class="id" title="definition">on_udecl_prop</span></a> <span class="id" title="tactic">in</span> ×.<br/>
@@ -457,6 +493,22 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">H''</span>; [<span class="id" title="var">now</span> <span class="id" title="tactic">left</span>|<span class="id" title="tactic">right</span>]; <span class="id" title="tactic">auto</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*+&nbsp;destruct&nbsp;d';&nbsp;trivial.&nbsp;repeat&nbsp;split.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;destruct&nbsp;H2;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;intros&nbsp;l&nbsp;Hl.&nbsp;apply&nbsp;H2&nbsp;in&nbsp;Hl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;LevelSet.union_spec;&nbsp;now&nbsp;right.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;intros&nbsp;c&nbsp;Hc.&nbsp;apply&nbsp;H2&nbsp;in&nbsp;Hc.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;ConstraintSet.union_spec;&nbsp;now&nbsp;right.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;destruct&nbsp;Hd&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">[<span class="id" title="var">_</span></span> <span class="inlinecode">[<span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">Hd</span>]]</span>;&nbsp;cbn&nbsp;in&nbsp;Hd.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;Hd&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">v</span></span> <span class="inlinecode"><span class="id" title="var">Hv</span></span>.&nbsp;exists&nbsp;v.&nbsp;intros&nbsp;c&nbsp;Hc;&nbsp;apply&nbsp;Hv;&nbsp;clear&nbsp;v&nbsp;Hv.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;ConstraintSet.union_spec&nbsp;in&nbsp;Hc;&nbsp;destruct&nbsp;Hc&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">Hc</span>|<span class="id" title="var">Hc</span></span>;&nbsp;simpl&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:&nbsp;apply&nbsp;ConstraintSet.union_spec&nbsp;in&nbsp;Hc;&nbsp;destruct&nbsp;Hc&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">Hc</span>|<span class="id" title="var">Hc</span></span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;apply&nbsp;H2&nbsp;in&nbsp;Hc.&nbsp;apply&nbsp;ConstraintSet.union_spec;&nbsp;now&nbsp;right.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;clear&nbsp;-Hc.&nbsp;destruct&nbsp;d&nbsp;as&nbsp;<span class="inlinecode">[?</span> <span class="inlinecode">?</span> <span class="inlinecode">[]]|[?</span> <span class="inlinecode">?</span> <span class="inlinecode">?</span> <span class="inlinecode">?</span> <span class="inlinecode">[]]</span>;&nbsp;cbn&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;try&nbsp;(apply&nbsp;ConstraintSet.empty_spec&nbsp;in&nbsp;Hc;&nbsp;contradiction).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;apply&nbsp;ConstraintSet.union_spec;&nbsp;now&nbsp;left.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;apply&nbsp;ConstraintSet.union_spec;&nbsp;now&nbsp;right.*)</span><br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
@@ -567,6 +619,8 @@
 #[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">weakening_env_declared_projection</span> : <span class="id" title="var">extends</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;diamond&nbsp;dependency,&nbsp;but&nbsp;the&nbsp;proofs&nbsp;should&nbsp;never&nbsp;matter&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;we&nbsp;export&nbsp;disabling&nbsp;this&nbsp;warning&nbsp;here&nbsp;so&nbsp;these&nbsp;coercions&nbsp;don't&nbsp;result&nbsp;in&nbsp;warnings,&nbsp;and&nbsp;then&nbsp;we&nbsp;re-enable&nbsp;it&nbsp;later&nbsp;to&nbsp;not&nbsp;suppress&nbsp;other&nbsp;warnings&nbsp;*)</span><br/>
 #[<span class="id" title="var">export</span>] <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> <span class="id" title="var">Append</span> "-ambiguous-paths".<br/>
 <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.CMorphisms.html#"><span class="id" title="module">CMorphisms</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.CRelationClasses.html#"><span class="id" title="module">CRelationClasses</span></a>.<br/>
 <span class="id" title="keyword">Global</span> <span class="id" title="keyword">Coercion</span> <a id="weaken_env_prop_full_to_decls" class="idref" href="#weaken_env_prop_full_to_decls"><span class="id" title="definition">weaken_env_prop_full_to_decls</span></a> {<a id="cf:152" class="idref" href="#cf:152"><span class="id" title="binder">cf</span></a> <a id="Pcmp:153" class="idref" href="#Pcmp:153"><span class="id" title="binder">Pcmp</span></a> <a id="P:154" class="idref" href="#P:154"><span class="id" title="binder">P</span></a> <a id="P0:155" class="idref" href="#P0:155"><span class="id" title="binder">P0</span></a>} : @<a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#weaken_env_prop_full"><span class="id" title="definition">weaken_env_prop_full</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#cf:152"><span class="id" title="variable">cf</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#Pcmp:153"><span class="id" title="variable">Pcmp</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#P:154"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#P0:155"><span class="id" title="variable">P0</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> @<a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#weaken_env_decls_prop_full"><span class="id" title="definition">weaken_env_decls_prop_full</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#cf:152"><span class="id" title="variable">cf</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#Pcmp:153"><span class="id" title="variable">Pcmp</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#P:154"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWeakeningEnv.html#P0:155"><span class="id" title="variable">P0</span></a>.<br/>

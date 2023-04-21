@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICSN</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span><br/>
@@ -231,6 +232,7 @@ Since we are working with name annotations, reduction is sensitive to names.
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;TODO&nbsp;Maybe&nbsp;switch&nbsp;to&nbsp;eq_context&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="cored_eq_context_upto_names" class="idref" href="#cored_eq_context_upto_names"><span class="id" title="lemma">cored_eq_context_upto_names</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="893aef7061fe05b037fc27cff76f1e6f" class="idref" href="#893aef7061fe05b037fc27cff76f1e6f"><span class="id" title="binder">Γ</span></a> <a id="470a1afdbbe48f100e3c886f9cdd5bf9" class="idref" href="#470a1afdbbe48f100e3c886f9cdd5bf9"><span class="id" title="binder">Δ</span></a> <a id="u:52" class="idref" href="#u:52"><span class="id" title="binder">u</span></a> <a id="v:53" class="idref" href="#v:53"><span class="id" title="binder">v</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICEquality.html#eq_context_upto_names"><span class="id" title="abbreviation">eq_context_upto_names</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSN.html#893aef7061fe05b037fc27cff76f1e6f"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSN.html#470a1afdbbe48f100e3c886f9cdd5bf9"><span class="id" title="variable">Δ</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -306,6 +308,44 @@ Since we are working with name annotations, reduction is sensitive to names.
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Lemma&nbsp;eq_context_upto_nlctx&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;Γ,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eq_context_upto&nbsp;Σ&nbsp;eq&nbsp;eq&nbsp;Γ&nbsp;(nlctx&nbsp;Γ).<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;Γ.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;induction&nbsp;Γ&nbsp;as&nbsp;<span class="inlinecode">|</span> <span class="inlinecode">[<span class="id" title="var">na</span></span> <span class="inlinecode">[<span class="id" title="var">b</span>|]</span> <span class="inlinecode"><span class="id" title="var">A</span>]</span> <span class="inlinecode"><span class="id" title="var">Γ</span></span> <span class="inlinecode"><span class="id" title="var">ih</span></span> <span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;simpl.&nbsp;constructor;&nbsp;simpl;&nbsp;try&nbsp;apply&nbsp;binder_anonymize;&nbsp;tas.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;constructor;&nbsp;tas;&nbsp;auto.&nbsp;eapply&nbsp;eq_term_upto_univ_tm_nl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;eq_term_upto_univ_tm_nl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;simpl.&nbsp;constructor;&nbsp;auto.&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;apply&nbsp;binder_anonymize.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;simpl.&nbsp;eapply&nbsp;eq_term_upto_univ_tm_nl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;auto.<br/>
+&nbsp;&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;cored_cored'_nl&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;Γ&nbsp;u&nbsp;v,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cored&nbsp;Σ&nbsp;Γ&nbsp;u&nbsp;v&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cored'&nbsp;(nlctx&nbsp;Γ)&nbsp;(nl&nbsp;u)&nbsp;(nl&nbsp;v).<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;Γ&nbsp;u&nbsp;v&nbsp;h.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;cored_eq_context_upto&nbsp;in&nbsp;h.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;6:&nbsp;eapply&nbsp;eq_context_upto_nlctx.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;destruct&nbsp;h&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">u'</span></span> <span class="inlinecode">[<span class="id" title="var">r</span></span> <span class="inlinecode">[<span class="id" title="var">e</span>]]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eexists&nbsp;_,&nbsp;_.&nbsp;intuition&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;constructor.&nbsp;eapply&nbsp;eq_term_trans.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;eapply&nbsp;eq_term_sym.&nbsp;eapply&nbsp;eq_term_tm_nl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;eapply&nbsp;eq_term_upto_univ_impl;&nbsp;eauto.&nbsp;all:typeclasses&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;constructor.&nbsp;eapply&nbsp;eq_term_sym.&nbsp;eapply&nbsp;eq_term_tm_nl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;?&nbsp;?&nbsp;?&nbsp;<span class="inlinecode"></span>.&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;?&nbsp;?&nbsp;?&nbsp;r.&nbsp;apply&nbsp;Forall2_eq&nbsp;in&nbsp;r.&nbsp;apply&nbsp;map_inj&nbsp;in&nbsp;r.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;subst.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;apply&nbsp;Universe.make_inj.<br/>
+&nbsp;&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="cored_cored'" class="idref" href="#cored_cored'"><span class="id" title="lemma">cored_cored'</span></a> :<br/>

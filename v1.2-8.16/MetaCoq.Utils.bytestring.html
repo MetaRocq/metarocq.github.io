@@ -561,8 +561,17 @@ To perform efficient pretty printing, one needs to use a tree structure
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.bytestring.html#Tree.to_string_acc"><span class="id" title="definition">to_string_acc</span></a> "" <a class="idref" href="MetaCoq.Utils.bytestring.html#l:138"><span class="id" title="variable">l</span></a>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Definition&nbsp;test&nbsp;:=&nbsp;"a"&nbsp;++&nbsp;"b"&nbsp;++&nbsp;"v"&nbsp;++&nbsp;"c".<br/>
+&nbsp;&nbsp;Eval&nbsp;compute&nbsp;in&nbsp;to_string&nbsp;test.&nbsp;*)</span><br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Fixpoint&nbsp;to_string_acc&nbsp;t&nbsp;acc&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;t&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;string&nbsp;s&nbsp;=&gt;&nbsp;String.append&nbsp;s&nbsp;acc<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;append&nbsp;s&nbsp;s'&nbsp;=&gt;&nbsp;to_string_acc&nbsp;s&nbsp;(to_string_acc&nbsp;s'&nbsp;acc)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;end.<br/>
+<br/>
+&nbsp;&nbsp;Definition&nbsp;to_string&nbsp;t&nbsp;:=&nbsp;to_string_acc&nbsp;t&nbsp;"".&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="Tree.string_of_list_aux" class="idref" href="#Tree.string_of_list_aux"><span class="id" title="definition">string_of_list_aux</span></a> {<a id="A:139" class="idref" href="#A:139"><span class="id" title="binder">A</span></a>} (<a id="f:140" class="idref" href="#f:140"><span class="id" title="binder">f</span></a> : <a class="idref" href="MetaCoq.Utils.bytestring.html#A:139"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Utils.bytestring.html#Tree.t"><span class="id" title="inductive">t</span></a>) (<a id="sep:141" class="idref" href="#sep:141"><span class="id" title="binder">sep</span></a> : <a class="idref" href="MetaCoq.Utils.bytestring.html#Tree.t"><span class="id" title="inductive">t</span></a>) (<a id="l:142" class="idref" href="#l:142"><span class="id" title="binder">l</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaCoq.Utils.bytestring.html#A:139"><span class="id" title="variable">A</span></a>) :=<br/>
@@ -598,6 +607,32 @@ To perform efficient pretty printing, one needs to use a tree structure
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Utils.bytestring.html#Tree"><span class="id" title="module">Tree</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Tests&nbsp;*)</span><br/>
+<span class="comment">(*<br/>
+<br/>
+Local&nbsp;Open&nbsp;Scope&nbsp;bs_scope.<br/>
+Import&nbsp;String.<br/>
+Definition&nbsp;x&nbsp;:=&nbsp;Eval&nbsp;compute&nbsp;in&nbsp;Tree.to_string&nbsp;(Tree.concat&nbsp;(Tree.string&nbsp;"")&nbsp;(List.repeat&nbsp;(Tree.string&nbsp;"frliqhgrnvcrlkejflqrjfljkl")&nbsp;10000)).<br/>
+Definition&nbsp;y&nbsp;:=&nbsp;Eval&nbsp;compute&nbsp;in&nbsp;String.concat&nbsp;""&nbsp;(List.repeat&nbsp;"frliqhgrnvcrlkejflqrjfljkl"&nbsp;10000)&nbsp;++&nbsp;"'".<br/>
+<br/>
+Time&nbsp;Eval&nbsp;compute&nbsp;in&nbsp;String.compare&nbsp;x&nbsp;y.&nbsp;<span class="comment">(*&nbsp;0.02s&nbsp;*)</span><br/>
+<br/>
+Import&nbsp;String.<br/>
+Fixpoint&nbsp;String.compare'&nbsp;(xs&nbsp;ys&nbsp;:&nbsp;bs)&nbsp;:&nbsp;comparison&nbsp;:=<br/>
+&nbsp;&nbsp;match&nbsp;xs&nbsp;,&nbsp;ys&nbsp;with<br/>
+&nbsp;&nbsp;|&nbsp;EmptyString,&nbsp;EmptyString&nbsp;=&gt;&nbsp;Eq<br/>
+&nbsp;&nbsp;|&nbsp;EmptyString&nbsp;,&nbsp;_&nbsp;=&gt;&nbsp;Lt<br/>
+&nbsp;&nbsp;|&nbsp;_&nbsp;,&nbsp;EmptyString&nbsp;=&gt;&nbsp;Gt<br/>
+&nbsp;&nbsp;|&nbsp;String&nbsp;x&nbsp;xs&nbsp;,&nbsp;String&nbsp;y&nbsp;ys&nbsp;=&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;compare&nbsp;x&nbsp;y&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Eq&nbsp;=&gt;&nbsp;String.compare'&nbsp;xs&nbsp;ys<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;x&nbsp;=&gt;&nbsp;x<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;end<br/>
+&nbsp;&nbsp;end.<br/>
+<br/>
+Time&nbsp;Eval&nbsp;vm_compute&nbsp;in&nbsp;String.compare&nbsp;x&nbsp;y.&nbsp;<span class="comment">(*&nbsp;0.14s&nbsp;*)</span><br/>
+Time&nbsp;Eval&nbsp;vm_compute&nbsp;in&nbsp;String.compare'&nbsp;x&nbsp;y.&nbsp;<span class="comment">(*&nbsp;0.03s~0.04s,&nbsp;i.e.&nbsp;more&nbsp;than&nbsp;3&nbsp;times&nbsp;faster&nbsp;*)</span><br/>
+*)</span><br/>
 </div>
 </div>
 <div id="footer">

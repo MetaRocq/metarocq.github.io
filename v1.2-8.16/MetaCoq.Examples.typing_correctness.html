@@ -28,6 +28,72 @@
 <h1 class="libtitle">Library MetaCoq.Examples.typing_correctness</h1>
 
 <div class="code">
+<span class="comment">(*From&nbsp;MetaCoq.Template&nbsp;Require&nbsp;Import&nbsp;config&nbsp;All.<br/>
+From&nbsp;MetaCoq.PCUIC&nbsp;Require&nbsp;Import&nbsp;PCUICAst&nbsp;PCUICAstUtils&nbsp;PCUICTyping&nbsp;PCUICLiftSubst&nbsp;TemplateToPCUIC.<br/>
+From&nbsp;MetaCoq.SafeChecker&nbsp;Require&nbsp;Import&nbsp;PCUICErrors&nbsp;PCUICWfEnv&nbsp;PCUICWfEnvImpl&nbsp;PCUICTypeChecker&nbsp;PCUICSafeChecker.<br/>
+From&nbsp;Equations&nbsp;Require&nbsp;Import&nbsp;Equations.<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+Polymorphic&nbsp;Inductive&nbsp;list@{u}&nbsp;(A&nbsp;:&nbsp;Type@{u})&nbsp;:&nbsp;Type@{u}&nbsp;:=<br/>
+<span class="comment">(*&nbsp;|&nbsp;nil&nbsp;:&nbsp;list&nbsp;A&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;|&nbsp;cons&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;list&nbsp;A&nbsp;-&gt;&nbsp;list&nbsp;A&nbsp;*)</span><br/>
+.<br/>
+<br/>
+Polymorphic&nbsp;Inductive&nbsp;rtree@{u}&nbsp;:&nbsp;Type@{u}&nbsp;:=<br/>
+|&nbsp;node&nbsp;:&nbsp;list&nbsp;rtree&nbsp;-&gt;&nbsp;rtree.<br/>
+<br/>
+Universe&nbsp;u.<br/>
+<br/>
+Polymorphic&nbsp;Inductive&nbsp;empty@{u}&nbsp;:&nbsp;Type@{u}&nbsp;:=.<br/>
+<br/>
+Polymorphic&nbsp;Inductive&nbsp;unit@{u}&nbsp;:&nbsp;Type@{u}&nbsp;:=&nbsp;tt.<br/>
+<br/>
+MetaCoq&nbsp;Quote&nbsp;Recursively&nbsp;Definition&nbsp;empty_sig_full_template&nbsp;:=&nbsp;(fun&nbsp;(A&nbsp;:&nbsp;Type@{u})&nbsp;(x&nbsp;:&nbsp;A)&nbsp;=&gt;&nbsp;x).<br/>
+Definition&nbsp;empty_sig_full&nbsp;:=&nbsp;trans_template_program&nbsp;empty_sig_full_template.<br/>
+<br/>
+MetaCoq&nbsp;Quote&nbsp;Recursively&nbsp;Definition&nbsp;empty_full_template&nbsp;:=&nbsp;empty@{u}.<br/>
+Definition&nbsp;empty_full&nbsp;:=&nbsp;trans_template_program&nbsp;empty_full_template.<br/>
+<br/>
+MetaCoq&nbsp;Quote&nbsp;Recursively&nbsp;Definition&nbsp;unit_full_template&nbsp;:=&nbsp;tt@{u}.<br/>
+Definition&nbsp;unit_full&nbsp;:=&nbsp;trans_template_program&nbsp;unit_full_template.<br/>
+<br/>
+MetaCoq&nbsp;Quote&nbsp;Recursively&nbsp;Definition&nbsp;list_full_template&nbsp;:=&nbsp;list@{u}.<br/>
+Definition&nbsp;list_full&nbsp;:=&nbsp;trans_template_program&nbsp;list_full_template.<br/>
+<br/>
+MetaCoq&nbsp;Quote&nbsp;Recursively&nbsp;Definition&nbsp;rtree_full_template&nbsp;:=&nbsp;rtree@{u}.<br/>
+Definition&nbsp;rtree_full&nbsp;:=&nbsp;trans_template_program&nbsp;rtree_full_template.<br/>
+<br/>
+Definition&nbsp;extract_gctx&nbsp;:&nbsp;PCUICProgram.pcuic_program&nbsp;-&gt;&nbsp;global_env_ext&nbsp;:=<br/>
+&nbsp;&nbsp;fun&nbsp;p&nbsp;=&gt;&nbsp;(p.1.1.(PCUICProgram.trans_env_env),&nbsp;p.1.2).<br/>
+<br/>
+Definition&nbsp;gctx&nbsp;:=&nbsp;Eval&nbsp;cbv&nbsp;in&nbsp;extract_gctx&nbsp;empty_full.&nbsp;<span class="comment">(*&nbsp;Change&nbsp;here&nbsp;*)</span><br/>
+<br/>
+Global&nbsp;Program&nbsp;Instance&nbsp;fake_guard_impl&nbsp;:&nbsp;abstract_guard_impl&nbsp;:=<br/>
+{|&nbsp;guard_impl&nbsp;:=&nbsp;fake_guard_impl&nbsp;|}.<br/>
+Next&nbsp;Obligation.&nbsp;Admitted.<br/>
+<br/>
+Local&nbsp;Existing&nbsp;Instance&nbsp;PCUICSN.default_normalizing.<br/>
+Import&nbsp;MCMonadNotation.<br/>
+<br/>
+Definition&nbsp;make_wf_env_ext&nbsp;(Σ&nbsp;:&nbsp;global_env_ext)&nbsp;:&nbsp;EnvCheck&nbsp;wf_env_ext&nbsp;wf_env_ext&nbsp;:=<br/>
+&nbsp;&nbsp;'(exist&nbsp;Σ'&nbsp;pf)&nbsp;&lt;-&nbsp;check_wf_ext&nbsp;optimized_abstract_env_impl&nbsp;Σ&nbsp;;;<br/>
+&nbsp;&nbsp;ret&nbsp;Σ'.<br/>
+<br/>
+Local&nbsp;Existing&nbsp;Instance&nbsp;default_checker_flags.<br/>
+<br/>
+Definition&nbsp;gctx_wf_env&nbsp;:&nbsp;wf_env_ext.<br/>
+Proof.<br/>
+&nbsp;&nbsp;let&nbsp;wf_proof&nbsp;:=&nbsp;eval&nbsp;hnf&nbsp;in&nbsp;(make_wf_env_ext&nbsp;gctx)&nbsp;in<br/>
+&nbsp;&nbsp;match&nbsp;wf_proof&nbsp;with<br/>
+&nbsp;&nbsp;|&nbsp;CorrectDecl&nbsp;_&nbsp;?x&nbsp;=&gt;&nbsp;exact&nbsp;x<br/>
+&nbsp;&nbsp;|&nbsp;?z&nbsp;=&gt;&nbsp;set&nbsp;(error&nbsp;:=&nbsp;z)<br/>
+&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;idtac&nbsp;z&nbsp;;&nbsp;fail&nbsp;"Couldn't&nbsp;prove&nbsp;the&nbsp;global&nbsp;environment&nbsp;is&nbsp;well-formed"&nbsp;*)</span><br/>
+&nbsp;&nbsp;end.<br/>
+Defined.<br/>
+*)</span><br/>
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#"><span class="id" title="library">Universes</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.Loader.html#"><span class="id" title="library">Loader</span></a>.<br/>
@@ -42,6 +108,10 @@
 <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.monad_utils.html#MCMonadNotation"><span class="id" title="module">MCMonadNotation</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;*********************************************************&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;In&nbsp;this&nbsp;file&nbsp;we&nbsp;define&nbsp;a&nbsp;small&nbsp;plugin&nbsp;which&nbsp;proves&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;the&nbsp;identity&nbsp;theorem&nbsp;for&nbsp;any&nbsp;sort&nbsp;using&nbsp;the&nbsp;safe&nbsp;checker.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;*********************************************************&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="bAnon" class="idref" href="#bAnon"><span class="id" title="definition">bAnon</span></a> := {| <a class="idref" href="MetaCoq.Common.BasicAst.html#binder_name"><span class="id" title="projection">binder_name</span></a> := <a class="idref" href="MetaCoq.Common.BasicAst.html#nAnon"><span class="id" title="constructor">nAnon</span></a>; <a class="idref" href="MetaCoq.Common.BasicAst.html#binder_relevance"><span class="id" title="projection">binder_relevance</span></a> := <a class="idref" href="MetaCoq.Common.BasicAst.html#Relevant"><span class="id" title="constructor">Relevant</span></a> |}.<br/>
@@ -54,6 +124,7 @@
 <span class="id" title="keyword">Definition</span> <a id="univ" class="idref" href="#univ"><span class="id" title="definition">univ</span></a> := <a class="idref" href="MetaCoq.Common.Universes.html#Level.level"><span class="id" title="constructor">Level.level</span></a> "s".<br/>
 
 <br/>
+<span class="comment">(*&nbsp;TODO&nbsp;move&nbsp;to&nbsp;SafeChecker&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="gctx" class="idref" href="#gctx"><span class="id" title="definition">gctx</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.global_env_ext"><span class="id" title="definition">global_env_ext</span></a> :=<br/>
@@ -123,12 +194,21 @@ There is always a proof of `forall x : Sort s, x -&gt; x`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">str</span> := <span class="id" title="tactic">eval</span> <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> (<a class="idref" href="MetaCoq.SafeChecker.PCUICErrors.html#string_of_type_error"><span class="id" title="definition">string_of_type_error</span></a> <span class="id" title="var">Σ</span> <span class="id" title="var">e</span>) <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">fail</span> "Failed to inhabit " <span class="id" title="var">T</span> " : " <span class="id" title="var">str</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">set</span> (<span class="id" title="var">blocked</span> := <span class="id" title="var">proof</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;fail&nbsp;"Anomaly:&nbsp;unexpected&nbsp;return&nbsp;value:&nbsp;"&nbsp;proof&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;| [ |- <a class="idref" href="MetaCoq.Examples.typing_correctness.html#inh"><span class="id" title="definition">inh</span></a> <span class="id" title="var">_</span> ?<span class="id" title="var">Γ</span> <span class="id" title="var">_</span> ] ⇒ <span class="id" title="tactic">fail</span> "Missing local wellformedness assumption for" <span class="id" title="var">Γ</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;identity_typing&nbsp;(u&nbsp;:=&nbsp;Universe.make&nbsp;univ):&nbsp;inh&nbsp;gctx_wf_env&nbsp;<span class="inlinecode"></span>&nbsp;(tImpl&nbsp;(tSort&nbsp;u)&nbsp;(tSort&nbsp;u)).<br/>
+Proof.<br/>
+&nbsp;&nbsp;set&nbsp;(impl&nbsp;:=&nbsp;tLambda&nbsp;(bNamed&nbsp;"s")&nbsp;(tSort&nbsp;u)&nbsp;(tRel&nbsp;0)).<br/>
+&nbsp;&nbsp;assert&nbsp;(wfΓ&nbsp;:&nbsp;forall&nbsp;Σ0&nbsp;:&nbsp;global_env_ext,<br/>
+&nbsp;&nbsp;abstract_env_ext_rel&nbsp;gctx_wf_env&nbsp;Σ0&nbsp;-&gt;&nbsp;∥&nbsp;wf_local&nbsp;Σ0&nbsp;<span class="inlinecode"></span>&nbsp;∥)&nbsp;by&nbsp;do&nbsp;2&nbsp;constructor.<br/>
+<br/>
+&nbsp;&nbsp;Time&nbsp;fill_inh&nbsp;impl.<br/>
+<br/>
+Time&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="identity_typing" class="idref" href="#identity_typing"><span class="id" title="lemma">identity_typing</span></a> (<a id="u:22" class="idref" href="#u:22"><span class="id" title="binder">u</span></a> := <a class="idref" href="MetaCoq.Common.Universes.html#Universe.make"><span class="id" title="definition">Universe.make</span></a> <a class="idref" href="MetaCoq.Examples.typing_correctness.html#univ"><span class="id" title="definition">univ</span></a>):<br/>
@@ -144,6 +224,7 @@ There is always a proof of `forall x : Sort s, x -&gt; x`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">|},</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#Monomorphic_ctx"><span class="id" title="constructor">Monomorphic_ctx</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a> <a class="idref" href="MetaCoq.Examples.typing_correctness.html#e7af3ac3bd678a659b77af9819669b83"><span class="id" title="variable">Σ0</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">;;;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">|-</span></a> <a class="idref" href="MetaCoq.Examples.typing_correctness.html#t:23"><span class="id" title="variable">t</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#f6519f471ad5acf69089466a686d7a45"><span class="id" title="notation">:</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tProd"><span class="id" title="constructor">tProd</span></a> (<a class="idref" href="MetaCoq.Examples.typing_correctness.html#bNamed"><span class="id" title="definition">bNamed</span></a> "s") (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tSort"><span class="id" title="constructor">tSort</span></a> <a class="idref" href="MetaCoq.Examples.typing_correctness.html#u:22"><span class="id" title="variable">u</span></a>) (<a class="idref" href="MetaCoq.Examples.typing_correctness.html#tImpl"><span class="id" title="definition">tImpl</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tRel"><span class="id" title="constructor">tRel</span></a> 0) (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tRel"><span class="id" title="constructor">tRel</span></a> 0)) <a class="idref" href="MetaCoq.Utils.MCSquash.html#2403cb4f4230cf3f6910dd7542d09118"><span class="id" title="notation">∥</span></a>).<br/>
+<span class="comment">(*&nbsp;inh&nbsp;gctx_wf_env&nbsp;<span class="inlinecode"></span>&nbsp;(tProd&nbsp;(bNamed&nbsp;"s")&nbsp;(tSort&nbsp;u)&nbsp;(tImpl&nbsp;(tRel&nbsp;0)&nbsp;(tRel&nbsp;0))).&nbsp;*)</span><br/>
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">set</span> (<span class="id" title="var">impl</span> := <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tLambda"><span class="id" title="constructor">tLambda</span></a> (<a class="idref" href="MetaCoq.Examples.typing_correctness.html#bNamed"><span class="id" title="definition">bNamed</span></a> "s") (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tSort"><span class="id" title="constructor">tSort</span></a> <span class="id" title="var">u</span>) (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tLambda"><span class="id" title="constructor">tLambda</span></a> <a class="idref" href="MetaCoq.Examples.typing_correctness.html#bAnon"><span class="id" title="definition">bAnon</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tRel"><span class="id" title="constructor">tRel</span></a> 0) (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#tRel"><span class="id" title="constructor">tRel</span></a> 0))).<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">assert</span> (<span class="id" title="var">wfΓ</span> : <span class="id" title="keyword">∀</span> <a id="b79409277befe39e187aa5f21ce977b4" class="idref" href="#b79409277befe39e187aa5f21ce977b4"><span class="id" title="binder">Σ0</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.global_env_ext"><span class="id" title="definition">global_env_ext</span></a>,<br/>
@@ -158,11 +239,12 @@ There is always a proof of `forall x : Sort s, x -&gt; x`
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">str</span> := <span class="id" title="tactic">eval</span> <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> (<a class="idref" href="MetaCoq.SafeChecker.PCUICErrors.html#string_of_type_error"><span class="id" title="definition">string_of_type_error</span></a> <span class="id" title="var">Σ</span> <span class="id" title="var">e</span>) <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">fail</span> "Failed to inhabit " <span class="id" title="var">T</span> " : " <span class="id" title="var">str</span><br/>
 &nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">set</span> (<span class="id" title="var">blocked</span> := <span class="id" title="var">proof</span>)<br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;fail&nbsp;"Anomaly:&nbsp;unexpected&nbsp;return&nbsp;value:&nbsp;"&nbsp;proof&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Print&nbsp;Opaque&nbsp;Dependencies&nbsp;identity_typing.&nbsp;*)</span><br/>
 </div>
 </div>
 <div id="footer">

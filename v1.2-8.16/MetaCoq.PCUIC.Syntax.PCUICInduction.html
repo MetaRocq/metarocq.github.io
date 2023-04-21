@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.Syntax.PCUICInduction</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.PArith.BinPos.html#"><span class="id" title="library">BinPos</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Arith.Compare_dec.html#"><span class="id" title="library">Arith.Compare_dec</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Bool.Bool.html#"><span class="id" title="library">Bool</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a> <a class="idref" href="MetaCoq.Utils.LibHypsNaming.html#"><span class="id" title="library">LibHypsNaming</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#"><span class="id" title="library">PCUICCases</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICSize.html#"><span class="id" title="library">PCUICSize</span></a>.<br/>
@@ -48,6 +49,7 @@ Derive the well-founded subterm relation for terms. Not so useful
   
 </div>
 <div class="code">
+<span class="comment">(*&nbsp;Derive&nbsp;Subterm&nbsp;for&nbsp;term.&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -524,6 +526,7 @@ Derive the well-founded subterm relation for terms. Not so useful
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;TODO:&nbsp;remove&nbsp;List.rev&nbsp;*)</span><br/>
 <span class="id" title="keyword">Lemma</span> <a id="list_size_rev" class="idref" href="#list_size_rev"><span class="id" title="lemma">list_size_rev</span></a> {<a id="A:146" class="idref" href="#A:146"><span class="id" title="binder">A</span></a>} <a id="size:147" class="idref" href="#size:147"><span class="id" title="binder">size</span></a> (<a id="l:148" class="idref" href="#l:148"><span class="id" title="binder">l</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInduction.html#A:146"><span class="id" title="variable">A</span></a>)<br/>
 &nbsp;&nbsp;: <a class="idref" href="MetaCoq.Utils.MCList.html#list_size"><span class="id" title="definition">list_size</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInduction.html#size:147"><span class="id" title="variable">size</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#rev"><span class="id" title="definition">List.rev</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInduction.html#l:148"><span class="id" title="variable">l</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Utils.MCList.html#list_size"><span class="id" title="definition">list_size</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInduction.html#size:147"><span class="id" title="variable">size</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInduction.html#l:148"><span class="id" title="variable">l</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>

@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICSubstitution</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICTactics.html#"><span class="id" title="library">PCUICTactics</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInduction.html#"><span class="id" title="library">PCUICInduction</span></a><br/>
@@ -484,6 +485,108 @@ Well-typed substitution into a context with let-ins
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;subst_declared_minductive&nbsp;{cf:checker_flags}&nbsp;Σ&nbsp;cst&nbsp;decl&nbsp;n&nbsp;k&nbsp;:<br/>
+&nbsp;&nbsp;wf&nbsp;Σ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;declared_minductive&nbsp;Σ&nbsp;cst&nbsp;decl&nbsp;-&gt;<br/>
+&nbsp;&nbsp;subst_mutual_inductive_body&nbsp;n&nbsp;k&nbsp;decl&nbsp;=&nbsp;decl.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;wfΣ&nbsp;Hdecl.<br/>
+&nbsp;&nbsp;pose&nbsp;proof&nbsp;(on_declared_minductive&nbsp;wfΣ&nbsp;Hdecl).&nbsp;apply&nbsp;onNpars&nbsp;in&nbsp;X.<br/>
+&nbsp;&nbsp;apply&nbsp;(declared_inductive_closed&nbsp;(Σ:=(empty_ext&nbsp;Σ)))&nbsp;in&nbsp;Hdecl;&nbsp;auto.<br/>
+&nbsp;&nbsp;move:&nbsp;Hdecl.<br/>
+&nbsp;&nbsp;rewrite&nbsp;/closed_inductive_decl&nbsp;/lift_mutual_inductive_body.<br/>
+&nbsp;&nbsp;destruct&nbsp;decl;&nbsp;simpl.<br/>
+&nbsp;&nbsp;move/andb_and&nbsp;=&gt;&nbsp;<span class="inlinecode"><span class="id" title="var">clpar</span></span> <span class="inlinecode"><span class="id" title="var">clbodies</span></span>.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;-&nbsp;now&nbsp;rewrite&nbsp;<span class="inlinecode"><span class="id" title="var">fold_context_k</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span>closed_ctx_subst.<br/>
+&nbsp;&nbsp;-&nbsp;eapply&nbsp;forallb_All&nbsp;in&nbsp;clbodies.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;Alli_mapi_id.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;eapply&nbsp;(All_Alli&nbsp;clbodies).&nbsp;intros;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros.&nbsp;eapply&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;simpl;&nbsp;intros.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move:&nbsp;H.&nbsp;rewrite&nbsp;/closed_inductive_body.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;x;&nbsp;simpl.&nbsp;move=&gt;&nbsp;/andb_and<span class="inlinecode">/<span class="id" title="var">andb_and</span></span> <span class="inlinecode">[<span class="id" title="var">ci</span></span> <span class="inlinecode"><span class="id" title="var">ct</span>]</span> <span class="inlinecode"><span class="id" title="var">cp</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f_equal.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;rewrite&nbsp;subst_closedn;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;closed_upwards;&nbsp;eauto;&nbsp;lia.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;eapply&nbsp;All_map_id.&nbsp;eapply&nbsp;forallb_All&nbsp;in&nbsp;ct.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;(All_impl&nbsp;ct).&nbsp;intros&nbsp;x.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;x&nbsp;as&nbsp;<span class="inlinecode">[<span class="id" title="var">id</span></span> <span class="inlinecode"><span class="id" title="var">ty</span>]</span> <span class="inlinecode"><span class="id" title="var">arg</span></span>;&nbsp;unfold&nbsp;on_pi2;&nbsp;intros&nbsp;c;&nbsp;simpl;&nbsp;repeat&nbsp;f_equal.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;subst_closedn.&nbsp;unfold&nbsp;cstr_type&nbsp;in&nbsp;c;&nbsp;simpl&nbsp;in&nbsp;c.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;closed_upwards;&nbsp;eauto;&nbsp;lia.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;simpl&nbsp;in&nbsp;X.&nbsp;rewrite&nbsp;-X&nbsp;in&nbsp;cp.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;forallb_All&nbsp;in&nbsp;cp.&nbsp;eapply&nbsp;All_map_id;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;(All_impl&nbsp;cp);&nbsp;pcuicfo.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;x;&nbsp;unfold&nbsp;on_snd;&nbsp;simpl;&nbsp;f_equal.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;subst_closedn.&nbsp;rewrite&nbsp;context_assumptions_fold.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;closed_upwards;&nbsp;eauto;&nbsp;lia.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;subst_declared_inductive&nbsp;{cf:checker_flags}&nbsp;ind&nbsp;Σ&nbsp;mdecl&nbsp;idecl&nbsp;n&nbsp;k&nbsp;:<br/>
+&nbsp;&nbsp;wf&nbsp;Σ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;declared_inductive&nbsp;Σ&nbsp;ind&nbsp;mdecl&nbsp;idecl&nbsp;-&gt;<br/>
+&nbsp;&nbsp;map_one_inductive_body&nbsp;(context_assumptions&nbsp;mdecl.(ind_params))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(length&nbsp;(arities_context&nbsp;mdecl.(ind_bodies)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;k'&nbsp;=&gt;&nbsp;subst&nbsp;n&nbsp;(k'&nbsp;+&nbsp;k))&nbsp;(inductive_ind&nbsp;ind)&nbsp;idecl&nbsp;=&nbsp;idecl.<br/>
+Proof.<br/>
+&nbsp;&nbsp;unfold&nbsp;declared_inductive.&nbsp;intros&nbsp;wfΣ&nbsp;<span class="inlinecode"><span class="id" title="var">Hmdecl</span></span> <span class="inlinecode"><span class="id" title="var">Hidecl</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;eapply&nbsp;(subst_declared_minductive&nbsp;_&nbsp;_&nbsp;_&nbsp;n&nbsp;k)&nbsp;in&nbsp;Hmdecl.&nbsp;2:&nbsp;auto.<br/>
+&nbsp;&nbsp;unfold&nbsp;subst_mutual_inductive_body&nbsp;in&nbsp;Hmdecl.<br/>
+&nbsp;&nbsp;destruct&nbsp;mdecl.&nbsp;simpl&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;injection&nbsp;Hmdecl.&nbsp;intros&nbsp;Heq.<br/>
+&nbsp;&nbsp;clear&nbsp;Hmdecl.<br/>
+&nbsp;&nbsp;pose&nbsp;proof&nbsp;Hidecl&nbsp;as&nbsp;Hidecl'.<br/>
+&nbsp;&nbsp;rewrite&nbsp;&lt;-&nbsp;Heq&nbsp;in&nbsp;Hidecl'.<br/>
+&nbsp;&nbsp;rewrite&nbsp;nth_error_mapi&nbsp;in&nbsp;Hidecl'.<br/>
+&nbsp;&nbsp;clear&nbsp;Heq.<br/>
+&nbsp;&nbsp;unfold&nbsp;option_map&nbsp;in&nbsp;Hidecl'.&nbsp;rewrite&nbsp;Hidecl&nbsp;in&nbsp;Hidecl'.<br/>
+&nbsp;&nbsp;congruence.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;subst0_inds_subst&nbsp;ind&nbsp;u&nbsp;mdecl&nbsp;n&nbsp;k&nbsp;t&nbsp;:<br/>
+&nbsp;&nbsp;(subst0&nbsp;(inds&nbsp;(inductive_mind&nbsp;ind)&nbsp;u&nbsp;(ind_bodies&nbsp;mdecl))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(subst&nbsp;n&nbsp;(|arities_context (ind_bodies mdecl)| + k) t)) =
+  subst n k (subst0 (inds (inductive_mind ind) u (ind_bodies mdecl)) t).
+Proof.
+  pose proof (distr_subst_rec t (inds (inductive_mind ind) u (ind_bodies mdecl)) n k 0).
+  simpl in H. rewrite H.
+  unfold arities_context. rewrite rev_map_length inds_length.
+  f_equal. generalize (ind_bodies mdecl).
+  clear. intros.
+  induction l; unfold inds; simpl; auto. f_equal. auto.
+Qed.
+
+Lemma subst_declared_constructor {cf:checker_flags} Σ c u mdecl idecl cdecl n k :
+  wf Σ -> declared_constructor Σ c mdecl idecl cdecl ->
+  subst (map (subst_instance u) n) k (type_of_constructor mdecl cdecl c u) = (type_of_constructor mdecl cdecl c u).
+Proof.
+  unfold declared_constructor. destruct c as [i ci]. intros wfΣ [Hidecl Hcdecl].
+  eapply (subst_declared_inductive _ _ _ _ n k) in Hidecl; eauto.
+  unfold type_of_constructor. destruct cdecl as [[id t'] arity].
+  destruct idecl; simpl in *.
+  injection Hidecl. intros.
+  pose Hcdecl as Hcdecl'.
+  rewrite <- H0 in Hcdecl'.
+  rewrite nth_error_map in Hcdecl'. rewrite Hcdecl in Hcdecl'.
+  simpl in Hcdecl'. injection Hcdecl'.
+  intros.
+  rewrite <- H2 at 2.
+  rewrite <- subst0_inds_subst. f_equal.
+  now rewrite <- subst_instance_subst.
+Qed.
+
+Lemma subst_declared_projection {cf:checker_flags} Σ c mdecl idecl pdecl n k :
+  wf Σ ->
+  declared_projection Σ c mdecl idecl pdecl ->
+  on_snd (subst n (S (ind_npars mdecl + k))) pdecl = pdecl.
+Proof.
+  intros.
+  eapply (declared_projection_closed (Σ:=empty_ext Σ)) in H; auto.
+  unfold on_snd. simpl.
+  rewrite subst_closedn.
+  - eapply closed_upwards; eauto; try lia.
+  - destruct pdecl; reflexivity.
+Qed.
+*)</span><br/>
 <span class="id" title="keyword">Lemma</span> <a id="subst_destArity" class="idref" href="#subst_destArity"><span class="id" title="lemma">subst_destArity</span></a> <a id="ctx:190" class="idref" href="#ctx:190"><span class="id" title="binder">ctx</span></a> <a id="t:191" class="idref" href="#t:191"><span class="id" title="binder">t</span></a> <a id="n:192" class="idref" href="#n:192"><span class="id" title="binder">n</span></a> <a id="k:193" class="idref" href="#k:193"><span class="id" title="binder">k</span></a> :<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#destArity"><span class="id" title="definition">destArity</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#ctx:190"><span class="id" title="variable">ctx</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#t:191"><span class="id" title="variable">t</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="var">args</span><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <span class="id" title="var">s</span><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> ⇒<br/>
@@ -502,6 +605,50 @@ Well-typed substitution into a context with let-ins
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="decompose_prod_n_assum0" class="idref" href="#decompose_prod_n_assum0"><span class="id" title="lemma">decompose_prod_n_assum0</span></a> <a id="ctx:194" class="idref" href="#ctx:194"><span class="id" title="binder">ctx</span></a> <a id="t:195" class="idref" href="#t:195"><span class="id" title="binder">t</span></a> : <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#decompose_prod_n_assum"><span class="id" title="definition">decompose_prod_n_assum</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#ctx:194"><span class="id" title="variable">ctx</span></a> 0 <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#t:195"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#ctx:194"><span class="id" title="variable">ctx</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#t:195"><span class="id" title="variable">t</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">t</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;subst_instantiate_params_subst&nbsp;n&nbsp;k&nbsp;params&nbsp;args&nbsp;s&nbsp;t&nbsp;:<br/>
+&nbsp;&nbsp;forall&nbsp;s'&nbsp;t',<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;instantiate_params_subst&nbsp;params&nbsp;args&nbsp;s&nbsp;t&nbsp;=&nbsp;Some&nbsp;(s',&nbsp;t')&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;instantiate_params_subst<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mapi_rec&nbsp;(fun&nbsp;k'&nbsp;decl&nbsp;=&gt;&nbsp;subst_decl&nbsp;n&nbsp;(k'&nbsp;+&nbsp;k)&nbsp;decl)&nbsp;params&nbsp;|s|)
+      (map (subst n k) args) (map (subst n k) s) (subst n (|s|&nbsp;+&nbsp;k)&nbsp;t)&nbsp;=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Some&nbsp;(map&nbsp;(subst&nbsp;n&nbsp;k)&nbsp;s',&nbsp;subst&nbsp;n&nbsp;(|s| + k + |params|)&nbsp;t').<br/>
+Proof.<br/>
+&nbsp;&nbsp;induction&nbsp;params&nbsp;in&nbsp;args,&nbsp;t,&nbsp;n,&nbsp;k,&nbsp;s&nbsp;|-&nbsp;*;&nbsp;intros&nbsp;ctx'&nbsp;t'.<br/>
+&nbsp;&nbsp;-&nbsp;destruct&nbsp;args;&nbsp;simpl;&nbsp;rewrite&nbsp;?Nat.add_0_r;&nbsp;try&nbsp;congruence.<br/>
+&nbsp;&nbsp;-&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;a&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">na</span></span> <span class="inlinecode">[<span class="id" title="var">body</span>|]</span> <span class="inlinecode"><span class="id" title="var">ty</span></span>;&nbsp;simpl;&nbsp;try&nbsp;congruence;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;t;&nbsp;try&nbsp;congruence.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;intros&nbsp;Ht'.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specialize&nbsp;(IHparams&nbsp;n&nbsp;k&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;Ht').<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl&nbsp;in&nbsp;IHparams.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;replace&nbsp;(|s| + k + S |params|)&nbsp;with&nbsp;(S&nbsp;(|s| + k + |params|))&nbsp;by&nbsp;lia.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;&lt;-&nbsp;IHparams.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;rewrite&nbsp;distr_subst.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;intros&nbsp;Ht'.&nbsp;destruct&nbsp;args;&nbsp;try&nbsp;congruence.&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specialize&nbsp;(IHparams&nbsp;n&nbsp;k&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;Ht').<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl&nbsp;in&nbsp;IHparams.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;replace&nbsp;(|s| + k + S |params|)&nbsp;with&nbsp;(S&nbsp;(|s| + k + |params|))&nbsp;by&nbsp;lia.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;rewrite&nbsp;&lt;-&nbsp;IHparams.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;subst_instantiate_params&nbsp;n&nbsp;k&nbsp;params&nbsp;args&nbsp;t&nbsp;ty&nbsp;:<br/>
+&nbsp;&nbsp;closed_ctx&nbsp;params&nbsp;-&gt;<br/>
+&nbsp;&nbsp;instantiate_params&nbsp;params&nbsp;args&nbsp;t&nbsp;=&nbsp;Some&nbsp;ty&nbsp;-&gt;<br/>
+&nbsp;&nbsp;instantiate_params&nbsp;params&nbsp;(map&nbsp;(subst&nbsp;n&nbsp;k)&nbsp;args)&nbsp;(subst&nbsp;n&nbsp;k&nbsp;t)&nbsp;=&nbsp;Some&nbsp;(subst&nbsp;n&nbsp;k&nbsp;ty).<br/>
+Proof.<br/>
+&nbsp;&nbsp;unfold&nbsp;instantiate_params.<br/>
+&nbsp;&nbsp;move/(closed_tele_subst&nbsp;n&nbsp;k&nbsp;params)=&gt;&nbsp;Heq.<br/>
+&nbsp;&nbsp;rewrite&nbsp;-{2}Heq&nbsp;//.<br/>
+&nbsp;&nbsp;specialize&nbsp;(subst_instantiate_params_subst&nbsp;n&nbsp;k&nbsp;(List.rev&nbsp;params)&nbsp;args&nbsp;<span class="inlinecode"></span>&nbsp;t).<br/>
+&nbsp;&nbsp;move=&gt;&nbsp;/=&nbsp;Heq'.<br/>
+&nbsp;&nbsp;case&nbsp;E:&nbsp;(instantiate_params_subst&nbsp;(List.rev&nbsp;params)&nbsp;args)=&gt;&nbsp;/=&nbsp;<span class="inlinecode">[<span class="id" title="var">l'</span></span> <span class="inlinecode"><span class="id" title="var">t'</span>]|</span>&nbsp;/=&nbsp;//.<br/>
+&nbsp;&nbsp;specialize&nbsp;(Heq'&nbsp;_&nbsp;_&nbsp;E).&nbsp;rewrite&nbsp;Heq'.&nbsp;move=&gt;&nbsp;<span class="inlinecode">=</span> <span class="inlinecode">&lt;-</span>.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;rewrite&nbsp;distr_subst&nbsp;//.<br/>
+&nbsp;&nbsp;move/instantiate_params_subst_length:&nbsp;E&nbsp;=&gt;&nbsp;-&gt;&nbsp;/=.&nbsp;do&nbsp;2&nbsp;f_equal.&nbsp;lia.<br/>
+Qed.<br/>
+Hint&nbsp;Rewrite&nbsp;subst_instantiate_params&nbsp;:&nbsp;lift.<br/>
+*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="to_extended_list_k_map_subst" class="idref" href="#to_extended_list_k_map_subst"><span class="id" title="lemma">to_extended_list_k_map_subst</span></a>:<br/>
@@ -658,6 +805,138 @@ Well-typed substitution into a context with let-ins
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;subst_build_case_predicate_type&nbsp;ind&nbsp;mdecl&nbsp;idecl&nbsp;u&nbsp;params&nbsp;ps&nbsp;pty&nbsp;n&nbsp;k&nbsp;:<br/>
+&nbsp;&nbsp;closed_ctx&nbsp;(subst_instance&nbsp;u&nbsp;(ind_params&nbsp;mdecl))&nbsp;-&gt;<br/>
+&nbsp;&nbsp;closed&nbsp;(ind_type&nbsp;idecl)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;build_case_predicate_type&nbsp;ind&nbsp;mdecl&nbsp;idecl&nbsp;params&nbsp;u&nbsp;ps&nbsp;=&nbsp;Some&nbsp;pty&nbsp;-&gt;<br/>
+&nbsp;&nbsp;build_case_predicate_type&nbsp;ind&nbsp;mdecl<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(map_one_inductive_body&nbsp;(context_assumptions&nbsp;mdecl.(ind_params))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(length&nbsp;(arities_context&nbsp;(ind_bodies&nbsp;mdecl)))&nbsp;(fun&nbsp;k'&nbsp;=&gt;&nbsp;subst&nbsp;n&nbsp;(k'&nbsp;+&nbsp;k))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(inductive_ind&nbsp;ind)&nbsp;idecl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(map&nbsp;(subst&nbsp;n&nbsp;k)&nbsp;params)&nbsp;u&nbsp;ps<br/>
+&nbsp;&nbsp;=&nbsp;Some&nbsp;(subst&nbsp;n&nbsp;k&nbsp;pty).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;closedparams&nbsp;closedtype.<br/>
+&nbsp;&nbsp;unfold&nbsp;build_case_predicate_type;&nbsp;simpl.<br/>
+&nbsp;&nbsp;case_eq&nbsp;(instantiate_params&nbsp;(subst_instance&nbsp;u&nbsp;(ind_params&nbsp;mdecl))&nbsp;params<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(subst_instance&nbsp;u&nbsp;(ind_type&nbsp;idecl)));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">discriminate</span></span> <span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;intros&nbsp;ipars&nbsp;Hipars.<br/>
+&nbsp;&nbsp;apply&nbsp;(subst_instantiate_params&nbsp;n&nbsp;k)&nbsp;in&nbsp;Hipars;&nbsp;tas.<br/>
+&nbsp;&nbsp;rewrite&nbsp;ind_type_map.&nbsp;simpl.<br/>
+&nbsp;&nbsp;rewrite&nbsp;subst_closedn&nbsp;in&nbsp;Hipars.<br/>
+&nbsp;&nbsp;{&nbsp;rewrite&nbsp;closedn_subst_instance;&nbsp;eapply&nbsp;closed_upwards;&nbsp;tea;&nbsp;lia.&nbsp;}<br/>
+&nbsp;&nbsp;rewrite&nbsp;subst_closedn;&nbsp;<span class="inlinecode"><span class="id" title="tactic">eapply</span></span> <span class="inlinecode"><span class="id" title="var">closed_upwards</span>;</span> <span class="inlinecode"><span class="id" title="var">tea</span>;</span> <span class="inlinecode"><span class="id" title="var">lia</span>|</span>.<br/>
+&nbsp;&nbsp;rewrite&nbsp;Hipars.<br/>
+&nbsp;&nbsp;specialize&nbsp;(subst_destArity&nbsp;<span class="inlinecode"></span>&nbsp;ipars&nbsp;n&nbsp;k);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;(destArity&nbsp;<span class="inlinecode"></span>&nbsp;ipars)&nbsp;as&nbsp;<span class="inlinecode">[<span class="id" title="var">ctx</span></span> <span class="inlinecode"><span class="id" title="var">s</span>]|</span>;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">discriminate</span></span>.<br/>
+&nbsp;&nbsp;simpl.&nbsp;cbn.&nbsp;move&nbsp;=&gt;&nbsp;-&gt;&nbsp;/some_inj-HH.&nbsp;simpl.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;etransitivity.<br/>
+&nbsp;&nbsp;2:&nbsp;exact&nbsp;(f_equal&nbsp;(subst&nbsp;n&nbsp;k)&nbsp;HH).<br/>
+&nbsp;&nbsp;rewrite&nbsp;subst_it_mkProd_or_LetIn.&nbsp;unf_term.&nbsp;simpl.&nbsp;f_equal.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;{&nbsp;destruct&nbsp;idecl;&nbsp;reflexivity.&nbsp;}<br/>
+&nbsp;&nbsp;rewrite&nbsp;subst_mkApps;&nbsp;simpl.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;rewrite&nbsp;map_app;&nbsp;f_equal.<br/>
+&nbsp;&nbsp;-&nbsp;rewrite&nbsp;!map_map;&nbsp;apply&nbsp;map_ext;&nbsp;clear;&nbsp;intro.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;subst_context_length.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;-&gt;&nbsp;commut_lift_subst_rec&nbsp;by&nbsp;lia.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;f_equal.&nbsp;lia.<br/>
+&nbsp;&nbsp;-&nbsp;rewrite&nbsp;/to_extended_list&nbsp;to_extended_list_k_subst.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;&lt;-&nbsp;to_extended_list_k_map_subst&nbsp;by&nbsp;lia.&nbsp;reflexivity.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;subst_build_branches_type&nbsp;{cf:checker_flags}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;k&nbsp;Σ&nbsp;ind&nbsp;mdecl&nbsp;idecl&nbsp;indices&nbsp;args&nbsp;u&nbsp;p&nbsp;brs&nbsp;cs&nbsp;:<br/>
+&nbsp;&nbsp;wf&nbsp;Σ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;declared_inductive&nbsp;Σ&nbsp;ind&nbsp;mdecl&nbsp;idecl&nbsp;-&gt;<br/>
+&nbsp;&nbsp;closed_ctx&nbsp;(subst_instance&nbsp;u&nbsp;(ind_params&nbsp;mdecl))&nbsp;-&gt;<br/>
+&nbsp;&nbsp;on_inductive&nbsp;(lift_typing&nbsp;typing)&nbsp;(Σ,&nbsp;ind_universes&nbsp;mdecl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(inductive_mind&nbsp;ind)&nbsp;mdecl&nbsp;-&gt;<br/>
+&nbsp;&nbsp;on_constructors&nbsp;(lift_typing&nbsp;typing)&nbsp;(Σ,&nbsp;ind_universes&nbsp;mdecl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mdecl&nbsp;(inductive_ind&nbsp;ind)&nbsp;idecl&nbsp;indices&nbsp;(ind_ctors&nbsp;idecl)&nbsp;cs&nbsp;-&gt;<br/>
+&nbsp;&nbsp;map_option_out&nbsp;(build_branches_type&nbsp;ind&nbsp;mdecl&nbsp;idecl&nbsp;args&nbsp;u&nbsp;p)&nbsp;=&nbsp;Some&nbsp;brs&nbsp;-&gt;<br/>
+&nbsp;&nbsp;map_option_out&nbsp;(build_branches_type&nbsp;ind&nbsp;mdecl<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;idecl&nbsp;(map&nbsp;(subst&nbsp;n&nbsp;k)&nbsp;args)&nbsp;u&nbsp;(subst&nbsp;n&nbsp;k&nbsp;p))&nbsp;=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Some&nbsp;(map&nbsp;(on_snd&nbsp;(subst&nbsp;n&nbsp;k))&nbsp;brs).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;wfΣ&nbsp;wfidecl&nbsp;closedparams&nbsp;onmind&nbsp;Honcs.<br/>
+&nbsp;&nbsp;rewrite&nbsp;!build_branches_type_.&nbsp;cbn.<br/>
+&nbsp;&nbsp;eapply&nbsp;Alli_map_option_out_mapi_Some_spec'.<br/>
+&nbsp;&nbsp;{&nbsp;eapply&nbsp;All2_All_left;&nbsp;tea.&nbsp;intros&nbsp;x&nbsp;y&nbsp;u';&nbsp;exact&nbsp;(y;&nbsp;u').&nbsp;}<br/>
+&nbsp;&nbsp;clear&nbsp;Honcs&nbsp;brs.<br/>
+&nbsp;&nbsp;intros&nbsp;j&nbsp;<span class="inlinecode">[<span class="id" title="var">id</span></span> <span class="inlinecode"><span class="id" title="var">t</span>]</span> <span class="inlinecode"><span class="id" title="var">i</span></span>&nbsp;<span class="inlinecode"><span class="id" title="var">t'</span></span> <span class="inlinecode"><span class="id" title="var">k'</span></span>&nbsp;<span class="inlinecode"><span class="id" title="var">cs'</span></span> <span class="inlinecode"><span class="id" title="var">Honc</span></span>.<br/>
+&nbsp;&nbsp;case_eq&nbsp;(instantiate_params&nbsp;(subst_instance&nbsp;u&nbsp;(ind_params&nbsp;mdecl))&nbsp;args<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(subst0&nbsp;(inds&nbsp;(inductive_mind&nbsp;ind)&nbsp;u<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ind_bodies&nbsp;mdecl))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(subst_instance&nbsp;u&nbsp;t)));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">discriminate</span></span>.<br/>
+&nbsp;&nbsp;intros&nbsp;ty&nbsp;Heq;&nbsp;cbn.<br/>
+&nbsp;&nbsp;pose&nbsp;proof&nbsp;(on_constructor_closed&nbsp;wfΣ&nbsp;(u:=u)&nbsp;Honc)&nbsp;as&nbsp;clt;&nbsp;cbn&nbsp;in&nbsp;clt.<br/>
+&nbsp;&nbsp;eapply&nbsp;(closed_upwards&nbsp;k)&nbsp;in&nbsp;clt;&nbsp;try&nbsp;lia.<br/>
+&nbsp;&nbsp;remember&nbsp;(subst0&nbsp;(inds&nbsp;(inductive_mind&nbsp;ind)&nbsp;u&nbsp;(ind_bodies&nbsp;mdecl))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(subst_instance&nbsp;u&nbsp;t))&nbsp;as&nbsp;ty'.<br/>
+&nbsp;&nbsp;apply&nbsp;(subst_instantiate_params&nbsp;n&nbsp;k)&nbsp;in&nbsp;Heq&nbsp;as&nbsp;Heq';&nbsp;tas.<br/>
+&nbsp;&nbsp;erewrite&nbsp;subst_closedn&nbsp;in&nbsp;Heq';&nbsp;tas.<br/>
+&nbsp;&nbsp;rewrite&nbsp;Heq'.<br/>
+&nbsp;&nbsp;eapply&nbsp;instantiate_params_make_context_subst&nbsp;in&nbsp;Heq.<br/>
+&nbsp;&nbsp;destruct&nbsp;Heq&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">ctx'</span></span> <span class="inlinecode">[<span class="id" title="var">ty''</span></span> <span class="inlinecode">[<span class="id" title="var">s'</span></span> <span class="inlinecode">[<span class="id" title="var">Hty</span></span> <span class="inlinecode">[<span class="id" title="var">Hsubst</span></span> <span class="inlinecode"><span class="id" title="var">Ht0</span>]]]]</span>.<br/>
+&nbsp;&nbsp;subst&nbsp;ty;&nbsp;simpl.<br/>
+&nbsp;&nbsp;rewrite&nbsp;Heqty'&nbsp;in&nbsp;Hty.<br/>
+&nbsp;&nbsp;destruct&nbsp;Honc&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">Hcstr_args</span></span> <span class="inlinecode">?</span> <span class="inlinecode"><span class="id" title="var">cdecl_eq</span></span> <span class="inlinecode"><span class="id" title="var">Hty'</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span>;&nbsp;unfold&nbsp;cstr_type&nbsp;in&nbsp;*;&nbsp;simpl&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;rewrite&nbsp;cdecl_eq&nbsp;in&nbsp;Hty.<br/>
+&nbsp;&nbsp;rewrite&nbsp;-&gt;&nbsp;!subst_instance_it_mkProd_or_LetIn&nbsp;in&nbsp;Hty.<br/>
+&nbsp;&nbsp;rewrite&nbsp;!subst_it_mkProd_or_LetIn&nbsp;in&nbsp;Hty.<br/>
+&nbsp;&nbsp;assert&nbsp;(H0:&nbsp;|subst_context (inds (inductive_mind ind) u (ind_bodies mdecl)) 0
+                (subst_instance u (ind_params mdecl))|
+          = |subst_instance&nbsp;u&nbsp;(ind_params&nbsp;mdecl)|).&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;rewrite&nbsp;subst_context_length.&nbsp;}<br/>
+&nbsp;&nbsp;rewrite&nbsp;&lt;-&nbsp;H0&nbsp;in&nbsp;Hty.<br/>
+&nbsp;&nbsp;rewrite&nbsp;decompose_prod_n_assum_it_mkProd&nbsp;in&nbsp;Hty.<br/>
+&nbsp;&nbsp;injection&nbsp;Hty.&nbsp;clear&nbsp;Hty.<br/>
+&nbsp;&nbsp;intros&nbsp;Heqty''&nbsp;&lt;-.&nbsp;revert&nbsp;Heqty''.<br/>
+&nbsp;&nbsp;rewrite&nbsp;!subst_instance_length&nbsp;Nat.add_0_r.<br/>
+&nbsp;&nbsp;rewrite&nbsp;subst_context_length&nbsp;subst_instance_length.<br/>
+&nbsp;&nbsp;rewrite&nbsp;(subst_cstr_concl_head&nbsp;ind&nbsp;u&nbsp;mdecl&nbsp;cs'.(cstr_args)&nbsp;cs'.(cstr_indices)).<br/>
+&nbsp;&nbsp;{&nbsp;destruct&nbsp;wfidecl&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">Hmdecl</span></span> <span class="inlinecode"><span class="id" title="var">Hnth</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;apply&nbsp;nth_error_Some_length&nbsp;in&nbsp;Hnth.<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;intros&nbsp;&lt;-.&nbsp;rewrite&nbsp;!subst_it_mkProd_or_LetIn&nbsp;!subst_mkApps&nbsp;/=.<br/>
+&nbsp;&nbsp;rewrite&nbsp;!decompose_prod_assum_it_mkProd&nbsp;/=;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;by&nbsp;rewrite&nbsp;is_ind_app_head_mkApps.<br/>
+&nbsp;&nbsp;rewrite&nbsp;!decompose_app_mkApps;&nbsp;try&nbsp;by&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;simpl.&nbsp;rewrite&nbsp;!map_app&nbsp;!subst_context_length<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!subst_instance_length&nbsp;Nat.add_0_r.<br/>
+&nbsp;&nbsp;eapply&nbsp;subst_to_extended_list_k&nbsp;with&nbsp;(k:=|cs'.(cstr_args)|) in Hsubst as XX.
+  rewrite map_subst_instance_to_extended_list_k in XX.
+  rewrite !XX; clear XX.
+  apply make_context_subst_spec in Hsubst as Hsubst'.
+  rewrite rev_involutive in Hsubst'.
+  pose proof (context_subst_assumptions_length Hsubst') as H1.
+  case E: chop => [l l'].
+  have chopm := (chop_map _ _ _ _ _ E).
+  move: E chopm.
+  rewrite chop_n_app ?map_length. {
+    rewrite <- H1. apply onNpars in onmind.
+    now rewrite context_assumptions_subst_instance. }
+  move=> [= <- <-] chopm.
+  move: {chopm}(chopm _ (subst n (|cs'.(cstr_args)|&nbsp;+&nbsp;k))).<br/>
+&nbsp;&nbsp;rewrite&nbsp;map_app.<br/>
+&nbsp;&nbsp;move=&gt;&nbsp;chopm;&nbsp;rewrite&nbsp;{}chopm&nbsp;/=.<br/>
+&nbsp;&nbsp;inversion&nbsp;1;&nbsp;subst.&nbsp;f_equal.&nbsp;unfold&nbsp;on_snd;&nbsp;cbn;&nbsp;f_equal.<br/>
+&nbsp;&nbsp;rewrite&nbsp;!app_nil_r&nbsp;/on_snd&nbsp;/=.<br/>
+&nbsp;&nbsp;rewrite&nbsp;subst_it_mkProd_or_LetIn&nbsp;!subst_context_length&nbsp;!subst_mkApps<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!subst_instance_length&nbsp;!map_app.<br/>
+&nbsp;&nbsp;f_equal.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;--&nbsp;rewrite&nbsp;-&gt;&nbsp;commut_lift_subst_rec&nbsp;by&nbsp;lia.&nbsp;arith_congr.<br/>
+&nbsp;&nbsp;--&nbsp;f_equal.&nbsp;simpl.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;!subst_mkApps&nbsp;/=&nbsp;!map_app.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f_equal.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;/to_extended_list&nbsp;-to_extended_list_k_map_subst.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++&nbsp;rewrite&nbsp;!subst_context_length&nbsp;subst_instance_length.&nbsp;lia.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++&nbsp;now&nbsp;rewrite&nbsp;to_extended_list_k_subst.<br/>
+Qed.<br/>
+*)</span><br/>
 
 <br/>
 #[<span class="id" title="var">global</span>]<br/>
@@ -773,6 +1052,28 @@ Well-typed substitution into a context with let-ins
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">subst</span> <span class="id" title="var">c</span>. <span class="id" title="tactic">rewrite</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.app_context_assoc"><span class="id" title="lemma">app_context_assoc</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Common.BasicAst.html#snoc"><span class="id" title="definition">snoc</span></a>. <span class="id" title="tactic">simpl</span>. <span class="id" title="var">lia_f_equal</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
+<span class="comment">(*<br/>
+<br/>
+Lemma&nbsp;subst_decompose_prod_assum_rec&nbsp;ctx&nbsp;t&nbsp;s&nbsp;k&nbsp;:<br/>
+&nbsp;&nbsp;let&nbsp;(ctx',&nbsp;t')&nbsp;:=&nbsp;decompose_prod_assum&nbsp;ctx&nbsp;t&nbsp;in<br/>
+&nbsp;&nbsp;let&nbsp;(ctx'',&nbsp;t'')&nbsp;:=&nbsp;decompose_prod_assum&nbsp;(subst_context&nbsp;s&nbsp;k&nbsp;ctx)&nbsp;(subst&nbsp;s&nbsp;(length&nbsp;ctx&nbsp;+&nbsp;k)&nbsp;t)&nbsp;in<br/>
+&nbsp;&nbsp;subst&nbsp;s&nbsp;k&nbsp;(it_mkProd_or_LetIn&nbsp;ctx'&nbsp;t')&nbsp;=&nbsp;it_mkProd_or_LetIn&nbsp;ctx''&nbsp;t''.<br/>
+Proof.<br/>
+&nbsp;&nbsp;rewrite&nbsp;decompose_prod_assum_ctx.<br/>
+&nbsp;&nbsp;destruct&nbsp;decompose_prod_assum&nbsp;eqn:Heq.<br/>
+&nbsp;&nbsp;destruct&nbsp;(decompose_prod_assum&nbsp;(subst_context&nbsp;_&nbsp;_&nbsp;_)&nbsp;_)&nbsp;eqn:Heq'.<br/>
+&nbsp;&nbsp;apply&nbsp;decompose_prod_assum_it_mkProd_or_LetIn&nbsp;in&nbsp;Heq.<br/>
+&nbsp;&nbsp;apply&nbsp;decompose_prod_assum_it_mkProd_or_LetIn&nbsp;in&nbsp;Heq'.<br/>
+&nbsp;&nbsp;rewrite&nbsp;subst_it_mkProd_or_LetIn.<br/>
+&nbsp;&nbsp;rewrite&nbsp;subst_context_app.<br/>
+&nbsp;&nbsp;rewrite&nbsp;it_mkProd_or_LetIn_app.<br/>
+&nbsp;&nbsp;rewrite&nbsp;-Heq'.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;simpl&nbsp;in&nbsp;Heq.<br/>
+&nbsp;&nbsp;rewrite&nbsp;Heq.<br/>
+&nbsp;&nbsp;rewrite&nbsp;subst_it_mkProd_or_LetIn.<br/>
+&nbsp;&nbsp;rewrite&nbsp;app_context_length.<br/>
+&nbsp;&nbsp;lia_f_equal.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Arguments</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Arith.PeanoNat.html#Nat.sub"><span class="id" title="definition">Nat.sub</span></a> : <span class="id" title="tactic">simpl</span> <span class="id" title="var">nomatch</span>.<br/>
@@ -982,6 +1283,7 @@ Substitution without lets in Γ'
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Let-expanding&nbsp;substitution&nbsp;*)</span><br/>
 <span class="id" title="keyword">Lemma</span> <a id="subslet_usubst" class="idref" href="#subslet_usubst"><span class="id" title="lemma">subslet_usubst</span></a> {<a id="94073b4263085084b61292dc173877b0" class="idref" href="#94073b4263085084b61292dc173877b0"><span class="id" title="binder">Γ</span></a> <a id="e21ded7251c0751816d446a0c9b51144" class="idref" href="#e21ded7251c0751816d446a0c9b51144"><span class="id" title="binder">Δ</span></a> <a id="9a4ae1c2038989d69d860d1684ffa823" class="idref" href="#9a4ae1c2038989d69d860d1684ffa823"><span class="id" title="binder">Γ'</span></a> <a id="s:340" class="idref" href="#s:340"><span class="id" title="binder">s</span></a>} :<br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#untyped_subslet"><span class="id" title="inductive">untyped_subslet</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#94073b4263085084b61292dc173877b0"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#s:340"><span class="id" title="variable">s</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#e21ded7251c0751816d446a0c9b51144"><span class="id" title="variable">Δ</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#usubst"><span class="id" title="definition">usubst</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#94073b4263085084b61292dc173877b0"><span class="id" title="variable">Γ</span></a><a class="idref" href="MetaCoq.Common.Environment.html#49608ad29a449fb99e23f35a3e9f2749"><span class="id" title="notation">,,,</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#e21ded7251c0751816d446a0c9b51144"><span class="id" title="variable">Δ</span></a><a class="idref" href="MetaCoq.Common.Environment.html#49608ad29a449fb99e23f35a3e9f2749"><span class="id" title="notation">,,,</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#9a4ae1c2038989d69d860d1684ffa823"><span class="id" title="variable">Γ'</span></a>) (<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#64b62961f3506563337ecca5e1172b0a"><span class="id" title="notation">⇑^</span></a><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#9a4ae1c2038989d69d860d1684ffa823"><span class="id" title="variable">Γ'</span></a><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#64b62961f3506563337ecca5e1172b0a"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#s:340"><span class="id" title="variable">s</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#999cdb9531c4ecd731abe269ac7560c5"><span class="id" title="notation">⋅</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#999cdb9531c4ecd731abe269ac7560c5"><span class="id" title="notation">n</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#ids"><span class="id" title="definition">ids</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#64b62961f3506563337ecca5e1172b0a"><span class="id" title="notation">)</span></a>) (<a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#94073b4263085084b61292dc173877b0"><span class="id" title="variable">Γ</span></a><a class="idref" href="MetaCoq.Common.Environment.html#49608ad29a449fb99e23f35a3e9f2749"><span class="id" title="notation">,,,</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.subst_context"><span class="id" title="definition">subst_context</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#s:340"><span class="id" title="variable">s</span></a> 0 <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#9a4ae1c2038989d69d860d1684ffa823"><span class="id" title="variable">Γ'</span></a>).<br/>
@@ -1297,6 +1599,31 @@ Substitution without lets in Γ'
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Lemma&nbsp;red_red_onctx&nbsp;{P&nbsp;Γ&nbsp;Δ&nbsp;Γ'&nbsp;s&nbsp;s'&nbsp;ctx}&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;untyped_subslet&nbsp;Γ&nbsp;s&nbsp;Δ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;onctx<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;b&nbsp;:&nbsp;term&nbsp;=&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;Δ&nbsp;Γ'0&nbsp;:&nbsp;context,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;untyped_subslet&nbsp;Γ&nbsp;s&nbsp;Δ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;red&nbsp;Σ&nbsp;(Γ,,,&nbsp;Γ'0)&nbsp;(subst&nbsp;s&nbsp;|Γ'0| b) (subst s' |Γ'0|&nbsp;b))&nbsp;ctx&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;All2_fold<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;(Γ0&nbsp;Δ0&nbsp;:&nbsp;context)&nbsp;(d&nbsp;d'&nbsp;:&nbsp;context_decl)&nbsp;=&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;red_decls&nbsp;Σ&nbsp;(Γ,,,&nbsp;Γ',,,&nbsp;mapi_context&nbsp;(shiftf&nbsp;(subst&nbsp;s)&nbsp;|Γ'|) Γ0)
+        (Γ,,, Γ',,, mapi_context (shiftf (subst s') |Γ'|)&nbsp;Δ0)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(map_decl&nbsp;(shiftf&nbsp;(subst&nbsp;s)&nbsp;|Γ'| |Γ0|)&nbsp;d)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(map_decl&nbsp;(shiftf&nbsp;(subst&nbsp;s')&nbsp;|Γ'| |Γ0|)&nbsp;d'))&nbsp;ctx&nbsp;ctx.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;hsubs.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;induction&nbsp;1;&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;p.&nbsp;destruct&nbsp;x&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">na</span></span> <span class="inlinecode">[<span class="id" title="var">b</span>|]</span> <span class="inlinecode"><span class="id" title="var">ty</span></span>;&nbsp;constructor;&nbsp;auto;&nbsp;simpl&nbsp;in&nbsp;*;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;/shiftf.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;specialize&nbsp;(o&nbsp;_&nbsp;(Γ'&nbsp;,,,&nbsp;mapi_context&nbsp;(fun&nbsp;k'&nbsp;=&gt;&nbsp;subst&nbsp;s&nbsp;(k'&nbsp;+&nbsp;|Γ'|)) l) hsubs).
+      len in o. now rewrite -app_context_assoc.
+    - specialize (r _ (Γ' ,,, mapi_context (fun k' => subst s (k' + |Γ'|))&nbsp;l)&nbsp;hsubs).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;len&nbsp;in&nbsp;r.&nbsp;now&nbsp;rewrite&nbsp;-app_context_assoc.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;specialize&nbsp;(r&nbsp;_&nbsp;(Γ'&nbsp;,,,&nbsp;mapi_context&nbsp;(fun&nbsp;k'&nbsp;=&gt;&nbsp;subst&nbsp;s&nbsp;(k'&nbsp;+&nbsp;|Γ'|)) l) hsubs).
+      len in r. now rewrite -app_context_assoc.
+  Qed. *)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Ltac</span> <span class="id" title="var">simpl_IHs</span> :=<br/>
@@ -1553,6 +1880,7 @@ The cumulativity relation is substitutive, yay!
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSubstitution.html#nth_error_subst_context"><span class="id" title="lemma">nth_error_subst_context</span></a> <span class="id" title="var">hnth</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">rewrite</span> /<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.subst_decl"><span class="id" title="definition">subst_decl</span></a>. <span class="id" title="tactic">simpl</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">sigma</span>. <span class="id" title="tactic">rewrite</span> -<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#shiftk_shift"><span class="id" title="lemma">shiftk_shift</span></a> -<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#subst_compose_assoc"><span class="id" title="lemma">subst_compose_assoc</span></a> -<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#shiftk_shift"><span class="id" title="lemma">shiftk_shift</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;rewrite&nbsp;lift0_inst&nbsp;!subst_inst_aux&nbsp;Nat.add_0_r.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#subst_shift_comm"><span class="id" title="lemma">subst_shift_comm</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> -<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#subst_fn_subst_consn"><span class="id" title="lemma">subst_fn_subst_consn</span></a>. <span class="id" title="var">lia_f_equal</span>. }<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="id" title="tactic">intros</span> <span class="id" title="var">n</span> <span class="id" title="var">hnth</span>; <span class="id" title="var">len</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">hd</span> [= -&gt;].<br/>

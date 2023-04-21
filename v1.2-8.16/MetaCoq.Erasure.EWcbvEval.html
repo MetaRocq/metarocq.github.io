@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Erasure.EWcbvEval</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Unicode.Utf8.html#"><span class="id" title="library">Utf8</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Common.BasicAst.html#"><span class="id" title="library">BasicAst</span></a>.<br/>
@@ -78,6 +79,8 @@
 <div class="code">
 
 <br/>
+<span class="comment">(*&nbsp;Tells&nbsp;if&nbsp;the&nbsp;evaluation&nbsp;relation&nbsp;should&nbsp;include&nbsp;match-prop&nbsp;and&nbsp;proj-prop&nbsp;reduction&nbsp;rules.<br/>
+&nbsp;&nbsp;Also,&nbsp;are&nbsp;constructors&nbsp;represented&nbsp;as&nbsp;blocks&nbsp;or&nbsp;higher-order.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Class</span> <a id="WcbvFlags" class="idref" href="#WcbvFlags"><span class="id" title="record">WcbvFlags</span></a> := { <a id="with_prop_case" class="idref" href="#with_prop_case"><span class="id" title="projection">with_prop_case</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ; <a id="with_guarded_fix" class="idref" href="#with_guarded_fix"><span class="id" title="projection">with_guarded_fix</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ; <a id="with_constructor_as_block" class="idref" href="#with_constructor_as_block"><span class="id" title="projection">with_constructor_as_block</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> }.<br/>
 
 <br/>
@@ -165,6 +168,7 @@
 <span class="id" title="keyword">Section</span> <a id="Wcbv" class="idref" href="#Wcbv"><span class="id" title="section">Wcbv</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="wfl:48" class="idref" href="#wfl:48"><span class="id" title="binder">wfl</span></a> : <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#WcbvFlags"><span class="id" title="class">WcbvFlags</span></a>}.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Context</span> (<a id="bee78f44e79dd1f39e7aa3afe03ef2db" class="idref" href="#bee78f44e79dd1f39e7aa3afe03ef2db"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#global_declarations"><span class="id" title="definition">global_declarations</span></a>).<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;The&nbsp;local&nbsp;context&nbsp;is&nbsp;fixed:&nbsp;we&nbsp;are&nbsp;only&nbsp;doing&nbsp;weak&nbsp;reductions&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Unset</span> <span class="id" title="var">Elimination</span> <span class="id" title="var">Schemes</span>.<br/>
@@ -417,9 +421,9 @@ Evars complicate reasoning due to the embedded substitution, we skip
       them for now 
 </div>
 <div class="code">
-&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;|&nbsp;eval_evar&nbsp;n&nbsp;l&nbsp;l'&nbsp;:&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forall2&nbsp;eval&nbsp;l&nbsp;l'&nbsp;-&gt;&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eval&nbsp;(tEvar&nbsp;n&nbsp;l)&nbsp;(tEvar&nbsp;n&nbsp;l')&nbsp;*)</span><br/>
 <br/>
 <br/>
 &nbsp;&nbsp;</div>
@@ -470,7 +474,8 @@ Characterization of values for this reduction relation.
 &nbsp;&nbsp;&nbsp;| <a id="value_head_cofix" class="idref" href="#value_head_cofix"><span class="id" title="constructor">value_head_cofix</span></a> <a id="mfix:183" class="idref" href="#mfix:183"><span class="id" title="binder">mfix</span></a> <a id="idx:184" class="idref" href="#idx:184"><span class="id" title="binder">idx</span></a> : <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#value_head:176"><span class="id" title="inductive">value_head</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#nargs:175"><span class="id" title="variable">nargs</span></a> (<a class="idref" href="MetaCoq.Erasure.EAst.html#tCoFix"><span class="id" title="constructor">tCoFix</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#mfix:183"><span class="id" title="variable">mfix</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#idx:184"><span class="id" title="variable">idx</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;| <a id="value_head_fix" class="idref" href="#value_head_fix"><span class="id" title="constructor">value_head_fix</span></a> <a id="mfix:185" class="idref" href="#mfix:185"><span class="id" title="binder">mfix</span></a> <a id="idx:186" class="idref" href="#idx:186"><span class="id" title="binder">idx</span></a> <a id="rarg:187" class="idref" href="#rarg:187"><span class="id" title="binder">rarg</span></a> <a id="fn:188" class="idref" href="#fn:188"><span class="id" title="binder">fn</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.EGlobalEnv.html#cunfold_fix"><span class="id" title="definition">cunfold_fix</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#mfix:185"><span class="id" title="variable">mfix</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#idx:186"><span class="id" title="variable">idx</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#rarg:187"><span class="id" title="variable">rarg</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#fn:188"><span class="id" title="variable">fn</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;If&nbsp;fixpoints&nbsp;are&nbsp;not&nbsp;guarded,&nbsp;we&nbsp;don't&nbsp;need&nbsp;to&nbsp;consider&nbsp;applied&nbsp;fixpoints<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;value&nbsp;heads*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">if</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#with_guarded_fix"><span class="id" title="method">with_guarded_fix</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">then</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#nargs:175"><span class="id" title="variable">nargs</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a3"><span class="id" title="notation">≤</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#rarg:187"><span class="id" title="variable">rarg</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">else</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#False"><span class="id" title="inductive">False</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#value_head:176"><span class="id" title="inductive">value_head</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#nargs:175"><span class="id" title="variable">nargs</span></a> (<a class="idref" href="MetaCoq.Erasure.EAst.html#tFix"><span class="id" title="constructor">tFix</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#mfix:185"><span class="id" title="variable">mfix</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#idx:186"><span class="id" title="variable">idx</span></a>).<br/>
 &nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Derive</span> <span class="id" title="var">Signature</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#value_head"><span class="id" title="inductive">value_head</span></a>.<br/>
@@ -986,6 +991,7 @@ Characterization of values for this reduction relation.
 The codomain of evaluation is only values: 
 </div>
 <div class="code">
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;means&nbsp;no&nbsp;redex&nbsp;can&nbsp;remain&nbsp;at&nbsp;the&nbsp;head&nbsp;of&nbsp;an&nbsp;evaluated&nbsp;term.&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="value_head_spec'" class="idref" href="#value_head_spec'"><span class="id" title="lemma">value_head_spec'</span></a> <a id="n:481" class="idref" href="#n:481"><span class="id" title="binder">n</span></a> <a id="t:482" class="idref" href="#t:482"><span class="id" title="binder">t</span></a> :<br/>
@@ -1595,6 +1601,52 @@ The codomain of evaluation is only values:
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#Wcbv"><span class="id" title="section">Wcbv</span></a>.<br/>
 
 <br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;eval_mkApps_inv'&nbsp;Σ&nbsp;f&nbsp;args&nbsp;v&nbsp;:<br/>
+&nbsp;&nbsp;@eval&nbsp;target_wcbv_flags&nbsp;Σ&nbsp;(mkApps&nbsp;f&nbsp;args)&nbsp;v&nbsp;-&gt;<br/>
+&nbsp;&nbsp;∑&nbsp;f',&nbsp;@eval&nbsp;target_wcbv_flags&nbsp;Σ&nbsp;f&nbsp;f'&nbsp;×&nbsp;∑&nbsp;args',&nbsp;All2&nbsp;(@eval&nbsp;target_wcbv_flags&nbsp;&nbsp;Σ)&nbsp;args&nbsp;args'&nbsp;×&nbsp;@eval&nbsp;target_wcbv_flags&nbsp;Σ&nbsp;(mkApps&nbsp;f'&nbsp;args')&nbsp;v.<br/>
+Proof.<br/>
+&nbsp;&nbsp;revert&nbsp;f&nbsp;v;&nbsp;induction&nbsp;args&nbsp;using&nbsp;rev_ind;&nbsp;cbn;&nbsp;intros&nbsp;f&nbsp;v.<br/>
+&nbsp;&nbsp;-&nbsp;intros&nbsp;ev.&nbsp;exists&nbsp;v.&nbsp;split&nbsp;=&gt;&nbsp;//.&nbsp;eapply&nbsp;eval_to_value&nbsp;in&nbsp;ev.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;<span class="inlinecode"></span>.&nbsp;split.&nbsp;econstructor.&nbsp;cbn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;eapply&nbsp;value_final.<br/>
+&nbsp;&nbsp;-&nbsp;rewrite&nbsp;mkApps_app.&nbsp;intros&nbsp;ev.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;depelim&nbsp;ev.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;specialize&nbsp;(IHargs&nbsp;_&nbsp;_&nbsp;ev1)&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">f'</span></span> <span class="inlinecode">[<span class="id" title="var">evf'</span></span> <span class="inlinecode">[<span class="id" title="var">args'</span></span> <span class="inlinecode">[<span class="id" title="var">Hargs'</span></span> <span class="inlinecode"><span class="id" title="var">evars</span>]]]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;f'.&nbsp;split&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eexists.&nbsp;split.&nbsp;eapply&nbsp;All2_app;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;mkApps_app.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;econstructor;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;value_final;&nbsp;eapply&nbsp;eval_to_value;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;specialize&nbsp;(IHargs&nbsp;_&nbsp;_&nbsp;ev1)&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">f'</span></span> <span class="inlinecode">[<span class="id" title="var">evf'</span></span> <span class="inlinecode">[<span class="id" title="var">args'</span></span> <span class="inlinecode">[<span class="id" title="var">Hargs'</span></span> <span class="inlinecode"><span class="id" title="var">evars</span>]]]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;f'.&nbsp;split&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eexists.&nbsp;split.&nbsp;eapply&nbsp;All2_app;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;mkApps_app.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;eval_beta;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;value_final;&nbsp;eapply&nbsp;eval_to_value;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;specialize&nbsp;(IHargs&nbsp;_&nbsp;_&nbsp;ev1)&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">f'</span></span> <span class="inlinecode">[<span class="id" title="var">evf'</span></span> <span class="inlinecode"><span class="id" title="var">ev</span>]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;f';&nbsp;split&nbsp;=&gt;&nbsp;//.&nbsp;<span class="comment">(*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;mkApps_app.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;eval_fix;&nbsp;tea.&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;specialize&nbsp;(IHargs&nbsp;_&nbsp;_&nbsp;ev1)&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">f'</span></span> <span class="inlinecode">[<span class="id" title="var">evf'</span></span> <span class="inlinecode"><span class="id" title="var">ev</span>]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;f';&nbsp;split&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;rewrite&nbsp;mkApps_app.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;eval_fix_value;&nbsp;tea.&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;specialize&nbsp;(IHargs&nbsp;_&nbsp;_&nbsp;ev1)&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">f'</span></span> <span class="inlinecode">[<span class="id" title="var">evf'</span></span> <span class="inlinecode">[<span class="id" title="var">args'</span></span> <span class="inlinecode">[<span class="id" title="var">Hargs'</span></span> <span class="inlinecode"><span class="id" title="var">evars</span>]]]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;f'.&nbsp;split&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eexists.&nbsp;split.&nbsp;eapply&nbsp;All2_app;&nbsp;eauto.&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;mkApps_app.<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;specialize&nbsp;(IHargs&nbsp;_&nbsp;_&nbsp;ev1)&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">f'</span></span> <span class="inlinecode">[<span class="id" title="var">evf'</span></span> <span class="inlinecode"><span class="id" title="var">ev</span>]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;f';&nbsp;split&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;mkApps_app.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;eval_fix';&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;specialize&nbsp;(IHargs&nbsp;_&nbsp;_&nbsp;ev1)&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">f''</span></span> <span class="inlinecode">[<span class="id" title="var">evf'</span></span> <span class="inlinecode"><span class="id" title="var">ev</span>]</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;f'';&nbsp;split&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;mkApps_app.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;eval_app_cong;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;cbn&nbsp;in&nbsp;i.&nbsp;discriminate.<br/>
+Qed.*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#eval_unique_sig"><span class="id" title="lemma">eval_unique_sig</span></a> {<span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>}.<br/>
@@ -1832,7 +1884,7 @@ Evaluation preserves closedness:
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="eval_wellformed" class="idref" href="#eval_wellformed"><span class="id" title="lemma">eval_wellformed</span></a> {<a id="efl:626" class="idref" href="#efl:626"><span class="id" title="binder">efl</span></a> : <a class="idref" href="MetaCoq.Erasure.EWellformed.html#EEnvFlags"><span class="id" title="class">EEnvFlags</span></a>} {<a id="wfl:627" class="idref" href="#wfl:627"><span class="id" title="binder">wfl</span></a> : <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#WcbvFlags"><span class="id" title="class">WcbvFlags</span></a>} <a id="5e8efea4f1d358b48bc8816029a719f4" class="idref" href="#5e8efea4f1d358b48bc8816029a719f4"><span class="id" title="binder">Σ</span></a> :<br/>
-&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="has_app:629" class="idref" href="#has_app:629"><span class="id" title="binder">has_app</span></a> : <a class="idref" href="MetaCoq.Erasure.EWellformed.html#has_tApp"><span class="id" title="method">has_tApp</span></a>), <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<a id="has_app:629" class="idref" href="#has_app:629"><span class="id" title="binder">has_app</span></a> : <a class="idref" href="MetaCoq.Erasure.EWellformed.html#has_tApp"><span class="id" title="method">has_tApp</span></a>), <span class="comment">(*&nbsp;necessary&nbsp;due&nbsp;to&nbsp;mkApps&nbsp;*)</span><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.EWellformed.html#wf_glob"><span class="id" title="inductive">wf_glob</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#5e8efea4f1d358b48bc8816029a719f4"><span class="id" title="variable">Σ</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="t:630" class="idref" href="#t:630"><span class="id" title="binder">t</span></a> <a id="u:631" class="idref" href="#u:631"><span class="id" title="binder">u</span></a>, <a class="idref" href="MetaCoq.Erasure.EWellformed.html#wellformed"><span class="id" title="definition">wellformed</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#5e8efea4f1d358b48bc8816029a719f4"><span class="id" title="variable">Σ</span></a> 0 <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#t:630"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#eval"><span class="id" title="inductive">eval</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#5e8efea4f1d358b48bc8816029a719f4"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#t:630"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#u:631"><span class="id" title="variable">u</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Erasure.EWellformed.html#wellformed"><span class="id" title="definition">wellformed</span></a> <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#5e8efea4f1d358b48bc8816029a719f4"><span class="id" title="variable">Σ</span></a> 0 <a class="idref" href="MetaCoq.Erasure.EWcbvEval.html#u:631"><span class="id" title="variable">u</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>

@@ -82,6 +82,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Sigma&nbsp;calculus&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -383,7 +384,7 @@ Shift a renaming <span class="inlinecode"><span class="id" title="var">f</span><
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="lift_renaming" class="idref" href="#lift_renaming"><span class="id" title="definition">lift_renaming</span></a> <a id="n:96" class="idref" href="#n:96"><span class="id" title="binder">n</span></a> <a id="k:97" class="idref" href="#k:97"><span class="id" title="binder">k</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="i:98" class="idref" href="#i:98"><span class="id" title="binder">i</span></a> ⇒<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">if</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Arith.PeanoNat.html#Nat.leb"><span class="id" title="definition">Nat.leb</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#k:97"><span class="id" title="variable">k</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#i:98"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">then</span></a>  <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#n:96"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#i:98"><span class="id" title="variable">i</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">if</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Arith.PeanoNat.html#Nat.leb"><span class="id" title="definition">Nat.leb</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#k:97"><span class="id" title="variable">k</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#i:98"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">then</span></a> <span class="comment">(*&nbsp;Lifted&nbsp;*)</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#n:96"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Peano.html#0dacc1786c5ba797d47dd85006231633"><span class="id" title="notation">+</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#i:98"><span class="id" title="variable">i</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">else</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#i:98"><span class="id" title="variable">i</span></a>.<br/>
 
 <br/>
@@ -460,6 +461,14 @@ Shift a renaming <span class="inlinecode"><span class="id" title="var">f</span><
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;map_branches_shiftn&nbsp;(fn&nbsp;:&nbsp;(renamingT)&nbsp;-&gt;&nbsp;term&nbsp;-&gt;&nbsp;term)&nbsp;f&nbsp;f'&nbsp;l&nbsp;:<br/>
+&nbsp;&nbsp;map_branches_shift&nbsp;fn&nbsp;f&nbsp;(map_branches_shift&nbsp;fn&nbsp;f'&nbsp;l)&nbsp;=<br/>
+&nbsp;&nbsp;List.map&nbsp;(fun&nbsp;i&nbsp;=&gt;&nbsp;map_branch&nbsp;(fn&nbsp;(shiftn&nbsp;|bcontext i| f) ∘ (fn (shiftn |bcontext&nbsp;i|&nbsp;f')))&nbsp;i)&nbsp;l.<br/>
+Proof.<br/>
+&nbsp;&nbsp;rewrite&nbsp;map_map_compose.&nbsp;apply&nbsp;map_ext&nbsp;=&gt;&nbsp;i.<br/>
+&nbsp;&nbsp;rewrite&nbsp;map_branch_shift_map_branch_shift.<br/>
+&nbsp;&nbsp;simpl.&nbsp;now&nbsp;apply&nbsp;map_branch_eq_spec.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="mapi_context_compose" class="idref" href="#mapi_context_compose"><span class="id" title="lemma">mapi_context_compose</span></a> <a id="f:115" class="idref" href="#f:115"><span class="id" title="binder">f</span></a> <a id="f':116" class="idref" href="#f':116"><span class="id" title="binder">f'</span></a> :<br/>
@@ -1752,6 +1761,7 @@ Simplify away iterated up's
 <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Rewrite</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#Upn_0"><span class="id" title="lemma">Upn_0</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#Upn_S"><span class="id" title="lemma">Upn_S</span></a> : <span class="id" title="var">sigma</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Print&nbsp;Rewrite&nbsp;HintDb&nbsp;sigma.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="subst_inst_aux" class="idref" href="#subst_inst_aux"><span class="id" title="lemma">subst_inst_aux</span></a> <a id="s:424" class="idref" href="#s:424"><span class="id" title="binder">s</span></a> <a id="k:425" class="idref" href="#k:425"><span class="id" title="binder">k</span></a> <a id="t:426" class="idref" href="#t:426"><span class="id" title="binder">t</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#subst"><span class="id" title="definition">subst</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#s:424"><span class="id" title="variable">s</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#k:425"><span class="id" title="variable">k</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#t:426"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#inst"><span class="id" title="definition">inst</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#up"><span class="id" title="definition">up</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#k:425"><span class="id" title="variable">k</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#subst_fn"><span class="id" title="definition">subst_fn</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#s:424"><span class="id" title="variable">s</span></a>)) <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#t:426"><span class="id" title="variable">t</span></a>.<br/>
@@ -1842,6 +1852,7 @@ Simplify away <span class="inlinecode"><span class="id" title="tactic">subst</sp
 <br/>
 #[<span class="id" title="var">global</span>]<br/>
 <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Rewrite</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#shiftk_shift_l"><span class="id" title="lemma">shiftk_shift_l</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#shiftk_shift"><span class="id" title="lemma">shiftk_shift</span></a> : <span class="id" title="var">sigma</span>.<br/>
+<span class="comment">(*&nbsp;Hint&nbsp;Rewrite&nbsp;Upn_eq&nbsp;:&nbsp;sigma.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="subst_app" class="idref" href="#subst_app"><span class="id" title="definition">subst_app</span></a> (<a id="t:438" class="idref" href="#t:438"><span class="id" title="binder">t</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#term"><span class="id" title="inductive">term</span></a>) (<a id="us:439" class="idref" href="#us:439"><span class="id" title="binder">us</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#term"><span class="id" title="inductive">term</span></a>) : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#term"><span class="id" title="inductive">term</span></a> :=<br/>
@@ -2081,6 +2092,20 @@ Simplify away <span class="inlinecode"><span class="id" title="tactic">subst</sp
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#subst_compose"><span class="id" title="definition">subst_compose</span></a>; <span class="id" title="var">sigma</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#shift"><span class="id" title="definition">shift</span></a>. <span class="id" title="tactic">simpl</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> /<a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#subst_compose"><span class="id" title="definition">subst_compose</span></a> /=.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;subst_consn_compose_r&nbsp;l&nbsp;σ'&nbsp;σ&nbsp;:&nbsp;σ&nbsp;∘s&nbsp;(l&nbsp;⋅n&nbsp;σ')&nbsp;=1&nbsp;map&nbsp;(inst&nbsp;(σ&nbsp;∘s&nbsp;(subst_fn&nbsp;l)))&nbsp;l&nbsp;⋅n&nbsp;(σ&nbsp;∘s&nbsp;σ').<br/>
+Proof.<br/>
+&nbsp;&nbsp;induction&nbsp;l;&nbsp;simpl.<br/>
+&nbsp;&nbsp;-&nbsp;now&nbsp;sigma.<br/>
+&nbsp;&nbsp;-&nbsp;rewrite&nbsp;subst_consn_subst_cons.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;subst_cons_compose_r.&nbsp;sigma.<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;(subst_cons_compose_r&nbsp;a<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;subst_compose;&nbsp;intros&nbsp;i.&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;subst_compo<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;IHl.&nbsp;now&nbsp;rewrite&nbsp;subst_consn_subst_cons.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 </div>

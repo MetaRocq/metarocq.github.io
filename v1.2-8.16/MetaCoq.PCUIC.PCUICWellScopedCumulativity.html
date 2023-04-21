@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICWellScopedCumulativity</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
@@ -44,6 +45,19 @@
 <span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;We&nbsp;show&nbsp;that&nbsp;conversion/cumulativity&nbsp;starting&nbsp;from&nbsp;well-typed&nbsp;terms&nbsp;is&nbsp;transitive.<br/>
+&nbsp;&nbsp;We&nbsp;first&nbsp;use&nbsp;typing&nbsp;to&nbsp;decorate&nbsp;the&nbsp;reductions/comparisons&nbsp;with&nbsp;invariants<br/>
+&nbsp;&nbsp;showing&nbsp;that&nbsp;all&nbsp;the&nbsp;considered&nbsp;contexts/terms&nbsp;are&nbsp;well-scoped.&nbsp;In&nbsp;a&nbsp;second&nbsp;step<br/>
+&nbsp;&nbsp;we&nbsp;use&nbsp;confluence&nbsp;of&nbsp;one-step&nbsp;reduction&nbsp;on&nbsp;well-scoped&nbsp;terms&nbsp;<span class="inlinecode"><span class="id" title="var">ws_red_confluence</span></span>,&nbsp;which&nbsp;also<br/>
+&nbsp;&nbsp;commutes&nbsp;with&nbsp;alpha,universe-equivalence&nbsp;of&nbsp;contexts&nbsp;and&nbsp;terms&nbsp;<span class="inlinecode"><span class="id" title="var">red1_eq_context_upto_l</span></span>.<br/>
+&nbsp;&nbsp;We&nbsp;can&nbsp;now&nbsp;derive&nbsp;transitivity&nbsp;of&nbsp;the&nbsp;conversion&nbsp;relation&nbsp;on&nbsp;*well-scoped*<br/>
+&nbsp;&nbsp;terms.&nbsp;To&nbsp;deal&nbsp;with&nbsp;the&nbsp;closedness&nbsp;side&nbsp;condition&nbsp;we&nbsp;put&nbsp;them&nbsp;in&nbsp;the&nbsp;definition<br/>
+&nbsp;&nbsp;of&nbsp;conversion/cumulativity:&nbsp;as&nbsp;terms&nbsp;need&nbsp;to&nbsp;move&nbsp;between&nbsp;contexts,&nbsp;and<br/>
+&nbsp;&nbsp;we&nbsp;sometimes&nbsp;need&nbsp;to&nbsp;consider&nbsp;conversion&nbsp;in&nbsp;open&nbsp;contexts,&nbsp;we&nbsp;work&nbsp;with<br/>
+&nbsp;&nbsp;them&nbsp;in&nbsp;an&nbsp;unpacked&nbsp;style.<br/>
+&nbsp;&nbsp;This&nbsp;allows&nbsp;to&nbsp;state&nbsp;theorems&nbsp;about&nbsp;conversion/cumulativity&nbsp;of&nbsp;general&nbsp;terms<br/>
+&nbsp;&nbsp;and&nbsp;contexts&nbsp;without&nbsp;wrapping/unwrapping&nbsp;them&nbsp;constantly&nbsp;into&nbsp;subsets.<br/>
+*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Reserved Notation</span> &quot; Σ ;;; Γ ⊢ t ≤[ pb ] u" (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="var">Γ</span>, <span class="id" title="var">t</span>, <span class="id" title="var">u</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>,<br/>
@@ -345,6 +359,7 @@ From well-typed to simply well-scoped equality.
 <span class="id" title="keyword">From</span> <span class="id" title="var">Equations.Type</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Relation_Properties</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;\rightsquigarrow&nbsp;*)</span><br/>
 <span class="id" title="keyword">Notation</span> <a id="56f76c3496e694b3bed8bac7841a1cca" class="idref" href="#56f76c3496e694b3bed8bac7841a1cca"><span class="id" title="notation">&quot;</span></a>Σ ;;; Γ ⊢ t ⇝ u" := (<a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#closed_red"><span class="id" title="definition">closed_red</span></a> <span class="id" title="var">Σ</span> <span class="id" title="var">Γ</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="var">Γ</span>, <span class="id" title="var">t</span>, <span class="id" title="var">u</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>,<br/>
 &nbsp;&nbsp;<span class="id" title="var">format</span> "Σ  ;;;  Γ  ⊢  t  ⇝  u").<br/>
 
@@ -414,6 +429,7 @@ From well-typed to simply well-scoped equality.
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;synonym&nbsp;of&nbsp;red_conv&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="red_ws_cumul_pb" class="idref" href="#red_ws_cumul_pb"><span class="id" title="lemma">red_ws_cumul_pb</span></a> {<a id="pb:187" class="idref" href="#pb:187"><span class="id" title="binder">pb</span></a> <a id="483c47e7100adec85d58e3dde43d0c71" class="idref" href="#483c47e7100adec85d58e3dde43d0c71"><span class="id" title="binder">Γ</span></a> <a id="t:189" class="idref" href="#t:189"><span class="id" title="binder">t</span></a> <a id="u:190" class="idref" href="#u:190"><span class="id" title="binder">u</span></a>} :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#92e99e5339b4f02e834d0d79710f4d38"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#56f76c3496e694b3bed8bac7841a1cca"><span class="id" title="notation">;;;</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#483c47e7100adec85d58e3dde43d0c71"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#56f76c3496e694b3bed8bac7841a1cca"><span class="id" title="notation">⊢</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#t:189"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#56f76c3496e694b3bed8bac7841a1cca"><span class="id" title="notation">⇝</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#u:190"><span class="id" title="variable">u</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#92e99e5339b4f02e834d0d79710f4d38"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#35217f73df56646eb74cda65149cc63c"><span class="id" title="notation">;;;</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#483c47e7100adec85d58e3dde43d0c71"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#35217f73df56646eb74cda65149cc63c"><span class="id" title="notation">⊢</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#t:189"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#35217f73df56646eb74cda65149cc63c"><span class="id" title="notation">≤[</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#pb:187"><span class="id" title="variable">pb</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#35217f73df56646eb74cda65149cc63c"><span class="id" title="notation">]</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICWellScopedCumulativity.html#u:190"><span class="id" title="variable">u</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span> <span class="id" title="var">wfΣ</span>.<br/>

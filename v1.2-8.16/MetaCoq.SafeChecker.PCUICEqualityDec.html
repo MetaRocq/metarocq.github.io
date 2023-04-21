@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.SafeChecker.PCUICEqualityDec</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Logic.ProofIrrelevance.html#"><span class="id" title="library">ProofIrrelevance</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Common.uGraph.html#"><span class="id" title="library">uGraph</span></a>.<br/>
@@ -47,6 +48,7 @@
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Default</span> <span class="id" title="keyword">Goal</span> <span class="id" title="var">Selector</span> "!".<br/>
 
 <br/>
+<span class="comment">(*&nbsp;TODO&nbsp;move*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="consistent_instance_wf_universe" class="idref" href="#consistent_instance_wf_universe"><span class="id" title="lemma">consistent_instance_wf_universe</span></a> `{<a id="H:1" class="idref" href="#H:1"><span class="id" title="binder">checker_flags</span></a>} <a id="ebf069dbc779b42a15c441a6d39d5f83" class="idref" href="#ebf069dbc779b42a15c441a6d39d5f83"><span class="id" title="binder">Σ</span></a> <a id="uctx:3" class="idref" href="#uctx:3"><span class="id" title="binder">uctx</span></a> <a id="u:4" class="idref" href="#u:4"><span class="id" title="binder">u</span></a> :<br/>
@@ -98,7 +100,7 @@
 &nbsp;&nbsp;| <span class="id" title="var">u</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <span class="id" title="var">us</span>, <span class="id" title="var">u'</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <span class="id" title="var">us'</span> ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#v:22"><span class="id" title="variable">v</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#compare_universe_instance_variance:25"><span class="id" title="definition">compare_universe_instance_variance</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#equ:20"><span class="id" title="variable">equ</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#lequ:21"><span class="id" title="variable">lequ</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#v:22"><span class="id" title="variable">v</span></a> <span class="id" title="var">us</span> <span class="id" title="var">us'</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Missing&nbsp;variance&nbsp;stands&nbsp;for&nbsp;irrelevance&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">v</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#::list_scope:x_'::'_x"><span class="id" title="notation">::</span></a> <span class="id" title="var">vs</span> ⇒ <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#compare_universe_variance"><span class="id" title="definition">compare_universe_variance</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#equ:20"><span class="id" title="variable">equ</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#lequ:21"><span class="id" title="variable">lequ</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#v:22"><span class="id" title="variable">v</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#u:23"><span class="id" title="variable">u</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#u':24"><span class="id" title="variable">u'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"><span class="id" title="notation">&amp;&amp;</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#compare_universe_instance_variance:25"><span class="id" title="definition">compare_universe_instance_variance</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#equ:20"><span class="id" title="variable">equ</span></a> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#lequ:21"><span class="id" title="variable">lequ</span></a> <span class="id" title="var">vs</span> <span class="id" title="var">us</span> <span class="id" title="var">us'</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
@@ -256,6 +258,20 @@
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;compare_global_instance_impl&nbsp;(equ&nbsp;lequ&nbsp;:&nbsp;_&nbsp;-&gt;&nbsp;_&nbsp;-&gt;&nbsp;bool)&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;gr&nbsp;napp&nbsp;:<br/>
+&nbsp;&nbsp;RelationClasses.subrelation&nbsp;equ&nbsp;Re&nbsp;-&gt;<br/>
+&nbsp;&nbsp;RelationClasses.subrelation&nbsp;lequ&nbsp;Rle&nbsp;-&gt;<br/>
+&nbsp;&nbsp;subrelation&nbsp;(compare_global_instance&nbsp;Σ&nbsp;equ&nbsp;lequ&nbsp;gr&nbsp;napp)&nbsp;(R_global_instance&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;gr&nbsp;napp).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;hre&nbsp;hrle&nbsp;x&nbsp;y.<br/>
+&nbsp;&nbsp;unfold&nbsp;compare_global_instance,&nbsp;R_global_instance,&nbsp;R_opt_variance.<br/>
+&nbsp;&nbsp;destruct&nbsp;global_variance&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">v</span>|</span>.<br/>
+&nbsp;&nbsp;-&nbsp;induction&nbsp;x&nbsp;in&nbsp;v,&nbsp;y&nbsp;|-&nbsp;*;&nbsp;destruct&nbsp;v,&nbsp;y;&nbsp;simpl;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rtoProp.&nbsp;intros&nbsp;<span class="inlinecode"><span class="id" title="var">Hat</span></span> <span class="inlinecode"><span class="id" title="var">Hxy</span></span>.&nbsp;split;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;t;&nbsp;simpl&nbsp;in&nbsp;*;&nbsp;auto.<br/>
+&nbsp;&nbsp;-&nbsp;intro.&nbsp;eapply&nbsp;forallb2_Forall2&nbsp;in&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;Forall2_impl;&nbsp;tea;&nbsp;eauto.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="Forall2_forallb2" class="idref" href="#Forall2_forallb2"><span class="id" title="lemma">Forall2_forallb2</span></a>:<br/>
@@ -1043,6 +1059,7 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;genereic&nbsp;equality&nbsp;for&nbsp;contexts&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Fixpoint</span> <a id="eqb_ctx_gen" class="idref" href="#eqb_ctx_gen"><span class="id" title="definition">eqb_ctx_gen</span></a> <a id="equ:349" class="idref" href="#equ:349"><span class="id" title="binder">equ</span></a> <a id="gen_compare_global_instance:350" class="idref" href="#gen_compare_global_instance:350"><span class="id" title="binder">gen_compare_global_instance</span></a><br/>
@@ -1405,6 +1422,48 @@ Checking equality
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*<br/>
+&nbsp;&nbsp;Definition&nbsp;eqb_opt_term&nbsp;leq&nbsp;(t&nbsp;u&nbsp;:&nbsp;option&nbsp;term)&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;t,&nbsp;u&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Some&nbsp;t,&nbsp;Some&nbsp;u&nbsp;=&gt;&nbsp;eqb_term&nbsp;leq&nbsp;t&nbsp;u<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;None,&nbsp;None&nbsp;=&gt;&nbsp;true<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;_,&nbsp;_&nbsp;=&gt;&nbsp;false<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;end.<br/>
+<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;eqb_opt_term_spec&nbsp;t&nbsp;u<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;eqb_opt_term&nbsp;t&nbsp;u&nbsp;-&gt;&nbsp;compare_opt_term&nbsp;Conv&nbsp;Σ&nbsp;(global_ext_constraints&nbsp;Σ)&nbsp;t&nbsp;u.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;t,&nbsp;u;&nbsp;try&nbsp;discriminate;&nbsp;cbn&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;eqb_term_spec;&nbsp;tea.<br/>
+&nbsp;&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Definition&nbsp;eqb_decl&nbsp;(d&nbsp;d'&nbsp;:&nbsp;context_decl)&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eqb_binder_annot&nbsp;d.(decl_name)&nbsp;d'.(decl_name)&nbsp;&amp;&amp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eqb_opt_term&nbsp;d.(decl_body)&nbsp;d'.(decl_body)&nbsp;&amp;&amp;&nbsp;eqb_term&nbsp;d.(decl_type)&nbsp;d'.(decl_type).<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;eqb_decl_spec&nbsp;d&nbsp;d'<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;eqb_decl&nbsp;d&nbsp;d'&nbsp;-&gt;&nbsp;eq_decl&nbsp;Σ&nbsp;(global_ext_constraints&nbsp;Σ)&nbsp;d&nbsp;d'.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;eqb_decl,&nbsp;eq_decl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intro&nbsp;H.&nbsp;rtoProp.&nbsp;apply&nbsp;eqb_opt_term_spec&nbsp;in&nbsp;H1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;eqb_term_spec&nbsp;in&nbsp;H0;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;eqb_binder_annot_spec&nbsp;in&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;d&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">na</span></span> <span class="inlinecode">[<span class="id" title="var">b</span>|]</span> <span class="inlinecode"><span class="id" title="var">ty</span></span>,&nbsp;d'&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">na'</span></span> <span class="inlinecode">[<span class="id" title="var">b'</span>|]</span> <span class="inlinecode"><span class="id" title="var">ty'</span></span>;&nbsp;simpl&nbsp;in&nbsp;*&nbsp;=&gt;&nbsp;//;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;repeat&nbsp;constructor;&nbsp;eauto.<br/>
+&nbsp;&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Definition&nbsp;eqb_context&nbsp;(Γ&nbsp;Δ&nbsp;:&nbsp;context)&nbsp;:=&nbsp;forallb2&nbsp;eqb_decl&nbsp;Γ&nbsp;Δ.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;eqb_context_spec&nbsp;Γ&nbsp;Δ<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;eqb_context&nbsp;Γ&nbsp;Δ&nbsp;-&gt;&nbsp;eq_context&nbsp;Σ&nbsp;(global_ext_constraints&nbsp;Σ)&nbsp;Γ&nbsp;Δ.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;eqb_context,&nbsp;eq_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intro&nbsp;HH.&nbsp;apply&nbsp;forallb2_All2&nbsp;in&nbsp;HH.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;All2_fold_All2.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;All2_impl;&nbsp;try&nbsp;eassumption.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;cbn.&nbsp;apply&nbsp;eqb_decl_spec.<br/>
+&nbsp;&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICEqualityDec.html#EqualityDecGen"><span class="id" title="section">EqualityDecGen</span></a>.<br/>

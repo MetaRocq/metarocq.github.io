@@ -28,6 +28,15 @@
 <h1 class="libtitle">Library MetaCoq.Utils.MC_ExtrOCamlNatInt</h1>
 
 <div class="code">
+<span class="comment">(************************************************************************)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;The&nbsp;Coq&nbsp;Proof&nbsp;Assistant&nbsp;/&nbsp;The&nbsp;Coq&nbsp;Development&nbsp;Team&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;INRIA,&nbsp;CNRS&nbsp;and&nbsp;contributors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&lt;O___,,&nbsp;*&nbsp;(see&nbsp;version&nbsp;control&nbsp;and&nbsp;CREDITS&nbsp;file&nbsp;for&nbsp;authors&nbsp;&amp;&nbsp;dates)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;\VV/&nbsp;&nbsp;**************************************************************)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;file&nbsp;is&nbsp;distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;Lesser&nbsp;General&nbsp;Public&nbsp;License&nbsp;Version&nbsp;2.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;LICENSE&nbsp;file&nbsp;for&nbsp;the&nbsp;text&nbsp;of&nbsp;the&nbsp;license)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(************************************************************************)</span><br/>
 
 <br/>
 </div>
@@ -102,6 +111,7 @@ Efficient (but uncertified) versions for usual <span class="inlinecode"><span cl
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">mult</span> ⇒ "( * )".<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">max</span> ⇒ "Stdlib.max".<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">min</span> ⇒ "Stdlib.min".<br/>
+<span class="comment">(*Extract&nbsp;Inlined&nbsp;Constant&nbsp;nat_beq&nbsp;=&gt;&nbsp;"(=)".*)</span><br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Nat.eqb</span> ⇒ "(=)".<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">EqNat.eq_nat_decide</span> ⇒ "(=)".<br/>
 
@@ -128,6 +138,13 @@ Efficient (but uncertified) versions for usual <span class="inlinecode"><span cl
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Euclid.modulo</span> ⇒ "fun n m -&gt; m mod n".<br/>
 
 <br/>
+<span class="comment">(*<br/>
+Definition&nbsp;test&nbsp;n&nbsp;m&nbsp;(H:m&gt;0)&nbsp;:=<br/>
+&nbsp;let&nbsp;(q,r,_,_)&nbsp;:=&nbsp;eucl_dev&nbsp;m&nbsp;H&nbsp;n&nbsp;in<br/>
+&nbsp;nat_compare&nbsp;n&nbsp;(q*m+r).<br/>
+<br/>
+Recursive&nbsp;Extraction&nbsp;test&nbsp;fact.<br/>
+*)</span><br/>
 </div>
 </div>
 <div id="footer">

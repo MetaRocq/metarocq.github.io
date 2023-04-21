@@ -115,6 +115,32 @@
 <span class="id" title="keyword">Module</span> <a id="PEnv" class="idref" href="#PEnv"><span class="id" title="module">PEnv</span></a> := <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment"><span class="id" title="module">PCUICAst.PCUICEnvironment</span></a>.<br/>
 
 <br/>
+<span class="comment">(*Lemma&nbsp;wf_erase_global_decl&nbsp;:<br/>
+&nbsp;&nbsp;forall&nbsp;(H&nbsp;:&nbsp;EWellformed.EEnvFlags)&nbsp;(k&nbsp;:&nbsp;kername)&nbsp;(g&nbsp;:&nbsp;PCUICAst.PCUICEnvironment.global_decl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(decls&nbsp;:&nbsp;list&nbsp;(kername&nbsp;*&nbsp;PCUICAst.PCUICEnvironment.global_decl))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(univs&nbsp;:&nbsp;Universes.ContextSet.t)&nbsp;retros&nbsp;w&nbsp;wt&nbsp;(Σex&nbsp;:&nbsp;global_env),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EWellformed.wf_glob&nbsp;(trans_env&nbsp;Σex)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EWellformed.wf_global_decl<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(trans_env&nbsp;Σex)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(trans_global_decl<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Erasure.erase_global_decl<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({|&nbsp;PEnv.universes&nbsp;:=&nbsp;univs;&nbsp;PEnv.declarations&nbsp;:=&nbsp;decls;&nbsp;PEnv.retroknowledge&nbsp;:=&nbsp;retros&nbsp;|},<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PCUICAst.PCUICLookup.universes_decl_of_decl&nbsp;g)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w&nbsp;k&nbsp;g&nbsp;wt))&nbsp;=&nbsp;true.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;H&nbsp;k&nbsp;g&nbsp;decls&nbsp;univs&nbsp;w&nbsp;wt&nbsp;Σex&nbsp;wf_global.<br/>
+&nbsp;&nbsp;unfold&nbsp;Erasure.erase_global_decl.<br/>
+&nbsp;&nbsp;destruct&nbsp;g.<br/>
+&nbsp;&nbsp;-&nbsp;destruct&nbsp;(Erasure.erase_constant_decl)&nbsp;eqn:Hdecl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;unfold&nbsp;Erasure.erase_constant_decl,Erasure.erase_constant_decl_clause_1&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;(Erasure.flag_of_type),&nbsp;conv_ar;try&nbsp;congruence.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inversion&nbsp;Hdecl;subst;clear&nbsp;Hdecl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;trans_global_decl,trans_cst.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cbn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;MCOption.option_default.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;global_erased_with_deps&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;erase_constant_body_correct''&nbsp;*)</span><br/>
+Qed&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">invert_wf</span> :=<br/>
@@ -125,8 +151,107 @@
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;wf_erase_global_decls_recursive&nbsp;`{EWellformed.EEnvFlags}&nbsp;:<br/>
+&nbsp;&nbsp;forall&nbsp;decls&nbsp;univs&nbsp;retros&nbsp;w&nbsp;seeds&nbsp;(ignored&nbsp;:&nbsp;kername&nbsp;-&gt;&nbsp;bool),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;Σex&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Erasure.erase_global_decls_deps_recursive&nbsp;decls&nbsp;univs&nbsp;retros&nbsp;w&nbsp;seeds&nbsp;ignored&nbsp;in<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EWellformed.wf_glob&nbsp;(trans_env&nbsp;Σex).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;decls&nbsp;univs&nbsp;retros&nbsp;w&nbsp;seeds&nbsp;ignored&nbsp;?.<br/>
+&nbsp;&nbsp;subst&nbsp;Σex.<br/>
+&nbsp;&nbsp;revert&nbsp;seeds.<br/>
+&nbsp;&nbsp;induction&nbsp;decls;intros&nbsp;seeds;auto;try&nbsp;constructor.<br/>
+&nbsp;&nbsp;simpl.<br/>
+&nbsp;&nbsp;destruct&nbsp;a;simpl.<br/>
+&nbsp;&nbsp;destruct&nbsp;(KernameSet.mem&nbsp;_&nbsp;_);cbn.<br/>
+&nbsp;&nbsp;-&nbsp;unfold&nbsp;MCProd.test_snd;cbn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;unfold&nbsp;trans_env&nbsp;in&nbsp;*;cbn&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;IHdecls.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;cbn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remember&nbsp;(KernameSet.union&nbsp;_&nbsp;_)&nbsp;as&nbsp;kns.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear&nbsp;Heqkns.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remember&nbsp;(Erasure.erase_global_decls_deps_recursive&nbsp;decls&nbsp;univs&nbsp;_&nbsp;_&nbsp;_&nbsp;_)&nbsp;as&nbsp;Σex.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert&nbsp;(EWellformed.wf_glob&nbsp;(trans_env&nbsp;Σex))&nbsp;by&nbsp;now&nbsp;subst&nbsp;Σex.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;apply&nbsp;wf_erase_global_decl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;sq.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;OptimizePropDiscr.trans_env_fresh_global.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;fresh_globals_erase_global_decl_rec.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;change&nbsp;decls&nbsp;with&nbsp;(PEnv.declarations<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{|&nbsp;PEnv.universes&nbsp;:=&nbsp;univs;&nbsp;PEnv.declarations&nbsp;:=&nbsp;decls;&nbsp;PEnv.retroknowledge&nbsp;:=&nbsp;retros&nbsp;|}).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;PCUICWfEnvImpl.wf_fresh_globals.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repeat&nbsp;invert_wf;split;auto;split;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;fresh_global_erase_global_decl_rec.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;change&nbsp;decls&nbsp;with&nbsp;(PEnv.declarations<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{|&nbsp;PEnv.universes&nbsp;:=&nbsp;univs;&nbsp;PEnv.declarations&nbsp;:=&nbsp;decls;&nbsp;PEnv.retroknowledge&nbsp;:=&nbsp;retros&nbsp;|}).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;repeat&nbsp;invert_wf.<br/>
+&nbsp;&nbsp;-&nbsp;apply&nbsp;IHdecls.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;optimize_correct&nbsp;`{EWellformed.EEnvFlags}&nbsp;Σ&nbsp;fgΣ&nbsp;t&nbsp;v&nbsp;:<br/>
+&nbsp;&nbsp;ELiftSubst.closed&nbsp;t&nbsp;=&nbsp;true&nbsp;-&gt;<br/>
+&nbsp;&nbsp;EGlobalEnv.closed_env&nbsp;(trans_env&nbsp;Σ)&nbsp;=&nbsp;true&nbsp;-&gt;<br/>
+&nbsp;&nbsp;EWellformed.wf_glob&nbsp;(trans_env&nbsp;Σ)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;@Prelim.Ee.eval&nbsp;default_wcbv_flags&nbsp;(trans_env&nbsp;Σ)&nbsp;t&nbsp;v&nbsp;-&gt;<br/>
+&nbsp;&nbsp;@Prelim.Ee.eval<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(EWcbvEval.disable_prop_cases&nbsp;opt_wcbv_flags)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(trans_env&nbsp;(OptimizePropDiscr.optimize_env&nbsp;Σ&nbsp;fgΣ))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(EOptimizePropDiscr.optimize&nbsp;(EEnvMap.GlobalContextMap.make&nbsp;(trans_env&nbsp;Σ)&nbsp;(OptimizePropDiscr.trans_env_fresh_globals&nbsp;_&nbsp;fgΣ))&nbsp;t)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(EOptimizePropDiscr.optimize&nbsp;(EEnvMap.GlobalContextMap.make&nbsp;(trans_env&nbsp;Σ)&nbsp;(OptimizePropDiscr.trans_env_fresh_globals&nbsp;_&nbsp;fgΣ))&nbsp;v).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;cl_t&nbsp;cl_env&nbsp;wfg&nbsp;ev.<br/>
+&nbsp;&nbsp;rewrite&nbsp;OptimizePropDiscr.trans_env_optimize_env.<br/>
+&nbsp;&nbsp;remember&nbsp;(EEnvMap.GlobalContextMap.make&nbsp;_&nbsp;_)&nbsp;as&nbsp;Σ0.<br/>
+&nbsp;&nbsp;unshelve&nbsp;eapply&nbsp;(EOptimizePropDiscr.optimize_correct&nbsp;(fl&nbsp;:=&nbsp;default_wcbv_flags)&nbsp;(Σ&nbsp;:=&nbsp;Σ0));subst;cbn;eauto.<br/>
+Qed.<br/>
+<br/>
+<br/>
+Theorem&nbsp;extract_correct<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{EWellformed.EEnvFlags}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(wfl&nbsp;:=&nbsp;opt_wcbv_flags)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Σ&nbsp;:&nbsp;P.global_env_ext)&nbsp;(wfΣ&nbsp;:&nbsp;∥wf_ext&nbsp;Σ∥)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kn&nbsp;ui&nbsp;ind&nbsp;c&nbsp;ui'&nbsp;ignored&nbsp;exΣ&nbsp;:<br/>
+&nbsp;&nbsp;axiom_free&nbsp;Σ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;welltyped&nbsp;Σ&nbsp;<span class="inlinecode"></span>&nbsp;(P.tConst&nbsp;kn&nbsp;ui)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;Σ&nbsp;p⊢&nbsp;P.tConst&nbsp;kn&nbsp;ui&nbsp;⇓&nbsp;P.tConstruct&nbsp;ind&nbsp;c&nbsp;ui'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;(isErasable&nbsp;Σ&nbsp;<span class="inlinecode"></span>&nbsp;(P.tConstruct&nbsp;ind&nbsp;c&nbsp;ui')&nbsp;-&gt;&nbsp;False)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;(forall&nbsp;k,&nbsp;ignored&nbsp;k&nbsp;=&nbsp;false)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;extract_pcuic_env<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(pcuic_args&nbsp;extract_within_coq)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Σ&nbsp;(wf_squash&nbsp;wfΣ)&nbsp;(KernameSet.singleton&nbsp;kn)&nbsp;ignored&nbsp;=&nbsp;Ok&nbsp;exΣ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;∥trans_env&nbsp;exΣ&nbsp;e⊢&nbsp;E.tConst&nbsp;kn&nbsp;⇓&nbsp;E.tConstruct&nbsp;ind&nbsp;c&nbsp;<span class="inlinecode"></span>∥.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;ax&nbsp;<span class="inlinecode"><span class="id" title="var">T</span></span> <span class="inlinecode"><span class="id" title="var">wt</span></span>&nbsp;ev&nbsp;not_erasable&nbsp;no_ignores&nbsp;ex.<br/>
+&nbsp;&nbsp;cbn&nbsp;-<span class="inlinecode"><span class="id" title="var">dearg_transform</span></span>&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;destruct&nbsp;dearg_transform&nbsp;eqn:dt;&nbsp;cbn&nbsp;-<span class="inlinecode"><span class="id" title="var">dearg_transform</span></span>&nbsp;in&nbsp;*;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">congruence</span></span>.<br/>
+&nbsp;&nbsp;injection&nbsp;ex&nbsp;as&nbsp;-&gt;.<br/>
+&nbsp;&nbsp;destruct&nbsp;wfΣ.<br/>
+&nbsp;&nbsp;eapply&nbsp;erases_correct&nbsp;with&nbsp;(Σ'&nbsp;:=&nbsp;trans_env&nbsp;(Erasure.erase_global_decls_deps_recursive&nbsp;(PCUICAst.PCUICEnvironment.declarations&nbsp;Σ)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PCUICAst.PCUICEnvironment.universes&nbsp;Σ)&nbsp;_&nbsp;(wf_squash&nbsp;(sq&nbsp;w))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(KernameSet.singleton&nbsp;kn)&nbsp;ignored))&nbsp;in&nbsp;ev&nbsp;as&nbsp;(erv&amp;erase_to&amp;<span class="inlinecode"><span class="id" title="var">erev</span></span>);eauto.<br/>
+&nbsp;&nbsp;+&nbsp;depelim&nbsp;erase_to;<span class="inlinecode">|<span class="id" title="var">easy</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;dearg_transform_correct;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;clear&nbsp;dt.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;(@OptimizePropDiscr.optimize_correct&nbsp;_&nbsp;default_wcbv_flags&nbsp;_&nbsp;_&nbsp;(tConst&nbsp;kn)&nbsp;(tConstruct&nbsp;ind&nbsp;c&nbsp;<span class="inlinecode"></span>));eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;remember&nbsp;(Erasure.erase_global_decls_deps_recursive&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;_)&nbsp;as&nbsp;eΣ.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert&nbsp;(EWellformed.wf_glob&nbsp;(trans_env&nbsp;eΣ))&nbsp;by&nbsp;now&nbsp;subst&nbsp;eΣ;eapply&nbsp;wf_erase_global_decls_recursive.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;apply&nbsp;EWellformed.wellformed_closed_env.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;eapply&nbsp;wf_erase_global_decls_recursive.<br/>
+&nbsp;&nbsp;+&nbsp;eapply&nbsp;inversion_Const&nbsp;in&nbsp;wt&nbsp;as&nbsp;(?&amp;?&amp;?&amp;?&amp;?);&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;clear&nbsp;dt.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;global_erased_with_deps_erases_deps_tConst;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;Σ&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">Σ0</span></span> <span class="inlinecode"><span class="id" title="var">univ_decls</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;Σ0&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">univs</span></span> <span class="inlinecode"><span class="id" title="var">Σ1</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;wf_ext_wf&nbsp;in&nbsp;w&nbsp;as&nbsp;w1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;erase_global_decls_deps_recursive_correct;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;unfold&nbsp;PCUICAst.declared_constant&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cbn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;?&nbsp;-&gt;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Print&nbsp;Assumptions&nbsp;extract_correct.&nbsp;*)</span><br/>
 
 <br/>
 </div>

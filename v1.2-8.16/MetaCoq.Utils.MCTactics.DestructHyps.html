@@ -80,6 +80,7 @@ given a <span class="inlinecode"><span class="id" title="var">matcher</span></sp
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">inversion_all_matches'</span> <span class="id" title="var">matcher</span> := <span class="id" title="var">inversion_all_matches_then</span> <span class="id" title="var">matcher</span> <span class="id" title="tactic">idtac</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;matches&nbsp;anything&nbsp;whose&nbsp;type&nbsp;has&nbsp;a&nbsp;<span class="inlinecode"><span class="id" title="var">T</span></span>&nbsp;in&nbsp;it&nbsp;*)</span><br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_type_matcher</span> <span class="id" title="var">T</span> <span class="id" title="var">HT</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">HT</span> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <span class="id" title="keyword">context</span>[<span class="id" title="var">T</span>] ⇒ <span class="id" title="tactic">idtac</span><br/>
