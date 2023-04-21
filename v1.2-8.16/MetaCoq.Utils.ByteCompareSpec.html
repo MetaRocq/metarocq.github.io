@@ -72,6 +72,10 @@
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
+<span class="comment">(*<br/>
+Proof.<br/>
+&nbsp;&nbsp;destruct&nbsp;x;&nbsp;abstract&nbsp;(destruct&nbsp;y;&nbsp;exact&nbsp;eq_refl).<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="compare_opp" class="idref" href="#compare_opp"><span class="id" title="lemma">compare_opp</span></a> <a id="x:8" class="idref" href="#x:8"><span class="id" title="binder">x</span></a> <a id="y:9" class="idref" href="#y:9"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Utils.ByteCompare.html#compare"><span class="id" title="definition">compare</span></a> <a class="idref" href="MetaCoq.Utils.ByteCompareSpec.html#x:8"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Utils.ByteCompareSpec.html#y:9"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#CompOpp"><span class="id" title="definition">CompOpp</span></a> (<a class="idref" href="MetaCoq.Utils.ByteCompare.html#compare"><span class="id" title="definition">compare</span></a> <a class="idref" href="MetaCoq.Utils.ByteCompareSpec.html#y:9"><span class="id" title="variable">y</span></a> <a class="idref" href="MetaCoq.Utils.ByteCompareSpec.html#x:8"><span class="id" title="variable">x</span></a>).<br/>
@@ -130,6 +134,7 @@
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Utils.ByteCompare.html#eqb"><span class="id" title="definition">eqb</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.NArith.BinNat.html#N.eqb_compare"><span class="id" title="lemma">N.eqb_compare</span></a>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;destruct&nbsp;x;&nbsp;cbn;&nbsp;abstract&nbsp;(destruct&nbsp;y;&nbsp;cbn;&nbsp;exact&nbsp;eq_refl).&nbsp;*)</span><br/>
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>

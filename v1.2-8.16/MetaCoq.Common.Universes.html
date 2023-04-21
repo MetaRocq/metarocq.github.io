@@ -86,7 +86,7 @@ Levels are Set or Level or lvar
 &nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <a id="Level.t_" class="idref" href="#Level.t_"><span class="id" title="inductive">t_</span></a> : <span class="id" title="keyword">Set</span> :=<br/>
 &nbsp;&nbsp;| <a id="Level.lzero" class="idref" href="#Level.lzero"><span class="id" title="constructor">lzero</span></a><br/>
 &nbsp;&nbsp;| <a id="Level.level" class="idref" href="#Level.level"><span class="id" title="constructor">level</span></a> (<span class="id" title="var">_</span> : <a class="idref" href="MetaCoq.Utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a>)<br/>
-&nbsp;&nbsp;| <a id="Level.lvar" class="idref" href="#Level.lvar"><span class="id" title="constructor">lvar</span></a> (<span class="id" title="var">_</span> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) .<br/>
+&nbsp;&nbsp;| <a id="Level.lvar" class="idref" href="#Level.lvar"><span class="id" title="constructor">lvar</span></a> (<span class="id" title="var">_</span> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>) <span class="comment">(*&nbsp;these&nbsp;are&nbsp;debruijn&nbsp;indices&nbsp;*)</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Common.Universes.html#Level.t_"><span class="id" title="inductive">t_</span></a>.<br/>
 
 <br/>
@@ -286,11 +286,17 @@ Levels are Set or Level or lvar
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Common.Universes.html#LevelSetMoreFacts"><span class="id" title="section">LevelSetMoreFacts</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;prop&nbsp;level&nbsp;is&nbsp;Prop&nbsp;or&nbsp;SProp&nbsp;*)</span><br/>
 <span class="id" title="keyword">Module</span> <a id="PropLevel" class="idref" href="#PropLevel"><span class="id" title="module">PropLevel</span></a>.<br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <a id="PropLevel.t" class="idref" href="#PropLevel.t"><span class="id" title="inductive">t</span></a> := <a id="PropLevel.lSProp" class="idref" href="#PropLevel.lSProp"><span class="id" title="constructor">lSProp</span></a> | <a id="PropLevel.lProp" class="idref" href="#PropLevel.lProp"><span class="id" title="constructor">lProp</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="var">EqDec</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Common.Universes.html#PropLevel.t"><span class="id" title="inductive">t</span></a>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;PropLevel_Evaluable&nbsp;:&nbsp;Evaluable&nbsp;t&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;v&nbsp;l&nbsp;=&gt;&nbsp;match&nbsp;l&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lSProp&nbsp;=&gt;&nbsp;-1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;lProp&nbsp;=&gt;&nbsp;-1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end.&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="PropLevel.compare" class="idref" href="#PropLevel.compare"><span class="id" title="definition">compare</span></a> (<a id="l1:55" class="idref" href="#l1:55"><span class="id" title="binder">l1</span></a> <a id="l2:56" class="idref" href="#l2:56"><span class="id" title="binder">l2</span></a> : <a class="idref" href="MetaCoq.Common.Universes.html#PropLevel.t"><span class="id" title="inductive">t</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#comparison"><span class="id" title="inductive">comparison</span></a> :=<br/>
@@ -320,6 +326,7 @@ Levels are Set or Level or lvar
 
 <br/>
 <span class="id" title="keyword">Module</span> <a id="LevelExpr" class="idref" href="#LevelExpr"><span class="id" title="module">LevelExpr</span></a>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;npe&nbsp;=&nbsp;no&nbsp;prop&nbsp;expression&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="LevelExpr.t" class="idref" href="#LevelExpr.t"><span class="id" title="definition">t</span></a> := (<a class="idref" href="MetaCoq.Common.Universes.html#Level.t"><span class="id" title="definition">Level.t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)%<span class="id" title="keyword">type</span>.<br/>
 
 <br/>
@@ -350,6 +357,7 @@ Levels are Set or Level or lvar
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="LevelExpr.type1" class="idref" href="#LevelExpr.type1"><span class="id" title="definition">type1</span></a> : <a class="idref" href="MetaCoq.Common.Universes.html#LevelExpr.t"><span class="id" title="definition">t</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Common.Universes.html#Level.lzero"><span class="id" title="constructor">Level.lzero</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> 1%<span class="id" title="var">nat</span><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Used&nbsp;for&nbsp;(un)quoting.&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="LevelExpr.from_kernel_repr" class="idref" href="#LevelExpr.from_kernel_repr"><span class="id" title="definition">from_kernel_repr</span></a> (<a id="e:69" class="idref" href="#e:69"><span class="id" title="binder">e</span></a> : <a class="idref" href="MetaCoq.Common.Universes.html#Level.t"><span class="id" title="definition">Level.t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) : <a class="idref" href="MetaCoq.Common.Universes.html#LevelExpr.t"><span class="id" title="definition">t</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;:= <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Common.Universes.html#e:69"><span class="id" title="variable">e</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">if</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#e:69"><span class="id" title="variable">e</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">then</span></a> 1%<span class="id" title="var">nat</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">else</span></a> 0%<span class="id" title="var">nat</span><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
 
@@ -444,6 +452,8 @@ Levels are Set or Level or lvar
 <span class="id" title="keyword">Module</span> <a id="LevelExprSetExtraOrdProp" class="idref" href="#LevelExprSetExtraOrdProp"><span class="id" title="module">LevelExprSetExtraOrdProp</span></a> := <a class="idref" href="MetaCoq.Utils.MCMSets.html#MSets.ExtraOrdProperties"><span class="id" title="module">MSets.ExtraOrdProperties</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#LevelExprSet"><span class="id" title="module">LevelExprSet</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#LevelExprSetOrdProp"><span class="id" title="module">LevelExprSetOrdProp</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;We&nbsp;have&nbsp;decidable&nbsp;equality&nbsp;w.r.t&nbsp;leibniz&nbsp;equality&nbsp;for&nbsp;sets&nbsp;of&nbsp;levels.<br/>
+&nbsp;&nbsp;This&nbsp;means&nbsp;concreteUniverses&nbsp;also&nbsp;have&nbsp;a&nbsp;decidable&nbsp;equality.&nbsp;*)</span><br/>
 #[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>] <span class="id" title="keyword">Instance</span> <a id="levelexprset_reflect" class="idref" href="#levelexprset_reflect"><span class="id" title="instance">levelexprset_reflect</span></a> : <a class="idref" href="MetaCoq.Utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#t"><span class="id" title="definition">LevelExprSet.t</span></a> :=<br/>
 &nbsp;&nbsp;{ <a class="idref" href="MetaCoq.Utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> := <a class="idref" href="MetaCoq.Common.Universes.html#equal"><span class="id" title="definition">LevelExprSet.equal</span></a> }.<br/>
 <span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
@@ -741,6 +751,7 @@ A universe / an algebraic expression is a list of universe expressions which is:
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="LevelAlgExpr.t" class="idref" href="#LevelAlgExpr.t"><span class="id" title="definition">t</span></a> := <a class="idref" href="MetaCoq.Common.Universes.html#nonEmptyLevelExprSet"><span class="id" title="record">nonEmptyLevelExprSet</span></a>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;We&nbsp;use&nbsp;uip&nbsp;on&nbsp;the&nbsp;is_empty&nbsp;condition&nbsp;*)</span><br/>
 &nbsp;&nbsp;#[<span class="id" title="var">global</span>, <span class="id" title="var">program</span>] <span class="id" title="keyword">Instance</span> <a id="LevelAlgExpr.levelexprset_reflect" class="idref" href="#LevelAlgExpr.levelexprset_reflect"><span class="id" title="instance">levelexprset_reflect</span></a> : <a class="idref" href="MetaCoq.Utils.ReflectEq.html#ReflectEq"><span class="id" title="class">ReflectEq</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#LevelAlgExpr.t"><span class="id" title="definition">t</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;{ <a class="idref" href="MetaCoq.Utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <a id="x:142" class="idref" href="#x:142"><span class="id" title="binder">x</span></a> <a id="y:143" class="idref" href="#y:143"><span class="id" title="binder">y</span></a> := <a class="idref" href="MetaCoq.Utils.ReflectEq.html#eqb"><span class="id" title="method">eqb</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#x:142"><span class="id" title="variable">x</span></a>.(<a class="idref" href="MetaCoq.Common.Universes.html#t_set"><span class="id" title="projection">t_set</span></a>) <a class="idref" href="MetaCoq.Common.Universes.html#y:143"><span class="id" title="variable">y</span></a>.(<a class="idref" href="MetaCoq.Common.Universes.html#t_set"><span class="id" title="projection">t_set</span></a>) }.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
@@ -838,6 +849,7 @@ The l.u.b. of 2 non-prop universe sets
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">u</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">change</span> <a class="idref" href="MetaCoq.Common.Universes.html#elt"><span class="id" title="definition">LevelSet.elt</span></a> <span class="id" title="keyword">with</span> <a class="idref" href="MetaCoq.Common.Universes.html#t"><span class="id" title="definition">Level.t</span></a> <span class="id" title="tactic">in</span> *;<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">change</span> <a class="idref" href="MetaCoq.Common.Universes.html#elt"><span class="id" title="definition">LevelExprSet.elt</span></a> <span class="id" title="keyword">with</span> <a class="idref" href="MetaCoq.Common.Universes.html#t"><span class="id" title="definition">LevelExpr.t</span></a> <span class="id" title="tactic">in</span> ×.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;change&nbsp;ConstraintSet.elt&nbsp;with&nbsp;UnivConstraint.t&nbsp;in&nbsp;*.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="val_fold_right" class="idref" href="#val_fold_right"><span class="id" title="lemma">val_fold_right</span></a> (<a id="u:157" class="idref" href="#u:157"><span class="id" title="binder">u</span></a> : <a class="idref" href="MetaCoq.Common.Universes.html#t"><span class="id" title="definition">LevelAlgExpr.t</span></a>) <a id="v:158" class="idref" href="#v:158"><span class="id" title="binder">v</span></a> :<br/>
@@ -1077,7 +1089,7 @@ Type of a product
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="cuniv_of_product" class="idref" href="#cuniv_of_product"><span class="id" title="definition">cuniv_of_product</span></a> <a id="domsort:223" class="idref" href="#domsort:223"><span class="id" title="binder">domsort</span></a> <a id="rangsort:224" class="idref" href="#rangsort:224"><span class="id" title="binder">rangsort</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaCoq.Common.Universes.html#rangsort:224"><span class="id" title="variable">rangsort</span></a> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Prop&nbsp;and&nbsp;SProp&nbsp;impredicativity&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Common.Universes.html#UProp"><span class="id" title="constructor">UProp</span></a> | <a class="idref" href="MetaCoq.Common.Universes.html#USProp"><span class="id" title="constructor">USProp</span></a> ⇒ <a class="idref" href="MetaCoq.Common.Universes.html#rangsort:224"><span class="id" title="variable">rangsort</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <a class="idref" href="MetaCoq.Common.Universes.html#cuniv_sup"><span class="id" title="definition">cuniv_sup</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#domsort:223"><span class="id" title="variable">domsort</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#rangsort:224"><span class="id" title="variable">rangsort</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
@@ -1327,13 +1339,25 @@ Test if the universe is a level or an algebraic universe.
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Used&nbsp;for&nbsp;quoting.&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="Universe.from_kernel_repr" class="idref" href="#Universe.from_kernel_repr"><span class="id" title="definition">from_kernel_repr</span></a> (<a id="e:280" class="idref" href="#e:280"><span class="id" title="binder">e</span></a> : <a class="idref" href="MetaCoq.Common.Universes.html#Level.t"><span class="id" title="definition">Level.t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) (<a id="es:281" class="idref" href="#es:281"><span class="id" title="binder">es</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="MetaCoq.Common.Universes.html#Level.t"><span class="id" title="definition">Level.t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>)) : <a class="idref" href="MetaCoq.Common.Universes.html#Universe.t"><span class="id" title="definition">t</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;:= <a class="idref" href="MetaCoq.Common.Universes.html#Universe.lType"><span class="id" title="constructor">lType</span></a> (<a class="idref" href="MetaCoq.Common.Universes.html#NonEmptySetFacts.add_list"><span class="id" title="definition">add_list</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#map"><span class="id" title="definition">List.map</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#LevelExpr.from_kernel_repr"><span class="id" title="definition">LevelExpr.from_kernel_repr</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#es:281"><span class="id" title="variable">es</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="MetaCoq.Common.Universes.html#LevelAlgExpr.make"><span class="id" title="definition">LevelAlgExpr.make</span></a> (<a class="idref" href="MetaCoq.Common.Universes.html#LevelExpr.from_kernel_repr"><span class="id" title="definition">LevelExpr.from_kernel_repr</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#e:280"><span class="id" title="variable">e</span></a>))).<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Definition&nbsp;uex_to_kernel_repr&nbsp;(e&nbsp;:&nbsp;LevelExpr.t)&nbsp;:&nbsp;Level.t&nbsp;*&nbsp;bool&nbsp;:=&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;match&nbsp;e&nbsp;with&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;|&nbsp;LevelExpr.npe&nbsp;(l,&nbsp;b)&nbsp;=&gt;&nbsp;(NoPropLevel.to_level&nbsp;l,&nbsp;b)&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;end.&nbsp;*)</span><br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Definition&nbsp;to_kernel_repr&nbsp;(u&nbsp;:&nbsp;t)&nbsp;:&nbsp;list&nbsp;(Level.t&nbsp;*&nbsp;bool)&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;&nbsp;map&nbsp;(LevelExpr.to_kernel_repr)&nbsp;(LevelExprSet.elements&nbsp;u).&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;match&nbsp;u&nbsp;with&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;lProp&nbsp;=&gt;&nbsp;<span class="inlinecode">(<span class="id" title="var">Level.lProp</span>,</span> <span class="inlinecode"><span class="id" title="var">false</span>)</span>&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;lSProp&nbsp;=&gt;&nbsp;<span class="inlinecode">(<span class="id" title="var">Level.lSProp</span>,</span> <span class="inlinecode"><span class="id" title="var">false</span>)</span>&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;lType&nbsp;l&nbsp;=&gt;&nbsp;map&nbsp;uex_to_kernel_repr&nbsp;(LevelExprSet.elements&nbsp;l)&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end.&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -1373,7 +1397,7 @@ Type of a product
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="Universe.sort_of_product" class="idref" href="#Universe.sort_of_product"><span class="id" title="definition">sort_of_product</span></a> (<a id="domsort:291" class="idref" href="#domsort:291"><span class="id" title="binder">domsort</span></a> <a id="rangsort:292" class="idref" href="#rangsort:292"><span class="id" title="binder">rangsort</span></a> : <a class="idref" href="MetaCoq.Common.Universes.html#Universe.t"><span class="id" title="definition">t</span></a>) :=<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Prop&nbsp;and&nbsp;SProp&nbsp;impredicativity&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">if</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#Universe.is_prop"><span class="id" title="definition">Universe.is_prop</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#rangsort:292"><span class="id" title="variable">rangsort</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#081ff67d3116402bb680e8692aa39185"><span class="id" title="notation">||</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#Universe.is_sprop"><span class="id" title="definition">Universe.is_sprop</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#rangsort:292"><span class="id" title="variable">rangsort</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">then</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#rangsort:292"><span class="id" title="variable">rangsort</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"><span class="id" title="notation">else</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#Universe.sup"><span class="id" title="definition">Universe.sup</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#domsort:291"><span class="id" title="variable">domsort</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#rangsort:292"><span class="id" title="variable">rangsort</span></a>.<br/>
 
@@ -1517,6 +1541,19 @@ Type of a product
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;val_zero_exprs&nbsp;v&nbsp;(l&nbsp;:&nbsp;LevelAlgExpr.t)&nbsp;:&nbsp;0&nbsp;&lt;=&nbsp;val&nbsp;v&nbsp;l.<br/>
+Proof.<br/>
+&nbsp;&nbsp;rewrite&nbsp;val_fold_right.<br/>
+&nbsp;&nbsp;destruct&nbsp;(LevelAlgExpr.exprs&nbsp;l)&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">e</span></span> <span class="inlinecode"><span class="id" title="var">u'</span></span>;&nbsp;clear&nbsp;l;&nbsp;cbn.<br/>
+&nbsp;&nbsp;induction&nbsp;(List.rev&nbsp;u');&nbsp;simpl.<br/>
+&nbsp;&nbsp;-&nbsp;destruct&nbsp;e&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">npl_expr</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;npl_expr&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">t</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;cbn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;assert&nbsp;(0&nbsp;&lt;=&nbsp;val&nbsp;v&nbsp;t)&nbsp;by&nbsp;apply&nbsp;Level.val_zero.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;b;lia.<br/>
+&nbsp;&nbsp;-&nbsp;pose&nbsp;proof&nbsp;(LevelExpr.val_zero&nbsp;a&nbsp;v);&nbsp;lia.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="val_is_prop" class="idref" href="#val_is_prop"><span class="id" title="lemma">val_is_prop</span></a> <a id="u:325" class="idref" href="#u:325"><span class="id" title="binder">u</span></a> <a id="v:326" class="idref" href="#v:326"><span class="id" title="binder">v</span></a> :<br/>
@@ -1999,6 +2036,7 @@ A universe instance represents a vector of argument concreteUniverses
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Variance&nbsp;info&nbsp;is&nbsp;needed&nbsp;to&nbsp;do&nbsp;full&nbsp;universe&nbsp;polymorphism&nbsp;*)</span><br/>
 <span class="id" title="keyword">Module</span> <a id="Variance" class="idref" href="#Variance"><span class="id" title="module">Variance</span></a>.<br/>
 </div>
 
@@ -2016,6 +2054,8 @@ A universe position in the instance given to a cumulative
 &nbsp;&nbsp;<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="var">EqDec</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Common.Universes.html#Variance.t"><span class="id" title="inductive">t</span></a>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;val&nbsp;check_subtype&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;t&nbsp;-&gt;&nbsp;bool&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;val&nbsp;sup&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;t&nbsp;-&gt;&nbsp;t&nbsp;*)</span><br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Common.Universes.html#Variance"><span class="id" title="module">Variance</span></a>.<br/>
 
 <br/>
@@ -2181,6 +2221,7 @@ A universe position in the instance given to a cumulative
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span> <span class="id" title="keyword">Type</span>. <span class="id" title="tactic">intros</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;ctrs&nbsp;are&nbsp;"enforced"&nbsp;by&nbsp;φ&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="valid_constraints0" class="idref" href="#valid_constraints0"><span class="id" title="definition">valid_constraints0</span></a> <a id="c4231634f47f80ac668b3c8c76c603a0" class="idref" href="#c4231634f47f80ac668b3c8c76c603a0"><span class="id" title="binder">φ</span></a> <a id="ctrs:556" class="idref" href="#ctrs:556"><span class="id" title="binder">ctrs</span></a><br/>
@@ -2206,6 +2247,20 @@ A universe position in the instance given to a cumulative
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span> <span class="id" title="keyword">Type</span>. <span class="id" title="tactic">split</span>; <span class="id" title="var">lia</span>. <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Lemma&nbsp;llt_lt&nbsp;n&nbsp;m&nbsp;:&nbsp;(n&nbsp;&lt;&nbsp;m)Z.<br/>
+&nbsp;&nbsp;Proof.&nbsp;lled;&nbsp;lia.&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;lle_le&nbsp;n&nbsp;m&nbsp;:&nbsp;(n&nbsp;&lt;=&nbsp;m)Z.<br/>
+&nbsp;&nbsp;Proof.&nbsp;lled;&nbsp;lia.&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;lt_llt&nbsp;n&nbsp;m&nbsp;:&nbsp;prop_sub_type&nbsp;-&gt;&nbsp;(n&nbsp;&lt;&nbsp;m)u.<br/>
+&nbsp;&nbsp;Proof.&nbsp;unfold&nbsp;llt.&nbsp;now&nbsp;intros&nbsp;-&gt;.&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;le_lle&nbsp;n&nbsp;m&nbsp;:&nbsp;prop_sub_type&nbsp;-&gt;&nbsp;(n&nbsp;&lt;=&nbsp;m)u.<br/>
+&nbsp;&nbsp;Proof.&nbsp;lled;&nbsp;<span class="inlinecode"><span class="id" title="var">lia</span>|<span class="id" title="tactic">discriminate</span></span>.&nbsp;Qed.<br/>
+<br/>
+&nbsp;&nbsp;Lemma&nbsp;lt_llt'&nbsp;n&nbsp;m&nbsp;:&nbsp;(0&nbsp;&lt;=&nbsp;n)Z&nbsp;-&gt;&nbsp;(n&nbsp;&lt;&nbsp;m)Z&nbsp;-&gt;&nbsp;(n&nbsp;&lt;=&nbsp;m)u.<br/>
+&nbsp;&nbsp;Proof.&nbsp;lled;&nbsp;lia.&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -2372,6 +2427,8 @@ A universe position in the instance given to a cumulative
 &nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Common.Universes.html#leq_universe_refl"><span class="id" title="instance">leq_universe_refl</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Common.Universes.html#leq_universe_sup_r"><span class="id" title="lemma">leq_universe_sup_r</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Rk:&nbsp;<span class="inlinecode"><span class="id" title="var">leq_universe</span></span> <span class="inlinecode">φ</span> <span class="inlinecode"><span class="id" title="var">s1</span></span> <span class="inlinecode">(<span class="id" title="var">sort_of_product</span></span> <span class="inlinecode"><span class="id" title="var">s1</span></span> <span class="inlinecode"><span class="id" title="var">s2</span>)</span>&nbsp;does&nbsp;not&nbsp;hold&nbsp;due&nbsp;to<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;impredicativity.&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a id="eq_universe_leq_universe" class="idref" href="#eq_universe_leq_universe"><span class="id" title="instance">eq_universe_leq_universe</span></a> <a id="0133233b15eed07860a1bf1f8b25ce6d" class="idref" href="#0133233b15eed07860a1bf1f8b25ce6d"><span class="id" title="binder">φ</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.RelationClasses.html#subrelation"><span class="id" title="class">subrelation</span></a> (<a class="idref" href="MetaCoq.Common.Universes.html#eq_universe"><span class="id" title="definition">eq_universe</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#0133233b15eed07860a1bf1f8b25ce6d"><span class="id" title="variable">φ</span></a>) (<a class="idref" href="MetaCoq.Common.Universes.html#leq_universe"><span class="id" title="definition">leq_universe</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#0133233b15eed07860a1bf1f8b25ce6d"><span class="id" title="variable">φ</span></a>).<br/>
@@ -2501,6 +2558,12 @@ Elimination restriction
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="is_lSet" class="idref" href="#is_lSet"><span class="id" title="definition">is_lSet</span></a> <a id="2cfd872d16bc0c1f6790199ecba145e7" class="idref" href="#2cfd872d16bc0c1f6790199ecba145e7"><span class="id" title="binder">φ</span></a> <a id="s:653" class="idref" href="#s:653"><span class="id" title="binder">s</span></a> := <a class="idref" href="MetaCoq.Common.Universes.html#eq_universe"><span class="id" title="definition">eq_universe</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#2cfd872d16bc0c1f6790199ecba145e7"><span class="id" title="variable">φ</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#s:653"><span class="id" title="variable">s</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#type0"><span class="id" title="definition">Universe.type0</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Unfolded&nbsp;definition&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;s&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Universe.lType&nbsp;u&nbsp;=&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;check_univs&nbsp;then&nbsp;forall&nbsp;v,&nbsp;satisfies&nbsp;v&nbsp;φ&nbsp;-&gt;&nbsp;val&nbsp;v&nbsp;u&nbsp;=&nbsp;0&nbsp;else&nbsp;True<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;_&nbsp;=&gt;&nbsp;False<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;end.&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="is_allowed_elimination" class="idref" href="#is_allowed_elimination"><span class="id" title="definition">is_allowed_elimination</span></a> <a id="37399789d58fe03a5fe44d6219f3179e" class="idref" href="#37399789d58fe03a5fe44d6219f3179e"><span class="id" title="binder">φ</span></a> <a id="allowed:655" class="idref" href="#allowed:655"><span class="id" title="binder">allowed</span></a> : <a class="idref" href="MetaCoq.Common.Universes.html#t"><span class="id" title="definition">Universe.t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
@@ -2512,6 +2575,7 @@ Elimination restriction
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Is&nbsp;<span class="inlinecode"><span class="id" title="var">a</span></span>&nbsp;a&nbsp;subset&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">a'</span></span>?&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="allowed_eliminations_subset" class="idref" href="#allowed_eliminations_subset"><span class="id" title="definition">allowed_eliminations_subset</span></a> (<a id="a:659" class="idref" href="#a:659"><span class="id" title="binder">a</span></a> <a id="a':660" class="idref" href="#a':660"><span class="id" title="binder">a'</span></a> : <a class="idref" href="MetaCoq.Common.Universes.html#allowed_eliminations"><span class="id" title="inductive">allowed_eliminations</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaCoq.Common.Universes.html#a:659"><span class="id" title="variable">a</span></a>, <a class="idref" href="MetaCoq.Common.Universes.html#a':660"><span class="id" title="variable">a'</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Common.Universes.html#IntoSProp"><span class="id" title="constructor">IntoSProp</span></a>, <span class="id" title="var">_</span><br/>
@@ -2610,6 +2674,13 @@ Elimination restriction
 &nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">check_univs</span> <span class="id" title="var">eqn</span>:<span class="id" title="var">H</span>; [<span class="id" title="var">unfold_univ_rel0</span> | <span class="id" title="tactic">trivial</span>].<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Ltac&nbsp;prop_non_prop&nbsp;:=<br/>
+&nbsp;&nbsp;match&nbsp;goal&nbsp;with<br/>
+&nbsp;&nbsp;|&nbsp;|-&nbsp;context<span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="var">Universe.is_prop</span></span> <span class="inlinecode">?<span class="id" title="var">u</span></span> <span class="inlinecode">||</span> <span class="inlinecode"><span class="id" title="var">Universe.is_sprop</span></span> <span class="inlinecode">?<span class="id" title="var">u</span></span>&nbsp;&nbsp;=&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;(Universe.is_prop&nbsp;u&nbsp;||&nbsp;Universe.is_sprop&nbsp;u)<br/>
+&nbsp;&nbsp;|&nbsp;H&nbsp;:&nbsp;context<span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="var">Universe.is_prop</span></span> <span class="inlinecode">?<span class="id" title="var">u</span></span> <span class="inlinecode">||</span> <span class="inlinecode"><span class="id" title="var">Universe.is_sprop</span></span> <span class="inlinecode">?<span class="id" title="var">u</span></span>&nbsp;|-&nbsp;_&nbsp;=&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;(Universe.is_prop&nbsp;u&nbsp;||&nbsp;Universe.is_sprop&nbsp;u)<br/>
+&nbsp;&nbsp;end.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">cong</span> := <span class="id" title="tactic">intuition</span> <span class="id" title="tactic">congruence</span>.<br/>
@@ -2880,7 +2951,9 @@ Elimination restriction
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Common.Universes.html#no_prop_leq_type"><span class="id" title="section">no_prop_leq_type</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;This&nbsp;level&nbsp;is&nbsp;a&nbsp;hack&nbsp;used&nbsp;in&nbsp;plugings&nbsp;to&nbsp;generate&nbsp;fresh&nbsp;levels&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="fresh_level" class="idref" href="#fresh_level"><span class="id" title="definition">fresh_level</span></a> : <a class="idref" href="MetaCoq.Common.Universes.html#t"><span class="id" title="definition">Level.t</span></a> := <a class="idref" href="MetaCoq.Common.Universes.html#level"><span class="id" title="constructor">Level.level</span></a>     "__metacoq_fresh_level__".<br/>
+<span class="comment">(*&nbsp;This&nbsp;universe&nbsp;is&nbsp;a&nbsp;hack&nbsp;used&nbsp;in&nbsp;plugins&nbsp;to&nbsp;generate&nbsp;fresh&nbsp;concreteUniverses&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="fresh_universe" class="idref" href="#fresh_universe"><span class="id" title="definition">fresh_universe</span></a> : <a class="idref" href="MetaCoq.Common.Universes.html#t"><span class="id" title="definition">Universe.t</span></a> := <a class="idref" href="MetaCoq.Common.Universes.html#make"><span class="id" title="definition">Universe.make</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#fresh_level"><span class="id" title="definition">fresh_level</span></a>.<br/>
 
 <br/>
@@ -3153,6 +3226,7 @@ Substitution of a universe-closed instance of the right size
 &nbsp;&nbsp;| <a class="idref" href="MetaCoq.Common.Universes.html#Monomorphic_ctx"><span class="id" title="constructor">Monomorphic_ctx</span></a> ⇒ <a class="idref" href="MetaCoq.Common.Universes.html#empty"><span class="id" title="definition">Instance.empty</span></a><br/>
 &nbsp;&nbsp;| <a class="idref" href="MetaCoq.Common.Universes.html#Polymorphic_ctx"><span class="id" title="constructor">Polymorphic_ctx</span></a> <span class="id" title="var">c</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#fst"><span class="id" title="definition">fst</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> (<a class="idref" href="MetaCoq.Common.Universes.html#repr"><span class="id" title="definition">AUContext.repr</span></a> <span class="id" title="var">c</span>))<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="comment">(*&nbsp;TODO:&nbsp;duplicate&nbsp;of&nbsp;polymorphic_instance&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="abstract_instance" class="idref" href="#abstract_instance"><span class="id" title="definition">abstract_instance</span></a> <a id="decl:798" class="idref" href="#decl:798"><span class="id" title="binder">decl</span></a> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaCoq.Common.Universes.html#decl:798"><span class="id" title="variable">decl</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| <a class="idref" href="MetaCoq.Common.Universes.html#Monomorphic_ctx"><span class="id" title="constructor">Monomorphic_ctx</span></a> ⇒ <a class="idref" href="MetaCoq.Common.Universes.html#empty"><span class="id" title="definition">Instance.empty</span></a><br/>

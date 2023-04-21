@@ -28,24 +28,25 @@
 <h1 class="libtitle">Library MetaCoq.Common.config</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.CRelationClasses.html#"><span class="id" title="library">CRelationClasses</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Bool.Bool.html#"><span class="id" title="library">Bool</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.RelationClasses.html#"><span class="id" title="library">RelationClasses</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.btauto.Btauto.html#"><span class="id" title="library">Btauto</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq.ssr</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Class</span> <a id="checker_flags" class="idref" href="#checker_flags"><span class="id" title="record">checker_flags</span></a> := {<br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;check_guard&nbsp;:&nbsp;bool&nbsp;;&nbsp;*)</span><br/>
 <br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Checking&nbsp;universe&nbsp;constraints&nbsp;iff&nbsp;<span class="inlinecode"><span class="id" title="var">true</span></span>&nbsp;*)</span><br/>
 &nbsp;&nbsp;<a id="check_univs" class="idref" href="#check_univs"><span class="id" title="projection">check_univs</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ;<br/>
 <br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Prop&nbsp;&lt;=&nbsp;Type&nbsp;iff&nbsp;<span class="inlinecode"><span class="id" title="var">true</span></span>&nbsp;*)</span><br/>
 &nbsp;&nbsp;<a id="prop_sub_type" class="idref" href="#prop_sub_type"><span class="id" title="projection">prop_sub_type</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ;<br/>
 <br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;If&nbsp;sort&nbsp;of&nbsp;indices&nbsp;are&nbsp;taken&nbsp;in&nbsp;account&nbsp;for&nbsp;the&nbsp;sort&nbsp;of&nbsp;inductive&nbsp;types&nbsp;*)</span><br/>
 &nbsp;&nbsp;<a id="indices_matter" class="idref" href="#indices_matter"><span class="id" title="projection">indices_matter</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ;<br/>
 <br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Lets&nbsp;in&nbsp;constructor&nbsp;types&nbsp;are&nbsp;allowed&nbsp;iff&nbsp;<span class="inlinecode"><span class="id" title="var">true</span></span>&nbsp;*)</span><br/>
 &nbsp;&nbsp;<a id="lets_in_constructor_types" class="idref" href="#lets_in_constructor_types"><span class="id" title="projection">lets_in_constructor_types</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a><br/>
 }.<br/>
 

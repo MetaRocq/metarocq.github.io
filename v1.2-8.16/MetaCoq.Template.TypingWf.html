@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Template.TypingWf</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
 <span class="id" title="keyword">Require</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Arith.PeanoNat.html#"><span class="id" title="library">PeanoNat</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
@@ -441,6 +442,35 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;case_predicate_contextP&nbsp;ind&nbsp;mdecl&nbsp;idecl&nbsp;params&nbsp;uinst&nbsp;pctx&nbsp;:<br/>
+&nbsp;&nbsp;build_case_predicate_context&nbsp;ind&nbsp;mdecl&nbsp;idecl&nbsp;params&nbsp;uinst&nbsp;=&nbsp;Some&nbsp;pctx&nbsp;&lt;~&gt;<br/>
+&nbsp;&nbsp;case_predicate_context&nbsp;ind&nbsp;mdecl&nbsp;idecl&nbsp;params&nbsp;uinst&nbsp;pctx.<br/>
+Proof.<br/>
+&nbsp;&nbsp;unfold&nbsp;build_case_predicate_context.<br/>
+&nbsp;&nbsp;unfold&nbsp;instantiate_params.<br/>
+&nbsp;&nbsp;destruct&nbsp;instantiate_params_subst&nbsp;as&nbsp;<span class="inlinecode">[<span class="id" title="var">ictx</span></span> <span class="inlinecode"><span class="id" title="var">p</span>]|</span>&nbsp;eqn:ipars&nbsp;=&gt;&nbsp;/=&nbsp;//.<br/>
+&nbsp;&nbsp;2:{&nbsp;split&nbsp;=&gt;&nbsp;//.&nbsp;intros&nbsp;H.&nbsp;depelim&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;instantiate_params_substP&nbsp;in&nbsp;i.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;ipars&nbsp;in&nbsp;i.&nbsp;discriminate.&nbsp;}<br/>
+&nbsp;&nbsp;move:&nbsp;(destArity_spec&nbsp;<span class="inlinecode"></span>&nbsp;(subst0&nbsp;ictx&nbsp;p)).<br/>
+&nbsp;&nbsp;destruct&nbsp;destArity&nbsp;as&nbsp;<span class="inlinecode">[<span class="id" title="var">idctx</span></span> <span class="inlinecode"><span class="id" title="var">inds</span>]|</span>&nbsp;eqn:da&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;simpl.&nbsp;intros&nbsp;eqs.<br/>
+&nbsp;&nbsp;split.<br/>
+&nbsp;&nbsp;eapply&nbsp;instantiate_params_substP&nbsp;in&nbsp;ipars.<br/>
+&nbsp;&nbsp;intros&nbsp;<span class="inlinecode">=</span> <span class="inlinecode">&lt;-</span>.&nbsp;econstructor.&nbsp;eauto.&nbsp;eauto.<br/>
+&nbsp;&nbsp;intros&nbsp;H.&nbsp;depelim&nbsp;H.&nbsp;subst&nbsp;sty.<br/>
+&nbsp;&nbsp;eapply&nbsp;instantiate_params_substP&nbsp;in&nbsp;i.<br/>
+&nbsp;&nbsp;rewrite&nbsp;ipars&nbsp;in&nbsp;i.&nbsp;noconf&nbsp;i.&nbsp;rewrite&nbsp;eqs&nbsp;in&nbsp;e.<br/>
+&nbsp;&nbsp;eapply&nbsp;it_mkProd_or_LetIn_inj&nbsp;in&nbsp;e&nbsp;as&nbsp;<span class="inlinecode">&lt;-</span> <span class="inlinecode">&lt;-</span>.<br/>
+&nbsp;&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;split&nbsp;=&gt;&nbsp;//&nbsp;<span class="inlinecode"></span>&nbsp;<span class="inlinecode"></span>&nbsp;s&nbsp;ty&nbsp;ictxt&nbsp;inds.<br/>
+&nbsp;&nbsp;move/instantiate_params_substP.<br/>
+&nbsp;&nbsp;rewrite&nbsp;ipars&nbsp;/=&nbsp;=&gt;&nbsp;<span class="inlinecode">=</span>&nbsp;&lt;-&nbsp;&lt;-&nbsp;H.<br/>
+&nbsp;&nbsp;rewrite&nbsp;H&nbsp;destArity_it_mkProd_or_LetIn&nbsp;in&nbsp;da.<br/>
+&nbsp;&nbsp;noconf&nbsp;da.<br/>
+Qed.<br/>
+*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="wf_subst_context" class="idref" href="#wf_subst_context"><span class="id" title="lemma">wf_subst_context</span></a> <a id="c64a4e18afb901fc0065484d2bee7e79" class="idref" href="#c64a4e18afb901fc0065484d2bee7e79"><span class="id" title="binder">Σ</span></a> <a id="s:140" class="idref" href="#s:140"><span class="id" title="binder">s</span></a> <a id="k:141" class="idref" href="#k:141"><span class="id" title="binder">k</span></a> <a id="0e57e1379e82b85f0519add418fbff0c" class="idref" href="#0e57e1379e82b85f0519add418fbff0c"><span class="id" title="binder">Γ</span></a> : <a class="idref" href="MetaCoq.Utils.All_Forall.html#All"><span class="id" title="inductive">All</span></a> (<a class="idref" href="MetaCoq.Template.WfAst.html#wf_decl"><span class="id" title="definition">wf_decl</span></a> <a class="idref" href="MetaCoq.Template.TypingWf.html#c64a4e18afb901fc0065484d2bee7e79"><span class="id" title="variable">Σ</span></a>) <a class="idref" href="MetaCoq.Template.TypingWf.html#0e57e1379e82b85f0519add418fbff0c"><span class="id" title="variable">Γ</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Utils.All_Forall.html#All"><span class="id" title="inductive">All</span></a> (<a class="idref" href="MetaCoq.Template.WfAst.html#wf"><span class="id" title="inductive">WfAst.wf</span></a> <a class="idref" href="MetaCoq.Template.TypingWf.html#c64a4e18afb901fc0065484d2bee7e79"><span class="id" title="variable">Σ</span></a>) <a class="idref" href="MetaCoq.Template.TypingWf.html#s:140"><span class="id" title="variable">s</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Utils.All_Forall.html#All"><span class="id" title="inductive">All</span></a> (<a class="idref" href="MetaCoq.Template.WfAst.html#wf_decl"><span class="id" title="definition">wf_decl</span></a> <a class="idref" href="MetaCoq.Template.TypingWf.html#c64a4e18afb901fc0065484d2bee7e79"><span class="id" title="variable">Σ</span></a>) (<a class="idref" href="MetaCoq.Template.Ast.html#Env.subst_context"><span class="id" title="definition">subst_context</span></a> <a class="idref" href="MetaCoq.Template.TypingWf.html#s:140"><span class="id" title="variable">s</span></a> <a class="idref" href="MetaCoq.Template.TypingWf.html#k:141"><span class="id" title="variable">k</span></a> <a class="idref" href="MetaCoq.Template.TypingWf.html#0e57e1379e82b85f0519add418fbff0c"><span class="id" title="variable">Γ</span></a>).<br/>
@@ -479,6 +509,20 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">wf_reln</span> : <span class="id" title="keyword">wf</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Lemma&nbsp;wf_instantiate_params_subst_spec&nbsp;params&nbsp;pars&nbsp;s&nbsp;ty&nbsp;s'&nbsp;ty'&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;instantiate_params_subst_spec&nbsp;params&nbsp;pars&nbsp;s&nbsp;ty&nbsp;s'&nbsp;ty'&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;All&nbsp;(wf_decl&nbsp;Σ)&nbsp;params&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;WfAst.wf&nbsp;Σ&nbsp;ty&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;All&nbsp;(WfAst.wf&nbsp;Σ)&nbsp;pars&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;All&nbsp;(WfAst.wf&nbsp;Σ)&nbsp;s&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;All&nbsp;(WfAst.wf&nbsp;Σ)&nbsp;s'&nbsp;*&nbsp;WfAst.wf&nbsp;Σ&nbsp;ty'.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;ipars.&nbsp;induction&nbsp;ipars;&nbsp;intros&nbsp;wfparams&nbsp;wfty&nbsp;wfpars&nbsp;wfs&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;depelim&nbsp;wfparams.&nbsp;depelim&nbsp;wfpars.&nbsp;depelim&nbsp;wfty.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;IHipars;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;depelim&nbsp;wfparams.&nbsp;depelim&nbsp;wfty.&nbsp;destruct&nbsp;H;&nbsp;simpl&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;IHipars;&nbsp;auto&nbsp;with&nbsp;wf.<br/>
+&nbsp;&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="wf_map2_set_binder_name" class="idref" href="#wf_map2_set_binder_name"><span class="id" title="lemma">wf_map2_set_binder_name</span></a> <a id="l:151" class="idref" href="#l:151"><span class="id" title="binder">l</span></a> <a id="l':152" class="idref" href="#l':152"><span class="id" title="binder">l'</span></a> :<br/>
@@ -572,6 +616,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Hint&nbsp;Resolve&nbsp;on_global_wf_Forall_decls&nbsp;:&nbsp;wf.&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="wf_inds" class="idref" href="#wf_inds"><span class="id" title="lemma">wf_inds</span></a> <a id="mind:175" class="idref" href="#mind:175"><span class="id" title="binder">mind</span></a> <a id="u:176" class="idref" href="#u:176"><span class="id" title="binder">u</span></a> <a id="mdecl:177" class="idref" href="#mdecl:177"><span class="id" title="binder">mdecl</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.All_Forall.html#All"><span class="id" title="inductive">All</span></a> (<a class="idref" href="MetaCoq.Template.WfAst.html#wf"><span class="id" title="inductive">WfAst.wf</span></a> <a class="idref" href="MetaCoq.Template.TypingWf.html#548b315e0589bbc80c58dd2cb348cf19"><span class="id" title="variable">Σ</span></a>) (<a class="idref" href="MetaCoq.Template.Ast.html#inds"><span class="id" title="definition">inds</span></a> <a class="idref" href="MetaCoq.Template.TypingWf.html#mind:175"><span class="id" title="variable">mind</span></a> <a class="idref" href="MetaCoq.Template.TypingWf.html#u:176"><span class="id" title="variable">u</span></a> <a class="idref" href="MetaCoq.Template.TypingWf.html#mdecl:177"><span class="id" title="variable">mdecl</span></a>.(<a class="idref" href="MetaCoq.Template.Ast.html#Env.ind_bodies"><span class="id" title="projection">ind_bodies</span></a>)).<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span> <span class="id" title="keyword">using</span> <span class="id" title="keyword">Type</span>.<br/>
@@ -1019,6 +1064,8 @@
 <span class="id" title="keyword">Global Hint Rewrite</span> <a class="idref" href="MetaCoq.Template.TypingWf.html#cstr_branch_context_length"><span class="id" title="lemma">cstr_branch_context_length</span></a> : <span class="id" title="var">len</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;case_branch_context_gen_length&nbsp;ind&nbsp;mdecl&nbsp;p&nbsp;puinst&nbsp;pctx&nbsp;:<br/>
+&nbsp;&nbsp;|case_branch_context_gen ind mdecl p puinst pctx | = |pctx|.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Section</span> <a id="TypingWf" class="idref" href="#TypingWf"><span class="id" title="section">TypingWf</span></a>.<br/>

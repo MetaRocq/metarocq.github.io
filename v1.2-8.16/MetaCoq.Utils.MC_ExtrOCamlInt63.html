@@ -28,6 +28,15 @@
 <h1 class="libtitle">Library MetaCoq.Utils.MC_ExtrOCamlInt63</h1>
 
 <div class="code">
+<span class="comment">(************************************************************************)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;The&nbsp;Coq&nbsp;Proof&nbsp;Assistant&nbsp;/&nbsp;The&nbsp;Coq&nbsp;Development&nbsp;Team&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;INRIA,&nbsp;CNRS&nbsp;and&nbsp;contributors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&lt;O___,,&nbsp;*&nbsp;(see&nbsp;version&nbsp;control&nbsp;and&nbsp;CREDITS&nbsp;file&nbsp;for&nbsp;authors&nbsp;&amp;&nbsp;dates)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;\VV/&nbsp;&nbsp;**************************************************************)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;file&nbsp;is&nbsp;distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;Lesser&nbsp;General&nbsp;Public&nbsp;License&nbsp;Version&nbsp;2.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;LICENSE&nbsp;file&nbsp;for&nbsp;the&nbsp;text&nbsp;of&nbsp;the&nbsp;license)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(************************************************************************)</span><br/>
 
 <br/>
 </div>
@@ -62,6 +71,7 @@ Primitive types and operators.
 <div class="code">
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.int</span> ⇒ "MCUint63.t".<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Uint63.int</span>.<br/>
+<span class="comment">(*&nbsp;Otherwise,&nbsp;the&nbsp;name&nbsp;conflicts&nbsp;with&nbsp;the&nbsp;primitive&nbsp;OCaml&nbsp;type&nbsp;<span class="inlinecode"><span class="id" title="var">int</span></span>&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.lsl</span> ⇒ "MCUint63.l_sl".<br/>

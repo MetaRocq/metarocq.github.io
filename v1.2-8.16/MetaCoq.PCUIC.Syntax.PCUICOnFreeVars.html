@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.Syntax.PCUICOnFreeVars</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.Morphisms.html#"><span class="id" title="library">Morphisms</span></a>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrfun.html#"><span class="id" title="library">ssrfun</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a> <a class="idref" href="MetaCoq.Utils.MCPred.html#"><span class="id" title="library">MCPred</span></a>.<br/>
@@ -198,6 +199,34 @@ Hint database for solving closed/on_free_vars goals
 <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Rewrite</span> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICOnFreeVars.html#test_context_k_ctx"><span class="id" title="lemma">test_context_k_ctx</span></a> : <span class="id" title="var">map</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(*&nbsp;<span class="comment">(*&nbsp;Lemma&nbsp;on_free_vars_true&nbsp;t&nbsp;:&nbsp;on_free_vars&nbsp;xpredT&nbsp;t.<br/>
+Proof.<br/>
+&nbsp;&nbsp;revert&nbsp;t.<br/>
+&nbsp;&nbsp;induction&nbsp;t&nbsp;using&nbsp;PCUICInduction.term_forall_list_ind;&nbsp;simpl&nbsp;=&gt;&nbsp;//;&nbsp;solve_all.<br/>
+&nbsp;&nbsp;all:try&nbsp;(rtoProp;&nbsp;now&nbsp;rewrite&nbsp;?shiftnP_xpredT&nbsp;?IHt1&nbsp;?IHt2&nbsp;?IHt3;&nbsp;eauto&nbsp;2;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;rtoProp;&nbsp;solve_all).<br/>
+&nbsp;&nbsp;-&nbsp;rtoProp.&nbsp;setoid_rewrite&nbsp;shiftnP_xpredT.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;test_context_k_ctx.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;move/onctxP:&nbsp;a0.<br/>
+&nbsp;&nbsp;-&nbsp;setoid_rewrite&nbsp;shiftnP_xpredT.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;test_context_k_ctx.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;move/onctxP:&nbsp;a1.<br/>
+&nbsp;&nbsp;-&nbsp;unfold&nbsp;test_def&nbsp;in&nbsp;*.&nbsp;apply&nbsp;/andP.&nbsp;now&nbsp;rewrite&nbsp;shiftnP_xpredT.<br/>
+&nbsp;&nbsp;-&nbsp;unfold&nbsp;test_def&nbsp;in&nbsp;*.&nbsp;apply&nbsp;/andP.&nbsp;now&nbsp;rewrite&nbsp;shiftnP_xpredT.<br/>
+Qed.&nbsp;*)</span><br/>
+<br/>
+Lemma&nbsp;on_free_vars_xpredT&nbsp;:&nbsp;on_free_vars&nbsp;xpredT&nbsp;=1&nbsp;xpredT.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;t;&nbsp;apply&nbsp;on_free_vars_true.<br/>
+Qed.&nbsp;*)</span><br/>
+<br/>
+Lemma&nbsp;test_context_k_true&nbsp;n&nbsp;ctx&nbsp;:&nbsp;test_context_k&nbsp;(fun=&gt;&nbsp;on_free_vars&nbsp;xpredT)&nbsp;n&nbsp;ctx.<br/>
+Proof.<br/>
+&nbsp;&nbsp;setoid_rewrite&nbsp;on_free_vars_xpredT.<br/>
+&nbsp;&nbsp;induction&nbsp;ctx;&nbsp;simpl;&nbsp;auto.<br/>
+&nbsp;&nbsp;rewrite&nbsp;/test_decl&nbsp;IHctx&nbsp;/=.<br/>
+&nbsp;&nbsp;destruct&nbsp;a&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">na</span></span> <span class="inlinecode">[<span class="id" title="var">b</span>|]</span> <span class="inlinecode"><span class="id" title="var">ty</span></span>&nbsp;=&gt;&nbsp;/=&nbsp;//.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="on_free_vars_impl" class="idref" href="#on_free_vars_impl"><span class="id" title="lemma">on_free_vars_impl</span></a> (<a id="p:40" class="idref" href="#p:40"><span class="id" title="binder">p</span></a> <a id="q:41" class="idref" href="#q:41"><span class="id" title="binder">q</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) <a id="t:42" class="idref" href="#t:42"><span class="id" title="binder">t</span></a> :<br/>
@@ -1124,6 +1153,7 @@ This is less precise than the strengthenP lemma above
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;on_ctx_free_vars_impl&nbsp;{P&nbsp;Q&nbsp;Γ}&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="on_free_vars_ctx_on_ctx_free_vars_xpredT" class="idref" href="#on_free_vars_ctx_on_ctx_free_vars_xpredT"><span class="id" title="lemma">on_free_vars_ctx_on_ctx_free_vars_xpredT</span></a> {<a id="P:280" class="idref" href="#P:280"><span class="id" title="binder">P</span></a> <a id="854c33c731e7ba97688106c356af8e81" class="idref" href="#854c33c731e7ba97688106c356af8e81"><span class="id" title="binder">Γ</span></a>} :<br/>
@@ -1175,6 +1205,94 @@ This is less precise than the strengthenP lemma above
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Not&nbsp;necessary&nbsp;for&nbsp;the&nbsp;above&nbsp;lemma,&nbsp;but&nbsp;still&nbsp;useful&nbsp;at&nbsp;some&nbsp;point&nbsp;presumably,<br/>
+&nbsp;&nbsp;&nbsp;e.g.&nbsp;for&nbsp;strenghtening&nbsp;*)</span><br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;on_free_vars_case_predicate_context&nbsp;{cf}&nbsp;{Σ}&nbsp;{wfΣ&nbsp;:&nbsp;wf&nbsp;Σ}&nbsp;{P&nbsp;ci&nbsp;mdecl&nbsp;idecl&nbsp;p}&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;let&nbsp;pctx&nbsp;:=&nbsp;case_predicate_context&nbsp;ci&nbsp;mdecl&nbsp;idecl&nbsp;p&nbsp;in<br/>
+&nbsp;&nbsp;&nbsp;declared_inductive&nbsp;Σ&nbsp;ci&nbsp;mdecl&nbsp;idecl&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;wf_predicate&nbsp;mdecl&nbsp;idecl&nbsp;p&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;forallb&nbsp;(on_free_vars&nbsp;P)&nbsp;(pparams&nbsp;p)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;on_free_vars&nbsp;(shiftnP&nbsp;|pcontext p| P) (preturn p) ->
+   on_free_vars_ctx P pctx.
+ Proof.
+   intros pctx decli wfp wfb havp.
+   rewrite /pctx /case_predicate_context /case_predicate_context_gen
+     /pre_case_predicate_context_gen /ind_predicate_context.
+   set (ibinder := {| decl_name := _ |}).
+   rewrite -on_free_vars_map2_cstr_args /=; len.
+   { eapply (wf_predicate_length_pcontext wfp). }
+   rewrite alli_app; len; rewrite andb_true_r.
+   apply andb_true_iff. split.
+   - rewrite -/(on_free_vars_ctx P _).
+     rewrite (on_free_vars_ctx_all_term _ _ Universe.type0).
+     rewrite -(subst_it_mkProd_or_LetIn _ _ _ (tSort _)).
+     apply on_free_vars_subst.
+     { rewrite forallb_rev => //. }
+     rewrite -on_free_vars_ctx_all_term.
+     rewrite on_free_vars_ctx_subst_instance.
+     rewrite (on_free_vars_ctx_all_term _ _ (Universe.type0)).
+     rewrite -(expand_lets_it_mkProd_or_LetIn _ _ 0 (tSort _)).
+     eapply on_free_vars_expand_lets_k; len.
+     * rewrite (wf_predicate_length_pars wfp).
+       apply (declared_minductive_ind_npars decli).
+     * eapply closed_ctx_on_free_vars.
+       apply (declared_inductive_closed_params decli).
+     * eapply on_free_vars_impl; cycle 1.
+       { rewrite <- on_free_vars_ctx_all_term.
+         instantiate (1 := closedP |mdecl.(ind_params)|&nbsp;xpredT).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;closedn_ctx_on_free_vars.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move:&nbsp;(declared_inductive_closed_pars_indices&nbsp;wfΣ&nbsp;decli).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;rewrite&nbsp;closedn_ctx_app&nbsp;=&gt;&nbsp;/andP&nbsp;<span class="inlinecode"></span>.&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;i'.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;/substP&nbsp;/=&nbsp;/closedP&nbsp;/shiftnP.&nbsp;len.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;repeat&nbsp;nat_compare_specs&nbsp;=&gt;&nbsp;/=&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;-&nbsp;rewrite&nbsp;/on_free_vars_decl&nbsp;/ibinder&nbsp;/test_decl&nbsp;/=&nbsp;/foroptb&nbsp;/=.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;on_free_vars_mkApps&nbsp;/=&nbsp;forallb_app&nbsp;/=.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;on_free_vars_to_extended_list&nbsp;/=&nbsp;andb_true_r.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;-/(is_true&nbsp;_).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;forallb_map.&nbsp;unshelve&nbsp;eapply&nbsp;(forallb_impl&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;wfb).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros.&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;on_free_vars_lift0.&nbsp;now&nbsp;rewrite&nbsp;addnP_shiftnP.<br/>
+&nbsp;Qed.<br/>
+<br/>
+&nbsp;Lemma&nbsp;on_free_vars_case_branch_context&nbsp;{cf}&nbsp;{Σ}&nbsp;{wfΣ&nbsp;:&nbsp;wf&nbsp;Σ}&nbsp;{P&nbsp;ci&nbsp;i&nbsp;mdecl&nbsp;idecl&nbsp;p&nbsp;br&nbsp;cdecl}&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;let&nbsp;brctx&nbsp;:=&nbsp;case_branch_context&nbsp;ci&nbsp;mdecl&nbsp;p&nbsp;(forget_types&nbsp;(bcontext&nbsp;br))&nbsp;cdecl&nbsp;in<br/>
+&nbsp;&nbsp;&nbsp;declared_constructor&nbsp;Σ&nbsp;(ci,&nbsp;i)&nbsp;mdecl&nbsp;idecl&nbsp;cdecl&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;wf_predicate&nbsp;mdecl&nbsp;idecl&nbsp;p&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;wf_branch&nbsp;cdecl&nbsp;br&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;forallb&nbsp;(on_free_vars&nbsp;P)&nbsp;(pparams&nbsp;p)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;on_free_vars_ctx&nbsp;P&nbsp;brctx.<br/>
+&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;intros&nbsp;brctx&nbsp;decli&nbsp;wfp&nbsp;wfb&nbsp;havp.<br/>
+&nbsp;&nbsp;&nbsp;rewrite&nbsp;/brctx&nbsp;/case_branch_context&nbsp;/case_branch_context_gen.<br/>
+&nbsp;&nbsp;&nbsp;rewrite&nbsp;(on_free_vars_ctx_all_term&nbsp;_&nbsp;_&nbsp;Universe.type0).<br/>
+&nbsp;&nbsp;&nbsp;rewrite&nbsp;-(subst_it_mkProd_or_LetIn&nbsp;_&nbsp;_&nbsp;_&nbsp;(tSort&nbsp;_)).<br/>
+&nbsp;&nbsp;&nbsp;apply&nbsp;on_free_vars_subst&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;{&nbsp;rewrite&nbsp;forallb_rev&nbsp;//.&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;rewrite&nbsp;-(expand_lets_it_mkProd_or_LetIn&nbsp;_&nbsp;_&nbsp;0&nbsp;(tSort&nbsp;_)).<br/>
+&nbsp;&nbsp;&nbsp;eapply&nbsp;on_free_vars_expand_lets_k;&nbsp;len.<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;rewrite&nbsp;(wf_predicate_length_pars&nbsp;wfp).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;(declared_minductive_ind_npars&nbsp;decli).<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;eapply&nbsp;closed_ctx_on_free_vars.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;closedn_subst_instance_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;(declared_inductive_closed_params&nbsp;decli).<br/>
+&nbsp;&nbsp;&nbsp;*&nbsp;rewrite&nbsp;-(subst_it_mkProd_or_LetIn&nbsp;_&nbsp;_&nbsp;_&nbsp;(tSort&nbsp;_)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;on_free_vars_impl;&nbsp;cycle&nbsp;1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;eapply&nbsp;(on_free_vars_subst_gen&nbsp;_&nbsp;P).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;eapply&nbsp;on_free_vars_terms_inds.&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;-on_free_vars_ctx_all_term.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;on_free_vars_ctx_subst_instance.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;-on_free_vars_map2_cstr_args.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;len.&nbsp;apply&nbsp;(wf_branch_length&nbsp;wfb).&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instantiate&nbsp;(1&nbsp;:=&nbsp;closedP&nbsp;(|mdecl.(ind_bodies)| + |mdecl.(ind_params)|)&nbsp;xpredT).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;closedn_ctx_on_free_vars.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;move/andP:&nbsp;(declared_constructor_closed&nbsp;wfΣ&nbsp;decli)&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>&nbsp;/andP&nbsp;<span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;intros&nbsp;i'.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;/substP&nbsp;/=&nbsp;/closedP&nbsp;/shiftnP.&nbsp;len.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;repeat&nbsp;nat_compare_specs&nbsp;=&gt;&nbsp;/=&nbsp;//.<br/>
+&nbsp;Qed.<br/>
+*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="on_free_vars_ctx_inst_case_context" class="idref" href="#on_free_vars_ctx_inst_case_context"><span class="id" title="lemma">on_free_vars_ctx_inst_case_context</span></a> <a id="P:293" class="idref" href="#P:293"><span class="id" title="binder">P</span></a> <a id="n:294" class="idref" href="#n:294"><span class="id" title="binder">n</span></a> <a id="pars:295" class="idref" href="#pars:295"><span class="id" title="binder">pars</span></a> <a id="puinst:296" class="idref" href="#puinst:296"><span class="id" title="binder">puinst</span></a> <a id="ctx:297" class="idref" href="#ctx:297"><span class="id" title="binder">ctx</span></a> :<br/>

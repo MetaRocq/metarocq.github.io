@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Erasure.EInduction</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#"><span class="id" title="library">List</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.BasicAst.html#"><span class="id" title="library">BasicAst</span></a>.<br/>
@@ -176,6 +177,7 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;We&nbsp;redefine&nbsp;these&nbsp;lemmas&nbsp;locally&nbsp;so&nbsp;they&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;compute&nbsp;a&nbsp;spine&nbsp;view&nbsp;in&nbsp;Coq&nbsp;itself&nbsp;*)</span><br/>
 <span class="id" title="keyword">Local</span> <span class="id" title="keyword">Lemma</span> <a id="decompose_app_rec_inv" class="idref" href="#decompose_app_rec_inv"><span class="id" title="lemma">decompose_app_rec_inv</span></a> {<a id="t:50" class="idref" href="#t:50"><span class="id" title="binder">t</span></a> <a id="l':51" class="idref" href="#l':51"><span class="id" title="binder">l'</span></a> <a id="f:52" class="idref" href="#f:52"><span class="id" title="binder">f</span></a> <a id="l:53" class="idref" href="#l:53"><span class="id" title="binder">l</span></a>} :<br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.EAstUtils.html#decompose_app_rec"><span class="id" title="definition">decompose_app_rec</span></a> <a class="idref" href="MetaCoq.Erasure.EInduction.html#t:50"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.Erasure.EInduction.html#l':51"><span class="id" title="variable">l'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Erasure.EInduction.html#f:52"><span class="id" title="variable">f</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaCoq.Erasure.EInduction.html#l:53"><span class="id" title="variable">l</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.EAst.html#mkApps"><span class="id" title="definition">mkApps</span></a> <a class="idref" href="MetaCoq.Erasure.EInduction.html#t:50"><span class="id" title="variable">t</span></a> <a class="idref" href="MetaCoq.Erasure.EInduction.html#l':51"><span class="id" title="variable">l'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#mkApps"><span class="id" title="definition">mkApps</span></a> <a class="idref" href="MetaCoq.Erasure.EInduction.html#f:52"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Erasure.EInduction.html#l:53"><span class="id" title="variable">l</span></a>.<br/>
@@ -380,9 +382,69 @@ Custom induction principle on syntax, dealing with the various lists appearing i
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Erasure.EInduction.html#MkAppsInd"><span class="id" title="module">MkAppsInd</span></a>.<br/>
 
 <br/>
+<span class="comment">(*Equations?&nbsp;head&nbsp;(t&nbsp;:&nbsp;term)&nbsp;:&nbsp;term<br/>
+&nbsp;&nbsp;by&nbsp;wf&nbsp;t&nbsp;(fun&nbsp;x&nbsp;y&nbsp;:&nbsp;term&nbsp;=&gt;&nbsp;size&nbsp;x&nbsp;&lt;&nbsp;size&nbsp;y)&nbsp;:=<br/>
+&nbsp;&nbsp;|&nbsp;t&nbsp;with&nbsp;TermSpineView.view&nbsp;t&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;|&nbsp;TermSpineView.tApp&nbsp;f&nbsp;l&nbsp;Hf&nbsp;Hl&nbsp;=&gt;&nbsp;head&nbsp;f;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;x&nbsp;=&gt;&nbsp;_&nbsp;}.<br/>
+Proof.<br/>
+&nbsp;&nbsp;7:{&nbsp;apply&nbsp;size_mkApps_f;&nbsp;auto.&nbsp;}<br/>
+&nbsp;&nbsp;all:try&nbsp;match&nbsp;goal&nbsp;with&nbsp;<span class="inlinecode"></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">TermSpineView.t</span></span> <span class="inlinecode">?<span class="id" title="var">t</span></span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"></span>&nbsp;=&gt;&nbsp;try&nbsp;exact&nbsp;t&nbsp;end.<br/>
+Defined.<br/>
+<br/>
+Lemma&nbsp;head_lemma&nbsp;t&nbsp;:&nbsp;head&nbsp;t&nbsp;=&nbsp;t.<br/>
+Proof.<br/>
+&nbsp;&nbsp;funelim&nbsp;(head&nbsp;t);&nbsp;try&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;2:{&nbsp;unfold&nbsp;head_obligation_10.&nbsp;cbn.&nbsp;}*)</span><br/>
 
 <br/>
-</div>
+<span class="comment">(*Module&nbsp;TermSpineView.<br/>
+<br/>
+&nbsp;&nbsp;Inductive&nbsp;t&nbsp;:&nbsp;Set&nbsp;:=<br/>
+&nbsp;&nbsp;|&nbsp;tBox&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;t&nbsp;<span class="comment">(*&nbsp;Represents&nbsp;all&nbsp;proofs&nbsp;*)</span><br/>
+&nbsp;&nbsp;|&nbsp;tRel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;t<br/>
+&nbsp;&nbsp;|&nbsp;tVar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;ident&nbsp;-&gt;&nbsp;t&nbsp;<span class="comment">(*&nbsp;For&nbsp;free&nbsp;variables&nbsp;(e.g.&nbsp;in&nbsp;a&nbsp;goal)&nbsp;*)</span><br/>
+&nbsp;&nbsp;|&nbsp;tEvar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;list&nbsp;term&nbsp;-&gt;&nbsp;t<br/>
+&nbsp;&nbsp;|&nbsp;tLambda&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;name&nbsp;-&gt;&nbsp;term&nbsp;-&gt;&nbsp;t<br/>
+&nbsp;&nbsp;|&nbsp;tLetIn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;name&nbsp;-&gt;&nbsp;term&nbsp;<span class="comment">(*&nbsp;the&nbsp;term&nbsp;*)</span>&nbsp;-&gt;&nbsp;term&nbsp;-&gt;&nbsp;t<br/>
+&nbsp;&nbsp;|&nbsp;tApp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;(f&nbsp;:&nbsp;term)&nbsp;(l&nbsp;:&nbsp;list&nbsp;term),&nbsp;~~&nbsp;isApp&nbsp;f&nbsp;-&gt;&nbsp;l&nbsp;&lt;&gt;&nbsp;nil&nbsp;-&gt;&nbsp;t<br/>
+&nbsp;&nbsp;|&nbsp;tConst&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;kername&nbsp;-&gt;&nbsp;t<br/>
+&nbsp;&nbsp;|&nbsp;tConstruct&nbsp;:&nbsp;inductive&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;t<br/>
+&nbsp;&nbsp;|&nbsp;tCase&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;(inductive&nbsp;*&nbsp;nat)&nbsp;<span class="comment">(*&nbsp; of parameters *)</span>&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;term&nbsp;<span class="comment">(*&nbsp;discriminee&nbsp;*)</span>&nbsp;-&gt;&nbsp;list&nbsp;(list&nbsp;name&nbsp;*&nbsp;term)&nbsp;<span class="comment">(*&nbsp;branches&nbsp;*)</span>&nbsp;-&gt;&nbsp;t<br/>
+&nbsp;&nbsp;|&nbsp;tProj&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;projection&nbsp;-&gt;&nbsp;term&nbsp;-&gt;&nbsp;t<br/>
+&nbsp;&nbsp;|&nbsp;tFix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;mfixpoint&nbsp;term&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;t<br/>
+&nbsp;&nbsp;|&nbsp;tCoFix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;mfixpoint&nbsp;term&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;t.<br/>
+<br/>
+&nbsp;&nbsp;Definition&nbsp;view&nbsp;:&nbsp;term&nbsp;-&gt;&nbsp;t&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;MkAppsInd.rec&nbsp;(P:=fun&nbsp;_&nbsp;=&gt;&nbsp;t)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tBox&nbsp;tRel&nbsp;tVar<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;n&nbsp;l&nbsp;_&nbsp;=&gt;&nbsp;tEvar&nbsp;n&nbsp;l)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;n&nbsp;t&nbsp;_&nbsp;=&gt;&nbsp;tLambda&nbsp;n&nbsp;t)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;n&nbsp;b&nbsp;_&nbsp;t&nbsp;_&nbsp;=&gt;&nbsp;tLetIn&nbsp;n&nbsp;b&nbsp;t)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;f&nbsp;l&nbsp;napp&nbsp;nnil&nbsp;_&nbsp;_&nbsp;=&gt;&nbsp;tApp&nbsp;f&nbsp;l&nbsp;napp&nbsp;nnil)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tConst<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tConstruct<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;p&nbsp;t&nbsp;pt&nbsp;l&nbsp;pl&nbsp;=&gt;&nbsp;tCase&nbsp;p&nbsp;t&nbsp;l)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;p&nbsp;t&nbsp;pt&nbsp;=&gt;&nbsp;tProj&nbsp;p&nbsp;t)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;mfix&nbsp;n&nbsp;_&nbsp;=&gt;&nbsp;tFix&nbsp;mfix&nbsp;n)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;mfix&nbsp;n&nbsp;_&nbsp;=&gt;&nbsp;tCoFix&nbsp;mfix&nbsp;n).<br/>
+<br/>
+&nbsp;&nbsp;Definition&nbsp;size&nbsp;(v&nbsp;:&nbsp;t)&nbsp;:&nbsp;nat&nbsp;:=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;match&nbsp;v&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;tRel&nbsp;i&nbsp;=&gt;&nbsp;1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;tEvar&nbsp;ev&nbsp;args&nbsp;=&gt;&nbsp;S&nbsp;(list_size&nbsp;size&nbsp;args)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;tLambda&nbsp;na&nbsp;M&nbsp;=&gt;&nbsp;S&nbsp;(size&nbsp;M)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;tApp&nbsp;u&nbsp;v&nbsp;_&nbsp;_&nbsp;=&gt;&nbsp;S&nbsp;(size&nbsp;u&nbsp;+&nbsp;list_size&nbsp;size&nbsp;v)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;tLetIn&nbsp;na&nbsp;b&nbsp;b'&nbsp;=&gt;&nbsp;S&nbsp;(size&nbsp;b&nbsp;+&nbsp;size&nbsp;b')<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;tCase&nbsp;ind&nbsp;c&nbsp;brs&nbsp;=&gt;&nbsp;S&nbsp;(size&nbsp;c&nbsp;+&nbsp;list_size&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;size&nbsp;x.2)&nbsp;brs)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;tProj&nbsp;p&nbsp;c&nbsp;=&gt;&nbsp;S&nbsp;(size&nbsp;c)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;tFix&nbsp;mfix&nbsp;idx&nbsp;=&gt;&nbsp;S&nbsp;(list_size&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;size&nbsp;(dbody&nbsp;x))&nbsp;mfix)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;tCoFix&nbsp;mfix&nbsp;idx&nbsp;=&gt;&nbsp;S&nbsp;(list_size&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;size&nbsp;(dbody&nbsp;x))&nbsp;mfix)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;_&nbsp;=&gt;&nbsp;1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;end.<br/>
+<br/>
+End&nbsp;TermSpineView.*)</span></div>
 </div>
 <div id="footer">
   Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>

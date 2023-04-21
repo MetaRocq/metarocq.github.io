@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Common.Primitive</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Primitive&nbsp;types&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Numbers.Cyclic.Int63.Uint63.html#"><span class="id" title="library">Uint63</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.PrimFloat.html#"><span class="id" title="library">PrimFloat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.SpecFloat.html#"><span class="id" title="library">SpecFloat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.FloatOps.html#"><span class="id" title="library">FloatOps</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ZArith.ZArith.html#"><span class="id" title="library">ZArith</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Numbers.HexadecimalString.html#"><span class="id" title="library">HexadecimalString</span></a>.<br/>
@@ -38,11 +39,12 @@
 <span class="id" title="keyword">Variant</span> <a id="prim_tag" class="idref" href="#prim_tag"><span class="id" title="inductive">prim_tag</span></a> :=<br/>
 &nbsp;&nbsp;| <a id="primInt" class="idref" href="#primInt"><span class="id" title="constructor">primInt</span></a><br/>
 &nbsp;&nbsp;| <a id="primFloat" class="idref" href="#primFloat"><span class="id" title="constructor">primFloat</span></a>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;|&nbsp;primArray.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="var">EqDec</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Common.Primitive.html#prim_tag"><span class="id" title="inductive">prim_tag</span></a>.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="string_of_prim_int" class="idref" href="#string_of_prim_int"><span class="id" title="definition">string_of_prim_int</span></a> (<a id="i:3" class="idref" href="#i:3"><span class="id" title="binder">i</span></a>:<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Numbers.Cyclic.Int63.Uint63.html#int"><span class="id" title="abbreviation">Uint63.int</span></a>) : <a class="idref" href="MetaCoq.Utils.MCString.html#string"><span class="id" title="abbreviation">string</span></a> :=<br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Better?&nbsp;DecimalString.NilZero.string_of_uint&nbsp;(BinNat.N.to_uint&nbsp;(BinInt.Z.to_N&nbsp;(Int63.to_Z&nbsp;i))).&nbsp;?&nbsp;*)</span><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.MCString.html#string_of_Z"><span class="id" title="definition">string_of_Z</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Numbers.Cyclic.Int63.Uint63.html#to_Z"><span class="id" title="definition">Uint63.to_Z</span></a> <a class="idref" href="MetaCoq.Common.Primitive.html#i:3"><span class="id" title="variable">i</span></a>).<br/>
 
 <br/>

@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Translations.times_bool_fun2</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden".<br/>
 
 <br/>
@@ -110,6 +111,8 @@
 &nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#transport"><span class="id" title="definition">transport</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#idmap"><span class="id" title="abbreviation">idmap</span></a> <span class="id" title="var">p</span>).<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#transport"><span class="id" title="definition">transport</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#idmap"><span class="id" title="abbreviation">idmap</span></a> <span class="id" title="var">p</span><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d"><span class="id" title="notation">^</span></a>).<br/>
 &nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#coe"><span class="id" title="definition">coe</span></a>; <span class="id" title="tactic">intro</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;refine&nbsp;(paths_ind&nbsp;A&nbsp;(fun&nbsp;y&nbsp;p&nbsp;=&gt;&nbsp;forall&nbsp;z&nbsp;:&nbsp;A,&nbsp;p^&nbsp; p &nbsp;z&nbsp;=&nbsp;z)&nbsp;(fun&nbsp;z&nbsp;=&gt;&nbsp;1)&nbsp;B&nbsp;p&nbsp;_).&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;refine&nbsp;(paths_ind&nbsp;A&nbsp;(fun&nbsp;y&nbsp;p&nbsp;=&gt;&nbsp;forall&nbsp;z&nbsp;:&nbsp;y,&nbsp;p&nbsp; p^ &nbsp;z&nbsp;=&nbsp;z)&nbsp;(fun&nbsp;z&nbsp;=&gt;&nbsp;1)&nbsp;B&nbsp;p&nbsp;_).&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#transport_Vp"><span class="id" title="definition">transport_Vp</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#idmap"><span class="id" title="abbreviation">idmap</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#transport_pV"><span class="id" title="definition">transport_pV</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#idmap"><span class="id" title="abbreviation">idmap</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
 <span class="id" title="keyword">Defined</span>.<br/>
@@ -166,6 +169,7 @@
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="UA_postcomposeequiv" class="idref" href="#UA_postcomposeequiv"><span class="id" title="definition">UA_postcomposeequiv</span></a> : <a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#UA"><span class="id" title="definition">UA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#postcompose_equiv"><span class="id" title="definition">postcompose_equiv</span></a>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;uses&nbsp;eta&nbsp;*)</span><br/>
 <span class="id" title="var">Admitted</span>.<br/>
 
 <br/>
@@ -177,6 +181,7 @@
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="e91781455ec454eef0bfbff8f4dbe196" class="idref" href="#e91781455ec454eef0bfbff8f4dbe196"><span class="id" title="definition">postcomposeequiv_αequiv</span></a><br/>
 &nbsp;&nbsp;: <a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#postcompose_equiv"><span class="id" title="definition">postcompose_equiv</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#a3750c8bc46947e5551cb84d0c3a54f5"><span class="id" title="definition">contr_isequivα</span></a>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;no&nbsp;eta&nbsp;?&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">H</span> <span class="id" title="var">A</span> <span class="id" title="var">P</span> <span class="id" title="var">C</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">H</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#sigT"><span class="id" title="record">sigT</span></a> <span class="id" title="var">P</span>) <span class="id" title="var">A</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">(</span></a><span class="id" title="var">_</span><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">;</span></a> <span class="id" title="var">_</span><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">)</span></a> <span class="id" title="var">_</span>).<br/>
 &nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">econstructor</span>.<br/>
@@ -204,9 +209,22 @@
 &nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>. <span class="id" title="tactic">∃</span> (<span class="id" title="keyword">fun</span> <a id="x:106" class="idref" href="#x:106"><span class="id" title="binder">x</span></a> ⇒ <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#x:105"><span class="id" title="variable">x</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">;</span></a> <span class="id" title="var">f</span> <a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#x:105"><span class="id" title="variable">x</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">)</span></a>). <span class="id" title="tactic">exact</span> 1.<br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">intros</span> [<span class="id" title="var">g</span> <span class="id" title="var">p</span>] <span class="id" title="var">x</span>. <span class="id" title="tactic">refine</span> (<span class="id" title="var">_</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#2b82354f12c687608f5c1ade3e7ee37d"><span class="id" title="notation">#</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.2'"><span class="id" title="notation">(</span></a><span class="id" title="var">g</span> <span class="id" title="var">x</span><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.2'"><span class="id" title="notation">).2</span></a>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap10"><span class="id" title="definition">ap10</span></a> <span class="id" title="var">p</span> <span class="id" title="var">x</span>).<br/>
-&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">lazy</span>. <span class="id" title="tactic">exact</span> 1. <span class="id" title="keyword">Defined</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>; <span class="id" title="tactic">lazy</span>. <span class="id" title="tactic">exact</span> 1. <span class="comment">(*&nbsp;uses&nbsp;eta!&nbsp;*)</span><br/>
+<span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;MetaCoq&nbsp;Run&nbsp;(TC&nbsp;&lt;-&nbsp;TranslateRec&nbsp;eqTC3&nbsp;contr_retractα&nbsp;;;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TC&nbsp;&lt;-&nbsp;ImplementExisting&nbsp;TC&nbsp;"contr_retract_α"&nbsp;;;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmDefinition&nbsp;"eqTC4"&nbsp;TC).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Next&nbsp;Obligation.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;tIntro&nbsp;A.&nbsp;tIntro&nbsp;P.&nbsp;tIntro&nbsp;H.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;simple&nbsp;refine&nbsp;(_;&nbsp;(_;&nbsp;_)).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;tIntro&nbsp;f.&nbsp;exists&nbsp;(pair&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;(x;&nbsp;π1&nbsp;f&nbsp;x))&nbsp;(π2&nbsp;f)).&nbsp;exact&nbsp;1.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;tIntro&nbsp;gp.&nbsp;refine&nbsp;(pair&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;_)&nbsp;(π2&nbsp;gp.1)).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;refine&nbsp;(_&nbsp; ((π1 gp.1) x).2). all: lazy. *)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exact&nbsp;(ap10&nbsp;(ap&nbsp;π1&nbsp;gp.2)&nbsp;x).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;tIntro&nbsp;f;&nbsp;lazy.&nbsp;exact&nbsp;1.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="UA_postcomposeequiv'" class="idref" href="#UA_postcomposeequiv'"><span class="id" title="definition">UA_postcomposeequiv'</span></a> : <a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#UA"><span class="id" title="definition">UA</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Translations.times_bool_fun2.html#postcompose_equiv"><span class="id" title="definition">postcompose_equiv</span></a>.<br/>
@@ -215,6 +233,7 @@
 &nbsp;&nbsp;- <span class="id" title="tactic">intro</span> <span class="id" title="var">f</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;uses&nbsp;eta&nbsp;*)</span><br/>
 <span class="id" title="var">Admitted</span>.<br/>
 
 <br/>

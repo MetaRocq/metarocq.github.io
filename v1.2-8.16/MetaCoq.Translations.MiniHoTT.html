@@ -54,8 +54,13 @@
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;sigT&nbsp;:&nbsp;forall&nbsp;A,&nbsp;(A&nbsp;-&gt;&nbsp;Type)&nbsp;-&gt;&nbsp;Type&nbsp;:=&nbsp;@sigT.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Definition&nbsp;existT&nbsp;:&nbsp;forall&nbsp;A&nbsp;P&nbsp;x,&nbsp;P&nbsp;x&nbsp;-&gt;&nbsp;sigT&nbsp;A&nbsp;P&nbsp;:=&nbsp;@existT.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Definition&nbsp;sigT_ind&nbsp;:&nbsp;forall&nbsp;A&nbsp;P&nbsp;(Q&nbsp;:&nbsp;sigT&nbsp;A&nbsp;P&nbsp;-&gt;&nbsp;Type),&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(forall&nbsp;x&nbsp;p,&nbsp;Q&nbsp;(existT&nbsp;A&nbsp;P&nbsp;x&nbsp;p))&nbsp;-&gt;&nbsp;forall&nbsp;s,&nbsp;Q&nbsp;s&nbsp;:=&nbsp;sigT_rect.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;***********************************************&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#sigT"><span class="id" title="record">sigT</span></a> {<span class="id" title="var">A</span>}%<span class="id" title="keyword">type</span> <span class="id" title="var">P</span>%<span class="id" title="keyword">type</span>.<br/>
@@ -172,10 +177,18 @@
 <span class="id" title="keyword">Notation</span> <a id="::function_scope:x_'o'_x" class="idref" href="#::function_scope:x_'o'_x"><span class="id" title="notation">&quot;</span></a>g 'o' f" := (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#compose"><span class="id" title="abbreviation">compose</span></a> <span class="id" title="var">g</span>%<span class="id" title="var">function</span> <span class="id" title="var">f</span>%<span class="id" title="var">function</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">function_scope</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Instance&nbsp;iff_compose&nbsp;:&nbsp;Transitive&nbsp;iff&nbsp;|&nbsp;1&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;fun&nbsp;A&nbsp;B&nbsp;C&nbsp;f&nbsp;g&nbsp;=&gt;&nbsp;(fst&nbsp;g&nbsp;o&nbsp;fst&nbsp;f&nbsp;,&nbsp;snd&nbsp;f&nbsp;o&nbsp;snd&nbsp;g).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Arguments&nbsp;iff_compose&nbsp;{A&nbsp;B&nbsp;C}&nbsp;f&nbsp;g&nbsp;:&nbsp;rename.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Instance&nbsp;iff_inverse&nbsp;:&nbsp;Symmetric&nbsp;iff&nbsp;|&nbsp;1&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;fun&nbsp;A&nbsp;B&nbsp;f&nbsp;=&gt;&nbsp;(snd&nbsp;f&nbsp;,&nbsp;fst&nbsp;f).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Arguments&nbsp;iff_inverse&nbsp;{A&nbsp;B}&nbsp;f&nbsp;:&nbsp;rename.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Instance&nbsp;iff_reflexive&nbsp;:&nbsp;Reflexive&nbsp;iff&nbsp;|&nbsp;1&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;fun&nbsp;A&nbsp;=&gt;&nbsp;(idmap&nbsp;,&nbsp;idmap).&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="composeD" class="idref" href="#composeD"><span class="id" title="definition">composeD</span></a> {<a id="A:56" class="idref" href="#A:56"><span class="id" title="binder">A</span></a> <a id="B:57" class="idref" href="#B:57"><span class="id" title="binder">B</span></a> <a id="C:58" class="idref" href="#C:58"><span class="id" title="binder">C</span></a>} (<a id="g:60" class="idref" href="#g:60"><span class="id" title="binder">g</span></a> : <span class="id" title="keyword">∀</span> <a id="b:59" class="idref" href="#b:59"><span class="id" title="binder">b</span></a>, <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#C:58"><span class="id" title="variable">C</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#b:59"><span class="id" title="variable">b</span></a>) (<a id="f:61" class="idref" href="#f:61"><span class="id" title="binder">f</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#A:56"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#B:57"><span class="id" title="variable">B</span></a>) := <span class="id" title="keyword">fun</span> <a id="x:62" class="idref" href="#x:62"><span class="id" title="binder">x</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#A:56"><span class="id" title="variable">A</span></a> ⇒ <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#g:60"><span class="id" title="variable">g</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f:61"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:62"><span class="id" title="variable">x</span></a>).<br/>
@@ -226,6 +239,7 @@
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="concat" class="idref" href="#concat"><span class="id" title="definition">concat</span></a> {<a id="A:82" class="idref" href="#A:82"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} {<a id="x:83" class="idref" href="#x:83"><span class="id" title="binder">x</span></a> <a id="y:84" class="idref" href="#y:84"><span class="id" title="binder">y</span></a> <a id="z:85" class="idref" href="#z:85"><span class="id" title="binder">z</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#A:82"><span class="id" title="variable">A</span></a>} (<a id="p:86" class="idref" href="#p:86"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:83"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#y:84"><span class="id" title="variable">y</span></a>) (<a id="q:87" class="idref" href="#q:87"><span class="id" title="binder">q</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#y:84"><span class="id" title="variable">y</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#z:85"><span class="id" title="variable">z</span></a>) : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:83"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#z:85"><span class="id" title="variable">z</span></a>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;:=&nbsp;transport&nbsp;(paths&nbsp;_&nbsp;x)&nbsp;q&nbsp;(transport&nbsp;(fun&nbsp;y&nbsp;=&gt;&nbsp;x&nbsp;=&nbsp;y)&nbsp;p&nbsp;1).&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">destruct</span> <span class="id" title="var">p</span>, <span class="id" title="var">q</span>.<br/>
 <span class="id" title="keyword">Defined</span>.<br/>
 
@@ -375,6 +389,7 @@
 <span class="id" title="keyword">Global Arguments</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#path_forall2"><span class="id" title="definition">path_forall2</span></a> {<span class="id" title="var">_</span>} {<span class="id" title="var">A</span> <span class="id" title="var">B</span>}%<span class="id" title="var">type_scope</span> {<span class="id" title="var">P</span>} (<span class="id" title="var">f</span> <span class="id" title="var">g</span>)%<span class="id" title="var">function_scope</span> <span class="id" title="var">_</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;PathGroupoid.v&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="concat_p1" class="idref" href="#concat_p1"><span class="id" title="definition">concat_p1</span></a> {<a id="A:185" class="idref" href="#A:185"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} {<a id="x:186" class="idref" href="#x:186"><span class="id" title="binder">x</span></a> <a id="y:187" class="idref" href="#y:187"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#A:185"><span class="id" title="variable">A</span></a>} (<a id="p:188" class="idref" href="#p:188"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:186"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#y:187"><span class="id" title="variable">y</span></a>) :<br/>
@@ -1209,7 +1224,7 @@ Sometimes, it's useful to have the goal be in terms of <span class="inlinecode">
 &nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| [ |- <span class="id" title="keyword">context</span>[<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#transport"><span class="id" title="definition">transport</span></a> ?<span class="id" title="var">P</span> ?<span class="id" title="var">p</span> ?<span class="id" title="var">u</span>] ]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇒ <span class="id" title="keyword">match</span> <span class="id" title="var">P</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#idmap"><span class="id" title="abbreviation">idmap</span></a> ⇒ <span class="id" title="tactic">fail</span> 1 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#idmap"><span class="id" title="abbreviation">idmap</span></a> ⇒ <span class="id" title="tactic">fail</span> 1 <span class="comment">(*&nbsp;we&nbsp;don't&nbsp;want&nbsp;to&nbsp;turn&nbsp;<span class="inlinecode"><span class="id" title="var">transport</span></span> <span class="inlinecode"><span class="id" title="var">idmap</span></span> <span class="inlinecode">(<span class="id" title="var">ap</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span>)</span>&nbsp;into&nbsp;<span class="inlinecode"><span class="id" title="var">transport</span></span> <span class="inlinecode"><span class="id" title="var">idmap</span></span> <span class="inlinecode">(<span class="id" title="var">ap</span></span> <span class="inlinecode"><span class="id" title="var">idmap</span></span> <span class="inlinecode">(<span class="id" title="var">ap</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span>))</span>&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">idtac</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">progress</span> <span class="id" title="tactic">rewrite</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#transport_idmap_ap"><span class="id" title="definition">transport_idmap_ap</span></a> <span class="id" title="var">_</span> <span class="id" title="var">P</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">p</span> <span class="id" title="var">u</span>)<br/>
@@ -1564,14 +1579,14 @@ Sometimes, it's useful to have the goal be in terms of <span class="inlinecode">
 <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Rewrite</span><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_p1"><span class="id" title="definition">concat_p1</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_1p"><span class="id" title="definition">concat_1p</span></a><br/>
-@<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_p_pp"><span class="id" title="definition">concat_p_pp</span></a> <br/>
+@<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_p_pp"><span class="id" title="definition">concat_p_pp</span></a> <span class="comment">(*&nbsp;there&nbsp;is&nbsp;a&nbsp;choice&nbsp;here&nbsp;!*)</span><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_pV"><span class="id" title="definition">concat_pV</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_Vp"><span class="id" title="definition">concat_Vp</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_V_pp"><span class="id" title="definition">concat_V_pp</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_p_Vp"><span class="id" title="definition">concat_p_Vp</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_pp_V"><span class="id" title="definition">concat_pp_V</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_pV_p"><span class="id" title="definition">concat_pV_p</span></a><br/>
- <br/>
+<span class="comment">(*@inv_pp*)</span> <span class="comment">(*&nbsp;I&nbsp;am&nbsp;not&nbsp;sure&nbsp;about&nbsp;this&nbsp;one&nbsp;*)</span><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#inv_V"><span class="id" title="definition">inv_V</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#moveR_Mp"><span class="id" title="definition">moveR_Mp</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#moveR_pM"><span class="id" title="definition">moveR_pM</span></a><br/>
@@ -1582,12 +1597,14 @@ Sometimes, it's useful to have the goal be in terms of <span class="inlinecode">
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#moveR_M1"><span class="id" title="definition">moveR_M1</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#moveR_1M"><span class="id" title="definition">moveR_1M</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap_1"><span class="id" title="definition">ap_1</span></a><br/>
-<br/>
+<span class="comment">(*&nbsp;@ap_pp<br/>
+@ap_p_pp&nbsp;?*)</span><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#inverse_ap"><span class="id" title="definition">inverse_ap</span></a><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap_idmap"><span class="id" title="definition">ap_idmap</span></a><br/>
-<br/>
+<span class="comment">(*&nbsp;@ap_compose<br/>
+@ap_compose'*)</span><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap_const"><span class="id" title="definition">ap_const</span></a><br/>
-<br/>
+<span class="comment">(*&nbsp;Unsure&nbsp;about&nbsp;naturality&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">ap</span></span>,&nbsp;was&nbsp;absent&nbsp;in&nbsp;the&nbsp;old&nbsp;implementation*)</span><br/>
 @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#apD10_1"><span class="id" title="definition">apD10_1</span></a><br/>
 :<span class="id" title="var">paths</span>.<br/>
 
@@ -1596,6 +1613,7 @@ Sometimes, it's useful to have the goal be in terms of <span class="inlinecode">
 &nbsp;&nbsp;<span class="id" title="tactic">autorewrite</span> <span class="id" title="keyword">with</span> <span class="id" title="var">paths</span> <span class="id" title="tactic">in</span> × |- × ; <span class="id" title="tactic">auto</span> <span class="id" title="keyword">with</span> <span class="id" title="var">path_hints</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Contractible.v&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -1661,6 +1679,7 @@ Also, the total space of any based path space is contractible.  We define the <s
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;???&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="path_basedpaths'" class="idref" href="#path_basedpaths'"><span class="id" title="definition">path_basedpaths'</span></a> {<a id="X:1381" class="idref" href="#X:1381"><span class="id" title="binder">X</span></a> : <span class="id" title="keyword">Type</span>} {<a id="x:1382" class="idref" href="#x:1382"><span class="id" title="binder">x</span></a> <a id="y:1383" class="idref" href="#y:1383"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#X:1381"><span class="id" title="variable">X</span></a>} (<a id="p:1384" class="idref" href="#p:1384"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#y:1383"><span class="id" title="variable">y</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:1382"><span class="id" title="variable">x</span></a>)<br/>
 : @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#existT"><span class="id" title="constructor">existT</span></a> <span class="id" title="var">_</span> (<span class="id" title="keyword">fun</span> <a id="z:1385" class="idref" href="#z:1385"><span class="id" title="binder">z</span></a> ⇒ @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#paths"><span class="id" title="definition">paths</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#X:1381"><span class="id" title="variable">X</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#z:1385"><span class="id" title="variable">z</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:1382"><span class="id" title="variable">x</span></a>) <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:1382"><span class="id" title="variable">x</span></a> 1 <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#y:1383"><span class="id" title="variable">y</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#p:1384"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">)</span></a>.<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1720,6 +1739,7 @@ If the domain is contractible, the function is propositionally constant.
 &nbsp;&nbsp;:= <span class="id" title="keyword">fun</span> <a id="x:1419" class="idref" href="#x:1419"><span class="id" title="binder">x</span></a> <a id="y:1420" class="idref" href="#y:1420"><span class="id" title="binder">y</span></a> ⇒ <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f:1415"><span class="id" title="variable">f</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#contr"><span class="id" title="method">contr</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:1419"><span class="id" title="variable">x</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d"><span class="id" title="notation">)^</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#da4283005a63bc086811fc2e64b35356"><span class="id" title="notation">@</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#contr"><span class="id" title="method">contr</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#y:1420"><span class="id" title="variable">y</span></a>).<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Equivalences.v&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Global Instance</span> <a id="isequiv_idmap" class="idref" href="#isequiv_idmap"><span class="id" title="instance">isequiv_idmap</span></a> (<a id="A:1421" class="idref" href="#A:1421"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquiv"><span class="id" title="class">IsEquiv</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#idmap"><span class="id" title="abbreviation">idmap</span></a> | 0 :=<br/>
@@ -1762,6 +1782,7 @@ The composition of equivalences is an equivalence.
 &nbsp;&nbsp;&nbsp;&nbsp;).<br/>
 
 <br/>
+<span class="comment">(*&nbsp;An&nbsp;alias&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">isequiv_compose</span></span>,&nbsp;with&nbsp;some&nbsp;arguments&nbsp;explicit;&nbsp;often&nbsp;convenient&nbsp;when&nbsp;type&nbsp;class&nbsp;search&nbsp;fails.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="isequiv_compose'" class="idref" href="#isequiv_compose'"><span class="id" title="definition">isequiv_compose'</span></a><br/>
 &nbsp;&nbsp;{<a id="A:1433" class="idref" href="#A:1433"><span class="id" title="binder">A</span></a> <a id="B:1434" class="idref" href="#B:1434"><span class="id" title="binder">B</span></a> : <span class="id" title="keyword">Type</span>} (<a id="f:1435" class="idref" href="#f:1435"><span class="id" title="binder">f</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#A:1433"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#B:1434"><span class="id" title="variable">B</span></a>) (<span class="id" title="var">_</span> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquiv"><span class="id" title="class">IsEquiv</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f:1435"><span class="id" title="variable">f</span></a>)<br/>
 &nbsp;&nbsp;{<a id="C:1436" class="idref" href="#C:1436"><span class="id" title="binder">C</span></a> : <span class="id" title="keyword">Type</span>} (<a id="g:1437" class="idref" href="#g:1437"><span class="id" title="binder">g</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#B:1434"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#C:1436"><span class="id" title="variable">C</span></a>) (<span class="id" title="var">_</span> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquiv"><span class="id" title="class">IsEquiv</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#g:1437"><span class="id" title="variable">g</span></a>)<br/>
@@ -1789,6 +1810,7 @@ We put <span class="inlinecode"><span class="id" title="var">g</span></span> and
 <span class="id" title="keyword">Notation</span> <a id="::equiv_scope:x_'oE'_x" class="idref" href="#::equiv_scope:x_'oE'_x"><span class="id" title="notation">&quot;</span></a>g 'oE' f" := (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#equiv_compose'"><span class="id" title="definition">equiv_compose'</span></a> <span class="id" title="var">g</span>%<span class="id" title="var">equiv</span> <span class="id" title="var">f</span>%<span class="id" title="var">equiv</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">equiv_scope</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;The&nbsp;TypeClass&nbsp;<span class="inlinecode"><span class="id" title="var">Transitive</span></span>&nbsp;has&nbsp;a&nbsp;different&nbsp;order&nbsp;of&nbsp;parameters&nbsp;than&nbsp;<span class="inlinecode"><span class="id" title="var">equiv_compose</span></span>.&nbsp;&nbsp;Thus&nbsp;in&nbsp;declaring&nbsp;the&nbsp;instance&nbsp;we&nbsp;have&nbsp;to&nbsp;switch&nbsp;the&nbsp;order&nbsp;of&nbsp;arguments.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Global Instance</span> <a id="transitive_equiv" class="idref" href="#transitive_equiv"><span class="id" title="instance">transitive_equiv</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Transitive"><span class="id" title="class">Transitive</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Equiv"><span class="id" title="record">Equiv</span></a> | 0 :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a id="f:1450" class="idref" href="#f:1450"><span class="id" title="binder">f</span></a> <a id="g:1451" class="idref" href="#g:1451"><span class="id" title="binder">g</span></a> ⇒ <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#equiv_compose"><span class="id" title="definition">equiv_compose</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#g:1451"><span class="id" title="variable">g</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f:1450"><span class="id" title="variable">f</span></a>.<br/>
 
@@ -1811,6 +1833,7 @@ Anything homotopic to an equivalence is an equivalence.
 &nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="IsEquivHomotopic.retr" class="idref" href="#IsEquivHomotopic.retr"><span class="id" title="variable">retr</span></a> := (<span class="id" title="keyword">fun</span> <a id="a:1459" class="idref" href="#a:1459"><span class="id" title="binder">a</span></a>:<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.A"><span class="id" title="variable">A</span></a> ⇒ <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.h"><span class="id" title="variable">h</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#a:1459"><span class="id" title="variable">a</span></a>)<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d"><span class="id" title="notation">)^</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#da4283005a63bc086811fc2e64b35356"><span class="id" title="notation">@</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#eissect"><span class="id" title="method">eissect</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.f"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#a:1459"><span class="id" title="variable">a</span></a>).<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;We&nbsp;prove&nbsp;the&nbsp;triangle&nbsp;identity&nbsp;with&nbsp;rewrite&nbsp;tactics.&nbsp;&nbsp;Since&nbsp;we&nbsp;lose&nbsp;control&nbsp;over&nbsp;the&nbsp;proof&nbsp;term&nbsp;that&nbsp;way,&nbsp;we&nbsp;make&nbsp;the&nbsp;result&nbsp;opaque&nbsp;with&nbsp;"Qed".&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="IsEquivHomotopic.adj" class="idref" href="#IsEquivHomotopic.adj"><span class="id" title="variable">adj</span></a> (<a id="a:1460" class="idref" href="#a:1460"><span class="id" title="binder">a</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.A"><span class="id" title="variable">A</span></a>) : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.sect"><span class="id" title="variable">sect</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.g"><span class="id" title="variable">g</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#a:1460"><span class="id" title="variable">a</span></a>) <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.g"><span class="id" title="variable">g</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.retr"><span class="id" title="variable">retr</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#a:1460"><span class="id" title="variable">a</span></a>).<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">sect</span>, <span class="id" title="var">retr</span>.<br/>
@@ -1822,6 +1845,7 @@ Anything homotopic to an equivalence is an equivalence.
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;This&nbsp;should&nbsp;not&nbsp;be&nbsp;an&nbsp;instance;&nbsp;it&nbsp;can&nbsp;cause&nbsp;the&nbsp;unifier&nbsp;to&nbsp;spin&nbsp;forever&nbsp;searching&nbsp;for&nbsp;functions&nbsp;to&nbsp;be&nbsp;hoomotpic&nbsp;to.&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="isequiv_homotopic" class="idref" href="#isequiv_homotopic"><span class="id" title="definition">isequiv_homotopic</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquiv"><span class="id" title="class">IsEquiv</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.g"><span class="id" title="variable">g</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;:= <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#BuildIsEquiv"><span class="id" title="constructor">BuildIsEquiv</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.g"><span class="id" title="variable">g</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.f"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a>) <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.sect"><span class="id" title="variable">sect</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.retr"><span class="id" title="variable">retr</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquivHomotopic.adj"><span class="id" title="variable">adj</span></a>.<br/>
 
@@ -1847,6 +1871,7 @@ The inverse of an equivalence is an equivalence.
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <a id="other_adj" class="idref" href="#other_adj"><span class="id" title="lemma">other_adj</span></a> (<a id="b:1465" class="idref" href="#b:1465"><span class="id" title="binder">b</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.B"><span class="id" title="variable">B</span></a>) : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#eissect"><span class="id" title="method">eissect</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">b</span></a>) <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#eisretr"><span class="id" title="method">eisretr</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#b:1465"><span class="id" title="variable">b</span></a>).<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;First&nbsp;we&nbsp;set&nbsp;up&nbsp;the&nbsp;mess.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_1p"><span class="id" title="definition">concat_1p</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#eissect"><span class="id" title="method">eissect</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_Vp"><span class="id" title="definition">concat_Vp</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#eisretr"><span class="id" title="method">eisretr</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">b</span></a>))))).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#whiskerR"><span class="id" title="definition">whiskerR</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#inverse2"><span class="id" title="definition">inverse2</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap02"><span class="id" title="definition">ap02</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#eisadj"><span class="id" title="method">eisadj</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">b</span></a>)))) <span class="id" title="var">_</span>).<br/>
@@ -1856,6 +1881,7 @@ The inverse of an equivalence is an equivalence.
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_pV"><span class="id" title="definition">concat_pV</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#eisretr"><span class="id" title="method">eisretr</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">b</span></a>))))).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#moveL_M1"><span class="id" title="definition">moveL_M1</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">rewrite</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_p_pp"><span class="id" title="definition">concat_p_pp</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Now&nbsp;we&nbsp;apply&nbsp;lots&nbsp;of&nbsp;naturality&nbsp;and&nbsp;cancel&nbsp;things.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#concat_pp_A1"><span class="id" title="definition">concat_pp_A1</span></a> (<span class="id" title="keyword">fun</span> <a id="a:1468" class="idref" href="#a:1468"><span class="id" title="binder">a</span></a> ⇒ <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#eissect"><span class="id" title="method">eissect</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#a:1466"><span class="id" title="variable">a</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d"><span class="id" title="notation">)^</span></a>) <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap_compose'"><span class="id" title="definition">ap_compose'</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap_p_pp"><span class="id" title="definition">ap_p_pp</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#eisretr"><span class="id" title="method">eisretr</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#EquivInverse.f"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">b</span></a>))))) <span class="id" title="var">_</span>).<br/>
@@ -2023,6 +2049,7 @@ In all the above cases, we were able to directly construct all the structure of 
 &nbsp;&nbsp;<span class="id" title="keyword">Context</span> (<a id="isretr:1537" class="idref" href="#isretr:1537"><span class="id" title="binder">isretr</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Sect"><span class="id" title="definition">Sect</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.g"><span class="id" title="variable">g</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.f"><span class="id" title="variable">f</span></a>) (<a id="issect:1538" class="idref" href="#issect:1538"><span class="id" title="binder">issect</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Sect"><span class="id" title="definition">Sect</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.f"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.g"><span class="id" title="variable">g</span></a>).<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;This&nbsp;is&nbsp;the&nbsp;modified&nbsp;<span class="inlinecode"><span class="id" title="var">eissect</span></span>.&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Let</span> <a id="Adjointify.issect'" class="idref" href="#Adjointify.issect'"><span class="id" title="variable">issect'</span></a> := <span class="id" title="keyword">fun</span> <a id="x:1539" class="idref" href="#x:1539"><span class="id" title="binder">x</span></a> ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.g"><span class="id" title="variable">g</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.f"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.issect"><span class="id" title="variable">issect</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:1539"><span class="id" title="variable">x</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d"><span class="id" title="notation">)^</span></a>)  <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#da4283005a63bc086811fc2e64b35356"><span class="id" title="notation">@</span></a>  <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.g"><span class="id" title="variable">g</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.isretr"><span class="id" title="variable">isretr</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.f"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:1539"><span class="id" title="variable">x</span></a>))  <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#da4283005a63bc086811fc2e64b35356"><span class="id" title="notation">@</span></a>  <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#Adjointify.issect"><span class="id" title="variable">issect</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:1539"><span class="id" title="variable">x</span></a>.<br/>
 
@@ -2231,6 +2258,13 @@ Conversely, if pre- or post-composing with a function is always an equivalence, 
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*<br/>
+Definition&nbsp;isequiv_isequiv_postcompose&nbsp;{A&nbsp;B&nbsp;:&nbsp;Type}&nbsp;(f&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;B)<br/>
+&nbsp;&nbsp;(postcomp&nbsp;:=&nbsp;(fun&nbsp;(C&nbsp;:&nbsp;Type)&nbsp;(h&nbsp;:&nbsp;C&nbsp;-&gt;&nbsp;A)&nbsp;=&gt;&nbsp;f&nbsp;o&nbsp;h))<br/>
+&nbsp;&nbsp;(feq&nbsp;:&nbsp;forall&nbsp;C:Type,&nbsp;IsEquiv&nbsp;(postcomp&nbsp;C))<br/>
+&nbsp;&nbsp;:&nbsp;IsEquiv&nbsp;f.<br/>
+<span class="comment">(*&nbsp;TODO&nbsp;*)</span><br/>
+*)</span><br/>
 
 <br/>
 </div>
@@ -2315,6 +2349,7 @@ Using <span class="inlinecode"><span class="id" title="var">equiv_ind</span></sp
 &nbsp;&nbsp;:= <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#equiv_compose'"><span class="id" title="definition">equiv_compose'</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#g:1706"><span class="id" title="variable">g</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f:1705"><span class="id" title="variable">f</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Shouldn't&nbsp;this&nbsp;become&nbsp;transitivity&nbsp;mid&nbsp;?&nbsp;*)</span><br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">equiv_via</span> <span class="id" title="var">mid</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">apply</span> @<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#equiv_composeR'"><span class="id" title="definition">equiv_composeR'</span></a> <span class="id" title="keyword">with</span> (<span class="id" title="var">B</span> := <span class="id" title="var">mid</span>).<br/>
 
@@ -2336,6 +2371,7 @@ It's often convenient when constructing a chain of equivalences to use <span cla
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Types/Paths.v&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="transport_paths_l" class="idref" href="#transport_paths_l"><span class="id" title="definition">transport_paths_l</span></a> {<a id="A:1707" class="idref" href="#A:1707"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} {<a id="x1:1708" class="idref" href="#x1:1708"><span class="id" title="binder">x1</span></a> <a id="x2:1709" class="idref" href="#x2:1709"><span class="id" title="binder">x2</span></a> <a id="y:1710" class="idref" href="#y:1710"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#A:1707"><span class="id" title="variable">A</span></a>} (<a id="p:1711" class="idref" href="#p:1711"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x1:1708"><span class="id" title="variable">x1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x2:1709"><span class="id" title="variable">x2</span></a>) (<a id="q:1712" class="idref" href="#q:1712"><span class="id" title="binder">q</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x1:1708"><span class="id" title="variable">x1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#y:1710"><span class="id" title="variable">y</span></a>)<br/>
@@ -2446,6 +2482,7 @@ It's often convenient when constructing a chain of equivalences to use <span cla
 &nbsp;&nbsp;:= <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#equiv_ap"><span class="id" title="definition">equiv_ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f:1800"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:1801"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#y:1802"><span class="id" title="variable">y</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;TODO:&nbsp;Is&nbsp;this&nbsp;really&nbsp;necessary?&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="equiv_inj" class="idref" href="#equiv_inj"><span class="id" title="definition">equiv_inj</span></a> `(<a id="f:1805" class="idref" href="#f:1805"><span class="id" title="binder">f</span></a> : <a id="A:1803" class="idref" href="#A:1803"><span class="id" title="binder">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a id="B:1804" class="idref" href="#B:1804"><span class="id" title="binder">B</span></a>) `{<a id="H:1806" class="idref" href="#H:1806"><span class="id" title="binder">IsEquiv</span></a> <a id="H:1806" class="idref" href="#H:1806"><span class="id" title="binder">A</span></a> <a id="H:1806" class="idref" href="#H:1806"><span class="id" title="binder">B</span></a> <a id="H:1806" class="idref" href="#H:1806"><span class="id" title="binder">f</span></a>} {<a id="x:1807" class="idref" href="#x:1807"><span class="id" title="binder">x</span></a> <a id="y:1808" class="idref" href="#y:1808"><span class="id" title="binder">y</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#A:1803"><span class="id" title="variable">A</span></a>}<br/>
 &nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f:1805"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:1807"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f:1805"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#y:1808"><span class="id" title="variable">y</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:1807"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#y:1808"><span class="id" title="variable">y</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a><br/>
 &nbsp;&nbsp;:= <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f:1805"><span class="id" title="variable">f</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">)^-1</span></a>.<br/>
@@ -3081,6 +3118,7 @@ In particular, all of the <span class="inlinecode"><span class="id" title="tacti
 &nbsp;&nbsp;:= <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#BuildEquiv"><span class="id" title="constructor">BuildEquiv</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#paths_ind"><span class="id" title="definition">paths_ind</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#a:2306"><span class="id" title="variable">a</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#P:2308"><span class="id" title="variable">P</span></a>) <span class="id" title="var">_</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Types/Forall.v&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Section</span> <a id="AssumeFunext" class="idref" href="#AssumeFunext"><span class="id" title="section">AssumeFunext</span></a>.<br/>
@@ -3370,7 +3408,7 @@ The action of maps given by lambda.
 &nbsp;&nbsp;&nbsp;&nbsp;(<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#functor_forall"><span class="id" title="definition">functor_forall</span></a> (<span class="id" title="var">f</span><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> (<a id="x:2515" class="idref" href="#x:2515"><span class="id" title="binder">x</span></a>:<span class="id" title="var">A</span>) (<a id="y:2516" class="idref" href="#y:2516"><span class="id" title="binder">y</span></a>:<span class="id" title="var">Q</span> (<span class="id" title="var">f</span><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">x</span></a>)) ⇒ <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#eisretr"><span class="id" title="method">eisretr</span></a> <span class="id" title="var">f</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#x:2513"><span class="id" title="variable">x</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#2b82354f12c687608f5c1ade3e7ee37d"><span class="id" title="notation">#</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">(</span></a><span class="id" title="var">g</span> (<span class="id" title="var">f</span><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">^-1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">x</span></a>)<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">)^-1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#f3f2d22838b594a6e5dbfb541ecf90ae"><span class="id" title="notation">y</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)) <span class="id" title="var">_</span> <span class="id" title="var">_</span>);<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>; <br/>
+&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>; <span class="comment">(*&nbsp;https://coq.inria.fr/bugs/show_bug.cgi?id=3848&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">h</span>.<br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> (<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#path_forall"><span class="id" title="definition">path_forall</span></a>; <span class="id" title="tactic">intros</span> <span class="id" title="var">b</span>; <span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#functor_forall"><span class="id" title="definition">functor_forall</span></a>;<br/>
@@ -3484,6 +3522,16 @@ There is another way to make forall functorial that acts on on equivalences only
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;trunc_forall&nbsp;`{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;`{forall&nbsp;a,&nbsp;IsTrunc&nbsp;n&nbsp;(P&nbsp;a)}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;IsTrunc&nbsp;n&nbsp;(forall&nbsp;a,&nbsp;P&nbsp;a)&nbsp;|&nbsp;100.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;generalize&nbsp;dependent&nbsp;P.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;simple_induction&nbsp;n&nbsp;n&nbsp;IH;&nbsp;simpl;&nbsp;intros&nbsp;P&nbsp;?.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;case&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode">-2</span>,&nbsp;i.e.&nbsp;contractibility&nbsp;*)</span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;exact&nbsp;_.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;case&nbsp;n&nbsp;=&nbsp;n'.+1&nbsp;*)</span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;f&nbsp;g;&nbsp;apply&nbsp;(trunc_equiv&nbsp;_&nbsp;(apD10&nbsp;^-1)).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -3547,6 +3595,7 @@ Note: not sure if <span class="inlinecode"><span class="id" title="var">P</span>
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#AssumeFunext"><span class="id" title="section">AssumeFunext</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Types/Sigma.v&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -3705,6 +3754,7 @@ Projections of paths from a total space.
 : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#u:2700"><span class="id" title="variable">u</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#v:2701"><span class="id" title="variable">v</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.1'"><span class="id" title="notation">.1</span></a><br/>
 &nbsp;&nbsp;:=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#pr1"><span class="id" title="abbreviation">pr1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#p:2702"><span class="id" title="variable">p</span></a>.<br/>
+<span class="comment">(*&nbsp;match&nbsp;p&nbsp;with&nbsp;idpath&nbsp;=&gt;&nbsp;1&nbsp;end.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Notation</span> <a id="::fibration_scope:x_'..1'" class="idref" href="#::fibration_scope:x_'..1'"><span class="id" title="notation">&quot;</span></a>p ..1" := (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#pr1_path"><span class="id" title="definition">pr1_path</span></a> <span class="id" title="var">p</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 3) : <span class="id" title="var">fibration_scope</span>.<br/>
@@ -3775,6 +3825,7 @@ Now we show how these things compute.
 &nbsp;&nbsp;:= <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#pr1_path_sigma_uncurried"><span class="id" title="definition">pr1_path_sigma_uncurried</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#p:2739"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#q:2740"><span class="id" title="variable">q</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#9302c87983df9fcf813fed38017558ae"><span class="id" title="notation">)</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Writing&nbsp;it&nbsp;the&nbsp;other&nbsp;way&nbsp;can&nbsp;help&nbsp;<span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="ap_pr1_path_sigma" class="idref" href="#ap_pr1_path_sigma"><span class="id" title="definition">ap_pr1_path_sigma</span></a> {<a id="A:2741" class="idref" href="#A:2741"><span class="id" title="binder">A</span></a>:<span class="id" title="keyword">Type</span>} {<a id="P:2742" class="idref" href="#P:2742"><span class="id" title="binder">P</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#A:2741"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>} {<a id="u:2743" class="idref" href="#u:2743"><span class="id" title="binder">u</span></a> <a id="v:2744" class="idref" href="#v:2744"><span class="id" title="binder">v</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#sigT"><span class="id" title="record">sigT</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#P:2742"><span class="id" title="variable">P</span></a>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="p:2745" class="idref" href="#p:2745"><span class="id" title="binder">p</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#u:2743"><span class="id" title="variable">u</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#v:2744"><span class="id" title="variable">v</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.1'"><span class="id" title="notation">.1</span></a>) (<a id="q:2746" class="idref" href="#q:2746"><span class="id" title="binder">q</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#p:2745"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#2b82354f12c687608f5c1ade3e7ee37d"><span class="id" title="notation">#</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#u:2743"><span class="id" title="variable">u</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#v:2744"><span class="id" title="variable">v</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.2'"><span class="id" title="notation">.2</span></a>)<br/>
 &nbsp;&nbsp;: <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#ap"><span class="id" title="definition">ap</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#pr1"><span class="id" title="abbreviation">pr1</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#path_sigma"><span class="id" title="definition">path_sigma</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#p:2745"><span class="id" title="variable">p</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#q:2746"><span class="id" title="variable">q</span></a>) <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#p:2745"><span class="id" title="variable">p</span></a><br/>
@@ -3830,6 +3881,7 @@ This lets us identify the path space of a sigma-type, up to equivalence.
 &nbsp;&nbsp;:= <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#BuildEquiv"><span class="id" title="constructor">BuildEquiv</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#path_sigma_uncurried"><span class="id" title="definition">path_sigma_uncurried</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#P:2774"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#u:2775"><span class="id" title="variable">u</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#v:2776"><span class="id" title="variable">v</span></a>) <span class="id" title="var">_</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;A&nbsp;contravariant&nbsp;version&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">isequiv_path_sigma'</span></span>&nbsp;*)</span><br/>
 <span class="id" title="keyword">Global Instance</span> <a id="isequiv_path_sigma_contra" class="idref" href="#isequiv_path_sigma_contra"><span class="id" title="instance">isequiv_path_sigma_contra</span></a> `{<a id="P:2779" class="idref" href="#P:2779"><span class="id" title="binder">P</span></a> : <a id="A:2778" class="idref" href="#A:2778"><span class="id" title="binder">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>} {<a id="u:2780" class="idref" href="#u:2780"><span class="id" title="binder">u</span></a> <a id="v:2781" class="idref" href="#v:2781"><span class="id" title="binder">v</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#sigT"><span class="id" title="record">sigT</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#P:2779"><span class="id" title="variable">P</span></a>}<br/>
 &nbsp;&nbsp;: <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#IsEquiv"><span class="id" title="class">IsEquiv</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#path_sigma_uncurried_contra"><span class="id" title="definition">path_sigma_uncurried_contra</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#P:2779"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#u:2780"><span class="id" title="variable">u</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#v:2781"><span class="id" title="variable">v</span></a>) | 0.<br/>
 &nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">eapply</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#isequiv_adjointify"><span class="id" title="definition">isequiv_adjointify</span></a> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#path_sigma_uncurried_contra"><span class="id" title="definition">path_sigma_uncurried_contra</span></a> <span class="id" title="var">P</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span>)).<br/>
@@ -3842,6 +3894,7 @@ This lets us identify the path space of a sigma-type, up to equivalence.
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;A&nbsp;contravariant&nbsp;version&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">equiv_path_sigma</span></span>&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="equiv_path_sigma_contra" class="idref" href="#equiv_path_sigma_contra"><span class="id" title="definition">equiv_path_sigma_contra</span></a> {<a id="A:2782" class="idref" href="#A:2782"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} `(<a id="P:2783" class="idref" href="#P:2783"><span class="id" title="binder">P</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#A:2782"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>) (<a id="u:2784" class="idref" href="#u:2784"><span class="id" title="binder">u</span></a> <a id="v:2785" class="idref" href="#v:2785"><span class="id" title="binder">v</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#sigT"><span class="id" title="record">sigT</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#P:2783"><span class="id" title="variable">P</span></a>)<br/>
 &nbsp;&nbsp;: <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#cc5e56ba3765e2d6b17e66d19b966f1d"><span class="id" title="notation">{</span></a><a id="p:2786" class="idref" href="#p:2786"><span class="id" title="binder">p</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#cc5e56ba3765e2d6b17e66d19b966f1d"><span class="id" title="notation">:</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#u:2784"><span class="id" title="variable">u</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#v:2785"><span class="id" title="variable">v</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#cc5e56ba3765e2d6b17e66d19b966f1d"><span class="id" title="notation">&amp;</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#u:2784"><span class="id" title="variable">u</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.2'"><span class="id" title="notation">.2</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#p:2786"><span class="id" title="variable">p</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6bc2e8b4a6e295632a90f5f35132db8d"><span class="id" title="notation">^</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#2b82354f12c687608f5c1ade3e7ee37d"><span class="id" title="notation">#</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#v:2785"><span class="id" title="variable">v</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#::fibration_scope:x_'.2'"><span class="id" title="notation">.2</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#cc5e56ba3765e2d6b17e66d19b966f1d"><span class="id" title="notation">}</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#068136b784cb569aaadfa01f234d5c01"><span class="id" title="notation">&lt;~&gt;</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#068136b784cb569aaadfa01f234d5c01"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#u:2784"><span class="id" title="variable">u</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#v:2785"><span class="id" title="variable">v</span></a><a class="idref" href="MetaCoq.Translations.MiniHoTT.html#068136b784cb569aaadfa01f234d5c01"><span class="id" title="notation">)</span></a><br/>
 &nbsp;&nbsp;:= <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#BuildEquiv"><span class="id" title="constructor">BuildEquiv</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<a class="idref" href="MetaCoq.Translations.MiniHoTT.html#path_sigma_uncurried_contra"><span class="id" title="definition">path_sigma_uncurried_contra</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#P:2783"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#u:2784"><span class="id" title="variable">u</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#v:2785"><span class="id" title="variable">v</span></a>) <span class="id" title="var">_</span>.<br/>
@@ -3955,6 +4008,17 @@ Applying a two variable function to a <span class="inlinecode"><span class="id" 
 <div class="code">
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;ap_path_sigma&nbsp;{A&nbsp;B}&nbsp;(P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type)&nbsp;(F&nbsp;:&nbsp;forall&nbsp;a&nbsp;:&nbsp;A,&nbsp;P&nbsp;a&nbsp;-&gt;&nbsp;B)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{x&nbsp;x'&nbsp;:&nbsp;A}&nbsp;{y&nbsp;:&nbsp;P&nbsp;x}&nbsp;{y'&nbsp;:&nbsp;P&nbsp;x'}&nbsp;(p&nbsp;:&nbsp;x&nbsp;=&nbsp;x')&nbsp;(q&nbsp;:&nbsp;p&nbsp; y = y') *)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;ap&nbsp;(fun&nbsp;w&nbsp;=&gt;&nbsp;F&nbsp;w.1&nbsp;w.2)&nbsp;(path_sigma'&nbsp;P&nbsp;p&nbsp;q)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;ap&nbsp;_&nbsp;(moveL_transport_V&nbsp;_&nbsp;p&nbsp;_&nbsp;_&nbsp;q)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;(transport_arrow_toconst&nbsp;_&nbsp;_&nbsp;_)^&nbsp;@&nbsp;ap10&nbsp;(apD&nbsp;F&nbsp;p)&nbsp;y'.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;destruct&nbsp;p,&nbsp;q;&nbsp;reflexivity.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Remark:&nbsp;this&nbsp;is&nbsp;also&nbsp;equal&nbsp;to:&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;ap10&nbsp;(apD&nbsp;F&nbsp;p^)^&nbsp;y&nbsp;@&nbsp;transport_arrow_toconst&nbsp;_&nbsp;_&nbsp;_&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;ap&nbsp;(F&nbsp;x')&nbsp;(transport2&nbsp;_&nbsp;(inv_V&nbsp;p)&nbsp;y&nbsp;@&nbsp;q).&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -3979,8 +4043,20 @@ Applying a function constructed with <span class="inlinecode"><span class="id" t
 <div class="code">
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;ap_sigT_rec_path_sigma&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;(P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type)&nbsp;{Q&nbsp;:&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x1&nbsp;x2:A)&nbsp;(p:x1=x2)&nbsp;(y1:P&nbsp;x1)&nbsp;(y2:P&nbsp;x2)&nbsp;(q:p&nbsp; y1 = y2) *)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(d&nbsp;:&nbsp;forall&nbsp;a,&nbsp;P&nbsp;a&nbsp;-&gt;&nbsp;Q)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;ap&nbsp;(sigT_ind&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;Q)&nbsp;d)&nbsp;(path_sigma'&nbsp;P&nbsp;p&nbsp;q)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;=&nbsp;(transport_const&nbsp;p&nbsp;_)^&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;(ap&nbsp;((transport&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;Q)&nbsp;p)&nbsp;o&nbsp;(d&nbsp;x1))&nbsp;(transport_Vp&nbsp;_&nbsp;p&nbsp;y1))^&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;(transport_arrow&nbsp;p&nbsp;_&nbsp;_)^&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;ap10&nbsp;(apD&nbsp;d&nbsp;p)&nbsp;(p&nbsp; y1) *)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;ap&nbsp;(d&nbsp;x2)&nbsp;q.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;destruct&nbsp;p.&nbsp;destruct&nbsp;q.&nbsp;reflexivity.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -4230,56 +4306,209 @@ Lemma 3.11.9(ii): Dually, summing up over a contractible type does nothing.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ 1)).<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigma_prod&nbsp;`(Q&nbsp;:&nbsp;(A&nbsp;*&nbsp;B)&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;{b&nbsp;:&nbsp;B&nbsp;&amp;&nbsp;Q&nbsp;(a,b)}}&nbsp;&lt;~&gt;&nbsp;sigT&nbsp;Q&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;@BuildEquiv&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;_&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(@BuildIsEquiv&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;{b&nbsp;:&nbsp;B&nbsp;&amp;&nbsp;Q&nbsp;(a,b)}}&nbsp;(sigT&nbsp;Q)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;apq&nbsp;=&gt;&nbsp;((apq.1,&nbsp;apq.2.1);&nbsp;apq.2.2))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;apq&nbsp;=&gt;&nbsp;(fst&nbsp;apq.1;&nbsp;(snd&nbsp;apq.1;&nbsp;apq.2)))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)).&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigma_prod0&nbsp;A&nbsp;B&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;B}&nbsp;&lt;~&gt;&nbsp;A&nbsp;*&nbsp;B&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildEquiv&nbsp;_&nbsp;_&nbsp;_&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BuildIsEquiv&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;B}&nbsp;(A&nbsp;*&nbsp;B)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;(ab&nbsp;:&nbsp;{a:A&nbsp;&amp;&nbsp;B})&nbsp;=&gt;&nbsp;(ab.1&nbsp;,&nbsp;ab.2))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;(ab&nbsp;:&nbsp;A*B)&nbsp;=&gt;&nbsp;(fst&nbsp;ab&nbsp;;&nbsp;snd&nbsp;ab))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)).&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;**&nbsp;Symmetry&nbsp;*)</span>&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigma_symm&nbsp;`(P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;B&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;{b&nbsp;:&nbsp;B&nbsp;&amp;&nbsp;P&nbsp;a&nbsp;b}}&nbsp;&lt;~&gt;&nbsp;{b&nbsp;:&nbsp;B&nbsp;&amp;&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;P&nbsp;a&nbsp;b}}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;((equiv_sigma_prod&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;P&nbsp;(snd&nbsp;x)&nbsp;(fst&nbsp;x)))^-1)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oE&nbsp;(equiv_functor_sigma'&nbsp;(equiv_prod_symm&nbsp;A&nbsp;B)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;equiv_idmap&nbsp;(P&nbsp;(fst&nbsp;x)&nbsp;(snd&nbsp;x))))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oE&nbsp;(equiv_sigma_prod&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;P&nbsp;(fst&nbsp;x)&nbsp;(snd&nbsp;x))).&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigma_symm0&nbsp;(A&nbsp;B&nbsp;:&nbsp;Type)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;B}&nbsp;&lt;~&gt;&nbsp;{b&nbsp;:&nbsp;B&nbsp;&amp;&nbsp;A}.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;refine&nbsp;(BuildEquiv&nbsp;_&nbsp;_&nbsp;(fun&nbsp;(w:{a:A&nbsp;&amp;&nbsp;B})&nbsp;=&gt;&nbsp;(w.2&nbsp;;&nbsp;w.1))&nbsp;_).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;simple&nbsp;refine&nbsp;(BuildIsEquiv&nbsp;_&nbsp;_&nbsp;_&nbsp;(fun&nbsp;(z:{b:B&nbsp;&amp;&nbsp;A})&nbsp;=&gt;&nbsp;(z.2&nbsp;;&nbsp;z.1))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;_);&nbsp;intros&nbsp;<span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span>;&nbsp;reflexivity.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;**&nbsp;Universal&nbsp;mapping&nbsp;properties&nbsp;*)</span>&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;***&nbsp;The&nbsp;positive&nbsp;universal&nbsp;property.&nbsp;*)</span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;isequiv_sigT_ind&nbsp;`{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Q&nbsp;:&nbsp;sigT&nbsp;P&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;IsEquiv&nbsp;(sigT_ind&nbsp;Q)&nbsp;|&nbsp;0&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildIsEquiv&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sigT_ind&nbsp;Q)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;f&nbsp;x&nbsp;y&nbsp;=&gt;&nbsp;f&nbsp;(x;y))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1).&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigT_ind&nbsp;`{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Q&nbsp;:&nbsp;sigT&nbsp;P&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;(forall&nbsp;(x:A)&nbsp;(y:P&nbsp;x),&nbsp;Q&nbsp;(x;y))&nbsp;&lt;~&gt;&nbsp;(forall&nbsp;xy,&nbsp;Q&nbsp;xy)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildEquiv&nbsp;_&nbsp;_&nbsp;(sigT_ind&nbsp;Q)&nbsp;_.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;***&nbsp;The&nbsp;negative&nbsp;universal&nbsp;property.&nbsp;*)</span>&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;sigT_coind_uncurried&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{A&nbsp;:&nbsp;X&nbsp;-&gt;&nbsp;Type}&nbsp;(P&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;{&nbsp;f&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;&amp;&nbsp;forall&nbsp;x,&nbsp;P&nbsp;x&nbsp;(f&nbsp;x)&nbsp;}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&gt;&nbsp;(forall&nbsp;x,&nbsp;sigT&nbsp;(P&nbsp;x))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;fun&nbsp;fg&nbsp;=&gt;&nbsp;fun&nbsp;x&nbsp;=&gt;&nbsp;(fg.1&nbsp;x&nbsp;;&nbsp;fg.2&nbsp;x).&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;sigT_coind&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{A&nbsp;:&nbsp;X&nbsp;-&gt;&nbsp;Type}&nbsp;(P&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(f&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x)&nbsp;(g&nbsp;:&nbsp;forall&nbsp;x,&nbsp;P&nbsp;x&nbsp;(f&nbsp;x))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;(forall&nbsp;x,&nbsp;sigT&nbsp;(P&nbsp;x))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;sigT_coind_uncurried&nbsp;P&nbsp;(f;g).&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;isequiv_sigT_coind&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{A&nbsp;:&nbsp;X&nbsp;-&gt;&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;IsEquiv&nbsp;(sigT_coind_uncurried&nbsp;P)&nbsp;|&nbsp;0&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildIsEquiv&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sigT_coind_uncurried&nbsp;P)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;h&nbsp;=&gt;&nbsp;existT&nbsp;(fun&nbsp;f&nbsp;=&gt;&nbsp;forall&nbsp;x,&nbsp;P&nbsp;x&nbsp;(f&nbsp;x))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;(h&nbsp;x).1)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;(h&nbsp;x).2))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1).&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigT_coind&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`(A&nbsp;:&nbsp;X&nbsp;-&gt;&nbsp;Type)&nbsp;(P&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;{&nbsp;f&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;&amp;&nbsp;forall&nbsp;x,&nbsp;P&nbsp;x&nbsp;(f&nbsp;x)&nbsp;}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;~&gt;&nbsp;(forall&nbsp;x,&nbsp;sigT&nbsp;(P&nbsp;x))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildEquiv&nbsp;_&nbsp;_&nbsp;(sigT_coind_uncurried&nbsp;P)&nbsp;_.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;**&nbsp;Sigmas&nbsp;preserve&nbsp;truncation&nbsp;*)</span>&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;trunc_sigma&nbsp;`{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{IsTrunc&nbsp;n&nbsp;A}&nbsp;`{forall&nbsp;a,&nbsp;IsTrunc&nbsp;n&nbsp;(P&nbsp;a)}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;IsTrunc&nbsp;n&nbsp;(sigT&nbsp;P)&nbsp;|&nbsp;100.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;generalize&nbsp;dependent&nbsp;A.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;induction&nbsp;n;&nbsp;simpl;&nbsp;intros&nbsp;A&nbsp;P&nbsp;ac&nbsp;Pc.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;{&nbsp;exists&nbsp;(center&nbsp;A;&nbsp;center&nbsp;(P&nbsp;(center&nbsp;A))).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;<span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode">?</span>.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;refine&nbsp;(path_sigma'&nbsp;P&nbsp;(contr&nbsp;a)&nbsp;(path_contr&nbsp;_&nbsp;_)).&nbsp;}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;{&nbsp;intros&nbsp;u&nbsp;v.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;refine&nbsp;(trunc_equiv&nbsp;_&nbsp;(path_sigma_uncurried&nbsp;P&nbsp;u&nbsp;v)).&nbsp;}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;The&nbsp;sigma&nbsp;of&nbsp;an&nbsp;arbitrary&nbsp;family&nbsp;of&nbsp;*disjoint*&nbsp;hprops&nbsp;is&nbsp;an&nbsp;hprop.&nbsp;*)</span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Definition&nbsp;ishprop_sigma_disjoint&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;`{forall&nbsp;a,&nbsp;IsHProp&nbsp;(P&nbsp;a)}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;(forall&nbsp;x&nbsp;y,&nbsp;P&nbsp;x&nbsp;-&gt;&nbsp;P&nbsp;y&nbsp;-&gt;&nbsp;x&nbsp;=&nbsp;y)&nbsp;-&gt;&nbsp;IsHProp&nbsp;{&nbsp;x&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;P&nbsp;x&nbsp;}.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;intros&nbsp;dj;&nbsp;apply&nbsp;hprop_allpath;&nbsp;intros&nbsp;<span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">px</span></span>&nbsp;<span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="var">py</span></span>.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;refine&nbsp;(path_sigma'&nbsp;P&nbsp;(dj&nbsp;x&nbsp;y&nbsp;px&nbsp;py)&nbsp;_).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;apply&nbsp;path_ishprop.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;**&nbsp;Subtypes&nbsp;(sigma&nbsp;types&nbsp;whose&nbsp;second&nbsp;components&nbsp;are&nbsp;hprops)&nbsp;*)</span>&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;To&nbsp;prove&nbsp;equality&nbsp;in&nbsp;a&nbsp;subtype,&nbsp;we&nbsp;only&nbsp;need&nbsp;equality&nbsp;of&nbsp;the&nbsp;first&nbsp;component.&nbsp;*)</span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Definition&nbsp;path_sigma_hprop&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;u.1&nbsp;=&nbsp;v.1&nbsp;-&gt;&nbsp;u&nbsp;=&nbsp;v&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;path_sigma_uncurried&nbsp;P&nbsp;u&nbsp;v&nbsp;o&nbsp;pr1^-1.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;isequiv_path_sigma_hprop&nbsp;{A&nbsp;P}&nbsp;`{forall&nbsp;x&nbsp;:&nbsp;A,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;{u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;IsEquiv&nbsp;(@path_sigma_hprop&nbsp;A&nbsp;P&nbsp;_&nbsp;u&nbsp;v)&nbsp;|&nbsp;100&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;isequiv_compose.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Hint&nbsp;Immediate&nbsp;isequiv_path_sigma_hprop&nbsp;:&nbsp;typeclass_instances.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;equiv_path_sigma_hprop&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{HP&nbsp;:&nbsp;forall&nbsp;a,&nbsp;IsHProp&nbsp;(P&nbsp;a)}&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;(u.1&nbsp;=&nbsp;v.1)&nbsp;&lt;~&gt;&nbsp;(u&nbsp;=&nbsp;v)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildEquiv&nbsp;_&nbsp;_&nbsp;(path_sigma_hprop&nbsp;_&nbsp;_)&nbsp;_.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;isequiv_pr1_path_hprop&nbsp;{A}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;a,&nbsp;IsHProp&nbsp;(P&nbsp;a)}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;y&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;IsEquiv&nbsp;(@pr1_path&nbsp;A&nbsp;P&nbsp;x&nbsp;y)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;_&nbsp;:&nbsp;IsEquiv&nbsp;(path_sigma_hprop&nbsp;x&nbsp;y)^-1.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Hint&nbsp;Immediate&nbsp;isequiv_pr1_path_hprop&nbsp;:&nbsp;typeclass_instances.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;We&nbsp;define&nbsp;this&nbsp;for&nbsp;ease&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">SearchAbout</span></span> <span class="inlinecode"><span class="id" title="var">IsEquiv</span></span> <span class="inlinecode"><span class="id" title="var">ap</span></span> <span class="inlinecode"><span class="id" title="var">pr1</span></span>&nbsp;*)</span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Definition&nbsp;isequiv_ap_pr1_hprop&nbsp;{A}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;a,&nbsp;IsHProp&nbsp;(P&nbsp;a)}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;y&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;IsEquiv&nbsp;(@ap&nbsp;_&nbsp;_&nbsp;(@pr1&nbsp;A&nbsp;P)&nbsp;x&nbsp;y)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;_.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;path_sigma_hprop_1&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;(u&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;path_sigma_hprop&nbsp;u&nbsp;u&nbsp;1&nbsp;=&nbsp;1.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;unfold&nbsp;path_sigma_hprop.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;unfold&nbsp;isequiv_pr1_contr;&nbsp;simpl.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;<span class="comment">(**&nbsp;Ugh&nbsp;*)</span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;refine&nbsp;(ap&nbsp;(fun&nbsp;p&nbsp;=&gt;&nbsp;match&nbsp;p&nbsp;in&nbsp;(_&nbsp;=&nbsp;v2)&nbsp;return&nbsp;(u&nbsp;=&nbsp;(u.1;&nbsp;v2))&nbsp;with&nbsp;1&nbsp;=&gt;&nbsp;1&nbsp;end)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(contr&nbsp;(idpath&nbsp;u.2))).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;The&nbsp;inverse&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">path_sigma_hprop</span></span>&nbsp;has&nbsp;its&nbsp;own&nbsp;name,&nbsp;so&nbsp;we&nbsp;give&nbsp;special&nbsp;names&nbsp;to&nbsp;the&nbsp;section&nbsp;and&nbsp;retraction&nbsp;homotopies&nbsp;to&nbsp;help&nbsp;<span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>&nbsp;out.&nbsp;*)</span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Definition&nbsp;path_sigma_hprop_ap_pr1&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;(p&nbsp;:&nbsp;u&nbsp;=&nbsp;v)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;path_sigma_hprop&nbsp;u&nbsp;v&nbsp;(ap&nbsp;pr1&nbsp;p)&nbsp;=&nbsp;p&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;eisretr&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v)&nbsp;p.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Definition&nbsp;path_sigma_hprop_pr1_path&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;(p&nbsp;:&nbsp;u&nbsp;=&nbsp;v)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;path_sigma_hprop&nbsp;u&nbsp;v&nbsp;p..1&nbsp;=&nbsp;p&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;eisretr&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v)&nbsp;p.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Definition&nbsp;ap_pr1_path_sigma_hprop&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;(p&nbsp;:&nbsp;u.1&nbsp;=&nbsp;v.1)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;ap&nbsp;pr1&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v&nbsp;p)&nbsp;=&nbsp;p&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;eissect&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v)&nbsp;p.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Definition&nbsp;pr1_path_path_sigma_hprop&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;(p&nbsp;:&nbsp;u.1&nbsp;=&nbsp;v.1)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;:&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v&nbsp;p)..1&nbsp;=&nbsp;p&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;eissect&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v)&nbsp;p.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="path_unit" class="idref" href="#path_unit"><span class="id" title="definition">path_unit</span></a> (<a id="z:2999" class="idref" href="#z:2999"><span class="id" title="binder">z</span></a> <a id="z':3000" class="idref" href="#z':3000"><span class="id" title="binder">z'</span></a> : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#unit"><span class="id" title="record">unit</span></a>) : <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#z:2999"><span class="id" title="variable">z</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Translations.MiniHoTT.html#z':3000"><span class="id" title="variable">z'</span></a>.<br/>

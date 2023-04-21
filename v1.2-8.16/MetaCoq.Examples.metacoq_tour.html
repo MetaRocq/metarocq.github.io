@@ -68,6 +68,7 @@ MetaCoq is:
 <div class="code">
 
 <br/>
+<span class="comment">(*&nbsp;The&nbsp;Template&nbsp;monad&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">Ast.term</span></a>.<br/>
@@ -93,6 +94,13 @@ MetaCoq is:
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;PCUIC:<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;Universes&nbsp;(with&nbsp;full&nbsp;algebraic&nbsp;universes&nbsp;supported&nbsp;everywhere)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;Universe&nbsp;polymorphism<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;Standard&nbsp;type&nbsp;theory&nbsp;with&nbsp;dependent&nbsp;products&nbsp;and&nbsp;let-ins<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;Inductive&nbsp;types&nbsp;and&nbsp;coinductive&nbsp;types<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;Constant&nbsp;and&nbsp;axiom&nbsp;declarations&nbsp;in&nbsp;a&nbsp;global&nbsp;environment&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Print</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#typing"><span class="id" title="inductive">typing</span></a>.<br/>
@@ -139,6 +147,7 @@ Proof of completeness is near completion.
 <span class="id" title="keyword">Check</span> <a class="idref" href="MetaCoq.SafeChecker.PCUICSafeRetyping.html#type_of_subtype"><span class="id" title="definition">type_of_subtype</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Running&nbsp;the&nbsp;safe&nbsp;checker&nbsp;inside&nbsp;Coq&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Examples</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour_prelude.html#"><span class="id" title="library">metacoq_tour_prelude</span></a>.<br/>
 
 <br/>
@@ -151,6 +160,15 @@ Proof of completeness is near completion.
 We construct a proof of typing entirely within Coq, calling the typechecker to produce the derivation 
 </div>
 <div class="code">
+<span class="comment">(*&nbsp;Lemma&nbsp;identity_typing&nbsp;(u&nbsp;:=&nbsp;Universe.make&nbsp;univ):<br/>
+&nbsp;&nbsp;inh&nbsp;gctx_wf_env&nbsp;<span class="inlinecode"></span>&nbsp;(tProd&nbsp;(bNamed&nbsp;"s")&nbsp;(tSort&nbsp;u)&nbsp;(tImpl&nbsp;(tRel&nbsp;0)&nbsp;(tRel&nbsp;0))).<br/>
+Proof.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;We&nbsp;construct&nbsp;a&nbsp;term&nbsp;*)</span><br/>
+&nbsp;&nbsp;set&nbsp;(impl&nbsp;:=&nbsp;tLambda&nbsp;(bNamed&nbsp;"s")&nbsp;(tSort&nbsp;u)&nbsp;(tLambda&nbsp;bAnon&nbsp;(tRel&nbsp;0)&nbsp;(tRel&nbsp;0))).<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Show&nbsp;that&nbsp;the&nbsp;empty&nbsp;context&nbsp;is&nbsp;well-formed&nbsp;&nbsp;*)</span><br/>
+&nbsp;&nbsp;assert&nbsp;(wfΓ&nbsp;:&nbsp;forall&nbsp;Σ0&nbsp;:&nbsp;global_env_ext,&nbsp;abstract_env_ext_rel&nbsp;gctx_wf_env&nbsp;Σ0&nbsp;-&gt;&nbsp;∥&nbsp;wf_local&nbsp;Σ0&nbsp;<span class="inlinecode"></span>&nbsp;∥)&nbsp;by&nbsp;do&nbsp;2&nbsp;constructor.<br/>
+&nbsp;&nbsp;fill_inh&nbsp;impl.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -159,6 +177,8 @@ We construct a proof of typing entirely within Coq, calling the typechecker to p
 The extracted typechecker also runs in OCaml 
 </div>
 <div class="code">
+<span class="comment">(*&nbsp;FIXME:&nbsp;checker&nbsp;unusable&nbsp;in&nbsp;OCaml&nbsp;due&nbsp;to&nbsp;representation&nbsp;of&nbsp;universes&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;MetaCoq&nbsp;SafeCheck&nbsp;(fun&nbsp;x&nbsp;:&nbsp;nat&nbsp;=&gt;&nbsp;x&nbsp;+&nbsp;1).&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -194,7 +214,8 @@ Running erasure live in Coq
 
 <br/>
 <span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmEval"><span class="id" title="constructor">tmEval</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Common.html#lazy"><span class="id" title="constructor">lazy</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#singleton_elim"><span class="id" title="definition">singleton_elim</span></a> <a class="idref" href="MetaCoq.Utils.monad_utils.html#c0f7708df476ab63a78f53086f844619"><span class="id" title="notation">&gt;&gt;=</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmQuoteRec"><span class="id" title="definition">tmQuoteRec</span></a> <a class="idref" href="MetaCoq.Utils.monad_utils.html#c0f7708df476ab63a78f53086f844619"><span class="id" title="notation">&gt;&gt;=</span></a><br/>
-&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="p:16" class="idref" href="#p:16"><span class="id" title="binder">p</span></a> ⇒ <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmEval"><span class="id" title="constructor">tmEval</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Common.html#lazy"><span class="id" title="constructor">lazy</span></a> (<a class="idref" href="MetaCoq.Examples.metacoq_tour.html#test"><span class="id" title="definition">test</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#p:16"><span class="id" title="variable">p</span></a>) <a class="idref" href="MetaCoq.Utils.monad_utils.html#c0f7708df476ab63a78f53086f844619"><span class="id" title="notation">&gt;&gt;=</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmPrint"><span class="id" title="constructor">tmPrint</span></a>). 
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <a id="p:16" class="idref" href="#p:16"><span class="id" title="binder">p</span></a> ⇒ <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmEval"><span class="id" title="constructor">tmEval</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Common.html#lazy"><span class="id" title="constructor">lazy</span></a> (<a class="idref" href="MetaCoq.Examples.metacoq_tour.html#test"><span class="id" title="definition">test</span></a> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#p:16"><span class="id" title="variable">p</span></a>) <a class="idref" href="MetaCoq.Utils.monad_utils.html#c0f7708df476ab63a78f53086f844619"><span class="id" title="notation">&gt;&gt;=</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#tmPrint"><span class="id" title="constructor">tmPrint</span></a>). <span class="comment">(*&nbsp;Optimized&nbsp;to&nbsp;remove&nbsp;match&nbsp;on&nbsp;Props&nbsp;*)</span><br/>
+
 <br/>
 <span class="id" title="var">MetaCoq</span> <span class="id" title="var">Erase</span> <a class="idref" href="MetaCoq.Examples.metacoq_tour.html#singleton_elim"><span class="id" title="definition">singleton_elim</span></a>.<br/>
 

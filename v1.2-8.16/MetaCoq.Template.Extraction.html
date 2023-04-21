@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Template.Extraction</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 </div>
 
 <div class="doc">
@@ -75,7 +76,15 @@
 <span class="id" title="keyword">Cd</span> "gen-src".<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Silence&nbsp;the&nbsp;warnings&nbsp;for&nbsp;specifications&nbsp;axioms&nbsp;of&nbsp;int63&nbsp;*)</span><br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-extraction-logical-axiom".<br/>
+<span class="comment">(*&nbsp;Floats&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Extraction&nbsp;Library&nbsp;Zeven.<br/>
+Extraction&nbsp;Library&nbsp;Zeven.<br/>
+Extraction&nbsp;Library&nbsp;ZArith_dec.<br/>
+Extraction&nbsp;Library&nbsp;Sumbool.<br/>
+Extraction&nbsp;Library&nbsp;Zbool.<br/>
+Extraction&nbsp;Library&nbsp;SpecFloat.&nbsp;*)</span><br/>
 <span class="id" title="var">Separate</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">FloatOps.Prim2SF</span>.<br/>
 
 <br/>

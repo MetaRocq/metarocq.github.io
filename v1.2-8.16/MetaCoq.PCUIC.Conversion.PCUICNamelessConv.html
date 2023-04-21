@@ -28,13 +28,14 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.Conversion.PCUICNamelessConv</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.RelationClasses.html#"><span class="id" title="library">RelationClasses</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICOnOne.html#"><span class="id" title="library">PCUICOnOne</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInduction.html#"><span class="id" title="library">PCUICInduction</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICCases.html#"><span class="id" title="library">PCUICCases</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICLiftSubst.html#"><span class="id" title="library">PCUICLiftSubst</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICEquality.html#"><span class="id" title="library">PCUICEquality</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICReduction.html#"><span class="id" title="library">PCUICReduction</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativitySpec.html#"><span class="id" title="library">PCUICCumulativitySpec</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#"><span class="id" title="library">PCUICCumulativity</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICPosition.html#"><span class="id" title="library">PCUICPosition</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICUnivSubst.html#"><span class="id" title="library">PCUICUnivSubst</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICNamelessDef.html#"><span class="id" title="library">PCUICNamelessDef</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICGuardCondition.html#"><span class="id" title="library">PCUICGuardCondition</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICClosedConv.html#"><span class="id" title="library">PCUICClosedConv</span></a> <a class="idref" href="MetaCoq.PCUIC.Typing.PCUICClosedTyp.html#"><span class="id" title="library">PCUICClosedTyp</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICUnivSubstitutionConv.html#"><span class="id" title="library">PCUICUnivSubstitutionConv</span></a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICClosed.html#"><span class="id" title="library">PCUICClosed</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#"><span class="id" title="library">PCUICSigmaCalculus</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a> .<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICClosed.html#"><span class="id" title="library">PCUICClosed</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSigmaCalculus.html#"><span class="id" title="library">PCUICSigmaCalculus</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a> <span class="comment">(*&nbsp;for&nbsp;context&nbsp;manipulations&nbsp;*)</span>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations.Prop.DepElim</span>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a>.<br/>
 
@@ -472,8 +473,60 @@ Conversion does not rely on name annotations of binders.
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+<span class="comment">(*Lemma&nbsp;eq_context_nl_inv_IH&nbsp;Σ&nbsp;Re&nbsp;ctx&nbsp;ctx'&nbsp;:<br/>
+&nbsp;&nbsp;onctx<br/>
+&nbsp;&nbsp;(fun&nbsp;u&nbsp;:&nbsp;term&nbsp;=&gt;<br/>
+&nbsp;forall&nbsp;(Rle&nbsp;:&nbsp;Universe.t&nbsp;-&gt;&nbsp;Universe.t&nbsp;-&gt;&nbsp;Prop)<br/>
+&nbsp;&nbsp;&nbsp;(napp&nbsp;:&nbsp;nat)&nbsp;(v&nbsp;:&nbsp;term),<br/>
+&nbsp;eq_term_upto_univ_napp&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;napp&nbsp;(nl&nbsp;u)&nbsp;(nl&nbsp;v)&nbsp;-&gt;<br/>
+&nbsp;eq_term_upto_univ_napp&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;napp&nbsp;u&nbsp;v)&nbsp;ctx&nbsp;-&gt;<br/>
+&nbsp;eq_context_gen&nbsp;eq&nbsp;eq&nbsp;(map&nbsp;(map_decl_anon&nbsp;nl)&nbsp;ctx)&nbsp;(map&nbsp;(map_decl_anon&nbsp;nl)&nbsp;ctx')&nbsp;-&gt;<br/>
+&nbsp;eq_context_gen&nbsp;eq&nbsp;eq&nbsp;ctx&nbsp;ctx'.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;Hctx.&nbsp;unfold&nbsp;ondecl&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;induction&nbsp;ctx&nbsp;as&nbsp;<span class="inlinecode">|[<span class="id" title="var">na</span></span> <span class="inlinecode">[<span class="id" title="var">b</span>|]</span> <span class="inlinecode"><span class="id" title="var">ty</span>]</span> <span class="inlinecode"><span class="id" title="var">Γ</span></span>&nbsp;in&nbsp;ctx',&nbsp;Hctx&nbsp;|-&nbsp;*;<br/>
+&nbsp;&nbsp;destruct&nbsp;ctx'&nbsp;as&nbsp;<span class="inlinecode">|[<span class="id" title="var">na'</span></span> <span class="inlinecode">[<span class="id" title="var">b'</span>|]</span> <span class="inlinecode"><span class="id" title="var">ty'</span>]</span> <span class="inlinecode"><span class="id" title="var">Δ</span></span>;&nbsp;simpl;&nbsp;intros&nbsp;H;<br/>
+&nbsp;&nbsp;depelim&nbsp;H;&nbsp;constructor;&nbsp;simpl&nbsp;in&nbsp;*;&nbsp;depelim&nbsp;Hctx;&nbsp;intuition&nbsp;eauto.<br/>
+&nbsp;&nbsp;*&nbsp;depelim&nbsp;c;&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;cbn&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;*&nbsp;depelim&nbsp;c.<br/>
+&nbsp;&nbsp;*&nbsp;depelim&nbsp;c.<br/>
+&nbsp;&nbsp;*&nbsp;depelim&nbsp;c;&nbsp;constructor;&nbsp;auto.<br/>
+Qed.*)</span><br/>
 
 <br/>
+<span class="comment">(*Lemma&nbsp;eq_term_upto_univ_nl_inv&nbsp;:<br/>
+&nbsp;&nbsp;forall&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;napp&nbsp;u&nbsp;v,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eq_term_upto_univ_napp&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;napp&nbsp;(nl&nbsp;u)&nbsp;(nl&nbsp;v)&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eq_term_upto_univ_napp&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;napp&nbsp;u&nbsp;v.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;napp&nbsp;u&nbsp;v&nbsp;h.<br/>
+&nbsp;&nbsp;induction&nbsp;u&nbsp;in&nbsp;napp,&nbsp;v,&nbsp;h,&nbsp;Rle&nbsp;|-&nbsp;*&nbsp;using&nbsp;term_forall_list_ind.<br/>
+&nbsp;&nbsp;all:&nbsp;dependent&nbsp;destruction&nbsp;h.<br/>
+&nbsp;&nbsp;all:&nbsp;destruct&nbsp;v&nbsp;;&nbsp;try&nbsp;discriminate.<br/>
+&nbsp;&nbsp;all:&nbsp;try&nbsp;solve&nbsp;<span class="inlinecode"></span>
+    <span class="inlinecode"><span class="id" title="tactic">try</span></span> <span class="inlinecode"><span class="id" title="keyword">lazymatch</span></span> <span class="inlinecode"><span class="id" title="keyword">goal</span></span> <span class="inlinecode"><span class="id" title="keyword">with</span></span>
+    <span class="inlinecode">|</span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">nl</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">|-</span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">⇒</span>
+      <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> <span class="inlinecode"><span class="id" title="tactic">in</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="tactic">inversion</span></span> <span class="inlinecode"><span class="id" title="var">h</span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="tactic">subst</span></span>
+    <span class="inlinecode"><span class="id" title="keyword">end</span></span> <span class="inlinecode">;</span>
+    <span class="inlinecode"><span class="id" title="tactic">constructor</span></span> <span class="inlinecode">;</span>
+    <span class="inlinecode"><span class="id" title="tactic">try</span></span> <span class="inlinecode"><span class="id" title="var">ih3</span></span> <span class="inlinecode">;</span>
+    <span class="inlinecode"><span class="id" title="tactic">assumption</span></span>
+  <span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;-&nbsp;cbn&nbsp;in&nbsp;H.&nbsp;inversion&nbsp;H.&nbsp;subst.&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;All2_map_inv&nbsp;in&nbsp;a.&nbsp;solve_all.<br/>
+&nbsp;&nbsp;-&nbsp;cbn&nbsp;in&nbsp;H.&nbsp;inversion&nbsp;H.&nbsp;subst.&nbsp;constructor&nbsp;;&nbsp;try&nbsp;ih3.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;red.&nbsp;destruct&nbsp;e;&nbsp;solve_all.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;simpl&nbsp;in&nbsp;a0.&nbsp;eapply&nbsp;All2_map_inv&nbsp;in&nbsp;a0.&nbsp;solve_all.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;simpl&nbsp;in&nbsp;a4.&nbsp;noconf&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;eq_context_nl_IH;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;apply&nbsp;All2_map_inv&nbsp;in&nbsp;a.&nbsp;solve_all.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;eq_context_nl_IH;&nbsp;tea.<br/>
+&nbsp;&nbsp;-&nbsp;cbn&nbsp;in&nbsp;H.&nbsp;inversion&nbsp;H.&nbsp;subst.&nbsp;constructor&nbsp;;&nbsp;try&nbsp;ih3.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;All2_map_inv&nbsp;in&nbsp;a.&nbsp;solve_all.<br/>
+&nbsp;&nbsp;-&nbsp;cbn&nbsp;in&nbsp;H.&nbsp;inversion&nbsp;H.&nbsp;subst.&nbsp;constructor&nbsp;;&nbsp;try&nbsp;ih3.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;All2_map_inv&nbsp;in&nbsp;a.&nbsp;solve_all.<br/>
+Qed.*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="nlctx_spec" class="idref" href="#nlctx_spec"><span class="id" title="lemma">nlctx_spec</span></a> :<br/>
@@ -492,6 +545,62 @@ Conversion does not rely on name annotations of binders.
 <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Resolve</span> <span class="id" title="var">binder_anonymize</span> : <span class="id" title="var">core</span>.<br/>
 #[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Constructors</span> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICNamelessConv.html#compare_decls"><span class="id" title="inductive">compare_decls</span></a> : <span class="id" title="var">core</span>.<br/>
 <span class="id" title="keyword">Local Hint Unfold</span> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICNamelessDef.html#map_decl_anon"><span class="id" title="definition">map_decl_anon</span></a> : <span class="id" title="var">core</span>.<br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;eq_term_upto_univ_tm_nl&nbsp;:<br/>
+&nbsp;&nbsp;forall&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;napp&nbsp;u,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Reflexive&nbsp;Re&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Reflexive&nbsp;Rle&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eq_term_upto_univ_napp&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;napp&nbsp;u&nbsp;(nl&nbsp;u).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;Σ&nbsp;Re&nbsp;Rle&nbsp;napp&nbsp;u&nbsp;hRe&nbsp;hRle.<br/>
+&nbsp;&nbsp;induction&nbsp;u&nbsp;in&nbsp;napp,&nbsp;Rle,&nbsp;hRle&nbsp;|-&nbsp;*&nbsp;using&nbsp;term_forall_list_ind.<br/>
+&nbsp;&nbsp;all:&nbsp;try&nbsp;solve&nbsp;<span class="inlinecode"></span>
+    <span class="inlinecode"><span class="id" title="tactic">simpl</span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="tactic">try</span></span> <span class="inlinecode"><span class="id" title="tactic">apply</span></span> <span class="inlinecode"><span class="id" title="var">eq_term_upto_univ_refl</span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="tactic">auto</span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="tactic">constructor</span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="tactic">eauto</span></span>
+  <span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;-&nbsp;simpl.&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;induction&nbsp;l.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;simpl.&nbsp;inversion&nbsp;X.&nbsp;subst.&nbsp;constructor&nbsp;;&nbsp;eauto.<br/>
+&nbsp;&nbsp;-&nbsp;simpl.&nbsp;destruct&nbsp;p.&nbsp;constructor&nbsp;;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;destruct&nbsp;X;&nbsp;red;&nbsp;simpl&nbsp;in&nbsp;*;&nbsp;intuition&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;induction&nbsp;a;&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;clear&nbsp;-a0&nbsp;hRe&nbsp;hRle.&nbsp;induction&nbsp;a0.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;constructor;&nbsp;auto.&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;x&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">na</span></span> <span class="inlinecode">[<span class="id" title="var">b</span>|]</span> <span class="inlinecode"><span class="id" title="var">ty</span></span>;&nbsp;simpl;&nbsp;constructor;&nbsp;auto;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;p;&nbsp;simpl&nbsp;in&nbsp;*;&nbsp;intuition&nbsp;(simpl;&nbsp;auto);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;induction&nbsp;l.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;simpl.&nbsp;depelim&nbsp;X0.&nbsp;destruct&nbsp;p.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl&nbsp;in&nbsp;*.&nbsp;repeat&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear&nbsp;-hRe&nbsp;hRle&nbsp;a0.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;induction&nbsp;a0;&nbsp;<span class="inlinecode"><span class="id" title="tactic">constructor</span>;</span> <span class="inlinecode"><span class="id" title="tactic">auto</span>|</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;x&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">na</span></span> <span class="inlinecode">[<span class="id" title="var">b</span>|]</span> <span class="inlinecode"><span class="id" title="var">ty</span></span>;&nbsp;simpl;&nbsp;constructor;&nbsp;auto;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;p;&nbsp;simpl&nbsp;in&nbsp;*;&nbsp;intuition&nbsp;auto;&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++&nbsp;eapply&nbsp;IHl.&nbsp;assumption.<br/>
+&nbsp;&nbsp;-&nbsp;simpl.&nbsp;constructor.&nbsp;induction&nbsp;m.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;simpl.&nbsp;inversion&nbsp;X.&nbsp;subst.&nbsp;constructor&nbsp;;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repeat&nbsp;split&nbsp;;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;apply&nbsp;X0&nbsp;;&nbsp;eauto.<br/>
+&nbsp;&nbsp;-&nbsp;simpl.&nbsp;constructor.&nbsp;induction&nbsp;m.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;simpl.&nbsp;inversion&nbsp;X.&nbsp;subst.&nbsp;constructor&nbsp;;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repeat&nbsp;split&nbsp;;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;apply&nbsp;X0&nbsp;;&nbsp;eauto.<br/>
+Qed.<br/>
+<br/>
+Corollary&nbsp;eq_term_tm_nl&nbsp;:<br/>
+&nbsp;&nbsp;forall&nbsp;`{checker_flags}&nbsp;Σ&nbsp;G&nbsp;u,&nbsp;eq_term&nbsp;Σ&nbsp;G&nbsp;u&nbsp;(nl&nbsp;u).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;flags&nbsp;Σ&nbsp;G&nbsp;u.<br/>
+&nbsp;&nbsp;eapply&nbsp;eq_term_upto_univ_tm_nl.<br/>
+&nbsp;&nbsp;-&nbsp;intro.&nbsp;eapply&nbsp;eq_universe_refl.<br/>
+&nbsp;&nbsp;-&nbsp;intro.&nbsp;eapply&nbsp;eq_universe_refl.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="nl_decompose_prod_assum" class="idref" href="#nl_decompose_prod_assum"><span class="id" title="lemma">nl_decompose_prod_assum</span></a> :<br/>
@@ -692,6 +801,27 @@ Conversion does not rely on name annotations of binders.
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;nlctx_stack_context&nbsp;:<br/>
+&nbsp;&nbsp;forall&nbsp;ρ,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;nlctx&nbsp;(stack_context&nbsp;ρ)&nbsp;=&nbsp;stack_context&nbsp;(nlstack&nbsp;ρ).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intro&nbsp;ρ.&nbsp;induction&nbsp;ρ.<br/>
+&nbsp;&nbsp;all:&nbsp;try&nbsp;(simpl&nbsp;;&nbsp;rewrite&nbsp;?IHρ&nbsp;;&nbsp;reflexivity).<br/>
+&nbsp;&nbsp;-&nbsp;simpl.&nbsp;rewrite&nbsp;nlctx_app_context.&nbsp;rewrite&nbsp;IHρ.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;nlctx_fix_context_alt.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;map_app.&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;2!map_def_sig_nl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;-&nbsp;simpl.&nbsp;rewrite&nbsp;nlctx_app_context.&nbsp;rewrite&nbsp;IHρ.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;nlctx_fix_context_alt.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;map_app.&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;2!map_def_sig_nl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;-&nbsp;simpl.&nbsp;rewrite&nbsp;nlctx_app_context.&nbsp;now&nbsp;rewrite&nbsp;IHρ.<br/>
+&nbsp;&nbsp;-&nbsp;simpl.&nbsp;rewrite&nbsp;nlctx_app_context.&nbsp;now&nbsp;rewrite&nbsp;IHρ.<br/>
+Qed.<br/>
+*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="nl_subst" class="idref" href="#nl_subst"><span class="id" title="lemma">nl_subst</span></a> :<br/>
@@ -1071,6 +1201,13 @@ Conversion does not rely on name annotations of binders.
 <span class="id" title="keyword">Definition</span> <a id="nlctx_binders" class="idref" href="#nlctx_binders"><span class="id" title="definition">nlctx_binders</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> (<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICNamelessDef.html#map_decl_anon"><span class="id" title="definition">map_decl_anon</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#id"><span class="id" title="definition">id</span></a>).<br/>
 
 <br/>
+<span class="comment">(*Lemma&nbsp;nl_ind_predicate_context&nbsp;ind&nbsp;mdecl&nbsp;idecl&nbsp;:<br/>
+&nbsp;&nbsp;nlctx_binders&nbsp;(ind_predicate_context&nbsp;ind&nbsp;mdecl&nbsp;idecl)&nbsp;=<br/>
+&nbsp;&nbsp;nlctx_binders&nbsp;(ind_predicate_context&nbsp;ind&nbsp;(nl_mutual_inductive_body&nbsp;mdecl)&nbsp;(nl_one_inductive_body&nbsp;idecl)).<br/>
+Proof.<br/>
+&nbsp;&nbsp;rewrite&nbsp;/ind_predicate_context&nbsp;/=&nbsp;/map_decl_anon&nbsp;/=.&nbsp;simpl.&nbsp;f_equal.<br/>
+<br/>
+&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="nlctx_smash_context" class="idref" href="#nlctx_smash_context"><span class="id" title="lemma">nlctx_smash_context</span></a> <a id="33aa1b7369ef98131122670f184cc21f" class="idref" href="#33aa1b7369ef98131122670f184cc21f"><span class="id" title="binder">Γ</span></a> <a id="37d28d041aacbb0fcf719229354b46be" class="idref" href="#37d28d041aacbb0fcf719229354b46be"><span class="id" title="binder">Δ</span></a> :<br/>
@@ -1472,8 +1609,44 @@ Conversion does not rely on name annotations of binders.
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Corollary&nbsp;reflect_nleq_term&nbsp;:&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;forall&nbsp;t&nbsp;t',&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reflect&nbsp;(nl&nbsp;t&nbsp;=&nbsp;nl&nbsp;t')&nbsp;(nleq_term&nbsp;t&nbsp;t').&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;intros&nbsp;t&nbsp;t'.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;destruct&nbsp;(reflect_upto_names&nbsp;t&nbsp;t').&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;constructor.&nbsp;eapply&nbsp;eq_term_nl_eq.&nbsp;assumption.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;constructor.&nbsp;intro&nbsp;bot.&nbsp;apply&nbsp;f.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;eq_term_upto_univ_nl_inv.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;bot.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;eq_term_upto_univ_refl.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all:&nbsp;auto.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;nleq_term_it_mkLambda_or_LetIn&nbsp;:&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;forall&nbsp;Γ&nbsp;u&nbsp;v,&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nleq_term&nbsp;u&nbsp;v&nbsp;-&gt;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nleq_term&nbsp;(it_mkLambda_or_LetIn&nbsp;Γ&nbsp;u)&nbsp;(it_mkLambda_or_LetIn&nbsp;Γ&nbsp;v).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;intros&nbsp;Γ&nbsp;u&nbsp;v&nbsp;h.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;induction&nbsp;Γ&nbsp;as&nbsp;<span class="inlinecode">|</span> <span class="inlinecode">[<span class="id" title="var">na</span></span> <span class="inlinecode">[<span class="id" title="var">b</span>|]</span> <span class="inlinecode"><span class="id" title="var">A</span>]</span> <span class="inlinecode"><span class="id" title="var">Γ</span></span> <span class="inlinecode"><span class="id" title="var">ih</span></span> <span class="inlinecode"></span>&nbsp;in&nbsp;u,&nbsp;v,&nbsp;h&nbsp;|-&nbsp;*.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;assumption.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;simpl.&nbsp;cbn.&nbsp;apply&nbsp;ih.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;ssrbool.introT.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;eapply&nbsp;reflect_nleq_term.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;cbn.&nbsp;f_equal.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;ssrbool.elimT.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;eapply&nbsp;reflect_nleq_term.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;assumption.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;simpl.&nbsp;cbn.&nbsp;apply&nbsp;ih.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;ssrbool.introT.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;eapply&nbsp;reflect_nleq_term.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;cbn.&nbsp;f_equal.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;ssrbool.elimT.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;eapply&nbsp;reflect_nleq_term.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;assumption.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="anonymize_two" class="idref" href="#anonymize_two"><span class="id" title="lemma">anonymize_two</span></a> <a id="na:338" class="idref" href="#na:338"><span class="id" title="binder">na</span></a> : <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICNamelessDef.html#anonymize"><span class="id" title="definition">anonymize</span></a> (<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICNamelessDef.html#anonymize"><span class="id" title="definition">anonymize</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICNamelessConv.html#na:338"><span class="id" title="variable">na</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICNamelessDef.html#anonymize"><span class="id" title="definition">anonymize</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICNamelessConv.html#na:338"><span class="id" title="variable">na</span></a>.<br/>

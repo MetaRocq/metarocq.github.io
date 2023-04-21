@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Erasure.EGenericMapEnv</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Unicode.Utf8.html#"><span class="id" title="library">Utf8</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Common.Kernames.html#"><span class="id" title="library">Kernames</span></a> <a class="idref" href="MetaCoq.Common.BasicAst.html#"><span class="id" title="library">BasicAst</span></a> <a class="idref" href="MetaCoq.Common.EnvMap.html#"><span class="id" title="library">EnvMap</span></a>.<br/>
@@ -394,6 +395,16 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Definition&nbsp;gen_transform_program&nbsp;(p&nbsp;:&nbsp;eprogram_env)&nbsp;:=<br/>
+&nbsp;&nbsp;(gen_transform_env&nbsp;p.1,&nbsp;gen_transform&nbsp;p.1&nbsp;p.2).<br/>
+<br/>
+Definition&nbsp;gen_transform_program_wf&nbsp;(p&nbsp;:&nbsp;eprogram_env)&nbsp;{hastbox&nbsp;:&nbsp;has_tBox}&nbsp;{hastrel&nbsp;:&nbsp;has_tRel}&nbsp;:<br/>
+&nbsp;&nbsp;wf_eprogram_env&nbsp;efl&nbsp;p&nbsp;-&gt;&nbsp;wf_eprogram&nbsp;(efl')&nbsp;(gen_transform_program&nbsp;p).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;<span class="inlinecode"></span>;&nbsp;split.<br/>
+&nbsp;&nbsp;now&nbsp;eapply&nbsp;gen_transform_env_wf.<br/>
+&nbsp;&nbsp;cbn.&nbsp;eapply&nbsp;gen_transform_wellformed_irrel&nbsp;=&gt;&nbsp;//.&nbsp;now&nbsp;eapply&nbsp;gen_transform_wellformed.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.Erasure.EGenericMapEnv.html#sec"><span class="id" title="section">sec</span></a>.<br/>

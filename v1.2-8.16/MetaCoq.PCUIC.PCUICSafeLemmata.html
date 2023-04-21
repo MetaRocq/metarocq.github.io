@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICSafeLemmata</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaCoq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a><br/>
@@ -160,6 +161,10 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;red&nbsp;is&nbsp;the&nbsp;reflexive&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;one-step&nbsp;reduction&nbsp;and&nbsp;thus<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can't&nbsp;be&nbsp;used&nbsp;as&nbsp;well&nbsp;order.&nbsp;We&nbsp;thus&nbsp;define&nbsp;the&nbsp;transitive&nbsp;closure,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;we&nbsp;take&nbsp;the&nbsp;symmetric&nbsp;version.<br/>
+&nbsp;&nbsp;&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Inductive</span> <a id="cored" class="idref" href="#cored"><span class="id" title="inductive">cored</span></a> (<a id="b2fa38fbaf9e73dda3ce249d373db916" class="idref" href="#b2fa38fbaf9e73dda3ce249d373db916"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.global_env"><span class="id" title="record">global_env</span></a>) <a id="18bf8c43a60891738d0d6115aa956824" class="idref" href="#18bf8c43a60891738d0d6115aa956824"><span class="id" title="binder">Γ</span></a>: <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#term"><span class="id" title="inductive">term</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#term"><span class="id" title="inductive">term</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
 &nbsp;&nbsp;| <a id="cored1" class="idref" href="#cored1"><span class="id" title="constructor">cored1</span></a> : <span class="id" title="keyword">∀</span> <a id="u:45" class="idref" href="#u:45"><span class="id" title="binder">u</span></a> <a id="v:46" class="idref" href="#v:46"><span class="id" title="binder">v</span></a>, <a class="idref" href="MetaCoq.PCUIC.PCUICReduction.html#red1"><span class="id" title="inductive">red1</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#b2fa38fbaf9e73dda3ce249d373db916"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#18bf8c43a60891738d0d6115aa956824"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#u:45"><span class="id" title="variable">u</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#v:46"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#cored:43"><span class="id" title="inductive">cored</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#b2fa38fbaf9e73dda3ce249d373db916"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#18bf8c43a60891738d0d6115aa956824"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#v:46"><span class="id" title="variable">v</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#u:45"><span class="id" title="variable">u</span></a><br/>
 &nbsp;&nbsp;| <a id="cored_trans" class="idref" href="#cored_trans"><span class="id" title="constructor">cored_trans</span></a> : <span class="id" title="keyword">∀</span> <a id="u:47" class="idref" href="#u:47"><span class="id" title="binder">u</span></a> <a id="v:48" class="idref" href="#v:48"><span class="id" title="binder">v</span></a> <a id="w:49" class="idref" href="#w:49"><span class="id" title="binder">w</span></a>, <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#cored:43"><span class="id" title="inductive">cored</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#b2fa38fbaf9e73dda3ce249d373db916"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#18bf8c43a60891738d0d6115aa956824"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#v:48"><span class="id" title="variable">v</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#u:47"><span class="id" title="variable">u</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICReduction.html#red1"><span class="id" title="inductive">red1</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#b2fa38fbaf9e73dda3ce249d373db916"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#18bf8c43a60891738d0d6115aa956824"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#v:48"><span class="id" title="variable">v</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#w:49"><span class="id" title="variable">w</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#cored:43"><span class="id" title="inductive">cored</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#b2fa38fbaf9e73dda3ce249d373db916"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#18bf8c43a60891738d0d6115aa956824"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#w:49"><span class="id" title="variable">w</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#u:47"><span class="id" title="variable">u</span></a>.<br/>
@@ -343,6 +348,9 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;This&nbsp;suggests&nbsp;that&nbsp;this&nbsp;should&nbsp;be&nbsp;the&nbsp;actual&nbsp;definition.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;+&nbsp;=&nbsp;-&gt;*.-&gt;<br/>
+&nbsp;&nbsp;&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="cored_red_trans" class="idref" href="#cored_red_trans"><span class="id" title="lemma">cored_red_trans</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="5ce56e56b761cd50da72eb3c93ee8349" class="idref" href="#5ce56e56b761cd50da72eb3c93ee8349"><span class="id" title="binder">Γ</span></a> <a id="u:94" class="idref" href="#u:94"><span class="id" title="binder">u</span></a> <a id="v:95" class="idref" href="#v:95"><span class="id" title="binder">v</span></a> <a id="w:96" class="idref" href="#w:96"><span class="id" title="binder">w</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICReduction.html#red"><span class="id" title="definition">red</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#3931413320ec8f946b61c1270ed62e19"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#5ce56e56b761cd50da72eb3c93ee8349"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#u:94"><span class="id" title="variable">u</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#v:95"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -400,6 +408,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">h</span>; <span class="id" title="var">depelim</span> <span class="id" title="keyword">wf</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">all</span>: <span class="id" title="tactic">destruct</span> <span class="id" title="var">l</span>; <span class="id" title="tactic">econstructor</span>; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;TODO:&nbsp;rename&nbsp;alpha_eq&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="compare_decls_conv" class="idref" href="#compare_decls_conv"><span class="id" title="lemma">compare_decls_conv</span></a> <a id="5fed251aa58d6913e63540c17d3d6121" class="idref" href="#5fed251aa58d6913e63540c17d3d6121"><span class="id" title="binder">Γ</span></a> <a id="7927c99c4e9bdd94a8214a8d6ddf627b" class="idref" href="#7927c99c4e9bdd94a8214a8d6ddf627b"><span class="id" title="binder">Γ'</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICEquality.html#eq_context_upto_names"><span class="id" title="abbreviation">eq_context_upto_names</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#5fed251aa58d6913e63540c17d3d6121"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#7927c99c4e9bdd94a8214a8d6ddf627b"><span class="id" title="variable">Γ'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#conv_context"><span class="id" title="abbreviation">conv_context</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulativity.html#cumulAlgo_gen"><span class="id" title="inductive">cumulAlgo_gen</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#3931413320ec8f946b61c1270ed62e19"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#5fed251aa58d6913e63540c17d3d6121"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#7927c99c4e9bdd94a8214a8d6ddf627b"><span class="id" title="variable">Γ'</span></a>.<br/>
@@ -592,8 +601,37 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Ill-scoped,&nbsp;if&nbsp;the&nbsp;stack&nbsp;has&nbsp;a&nbsp;context&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*Lemma&nbsp;conv_zipp&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;Γ&nbsp;u&nbsp;v&nbsp;ρ,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;closedn_stack&nbsp;|Γ| ρ ->
+      Σ ;;; Γ ⊢ u = v ->
+      Σ ;;; Γ ⊢ zipp u ρ = zipp v ρ.
+  Proof.
+    intros Γ u v ρ cl h.
+    unfold zipp.
+    destruct decompose_stack eqn:da.
+    induction l in u, v, cl, h, da |- *.
+    - assumption.
+    - simpl. eapply IHl => //.
+      * eapply ws_cumul_pb_App_l; tas.
+        eapply decompose_stack_closed in da; tea.
+        move: da => /= /andP[].
+  Qed.*)</span><br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Lemma&nbsp;cumul_zipp&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;forall&nbsp;Γ&nbsp;u&nbsp;v&nbsp;π,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Σ&nbsp;;;;&nbsp;Γ&nbsp;|-&nbsp;u&nbsp;&lt;=&nbsp;v&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Σ&nbsp;;;;&nbsp;Γ&nbsp;|-&nbsp;zipp&nbsp;u&nbsp;π&nbsp;&lt;=&nbsp;zipp&nbsp;v&nbsp;π.<br/>
+&nbsp;&nbsp;Proof.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;Γ&nbsp;u&nbsp;v&nbsp;π&nbsp;h.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;zipp.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;decompose_stack&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode">ρ</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;induction&nbsp;l&nbsp;in&nbsp;u,&nbsp;v,&nbsp;h&nbsp;|-&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;assumption.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;simpl.&nbsp;&nbsp;eapply&nbsp;IHl.&nbsp;eapply&nbsp;cumul_App_l.&nbsp;assumption.<br/>
+&nbsp;&nbsp;Qed.&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Derive</span> <span class="id" title="var">Signature</span> <span class="id" title="keyword">for</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Wf.html#Acc"><span class="id" title="inductive">Acc</span></a>.<br/>
@@ -624,6 +662,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;TODO&nbsp;Put&nbsp;more&nbsp;general&nbsp;lemma&nbsp;in&nbsp;Inversion&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="welltyped_it_mkLambda_or_LetIn" class="idref" href="#welltyped_it_mkLambda_or_LetIn"><span class="id" title="lemma">welltyped_it_mkLambda_or_LetIn</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="730fc85456f9052a2572966249a12cca" class="idref" href="#730fc85456f9052a2572966249a12cca"><span class="id" title="binder">Γ</span></a> <a id="9aa1b8f92d89dfa875946aba8367f6fe" class="idref" href="#9aa1b8f92d89dfa875946aba8367f6fe"><span class="id" title="binder">Δ</span></a> <a id="t:147" class="idref" href="#t:147"><span class="id" title="binder">t</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#welltyped"><span class="id" title="inductive">welltyped</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#3931413320ec8f946b61c1270ed62e19"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#730fc85456f9052a2572966249a12cca"><span class="id" title="variable">Γ</span></a> (<a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.it_mkLambda_or_LetIn"><span class="id" title="definition">it_mkLambda_or_LetIn</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#9aa1b8f92d89dfa875946aba8367f6fe"><span class="id" title="variable">Δ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#t:147"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -827,6 +866,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;TODO&nbsp;MOVE&nbsp;or&nbsp;even&nbsp;replace&nbsp;old&nbsp;lemma&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="decompose_stack_noStackApp" class="idref" href="#decompose_stack_noStackApp"><span class="id" title="lemma">decompose_stack_noStackApp</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="6dc072a4865a8a12b436921c455acaa4" class="idref" href="#6dc072a4865a8a12b436921c455acaa4"><span class="id" title="binder">π</span></a> <a id="l:197" class="idref" href="#l:197"><span class="id" title="binder">l</span></a> <a id="d56028fd1c91abbfa33c38b083dc5d5e" class="idref" href="#d56028fd1c91abbfa33c38b083dc5d5e"><span class="id" title="binder">ρ</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICPosition.html#decompose_stack"><span class="id" title="definition">decompose_stack</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#6dc072a4865a8a12b436921c455acaa4"><span class="id" title="variable">π</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#l:197"><span class="id" title="variable">l</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#d56028fd1c91abbfa33c38b083dc5d5e"><span class="id" title="variable">ρ</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -840,6 +880,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;TODO&nbsp;MOVE&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="stack_context_decompose" class="idref" href="#stack_context_decompose"><span class="id" title="lemma">stack_context_decompose</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="072ba900ddfcd23fada0422b2e42f831" class="idref" href="#072ba900ddfcd23fada0422b2e42f831"><span class="id" title="binder">π</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICPosition.html#stack_context"><span class="id" title="definition">stack_context</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> (<a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICPosition.html#decompose_stack"><span class="id" title="definition">decompose_stack</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#072ba900ddfcd23fada0422b2e42f831"><span class="id" title="variable">π</span></a>)) <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICPosition.html#stack_context"><span class="id" title="definition">stack_context</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICSafeLemmata.html#072ba900ddfcd23fada0422b2e42f831"><span class="id" title="variable">π</span></a>.<br/>

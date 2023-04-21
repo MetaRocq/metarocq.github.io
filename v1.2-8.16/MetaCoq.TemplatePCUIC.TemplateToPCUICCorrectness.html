@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Common.EnvMap.html#"><span class="id" title="library">EnvMap</span></a>.<br/>
@@ -109,6 +110,7 @@
 &nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="var">lia</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Source&nbsp;=Template,&nbsp;Target&nbsp;(unqualified)&nbsp;=&nbsp;Coq&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Module</span> <a id="S" class="idref" href="#S"><span class="id" title="module">S</span></a> :=<a class="idref" href="MetaCoq.Template.Ast.html#"><span class="id" title="module">Template.Ast</span></a>.<br/>
@@ -219,6 +221,8 @@
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.Typing.html#on_global_decl"><span class="id" title="definition">Typing.on_global_decl</span></a> <a class="idref" href="MetaCoq.Template.Typing.html#cumul_gen"><span class="id" title="inductive">Typing.cumul_gen</span></a> (<span class="id" title="keyword">fun</span> (<a id="06f02a2e1ae1dbc558fdd78ca814765d" class="idref" href="#06f02a2e1ae1dbc558fdd78ca814765d"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#Env.global_env_ext"><span class="id" title="definition">Ast.Env.global_env_ext</span></a>) ⇒ <a class="idref" href="MetaCoq.Template.WfAst.html#wf_decl_pred"><span class="id" title="definition">WfAst.wf_decl_pred</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#06f02a2e1ae1dbc558fdd78ca814765d"><span class="id" title="variable">Σ</span></a>) <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#4a3db5069015eacb9ec70510dc094686"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#kn:34"><span class="id" title="variable">kn</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#decl:35"><span class="id" title="variable">decl</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Issue&nbsp;in&nbsp;equations:&nbsp;signatures&nbsp;cannot&nbsp;be&nbsp;found&nbsp;up-to&nbsp;arbitrary&nbsp;conversions.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;[global] Hint Extern 4 (Signature (Typing.wf _) _ _) => exact (on_global_env_Signature _ _ _) : typeclass_instances. *)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="trans_lookup_env" class="idref" href="#trans_lookup_env"><span class="id" title="lemma">trans_lookup_env</span></a> {<a id="cf:37" class="idref" href="#cf:37"><span class="id" title="binder">cf</span></a>} {<a id="4419af43eee85446dd7b19942c9f830b" class="idref" href="#4419af43eee85446dd7b19942c9f830b"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#Env.global_env"><span class="id" title="record">Ast.Env.global_env</span></a>} <a id="cst:39" class="idref" href="#cst:39"><span class="id" title="binder">cst</span></a> {<a id="67c3e2b12787cef1ddc5fda5ba2b8c07" class="idref" href="#67c3e2b12787cef1ddc5fda5ba2b8c07"><span class="id" title="binder">wfΣ</span></a> : <a class="idref" href="MetaCoq.Template.Typing.html#wf"><span class="id" title="class">Typing.wf</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#4419af43eee85446dd7b19942c9f830b"><span class="id" title="variable">Σ</span></a>} :<br/>
@@ -572,6 +576,7 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;TODO&nbsp;Duplicate?&nbsp;*)</span><br/>
 <span class="id" title="keyword">Lemma</span> <a id="Alli_map_option_out_mapi_Some_spec" class="idref" href="#Alli_map_option_out_mapi_Some_spec"><span class="id" title="lemma">Alli_map_option_out_mapi_Some_spec</span></a> {<a id="A:111" class="idref" href="#A:111"><span class="id" title="binder">A</span></a> <a id="B:112" class="idref" href="#B:112"><span class="id" title="binder">B</span></a> <a id="B':113" class="idref" href="#B':113"><span class="id" title="binder">B'</span></a>} (<a id="f:114" class="idref" href="#f:114"><span class="id" title="binder">f</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#A:111"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#B:112"><span class="id" title="variable">B</span></a>) (<a id="g':115" class="idref" href="#g':115"><span class="id" title="binder">g'</span></a> : <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#B:112"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#B':113"><span class="id" title="variable">B'</span></a>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a id="g:116" class="idref" href="#g:116"><span class="id" title="binder">g</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#A:111"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#B':113"><span class="id" title="variable">B'</span></a>) <a id="P:117" class="idref" href="#P:117"><span class="id" title="binder">P</span></a> <a id="l:118" class="idref" href="#l:118"><span class="id" title="binder">l</span></a> <a id="t:119" class="idref" href="#t:119"><span class="id" title="binder">t</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.All_Forall.html#Alli"><span class="id" title="inductive">Alli</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#P:117"><span class="id" title="variable">P</span></a> 0 <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#l:118"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -691,6 +696,20 @@
 <span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">reflexivity</span>. <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;From&nbsp;MetaCoq.PCUIC&nbsp;Require&nbsp;Import&nbsp;PCUICClosed&nbsp;PCUICInductiveInversion.<br/>
+<br/>
+Lemma&nbsp;instantiate_params_spec&nbsp;params&nbsp;paramsi&nbsp;concl&nbsp;ty&nbsp;:<br/>
+&nbsp;&nbsp;instantiate_params&nbsp;params&nbsp;paramsi&nbsp;(it_mkProd_or_LetIn&nbsp;params&nbsp;concl)&nbsp;=&nbsp;Some&nbsp;ty&nbsp;-&gt;<br/>
+&nbsp;&nbsp;ty&nbsp;=&nbsp;(subst&nbsp;(List.rev&nbsp;paramsi)&nbsp;0&nbsp;(expand_lets&nbsp;params&nbsp;concl)).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;h.&nbsp;eapply&nbsp;instantiate_params_make_context_subst&nbsp;in&nbsp;h&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">ctx''</span></span> <span class="inlinecode">[<span class="id" title="var">ms</span></span> <span class="inlinecode">[<span class="id" title="var">s'</span></span> <span class="inlinecode">[<span class="id" title="var">da</span></span> <span class="inlinecode">[<span class="id" title="var">dp</span></span> <span class="inlinecode">-&gt;]]]]</span>.<br/>
+&nbsp;&nbsp;eapply&nbsp;make_context_subst_spec&nbsp;in&nbsp;dp.<br/>
+&nbsp;&nbsp;rewrite&nbsp;List.rev_involutive&nbsp;in&nbsp;dp.<br/>
+&nbsp;&nbsp;pose&nbsp;proof&nbsp;(PCUICContexts.context_subst_length2&nbsp;dp).<br/>
+&nbsp;&nbsp;rewrite&nbsp;decompose_prod_n_assum_it_mkProd&nbsp;app_nil_r&nbsp;in&nbsp;da.&nbsp;noconf&nbsp;da.<br/>
+&nbsp;&nbsp;apply&nbsp;context_subst_subst_extended_subst&nbsp;in&nbsp;dp&nbsp;as&nbsp;-&gt;.<br/>
+&nbsp;&nbsp;rewrite&nbsp;map_subst_expand_lets&nbsp;?List.rev_length&nbsp;//.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="trans_ind_bodies_length" class="idref" href="#trans_ind_bodies_length"><span class="id" title="lemma">trans_ind_bodies_length</span></a> <a id="mdecl:159" class="idref" href="#mdecl:159"><span class="id" title="binder">mdecl</span></a> : <a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.Template.Ast.html#Env.ind_bodies"><span class="id" title="projection">Ast.Env.ind_bodies</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#mdecl:159"><span class="id" title="variable">mdecl</span></a><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.PCUIC.PCUICAst.html#PCUICEnvironment.ind_bodies"><span class="id" title="projection">ind_bodies</span></a> (<a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUIC.html#trans_minductive_body"><span class="id" title="definition">trans_minductive_body</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#78f5ffc03755375ae4b594444f90fb83"><span class="id" title="abbreviation">trΣ</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#mdecl:159"><span class="id" title="variable">mdecl</span></a>)<a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a>.<br/>
@@ -744,6 +763,7 @@
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#Translation"><span class="id" title="section">Translation</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Derive&nbsp;Signature&nbsp;for&nbsp;Typing.on_global_env.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Section</span> <a id="Trans_Global" class="idref" href="#Trans_Global"><span class="id" title="section">Trans_Global</span></a>.<br/>
@@ -944,6 +964,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;TODO&nbsp;updateTemplate&nbsp;Coq's&nbsp;eq_term&nbsp;to&nbsp;reflect&nbsp;PCUIC's&nbsp;cumulativity&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="trans_eq_term_upto_univ" class="idref" href="#trans_eq_term_upto_univ"><span class="id" title="lemma">trans_eq_term_upto_univ</span></a> {<a id="Re:268" class="idref" href="#Re:268"><span class="id" title="binder">Re</span></a> <a id="Rle:269" class="idref" href="#Rle:269"><span class="id" title="binder">Rle</span></a> <a id="t:270" class="idref" href="#t:270"><span class="id" title="binder">t</span></a> <a id="u:271" class="idref" href="#u:271"><span class="id" title="binder">u</span></a> <a id="napp:272" class="idref" href="#napp:272"><span class="id" title="binder">napp</span></a>} :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.RelationClasses.html#subrelation"><span class="id" title="class">RelationClasses.subrelation</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#Re:268"><span class="id" title="variable">Re</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#Rle:269"><span class="id" title="variable">Rle</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.WfAst.html#wf"><span class="id" title="inductive">WfAst.wf</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#4473f27ac00902d98520fb57df7e978d"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#t:270"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -1441,6 +1462,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Require&nbsp;Import&nbsp;PCUICInductiveInversion.&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="map2_cst" class="idref" href="#map2_cst"><span class="id" title="lemma">map2_cst</span></a> {<a id="A:426" class="idref" href="#A:426"><span class="id" title="binder">A</span></a> <a id="B:427" class="idref" href="#B:427"><span class="id" title="binder">B</span></a>} (<a id="l:428" class="idref" href="#l:428"><span class="id" title="binder">l</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#A:426"><span class="id" title="variable">A</span></a>) (<a id="l':429" class="idref" href="#l':429"><span class="id" title="binder">l'</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#B:427"><span class="id" title="variable">B</span></a>) :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#l:428"><span class="id" title="variable">l</span></a><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#l':429"><span class="id" title="variable">l'</span></a><a class="idref" href="MetaCoq.Utils.MCList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.MCList.html#map2"><span class="id" title="definition">map2</span></a> (<span class="id" title="keyword">fun</span> <a id="x:430" class="idref" href="#x:430"><span class="id" title="binder">x</span></a> <a id="y:431" class="idref" href="#y:431"><span class="id" title="binder">y</span></a> ⇒ <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#x:430"><span class="id" title="variable">x</span></a>) <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#l:428"><span class="id" title="variable">l</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#l':429"><span class="id" title="variable">l'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.TemplatePCUIC.TemplateToPCUICCorrectness.html#l:428"><span class="id" title="variable">l</span></a>.<br/>
@@ -2429,6 +2451,7 @@
 <span class="id" title="keyword">Local Hint Transparent</span> <a class="idref" href="MetaCoq.Common.Universes.html#Universe.t"><span class="id" title="definition">Universe.t</span></a> : <span class="id" title="var">trans</span>.<br/>
 <span class="id" title="keyword">Local</span> <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Variables</span> <span class="id" title="keyword">Transparent</span> : <span class="id" title="var">trans</span>.<br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">trans</span> := <span class="id" title="tactic">try</span> <span class="id" title="var">typeclasses</span> <span class="id" title="tactic">eauto</span> <span class="id" title="keyword">with</span> <span class="id" title="var">trans</span>.<br/>
+<span class="comment">(*&nbsp;bug&nbsp;in&nbsp;Coq,&nbsp;typeclasses&nbsp;eauto&nbsp;tries&nbsp;exact&nbsp;with&nbsp;a&nbsp;quantified&nbsp;hypothesis&nbsp;starting&nbsp;with&nbsp;a&nbsp;let-in&nbsp;*)</span><br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">simpl_let</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| [ <span class="id" title="var">H</span> : <span class="id" title="keyword">let</span> <span class="id" title="var">_</span> := <span class="id" title="var">_</span> <span class="id" title="tactic">in</span> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ] ⇒ <span class="id" title="tactic">progress</span> (<span class="id" title="tactic">cbv</span> <span class="id" title="keyword">zeta</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>)<br/>
@@ -2460,7 +2483,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">f_equal</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;Casts&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#refine_type"><span class="id" title="lemma">refine_type</span></a>; <span class="id" title="var">cbn</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_App"><span class="id" title="constructor">type_App</span></a>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:{ <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_Lambda"><span class="id" title="constructor">type_Lambda</span></a>; <span class="id" title="tactic">eauto</span>. <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#type_Rel"><span class="id" title="constructor">type_Rel</span></a>. <span class="id" title="tactic">econstructor</span>; <span class="id" title="tactic">eauto</span>.<br/>
@@ -2482,7 +2505,7 @@
 &nbsp;&nbsp;- <span class="id" title="tactic">econstructor</span>; <span class="id" title="tactic">eauto</span> <span class="id" title="keyword">with</span> <span class="id" title="var">trans</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;- <br/>
+&nbsp;&nbsp;- <span class="comment">(*&nbsp;The&nbsp;interesting&nbsp;application&nbsp;case&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cbn</span>; <span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.PCUIC.PCUICGeneration.html#type_mkApps"><span class="id" title="lemma">type_mkApps</span></a>; <span class="id" title="tactic">eauto</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">specialize</span> (<span class="id" title="var">X0</span> <span class="id" title="var">X2</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="MetaCoq.Template.TypingWf.html#typing_wf"><span class="id" title="lemma">typing_wf</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">X</span>; <span class="id" title="tactic">eauto</span>. <span class="id" title="tactic">destruct</span> <span class="id" title="var">X</span>.<br/>
@@ -2735,6 +2758,26 @@
 <br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.PCUIC.Syntax.PCUICInstDef.html#"><span class="id" title="library">PCUICInstDef</span></a> <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICInstConv.html#"><span class="id" title="library">PCUICInstConv</span></a>.<br/>
 <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;closed_ctx_map2_set_binder_name&nbsp;(n&nbsp;:&nbsp;nat)&nbsp;(bctx&nbsp;:&nbsp;list&nbsp;aname)&nbsp;(ctx&nbsp;:&nbsp;list&nbsp;context_decl)&nbsp;:<br/>
+&nbsp;&nbsp;closedn_ctx&nbsp;n&nbsp;ctx&nbsp;-&gt;&nbsp;closedn_ctx&nbsp;n&nbsp;(map2_bias_left&nbsp;set_binder_name&nbsp;dummy_decl&nbsp;bctx&nbsp;ctx).<br/>
+Proof.<br/>
+&nbsp;&nbsp;induction&nbsp;bctx&nbsp;in&nbsp;n,&nbsp;ctx&nbsp;|-&nbsp;*;&nbsp;cbn;&nbsp;auto.<br/>
+&nbsp;&nbsp;destruct&nbsp;ctx;&nbsp;auto.<br/>
+&nbsp;&nbsp;intros&nbsp;H.<br/>
+&nbsp;&nbsp;destruct&nbsp;ctx.&nbsp;cbn.<br/>
+&nbsp;&nbsp;rewrite&nbsp;IHbctx&nbsp;//.<br/>
+&nbsp;&nbsp;rewrite&nbsp;!closedn_ctx_snoc&nbsp;IHbctx.<br/>
+&nbsp;&nbsp;rewrite&nbsp;closedn_ctx_snoc&nbsp;in&nbsp;H.&nbsp;now&nbsp;move/andP:&nbsp;H=&gt;<span class="inlinecode"></span>.<br/>
+&nbsp;&nbsp;cbn.&nbsp;rewrite&nbsp;map2_bias_left_length.<br/>
+&nbsp;&nbsp;rewrite&nbsp;closedn_ctx_snoc&nbsp;in&nbsp;H.&nbsp;move/andP:&nbsp;H=&gt;<span class="inlinecode"></span>.<br/>
+<br/>
+&nbsp;&nbsp;cbn.<br/>
+&nbsp;&nbsp;specialize&nbsp;(IHbctx&nbsp;_&nbsp;_&nbsp;H).<br/>
+&nbsp;&nbsp;cbn&nbsp;in&nbsp;IHbctx.<br/>
+&nbsp;&nbsp;move/andP&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>&nbsp;clc&nbsp;clctx.<br/>
+&nbsp;&nbsp;rewrite&nbsp;IHbctx&nbsp;//&nbsp;/=.<br/>
+&nbsp;&nbsp;eapply&nbsp;closed_decl<br/>
+&nbsp;&nbsp;rewrite&nbsp;closedn_ctx_&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="closed_ind_predicate_context" class="idref" href="#closed_ind_predicate_context"><span class="id" title="lemma">closed_ind_predicate_context</span></a> {<a id="cf:768" class="idref" href="#cf:768"><span class="id" title="binder">cf</span></a>} {<a id="6bf91d213df0bb0ac259b13d0e6fa801" class="idref" href="#6bf91d213df0bb0ac259b13d0e6fa801"><span class="id" title="binder">Σ</span></a> <a id="ind:770" class="idref" href="#ind:770"><span class="id" title="binder">ind</span></a> <a id="mdecl:771" class="idref" href="#mdecl:771"><span class="id" title="binder">mdecl</span></a> <a id="idecl:772" class="idref" href="#idecl:772"><span class="id" title="binder">idecl</span></a>} :<br/>

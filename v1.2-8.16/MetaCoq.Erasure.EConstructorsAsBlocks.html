@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Erasure.EConstructorsAsBlocks</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Unicode.Utf8.html#"><span class="id" title="library">Utf8</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Common.Kernames.html#"><span class="id" title="library">Kernames</span></a> <a class="idref" href="MetaCoq.Common.BasicAst.html#"><span class="id" title="library">BasicAst</span></a> <a class="idref" href="MetaCoq.Common.EnvMap.html#"><span class="id" title="library">EnvMap</span></a>.<br/>
@@ -53,6 +54,7 @@
 We assume <span class="inlinecode"><span class="id" title="keyword">Prop</span></span> <span class="inlinecode">&lt;/=</span> <span class="inlinecode"><span class="id" title="keyword">Type</span></span> and universes are checked correctly in the following. 
 </div>
 <div class="code">
+<span class="comment">(*&nbsp;Local&nbsp;Existing&nbsp;Instance&nbsp;extraction_checker_flags.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">introdep</span> := <span class="id" title="keyword">let</span> <span class="id" title="var">H</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">intros</span> <span class="id" title="var">H</span>; <span class="id" title="var">depelim</span> <span class="id" title="var">H</span>.<br/>
 
 <br/>
@@ -248,7 +250,8 @@ We assume <span class="inlinecode"><span class="id" title="keyword">Prop</span><
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="transform_blocks_mkApps_eta" class="idref" href="#transform_blocks_mkApps_eta"><span class="id" title="lemma">transform_blocks_mkApps_eta</span></a> (<a id="P:135" class="idref" href="#P:135"><span class="id" title="binder">P</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">term</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>) <a id="fn:136" class="idref" href="#fn:136"><span class="id" title="binder">fn</span></a> <a id="args:137" class="idref" href="#args:137"><span class="id" title="binder">args</span></a> :<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#b3ebd0deddd84fd60e149cb5ef719351"><span class="id" title="notation">~~</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#isApp"><span class="id" title="definition">EAst.isApp</span></a> <a class="idref" href="MetaCoq.Erasure.EConstructorsAsBlocks.html#fn:136"><span class="id" title="variable">fn</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;wf_glob&nbsp;Σ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#b3ebd0deddd84fd60e149cb5ef719351"><span class="id" title="notation">~~</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#isApp"><span class="id" title="definition">EAst.isApp</span></a> <a class="idref" href="MetaCoq.Erasure.EConstructorsAsBlocks.html#fn:136"><span class="id" title="variable">fn</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.EEtaExpanded.html#isEtaExp"><span class="id" title="definition">isEtaExp</span></a> <a class="idref" href="MetaCoq.Erasure.EConstructorsAsBlocks.html#e6ed1b21a7d22bc6ab9a29a926de5bef"><span class="id" title="variable">Σ</span></a> (<a class="idref" href="MetaCoq.Erasure.EAst.html#mkApps"><span class="id" title="definition">mkApps</span></a> <a class="idref" href="MetaCoq.Erasure.EConstructorsAsBlocks.html#fn:136"><span class="id" title="variable">fn</span></a> <a class="idref" href="MetaCoq.Erasure.EConstructorsAsBlocks.html#args:137"><span class="id" title="variable">args</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><span class="id" title="keyword">match</span> <a class="idref" href="MetaCoq.Erasure.EEtaExpanded.html#construct_viewc"><span class="id" title="definition">construct_viewc</span></a> <a class="idref" href="MetaCoq.Erasure.EConstructorsAsBlocks.html#fn:136"><span class="id" title="variable">fn</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaCoq.Erasure.EEtaExpanded.html#view_construct"><span class="id" title="constructor">view_construct</span></a> <span class="id" title="var">kn</span> <span class="id" title="var">c</span> <span class="id" title="var">block_args</span> ⇒<br/>
@@ -907,6 +910,15 @@ We assume <span class="inlinecode"><span class="id" title="keyword">Prop</span><
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*Lemma&nbsp;optimize_wellformed_decl_irrel&nbsp;{efl&nbsp;:&nbsp;EEnvFlags}&nbsp;{Σ&nbsp;:&nbsp;GlobalContextMap.t}&nbsp;d&nbsp;:<br/>
+&nbsp;&nbsp;wf_glob&nbsp;Σ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;wf_global_decl&nbsp;(efl&nbsp;:=&nbsp;env_flags)&nbsp;Σ&nbsp;d&nbsp;-&gt;<br/>
+&nbsp;&nbsp;wf_global_decl&nbsp;(efl&nbsp;:=&nbsp;env_flags_blocks)&nbsp;(transform_blocks_env&nbsp;Σ)&nbsp;d.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;wf;&nbsp;destruct&nbsp;d&nbsp;=&gt;&nbsp;/=&nbsp;//.<br/>
+&nbsp;&nbsp;destruct&nbsp;(cst_body&nbsp;c)&nbsp;=&gt;&nbsp;/=&nbsp;//.<br/>
+&nbsp;&nbsp;intros&nbsp;wf'.&nbsp;eapply&nbsp;transform_wellformed.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="optimize_decl_wf" class="idref" href="#optimize_decl_wf"><span class="id" title="lemma">optimize_decl_wf</span></a> {<a id="efl:270" class="idref" href="#efl:270"><span class="id" title="binder">efl</span></a> : <a class="idref" href="MetaCoq.Erasure.EWellformed.html#EEnvFlags"><span class="id" title="class">EEnvFlags</span></a>} {<a id="e05fa26bdcc4ab46a0b3b9be4923b918" class="idref" href="#e05fa26bdcc4ab46a0b3b9be4923b918"><span class="id" title="binder">Σ</span></a> : <a class="idref" href="MetaCoq.Erasure.EEnvMap.html#GlobalContextMap.t"><span class="id" title="record">GlobalContextMap.t</span></a>} :<br/>

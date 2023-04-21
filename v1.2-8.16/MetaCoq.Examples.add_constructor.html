@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Examples.add_constructor</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.All.html#"><span class="id" title="library">All</span></a>.<br/>
 
@@ -35,6 +36,11 @@
 <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.monad_utils.html#MCMonadNotation"><span class="id" title="module">MCMonadNotation</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;****************************************************&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;In&nbsp;this&nbsp;file&nbsp;we&nbsp;define&nbsp;a&nbsp;small&nbsp;plugin&nbsp;which&nbsp;allow&nbsp;to&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;add&nbsp;a&nbsp;constructor&nbsp;to&nbsp;an&nbsp;inductive&nbsp;without&nbsp;rewriting&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;the&nbsp;whole&nbsp;inductive.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;****************************************************&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -70,6 +76,8 @@
 <div class="code">
 
 <br/>
+<span class="comment">(*&nbsp;<span class="inlinecode"><span class="id" title="var">add_ctor</span></span>&nbsp;add&nbsp;a&nbsp;constructor&nbsp;to&nbsp;a&nbsp;<span class="inlinecode"><span class="id" title="var">mutual_inductive_body</span></span><br/>
+&nbsp;(that&nbsp;is&nbsp;a&nbsp;reified&nbsp;declaration&nbsp;of&nbsp;an&nbsp;inductive).&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="tsl_constructor_body" class="idref" href="#tsl_constructor_body"><span class="id" title="definition">tsl_constructor_body</span></a> (<a id="c:9" class="idref" href="#c:9"><span class="id" title="binder">c</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#Env.constructor_body"><span class="id" title="record">constructor_body</span></a>) : <a class="idref" href="MetaCoq.Template.Ast.html#Env.constructor_body"><span class="id" title="record">constructor_body</span></a> :=<br/>
@@ -119,6 +127,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Examples.add_constructor.html#mind:18"><span class="id" title="variable">mind</span></a>.(<a class="idref" href="MetaCoq.Template.Ast.html#Env.ind_bodies"><span class="id" title="projection">ind_bodies</span></a>) |}.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;<span class="inlinecode"><span class="id" title="var">add_constructor</span></span>&nbsp;is&nbsp;a&nbsp;new&nbsp;command&nbsp;(in&nbsp;Template&nbsp;Coq&nbsp;style)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;which&nbsp;do&nbsp;what&nbsp;we&nbsp;want&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="var">Polymorphic</span> <span class="id" title="keyword">Definition</span> <a id="add_constructor" class="idref" href="#add_constructor"><span class="id" title="definition">add_constructor</span></a> (<a id="tm:28" class="idref" href="#tm:28"><span class="id" title="binder">tm</span></a> : <a class="idref" href="MetaCoq.Template.Ast.html#term"><span class="id" title="inductive">Ast.term</span></a>)<br/>
@@ -149,6 +159,10 @@ Here we add a silly constructor to bool.
 <div class="code">
 <span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Examples.add_constructor.html#add_constructor"><span class="id" title="definition">add_constructor</span></a> <a class="idref" href="MetaCoq.Template.Loader.html#718bcc50d47fdc3f494b25555b8a784b"><span class="id" title="notation">&lt;%</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="MetaCoq.Template.Loader.html#718bcc50d47fdc3f494b25555b8a784b"><span class="id" title="notation">%&gt;</span></a> "foo" <a class="idref" href="MetaCoq.Template.Loader.html#718bcc50d47fdc3f494b25555b8a784b"><span class="id" title="notation">&lt;%</span></a> <a class="idref" href="MetaCoq.Template.Loader.html#718bcc50d47fdc3f494b25555b8a784b"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <a id="x:34" class="idref" href="#x:34"><span class="id" title="binder">x</span></a> : <span class="id" title="keyword">Type</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Examples.add_constructor.html#x:34"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Examples.add_constructor.html#x:34"><span class="id" title="variable">x</span></a><a class="idref" href="MetaCoq.Template.Loader.html#718bcc50d47fdc3f494b25555b8a784b"><span class="id" title="notation">)</span></a> <a class="idref" href="MetaCoq.Template.Loader.html#718bcc50d47fdc3f494b25555b8a784b"><span class="id" title="notation">%&gt;</span></a>).<br/>
+<span class="comment">(*&nbsp;Inductive&nbsp;bool'&nbsp;:&nbsp;Set&nbsp;:=&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true'&nbsp;:&nbsp;bool'&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;|&nbsp;false'&nbsp;:&nbsp;bool'&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;|&nbsp;foo&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;bool'&nbsp;-&gt;&nbsp;bool&nbsp;-&gt;&nbsp;bool'&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="test" class="idref" href="#test"><span class="id" title="definition">test</span></a> := <a class="idref" href="MetaCoq.Examples.add_constructor.html#bool'"><span class="id" title="inductive">bool'</span></a>.<br/>
 <span class="id" title="keyword">Definition</span> <a id="test'" class="idref" href="#test'"><span class="id" title="definition">test'</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Examples.add_constructor.html#bool'"><span class="id" title="inductive">bool'</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Examples.add_constructor.html#bool'"><span class="id" title="inductive">bool'</span></a> := <a class="idref" href="MetaCoq.Examples.add_constructor.html#foo"><span class="id" title="constructor">foo</span></a>.<br/>
 
@@ -169,6 +183,11 @@ Here is a useful usecase: add a case to a syntax.
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="test2" class="idref" href="#test2"><span class="id" title="definition">test2</span></a> := <a class="idref" href="MetaCoq.Examples.add_constructor.html#letin"><span class="id" title="constructor">letin</span></a>.<br/>
+<span class="comment">(*&nbsp;Inductive&nbsp;tm'&nbsp;:&nbsp;Type&nbsp;:=&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var'&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;tm'&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;|&nbsp;lam'&nbsp;:&nbsp;tm'&nbsp;-&gt;&nbsp;tm'&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;|&nbsp;app'&nbsp;:&nbsp;tm'&nbsp;-&gt;&nbsp;tm'&nbsp;-&gt;&nbsp;tm'&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;|&nbsp;letin&nbsp;:&nbsp;tm'&nbsp;-&gt;&nbsp;tm'&nbsp;-&gt;&nbsp;tm'&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="MetaCoq.Examples.add_constructor.html#add_constructor"><span class="id" title="definition">add_constructor</span></a> <a class="idref" href="MetaCoq.Template.Loader.html#718bcc50d47fdc3f494b25555b8a784b"><span class="id" title="notation">&lt;%</span></a>@<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a><a class="idref" href="MetaCoq.Template.Loader.html#718bcc50d47fdc3f494b25555b8a784b"><span class="id" title="notation">%&gt;</span></a> "foo'"<br/>

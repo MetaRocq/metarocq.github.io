@@ -107,6 +107,7 @@
 Mainly for testing purposes 
 </div>
 <div class="code">
+<span class="comment">(*&nbsp;Needs&nbsp;to&nbsp;set&nbsp;universe&nbsp;to&nbsp;Set&nbsp;otherwise&nbsp;make&nbsp;vos&nbsp;without&nbsp;Universe&nbsp;Checking&nbsp;fails&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="extract_def_name" class="idref" href="#extract_def_name"><span class="id" title="definition">extract_def_name</span></a> {<a id="A:27" class="idref" href="#A:27"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>} (<a id="a:28" class="idref" href="#a:28"><span class="id" title="binder">a</span></a> : <a class="idref" href="MetaCoq.Erasure.Typed.CertifyingBeta.html#A:27"><span class="id" title="variable">A</span></a>) : <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#TemplateMonad"><span class="id" title="inductive">TemplateMonad@</span></a><a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#TemplateMonad"><span class="id" title="inductive">{</span></a><a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#TemplateMonad"><span class="id" title="inductive">_</span></a> <a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#TemplateMonad"><span class="id" title="inductive">Set</span></a><a class="idref" href="MetaCoq.Template.TemplateMonad.Core.html#TemplateMonad"><span class="id" title="inductive">}</span></a> <a class="idref" href="MetaCoq.Common.Kernames.html#KernameSet.elt"><span class="id" title="definition">KernameSet.elt</span></a> :=<br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.Typed.Utils.html#extract_def_name"><span class="id" title="definition">extract_def_name</span></a> <a class="idref" href="MetaCoq.Erasure.Typed.CertifyingBeta.html#a:28"><span class="id" title="variable">a</span></a>.<br/>
 
@@ -132,6 +133,7 @@ Mainly for testing purposes
 &nbsp;&nbsp;<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Run</span> (<a class="idref" href="MetaCoq.Erasure.Typed.CertifyingBeta.html#betared_def"><span class="id" title="definition">betared_def</span></a> <a class="idref" href="MetaCoq.Erasure.Typed.CertifyingBeta.html#Ex1.foo"><span class="id" title="definition">foo</span></a>).<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;FIXME:&nbsp;it's&nbsp;a&nbsp;bit&nbsp;fragile&nbsp;to&nbsp;refer&nbsp;to&nbsp;unquoted&nbsp;definitions,&nbsp;because&nbsp;their&nbsp;names&nbsp;depend&nbsp;on&nbsp;a&nbsp;module/path&nbsp;they&nbsp;are&nbsp;in&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="var">MetaCoq</span> <span class="id" title="var">Quote</span> <span class="id" title="var">Recursively</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">foo_after</span> :=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Erasure.Typed.CertifyingBeta.html#Ex1.MetaCoq_Erasure_Typed_CertifyingBeta_Ex1_foo_after_betared"><span class="id" title="definition">MetaCoq_Erasure_Typed_CertifyingBeta_Ex1_foo_after_betared</span></a>.<br/>
 

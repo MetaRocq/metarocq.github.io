@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICAlpha</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.CRelationClasses.html#"><span class="id" title="library">CRelationClasses</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.CMorphisms.html#"><span class="id" title="library">CMorphisms</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
@@ -43,6 +44,7 @@
 <span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Alpha&nbsp;convertible&nbsp;terms&nbsp;and&nbsp;contexts&nbsp;have&nbsp;the&nbsp;same&nbsp;typings&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">cf</span> : <a class="idref" href="MetaCoq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>.<br/>
@@ -73,6 +75,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<a id="cf:5" class="idref" href="#cf:5"><span class="id" title="binder">cf</span></a>:<a class="idref" href="MetaCoq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>}.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;TODO&nbsp;MOVE&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="wf_local_nth_error_vass" class="idref" href="#wf_local_nth_error_vass"><span class="id" title="lemma">wf_local_nth_error_vass</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="f525610baade8c1419220d275a93fff0" class="idref" href="#f525610baade8c1419220d275a93fff0"><span class="id" title="binder">Σ</span></a> <a id="de9bdb4e9c2be34cf9b5e2f20d66b06e" class="idref" href="#de9bdb4e9c2be34cf9b5e2f20d66b06e"><span class="id" title="binder">Γ</span></a> <a id="i:8" class="idref" href="#i:8"><span class="id" title="binder">i</span></a> <a id="na:9" class="idref" href="#na:9"><span class="id" title="binder">na</span></a> <a id="ty:10" class="idref" href="#ty:10"><span class="id" title="binder">ty</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.PCUIC.PCUICTyping.html#wf"><span class="id" title="class">wf</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#f525610baade8c1419220d275a93fff0"><span class="id" title="variable">Σ</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -101,6 +104,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;TODO&nbsp;MOVE&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="fix_context_nth_error" class="idref" href="#fix_context_nth_error"><span class="id" title="lemma">fix_context_nth_error</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="m:11" class="idref" href="#m:11"><span class="id" title="binder">m</span></a> <a id="i:12" class="idref" href="#i:12"><span class="id" title="binder">i</span></a> <a id="d:13" class="idref" href="#d:13"><span class="id" title="binder">d</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#nth_error"><span class="id" title="definition">nth_error</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#m:11"><span class="id" title="variable">m</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#i:12"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#d:13"><span class="id" title="variable">d</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
@@ -117,6 +121,7 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;TODO&nbsp;MOVE&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a id="nth_error_weak_context" class="idref" href="#nth_error_weak_context"><span class="id" title="lemma">nth_error_weak_context</span></a> :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="6f77cad99d2eda9ef19109858c066b07" class="idref" href="#6f77cad99d2eda9ef19109858c066b07"><span class="id" title="binder">Γ</span></a> <a id="7ee6c73ac519f9cc1d66bb79070462a5" class="idref" href="#7ee6c73ac519f9cc1d66bb79070462a5"><span class="id" title="binder">Δ</span></a> <a id="i:16" class="idref" href="#i:16"><span class="id" title="binder">i</span></a> <a id="d:17" class="idref" href="#d:17"><span class="id" title="binder">d</span></a>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#nth_error"><span class="id" title="definition">nth_error</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#7ee6c73ac519f9cc1d66bb79070462a5"><span class="id" title="variable">Δ</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#i:16"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICAlpha.html#d:17"><span class="id" title="variable">d</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>

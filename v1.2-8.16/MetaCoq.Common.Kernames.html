@@ -30,6 +30,7 @@
 <div class="code">
 
 <br/>
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.micromega.Lia.html#"><span class="id" title="library">Lia</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.MSets.MSetList.html#"><span class="id" title="library">MSetList</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Structures.OrderedTypeAlt.html#"><span class="id" title="library">OrderedTypeAlt</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Structures.OrderedTypeEx.html#"><span class="id" title="library">OrderedTypeEx</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.FSets.FMapAVL.html#"><span class="id" title="library">FMapAVL</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.FSets.FMapFacts.html#"><span class="id" title="library">FMapFacts</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.MSets.MSetAVL.html#"><span class="id" title="library">MSetAVL</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.MSets.MSetFacts.html#"><span class="id" title="library">MSetFacts</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.MSets.MSetProperties.html#"><span class="id" title="library">MSetProperties</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a> <a class="idref" href="MetaCoq.Utils.MCMSets.html#"><span class="id" title="library">MCMSets</span></a> <a class="idref" href="MetaCoq.Utils.MCFSets.html#"><span class="id" title="library">MCFSets</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a>.<br/>
@@ -112,7 +113,9 @@
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Definition</span> <a id="ident" class="idref" href="#ident"><span class="id" title="definition">ident</span></a>   := <a class="idref" href="MetaCoq.Utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a>. <span class="id" title="keyword">Definition</span> <a id="qualid" class="idref" href="#qualid"><span class="id" title="definition">qualid</span></a>  := <a class="idref" href="MetaCoq.Utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a>. 
+<span class="id" title="keyword">Definition</span> <a id="ident" class="idref" href="#ident"><span class="id" title="definition">ident</span></a>   := <a class="idref" href="MetaCoq.Utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a>. <span class="comment">(*&nbsp;e.g.&nbsp;nat&nbsp;*)</span><br/>
+<span class="id" title="keyword">Definition</span> <a id="qualid" class="idref" href="#qualid"><span class="id" title="definition">qualid</span></a>  := <a class="idref" href="MetaCoq.Utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a>. <span class="comment">(*&nbsp;e.g.&nbsp;Datatypes.nat&nbsp;*)</span><br/>
+
 <br/>
 </div>
 
@@ -215,6 +218,8 @@ The absolute names of objects seen by kernel
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Common.Kernames.html#string_of_modpath"><span class="id" title="definition">string_of_modpath</span></a> <a class="idref" href="MetaCoq.Common.Kernames.html#kn:13"><span class="id" title="variable">kn</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.1'"><span class="id" title="notation">.1</span></a> <a class="idref" href="MetaCoq.Utils.utils.html#ee0c685eaa3e4bb6fc08727e7542b6f9"><span class="id" title="notation">^</span></a> "." <a class="idref" href="MetaCoq.Utils.utils.html#ee0c685eaa3e4bb6fc08727e7542b6f9"><span class="id" title="notation">^</span></a> <a class="idref" href="MetaCoq.Common.Kernames.html#kn:13"><span class="id" title="variable">kn</span></a><a class="idref" href="MetaCoq.Utils.MCProd.html#::pair_scope:x_'.2'"><span class="id" title="notation">.2</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Eval&nbsp;compute&nbsp;in&nbsp;DirPathOT.compare&nbsp;<span class="inlinecode">&quot;<span class="id" title="var">foo</span>&quot;;</span> <span class="inlinecode">&quot;<span class="id" title="var">bar</span>&quot;</span>&nbsp;<span class="inlinecode">&quot;<span class="id" title="var">baz</span>&quot;</span>.<br/>
+&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Module</span> <a id="ModPathComp" class="idref" href="#ModPathComp"><span class="id" title="module">ModPathComp</span></a>.<br/>
@@ -494,6 +499,8 @@ The absolute names of objects seen by kernel
 <span class="id" title="keyword">Definition</span> <a id="eq_constant" class="idref" href="#eq_constant"><span class="id" title="definition">eq_constant</span></a> := <a class="idref" href="MetaCoq.Common.Kernames.html#eq_kername"><span class="id" title="abbreviation">eq_kername</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Local&nbsp;Open&nbsp;Scope&nbsp;string_scope.*)</span><br/>
+<span class="comment">(*&nbsp;Eval&nbsp;compute&nbsp;in&nbsp;KernameOT.compare&nbsp;(MPfile&nbsp;<span class="inlinecode">&quot;<span class="id" title="var">fdejrkjl</span>&quot;</span>,&nbsp;"A")&nbsp;(MPfile&nbsp;<span class="inlinecode">&quot;<span class="id" title="var">lfrk</span>;<span class="id" title="var">k</span>&quot;</span>,&nbsp;"B").&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Module</span> <a id="KernameSet" class="idref" href="#KernameSet"><span class="id" title="module">KernameSet</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.MSets.MSetAVL.html#Make"><span class="id" title="module">MSetAVL.Make</span></a> <a class="idref" href="MetaCoq.Common.Kernames.html#Kername"><span class="id" title="module">Kername</span></a>.<br/>
@@ -567,8 +574,8 @@ Designation of a (particular) inductive type.
 <br/>
 <span class="id" title="keyword">Record</span> <a id="projection" class="idref" href="#projection"><span class="id" title="record">projection</span></a> := <span class="id" title="var">mkProjection</span><br/>
 &nbsp;&nbsp;{ <a id="proj_ind" class="idref" href="#proj_ind"><span class="id" title="projection">proj_ind</span></a> : <a class="idref" href="MetaCoq.Common.Kernames.html#inductive"><span class="id" title="record">inductive</span></a>;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a id="proj_npars" class="idref" href="#proj_npars"><span class="id" title="projection">proj_npars</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>; <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a id="proj_arg" class="idref" href="#proj_arg"><span class="id" title="projection">proj_arg</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>  }.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a id="proj_npars" class="idref" href="#proj_npars"><span class="id" title="projection">proj_npars</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>; <span class="comment">(*&nbsp;Number&nbsp;of&nbsp;(non-let)&nbsp;parameters&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a id="proj_arg" class="idref" href="#proj_arg"><span class="id" title="projection">proj_arg</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <span class="comment">(*&nbsp;Argument&nbsp;to&nbsp;project&nbsp;*)</span> }.<br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="eq_projection" class="idref" href="#eq_projection"><span class="id" title="definition">eq_projection</span></a> (<a id="p:81" class="idref" href="#p:81"><span class="id" title="binder">p</span></a> <a id="p':82" class="idref" href="#p':82"><span class="id" title="binder">p'</span></a> : <a class="idref" href="MetaCoq.Common.Kernames.html#projection"><span class="id" title="record">projection</span></a>) :=<br/>

@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Erasure.ECSubst</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Erasure</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Erasure.EAst.html#"><span class="id" title="library">EAst</span></a> <a class="idref" href="MetaCoq.Erasure.EAstUtils.html#"><span class="id" title="library">EAstUtils</span></a> <a class="idref" href="MetaCoq.Erasure.EInduction.html#"><span class="id" title="library">EInduction</span></a> <a class="idref" href="MetaCoq.Erasure.ELiftSubst.html#"><span class="id" title="library">ELiftSubst</span></a>.<br/>
@@ -120,6 +121,61 @@ It is equivalent to general substitution on closed terms.
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;closedn_subst&nbsp;s&nbsp;k&nbsp;k'&nbsp;t&nbsp;:<br/>
+&nbsp;&nbsp;forallb&nbsp;(closedn&nbsp;k)&nbsp;s&nbsp;-&gt;&nbsp;closedn&nbsp;(k&nbsp;+&nbsp;k'&nbsp;+&nbsp;|s|) t ->
+  closedn (k + k') (subst s k' t).
+Proof.
+  intros Hs. solve_all. revert H.
+  induction t in k' |- * using term_forall_list_ind; intros;
+    simpl in *;
+    rewrite -> ?map_map_compose, ?compose_on_snd, ?compose_map_def, ?map_length;
+    simpl closed in *; try change_Sk; repeat (rtoProp; solve_all);
+    unfold compose, test_def, on_snd, test_snd in *; simpl in *; eauto with all.
+
+  - elim (Nat.leb_spec k' n); intros. simpl.
+    apply Nat.ltb_lt in H.
+    destruct nth_error eqn:Heq.
+    -- eapply closedn_lift.
+       now eapply nth_error_all in Heq; simpl; eauto; simpl in *.
+    -- simpl. elim (Nat.ltb_spec); auto. intros.
+       apply nth_error_None in Heq. lia.
+    -- simpl. apply Nat.ltb_lt in H0.
+       apply Nat.ltb_lt. apply Nat.ltb_lt in H0. lia.
+
+  - specialize (IHt2 (S k')).
+    rewrite <- Nat.add_succ_comm in IHt2. eauto.
+  - specialize (IHt2 (S k')).
+    rewrite <- Nat.add_succ_comm in IHt2. eauto.
+  - specialize (IHt3 (S k')).
+    rewrite <- Nat.add_succ_comm in IHt3. eauto.
+  - rtoProp; solve_all. rewrite -> !Nat.add_assoc in *.
+    specialize (b0 (|m|&nbsp;+&nbsp;k')).&nbsp;unfold&nbsp;is_true.&nbsp;rewrite&nbsp;&lt;-&nbsp;b0.&nbsp;f_equal.&nbsp;lia.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;is_true.&nbsp;rewrite&nbsp;&lt;-&nbsp;H0.&nbsp;f_equal.&nbsp;lia.<br/>
+&nbsp;&nbsp;-&nbsp;rtoProp;&nbsp;solve_all.&nbsp;rewrite&nbsp;-&gt;&nbsp;!Nat.add_assoc&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;specialize&nbsp;(b0&nbsp;(|m| + k')). unfold is_true. rewrite <- b0. f_equal. lia.
+    unfold is_true. rewrite <- H0. f_equal. lia.
+Qed.
+
+Lemma closedn_subst0 s k t :
+  forallb (closedn k) s -> closedn (k + |s|)&nbsp;t&nbsp;-&gt;<br/>
+&nbsp;&nbsp;closedn&nbsp;k&nbsp;(subst0&nbsp;s&nbsp;t).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros.<br/>
+&nbsp;&nbsp;generalize&nbsp;(closedn_subst&nbsp;s&nbsp;k&nbsp;0&nbsp;t&nbsp;H).<br/>
+&nbsp;&nbsp;rewrite&nbsp;Nat.add_0_r.&nbsp;eauto.<br/>
+Qed.<br/>
+<br/>
+<br/>
+<br/>
+Lemma&nbsp;closed_csubst&nbsp;t&nbsp;k&nbsp;u&nbsp;:&nbsp;closed&nbsp;t&nbsp;-&gt;&nbsp;closedn&nbsp;(S&nbsp;k)&nbsp;u&nbsp;-&gt;&nbsp;closedn&nbsp;k&nbsp;(csubst&nbsp;t&nbsp;0&nbsp;u).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros.<br/>
+&nbsp;&nbsp;rewrite&nbsp;closed_subst;&nbsp;auto.<br/>
+&nbsp;&nbsp;eapply&nbsp;closedn_subst0.&nbsp;simpl.&nbsp;erewrite&nbsp;closed_upwards;&nbsp;eauto.&nbsp;lia.<br/>
+&nbsp;&nbsp;simpl.&nbsp;now&nbsp;rewrite&nbsp;Nat.add_1_r.<br/>
+Qed.<br/>
+*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="closed_csubst" class="idref" href="#closed_csubst"><span class="id" title="lemma">closed_csubst</span></a> <a id="t:21" class="idref" href="#t:21"><span class="id" title="binder">t</span></a> <a id="k:22" class="idref" href="#k:22"><span class="id" title="binder">k</span></a> <a id="u:23" class="idref" href="#u:23"><span class="id" title="binder">u</span></a> :<br/>

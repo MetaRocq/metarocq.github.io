@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Template.LiftSubst</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.Environment.html#"><span class="id" title="library">Environment</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Template.Ast.html#"><span class="id" title="library">Ast</span></a> <a class="idref" href="MetaCoq.Template.AstUtils.html#"><span class="id" title="library">AstUtils</span></a> <a class="idref" href="MetaCoq.Template.Induction.html#"><span class="id" title="library">Induction</span></a> <a class="idref" href="MetaCoq.Template.WfAst.html#"><span class="id" title="library">WfAst</span></a>.<br/>
@@ -552,7 +553,12 @@
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span>. <span class="id" title="tactic">unfold</span> <a class="idref" href="MetaCoq.Common.BasicAst.html#map_decl"><span class="id" title="definition">map_decl</span></a>, <a class="idref" href="MetaCoq.Template.Ast.html#Env.vass"><span class="id" title="definition">vass</span></a>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">f_equal</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <a class="idref" href="MetaCoq.Template.LiftSubst.html#permute_lift"><span class="id" title="lemma">permute_lift</span></a>. <span class="id" title="var">lia</span>. <span class="id" title="tactic">f_equal</span>; <span class="id" title="var">lia</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
- 
+<span class="comment">(*<br/>
+Lemma&nbsp;noccur_between_subst&nbsp;k&nbsp;n&nbsp;t&nbsp;:&nbsp;noccur_between&nbsp;k&nbsp;n&nbsp;t&nbsp;-&gt;<br/>
+&nbsp;&nbsp;closedn&nbsp;(n&nbsp;+&nbsp;k)&nbsp;t&nbsp;-&gt;&nbsp;closedn&nbsp;k&nbsp;t.<br/>
+Proof.<br/>
+Qed.&nbsp;&nbsp;*)</span> <span class="comment">(*&nbsp;TODO&nbsp;*)</span><br/>
+
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="strip_casts_lift" class="idref" href="#strip_casts_lift"><span class="id" title="lemma">strip_casts_lift</span></a> <a id="n:158" class="idref" href="#n:158"><span class="id" title="binder">n</span></a> <a id="k:159" class="idref" href="#k:159"><span class="id" title="binder">k</span></a> <a id="t:160" class="idref" href="#t:160"><span class="id" title="binder">t</span></a> :<br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Template.AstUtils.html#strip_casts"><span class="id" title="definition">strip_casts</span></a> (<a class="idref" href="MetaCoq.Template.Ast.html#lift"><span class="id" title="definition">lift</span></a> <a class="idref" href="MetaCoq.Template.LiftSubst.html#n:158"><span class="id" title="variable">n</span></a> <a class="idref" href="MetaCoq.Template.LiftSubst.html#k:159"><span class="id" title="variable">k</span></a> <a class="idref" href="MetaCoq.Template.LiftSubst.html#t:160"><span class="id" title="variable">t</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="MetaCoq.Template.Ast.html#lift"><span class="id" title="definition">lift</span></a> <a class="idref" href="MetaCoq.Template.LiftSubst.html#n:158"><span class="id" title="variable">n</span></a> <a class="idref" href="MetaCoq.Template.LiftSubst.html#k:159"><span class="id" title="variable">k</span></a> (<a class="idref" href="MetaCoq.Template.AstUtils.html#strip_casts"><span class="id" title="definition">strip_casts</span></a> <a class="idref" href="MetaCoq.Template.LiftSubst.html#t:160"><span class="id" title="variable">t</span></a>).<br/>
@@ -574,6 +580,10 @@
 <span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">t</span>; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">eexists</span> <span class="id" title="var">_</span>, <span class="id" title="var">_</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;mkApps_tApp'&nbsp;f&nbsp;l&nbsp;l'&nbsp;:&nbsp;mkApps&nbsp;(tApp&nbsp;f&nbsp;l)&nbsp;l'&nbsp;=&nbsp;mkApps&nbsp;f&nbsp;(l&nbsp;++&nbsp;l').<br/>
+Proof.<br/>
+&nbsp;&nbsp;induction&nbsp;l';&nbsp;simpl.&nbsp;rewrite&nbsp;app_nil_r.&nbsp;&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Lemma</span> <a id="list_length_ind" class="idref" href="#list_length_ind"><span class="id" title="lemma">list_length_ind</span></a> {<a id="A:166" class="idref" href="#A:166"><span class="id" title="binder">A</span></a>} (<a id="P:167" class="idref" href="#P:167"><span class="id" title="binder">P</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaCoq.Template.LiftSubst.html#A:166"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Type</span>) (<a id="p0:168" class="idref" href="#p0:168"><span class="id" title="binder">p0</span></a> : <a class="idref" href="MetaCoq.Template.LiftSubst.html#P:167"><span class="id" title="variable">P</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>)<br/>

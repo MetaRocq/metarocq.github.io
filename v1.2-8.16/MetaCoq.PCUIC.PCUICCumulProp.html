@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.PCUIC.PCUICCumulProp</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssrbool.html#"><span class="id" title="library">ssrbool</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Common.Universes.html#"><span class="id" title="library">Universes</span></a>.<br/>
@@ -505,6 +506,21 @@
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;is_prop_subst_level_expr&nbsp;u1&nbsp;u2&nbsp;s&nbsp;:<br/>
+&nbsp;&nbsp;Forall2&nbsp;(fun&nbsp;x&nbsp;y&nbsp;:&nbsp;Level.t&nbsp;=&gt;&nbsp;eq_univ_prop&nbsp;(Universe.make&nbsp;x)&nbsp;(Universe.make&nbsp;y))&nbsp;u1&nbsp;u2&nbsp;&nbsp;-&gt;<br/>
+&nbsp;&nbsp;LevelExpr.is_prop&nbsp;(subst_instance_level_expr&nbsp;u1&nbsp;s)&nbsp;=&nbsp;LevelExpr.is_prop&nbsp;(subst_instance_level_expr&nbsp;u2&nbsp;s).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;hu.&nbsp;destruct&nbsp;s;&nbsp;simpl;&nbsp;auto.<br/>
+&nbsp;&nbsp;destruct&nbsp;e&nbsp;as&nbsp;<span class="inlinecode">[]</span> <span class="inlinecode">?</span>;&nbsp;simpl;&nbsp;auto.<br/>
+&nbsp;&nbsp;destruct&nbsp;(nth_error&nbsp;u1&nbsp;n)&nbsp;eqn:E.<br/>
+&nbsp;&nbsp;eapply&nbsp;Forall2_nth_error_Some_l&nbsp;in&nbsp;hu;&nbsp;eauto.<br/>
+&nbsp;&nbsp;destruct&nbsp;hu&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">t'</span></span> <span class="inlinecode">[-&gt;</span> <span class="inlinecode"><span class="id" title="var">eq</span>]</span>.<br/>
+&nbsp;&nbsp;red&nbsp;in&nbsp;eq.&nbsp;rewrite&nbsp;!univ_is_prop_make&nbsp;in&nbsp;eq.<br/>
+&nbsp;&nbsp;eapply&nbsp;eq_iff_eq_true&nbsp;in&nbsp;eq.<br/>
+&nbsp;&nbsp;destruct&nbsp;t,&nbsp;t';&nbsp;simpl&nbsp;in&nbsp;eq&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;eapply&nbsp;Forall2_nth_error_None_l&nbsp;in&nbsp;hu;&nbsp;eauto.<br/>
+&nbsp;&nbsp;now&nbsp;rewrite&nbsp;hu.<br/>
+Qed.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Instance</span> <a id="substuniv_eq_univ_prop" class="idref" href="#substuniv_eq_univ_prop"><span class="id" title="instance">substuniv_eq_univ_prop</span></a> : <a class="idref" href="MetaCoq.PCUIC.Conversion.PCUICUnivSubstitutionConv.html#SubstUnivPreserving"><span class="id" title="class">SubstUnivPreserving</span></a> <a class="idref" href="MetaCoq.PCUIC.PCUICCumulProp.html#eq_univ_prop"><span class="id" title="definition">eq_univ_prop</span></a>.<br/>

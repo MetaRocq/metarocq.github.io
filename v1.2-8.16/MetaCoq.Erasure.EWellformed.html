@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Erasure.EWellformed</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Unicode.Utf8.html#"><span class="id" title="library">Utf8</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Program.Program.html#"><span class="id" title="library">Program</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Common.config.html#"><span class="id" title="library">config</span></a> <a class="idref" href="MetaCoq.Common.Kernames.html#"><span class="id" title="library">Kernames</span></a>.<br/>
@@ -120,6 +121,13 @@
 &nbsp;&nbsp;<span class="id" title="keyword">Variable</span> <a id="0dab976f04480dade18b27a05c867747" class="idref" href="#0dab976f04480dade18b27a05c867747"><span class="id" title="variable">Σ</span></a> : <a class="idref" href="MetaCoq.Erasure.EAst.html#global_context"><span class="id" title="abbreviation">global_context</span></a>.<br/>
 
 <br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;a&nbsp;term&nbsp;term&nbsp;is&nbsp;wellformed&nbsp;if<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;it&nbsp;is&nbsp;closed&nbsp;up&nbsp;to&nbsp;k,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;it&nbsp;only&nbsp;contains&nbsp;constructors&nbsp;as&nbsp;indicated&nbsp;by&nbsp;sw,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;all&nbsp;occuring&nbsp;constructors&nbsp;are&nbsp;defined,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;all&nbsp;occuring&nbsp;constants&nbsp;are&nbsp;defined,&nbsp;and<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;all&nbsp;occuring&nbsp;fixpoints&nbsp;have&nbsp;lambdas&nbsp;as&nbsp;bodies<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;if&nbsp;has_axioms&nbsp;is&nbsp;false,&nbsp;all&nbsp;occuring&nbsp;constants&nbsp;have&nbsp;bodies&nbsp;*)</span><br/>
 
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a id="wf_fix_gen" class="idref" href="#wf_fix_gen"><span class="id" title="definition">wf_fix_gen</span></a> (<a id="wf:26" class="idref" href="#wf:26"><span class="id" title="binder">wf</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Erasure.EAst.html#term"><span class="id" title="inductive">term</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) <a id="k:27" class="idref" href="#k:27"><span class="id" title="binder">k</span></a> <a id="mfix:28" class="idref" href="#mfix:28"><span class="id" title="binder">mfix</span></a> <a id="idx:29" class="idref" href="#idx:29"><span class="id" title="binder">idx</span></a> :=<br/>

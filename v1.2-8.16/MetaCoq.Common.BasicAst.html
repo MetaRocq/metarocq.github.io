@@ -28,6 +28,7 @@
 <h1 class="libtitle">Library MetaCoq.Common.BasicAst</h1>
 
 <div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ssr.ssreflect.html#"><span class="id" title="library">ssreflect</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Classes.Morphisms.html#"><span class="id" title="library">Morphisms</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Structures.Orders.html#"><span class="id" title="library">Orders</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Setoids.Setoid.html#"><span class="id" title="library">Setoid</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="MetaCoq.Common.Kernames.html#"><span class="id" title="library">Kernames</span></a>.<br/>
@@ -127,7 +128,9 @@ The kind of a cast
 <span class="id" title="keyword">Record</span> <a id="case_info" class="idref" href="#case_info"><span class="id" title="record">case_info</span></a> := <span class="id" title="var">mk_case_info</span> {<br/>
 &nbsp;&nbsp;<a id="ci_ind" class="idref" href="#ci_ind"><span class="id" title="projection">ci_ind</span></a> : <a class="idref" href="MetaCoq.Common.Kernames.html#inductive"><span class="id" title="record">inductive</span></a>;<br/>
 &nbsp;&nbsp;<a id="ci_npar" class="idref" href="#ci_npar"><span class="id" title="projection">ci_npar</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>;<br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Not&nbsp;implemented&nbsp;yet,&nbsp;as&nbsp;the&nbsp;representation&nbsp;in&nbsp;PCUIC&nbsp;doesn't&nbsp;need&nbsp;this&nbsp;cached&nbsp;information.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ci_cstr_nargs&nbsp;:&nbsp;list&nbsp;nat;&nbsp;<span class="comment">(*&nbsp;The&nbsp;number&nbsp;of&nbsp;REAL&nbsp;arguments&nbsp;of&nbsp;each&nbsp;constructor&nbsp;(no&nbsp;params,&nbsp;no&nbsp;lets)&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ci_cstr_ndecls&nbsp;:&nbsp;list&nbsp;nat;&nbsp;<span class="comment">(*&nbsp;The&nbsp;number&nbsp;of&nbsp;arguments&nbsp;of&nbsp;each&nbsp;constructor&nbsp;(no&nbsp;params&nbsp;but&nbsp;lets&nbsp;included)&nbsp;*)</span>&nbsp;&nbsp;&nbsp;*)</span><br/>
 &nbsp;&nbsp;<a id="ci_relevance" class="idref" href="#ci_relevance"><span class="id" title="projection">ci_relevance</span></a> : <a class="idref" href="MetaCoq.Common.BasicAst.html#relevance"><span class="id" title="inductive">relevance</span></a> }.<br/>
 <span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="var">EqDec</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Common.BasicAst.html#case_info"><span class="id" title="record">case_info</span></a>.<br/>
 
@@ -135,17 +138,19 @@ The kind of a cast
 <span class="id" title="keyword">Definition</span> <a id="string_of_case_info" class="idref" href="#string_of_case_info"><span class="id" title="definition">string_of_case_info</span></a> <a id="ci:32" class="idref" href="#ci:32"><span class="id" title="binder">ci</span></a> :=<br/>
 &nbsp;&nbsp;"(" <a class="idref" href="MetaCoq.Utils.utils.html#ee0c685eaa3e4bb6fc08727e7542b6f9"><span class="id" title="notation">^</span></a> <a class="idref" href="MetaCoq.Common.Kernames.html#string_of_inductive"><span class="id" title="definition">string_of_inductive</span></a> <a class="idref" href="MetaCoq.Common.BasicAst.html#ci:32"><span class="id" title="variable">ci</span></a>.(<a class="idref" href="MetaCoq.Common.BasicAst.html#ci_ind"><span class="id" title="projection">ci_ind</span></a>) <a class="idref" href="MetaCoq.Utils.utils.html#ee0c685eaa3e4bb6fc08727e7542b6f9"><span class="id" title="notation">^</span></a> "," <a class="idref" href="MetaCoq.Utils.utils.html#ee0c685eaa3e4bb6fc08727e7542b6f9"><span class="id" title="notation">^</span></a><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.MCString.html#string_of_nat"><span class="id" title="definition">string_of_nat</span></a> <a class="idref" href="MetaCoq.Common.BasicAst.html#ci:32"><span class="id" title="variable">ci</span></a>.(<a class="idref" href="MetaCoq.Common.BasicAst.html#ci_npar"><span class="id" title="projection">ci_npar</span></a>) <a class="idref" href="MetaCoq.Utils.utils.html#ee0c685eaa3e4bb6fc08727e7542b6f9"><span class="id" title="notation">^</span></a> "," <a class="idref" href="MetaCoq.Utils.utils.html#ee0c685eaa3e4bb6fc08727e7542b6f9"><span class="id" title="notation">^</span></a><br/>
-&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;string_of_list&nbsp;string_of_nat&nbsp;ci.(ci_cstr_nargs)&nbsp;^&nbsp;","&nbsp;^<br/>
+&nbsp;&nbsp;string_of_list&nbsp;string_of_nat&nbsp;ci.(ci_cstr_ndecls)&nbsp;^&nbsp;","&nbsp;^&nbsp;*)</span><br/>
 &nbsp;&nbsp;<a class="idref" href="MetaCoq.Common.BasicAst.html#string_of_relevance"><span class="id" title="definition">string_of_relevance</span></a> <a class="idref" href="MetaCoq.Common.BasicAst.html#ci:32"><span class="id" title="variable">ci</span></a>.(<a class="idref" href="MetaCoq.Common.BasicAst.html#ci_relevance"><span class="id" title="projection">ci_relevance</span></a>) <a class="idref" href="MetaCoq.Utils.utils.html#ee0c685eaa3e4bb6fc08727e7542b6f9"><span class="id" title="notation">^</span></a> ")".<br/>
 
 <br/>
 <span class="id" title="keyword">Inductive</span> <a id="recursivity_kind" class="idref" href="#recursivity_kind"><span class="id" title="inductive">recursivity_kind</span></a> :=<br/>
-&nbsp;&nbsp;| <a id="Finite" class="idref" href="#Finite"><span class="id" title="constructor">Finite</span></a> <br/>
-&nbsp;&nbsp;| <a id="CoFinite" class="idref" href="#CoFinite"><span class="id" title="constructor">CoFinite</span></a> <br/>
-&nbsp;&nbsp;| <a id="BiFinite" class="idref" href="#BiFinite"><span class="id" title="constructor">BiFinite</span></a> .<br/>
+&nbsp;&nbsp;| <a id="Finite" class="idref" href="#Finite"><span class="id" title="constructor">Finite</span></a> <span class="comment">(*&nbsp;=&nbsp;inductive&nbsp;*)</span><br/>
+&nbsp;&nbsp;| <a id="CoFinite" class="idref" href="#CoFinite"><span class="id" title="constructor">CoFinite</span></a> <span class="comment">(*&nbsp;=&nbsp;coinductive&nbsp;*)</span><br/>
+&nbsp;&nbsp;| <a id="BiFinite" class="idref" href="#BiFinite"><span class="id" title="constructor">BiFinite</span></a> <span class="comment">(*&nbsp;=&nbsp;non-recursive,&nbsp;like&nbsp;in&nbsp;"Record"&nbsp;definitions&nbsp;*)</span>.<br/>
 <span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="var">EqDec</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Common.BasicAst.html#recursivity_kind"><span class="id" title="inductive">recursivity_kind</span></a>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;The&nbsp;kind&nbsp;of&nbsp;a&nbsp;conversion&nbsp;problem&nbsp;*)</span><br/>
 <span class="id" title="keyword">Inductive</span> <a id="conv_pb" class="idref" href="#conv_pb"><span class="id" title="inductive">conv_pb</span></a> :=<br/>
 &nbsp;&nbsp;| <a id="Conv" class="idref" href="#Conv"><span class="id" title="constructor">Conv</span></a><br/>
 &nbsp;&nbsp;| <a id="Cumul" class="idref" href="#Cumul"><span class="id" title="constructor">Cumul</span></a>.<br/>
@@ -159,14 +164,17 @@ The kind of a cast
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;This&nbsp;opaque&nbsp;natural&nbsp;number&nbsp;is&nbsp;a&nbsp;hack&nbsp;to&nbsp;inform&nbsp;unquoting&nbsp;to&nbsp;generate<br/>
+&nbsp;&nbsp;a&nbsp;fresh&nbsp;evar&nbsp;when&nbsp;encountering&nbsp;it.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <a id="fresh_evar_id" class="idref" href="#fresh_evar_id"><span class="id" title="definition">fresh_evar_id</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>. <span class="id" title="tactic">exact</span> 0. <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
+<span class="comment">(*&nbsp;Parametrized&nbsp;by&nbsp;term&nbsp;because&nbsp;term&nbsp;is&nbsp;not&nbsp;yet&nbsp;defined&nbsp;*)</span><br/>
 <span class="id" title="keyword">Record</span> <a id="def" class="idref" href="#def"><span class="id" title="record">def</span></a> <a id="term:41" class="idref" href="#term:41"><span class="id" title="binder">term</span></a> := <span class="id" title="var">mkdef</span> {<br/>
-&nbsp;&nbsp;<a id="dname" class="idref" href="#dname"><span class="id" title="projection">dname</span></a> : <a class="idref" href="MetaCoq.Common.BasicAst.html#aname"><span class="id" title="definition">aname</span></a>; <br/>
+&nbsp;&nbsp;<a id="dname" class="idref" href="#dname"><span class="id" title="projection">dname</span></a> : <a class="idref" href="MetaCoq.Common.BasicAst.html#aname"><span class="id" title="definition">aname</span></a>; <span class="comment">(*&nbsp;the&nbsp;name,&nbsp;annotated&nbsp;with&nbsp;relevance&nbsp;**)</span><br/>
 &nbsp;&nbsp;<a id="dtype" class="idref" href="#dtype"><span class="id" title="projection">dtype</span></a> : <a class="idref" href="MetaCoq.Common.BasicAst.html#term:41"><span class="id" title="variable">term</span></a>;<br/>
-&nbsp;&nbsp;<a id="dbody" class="idref" href="#dbody"><span class="id" title="projection">dbody</span></a> : <a class="idref" href="MetaCoq.Common.BasicAst.html#term:41"><span class="id" title="variable">term</span></a>; <br/>
-&nbsp;&nbsp;<a id="rarg" class="idref" href="#rarg"><span class="id" title="projection">rarg</span></a>  : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>   }.<br/>
+&nbsp;&nbsp;<a id="dbody" class="idref" href="#dbody"><span class="id" title="projection">dbody</span></a> : <a class="idref" href="MetaCoq.Common.BasicAst.html#term:41"><span class="id" title="variable">term</span></a>; <span class="comment">(*&nbsp;the&nbsp;body&nbsp;(a&nbsp;lambda&nbsp;term).&nbsp;Note,&nbsp;this&nbsp;may&nbsp;mention&nbsp;other&nbsp;(mutually-defined)&nbsp;names&nbsp;**)</span><br/>
+&nbsp;&nbsp;<a id="rarg" class="idref" href="#rarg"><span class="id" title="projection">rarg</span></a>  : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>  <span class="comment">(*&nbsp;the&nbsp;index&nbsp;of&nbsp;the&nbsp;recursive&nbsp;argument,&nbsp;0&nbsp;for&nbsp;cofixpoints&nbsp;**)</span> }.<br/>
 
 <br/>
 <span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaCoq.Common.BasicAst.html#dname"><span class="id" title="projection">dname</span></a> {<span class="id" title="var">term</span>} <span class="id" title="var">_</span>.<br/>
@@ -367,6 +375,14 @@ The kind of a cast
 &nbsp;&nbsp;- <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">Hfg</span>.<br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">apply</span> <span class="id" title="var">Hfg</span>.<br/>
 <span class="id" title="keyword">Qed</span>.<br/>
+<span class="comment">(*<br/>
+<br/>
+[global] Instance pointwise_subrelation {A B} : subrelation (`=1`) (@Logic.eq A ==> @Logic.eq B)%signature.
+Proof.
+  intros f g Hfg x y ->. now rewrite Hfg.
+Qed.
+
+<span class="inlinecode"><span class="id" title="var">global</span></span>&nbsp;Instance&nbsp;pointwise_subrelation_inv&nbsp;{A&nbsp;B}&nbsp;:&nbsp;subrelation&nbsp;(@Logic.eq&nbsp;A&nbsp;==&gt;&nbsp;@Logic.eq&nbsp;B)*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <a id="map_context" class="idref" href="#map_context"><span class="id" title="definition">map_context</span></a> {<a id="term:174" class="idref" href="#term:174"><span class="id" title="binder">term</span></a> <a id="term':175" class="idref" href="#term':175"><span class="id" title="binder">term'</span></a>} (<a id="f:176" class="idref" href="#f:176"><span class="id" title="binder">f</span></a> : <a class="idref" href="MetaCoq.Common.BasicAst.html#term:174"><span class="id" title="variable">term</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaCoq.Common.BasicAst.html#term':175"><span class="id" title="variable">term'</span></a>) (<a id="c:177" class="idref" href="#c:177"><span class="id" title="binder">c</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> (<a class="idref" href="MetaCoq.Common.BasicAst.html#context_decl"><span class="id" title="record">context_decl</span></a> <a class="idref" href="MetaCoq.Common.BasicAst.html#term:174"><span class="id" title="variable">term</span></a>)) :=<br/>
