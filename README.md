@@ -188,6 +188,11 @@ Examples of translations built on top of this:
 
 ## Papers
 
+- ["Correct and Complete Type Checking and Certified Erasure for Coq, in Coq"](https://inria.hal.science/hal-04077552) Matthieu Sozeau, Yannick Forster, Meven Lennon-Bertrand, Nicolas Tabareau
+  and Théo Winterhalter. Submitted. April 2023.
+
+  This paper presents the whole metatheoretical development of PCUIC and verified typechecking and erasure, as of version 1.2 of MetaCoq.
+
 - ["The Curious Case of Case"](https://sozeau.gitlabpages.inria.fr/www/research/publications/The_Curious_Case_of_Case-WITS22-220122.pdf) Matthieu Sozeau, Meven Lennon-Bertrand and Yannick Forster. WITS 2022 presentation, Philadelphia.
   This presents the challenges around the representation of cases in Coq and PCUIC.
 
@@ -197,6 +202,9 @@ Examples of translations built on top of this:
 - ["Coq Coq Correct! Verification of Type Checking and Erasure for Coq, in Coq"](https://metacoq.github.io/coqcoqcorrect)
   Matthieu Sozeau, Simon Boulier, Yannick Forster, Nicolas Tabareau
   and Théo Winterhalter. POPL 2020, New Orleans.
+
+  This paper presented the formal proofs of soundness of conversion, type checking and erasure.
+  Now superseded by the Coq Coq Complete version above.
 
 - ["Formalisation and meta-theory of type theory"](https://theowinterhalter.github.io/#phd) Théo Winterhalter, PhD thesis, September 2020. 
   Part 3 describes in detail the verified reduction, conversion and type checker.
