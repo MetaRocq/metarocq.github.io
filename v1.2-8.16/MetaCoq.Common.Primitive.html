@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./indexpage.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaCoq.Common.Primitive</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Numbers.Cyclic.Int63.Uint63.html#"><span class="id" title="library">Uint63</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.PrimFloat.html#"><span class="id" title="library">PrimFloat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.SpecFloat.html#"><span class="id" title="library">SpecFloat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.FloatOps.html#"><span class="id" title="library">FloatOps</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ZArith.ZArith.html#"><span class="id" title="library">ZArith</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Numbers.HexadecimalString.html#"><span class="id" title="library">HexadecimalString</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaCoq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaCoq.Utils.bytestring.html#"><span class="id" title="library">bytestring</span></a> <a class="idref" href="MetaCoq.Utils.MCString.html#"><span class="id" title="library">MCString</span></a>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">bs</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Variant</span> <a id="prim_tag" class="idref" href="#prim_tag"><span class="id" title="inductive">prim_tag</span></a> :=<br/>
+&nbsp;&nbsp;| <a id="primInt" class="idref" href="#primInt"><span class="id" title="constructor">primInt</span></a><br/>
+&nbsp;&nbsp;| <a id="primFloat" class="idref" href="#primFloat"><span class="id" title="constructor">primFloat</span></a>.<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="var">EqDec</span> <span class="id" title="keyword">for</span> <a class="idref" href="MetaCoq.Common.Primitive.html#prim_tag"><span class="id" title="inductive">prim_tag</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="string_of_prim_int" class="idref" href="#string_of_prim_int"><span class="id" title="definition">string_of_prim_int</span></a> (<a id="i:3" class="idref" href="#i:3"><span class="id" title="binder">i</span></a>:<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Numbers.Cyclic.Int63.Uint63.html#int"><span class="id" title="abbreviation">Uint63.int</span></a>) : <a class="idref" href="MetaCoq.Utils.MCString.html#string"><span class="id" title="abbreviation">string</span></a> :=<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.MCString.html#string_of_Z"><span class="id" title="definition">string_of_Z</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Numbers.Cyclic.Int63.Uint63.html#to_Z"><span class="id" title="definition">Uint63.to_Z</span></a> <a class="idref" href="MetaCoq.Common.Primitive.html#i:3"><span class="id" title="variable">i</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="string_of_float" class="idref" href="#string_of_float"><span class="id" title="definition">string_of_float</span></a> (<a id="f:4" class="idref" href="#f:4"><span class="id" title="binder">f</span></a> : <span class="id" title="var">PrimFloat.float</span>) : <a class="idref" href="MetaCoq.Utils.MCString.html#string"><span class="id" title="abbreviation">string</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.FloatOps.html#Prim2SF"><span class="id" title="definition">Prim2SF</span></a> <a class="idref" href="MetaCoq.Common.Primitive.html#f:4"><span class="id" title="variable">f</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.SpecFloat.html#S754_zero"><span class="id" title="constructor">S754_zero</span></a> <span class="id" title="var">sign</span> ⇒ <span class="id" title="keyword">if</span> <span class="id" title="var">sign</span> <span class="id" title="keyword">then</span> "-0" <span class="id" title="keyword">else</span> "0"<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.SpecFloat.html#S754_infinity"><span class="id" title="constructor">S754_infinity</span></a> <span class="id" title="var">sign</span> ⇒ <span class="id" title="keyword">if</span> <span class="id" title="var">sign</span> <span class="id" title="keyword">then</span> "-INFINITY" <span class="id" title="keyword">else</span> "INFINITY"<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.SpecFloat.html#S754_nan"><span class="id" title="constructor">S754_nan</span></a> ⇒ "NAN"<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Floats.SpecFloat.html#S754_finite"><span class="id" title="constructor">S754_finite</span></a> <span class="id" title="var">sign</span> <span class="id" title="var">p</span> <span class="id" title="var">z</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <a id="abs:5" class="idref" href="#abs:5"><span class="id" title="binder">abs</span></a> := "0x" <a class="idref" href="MetaCoq.Utils.bytestring.html#da3fc5e689cedcb9491dd6dad17e0422"><span class="id" title="notation">++</span></a> <a class="idref" href="MetaCoq.Utils.bytestring.html#String.of_string"><span class="id" title="definition">bytestring.String.of_string</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Numbers.HexadecimalString.html#NilZero.string_of_uint"><span class="id" title="definition">Numbers.HexadecimalString.NilZero.string_of_uint</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.PArith.BinPos.html#Pos.to_hex_uint"><span class="id" title="definition">Pos.to_hex_uint</span></a> <span class="id" title="var">p</span>)) <a class="idref" href="MetaCoq.Utils.bytestring.html#da3fc5e689cedcb9491dd6dad17e0422"><span class="id" title="notation">++</span></a> "p" <a class="idref" href="MetaCoq.Utils.bytestring.html#da3fc5e689cedcb9491dd6dad17e0422"><span class="id" title="notation">++</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaCoq.Utils.bytestring.html#String.of_string"><span class="id" title="definition">bytestring.String.of_string</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.Numbers.DecimalString.html#NilZero.string_of_int"><span class="id" title="definition">Numbers.DecimalString.NilZero.string_of_int</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.16.0/stdlib//Coq.ZArith.BinInt.html#Z.to_int"><span class="id" title="definition">Z.to_int</span></a> <span class="id" title="var">z</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">in</span> <span class="id" title="keyword">if</span> <span class="id" title="var">sign</span> <span class="id" title="keyword">then</span> "-" <a class="idref" href="MetaCoq.Utils.bytestring.html#da3fc5e689cedcb9491dd6dad17e0422"><span class="id" title="notation">++</span></a> <a class="idref" href="MetaCoq.Common.Primitive.html#abs:5"><span class="id" title="variable">abs</span></a> <span class="id" title="keyword">else</span> <a class="idref" href="MetaCoq.Common.Primitive.html#abs:5"><span class="id" title="variable">abs</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>
