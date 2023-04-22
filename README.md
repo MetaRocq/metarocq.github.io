@@ -52,7 +52,7 @@ Coq. The project currently has a single repository extending
 Template-Coq with additional features. Each extension is in a dedicated folder.
 The [dependency graph](https://raw.githubusercontent.com/MetaCoq/metacoq.github.io/master/assets/depgraph-2022-07-01.png)
 might be useful to navigate the project.
-Statistics: ~150kLoC of Coq, ~30kLoC of OCaml.
+Statistics: ~300kLoC of Coq, ~30kLoC of OCaml.
 
 ### [Template-Coq](https://github.com/MetaCoq/metacoq/tree/coq-8.16/template-coq/theories)
 
@@ -61,8 +61,8 @@ takes `Coq` terms and constructs a representation of their syntax tree as
 an inductive data type. The representation is based on the kernel's
 term representation.
 
-After importing `MetaCoq.Template.Loader` there are commands `MetaCoq Test Quote t.`, 
-`MetaCoq Quote Definition name := (t).` and `MetaCoq Quote Recursively Definition name := (t).` as 
+After importing `MetaCoq.Template.Loader` there are commands `MetaCoq Test Quote t.`,
+`MetaCoq Quote Definition name := (t).` and `MetaCoq Quote Recursively Definition name := (t).` as
 well as a tactic `quote_term t k`,
 where in all cases `t` is a term and `k` a continuation tactic.
 
@@ -77,7 +77,7 @@ In addition to this representation of terms, Template Coq includes:
   checker, and inserting them in the global environment, in
   the style of MTac. Monadic programs `p : TemplateMonad A` can be run using `MetaCoq Run p`.
 
-- A formalisation of the typing rules reflecting the ones of Coq, covering all of Coq 
+- A formalization of the typing rules reflecting the ones of Coq, covering all of Coq
   except eta-expansion and template polymorphism.
 
 ### [PCUIC](https://github.com/MetaCoq/metacoq/tree/coq-8.16/pcuic/theories)
@@ -109,11 +109,11 @@ calculus has proofs of standard metatheoretical results:
 - Canonicity: The weak head normal form of a term of inductive type is a constructor application.
 
 - Consistency under the assumption of strong normalization
-  
+
 - Weak call-by-value standardization: Normal forms of terms of first-order inductive type
 can be found via weak call-by-value evaluation.
 
-See the PCUIC [README](https://github.com/MetaCoq/metacoq/tree/coq-8.16/pcuic/theories/README.md) for 
+See the PCUIC [README](https://github.com/MetaCoq/metacoq/tree/coq-8.16/pcuic/theories/README.md) for
 a detailed view of the development.
 
 ### [Safe Checker](https://github.com/MetaCoq/metacoq/tree/coq-8.16/safechecker/theories)
@@ -133,10 +133,10 @@ type-checker, one can use:
 
     MetaCoq CoqCheck <term>
 
-This also includes a verified, efficient re-typing procedure (useful in tactics) in 
+This also includes a verified, efficient re-typing procedure (useful in tactics) in
 `MetaCoq.SafeChecker.PCUICSafeRetyping`.
 
-See the SafeChecker [README](https://github.com/MetaCoq/metacoq/tree/coq-8.16/safechecker/theories/README.md) for 
+See the SafeChecker [README](https://github.com/MetaCoq/metacoq/tree/coq-8.16/safechecker/theories/README.md) for
 a detailed view of the development.
 
 ### [Erasure](https://github.com/MetaCoq/metacoq/tree/coq-8.16/erasure/theories)
@@ -150,10 +150,10 @@ The extracted safe erasure is available in Coq through a new vernacular command:
 After importing `MetaCoq.Erasure.Loader`.
 
 The erasure pipeline includes verified optimizations to remove lets in constructors,
-remove cases on propositional terms, switch to an unguarded fixpoint reduction rule and 
-transform the higher-order constructor applications to first-order blocks for easier 
-translation to usual programming languages. See the erasure 
-[README](https://github.com/MetaCoq/metacoq/tree/coq-8.16/erasure/theories/README.md) for 
+remove cases on propositional terms, switch to an unguarded fixpoint reduction rule and
+transform the higher-order constructor applications to first-order blocks for easier
+translation to usual programming languages. See the erasure
+[README](https://github.com/MetaCoq/metacoq/tree/coq-8.16/erasure/theories/README.md) for
 a detailed view of the development.
 
 ### [Translations](https://github.com/MetaCoq/metacoq/tree/coq-8.16/translations)
@@ -164,6 +164,19 @@ Examples of translations built on top of this:
 
 - a plugin to negate functional extensionality in [translations/times_bool_fun.v](https://github.com/MetaCoq/metacoq/tree/coq-8.16/translations/times_bool_fun.v)
 
+### [Quotation](https://github.com/MetaCoq/metacoq/tree/coq-8.16/quotation/theories)
+
+The `Quotation` module is geared at providing functions `□T → □□T` for
+`□T := Ast.term` (currently implemented) and for `□T := { t : Ast.term
+& Σ ;;; [] |- t : T }` (still in the works).
+
+Ultimately the goal of this development is to prove that `□` is a lax monoidal
+semicomonad (a functor with `cojoin : □T → □□T` that codistributes over `unit`
+and `×`), which is sufficient for proving Löb's theorem.
+
+The public-facing interface of this development is provided in [`MetaCoq.Quotation.ToTemplate.All`](./quotation/theories/ToTemplate/All.v) and [`MetaCoq.Quotation.ToPCUIC.All`](./quotation/theories/ToPCUIC/All.v).
+
+See the Quotation [README](https://github.com/MetaCoq/metacoq/tree/coq-8.16/quotation/theories/README.md) for a more detailed view of the development.
 
 ### Examples
 
@@ -179,7 +192,7 @@ Examples of translations built on top of this:
 - The test-suite files [test-suite/erasure_test.v](https://github.com/MetaCoq/metacoq/tree/coq-8.16/test-suite/erasure_test.v)
   and [test-suite/safechecker_test.v](https://github.com/MetaCoq/metacoq/tree/coq-8.16/test-suite/safechecker_test.v) show example
   uses (and current limitations of) the extracted verified checker and erasure.
-  
+
 - The [test-suite/self_erasure.v](https://github.com/MetaCoq/metacoq/tree/coq-8.16/test-suite/self_erasure.v) file checks that erasure
   works on the verified typechecking and erasure programs themselves.
 
@@ -188,8 +201,7 @@ Examples of translations built on top of this:
 
 ## Papers
 
-- ["Correct and Complete Type Checking and Certified Erasure for Coq, in Coq"](https://inria.hal.science/hal-04077552) Matthieu Sozeau, Yannick Forster, Meven Lennon-Bertrand, Nicolas Tabareau
-  and Théo Winterhalter. Submitted. April 2023.
+- ["Correct and Complete Type Checking and Certified Erasure for Coq, in Coq"](https://inria.hal.science/hal-04077552) Matthieu Sozeau, Yannick Forster, Meven Lennon-Bertrand, Nicolas Tabareau and Théo Winterhalter. Submitted. April 2023.
 
   This paper presents the whole metatheoretical development of PCUIC and verified typechecking and erasure, as of version 1.2 of MetaCoq.
 
@@ -204,9 +216,9 @@ Examples of translations built on top of this:
   and Théo Winterhalter. POPL 2020, New Orleans.
 
   This paper presented the formal proofs of soundness of conversion, type checking and erasure.
-  Now superseded by the Coq Coq Complete version above.
+  Now superseded by the April 2023 article above.
 
-- ["Formalisation and meta-theory of type theory"](https://theowinterhalter.github.io/#phd) Théo Winterhalter, PhD thesis, September 2020. 
+- ["Formalization and meta-theory of type theory"](https://theowinterhalter.github.io/#phd) Théo Winterhalter, PhD thesis, September 2020.
   Part 3 describes in detail the verified reduction, conversion and type checker.
 
 - ["Coq Coq Codet! Towards a Verified Toolchain for Coq in
