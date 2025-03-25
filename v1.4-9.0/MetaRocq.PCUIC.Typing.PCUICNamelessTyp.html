@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.PCUIC.Typing.PCUICNamelessTyp</h1>
+
+<div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">RelationClasses</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaRocq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICInduction.html#"><span class="id" title="library">PCUICInduction</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICLiftSubst.html#"><span class="id" title="library">PCUICLiftSubst</span></a> <a class="idref" href="MetaRocq.PCUIC.PCUICEquality.html#"><span class="id" title="library">PCUICEquality</span></a> <a class="idref" href="MetaRocq.PCUIC.PCUICReduction.html#"><span class="id" title="library">PCUICReduction</span></a> <a class="idref" href="MetaRocq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICPosition.html#"><span class="id" title="library">PCUICPosition</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICUnivSubst.html#"><span class="id" title="library">PCUICUnivSubst</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICNamelessDef.html#"><span class="id" title="library">PCUICNamelessDef</span></a> <a class="idref" href="MetaRocq.PCUIC.PCUICGuardCondition.html#"><span class="id" title="library">PCUICGuardCondition</span></a> <a class="idref" href="MetaRocq.PCUIC.Conversion.PCUICNamelessConv.html#"><span class="id" title="library">PCUICNamelessConv</span></a> <a class="idref" href="MetaRocq.PCUIC.PCUICConversion.html#"><span class="id" title="library">PCUICConversion</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.PCUIC.PCUICWellScopedCumulativity.html#"><span class="id" title="library">PCUICWellScopedCumulativity</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICOnFreeVars.html#"><span class="id" title="library">PCUICOnFreeVars</span></a> <a class="idref" href="MetaRocq.PCUIC.Conversion.PCUICOnFreeVarsConv.html#"><span class="id" title="library">PCUICOnFreeVarsConv</span></a> <a class="idref" href="MetaRocq.PCUIC.PCUICConfluence.html#"><span class="id" title="library">PCUICConfluence</span></a> <a class="idref" href="MetaRocq.PCUIC.Typing.PCUICClosedTyp.html#"><span class="id" title="library">PCUICClosedTyp</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICClosed.html#"><span class="id" title="library">PCUICClosed</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#"><span class="id" title="library">PCUICSigmaCalculus</span></a> <span class="comment">(*&nbsp;for&nbsp;context&nbsp;manipulations&nbsp;*)</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Equations.Prop</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">DepElim</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">ssreflect</span> <span class="id" title="library">ssrbool</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Implicit</span> <span class="id" title="keyword">Types</span> <span class="id" title="var">cf</span> : <a class="idref" href="MetaRocq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Typing does not rely on name annotations of binders.
+
+<div class="paragraph"> </div>
+
+  We prove this by constructing a type-preserving translation to
+  terms where all binders are anonymous. An alternative would be to
+  be parametrically polymorphic everywhere on the binder name type.
+  This would allow to add implicit information too. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Set</span> <span class="id" title="var">Keyed</span> <span class="id" title="var">Unification</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Default</span> <span class="id" title="keyword">Goal</span> <span class="id" title="var">Selector</span> "!".<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Seems&nbsp;unused&nbsp;*)</span><br/>
+
+<br/>
+<span class="comment">(*<br/>
+Lemma&nbsp;nlg_wf_local&nbsp;{cf&nbsp;:&nbsp;checker_flags}&nbsp;:<br/>
+&nbsp;&nbsp;forall&nbsp;Σ&nbsp;Γ&nbsp;(hΓ&nbsp;:&nbsp;wf_local&nbsp;Σ&nbsp;Γ),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;All_local_env_over<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;typing<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;Σ&nbsp;Γ&nbsp;(_&nbsp;:&nbsp;wf_local&nbsp;Σ&nbsp;Γ)&nbsp;(t&nbsp;T&nbsp;:&nbsp;term)&nbsp;(_&nbsp;:&nbsp;Σ&nbsp;;;;&nbsp;Γ&nbsp;|-&nbsp;t&nbsp;:&nbsp;T)&nbsp;=&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nlg&nbsp;Σ&nbsp;;;;&nbsp;nlctx&nbsp;Γ&nbsp;|-&nbsp;nl&nbsp;t&nbsp;:&nbsp;nl&nbsp;T)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Σ&nbsp;Γ&nbsp;hΓ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;wf_local&nbsp;(nlg&nbsp;Σ)&nbsp;(nlctx&nbsp;Γ).<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros&nbsp;Σ&nbsp;Γ&nbsp;hΓ&nbsp;h.<br/>
+&nbsp;&nbsp;induction&nbsp;h.<br/>
+&nbsp;&nbsp;-&nbsp;constructor.<br/>
+&nbsp;&nbsp;-&nbsp;simpl.&nbsp;unfold&nbsp;map_decl_anon.&nbsp;cbn.&nbsp;constructor.&nbsp;1:&nbsp;assumption.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;infer_typing_sort_impl&nbsp;with&nbsp;id&nbsp;tu;&nbsp;intros&nbsp;Hty.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;exact&nbsp;Hs.<br/>
+&nbsp;&nbsp;-&nbsp;simpl.&nbsp;unfold&nbsp;map_decl_anon.&nbsp;cbn.&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;assumption.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;apply&nbsp;infer_typing_sort_impl&nbsp;with&nbsp;id&nbsp;tu;&nbsp;intros&nbsp;Hty.&nbsp;exact&nbsp;Hs.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;assumption.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;nl_check_one_fix&nbsp;d&nbsp;:&nbsp;check_one_fix&nbsp;d&nbsp;=&nbsp;check_one_fix&nbsp;(map_def_anon&nbsp;nl&nbsp;nl&nbsp;d).<br/>
+Proof.<br/>
+&nbsp;&nbsp;destruct&nbsp;d;&nbsp;simpl.<br/>
+&nbsp;&nbsp;rewrite&nbsp;(nl_decompose_prod_assum&nbsp;<span class="inlinecode"></span>&nbsp;dtype).<br/>
+&nbsp;&nbsp;destruct&nbsp;decompose_prod_assum.<br/>
+&nbsp;&nbsp;rewrite&nbsp;-(nlctx_smash_context&nbsp;<span class="inlinecode"></span>)&nbsp;-map_rev&nbsp;nth_error_map.<br/>
+&nbsp;&nbsp;destruct&nbsp;nth_error&nbsp;=&gt;&nbsp;//.&nbsp;cbn.<br/>
+&nbsp;&nbsp;rewrite&nbsp;<span class="inlinecode"><span class="id" title="var">decompose_app_rec</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span>nl_decompose_app.<br/>
+&nbsp;&nbsp;destruct&nbsp;decompose_app&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;destruct&nbsp;t0&nbsp;=&gt;&nbsp;//.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;nl_wf_fixpoint&nbsp;Σ&nbsp;mfix&nbsp;:<br/>
+&nbsp;&nbsp;wf_fixpoint&nbsp;Σ.1&nbsp;mfix&nbsp;=&nbsp;wf_fixpoint&nbsp;(nlg&nbsp;Σ)&nbsp;(map&nbsp;(map_def_anon&nbsp;nl&nbsp;nl)&nbsp;mfix).<br/>
+Proof.<br/>
+&nbsp;&nbsp;unfold&nbsp;wf_fixpoint,&nbsp;wf_fixpoint_gen.<br/>
+&nbsp;&nbsp;f_equal.<br/>
+&nbsp;&nbsp;{&nbsp;rewrite&nbsp;forallb_map.&nbsp;eapply&nbsp;forallb_ext&nbsp;=&gt;&nbsp;x.&nbsp;cbn.&nbsp;destruct&nbsp;(dbody&nbsp;x)&nbsp;=&gt;&nbsp;//.&nbsp;}<br/>
+&nbsp;&nbsp;replace&nbsp;(map&nbsp;check_one_fix&nbsp;mfix)&nbsp;with&nbsp;(map&nbsp;check_one_fix&nbsp;(map&nbsp;(map_def_anon&nbsp;nl&nbsp;nl)&nbsp;mfix))&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;*&nbsp;destruct&nbsp;map_option_out&nbsp;=&gt;&nbsp;//.&nbsp;destruct&nbsp;l&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;f_equal.&nbsp;rewrite&nbsp;/check_recursivity_kind.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;epose&nbsp;proof&nbsp;(nl_lookup_env&nbsp;Σ.1).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;Σ;&nbsp;cbn&nbsp;in&nbsp;*.&nbsp;rewrite&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;lookup_env&nbsp;=&gt;&nbsp;//.&nbsp;cbn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;g0&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;*&nbsp;rewrite&nbsp;map_map_compose.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;setoid_rewrite&nbsp;&lt;-nl_check_one_fix.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;nl_check_one_cofix&nbsp;d&nbsp;:&nbsp;check_one_cofix&nbsp;d&nbsp;=&nbsp;check_one_cofix&nbsp;(map_def_anon&nbsp;nl&nbsp;nl&nbsp;d).<br/>
+Proof.<br/>
+&nbsp;&nbsp;destruct&nbsp;d;&nbsp;simpl.<br/>
+&nbsp;&nbsp;rewrite&nbsp;(nl_decompose_prod_assum&nbsp;<span class="inlinecode"></span>&nbsp;dtype).<br/>
+&nbsp;&nbsp;destruct&nbsp;decompose_prod_assum.<br/>
+&nbsp;&nbsp;rewrite&nbsp;nl_decompose_app.<br/>
+&nbsp;&nbsp;destruct&nbsp;decompose_app&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;destruct&nbsp;t0&nbsp;=&gt;&nbsp;//.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;nl_wf_cofixpoint&nbsp;Σ&nbsp;mfix&nbsp;:<br/>
+&nbsp;&nbsp;wf_cofixpoint&nbsp;Σ.1&nbsp;mfix&nbsp;=&nbsp;wf_cofixpoint&nbsp;(nlg&nbsp;Σ)&nbsp;(map&nbsp;(map_def_anon&nbsp;nl&nbsp;nl)&nbsp;mfix).<br/>
+Proof.<br/>
+&nbsp;&nbsp;unfold&nbsp;wf_cofixpoint,&nbsp;wf_cofixpoint_gen.<br/>
+&nbsp;&nbsp;replace&nbsp;(map&nbsp;check_one_cofix&nbsp;mfix)&nbsp;with&nbsp;(map&nbsp;check_one_cofix&nbsp;(map&nbsp;(map_def_anon&nbsp;nl&nbsp;nl)&nbsp;mfix))&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;*&nbsp;destruct&nbsp;map_option_out&nbsp;=&gt;&nbsp;//.&nbsp;destruct&nbsp;l&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;f_equal.&nbsp;rewrite&nbsp;/check_recursivity_kind.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;epose&nbsp;proof&nbsp;(nl_lookup_env&nbsp;Σ.1).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;Σ;&nbsp;cbn&nbsp;in&nbsp;*.&nbsp;rewrite&nbsp;H.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;lookup_env&nbsp;=&gt;&nbsp;//.&nbsp;cbn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;g0&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;*&nbsp;rewrite&nbsp;map_map_compose.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;setoid_rewrite&nbsp;&lt;-&nbsp;nl_check_one_cofix.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;wf_sort_nl&nbsp;Σ&nbsp;u&nbsp;:&nbsp;wf_sort&nbsp;Σ&nbsp;u&nbsp;-&gt;&nbsp;wf_sort&nbsp;(nlg&nbsp;Σ)&nbsp;u.<br/>
+Proof.<br/>
+&nbsp;&nbsp;destruct&nbsp;u;&nbsp;simpl;&nbsp;auto.<br/>
+&nbsp;&nbsp;intros.<br/>
+&nbsp;&nbsp;now&nbsp;rewrite&nbsp;nl_global_ext_levels.<br/>
+Qed.<br/>
+<br/>
+Lemma&nbsp;nl_wf&nbsp;{cf:checker_flags}&nbsp;(Σ&nbsp;:&nbsp;global_env_ext)&nbsp;:<br/>
+&nbsp;&nbsp;wf&nbsp;Σ&nbsp;-&gt;&nbsp;wf&nbsp;(nlg&nbsp;Σ).<br/>
+<br/>
+Lemma&nbsp;nl_cumulSpec&nbsp;{cf:checker_flags}&nbsp;:<br/>
+&nbsp;&nbsp;forall&nbsp;(Σ:global_env_ext)&nbsp;Γ&nbsp;A&nbsp;B,&nbsp;wf&nbsp;Σ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;is_closed_context&nbsp;Γ&nbsp;-&gt;<br/>
+&nbsp;&nbsp;is_open_term&nbsp;Γ&nbsp;A&nbsp;-&gt;<br/>
+&nbsp;&nbsp;is_open_term&nbsp;Γ&nbsp;B&nbsp;-&gt;<br/>
+&nbsp;&nbsp;Σ&nbsp;;;;&nbsp;Γ&nbsp;|-&nbsp;A&nbsp;&lt;=s&nbsp;B&nbsp;-&gt;<br/>
+&nbsp;&nbsp;nlg&nbsp;Σ&nbsp;;;;&nbsp;nlctx&nbsp;Γ&nbsp;|-&nbsp;nl&nbsp;A&nbsp;&lt;=s&nbsp;nl&nbsp;B.<br/>
+Proof.<br/>
+&nbsp;&nbsp;intros.&nbsp;eapply&nbsp;(cumulAlgo_cumulSpec&nbsp;(nlg&nbsp;Σ)&nbsp;(pb:=Cumul)).<br/>
+&nbsp;&nbsp;eapply&nbsp;into_ws_cumul_pb.<br/>
+&nbsp;&nbsp;-&nbsp;eapply&nbsp;nl_cumul.&nbsp;eapply&nbsp;(ws_cumul_pb_forget&nbsp;(pb:=Cumul)).<br/>
+&nbsp;&nbsp;unshelve&nbsp;eapply&nbsp;(cumulSpec_cumulAlgo&nbsp;_&nbsp;_&nbsp;(exist&nbsp;_&nbsp;_&nbsp;)&nbsp;(exist&nbsp;_&nbsp;_)&nbsp;(exist&nbsp;_&nbsp;_));&nbsp;eauto;&nbsp;cbn.<br/>
+&nbsp;&nbsp;-&nbsp;eapply&nbsp;closed_ctx_on_free_vars.&nbsp;apply&nbsp;closed_nlctx.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;is_closed_ctx_closed;&nbsp;eauto.<br/>
+&nbsp;&nbsp;-&nbsp;eapply&nbsp;closedn_on_free_vars.&nbsp;apply&nbsp;closed_nl.&nbsp;rewrite&nbsp;nlctx_length.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;on_free_vars_closedn;&nbsp;eauto.<br/>
+&nbsp;&nbsp;-&nbsp;eapply&nbsp;closedn_on_free_vars.&nbsp;apply&nbsp;closed_nl.&nbsp;rewrite&nbsp;nlctx_length.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;on_free_vars_closedn;&nbsp;eauto.<br/>
+&nbsp;&nbsp;Unshelve.&nbsp;eapply&nbsp;nl_wf;&nbsp;eauto.<br/>
+Defined.<br/>
+<br/>
+Lemma&nbsp;typing_nlg&nbsp;{cf&nbsp;:&nbsp;checker_flags}&nbsp;:<br/>
+&nbsp;&nbsp;env_prop&nbsp;(fun&nbsp;Σ&nbsp;Γ&nbsp;t&nbsp;T&nbsp;=&gt;&nbsp;nlg&nbsp;Σ&nbsp;;;;&nbsp;nlctx&nbsp;Γ&nbsp;|-&nbsp;nl&nbsp;t&nbsp;:&nbsp;nl&nbsp;T)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;Σ&nbsp;Γ&nbsp;=&gt;&nbsp;wf_local&nbsp;(nlg&nbsp;Σ)&nbsp;(nlctx&nbsp;Γ)).<br/>
+Proof.<br/>
+&nbsp;&nbsp;clear.<br/>
+&nbsp;&nbsp;apply&nbsp;typing_ind_env;&nbsp;intros;&nbsp;cbn&nbsp;in&nbsp;*;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;?nl_lift&nbsp;?nl_subst&nbsp;?nl_subst_instance;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;(econstructor;&nbsp;eauto&nbsp;using&nbsp;nlg_wf_local;&nbsp;fail).<br/>
+&nbsp;&nbsp;-&nbsp;induction&nbsp;X;&nbsp;simpl;&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;now&nbsp;exists&nbsp;(tu.π1).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;now&nbsp;exists&nbsp;(tu.π1).<br/>
+<br/>
+&nbsp;&nbsp;-&nbsp;replace&nbsp;(nl&nbsp;(decl_type&nbsp;decl))&nbsp;with&nbsp;(decl_type&nbsp;(map_decl_anon&nbsp;nl&nbsp;decl));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">decl</span>;</span> <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;constructor.&nbsp;1:&nbsp;eauto&nbsp;using&nbsp;nlg_wf_local.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;nlctx.&nbsp;rewrite&nbsp;nth_error_map.&nbsp;now&nbsp;rewrite&nbsp;H.<br/>
+&nbsp;&nbsp;-&nbsp;constructor;&nbsp;eauto&nbsp;using&nbsp;nlg_wf_local.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;apply&nbsp;wf_sort_nl.<br/>
+&nbsp;&nbsp;-&nbsp;replace&nbsp;(nl&nbsp;(cst_type&nbsp;decl))&nbsp;with&nbsp;(cst_type&nbsp;(map_constant_body&nbsp;nl&nbsp;decl));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">decl</span>;</span> <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;constructor;&nbsp;eauto&nbsp;using&nbsp;nlg_wf_local.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;unfold&nbsp;declared_constant&nbsp;in&nbsp;*.&nbsp;now&nbsp;erewrite&nbsp;lookup_env_nlg;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;red.&nbsp;rewrite&nbsp;global_ext_levels_nlg&nbsp;global_ext_constraints_nlg;&nbsp;assumption.<br/>
+&nbsp;&nbsp;-&nbsp;replace&nbsp;(nl&nbsp;(ind_type&nbsp;idecl))&nbsp;with&nbsp;(ind_type&nbsp;(nl_one_inductive_body&nbsp;idecl));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">idecl</span>;</span> <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;isdecl&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">H1</span></span> <span class="inlinecode"><span class="id" title="var">H2</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;econstructor;&nbsp;eauto&nbsp;using&nbsp;nlg_wf_local.&nbsp;1:&nbsp;split.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;eapply&nbsp;lookup_env_nlg&nbsp;in&nbsp;H1.&nbsp;eapply&nbsp;H1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;replace&nbsp;(ind_bodies&nbsp;(nl_mutual_inductive_body&nbsp;mdecl))&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(map&nbsp;nl_one_inductive_body&nbsp;(ind_bodies&nbsp;mdecl));&nbsp;<span class="inlinecode">|<span class="id" title="var">now</span></span> <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">mdecl</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;nth_error_map&nbsp;H2.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;unfold&nbsp;consistent_instance_ext.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;global_ext_levels_nlg&nbsp;global_ext_constraints_nlg;&nbsp;assumption.<br/>
+&nbsp;&nbsp;-&nbsp;cbn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;nl_inds.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;type_Construct&nbsp;with&nbsp;(idecl0:=nl_one_inductive_body&nbsp;idecl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mdecl0:=nl_mutual_inductive_body&nbsp;mdecl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(cdecl0:=nl_constructor_body&nbsp;cdecl);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eauto&nbsp;using&nbsp;nlg_wf_local.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;destruct&nbsp;isdecl&nbsp;as&nbsp;<span class="inlinecode">[<span class="id" title="var">H1</span></span> <span class="inlinecode"><span class="id" title="var">H2</span>]</span> <span class="inlinecode"><span class="id" title="var">H3</span></span>.&nbsp;repeat&nbsp;split.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;eapply&nbsp;lookup_env_nlg&nbsp;in&nbsp;H1.&nbsp;eapply&nbsp;H1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;replace&nbsp;(ind_bodies&nbsp;(nl_mutual_inductive_body&nbsp;mdecl))&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(map&nbsp;nl_one_inductive_body&nbsp;(ind_bodies&nbsp;mdecl));&nbsp;<span class="inlinecode">|<span class="id" title="var">now</span></span> <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">mdecl</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;nth_error_map&nbsp;H2.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;rewrite&nbsp;nth_error_map&nbsp;H3.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;unfold&nbsp;consistent_instance_ext.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;global_ext_levels_nlg&nbsp;global_ext_constraints_nlg;&nbsp;assumption.<br/>
+&nbsp;&nbsp;-&nbsp;rewrite&nbsp;nl_mkApps&nbsp;map_app&nbsp;nl_it_mkLambda_or_LetIn&nbsp;/predctx&nbsp;nl_case_predicate_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;type_Case&nbsp;with&nbsp;&nbsp;(mdecl0:=nl_mutual_inductive_body&nbsp;mdecl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(idecl0:=nl_one_inductive_body&nbsp;idecl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(p0:=nl_predicate&nbsp;nl&nbsp;p);&nbsp;tea;&nbsp;rewrite&nbsp;-&nbsp;?nl_case_predicate_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;destruct&nbsp;isdecl&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">HH1</span></span> <span class="inlinecode"><span class="id" title="var">HH2</span></span>.&nbsp;split.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;eapply&nbsp;lookup_env_nlg&nbsp;in&nbsp;HH1.&nbsp;eapply&nbsp;HH1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;replace&nbsp;(ind_bodies&nbsp;(nl_mutual_inductive_body&nbsp;mdecl))&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(map&nbsp;nl_one_inductive_body&nbsp;(ind_bodies&nbsp;mdecl));&nbsp;<span class="inlinecode">|<span class="id" title="var">now</span></span> <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">mdecl</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;nth_error_map&nbsp;HH2.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;simpl.&nbsp;clear&nbsp;-X1.&nbsp;move:&nbsp;X1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;/ind_predicate_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;a;&nbsp;depelim&nbsp;a.&nbsp;rewrite&nbsp;H.&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;depelim&nbsp;c;&nbsp;constructor;&nbsp;simpl;&nbsp;auto.&nbsp;subst&nbsp;T.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;nl_mkApps&nbsp;/=.&nbsp;f_equal.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;rewrite&nbsp;nl_to_extended_list&nbsp;nlctx_app_context&nbsp;nlctx_smash_context&nbsp;nl_expand_lets_ctx.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;rewrite&nbsp;-nl_expand_lets_ctx.&nbsp;eapply&nbsp;All2_map,&nbsp;(All2_impl&nbsp;a).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;??&nbsp;<span class="inlinecode"></span>;&nbsp;constructor;&nbsp;subst;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;destruct&nbsp;H0&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">wfpars</span></span> <span class="inlinecode"><span class="id" title="var">wfpctx</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;split;&nbsp;simpl;&nbsp;rewrite&nbsp;?length_map&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear&nbsp;-wfpctx.&nbsp;depelim&nbsp;wfpctx.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;nl_forget_types&nbsp;H0&nbsp;/=.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl.&nbsp;constructor&nbsp;=&gt;&nbsp;//.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;Forall2_map;&nbsp;solve_all.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;simpl.&nbsp;tas.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unfold&nbsp;consistent_instance_ext.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;global_ext_levels_nlg&nbsp;global_ext_constraints_nlg;&nbsp;assumption.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;rewrite&nbsp;-nlctx_app_context.&nbsp;exact&nbsp;X4.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;rewrite&nbsp;-nlctx_app_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;apply&nbsp;nl_is_allowed_elimination.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;revert&nbsp;X6.&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;-map_app&nbsp;-nlctx_app_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;-nlctx_subst_instance.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;-<span class="inlinecode"><span class="id" title="var">List.rev</span></span> <span class="inlinecode">(<span class="id" title="var">nlctx</span></span> <span class="inlinecode"><span class="id" title="var">_</span>)</span>map_rev.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear.&nbsp;induction&nbsp;1;&nbsp;simpl;&nbsp;constructor;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;now&nbsp;rewrite&nbsp;-(nl_subst_telescope&nbsp;<span class="inlinecode"><span class="id" title="var">i</span></span>&nbsp;0&nbsp;Δ).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;now&nbsp;rewrite&nbsp;-(nl_subst_telescope&nbsp;<span class="inlinecode"><span class="id" title="var">b</span></span>&nbsp;0&nbsp;Δ).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;rewrite&nbsp;nl_mkApps&nbsp;map_app&nbsp;in&nbsp;X8.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;eapply&nbsp;nl_wf_branches.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;eapply&nbsp;All2i_map,&nbsp;(All2i_impl&nbsp;X9).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;i&nbsp;cdecl&nbsp;br.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;(cbt&nbsp;:=&nbsp;case_branch_type&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;_)&nbsp;in&nbsp;*.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;(convctx&nbsp;&amp;&nbsp;wfctx&nbsp;&amp;&nbsp;bbodyty&nbsp;&amp;&nbsp;IHbody&nbsp;&amp;&nbsp;bty&nbsp;&amp;&nbsp;IHbty).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl&nbsp;preturn.&nbsp;rewrite&nbsp;-nl_it_mkLambda_or_LetIn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cbn&nbsp;-<span class="inlinecode"><span class="id" title="var">case_branch_type</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;nl_case_branch_type.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;-/cbt.&nbsp;unfold&nbsp;map_pair.&nbsp;cbn.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repeat&nbsp;split.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;cbn.&nbsp;rewrite&nbsp;-nl_cstr_branch_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;All2_map,&nbsp;(All2_impl&nbsp;convctx).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;??<span class="inlinecode"></span>;&nbsp;constructor;&nbsp;subst;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;now&nbsp;rewrite&nbsp;-<span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">_</span></span>nlctx_app_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;now&nbsp;rewrite&nbsp;-&nbsp;!<span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">_</span></span>nlctx_app_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;rewrite&nbsp;-&nbsp;!<span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode">++</span> <span class="inlinecode"><span class="id" title="var">_</span></span>nlctx_app_context.&nbsp;eauto.<br/>
+&nbsp;&nbsp;-&nbsp;destruct&nbsp;pdecl&nbsp;as&nbsp;<span class="inlinecode"><span class="id" title="var">pdecl1</span></span> <span class="inlinecode"><span class="id" title="var">pdecl2</span></span>;&nbsp;simpl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;map_rev.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;eapply&nbsp;type_Proj&nbsp;with&nbsp;(mdecl0:=nl_mutual_inductive_body&nbsp;mdecl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(idecl0:=nl_one_inductive_body&nbsp;idecl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(cdecl0:=nl_constructor_body&nbsp;cdecl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(pdecl:=(pdecl1,&nbsp;nl&nbsp;pdecl2)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;destruct&nbsp;isdecl&nbsp;as&nbsp;<span class="inlinecode">[[<span class="id" title="var">H1</span></span> <span class="inlinecode"><span class="id" title="var">H2</span>]</span> <span class="inlinecode"><span class="id" title="var">H3</span>]</span> <span class="inlinecode">[<span class="id" title="var">H4</span></span> <span class="inlinecode"><span class="id" title="var">H5</span>]</span>.&nbsp;repeat&nbsp;split.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;eapply&nbsp;lookup_env_nlg&nbsp;in&nbsp;H1.&nbsp;eapply&nbsp;H1.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;replace&nbsp;(ind_bodies&nbsp;(nl_mutual_inductive_body&nbsp;mdecl))&nbsp;with<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(map&nbsp;nl_one_inductive_body&nbsp;(ind_bodies&nbsp;mdecl));&nbsp;<span class="inlinecode">|<span class="id" title="var">now</span></span> <span class="inlinecode"><span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">mdecl</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;nth_error_map&nbsp;H2.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;rewrite&nbsp;nth_error_map&nbsp;H3.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;rewrite&nbsp;nth_error_map&nbsp;H4.&nbsp;reflexivity.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;assumption.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;rewrite&nbsp;nl_mkApps&nbsp;in&nbsp;X2.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;rewrite&nbsp;length_map.<br/>
+&nbsp;&nbsp;-&nbsp;replace&nbsp;(nl&nbsp;(dtype&nbsp;decl))&nbsp;with&nbsp;(dtype&nbsp;(map_def_anon&nbsp;nl&nbsp;nl&nbsp;decl));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">decl</span>;</span> <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;assert&nbsp;(XX:&nbsp;nlctx&nbsp;Γ&nbsp;,,,&nbsp;fix_context&nbsp;(map&nbsp;(map_def_anon&nbsp;nl&nbsp;nl)&nbsp;mfix)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;nlctx&nbsp;(Γ&nbsp;,,,&nbsp;fix_context&nbsp;mfix))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;now&nbsp;rewrite&nbsp;&lt;-&nbsp;nl_fix_context,&nbsp;&lt;-&nbsp;nlctx_app_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;constructor.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;eapply&nbsp;fix_guard_nl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;rewrite&nbsp;nth_error_map&nbsp;H0.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;rewrite&nbsp;nlctx_app_context&nbsp;in&nbsp;X.&nbsp;now&nbsp;eapply&nbsp;All_local_env_app_inv&nbsp;in&nbsp;X.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;clear&nbsp;-X0.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;All_map.&nbsp;eapply&nbsp;All_impl;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl.&nbsp;intros&nbsp;x&nbsp;<span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">Hs</span></span>.&nbsp;now&nbsp;exists&nbsp;s.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;apply&nbsp;All_map.&nbsp;eapply&nbsp;All_impl;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl.&nbsp;intros&nbsp;<span class="inlinecode"></span>&nbsp;<span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">Hs</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl&nbsp;in&nbsp;*;&nbsp;intuition&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;rewrite&nbsp;fix_context_length&nbsp;length_map.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;fix_context_length&nbsp;in&nbsp;Hs.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;rewrite&nbsp;-&gt;&nbsp;XX,&nbsp;&lt;-&nbsp;nl_lift.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;rewrite&nbsp;&lt;-nl_wf_fixpoint.<br/>
+&nbsp;&nbsp;-&nbsp;replace&nbsp;(nl&nbsp;(dtype&nbsp;decl))&nbsp;with&nbsp;(dtype&nbsp;(map_def_anon&nbsp;nl&nbsp;nl&nbsp;decl));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">destruct</span></span> <span class="inlinecode"><span class="id" title="var">decl</span>;</span> <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;assert&nbsp;(XX:&nbsp;nlctx&nbsp;Γ&nbsp;,,,&nbsp;fix_context&nbsp;(map&nbsp;(map_def_anon&nbsp;nl&nbsp;nl)&nbsp;mfix)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;nlctx&nbsp;(Γ&nbsp;,,,&nbsp;fix_context&nbsp;mfix))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;now&nbsp;rewrite&nbsp;&lt;-&nbsp;nl_fix_context,&nbsp;&lt;-&nbsp;nlctx_app_context.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;constructor;&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;apply&nbsp;cofix_guard_nl.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;rewrite&nbsp;nth_error_map&nbsp;H0.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;rewrite&nbsp;nlctx_app_context&nbsp;in&nbsp;X;&nbsp;apply&nbsp;All_local_env_app_inv&nbsp;in&nbsp;X.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;clear&nbsp;-X0.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;All_map.&nbsp;eapply&nbsp;All_impl;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl.&nbsp;intros&nbsp;x&nbsp;<span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">Hs</span></span>.&nbsp;now&nbsp;exists&nbsp;s.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;apply&nbsp;All_map.&nbsp;eapply&nbsp;All_impl;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl.&nbsp;intros&nbsp;<span class="inlinecode"></span>&nbsp;<span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode"><span class="id" title="var">Hs</span></span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpl&nbsp;in&nbsp;*;&nbsp;intuition&nbsp;auto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;rewrite&nbsp;fix_context_length&nbsp;length_map.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;fix_context_length&nbsp;in&nbsp;Hs.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now&nbsp;rewrite&nbsp;-&gt;&nbsp;XX,&nbsp;&lt;-&nbsp;nl_lift.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;now&nbsp;rewrite&nbsp;&lt;-nl_wf_cofixpoint.<br/>
+&nbsp;&nbsp;-&nbsp;econstructor;&nbsp;tea.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;nl_cumulSpec;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;eapply&nbsp;wf_local_closed_context;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;eapply&nbsp;closedn_on_free_vars.&nbsp;eapply&nbsp;type_closed;&nbsp;eauto.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;eapply&nbsp;closedn_on_free_vars.&nbsp;eapply&nbsp;subject_closed;&nbsp;eauto.<br/>
+Qed.<br/>
+<br/>
+<br/>
+*)</span><br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,1334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<div id="toc">
+<h2><a href="MetaRocq.Common.BasicAst.html">Library MetaRocq.Common.BasicAst</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Common.BasicAst.html#lab1">The context of De Bruijn indices</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Common.EnvMap.html">Library MetaRocq.Common.EnvMap</a></h2>
+<h2><a href="MetaRocq.Common.Environment.html">Library MetaRocq.Common.Environment</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Common.Environment.html#lab2">Declarations</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Common.Environment.html#lab3">Environments</a>
+
+</li>
+<li><a href="MetaRocq.Common.Environment.html#lab4">Programs</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Common.EnvironmentReflect.html">Library MetaRocq.Common.EnvironmentReflect</a></h2>
+<h2><a href="MetaRocq.Common.EnvironmentTyping.html">Library MetaRocq.Common.EnvironmentTyping</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Common.EnvironmentTyping.html#lab5">Environment lookup</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Common.EnvironmentTyping.html#lab6">Typing of inductive declarations</a>
+
+</li>
+<li><a href="MetaRocq.Common.EnvironmentTyping.html#lab7">Typing of constant declarations</a>
+
+</li>
+<li><a href="MetaRocq.Common.EnvironmentTyping.html#lab8">Typing of global environment</a>
+
+</li>
+<li><a href="MetaRocq.Common.EnvironmentTyping.html#lab9">Typing of local environments</a>
+
+</li>
+</ul>
+
+</li>
+<li><a href="MetaRocq.Common.EnvironmentTyping.html#lab10">Induction principle for typing up-to a global environment</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Common.Kernames.html">Library MetaRocq.Common.Kernames</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Common.Kernames.html#lab11">Reification of names **</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Common.MonadBasicAst.html">Library MetaRocq.Common.MonadBasicAst</a></h2>
+<h2><a href="MetaRocq.Common.Primitive.html">Library MetaRocq.Common.Primitive</a></h2>
+<h2><a href="MetaRocq.Common.Reflect.html">Library MetaRocq.Common.Reflect</a></h2>
+<h2><a href="MetaRocq.Common.Transform.html">Library MetaRocq.Common.Transform</a></h2>
+<h2><a href="MetaRocq.Common.Universes.html">Library MetaRocq.Common.Universes</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Common.Universes.html#lab12">Valuations</a>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Common.Universes.html#lab13">Lemmas about eq and leq ****</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+<li><a href="MetaRocq.Common.Universes.html#lab14">Universe substitution</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Common.UniversesDec.html">Library MetaRocq.Common.UniversesDec</a></h2>
+<h2><a href="MetaRocq.Common.config.html">Library MetaRocq.Common.config</a></h2>
+<h2><a href="MetaRocq.Common.uGraph.html">Library MetaRocq.Common.uGraph</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Common.uGraph.html#lab15">Check of consistency **</a>
+
+</li>
+<li><a href="MetaRocq.Common.uGraph.html#lab16">Check of leq **</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.ErasurePlugin.ETransform.html">Library MetaRocq.ErasurePlugin.ETransform</a></h2>
+<h2><a href="MetaRocq.ErasurePlugin.Erasure.html">Library MetaRocq.ErasurePlugin.Erasure</a></h2>
+<h2><a href="MetaRocq.ErasurePlugin.ErasureCorrectness.html">Library MetaRocq.ErasurePlugin.ErasureCorrectness</a></h2>
+<h2><a href="MetaRocq.ErasurePlugin.Extraction.html">Library MetaRocq.ErasurePlugin.Extraction</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.ErasurePlugin.Extraction.html#lab17">Extraction setup for the erasure phase of template-rocq.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.ErasurePlugin.Loader.html">Library MetaRocq.ErasurePlugin.Loader</a></h2>
+<h2><a href="MetaRocq.Erasure.EArities.html">Library MetaRocq.Erasure.EArities</a></h2>
+<h2><a href="MetaRocq.Erasure.EAst.html">Library MetaRocq.Erasure.EAst</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EAst.html#lab18">Extracted terms</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EAst.html#lab19">Entries</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EAst.html#lab20">Constant and axiom entries</a>
+
+</li>
+<li><a href="MetaRocq.Erasure.EAst.html#lab21">Inductive entries</a>
+
+</li>
+</ul>
+
+</li>
+<li><a href="MetaRocq.Erasure.EAst.html#lab22">Declarations</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EAst.html#lab23">The context of De Bruijn indices</a>
+
+</li>
+<li><a href="MetaRocq.Erasure.EAst.html#lab24">Environments</a>
+
+</li>
+<li><a href="MetaRocq.Erasure.EAst.html#lab25">Programs</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.EAstUtils.html">Library MetaRocq.Erasure.EAstUtils</a></h2>
+<h2><a href="MetaRocq.Erasure.EBeta.html">Library MetaRocq.Erasure.EBeta</a></h2>
+<h2><a href="MetaRocq.Erasure.ECSubst.html">Library MetaRocq.Erasure.ECSubst</a></h2>
+<h2><a href="MetaRocq.Erasure.ECoInductiveToInductive.html">Library MetaRocq.Erasure.ECoInductiveToInductive</a></h2>
+<h2><a href="MetaRocq.Erasure.EConstructorsAsBlocks.html">Library MetaRocq.Erasure.EConstructorsAsBlocks</a></h2>
+<h2><a href="MetaRocq.Erasure.EDeps.html">Library MetaRocq.Erasure.EDeps</a></h2>
+<h2><a href="MetaRocq.Erasure.EEnvMap.html">Library MetaRocq.Erasure.EEnvMap</a></h2>
+<h2><a href="MetaRocq.Erasure.EEtaExpanded.html">Library MetaRocq.Erasure.EEtaExpanded</a></h2>
+<h2><a href="MetaRocq.Erasure.EEtaExpandedFix.html">Library MetaRocq.Erasure.EEtaExpandedFix</a></h2>
+<h2><a href="MetaRocq.Erasure.EExtends.html">Library MetaRocq.Erasure.EExtends</a></h2>
+<h2><a href="MetaRocq.Erasure.EGenericGlobalMap.html">Library MetaRocq.Erasure.EGenericGlobalMap</a></h2>
+<h2><a href="MetaRocq.Erasure.EGenericMapEnv.html">Library MetaRocq.Erasure.EGenericMapEnv</a></h2>
+<h2><a href="MetaRocq.Erasure.EGlobalEnv.html">Library MetaRocq.Erasure.EGlobalEnv</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EGlobalEnv.html#lab26">Global environments</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EGlobalEnv.html#lab27">Environment lookup</a>
+
+</li>
+<li><a href="MetaRocq.Erasure.EGlobalEnv.html#lab28">Reduction</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EGlobalEnv.html#lab29">Helper functions for reduction</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.EGlobalFragment.html">Library MetaRocq.Erasure.EGlobalFragment</a></h2>
+<h2><a href="MetaRocq.Erasure.EImplementBox.html">Library MetaRocq.Erasure.EImplementBox</a></h2>
+<h2><a href="MetaRocq.Erasure.EInduction.html">Library MetaRocq.Erasure.EInduction</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EInduction.html#lab30">Deriving a compact induction principle for terms</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.EInlineProjections.html">Library MetaRocq.Erasure.EInlineProjections</a></h2>
+<h2><a href="MetaRocq.Erasure.EInlining.html">Library MetaRocq.Erasure.EInlining</a></h2>
+<h2><a href="MetaRocq.Erasure.ELiftSubst.html">Library MetaRocq.Erasure.ELiftSubst</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.ELiftSubst.html#lab31">Lifting and substitution for the AST</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.EOptimizePropDiscr.html">Library MetaRocq.Erasure.EOptimizePropDiscr</a></h2>
+<h2><a href="MetaRocq.Erasure.EPretty.html">Library MetaRocq.Erasure.EPretty</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EPretty.html#lab32">Pretty printing</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.EPrimitive.html">Library MetaRocq.Erasure.EPrimitive</a></h2>
+<h2><a href="MetaRocq.Erasure.EProgram.html">Library MetaRocq.Erasure.EProgram</a></h2>
+<h2><a href="MetaRocq.Erasure.EReflect.html">Library MetaRocq.Erasure.EReflect</a></h2>
+<h2><a href="MetaRocq.Erasure.ERemoveParams.html">Library MetaRocq.Erasure.ERemoveParams</a></h2>
+<h2><a href="MetaRocq.Erasure.EReorderCstrs.html">Library MetaRocq.Erasure.EReorderCstrs</a></h2>
+<h2><a href="MetaRocq.Erasure.ESpineView.html">Library MetaRocq.Erasure.ESpineView</a></h2>
+<h2><a href="MetaRocq.Erasure.ESubstitution.html">Library MetaRocq.Erasure.ESubstitution</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Erasure.ESubstitution.html#lab33">Global Weakening</a>
+
+</li>
+<li><a href="MetaRocq.Erasure.ESubstitution.html#lab34">Weakening</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.EUnboxing.html">Library MetaRocq.Erasure.EUnboxing</a></h2>
+<h2><a href="MetaRocq.Erasure.EWcbvEval.html">Library MetaRocq.Erasure.EWcbvEval</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EWcbvEval.html#lab35">Weak-head call-by-value evaluation strategy.</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EWcbvEval.html#lab36">Big step version of weak cbv beta-zeta-iota-fix-delta reduction.</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.EWcbvEvalCstrsAsBlocksFixLambdaInd.html">Library MetaRocq.Erasure.EWcbvEvalCstrsAsBlocksFixLambdaInd</a></h2>
+<h2><a href="MetaRocq.Erasure.EWcbvEvalCstrsAsBlocksInd.html">Library MetaRocq.Erasure.EWcbvEvalCstrsAsBlocksInd</a></h2>
+<h2><a href="MetaRocq.Erasure.EWcbvEvalEtaInd.html">Library MetaRocq.Erasure.EWcbvEvalEtaInd</a></h2>
+<h2><a href="MetaRocq.Erasure.EWcbvEvalInd.html">Library MetaRocq.Erasure.EWcbvEvalInd</a></h2>
+<h2><a href="MetaRocq.Erasure.EWcbvEvalNamed.html">Library MetaRocq.Erasure.EWcbvEvalNamed</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EWcbvEvalNamed.html#lab37">Weak-head call-by-value evaluation strategy.</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EWcbvEvalNamed.html#lab38">Big step *named* version of weak cbv beta-zeta-iota-fix-delta reduction.</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.EWellformed.html">Library MetaRocq.Erasure.EWellformed</a></h2>
+<h2><a href="MetaRocq.Erasure.EWtAst.html">Library MetaRocq.Erasure.EWtAst</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.EWtAst.html#lab39">Well-scoped and well-formed extracted terms</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.ErasureCorrectness.html">Library MetaRocq.Erasure.ErasureCorrectness</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.ErasureCorrectness.html#lab40">Correctness of erasure</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.ErasureCorrectness.html#lab41">The correctness proof</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.ErasureFunction.html">Library MetaRocq.Erasure.ErasureFunction</a></h2>
+<h2><a href="MetaRocq.Erasure.ErasureFunctionProperties.html">Library MetaRocq.Erasure.ErasureFunctionProperties</a></h2>
+<h2><a href="MetaRocq.Erasure.ErasureProperties.html">Library MetaRocq.Erasure.ErasureProperties</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Erasure.ErasureProperties.html#lab42">Erasure and applications</a>
+
+</li>
+<li><a href="MetaRocq.Erasure.ErasureProperties.html#lab43">Preliminaries on arities and proofs</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.ErasureProperties.html#lab44">Erasure is stable under context conversion</a>
+
+</li>
+</ul>
+
+</li>
+<li><a href="MetaRocq.Erasure.ErasureProperties.html#lab45">isErasable is stable under universe instantiation</a>
+
+</li>
+<li><a href="MetaRocq.Erasure.ErasureProperties.html#lab46">Erasure is stable under instantiation of universes</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.Extract.html">Library MetaRocq.Erasure.Extract</a></h2>
+<h2><a href="MetaRocq.Erasure.Prelim.html">Library MetaRocq.Erasure.Prelim</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Erasure.Prelim.html#lab47">on mkApps</a>
+
+</li>
+<li><a href="MetaRocq.Erasure.Prelim.html#lab48">Prelim on fixpoints</a>
+
+</li>
+<li><a href="MetaRocq.Erasure.Prelim.html#lab49">Prelim on typing</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICAlpha.html">Library MetaRocq.PCUIC.PCUICAlpha</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICArities.html">Library MetaRocq.PCUIC.PCUICArities</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICAst.html">Library MetaRocq.PCUIC.PCUICAst</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICAst.html#lab50">AST of the Polymorphic Cumulative Calculus of Inductive Constructions</a>
+
+</li>
+<li><a href="MetaRocq.PCUIC.PCUICAst.html#lab51">Universe substitution</a>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICAst.html#lab52">Entries</a>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICAst.html#lab53">Constant and axiom entries</a>
+
+</li>
+<li><a href="MetaRocq.PCUIC.PCUICAst.html#lab54">Inductive entries</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICCSubst.html">Library MetaRocq.PCUIC.PCUICCSubst</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICCSubst.html#lab55">Closed single substitution:</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICCanonicity.html">Library MetaRocq.PCUIC.PCUICCanonicity</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICCasesContexts.html">Library MetaRocq.PCUIC.PCUICCasesContexts</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICCasesHelper.html">Library MetaRocq.PCUIC.PCUICCasesHelper</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICClassification.html">Library MetaRocq.PCUIC.PCUICClassification</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICConfluence.html">Library MetaRocq.PCUIC.PCUICConfluence</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICConsistency.html">Library MetaRocq.PCUIC.PCUICConsistency</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICContextConversion.html">Library MetaRocq.PCUIC.PCUICContextConversion</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICContextReduction.html">Library MetaRocq.PCUIC.PCUICContextReduction</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICContextSubst.html">Library MetaRocq.PCUIC.PCUICContextSubst</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICContextSubst.html#lab56">Substitution lemmas for typing derivations.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICContexts.html">Library MetaRocq.PCUIC.PCUICContexts</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICConvCumInversion.html">Library MetaRocq.PCUIC.PCUICConvCumInversion</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICConversion.html">Library MetaRocq.PCUIC.PCUICConversion</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICCumulProp.html">Library MetaRocq.PCUIC.PCUICCumulProp</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICCumulativity.html">Library MetaRocq.PCUIC.PCUICCumulativity</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICCumulativity.html#lab57">Definition of cumulativity and conversion relations</a>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICCumulativity.html#lab58">Cumulativity</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICCumulativitySpec.html">Library MetaRocq.PCUIC.PCUICCumulativitySpec</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICCumulativitySpec.html#lab59">Definition of cumulativity and conversion relations</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICElimination.html">Library MetaRocq.PCUIC.PCUICElimination</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICEquality.html">Library MetaRocq.PCUIC.PCUICEquality</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICEquality.html#lab60">Syntactic ws_cumul_pb up-to universes</a>
+
+</li>
+<li><a href="MetaRocq.PCUIC.PCUICEquality.html#lab61">Behavior on mkApps and it_mkLambda_or_LetIn **</a>
+
+</li>
+<li><a href="MetaRocq.PCUIC.PCUICEquality.html#lab62">Syntactic ws_cumul_pb up to printing anotations **</a>
+
+</li>
+<li><a href="MetaRocq.PCUIC.PCUICEquality.html#lab63">ws_cumul_pb on contexts **</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICEtaExpand.html">Library MetaRocq.PCUIC.PCUICEtaExpand</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICExpandLets.html">Library MetaRocq.PCUIC.PCUICExpandLets</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICExpandLetsCorrectness.html">Library MetaRocq.PCUIC.PCUICExpandLetsCorrectness</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICFirstorder.html">Library MetaRocq.PCUIC.PCUICFirstorder</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICGeneration.html">Library MetaRocq.PCUIC.PCUICGeneration</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICGlobalEnv.html">Library MetaRocq.PCUIC.PCUICGlobalEnv</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICGuardCondition.html">Library MetaRocq.PCUIC.PCUICGuardCondition</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICInductiveInversion.html">Library MetaRocq.PCUIC.PCUICInductiveInversion</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICInductives.html">Library MetaRocq.PCUIC.PCUICInductives</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICInductives.html#lab64">Projections</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICInversion.html">Library MetaRocq.PCUIC.PCUICInversion</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICLoader.html">Library MetaRocq.PCUIC.PCUICLoader</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICMonadAst.html">Library MetaRocq.PCUIC.PCUICMonadAst</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICNormal.html">Library MetaRocq.PCUIC.PCUICNormal</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICNormalization.html">Library MetaRocq.PCUIC.PCUICNormalization</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICParallelReduction.html">Library MetaRocq.PCUIC.PCUICParallelReduction</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICParallelReductionConfluence.html">Library MetaRocq.PCUIC.PCUICParallelReductionConfluence</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICPrincipality.html">Library MetaRocq.PCUIC.PCUICPrincipality</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICProgram.html">Library MetaRocq.PCUIC.PCUICProgram</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICProgram.html#lab65">Definition of programs in template-rocq, well-typed terms and provided transformations</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICProgress.html">Library MetaRocq.PCUIC.PCUICProgress</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICRedTypeIrrelevance.html">Library MetaRocq.PCUIC.PCUICRedTypeIrrelevance</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICReduction.html">Library MetaRocq.PCUIC.PCUICReduction</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICSN.html">Library MetaRocq.PCUIC.PCUICSN</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICSR.html">Library MetaRocq.PCUIC.PCUICSR</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICSafeLemmata.html">Library MetaRocq.PCUIC.PCUICSafeLemmata</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICSigmaCalculus.html">Library MetaRocq.PCUIC.PCUICSigmaCalculus</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#lab66">Theory of σ-calculus operations</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICSpine.html">Library MetaRocq.PCUIC.PCUICSpine</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICSubstitution.html">Library MetaRocq.PCUIC.PCUICSubstitution</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICSubstitution.html#lab67">Substitution lemmas for typing derivations. Substitution is now derived from a general</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICTelescopes.html">Library MetaRocq.PCUIC.PCUICTelescopes</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICTypedAst.html">Library MetaRocq.PCUIC.PCUICTypedAst</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICTyping.html">Library MetaRocq.PCUIC.PCUICTyping</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICTyping.html#lab68">Typing derivations</a>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICTyping.html#lab69">Typing relation</a>
+
+</li>
+<li><a href="MetaRocq.PCUIC.PCUICTyping.html#lab70">Typechecking of global environments</a>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICTyping.html#lab71">An induction principle ensuring the Σ declarations enjoy the same properties.</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICUnivLevels.html">Library MetaRocq.PCUIC.PCUICUnivLevels</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICValidity.html">Library MetaRocq.PCUIC.PCUICValidity</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICWcbvEval.html">Library MetaRocq.PCUIC.PCUICWcbvEval</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICWcbvEval.html#lab72">Weak-head call-by-value evaluation strategy.</a>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICWcbvEval.html#lab73">Big step version of weak cbv beta-zeta-iota-fix-delta reduction.</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICWeakeningConfig.html">Library MetaRocq.PCUIC.PCUICWeakeningConfig</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICWeakeningConfig.html#lab74">Weakening lemmas w.r.t. the checker configuration</a>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICWeakeningConfig.html#lab75">Constraints</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICWeakeningConfigSN.html">Library MetaRocq.PCUIC.PCUICWeakeningConfigSN</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICWeakeningEnv.html">Library MetaRocq.PCUIC.PCUICWeakeningEnv</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICWeakeningEnv.html#lab76">Weakening lemmas w.r.t. the global environment</a>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.PCUICWeakeningEnv.html#lab77">Constraints</a>
+
+</li>
+<li><a href="MetaRocq.PCUIC.PCUICWeakeningEnv.html#lab78">Lookup</a>
+
+</li>
+<li><a href="MetaRocq.PCUIC.PCUICWeakeningEnv.html#lab79">Back to universes</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.PCUICWeakeningEnvSN.html">Library MetaRocq.PCUIC.PCUICWeakeningEnvSN</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICWellScopedCumulativity.html">Library MetaRocq.PCUIC.PCUICWellScopedCumulativity</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICWfCases.html">Library MetaRocq.PCUIC.PCUICWfCases</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICWfUniverses.html">Library MetaRocq.PCUIC.PCUICWfUniverses</a></h2>
+<h2><a href="MetaRocq.PCUIC.PCUICWtCumulativity.html">Library MetaRocq.PCUIC.PCUICWtCumulativity</a></h2>
+<h2><a href="MetaRocq.Quotation.CommonUtils.html">Library MetaRocq.Quotation.CommonUtils</a></h2>
+<h2><a href="MetaRocq.SafeCheckerPlugin.Extraction.html">Library MetaRocq.SafeCheckerPlugin.Extraction</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.SafeCheckerPlugin.Extraction.html#lab80">Extraction setup for the safechecker phase of MetaRocq.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.SafeCheckerPlugin.Loader.html">Library MetaRocq.SafeCheckerPlugin.Loader</a></h2>
+<h2><a href="MetaRocq.SafeCheckerPlugin.SafeTemplateChecker.html">Library MetaRocq.SafeCheckerPlugin.SafeTemplateChecker</a></h2>
+<h2><a href="MetaRocq.SafeChecker.PCUICEqualityDec.html">Library MetaRocq.SafeChecker.PCUICEqualityDec</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.SafeChecker.PCUICEqualityDec.html#lab81">Boolean of equality **</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.SafeChecker.PCUICErrors.html">Library MetaRocq.SafeChecker.PCUICErrors</a></h2>
+<h2><a href="MetaRocq.SafeChecker.PCUICRetypingEnvIrrelevance.html">Library MetaRocq.SafeChecker.PCUICRetypingEnvIrrelevance</a></h2>
+<h2><a href="MetaRocq.SafeChecker.PCUICSafeChecker.html">Library MetaRocq.SafeChecker.PCUICSafeChecker</a></h2>
+<h2><a href="MetaRocq.SafeChecker.PCUICSafeConversion.html">Library MetaRocq.SafeChecker.PCUICSafeConversion</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.SafeChecker.PCUICSafeConversion.html#lab82">Conversion for PCUIC without fuel</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.SafeChecker.PCUICSafeReduce.html">Library MetaRocq.SafeChecker.PCUICSafeReduce</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.SafeChecker.PCUICSafeReduce.html#lab83">Reduction machine for PCUIC without fuel</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.SafeChecker.PCUICSafeRetyping.html">Library MetaRocq.SafeChecker.PCUICSafeRetyping</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.SafeChecker.PCUICSafeRetyping.html#lab84">Retyping</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.SafeChecker.PCUICTypeChecker.html">Library MetaRocq.SafeChecker.PCUICTypeChecker</a></h2>
+<h2><a href="MetaRocq.SafeChecker.PCUICWfEnv.html">Library MetaRocq.SafeChecker.PCUICWfEnv</a></h2>
+<h2><a href="MetaRocq.SafeChecker.PCUICWfEnvImpl.html">Library MetaRocq.SafeChecker.PCUICWfEnvImpl</a></h2>
+<h2><a href="MetaRocq.SafeChecker.PCUICWfReduction.html">Library MetaRocq.SafeChecker.PCUICWfReduction</a></h2>
+<h2><a href="MetaRocq.TemplatePCUIC.Loader.html">Library MetaRocq.TemplatePCUIC.Loader</a></h2>
+<h2><a href="MetaRocq.TemplatePCUIC.PCUICTemplateMonad.html">Library MetaRocq.TemplatePCUIC.PCUICTemplateMonad</a></h2>
+<h2><a href="MetaRocq.TemplatePCUIC.PCUICToTemplate.html">Library MetaRocq.TemplatePCUIC.PCUICToTemplate</a></h2>
+<h2><a href="MetaRocq.TemplatePCUIC.PCUICToTemplateCorrectness.html">Library MetaRocq.TemplatePCUIC.PCUICToTemplateCorrectness</a></h2>
+<h2><a href="MetaRocq.TemplatePCUIC.PCUICTransform.html">Library MetaRocq.TemplatePCUIC.PCUICTransform</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.TemplatePCUIC.PCUICTransform.html#lab85">Definition of programs in template-rocq, well-typed terms and provided transformations</a>
+
+</li>
+<li><a href="MetaRocq.TemplatePCUIC.PCUICTransform.html#lab86">Translation from Template to PCUIC, directly preserves evaluation</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.TemplatePCUIC.TemplateMonadToPCUIC.html">Library MetaRocq.TemplatePCUIC.TemplateMonadToPCUIC</a></h2>
+<h2><a href="MetaRocq.TemplatePCUIC.TemplateToPCUIC.html">Library MetaRocq.TemplatePCUIC.TemplateToPCUIC</a></h2>
+<h2><a href="MetaRocq.TemplatePCUIC.TemplateToPCUICCorrectness.html">Library MetaRocq.TemplatePCUIC.TemplateToPCUICCorrectness</a></h2>
+<h2><a href="MetaRocq.TemplatePCUIC.TemplateToPCUICExpanded.html">Library MetaRocq.TemplatePCUIC.TemplateToPCUICExpanded</a></h2>
+<h2><a href="MetaRocq.TemplatePCUIC.TemplateToPCUICWcbvEval.html">Library MetaRocq.TemplatePCUIC.TemplateToPCUICWcbvEval</a></h2>
+<h2><a href="MetaRocq.Template.All.html">Library MetaRocq.Template.All</a></h2>
+<h2><a href="MetaRocq.Template.Ast.html">Library MetaRocq.Template.Ast</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Ast.html#lab87">AST of Rocq kernel terms and kernel data structures</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Ast.html#lab88">Basic data-types:</a>
+
+</li>
+<li><a href="MetaRocq.Template.Ast.html#lab89">Terms:</a>
+
+</li>
+<li><a href="MetaRocq.Template.Ast.html#lab90">Kernel interface: entries and declarations</a>
+
+</li>
+<li><a href="MetaRocq.Template.Ast.html#lab91">Environments of declarations</a>
+
+</li>
+<li><a href="MetaRocq.Template.Ast.html#lab92">Entries</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Ast.html#lab93">Constant and axiom entries</a>
+
+</li>
+<li><a href="MetaRocq.Template.Ast.html#lab94">Inductive entries</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.AstUtils.html">Library MetaRocq.Template.AstUtils</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.AstUtils.html#lab95">Traversal functions.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.Checker.html">Library MetaRocq.Template.Checker</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Checker.html#lab96">Rocq type-checker for kernel terms</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.Constants.html">Library MetaRocq.Template.Constants</a></h2>
+<h2><a href="MetaRocq.Template.EtaExpand.html">Library MetaRocq.Template.EtaExpand</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.EtaExpand.html#lab97">Eta-expansion and proof generation</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.ExtractableLoader.html">Library MetaRocq.Template.ExtractableLoader</a></h2>
+<h2><a href="MetaRocq.Template.Extraction.html">Library MetaRocq.Template.Extraction</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Extraction.html#lab98">Extraction setup for template-rocq.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.Induction.html">Library MetaRocq.Template.Induction</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Induction.html#lab99">Deriving a compact induction principle for terms</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.Lib.html">Library MetaRocq.Template.Lib</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Lib.html#lab100">Commands.</a>
+
+</li>
+<li><a href="MetaRocq.Template.Lib.html#lab101">Useful shortcuts.</a>
+
+</li>
+<li><a href="MetaRocq.Template.Lib.html#lab102">Monadic notations.</a>
+
+</li>
+<li><a href="MetaRocq.Template.Lib.html#lab103">Packed inductives and constructors.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.LiftSubst.html">Library MetaRocq.Template.LiftSubst</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.LiftSubst.html#lab104">Lifting and substitution for the AST</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.Loader.html">Library MetaRocq.Template.Loader</a></h2>
+<h2><a href="MetaRocq.Template.MonadAst.html">Library MetaRocq.Template.MonadAst</a></h2>
+<h2><a href="MetaRocq.Template.Normal.html">Library MetaRocq.Template.Normal</a></h2>
+<h2><a href="MetaRocq.Template.Pretty.html">Library MetaRocq.Template.Pretty</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Pretty.html#lab105">Pretty printing</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.Reduction.html">Library MetaRocq.Template.Reduction</a></h2>
+<h2><a href="MetaRocq.Template.ReflectAst.html">Library MetaRocq.Template.ReflectAst</a></h2>
+<h2><a href="MetaRocq.Template.TemplateCheckWf.html">Library MetaRocq.Template.TemplateCheckWf</a></h2>
+<h2><a href="MetaRocq.Template.TemplateEnvMap.html">Library MetaRocq.Template.TemplateEnvMap</a></h2>
+<h2><a href="MetaRocq.Template.TemplateMonad.html">Library MetaRocq.Template.TemplateMonad</a></h2>
+<h2><a href="MetaRocq.Template.TemplateProgram.html">Library MetaRocq.Template.TemplateProgram</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.TemplateProgram.html#lab106">Definition of programs in template-rocq, well-typed terms and provided transformations</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.TermEquality.html">Library MetaRocq.Template.TermEquality</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Template.TermEquality.html#lab107">Syntactic equality up-to universes</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.Typing.html">Library MetaRocq.Template.Typing</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Typing.html#lab108">Typing derivations</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Typing.html#lab109">Reduction</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Typing.html#lab110">Helper functions for reduction</a>
+
+</li>
+<li><a href="MetaRocq.Template.Typing.html#lab111">One step strong beta-zeta-iota-fix-delta reduction</a>
+
+</li>
+<li><a href="MetaRocq.Template.Typing.html#lab112">Reduction</a>
+
+</li>
+</ul>
+
+</li>
+<li><a href="MetaRocq.Template.Typing.html#lab113">Term equality and cumulativity</a>
+
+</li>
+<li><a href="MetaRocq.Template.Typing.html#lab114">Cumulativity:</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Typing.html#lab115">Conversion</a>
+
+</li>
+</ul>
+
+</li>
+<li><a href="MetaRocq.Template.Typing.html#lab116">Typing relation</a>
+
+</li>
+<li><a href="MetaRocq.Template.Typing.html#lab117">Typechecking of global environments</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.Typing.html#lab118">An induction principle ensuring the Σ declarations enjoy the same properties.</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.TypingWf.html">Library MetaRocq.Template.TypingWf</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.TypingWf.html#lab119">Well-formedness of terms and types in typing derivations</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.UnivSubst.html">Library MetaRocq.Template.UnivSubst</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.UnivSubst.html#lab120">Universe substitution</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.WcbvEval.html">Library MetaRocq.Template.WcbvEval</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.WcbvEval.html#lab121">Weak-head call-by-value evaluation strategy.</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.WcbvEval.html#lab122">Big step version of weak cbv beta-zeta-iota-fix-delta reduction.</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.WfAst.html">Library MetaRocq.Template.WfAst</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.WfAst.html#lab123">Well-formedness of terms and types in typing derivations</a>
+
+</li>
+<li><a href="MetaRocq.Template.WfAst.html#lab124">Inversion lemmas for the well-formedness judgement</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Utils.All_Forall.html">Library MetaRocq.Utils.All_Forall</a></h2>
+<h2><a href="MetaRocq.Utils.ByteCompare.html">Library MetaRocq.Utils.ByteCompare</a></h2>
+<h2><a href="MetaRocq.Utils.ByteCompareSpec.html">Library MetaRocq.Utils.ByteCompareSpec</a></h2>
+<h2><a href="MetaRocq.Utils.ByteCompare_opt.html">Library MetaRocq.Utils.ByteCompare_opt</a></h2>
+<h2><a href="MetaRocq.Utils.LibHypsNaming.html">Library MetaRocq.Utils.LibHypsNaming</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Utils.LibHypsNaming.html#lab125">The custom renaming tactic</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Utils.MRArith.html">Library MetaRocq.Utils.MRArith</a></h2>
+<h2><a href="MetaRocq.Utils.MRCompare.html">Library MetaRocq.Utils.MRCompare</a></h2>
+<h2><a href="MetaRocq.Utils.MREquality.html">Library MetaRocq.Utils.MREquality</a></h2>
+<h2><a href="MetaRocq.Utils.MRFSets.html">Library MetaRocq.Utils.MRFSets</a></h2>
+<h2><a href="MetaRocq.Utils.MRList.html">Library MetaRocq.Utils.MRList</a></h2>
+<h2><a href="MetaRocq.Utils.MRListable.html">Library MetaRocq.Utils.MRListable</a></h2>
+<h2><a href="MetaRocq.Utils.MRMSets.html">Library MetaRocq.Utils.MRMSets</a></h2>
+<h2><a href="MetaRocq.Utils.MROption.html">Library MetaRocq.Utils.MROption</a></h2>
+<h2><a href="MetaRocq.Utils.MRPred.html">Library MetaRocq.Utils.MRPred</a></h2>
+<h2><a href="MetaRocq.Utils.MRPrelude.html">Library MetaRocq.Utils.MRPrelude</a></h2>
+<h2><a href="MetaRocq.Utils.MRProd.html">Library MetaRocq.Utils.MRProd</a></h2>
+<h2><a href="MetaRocq.Utils.MRReflect.html">Library MetaRocq.Utils.MRReflect</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Utils.MRReflect.html#lab126">Notion of reflection for Type-based properties</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Utils.MRRelations.html">Library MetaRocq.Utils.MRRelations</a></h2>
+<h2><a href="MetaRocq.Utils.MRSquash.html">Library MetaRocq.Utils.MRSquash</a></h2>
+<h2><a href="MetaRocq.Utils.MRString.html">Library MetaRocq.Utils.MRString</a></h2>
+<h2><a href="MetaRocq.Utils.MRUtils.html">Library MetaRocq.Utils.MRUtils</a></h2>
+<h2><a href="MetaRocq.Utils.MR_ExtrOCamlInt63.html">Library MetaRocq.Utils.MR_ExtrOCamlInt63</a></h2>
+<h2><a href="MetaRocq.Utils.MR_ExtrOCamlNatInt.html">Library MetaRocq.Utils.MR_ExtrOCamlNatInt</a></h2>
+<h2><a href="MetaRocq.Utils.MR_ExtrOCamlZPosInt.html">Library MetaRocq.Utils.MR_ExtrOCamlZPosInt</a></h2>
+<h2><a href="MetaRocq.Utils.ReflectEq.html">Library MetaRocq.Utils.ReflectEq</a></h2>
+<h2><a href="MetaRocq.Utils.Show.html">Library MetaRocq.Utils.Show</a></h2>
+<h2><a href="MetaRocq.Utils.bytestring.html">Library MetaRocq.Utils.bytestring</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Utils.bytestring.html#lab127">Copyright (C) 2020 BedRock Systems, Inc.</a>
+
+</li>
+<li><a href="MetaRocq.Utils.bytestring.html#lab128">All rights reserved.</a>
+
+</li>
+<li><a href="MetaRocq.Utils.bytestring.html#lab129">SPDX-License-Identifier: LGPL-2.1 WITH BedRock Exception for use over network,</a>
+
+</li>
+<li><a href="MetaRocq.Utils.bytestring.html#lab130">see repository root for details.</a>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Utils.bytestring.html#lab131">Substrings</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Utils.monad_utils.html">Library MetaRocq.Utils.monad_utils</a></h2>
+<h2><a href="MetaRocq.Utils.utils.html">Library MetaRocq.Utils.utils</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Utils.utils.html#lab132">This file exports utilities and notations used in MetaRocq.</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Utils.wGraph.html">Library MetaRocq.Utils.wGraph</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Utils.wGraph.html#lab133">Main results about acyclicity</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.Typed.Annotations.html">Library MetaRocq.Erasure.Typed.Annotations</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.Typed.Annotations.html#lab134">More utility functions</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.Typed.Certifying.html">Library MetaRocq.Erasure.Typed.Certifying</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.Typed.Certifying.html#lab135">Term and proof generation for the certifying transforms</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.Typed.CertifyingBeta.html">Library MetaRocq.Erasure.Typed.CertifyingBeta</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.CertifyingEta.html">Library MetaRocq.Erasure.Typed.CertifyingEta</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.Typed.CertifyingEta.html#lab136">Eta-expansion and proof generation</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.Typed.CertifyingInlining.html">Library MetaRocq.Erasure.Typed.CertifyingInlining</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Erasure.Typed.CertifyingInlining.html#lab137">Inlining pass on the Template Rocq representation</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Erasure.Typed.ClosedAux.html">Library MetaRocq.Erasure.Typed.ClosedAux</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.Erasure.html">Library MetaRocq.Erasure.Typed.Erasure</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.ErasureCorrectness.html">Library MetaRocq.Erasure.Typed.ErasureCorrectness</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.ExAst.html">Library MetaRocq.Erasure.Typed.ExAst</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.Extraction.html">Library MetaRocq.Erasure.Typed.Extraction</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.ExtractionCorrectness.html">Library MetaRocq.Erasure.Typed.ExtractionCorrectness</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.Optimize.html">Library MetaRocq.Erasure.Typed.Optimize</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.OptimizeCorrectness.html">Library MetaRocq.Erasure.Typed.OptimizeCorrectness</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.OptimizePropDiscr.html">Library MetaRocq.Erasure.Typed.OptimizePropDiscr</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.ResultMonad.html">Library MetaRocq.Erasure.Typed.ResultMonad</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.Transform.html">Library MetaRocq.Erasure.Typed.Transform</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.TypeAnnotations.html">Library MetaRocq.Erasure.Typed.TypeAnnotations</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.Utils.html">Library MetaRocq.Erasure.Typed.Utils</a></h2>
+<h2><a href="MetaRocq.Erasure.Typed.WcbvEvalAux.html">Library MetaRocq.Erasure.Typed.WcbvEvalAux</a></h2>
+<h2><a href="MetaRocq.PCUIC.Bidirectional.BDFromPCUIC.html">Library MetaRocq.PCUIC.Bidirectional.BDFromPCUIC</a></h2>
+<h2><a href="MetaRocq.PCUIC.Bidirectional.BDStrengthening.html">Library MetaRocq.PCUIC.Bidirectional.BDStrengthening</a></h2>
+<h2><a href="MetaRocq.PCUIC.Bidirectional.BDToPCUIC.html">Library MetaRocq.PCUIC.Bidirectional.BDToPCUIC</a></h2>
+<h2><a href="MetaRocq.PCUIC.Bidirectional.BDTyping.html">Library MetaRocq.PCUIC.Bidirectional.BDTyping</a></h2>
+<h2><a href="MetaRocq.PCUIC.Bidirectional.BDUnique.html">Library MetaRocq.PCUIC.Bidirectional.BDUnique</a></h2>
+<h2><a href="MetaRocq.PCUIC.Conversion.PCUICClosedConv.html">Library MetaRocq.PCUIC.Conversion.PCUICClosedConv</a></h2>
+<h2><a href="MetaRocq.PCUIC.Conversion.PCUICInstConv.html">Library MetaRocq.PCUIC.Conversion.PCUICInstConv</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Conversion.PCUICInstConv.html#lab138">Type preservation for σ-calculus instantiation</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Conversion.PCUICNamelessConv.html">Library MetaRocq.PCUIC.Conversion.PCUICNamelessConv</a></h2>
+<h2><a href="MetaRocq.PCUIC.Conversion.PCUICOnFreeVarsConv.html">Library MetaRocq.PCUIC.Conversion.PCUICOnFreeVarsConv</a></h2>
+<h2><a href="MetaRocq.PCUIC.Conversion.PCUICRenameConv.html">Library MetaRocq.PCUIC.Conversion.PCUICRenameConv</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Conversion.PCUICRenameConv.html#lab139">Type preservation for σ-calculus operations</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Conversion.PCUICUnivSubstitutionConv.html">Library MetaRocq.PCUIC.Conversion.PCUICUnivSubstitutionConv</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Conversion.PCUICUnivSubstitutionConv.html#lab140">Universe Substitution lemmas for typing derivations.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Conversion.PCUICWeakeningConfigConv.html">Library MetaRocq.PCUIC.Conversion.PCUICWeakeningConfigConv</a></h2>
+<h2><a href="MetaRocq.PCUIC.Conversion.PCUICWeakeningConv.html">Library MetaRocq.PCUIC.Conversion.PCUICWeakeningConv</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Conversion.PCUICWeakeningConv.html#lab141">Weakening lemmas for typing derivations.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Conversion.PCUICWeakeningEnvConv.html">Library MetaRocq.PCUIC.Conversion.PCUICWeakeningEnvConv</a></h2>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICCases.html">Library MetaRocq.PCUIC.Syntax.PCUICCases</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Syntax.PCUICCases.html#lab142">Functions related to the "compact" case representation</a>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Syntax.PCUICCases.html#lab143">Helper functions for reduction/conversion</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICClosed.html">Library MetaRocq.PCUIC.Syntax.PCUICClosed</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Syntax.PCUICClosed.html#lab144">Lemmas about the <span class="inlinecode"><span class="id" title="var">closedn</span></span> predicate</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICDepth.html">Library MetaRocq.PCUIC.Syntax.PCUICDepth</a></h2>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICInduction.html">Library MetaRocq.PCUIC.Syntax.PCUICInduction</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Syntax.PCUICInduction.html#lab145">Deriving a compact induction principle for terms</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICInstDef.html">Library MetaRocq.PCUIC.Syntax.PCUICInstDef</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Syntax.PCUICInstDef.html#lab146">Type preservation for σ-calculus instantiation</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICLiftSubst.html">Library MetaRocq.PCUIC.Syntax.PCUICLiftSubst</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Syntax.PCUICLiftSubst.html#lab147">Commutation lemmas for the lifting and substitution operations.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICNamelessDef.html">Library MetaRocq.PCUIC.Syntax.PCUICNamelessDef</a></h2>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICOnFreeVars.html">Library MetaRocq.PCUIC.Syntax.PCUICOnFreeVars</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Syntax.PCUICOnFreeVars.html#lab148">Preservation of free variables</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICPosition.html">Library MetaRocq.PCUIC.Syntax.PCUICPosition</a></h2>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICReflect.html">Library MetaRocq.PCUIC.Syntax.PCUICReflect</a></h2>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html">Library MetaRocq.PCUIC.Syntax.PCUICRenameDef</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#lab149">Type preservation for σ-calculus operations</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICTactics.html">Library MetaRocq.PCUIC.Syntax.PCUICTactics</a></h2>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICUnivSubst.html">Library MetaRocq.PCUIC.Syntax.PCUICUnivSubst</a></h2>
+<h2><a href="MetaRocq.PCUIC.Syntax.PCUICViews.html">Library MetaRocq.PCUIC.Syntax.PCUICViews</a></h2>
+<h2><a href="MetaRocq.PCUIC.Typing.PCUICClosedTyp.html">Library MetaRocq.PCUIC.Typing.PCUICClosedTyp</a></h2>
+<h2><a href="MetaRocq.PCUIC.Typing.PCUICContextConversionTyp.html">Library MetaRocq.PCUIC.Typing.PCUICContextConversionTyp</a></h2>
+<h2><a href="MetaRocq.PCUIC.Typing.PCUICInstTyp.html">Library MetaRocq.PCUIC.Typing.PCUICInstTyp</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Typing.PCUICInstTyp.html#lab150">Type preservation for σ-calculus instantiation</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Typing.PCUICNamelessTyp.html">Library MetaRocq.PCUIC.Typing.PCUICNamelessTyp</a></h2>
+<h2><a href="MetaRocq.PCUIC.Typing.PCUICRenameTyp.html">Library MetaRocq.PCUIC.Typing.PCUICRenameTyp</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Typing.PCUICRenameTyp.html#lab151">Type preservation for σ-calculus operations</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Typing.PCUICUnivSubstitutionTyp.html">Library MetaRocq.PCUIC.Typing.PCUICUnivSubstitutionTyp</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Typing.PCUICUnivSubstitutionTyp.html#lab152">Universe Substitution lemmas for typing derivations.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.Typing.PCUICWeakeningConfigTyp.html">Library MetaRocq.PCUIC.Typing.PCUICWeakeningConfigTyp</a></h2>
+<h2><a href="MetaRocq.PCUIC.Typing.PCUICWeakeningEnvTyp.html">Library MetaRocq.PCUIC.Typing.PCUICWeakeningEnvTyp</a></h2>
+<h2><a href="MetaRocq.PCUIC.Typing.PCUICWeakeningTyp.html">Library MetaRocq.PCUIC.Typing.PCUICWeakeningTyp</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.Typing.PCUICWeakeningTyp.html#lab153">Weakening lemmas for typing derivations.</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.utils.PCUICAstUtils.html">Library MetaRocq.PCUIC.utils.PCUICAstUtils</a></h2>
+<h2><a href="MetaRocq.PCUIC.utils.PCUICOnOne.html">Library MetaRocq.PCUIC.utils.PCUICOnOne</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.PCUIC.utils.PCUICOnOne.html#lab154">Reduction</a>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.utils.PCUICOnOne.html#lab155">One step strong beta-zeta-iota-fix-delta reduction</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.utils.PCUICPretty.html">Library MetaRocq.PCUIC.utils.PCUICPretty</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.PCUIC.utils.PCUICPretty.html#lab156">Pretty printing</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.PCUIC.utils.PCUICPrimitive.html">Library MetaRocq.PCUIC.utils.PCUICPrimitive</a></h2>
+<h2><a href="MetaRocq.PCUIC.utils.PCUICSize.html">Library MetaRocq.PCUIC.utils.PCUICSize</a></h2>
+<h2><a href="MetaRocq.PCUIC.utils.PCUICUtils.html">Library MetaRocq.PCUIC.utils.PCUICUtils</a></h2>
+<h2><a href="MetaRocq.Quotation.ToPCUIC.All.html">Library MetaRocq.Quotation.ToPCUIC.All</a></h2>
+<h2><a href="MetaRocq.Quotation.ToPCUIC.Equations.html">Library MetaRocq.Quotation.ToPCUIC.Equations</a></h2>
+<h2><a href="MetaRocq.Quotation.ToPCUIC.Init.html">Library MetaRocq.Quotation.ToPCUIC.Init</a></h2>
+<h2><a href="MetaRocq.Quotation.ToTemplate.All.html">Library MetaRocq.Quotation.ToTemplate.All</a></h2>
+<h2><a href="MetaRocq.Quotation.ToTemplate.Equations.html">Library MetaRocq.Quotation.ToTemplate.Equations</a></h2>
+<h2><a href="MetaRocq.Quotation.ToTemplate.Init.html">Library MetaRocq.Quotation.ToTemplate.Init</a></h2>
+<h2><a href="MetaRocq.TemplatePCUIC.PCUICTemplateMonad.Core.html">Library MetaRocq.TemplatePCUIC.PCUICTemplateMonad.Core</a></h2>
+<h2><a href="MetaRocq.Template.TemplateMonad.Common.html">Library MetaRocq.Template.TemplateMonad.Common</a></h2>
+<h2><a href="MetaRocq.Template.TemplateMonad.Core.html">Library MetaRocq.Template.TemplateMonad.Core</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.TemplateMonad.Core.html#lab157">The Template Monad</a>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Template.TemplateMonad.Core.html#lab158">The TemplateMonad type</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Template.TemplateMonad.Extractable.html">Library MetaRocq.Template.TemplateMonad.Extractable</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Template.TemplateMonad.Extractable.html#lab159">The Extractable Template Monad</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Utils.MRTactics.DestructHead.html">Library MetaRocq.Utils.MRTactics.DestructHead</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.DestructHyps.html">Library MetaRocq.Utils.MRTactics.DestructHyps</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.FindHyp.html">Library MetaRocq.Utils.MRTactics.FindHyp</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.GeneralizeOverHoles.html">Library MetaRocq.Utils.MRTactics.GeneralizeOverHoles</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.Head.html">Library MetaRocq.Utils.MRTactics.Head</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.InHypUnderBindersDo.html">Library MetaRocq.Utils.MRTactics.InHypUnderBindersDo</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.SpecializeAllWays.html">Library MetaRocq.Utils.MRTactics.SpecializeAllWays</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.SpecializeBy.html">Library MetaRocq.Utils.MRTactics.SpecializeBy</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.SpecializeUnderBindersBy.html">Library MetaRocq.Utils.MRTactics.SpecializeUnderBindersBy</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.SplitInContext.html">Library MetaRocq.Utils.MRTactics.SplitInContext</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.UniquePose.html">Library MetaRocq.Utils.MRTactics.UniquePose</a></h2>
+<h2><a href="MetaRocq.Utils.MRTactics.Zeta1.html">Library MetaRocq.Utils.MRTactics.Zeta1</a></h2>
+<h2><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html">Library MetaRocq.Utils.canonicaltries.CanonicalTries</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab160">The extensional binary tries based on a canonical representation</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab161">Representation of tries</a>
+
+</li>
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab162">Basic operations: <span class="inlinecode"><span class="id" title="var">empty</span></span>, <span class="inlinecode"><span class="id" title="var">get</span></span>, <span class="inlinecode"><span class="id" title="tactic">set</span></span>, <span class="inlinecode"><span class="id" title="var">remove</span></span></a>
+
+</li>
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab163">Good variable properties for the basic operations</a>
+
+</li>
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab164">The <span class="inlinecode"><span class="id" title="var">map_filter</span></span> collective operation over tries</a>
+
+</li>
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab165">Custom case analysis principles and induction principles</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab166">A case analysis principle</a>
+
+</li>
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab167">A recursion principle</a>
+
+</li>
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab168">An induction principle</a>
+
+</li>
+</ul>
+
+</li>
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab169">The <span class="inlinecode"><span class="id" title="var">combine</span></span> collective operation over pairs of tries</a>
+
+</li>
+<li><a href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#lab170">Extensionality property</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Utils.canonicaltries.String2pos.html">Library MetaRocq.Utils.canonicaltries.String2pos</a></h2>
+<h2><a href="MetaRocq.Translations.MiniHoTT.html">Library MetaRocq.Translations.MiniHoTT</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab171">Path operations are equivalences</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab172">Dependent paths</a>
+
+</li>
+</ul>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab173">Universal mapping property</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab174">Paths</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab175">Path algebra</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab176">Transport</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab177">Maps on paths</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab178">Dependent paths</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab179">Functorial action</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab180">Equivalences</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab181">Truncatedness: any dependent product of n-types is an n-type</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab182">Contractibility: A product over a contractible type is equivalent to the fiber over the center.</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab183">Symmetry of curried arguments</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab184">Unpacking</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab185">Eta conversion</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab186">Paths</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab187">Transport</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab188">Functorial action</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab189">Equivalences</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT.html#lab190">Associativity</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Translations.MiniHoTT_paths.html">Library MetaRocq.Translations.MiniHoTT_paths</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab191">Path operations are equivalences</a>
+<ul class="doclist">
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab192">Dependent paths</a>
+
+</li>
+</ul>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab193">Universal mapping property</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab194">Paths</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab195">Path algebra</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab196">Transport</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab197">Maps on paths</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab198">Dependent paths</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab199">Functorial action</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab200">Equivalences</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab201">Truncatedness: any dependent product of n-types is an n-type</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab202">Contractibility: A product over a contractible type is equivalent to the fiber over the center.</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab203">Symmetry of curried arguments</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab204">Unpacking</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab205">Eta conversion</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab206">Paths</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab207">Transport</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab208">Functorial action</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab209">Equivalences</a>
+
+</li>
+<li><a href="MetaRocq.Translations.MiniHoTT_paths.html#lab210">Associativity</a>
+
+</li>
+</ul>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Translations.param_binary.html">Library MetaRocq.Translations.param_binary</a></h2>
+<h2><a href="MetaRocq.Translations.param_cheap_packed.html">Library MetaRocq.Translations.param_cheap_packed</a></h2>
+<h2><a href="MetaRocq.Translations.param_generous_packed.html">Library MetaRocq.Translations.param_generous_packed</a></h2>
+<h2><a href="MetaRocq.Translations.param_generous_unpacked.html">Library MetaRocq.Translations.param_generous_unpacked</a></h2>
+<h2><a href="MetaRocq.Translations.param_original.html">Library MetaRocq.Translations.param_original</a></h2>
+<h2><a href="MetaRocq.Translations.sigma.html">Library MetaRocq.Translations.sigma</a></h2>
+<h2><a href="MetaRocq.Translations.standard_model.html">Library MetaRocq.Translations.standard_model</a></h2>
+<ul class="doclist">
+<li><a href="MetaRocq.Translations.standard_model.html#lab211">****************** WARNING : WIP ! ****************** *</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Translations.times_bool_fun.html">Library MetaRocq.Translations.times_bool_fun</a></h2>
+<h2><a href="MetaRocq.Translations.times_bool_fun2.html">Library MetaRocq.Translations.times_bool_fun2</a></h2>
+<h2><a href="MetaRocq.Translations.translation_utils.html">Library MetaRocq.Translations.translation_utils</a></h2>
+<h2><a href="MetaRocq.Examples.add_constructor.html">Library MetaRocq.Examples.add_constructor</a></h2>
+<ul class="doclist">
+<li><ul class="doclist">
+<li><a href="MetaRocq.Examples.add_constructor.html#lab212">Auxiliary functions</a>
+
+</li>
+</ul>
+
+</li>
+<li><a href="MetaRocq.Examples.add_constructor.html#lab213">Plugin</a>
+
+</li>
+<li><a href="MetaRocq.Examples.add_constructor.html#lab214">Examples</a>
+
+</li>
+</ul>
+<h2><a href="MetaRocq.Examples.constructor_tac.html">Library MetaRocq.Examples.constructor_tac</a></h2>
+<h2><a href="MetaRocq.Examples.demo.html">Library MetaRocq.Examples.demo</a></h2>
+<h2><a href="MetaRocq.Examples.metarocq_tour.html">Library MetaRocq.Examples.metarocq_tour</a></h2>
+<h2><a href="MetaRocq.Examples.metarocq_tour_prelude.html">Library MetaRocq.Examples.metarocq_tour_prelude</a></h2>
+<h2><a href="MetaRocq.Examples.tauto.html">Library MetaRocq.Examples.tauto</a></h2>
+<h2><a href="MetaRocq.Examples.typing_correctness.html">Library MetaRocq.Examples.typing_correctness</a></h2>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

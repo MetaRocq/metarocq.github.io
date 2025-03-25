@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.Utils.MRTactics.DestructHead</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Utils.MRTactics.Head.html#"><span class="id" title="library">Utils.MRTactics.Head</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Utils.MRTactics.DestructHyps.html#"><span class="id" title="library">Utils.MRTactics.DestructHyps</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_matcher</span> <span class="id" title="var">T</span> <span class="id" title="var">HT</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">head</span> <span class="id" title="var">HT</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">T</span> ⇒ <span class="id" title="tactic">idtac</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head</span> <span class="id" title="var">T</span> := <span class="id" title="var">destruct_all_matches</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">destruct_head_matcher</span> <span class="id" title="var">T</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head</span> <span class="id" title="var">T</span> := <span class="id" title="var">destruct_one_match</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">destruct_head_matcher</span> <span class="id" title="var">T</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'</span> <span class="id" title="var">T</span> := <span class="id" title="var">destruct_all_matches'</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">destruct_head_matcher</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">inversion_head</span> <span class="id" title="var">T</span> := <span class="id" title="var">inversion_all_matches</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">destruct_head_matcher</span> <span class="id" title="var">T</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">inversion_one_head</span> <span class="id" title="var">T</span> := <span class="id" title="var">inversion_one_match</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">destruct_head_matcher</span> <span class="id" title="var">T</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">inversion_head'</span> <span class="id" title="var">T</span> := <span class="id" title="var">inversion_all_matches'</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">destruct_head_matcher</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">head_hnf_matcher</span> <span class="id" title="var">T</span> <span class="id" title="var">HT</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">head_hnf</span> <span class="id" title="var">HT</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">T</span> ⇒ <span class="id" title="tactic">idtac</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_hnf</span> <span class="id" title="var">T</span> := <span class="id" title="var">destruct_all_matches</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">head_hnf_matcher</span> <span class="id" title="var">T</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_hnf</span> <span class="id" title="var">T</span> := <span class="id" title="var">destruct_one_match</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">head_hnf_matcher</span> <span class="id" title="var">T</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_hnf'</span> <span class="id" title="var">T</span> := <span class="id" title="var">destruct_all_matches'</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">head_hnf_matcher</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">inversion_head_hnf</span> <span class="id" title="var">T</span> := <span class="id" title="var">inversion_all_matches</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">head_hnf_matcher</span> <span class="id" title="var">T</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">inversion_one_head_hnf</span> <span class="id" title="var">T</span> := <span class="id" title="var">inversion_one_match</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">head_hnf_matcher</span> <span class="id" title="var">T</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">inversion_head_hnf'</span> <span class="id" title="var">T</span> := <span class="id" title="var">inversion_all_matches'</span> <span class="id" title="keyword">ltac</span>:(<span class="id" title="var">head_hnf_matcher</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Faster versions for some common connectives 
+</div>
+<div class="code">
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_ex</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#ex"><span class="id" title="inductive">ex</span></a> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_ex</span> := <span class="id" title="var">destruct_one_head'_ex</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_ex</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_ex</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_ex</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_ex</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_sig</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#sig"><span class="id" title="inductive">sig</span></a> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_sig</span> := <span class="id" title="var">destruct_one_head'_sig</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_sig</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_sig</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_sig</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_sig</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_sigT</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#sigT"><span class="id" title="inductive">sigT</span></a> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_sigT</span> := <span class="id" title="var">destruct_one_head'_sigT</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_sigT</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_sigT</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_sigT</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_sigT</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_prod</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#prod"><span class="id" title="inductive">prod</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_prod</span> := <span class="id" title="var">destruct_one_head'_prod</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_prod</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_prod</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_prod</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_prod</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_and</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#and"><span class="id" title="inductive">and</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_and</span> := <span class="id" title="var">destruct_one_head'_and</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_and</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_and</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_and</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_and</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_or</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#or"><span class="id" title="inductive">or</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_or</span> := <span class="id" title="var">destruct_one_head'_or</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_or</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_or</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_or</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_or</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_sum</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#sum"><span class="id" title="inductive">sum</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_sum</span> := <span class="id" title="var">destruct_one_head'_sum</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_sum</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_sum</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_sum</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_sum</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_unit</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">clear</span> <span class="id" title="var">H</span> || <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_unit</span> := <span class="id" title="var">destruct_one_head'_unit</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_unit</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_unit</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_unit</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_unit</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_True</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#True"><span class="id" title="inductive">True</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">clear</span> <span class="id" title="var">H</span> || <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_True</span> := <span class="id" title="var">destruct_one_head'_True</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_True</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_True</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_True</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_True</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_bool</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">clear</span> <span class="id" title="var">H</span> || <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_bool</span> := <span class="id" title="var">destruct_one_head'_bool</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_bool</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_bool</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_bool</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_bool</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_False</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#False"><span class="id" title="inductive">False</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_False</span> := <span class="id" title="var">destruct_one_head'_False</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_False</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_False</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_False</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_False</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head'_Empty_set</span> := <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span> <span class="id" title="var">H</span> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#Empty_set"><span class="id" title="inductive">Empty_set</span></a> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">destruct</span> <span class="id" title="var">H</span> <span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_one_head_Empty_set</span> := <span class="id" title="var">destruct_one_head'_Empty_set</span>; <span class="id" title="tactic">simpl</span> <span class="id" title="tactic">in</span> ×.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head'_Empty_set</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head'_Empty_set</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">destruct_head_Empty_set</span> := <span class="id" title="tactic">repeat</span> <span class="id" title="var">destruct_one_head_Empty_set</span>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.Translations.param_generous_unpacked</h1>
+
+<div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">utils</span> <span class="id" title="keyword">All</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Translations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">translation_utils</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">ssreflect</span>.<br/>
+<span class="comment">(*&nbsp;Import&nbsp;BasicAst.&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Reserved Notation</span> &quot;'tsl_ty_param'".<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">tsl_name</span> <span class="id" title="var">n</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">nAnon</span> ⇒ <span class="id" title="var">nAnon</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">nNamed</span> <span class="id" title="var">n</span> ⇒ <span class="id" title="var">nNamed</span> (<span class="id" title="var">tsl_ident</span> <span class="id" title="var">n</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Definition&nbsp;mkApps&nbsp;t&nbsp;us&nbsp;:=&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;match&nbsp;t&nbsp;with&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;|&nbsp;tApp&nbsp;f&nbsp;args&nbsp;=&gt;&nbsp;tApp&nbsp;f&nbsp;(args&nbsp;++&nbsp;us)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;|&nbsp;_&nbsp;=&gt;&nbsp;tApp&nbsp;t&nbsp;us&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;end.&nbsp;*)</span><br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">mkApps</span> <span class="id" title="var">t</span> <span class="id" title="var">us</span> := <span class="id" title="var">tApp</span> <span class="id" title="var">t</span> <span class="id" title="var">us</span>. <span class="comment">(*&nbsp;meanwhile&nbsp;*)</span><br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">mkApp</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span> := <span class="id" title="var">mkApps</span> <span class="id" title="var">t</span> [<span class="id" title="var">u</span>].<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">default_term</span> := <span class="id" title="var">tRel</span> 0.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">up</span> := <span class="id" title="var">lift</span> 1 0.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">tsl_rec0</span> (<span class="id" title="var">E</span> : <span class="id" title="var">tsl_table</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">term</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">t</span>} : <span class="id" title="var">term</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">tRel</span> <span class="id" title="var">k</span> ⇒ <span class="id" title="var">tRel</span> (2*<span class="id" title="var">k</span>+1)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tEvar</span> <span class="id" title="var">k</span> <span class="id" title="var">ts</span> ⇒ <span class="id" title="var">tEvar</span> <span class="id" title="var">k</span> (<span class="id" title="var">map</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span>) <span class="id" title="var">ts</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tCast</span> <span class="id" title="var">t</span> <span class="id" title="var">c</span> <span class="id" title="var">a</span> ⇒ <span class="id" title="var">tCast</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>) <span class="id" title="var">c</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">a</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tProd</span> <span class="id" title="var">na</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> ⇒ <span class="id" title="var">tProd</span> <span class="id" title="var">na</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">tProd</span> (<span class="id" title="var">tsl_name</span> <span class="id" title="var">na</span>) (<span class="id" title="var">mkApp</span> (<span class="id" title="var">up</span> (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span>)) (<span class="id" title="var">tRel</span> 0))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">B</span>))<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tLambda</span> <span class="id" title="var">na</span> <span class="id" title="var">A</span> <span class="id" title="var">t</span> ⇒ <span class="id" title="var">tLambda</span> <span class="id" title="var">na</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">tLambda</span> (<span class="id" title="var">tsl_name</span> <span class="id" title="var">na</span>) (<span class="id" title="var">mkApp</span> (<span class="id" title="var">up</span> (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span>)) (<span class="id" title="var">tRel</span> 0))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>))<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tLetIn</span> <span class="id" title="var">na</span> <span class="id" title="var">A</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span> ⇒ <span class="id" title="var">tLetIn</span> <span class="id" title="var">na</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span>) (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">tLetIn</span> (<span class="id" title="var">tsl_name</span> <span class="id" title="var">na</span>) (<span class="id" title="var">mkApp</span> (<span class="id" title="var">up</span> (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span>)) (<span class="id" title="var">tRel</span> 0)) (<span class="id" title="var">up</span> (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">u</span>))<br/>
+<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tApp</span> <span class="id" title="var">t</span> <span class="id" title="var">us</span> ⇒ <span class="id" title="keyword">let</span> <span class="id" title="var">u'</span> := <span class="id" title="var">List.fold_right</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> <span class="id" title="var">l</span> ⇒ <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">v</span> :: <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">v</span> :: <span class="id" title="var">l</span>) [] <span class="id" title="var">us</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">mkApps</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>) <span class="id" title="var">u'</span><br/>
+<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tCase</span> <span class="id" title="var">ik</span> <span class="id" title="var">t</span> <span class="id" title="var">u</span> <span class="id" title="var">br</span> ⇒ <span class="id" title="var">tCase</span> <span class="id" title="var">ik</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>) (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">u</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">map</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ (<span class="id" title="var">fst</span> <span class="id" title="var">x</span>, <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> (<span class="id" title="var">snd</span> <span class="id" title="var">x</span>))) <span class="id" title="var">br</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tProj</span> <span class="id" title="var">p</span> <span class="id" title="var">t</span> ⇒ <span class="id" title="var">tProj</span> <span class="id" title="var">p</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>)<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;|&nbsp;tFix&nbsp;:&nbsp;mfixpoint&nbsp;term&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;term&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;|&nbsp;tCoFix&nbsp;:&nbsp;mfixpoint&nbsp;term&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;term&nbsp;*)</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+<span class="id" title="keyword">with</span> <span class="id" title="var">tsl_rec1</span> (<span class="id" title="var">E</span> : <span class="id" title="var">tsl_table</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">term</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">t</span>} : <span class="id" title="var">term</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">tRel</span> <span class="id" title="var">k</span> ⇒ <span class="id" title="var">tRel</span> (2 × <span class="id" title="var">k</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tSort</span> <span class="id" title="var">s</span> ⇒ <span class="id" title="var">tLambda</span> (<span class="id" title="var">nNamed</span> "A") (<span class="id" title="var">tSort</span> <span class="id" title="var">s</span>) (<span class="id" title="var">tProd</span> <span class="id" title="var">nAnon</span> (<span class="id" title="var">tRel</span> 0) (<span class="id" title="var">tSort</span> <span class="id" title="var">s</span>))<br/>
+<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tProd</span> <span class="id" title="var">na</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> ⇒ <span class="id" title="keyword">let</span> <span class="id" title="var">A0</span> := <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">A1</span> := <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">B0</span> := <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">B</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">B1</span> := <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">B</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">ΠAB0</span> := <span class="id" title="var">tProd</span> <span class="id" title="var">na</span> <span class="id" title="var">A0</span> (<span class="id" title="var">tProd</span> (<span class="id" title="var">tsl_name</span> <span class="id" title="var">na</span>) (<span class="id" title="var">mkApp</span> (<span class="id" title="var">up</span> <span class="id" title="var">A1</span>) (<span class="id" title="var">tRel</span> 0)) <span class="id" title="var">B0</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tLambda</span> (<span class="id" title="var">nNamed</span> "f") <span class="id" title="var">ΠAB0</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">tProd</span> <span class="id" title="var">na</span> (<span class="id" title="var">up</span> <span class="id" title="var">A0</span>) (<span class="id" title="var">tProd</span> (<span class="id" title="var">tsl_name</span> <span class="id" title="var">na</span>) (<span class="id" title="var">subst_app</span> (<span class="id" title="var">lift0</span> 2 <span class="id" title="var">A1</span>) [<span class="id" title="var">tRel</span> 0])<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">subst_app</span> (<span class="id" title="var">lift</span> 1 2 <span class="id" title="var">B1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">tApp</span> (<span class="id" title="var">tRel</span> 2) [<span class="id" title="var">tRel</span> 1; <span class="id" title="var">tRel</span> 0]])))<br/>
+<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tLambda</span> <span class="id" title="var">na</span> <span class="id" title="var">A</span> <span class="id" title="var">t</span> ⇒ <span class="id" title="keyword">let</span> <span class="id" title="var">A0</span> := <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">A1</span> := <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tLambda</span> <span class="id" title="var">na</span> <span class="id" title="var">A0</span> (<span class="id" title="var">tLambda</span> (<span class="id" title="var">tsl_name</span> <span class="id" title="var">na</span>) (<span class="id" title="var">subst_app</span> (<span class="id" title="var">up</span> <span class="id" title="var">A1</span>) [<span class="id" title="var">tRel</span> 0]) (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>))<br/>
+<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tApp</span> <span class="id" title="var">t</span> <span class="id" title="var">us</span> ⇒ <span class="id" title="keyword">let</span> <span class="id" title="var">u'</span> := <span class="id" title="var">List.fold_right</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">v</span> <span class="id" title="var">l</span> ⇒ <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">v</span> :: <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">v</span> :: <span class="id" title="var">l</span>) [] <span class="id" title="var">us</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">mkApps</span> (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>) <span class="id" title="var">u'</span><br/>
+<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tLetIn</span> <span class="id" title="var">na</span> <span class="id" title="var">t</span> <span class="id" title="var">A</span> <span class="id" title="var">u</span> ⇒ <span class="id" title="keyword">let</span> <span class="id" title="var">t0</span> := <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">t1</span> := <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">A0</span> := <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">A1</span> := <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">u0</span> := <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">u</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">u1</span> := <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">u</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tLetIn</span> <span class="id" title="var">na</span> <span class="id" title="var">t0</span> <span class="id" title="var">A0</span> (<span class="id" title="var">tLetIn</span> (<span class="id" title="var">tsl_name</span> <span class="id" title="var">na</span>) (<span class="id" title="var">up</span> <span class="id" title="var">t1</span>) (<span class="id" title="var">subst_app</span> (<span class="id" title="var">up</span> <span class="id" title="var">A1</span>) [<span class="id" title="var">tRel</span> 0]) <span class="id" title="var">u1</span>)<br/>
+<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tCast</span> <span class="id" title="var">t</span> <span class="id" title="var">c</span> <span class="id" title="var">A</span> ⇒ <span class="id" title="keyword">let</span> <span class="id" title="var">t0</span> := <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">t1</span> := <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">A0</span> := <span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">A1</span> := <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tCast</span> <span class="id" title="var">t1</span> <span class="id" title="var">c</span> (<span class="id" title="var">mkApps</span> <span class="id" title="var">A1</span> [<span class="id" title="var">tCast</span> <span class="id" title="var">t0</span> <span class="id" title="var">c</span> <span class="id" title="var">A0</span>]) <span class="comment">(*&nbsp;apply_subst&nbsp;?&nbsp;*)</span><br/>
+<br/>
+&nbsp;&nbsp;| <span class="id" title="var">tConst</span> <span class="id" title="var">s</span> <span class="id" title="var">univs</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">lookup_tsl_table</span> <span class="id" title="var">E</span> (<span class="id" title="var">ConstRef</span> <span class="id" title="var">s</span>) <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> <span class="id" title="var">t</span> ⇒ <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> ⇒ <span class="id" title="var">default_term</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">tInd</span> <span class="id" title="var">i</span> <span class="id" title="var">univs</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">lookup_tsl_table</span> <span class="id" title="var">E</span> (<span class="id" title="var">IndRef</span> <span class="id" title="var">i</span>) <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> <span class="id" title="var">t</span> ⇒ <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> ⇒ <span class="id" title="var">default_term</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">tConstruct</span> <span class="id" title="var">i</span> <span class="id" title="var">n</span> <span class="id" title="var">univs</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">lookup_tsl_table</span> <span class="id" title="var">E</span> (<span class="id" title="var">ConstructRef</span> <span class="id" title="var">i</span> <span class="id" title="var">n</span>) <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Some</span> <span class="id" title="var">t</span> ⇒ <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">None</span> ⇒ <span class="id" title="var">default_term</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+<br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">todo</span> ""<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> (<span class="id" title="var">tm</span> &lt;- <span class="id" title="var">tmQuote</span> (<span class="id" title="keyword">∀</span> <span class="id" title="var">A</span>, <span class="id" title="var">A</span> → <span class="id" title="var">A</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">tm'</span> := <span class="id" title="var">tsl_rec1</span> [] <span class="id" title="var">tm</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmUnquote</span> <span class="id" title="var">tm'</span> &gt;&gt;= <span class="id" title="var">tmPrint</span>).<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> (<span class="id" title="var">tm</span> &lt;- <span class="id" title="var">tmQuote</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">A</span> (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) ⇒ <span class="id" title="var">x</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">tm'</span> := <span class="id" title="var">tsl_rec0</span> [] <span class="id" title="var">tm</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmUnquote</span> <span class="id" title="var">tm'</span> &gt;&gt;= <span class="id" title="var">tmPrint</span>).<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> (<span class="id" title="var">tm</span> &lt;- <span class="id" title="var">tmQuote</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">A</span> (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) ⇒ <span class="id" title="var">x</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">tm'</span> := <span class="id" title="var">tsl_rec1</span> [] <span class="id" title="var">tm</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmUnquote</span> <span class="id" title="var">tm'</span> &gt;&gt;= <span class="id" title="var">tmPrint</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Goal</span> ((<span class="id" title="keyword">fun</span> <span class="id" title="var">f</span> : <span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">A</span>ᵗ : <span class="id" title="var">A</span> → <span class="id" title="keyword">Type</span>) (<span class="id" title="var">H</span> : <span class="id" title="var">A</span>), <span class="id" title="var">A</span>ᵗ <span class="id" title="var">H</span> → <span class="id" title="var">A</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">A</span>ᵗ : <span class="id" title="var">A</span> → <span class="id" title="keyword">Type</span>) (<span class="id" title="var">H</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">H0</span> : <span class="id" title="var">A</span>ᵗ <span class="id" title="var">H</span>), <span class="id" title="var">A</span>ᵗ (<span class="id" title="var">f</span> <span class="id" title="var">A</span> <span class="id" title="var">A</span>ᵗ <span class="id" title="var">H</span> <span class="id" title="var">H0</span>)) (<span class="id" title="keyword">fun</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">A</span>ᵗ : <span class="id" title="var">A</span> → <span class="id" title="keyword">Type</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">_</span> : <span class="id" title="var">A</span>ᵗ <span class="id" title="var">x</span>) ⇒ <span class="id" title="var">x</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">A</span>ᵗ : <span class="id" title="var">A</span> → <span class="id" title="keyword">Type</span>) (<span class="id" title="var">x</span> : <span class="id" title="var">A</span>), <span class="id" title="var">A</span>ᵗ <span class="id" title="var">x</span> → <span class="id" title="var">A</span>ᵗ <span class="id" title="var">x</span>)).<br/>
+<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Quote</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">tm</span> := ((<span class="id" title="keyword">fun</span> <span class="id" title="var">A</span> (<span class="id" title="var">x</span>:<span class="id" title="var">A</span>) ⇒ <span class="id" title="var">x</span>) (<span class="id" title="keyword">Type</span> → <span class="id" title="keyword">Type</span>) (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="var">x</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Unset</span> <span class="id" title="var">MetaRocq</span> <span class="id" title="keyword">Strict</span> <span class="id" title="var">Unquote</span> <span class="id" title="var">Universe</span> <span class="id" title="var">Mode</span>.<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> (<span class="id" title="keyword">let</span> <span class="id" title="var">tm'</span> := <span class="id" title="var">tsl_rec1</span> [] <span class="id" title="var">tm</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">print_nf</span> <span class="id" title="var">tm'</span> ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmUnquote</span> <span class="id" title="var">tm'</span> &gt;&gt;= <span class="id" title="var">tmPrint</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">fold_left_i_aux</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span>} (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> → <span class="id" title="var">nat</span> → <span class="id" title="var">B</span> → <span class="id" title="var">A</span>) (<span class="id" title="var">n0</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">B</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">a0</span> : <span class="id" title="var">A</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">l</span>} : <span class="id" title="var">A</span><br/>
+&nbsp;&nbsp;:= <span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| [] ⇒ <span class="id" title="var">a0</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">b</span> :: <span class="id" title="var">l</span> ⇒ <span class="id" title="var">fold_left_i_aux</span> <span class="id" title="var">f</span> (<span class="id" title="var">S</span> <span class="id" title="var">n0</span>) <span class="id" title="var">l</span> (<span class="id" title="var">f</span> <span class="id" title="var">a0</span> <span class="id" title="var">n0</span> <span class="id" title="var">b</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">fold_left_i</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span>} <span class="id" title="var">f</span> := @<span class="id" title="var">fold_left_i_aux</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">f</span> 0.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">monad_map_i_aux</span> {<span class="id" title="var">M</span>} {<span class="id" title="var">H</span> : <span class="id" title="var">Monad</span> <span class="id" title="var">M</span>} {<span class="id" title="var">A</span> <span class="id" title="var">B</span>} (<span class="id" title="var">f</span> : <span class="id" title="var">nat</span> → <span class="id" title="var">A</span> → <span class="id" title="var">M</span> <span class="id" title="var">B</span>) (<span class="id" title="var">n0</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>) : <span class="id" title="var">M</span> (<span class="id" title="var">list</span> <span class="id" title="var">B</span>)<br/>
+&nbsp;&nbsp;:= <span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| [] ⇒ <span class="id" title="var">ret</span> []<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> :: <span class="id" title="var">l</span> ⇒ <span class="id" title="var">x'</span> &lt;- (<span class="id" title="var">f</span> <span class="id" title="var">n0</span> <span class="id" title="var">x</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">l'</span> &lt;- (<span class="id" title="var">monad_map_i_aux</span> <span class="id" title="var">f</span> (<span class="id" title="var">S</span> <span class="id" title="var">n0</span>) <span class="id" title="var">l</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ret</span> (<span class="id" title="var">x'</span> :: <span class="id" title="var">l'</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">monad_map_i</span> {<span class="id" title="var">M</span> <span class="id" title="var">H</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>} <span class="id" title="var">f</span> := @<span class="id" title="var">monad_map_i_aux</span> <span class="id" title="var">M</span> <span class="id" title="var">H</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">f</span> 0.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;could&nbsp;be&nbsp;defined&nbsp;with&nbsp;Id&nbsp;monad&nbsp;*)</span><br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">map_i_aux</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span>} (<span class="id" title="var">f</span> : <span class="id" title="var">nat</span> → <span class="id" title="var">A</span> → <span class="id" title="var">B</span>) (<span class="id" title="var">n0</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>) : <span class="id" title="var">list</span> <span class="id" title="var">B</span><br/>
+&nbsp;&nbsp;:= <span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| [] ⇒ []<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">x</span> :: <span class="id" title="var">l</span> ⇒ (<span class="id" title="var">f</span> <span class="id" title="var">n0</span> <span class="id" title="var">x</span>) :: (<span class="id" title="var">map_i_aux</span> <span class="id" title="var">f</span> (<span class="id" title="var">S</span> <span class="id" title="var">n0</span>) <span class="id" title="var">l</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">map_i</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span>} <span class="id" title="var">f</span> := @<span class="id" title="var">map_i_aux</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">f</span> 0.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">tsl_mind_body</span> (<span class="id" title="var">E</span> : <span class="id" title="var">tsl_table</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">id</span> : <span class="id" title="var">ident</span>) (<span class="id" title="var">mind</span> : <span class="id" title="var">mutual_inductive_body</span>)<br/>
+&nbsp;&nbsp;: <span class="id" title="var">tsl_table</span> × <span class="id" title="var">list</span> <span class="id" title="var">mutual_inductive_body</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">_</span>, [{| <span class="id" title="var">ind_npars</span> := 2 × <span class="id" title="var">mind</span>.(<span class="id" title="var">ind_npars</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_bodies</span> := <span class="id" title="var">_</span> |}]).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">refine</span> (<span class="id" title="keyword">let</span> <span class="id" title="var">id'</span> := <span class="id" title="var">tsl_ident</span> <span class="id" title="var">id</span> <span class="id" title="tactic">in</span> <span class="comment">(*&nbsp;should&nbsp;be&nbsp;kn&nbsp;?&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">fold_left_i</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">E</span> <span class="id" title="var">i</span> <span class="id" title="var">ind</span> ⇒ <span class="id" title="var">_</span> :: <span class="id" title="var">_</span> ++ <span class="id" title="var">E</span>) <span class="id" title="var">mind</span>.(<span class="id" title="var">ind_bodies</span>) []).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;ind&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<span class="id" title="var">IndRef</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">id</span> <span class="id" title="var">i</span>), <span class="id" title="var">tInd</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">id'</span> <span class="id" title="var">i</span>) []).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;ctors&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">fold_left_i</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">E</span> <span class="id" title="var">k</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">_</span> :: <span class="id" title="var">E</span>) <span class="id" title="var">ind</span>.(<span class="id" title="var">ind_ctors</span>) []).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<span class="id" title="var">ConstructRef</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">id</span> <span class="id" title="var">i</span>) <span class="id" title="var">k</span>, <span class="id" title="var">tConstruct</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">id'</span> <span class="id" title="var">i</span>) <span class="id" title="var">k</span> []).<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">refine</span> (<span class="id" title="var">map_i</span> <span class="id" title="var">_</span> <span class="id" title="var">mind</span>.(<span class="id" title="var">ind_bodies</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">i</span> <span class="id" title="var">ind</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> {| <span class="id" title="var">ind_name</span> := <span class="id" title="var">tsl_ident</span> <span class="id" title="var">ind</span>.(<span class="id" title="var">ind_name</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_type</span> := <span class="id" title="var">_</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_kelim</span> := <span class="id" title="var">ind</span>.(<span class="id" title="var">ind_kelim</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_ctors</span> := <span class="id" title="var">_</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_projs</span> := [] |}. <span class="comment">(*&nbsp;todo&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;arity&nbsp;&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="keyword">let</span> <span class="id" title="var">ar</span> := <span class="id" title="var">subst_app</span> (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">ind</span>.(<span class="id" title="var">ind_type</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<span class="id" title="var">tInd</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">id</span> <span class="id" title="var">i</span>) []] <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ar</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;+ <span class="comment">(*&nbsp;constructors&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">map_i</span> <span class="id" title="var">_</span> <span class="id" title="var">ind</span>.(<span class="id" title="var">ind_ctors</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">k</span> ((<span class="id" title="var">name</span>, <span class="id" title="var">typ</span>), <span class="id" title="var">nargs</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">tsl_ident</span> <span class="id" title="var">name</span>, <span class="id" title="var">_</span>, 2 × <span class="id" title="var">nargs</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">subst_app</span> <span class="id" title="var">_</span> [<span class="id" title="var">tConstruct</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">id</span> <span class="id" title="var">i</span>) <span class="id" title="var">k</span> []]).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">fold_left_i</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">t0</span> <span class="id" title="var">i</span> <span class="id" title="var">u</span>  ⇒ <span class="id" title="var">t0</span> {<span class="id" title="var">S</span> <span class="id" title="var">i</span> := <span class="id" title="var">u</span>}) <span class="id" title="var">_</span> (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">typ</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;<span class="inlinecode"><span class="id" title="var">I_n</span>-1;</span> <span class="inlinecode">...</span> <span class="inlinecode"><span class="id" title="var">I_0</span></span>&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">List.rev</span> (<span class="id" title="var">map_i</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">i</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">tInd</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">id</span> <span class="id" title="var">i</span>) [])<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">mind</span>.(<span class="id" title="var">ind_bodies</span>))).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Instance&nbsp;param3&nbsp;:&nbsp;Translation&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;{|&nbsp;tsl_id&nbsp;:=&nbsp;tsl_ident&nbsp;;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tsl_tm&nbsp;:=&nbsp;fun&nbsp;ΣE&nbsp;=&gt;&nbsp;tsl_term&nbsp;fuel&nbsp;(fst&nbsp;ΣE)&nbsp;(snd&nbsp;ΣE)&nbsp;<span class="inlinecode"></span>&nbsp;;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tsl_ty&nbsp;:=&nbsp;fun&nbsp;ΣE&nbsp;=&gt;&nbsp;tsl_ty_param&nbsp;fuel&nbsp;(fst&nbsp;ΣE)&nbsp;(snd&nbsp;ΣE)&nbsp;<span class="inlinecode"></span>&nbsp;;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tsl_ind&nbsp;:=&nbsp;todo&nbsp;|}.&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">tTranslate</span> (<span class="id" title="var">ΣE</span> : <span class="id" title="var">tsl_context</span>) (<span class="id" title="var">id</span> : <span class="id" title="var">ident</span>)<br/>
+&nbsp;&nbsp;: <span class="id" title="var">TemplateMonad</span> (<span class="id" title="var">option</span> <span class="id" title="var">tsl_context</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">gr</span> &lt;- <span class="id" title="var">tmLocate</span> <span class="id" title="var">id</span> ;;<br/>
+&nbsp;&nbsp;<span class="id" title="var">id'</span> &lt;- <span class="id" title="var">tmEval</span> <span class="id" title="var">all</span> (<span class="id" title="var">tsl_ident</span> <span class="id" title="var">id</span>) ;;<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">E</span> := <span class="id" title="var">snd</span> <span class="id" title="var">ΣE</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">gr</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">ConstructRef</span> <span class="id" title="var">ind</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">tmPrint</span> "todo tTranslate" ;; <span class="id" title="var">ret</span> <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">IndRef</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">kn</span> <span class="id" title="var">n</span>) ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">d</span> &lt;- <span class="id" title="var">tmQuoteInductive</span> <span class="id" title="var">id</span> ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">d'</span> := <span class="id" title="var">tsl_mind_body</span> <span class="id" title="var">E</span> <span class="id" title="var">id</span> <span class="id" title="var">d</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">d'</span> &lt;- <span class="id" title="var">tmEval</span> <span class="id" title="tactic">lazy</span> <span class="id" title="var">d'</span> ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmPrint</span> <span class="id" title="var">d'</span> ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">entries</span> := <span class="id" title="var">map</span> <span class="id" title="var">mind_body_to_entry</span> (<span class="id" title="var">snd</span> <span class="id" title="var">d'</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;print_nf&nbsp;entries&nbsp;;;&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">monad_fold_left</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> <span class="id" title="var">e</span> ⇒ <span class="id" title="var">tmMkInductive</span> <span class="id" title="var">true</span> <span class="id" title="var">e</span>) <span class="id" title="var">entries</span> <span class="id" title="var">tt</span> ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">decl</span> := <span class="id" title="var">InductiveDecl</span> <span class="id" title="var">kn</span> <span class="id" title="var">d</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">print_nf</span>  (<span class="id" title="var">id</span> ^ " has been translated as " ^ <span class="id" title="var">id'</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ret</span> (<span class="id" title="var">Some</span> (<span class="id" title="var">decl</span> :: <span class="id" title="var">fst</span> <span class="id" title="var">ΣE</span>, <span class="id" title="var">E</span> ++ <span class="id" title="var">snd</span> <span class="id" title="var">ΣE</span>))<br/>
+<br/>
+&nbsp;&nbsp;| <span class="id" title="var">ConstRef</span> <span class="id" title="var">kn</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">e</span> &lt;- <span class="id" title="var">tmQuoteConstant</span> <span class="id" title="var">kn</span> <span class="id" title="var">true</span> ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">print_nf</span> ("toto1" ^ <span class="id" title="var">id</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">e</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">ParameterEntry</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">print_nf</span> (<span class="id" title="var">id</span> ^ "is an axiom, not a definition") ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ret</span> <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">DefinitionEntry</span> {| <span class="id" title="var">definition_entry_type</span> := <span class="id" title="var">A</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">definition_entry_body</span> := <span class="id" title="var">t</span> |} ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">print_nf</span> ("toto2 " ^ <span class="id" title="var">id</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;tmPrint&nbsp;t&nbsp;;;&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t0</span> &lt;- <span class="id" title="var">tmEval</span> <span class="id" title="tactic">lazy</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t1</span> &lt;- <span class="id" title="var">tmEval</span> <span class="id" title="tactic">lazy</span> (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">t</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">A1</span> &lt;- <span class="id" title="var">tmEval</span> <span class="id" title="tactic">lazy</span> (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> <span class="id" title="var">A</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">print_nf</span> ("toto4 " ^ <span class="id" title="var">id</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmMkDefinition</span> <span class="id" title="var">id'</span> <span class="id" title="var">t1</span> ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">print_nf</span> ("toto5 " ^ <span class="id" title="var">id</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">decl</span> := {| <span class="id" title="var">cst_universes</span> := [];<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">cst_type</span> := <span class="id" title="var">A</span>; <span class="id" title="var">cst_body</span> := <span class="id" title="var">Some</span> <span class="id" title="var">t</span> |} <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">Σ'</span> := <span class="id" title="var">ConstantDecl</span> <span class="id" title="var">kn</span> <span class="id" title="var">decl</span> :: (<span class="id" title="var">fst</span> <span class="id" title="var">ΣE</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">E'</span> := (<span class="id" title="var">ConstRef</span> <span class="id" title="var">kn</span>, <span class="id" title="var">tConst</span> <span class="id" title="var">id'</span> []) :: (<span class="id" title="var">snd</span> <span class="id" title="var">ΣE</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">print_nf</span>  (<span class="id" title="var">id</span> ^ " has been translated as " ^ <span class="id" title="var">id'</span>) ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmEval</span> <span class="id" title="var">all</span> (<span class="id" title="var">Some</span> (<span class="id" title="var">Σ'</span>, <span class="id" title="var">E'</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">Ty</span> := <span class="id" title="keyword">Type</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">TyTy</span> := <span class="id" title="var">Ty</span> → <span class="id" title="keyword">Type</span>.<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> (<span class="id" title="var">ΣE</span> &lt;- <span class="id" title="var">tTranslate</span> ([],[]) "Ty" ;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">ΣE</span> := <span class="id" title="var">option_get</span> <span class="id" title="var">todo</span> <span class="id" title="var">ΣE</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;print_nf&nbsp;ΣE).&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tTranslate</span> <span class="id" title="var">ΣE</span> "TyTy" &gt;&gt;= <span class="id" title="var">tmPrint</span>).<br/>
+
+<br/>
+<span class="comment">(*&nbsp;MetaRocq&nbsp;Run&nbsp;(ΣE&nbsp;&lt;-&nbsp;tTranslate&nbsp;(<span class="inlinecode"></span>,<span class="inlinecode"></span>)&nbsp;"nat"&nbsp;;;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;let&nbsp;ΣE&nbsp;:=&nbsp;option_get&nbsp;todo&nbsp;ΣE&nbsp;in&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;print_nf&nbsp;ΣE).&nbsp;*)</span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tTranslate&nbsp;ΣE&nbsp;"t"&nbsp;&gt;&gt;=&nbsp;tmPrint).&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="var">Fail</span> <span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> (<span class="id" title="var">tTranslate</span> ([],[]) "nat").<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">map_context_decl</span> (<span class="id" title="var">f</span> : <span class="id" title="var">term</span> → <span class="id" title="var">term</span>) (<span class="id" title="var">decl</span> : <span class="id" title="var">context_decl</span>): <span class="id" title="var">context_decl</span><br/>
+&nbsp;&nbsp;:= {| <span class="id" title="var">decl_name</span> := <span class="id" title="var">decl</span>.(<span class="id" title="var">decl_name</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">decl_body</span> := <span class="id" title="var">option_map</span> <span class="id" title="var">f</span> <span class="id" title="var">decl</span>.(<span class="id" title="var">decl_body</span>); <span class="id" title="var">decl_type</span> := <span class="id" title="var">f</span> <span class="id" title="var">decl</span>.(<span class="id" title="var">decl_type</span>) |}.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> &quot; Γ ,, d " := (<span class="id" title="var">d</span> :: <span class="id" title="var">Γ</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 20, <span class="id" title="var">d</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">tsl_ctx</span> (<span class="id" title="var">E</span> : <span class="id" title="var">tsl_table</span>) (<span class="id" title="var">Γ</span> : <span class="id" title="keyword">context</span>) : <span class="id" title="keyword">context</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">Γ</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| [] ⇒ []<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;|&nbsp;Γ&nbsp;,,&nbsp;{|&nbsp;decl_name&nbsp;:=&nbsp;n;&nbsp;decl_body&nbsp;:=&nbsp;None;&nbsp;decl_type&nbsp;:=&nbsp;A&nbsp;|}&nbsp;=&gt;&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;tsl_ctx&nbsp;E&nbsp;Γ&nbsp;,,&nbsp;vass&nbsp;n&nbsp;(tsl_rec0&nbsp;0&nbsp;A)&nbsp;,,&nbsp;vass&nbsp;(tsl_name&nbsp;n)&nbsp;(mkApp&nbsp;(lift0&nbsp;1&nbsp;(tsl_rec1&nbsp;E&nbsp;0&nbsp;A))&nbsp;(tRel&nbsp;0))&nbsp;*)</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">Γ</span> ,, <span class="id" title="var">decl</span> ⇒ <span class="id" title="keyword">let</span> <span class="id" title="var">n</span> := <span class="id" title="var">decl</span>.(<span class="id" title="var">decl_name</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="var">decl</span>.(<span class="id" title="var">decl_body</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">A</span> := <span class="id" title="var">decl</span>.(<span class="id" title="var">decl_type</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tsl_ctx</span> <span class="id" title="var">E</span> <span class="id" title="var">Γ</span> ,, <span class="id" title="var">Build_context_decl</span> <span class="id" title="var">n</span> (<span class="id" title="var">omap</span> (<span class="id" title="var">tsl_rec0</span> 0) <span class="id" title="var">x</span>) (<span class="id" title="var">tsl_rec0</span> 0 <span class="id" title="var">A</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,, <span class="id" title="var">Build_context_decl</span> (<span class="id" title="var">tsl_name</span> <span class="id" title="var">n</span>) (<span class="id" title="var">omap</span> (<span class="id" title="var">lift</span> 1 0 \<span class="id" title="var">o</span> <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> 0) <span class="id" title="var">x</span>) (<span class="id" title="var">mkApps</span> (<span class="id" title="var">lift0</span> 1 (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> 0 <span class="id" title="var">A</span>)) [<span class="id" title="var">tRel</span> 0])<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Delimit</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">term_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">term</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> &quot;#| Γ |" := (<span class="id" title="var">List.length</span> <span class="id" title="var">Γ</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">Γ</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 99, <span class="id" title="var">format</span> "#| Γ |") : <span class="id" title="var">term_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">tsl_ctx_length</span> <span class="id" title="var">E</span> (<span class="id" title="var">Γ</span> : <span class="id" title="keyword">context</span>) : #|<span class="id" title="var">tsl_ctx</span> <span class="id" title="var">E</span> <span class="id" title="var">Γ</span>| = 2 × #|<span class="id" title="var">Γ</span>|%<span class="id" title="var">term</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Γ</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">destruct</span> <span class="id" title="var">a</span>, <span class="id" title="var">decl_body</span>; <span class="id" title="tactic">simpl</span>;<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHΓ</span> <span class="id" title="var">mulnS</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Fixpoint&nbsp;removefirst_n&nbsp;{A}&nbsp;(n&nbsp;:&nbsp;nat)&nbsp;(l&nbsp;:&nbsp;list&nbsp;A)&nbsp;:&nbsp;list&nbsp;A&nbsp;:=&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;match&nbsp;n&nbsp;with&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;|&nbsp;O&nbsp;=&gt;&nbsp;l&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;|&nbsp;S&nbsp;n&nbsp;=&gt;&nbsp;match&nbsp;l&nbsp;with&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<span class="inlinecode"></span>&nbsp;=&gt;&nbsp;<span class="inlinecode"></span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;a&nbsp;::&nbsp;l&nbsp;=&gt;&nbsp;removefirst_n&nbsp;n&nbsp;l&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;end.&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> &quot;( x ; y )" := (<span class="id" title="var">exist</span> <span class="id" title="var">_</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>).<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;tsl_ctx_safe_nth&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;Γ&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;forall&nbsp;Γ',&nbsp;tsl_ctx&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;Γ&nbsp;=&nbsp;Success&nbsp;Γ'&nbsp;-&gt;&nbsp;forall&nbsp;n&nbsp;p,&nbsp;exists&nbsp;p',&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map_context_decl&nbsp;(tsl_ty&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;(removefirst_n&nbsp;(S&nbsp;n)&nbsp;Γ))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(safe_nth&nbsp;Γ&nbsp;(n;&nbsp;p))&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;Success&nbsp;(safe_nth&nbsp;Γ'&nbsp;(n;&nbsp;p')).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;intros&nbsp;Γ'&nbsp;H&nbsp;n&nbsp;p.&nbsp;cbn&nbsp;beta&nbsp;in&nbsp;*.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;revert&nbsp;Γ&nbsp;Γ'&nbsp;H&nbsp;p.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;induction&nbsp;n;&nbsp;intros&nbsp;Γ&nbsp;Γ'&nbsp;H&nbsp;p;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(destruct&nbsp;Γ&nbsp;as&nbsp;<span class="inlinecode">|<span class="id" title="var">A</span></span> <span class="inlinecode"><span class="id" title="var">Γ</span></span>;&nbsp;<span class="inlinecode"><span class="id" title="tactic">inversion</span></span> <span class="inlinecode"><span class="id" title="var">p</span>|</span>).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;cbn&nbsp;-<span class="inlinecode"><span class="id" title="var">map_context_decl</span></span>.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;tsl_ctx_cons&nbsp;in&nbsp;H.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remember&nbsp;(map_context_decl&nbsp;(tsl_term&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;Γ)&nbsp;A).&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;t;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">discriminate</span></span>.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remember&nbsp;(tsl_ctx&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;Γ).&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;t;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">discriminate</span></span>.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cbn&nbsp;in&nbsp;H.&nbsp;inversion&nbsp;H;&nbsp;clear&nbsp;H.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clear&nbsp;p&nbsp;H1.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unshelve&nbsp;econstructor.&nbsp;apply&nbsp;le_n_S,&nbsp;le_0_n.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reflexivity.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;cbn&nbsp;-<span class="inlinecode"><span class="id" title="var">map_context_decl</span></span>.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite&nbsp;tsl_ctx_cons&nbsp;in&nbsp;H.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remember&nbsp;(map_context_decl&nbsp;(tsl_term&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;Γ)&nbsp;A).&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;t;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">discriminate</span></span>.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remember&nbsp;(tsl_ctx&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;Γ).&nbsp;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;t;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">discriminate</span></span>.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cbn&nbsp;in&nbsp;H.&nbsp;inversion&nbsp;H;&nbsp;clear&nbsp;H.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;symmetry&nbsp;in&nbsp;Heqt0.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;(Typing.safe_nth_obligation_2&nbsp;context_decl&nbsp;(A&nbsp;::&nbsp;Γ)&nbsp;(S&nbsp;n;&nbsp;p)&nbsp;A&nbsp;Γ&nbsp;eq_refl&nbsp;n&nbsp;eq_refl).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specialize&nbsp;(IHn&nbsp;Γ&nbsp;c0&nbsp;Heqt0&nbsp;l).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;destruct&nbsp;IHn.&nbsp;*)</span><br/>
+
+<br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unshelve&nbsp;econstructor.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cbn.&nbsp;rewrite&nbsp;&lt;-&nbsp;(tsl_ctx_length&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;Γ&nbsp;_&nbsp;Heqt0).&nbsp;exact&nbsp;p.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;etransitivity.&nbsp;exact&nbsp;π2.&nbsp;cbn.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;f_equal,&nbsp;f_equal,&nbsp;f_equal.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply&nbsp;le_irr.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Admitted.&nbsp;*)</span><br/>
+
+<br/>
+<span class="comment">(*&nbsp;<span class="comment">(*&nbsp;todo&nbsp;inductives&nbsp;*)</span>&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Definition&nbsp;global_ctx_correct&nbsp;(Σ&nbsp;:&nbsp;global_context)&nbsp;(E&nbsp;:&nbsp;tsl_context)&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;forall&nbsp;id&nbsp;T,&nbsp;lookup_constant_type&nbsp;Σ&nbsp;id&nbsp;=&nbsp;Checked&nbsp;T&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;exists&nbsp;fuel&nbsp;t'&nbsp;T',&nbsp;lookup_tsl_ctx&nbsp;E&nbsp;(ConstRef&nbsp;id)&nbsp;=&nbsp;Some&nbsp;t'&nbsp;/\&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tsl_term&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;<span class="inlinecode"></span>&nbsp;T&nbsp;=&nbsp;Success&nbsp;_&nbsp;T'&nbsp;/\&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;squash&nbsp;(Σ&nbsp;;;;&nbsp;<span class="inlinecode"></span>&nbsp;|--&nbsp;t'&nbsp;:&nbsp;T').&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">tsl_table_correct</span> (<span class="id" title="var">Σ</span> : <span class="id" title="var">global_context</span>) (<span class="id" title="var">E</span> : <span class="id" title="var">tsl_table</span>) : <span class="id" title="keyword">Type</span> := <span class="id" title="var">todo</span>.<br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;forall&nbsp;id&nbsp;t'&nbsp;T,&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lookup_tsl_table&nbsp;E&nbsp;(ConstRef&nbsp;id)&nbsp;=&nbsp;Some&nbsp;t'&nbsp;-&gt;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lookup_constant_type&nbsp;Σ&nbsp;id&nbsp;=&nbsp;Checked&nbsp;T&nbsp;-&gt;&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;fuel&nbsp;T',&nbsp;((tsl_ty&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;<span class="inlinecode"></span>&nbsp;T&nbsp;=&nbsp;Success&nbsp;T')&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;(Σ&nbsp;;;;&nbsp;<span class="inlinecode"></span>&nbsp;|--&nbsp;&nbsp;t'&nbsp;:&nbsp;T'))*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">LmapE</span> : @<span class="id" title="var">List.map</span> = @<span class="id" title="var">seq.map</span>.<br/>
+<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">lebE</span> (<span class="id" title="var">m</span> <span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : (<span class="id" title="var">Nat.leb</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span>) = (<span class="id" title="var">m</span> ≤ <span class="id" title="var">n</span>).<br/>
+<span class="id" title="var">Admitted</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">term_eqP</span> : <span class="id" title="var">Equality.axiom</span> <span class="id" title="var">eq_term</span>.<br/>
+<span class="id" title="var">Admitted</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">term_eqMixin</span> := <span class="id" title="var">EqMixin</span> <span class="id" title="var">term_eqP</span>.<br/>
+<span class="id" title="keyword">Canonical</span> <span class="id" title="var">termT_eqype</span> := <span class="id" title="var">EqType</span> <span class="id" title="var">term</span> <span class="id" title="var">term_eqMixin</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">tsl_rec0_lift</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span> <span class="id" title="var">t</span> :<br/>
+&nbsp;&nbsp;<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">m</span> (<span class="id" title="var">lift</span> <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">t</span>) = <span class="id" title="var">lift</span> (2 × <span class="id" title="var">n</span>) <span class="id" title="var">m</span> (<span class="id" title="var">tsl_rec0</span> <span class="id" title="var">m</span> <span class="id" title="var">t</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">elim</span>/<span class="id" title="var">term_forall_list_ind</span> : <span class="id" title="var">t</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span> ⇒ //=; <span class="id" title="tactic">rewrite</span> ?<span class="id" title="var">plusE</span>.<br/>
+- <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">n</span> <span class="id" title="var">m</span> <span class="id" title="var">k</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">lebE</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">case</span>: <span class="id" title="var">leqP</span> ⇒ /= <span class="id" title="var">mn</span>; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">lebE</span> <span class="id" title="var">plusE</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> !<span class="id" title="var">ifT</span> ?<span class="id" title="var">mulnDr</span> ?<span class="id" title="var">addnA</span> //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">admit</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">admit</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">leqNgt</span> <span class="id" title="var">mn</span>.<br/>
+- <span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="tactic">by</span> <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">t</span> <span class="id" title="var">IHt</span> <span class="id" title="var">c</span> <span class="id" title="var">t0</span> <span class="id" title="var">IHt0</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHt</span> <span class="id" title="var">IHt0</span>.<br/>
+- <span class="id" title="tactic">by</span> <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">n0</span> <span class="id" title="var">t</span> -<span class="id" title="var">IHt</span> <span class="id" title="var">t0</span> <span class="id" title="var">IHt0</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span> /=; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHt</span> <span class="id" title="var">addn1</span> <span class="id" title="var">IHt0</span>.<br/>
+- <span class="id" title="tactic">by</span> <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">n</span> <span class="id" title="var">t</span> <span class="id" title="var">IHt</span> <span class="id" title="var">t0</span> <span class="id" title="var">IHt0</span> <span class="id" title="var">m</span> <span class="id" title="var">n0</span>; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHt</span> <span class="id" title="var">addn1</span> <span class="id" title="var">IHt0</span>.<br/>
+- <span class="id" title="tactic">by</span> <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">n</span> <span class="id" title="var">t</span> <span class="id" title="var">IHt</span> <span class="id" title="var">t0</span> <span class="id" title="var">IHt0</span> <span class="id" title="var">t1</span> <span class="id" title="var">IHt1</span> <span class="id" title="var">m</span> <span class="id" title="var">n0</span>; <span class="id" title="tactic">rewrite</span> !<span class="id" title="var">addn1</span> <span class="id" title="var">IHt</span> <span class="id" title="var">IHt0</span> <span class="id" title="var">IHt1</span>.<br/>
+- <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">t</span> <span class="id" title="var">IHt</span> <span class="id" title="var">l</span> <span class="id" title="var">IHl</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHt</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">LmapE</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> -!<span class="id" title="var">map_comp</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">congr</span> (<span class="id" title="var">tApp</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>/<span class="id" title="var">eq_in_map</span> ⇒ <span class="id" title="var">i</span> /=.<br/>
+&nbsp;&nbsp;<span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">p</span> <span class="id" title="var">t</span> <span class="id" title="var">IHt</span> <span class="id" title="var">t0</span> <span class="id" title="var">IHt0</span> <span class="id" title="var">l</span> <span class="id" title="var">IHl</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHt</span> <span class="id" title="var">IHt0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="tactic">by</span> <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">s</span> <span class="id" title="var">t</span> <span class="id" title="var">IHt</span> <span class="id" title="var">m</span> <span class="id" title="var">n</span>; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHt</span>.<br/>
+- <span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="var">admit</span>.<br/>
+<span class="id" title="var">Admitted</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">lift_mkApps</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span> <span class="id" title="var">t</span> <span class="id" title="var">us</span><br/>
+&nbsp;&nbsp;: <span class="id" title="var">lift</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span> (<span class="id" title="var">mkApps</span> <span class="id" title="var">t</span> <span class="id" title="var">us</span>) = <span class="id" title="var">mkApps</span> (<span class="id" title="var">lift</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span> <span class="id" title="var">t</span>) (<span class="id" title="var">map</span> (<span class="id" title="var">lift</span> <span class="id" title="var">n</span> <span class="id" title="var">k</span>) <span class="id" title="var">us</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;destruct&nbsp;t;&nbsp;try&nbsp;reflexivity.&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;cbn.&nbsp;destruct&nbsp;(Nat.leb&nbsp;k&nbsp;n0);&nbsp;try&nbsp;reflexivity.&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;cbn.&nbsp;by&nbsp;rewrite&nbsp;-map_cat.&nbsp;&nbsp;*)</span><br/>
+<span class="id" title="var">done</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Arguments</span> <span class="id" title="var">subst_app</span> : <span class="id" title="tactic">simpl</span> <span class="id" title="var">nomatch</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">tsl_rec1_lift</span> <span class="id" title="var">E</span> <span class="id" title="var">n</span> <span class="id" title="var">t</span> :<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;tsl_rec1&nbsp;E&nbsp;0&nbsp;(lift&nbsp;n&nbsp;m&nbsp;t)&nbsp;=&nbsp;lift&nbsp;(2&nbsp;*&nbsp;n)&nbsp;(2&nbsp;*&nbsp;m)&nbsp;(tsl_rec1&nbsp;E&nbsp;0&nbsp;t).&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> 0 (<span class="id" title="var">lift0</span> <span class="id" title="var">n</span> <span class="id" title="var">t</span>) = <span class="id" title="var">lift0</span> (2 × <span class="id" title="var">n</span>) (<span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> 0 <span class="id" title="var">t</span>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">elim</span>/<span class="id" title="var">term_forall_list_ind</span> : <span class="id" title="var">t</span> <span class="id" title="var">n</span> ⇒ //; <span class="id" title="tactic">rewrite</span> ?<span class="id" title="var">plusE</span>.<br/>
+- <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">n</span> <span class="id" title="var">k</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;rewrite&nbsp;!lebE&nbsp;fun_if&nbsp;/=&nbsp;leq_mul2l&nbsp;/=.&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;by&nbsp;have&nbsp;<span class="inlinecode"></span>&nbsp;:=&nbsp;leqP&nbsp;m&nbsp;n&nbsp;=&gt;&nbsp;//=;&nbsp;*)</span> <span class="id" title="tactic">by</span> <span class="id" title="tactic">rewrite</span> /= <span class="id" title="var">mulnDr</span>.<br/>
+- <span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">t</span> <span class="id" title="var">IHt</span> <span class="id" title="var">c</span> <span class="id" title="var">t0</span> <span class="id" title="var">IHt0</span> <span class="id" title="var">n</span> /=; <span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHt</span> <span class="id" title="var">IHt0</span> ?<span class="id" title="var">lift_mkApps</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">congr</span> (<span class="id" title="var">tCast</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<span class="id" title="var">mkApps</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">rewrite</span> !<span class="id" title="var">tsl_rec0_lift</span>.<br/>
+- <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">n</span> <span class="id" title="var">t</span> <span class="id" title="var">IHt</span> <span class="id" title="var">t0</span> <span class="id" title="var">IHt0</span> <span class="id" title="var">n0</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /=.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> !<span class="id" title="var">IHt</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> !<span class="id" title="var">tsl_rec0_lift</span>.<br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;rewrite&nbsp;lift_simpl.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;rewrite&nbsp;IHt&nbsp;addn1&nbsp;IHt0.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;-&nbsp;by&nbsp;move=&gt;&nbsp;n&nbsp;t&nbsp;IHt&nbsp;t0&nbsp;IHt0&nbsp;m&nbsp;n0;&nbsp;rewrite&nbsp;IHt&nbsp;addn1&nbsp;IHt0.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;-&nbsp;by&nbsp;move=&gt;&nbsp;n&nbsp;t&nbsp;IHt&nbsp;t0&nbsp;IHt0&nbsp;t1&nbsp;IHt1&nbsp;m&nbsp;n0;&nbsp;rewrite&nbsp;!addn1&nbsp;IHt&nbsp;IHt0&nbsp;IHt1.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;-&nbsp;move=&gt;&nbsp;t&nbsp;IHt&nbsp;l&nbsp;IHl&nbsp;m&nbsp;n;&nbsp;rewrite&nbsp;IHt.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;rewrite&nbsp;LmapE.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;rewrite&nbsp;-!map_comp.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;congr&nbsp;(tApp&nbsp;_&nbsp;_).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;apply/eq_in_map&nbsp;=&gt;&nbsp;i&nbsp;/=.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;admit.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;-&nbsp;move=&gt;&nbsp;p&nbsp;t&nbsp;IHt&nbsp;t0&nbsp;IHt0&nbsp;l&nbsp;IHl&nbsp;m&nbsp;n.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;rewrite&nbsp;IHt&nbsp;IHt0.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;admit.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;-&nbsp;by&nbsp;move=&gt;&nbsp;s&nbsp;t&nbsp;IHt&nbsp;m&nbsp;n;&nbsp;rewrite&nbsp;IHt.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;-&nbsp;admit.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;-&nbsp;admit.&nbsp;*)</span><br/>
+<span class="id" title="var">Admitted</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Admitted.&nbsp;*)</span><br/>
+
+<br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;tsl_rec0_lift&nbsp;n&nbsp;t&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;tsl_rec0&nbsp;0&nbsp;(lift0&nbsp;n&nbsp;t)&nbsp;=&nbsp;lift0&nbsp;n&nbsp;(tsl_rec0&nbsp;0&nbsp;t).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Admitted.&nbsp;*)</span><br/>
+
+<br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;tsl_ty_lift&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;Γ&nbsp;n&nbsp;(p&nbsp;:&nbsp;n&nbsp;&lt;=&nbsp;|Γ|) t *)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;tsl_ty&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;Γ&nbsp;(lift0&nbsp;n&nbsp;t)&nbsp;=&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(t'&nbsp;&lt;-&nbsp;tsl_ty&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;(removefirst_n&nbsp;n&nbsp;Γ)&nbsp;t&nbsp;;;&nbsp;ret&nbsp;(lift0&nbsp;n&nbsp;t')).&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Admitted.&nbsp;*)</span><br/>
+
+<br/>
+<span class="comment">(*&nbsp;Lemma&nbsp;tsl_S_fuel&nbsp;{fuel&nbsp;Σ&nbsp;E&nbsp;Γ&nbsp;t&nbsp;t'}&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;tsl_term&nbsp;fuel&nbsp;Σ&nbsp;E&nbsp;Γ&nbsp;t&nbsp;=&nbsp;Success&nbsp;t'&nbsp;-&gt;&nbsp;tsl_term&nbsp;(S&nbsp;fuel)&nbsp;Σ&nbsp;E&nbsp;Γ&nbsp;t&nbsp;=&nbsp;Success&nbsp;t'.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;Admitted.&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Record</span> <span class="id" title="var">hidden</span> <span class="id" title="var">T</span> := <span class="id" title="var">Hidden</span> {<span class="id" title="var">show</span> : <span class="id" title="var">T</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <span class="id" title="var">show</span> : <span class="id" title="tactic">simpl</span> <span class="id" title="var">never</span>.<br/>
+<span class="id" title="keyword">Notation</span> &quot;'hidden" := (<span class="id" title="var">show</span> <span class="id" title="var">_</span> (<span class="id" title="var">Hidden</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)).<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">hide</span> <span class="id" title="var">T</span> (<span class="id" title="var">t</span> : <span class="id" title="var">T</span>) : <span class="id" title="var">t</span> = <span class="id" title="var">show</span> <span class="id" title="var">T</span> (<span class="id" title="var">Hidden</span> <span class="id" title="var">T</span> <span class="id" title="var">t</span>).<br/>
+<span class="id" title="keyword">Proof</span>. <span class="id" title="tactic">by</span> []. <span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;From&nbsp;mathcomp&nbsp;Require&nbsp;Import&nbsp;ssrnat.&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Arguments</span> <span class="id" title="var">safe_nth</span> : <span class="id" title="tactic">simpl</span> <span class="id" title="var">nomatch</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">eq_safe_nth</span> <span class="id" title="var">T</span> (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">T</span>) <span class="id" title="var">n</span> <span class="id" title="var">n'</span> <span class="id" title="var">p</span> <span class="id" title="var">p'</span> : <span class="id" title="var">n</span> = <span class="id" title="var">n'</span> →<br/>
+&nbsp;&nbsp;<span class="id" title="var">safe_nth</span> <span class="id" title="var">l</span> (<span class="id" title="var">n</span>; <span class="id" title="var">p</span>) = <span class="id" title="var">safe_nth</span> <span class="id" title="var">l</span> (<span class="id" title="var">n'</span>; <span class="id" title="var">p'</span>) :&gt; <span class="id" title="var">T</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">move</span>⇒ <span class="id" title="var">eq_n</span>; <span class="id" title="tactic">case</span>: <span class="id" title="var">_</span> / <span class="id" title="var">eq_n</span> <span class="id" title="tactic">in</span> <span class="id" title="var">p</span> <span class="id" title="var">p'</span> ×.<br/>
+<span class="id" title="tactic">elim</span>: <span class="id" title="var">l</span> ⇒ [|<span class="id" title="var">x</span> <span class="id" title="var">l</span> <span class="id" title="var">IHl</span>] <span class="id" title="tactic">in</span> <span class="id" title="var">n</span> <span class="id" title="var">p</span> <span class="id" title="var">p'</span> ×.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">inversion</span> <span class="id" title="var">p</span>.<br/>
+<span class="id" title="tactic">by</span> <span class="id" title="tactic">case</span>: <span class="id" title="var">n</span> ⇒ [//|<span class="id" title="var">n</span>] <span class="id" title="tactic">in</span> <span class="id" title="var">p</span> <span class="id" title="var">p'</span> *; <span class="id" title="tactic">apply</span>: <span class="id" title="var">IHl</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <span class="id" title="var">tsl_rec0_decl_type</span> (<span class="id" title="var">Γ</span> : <span class="id" title="keyword">context</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">isdecl</span> : (<span class="id" title="var">n</span> &lt; #|<span class="id" title="var">Γ</span>|%<span class="id" title="var">term</span>)%<span class="id" title="var">coq_nat</span>) (<span class="id" title="var">E</span> : <span class="id" title="var">tsl_table</span>) (<span class="id" title="var">isdecl'</span> : (2 × <span class="id" title="var">n</span> + 1 &lt; #|<span class="id" title="var">tsl_ctx</span> <span class="id" title="var">E</span> <span class="id" title="var">Γ</span>|%<span class="id" title="var">term</span>)%<span class="id" title="var">coq_nat</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" title="var">tsl_rec0</span> 0 (<span class="id" title="var">decl_type</span> (<span class="id" title="var">safe_nth</span> <span class="id" title="var">Γ</span> (<span class="id" title="var">n</span>; <span class="id" title="var">isdecl</span>))) =<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">decl_type</span> (<span class="id" title="var">safe_nth</span> (<span class="id" title="var">tsl_ctx</span> <span class="id" title="var">E</span> <span class="id" title="var">Γ</span>) (2 × <span class="id" title="var">n</span> + 1; <span class="id" title="var">isdecl'</span>)).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">elim</span>: <span class="id" title="var">Γ</span> ⇒ [|<span class="id" title="var">a</span> <span class="id" title="var">Γ</span> <span class="id" title="var">IHΓ</span>] <span class="id" title="tactic">in</span> <span class="id" title="var">n</span> <span class="id" title="var">isdecl</span> <span class="id" title="var">isdecl'</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">inversion</span> <span class="id" title="var">isdecl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">case</span>: <span class="id" title="var">n</span> ⇒ [//|<span class="id" title="var">n</span>] <span class="id" title="tactic">in</span> <span class="id" title="var">isdecl</span> <span class="id" title="var">isdecl'</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">addn1</span> /= <span class="id" title="tactic">in</span> <span class="id" title="var">isdecl'</span> ×.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">IHΓ</span> <span class="id" title="var">addn1</span> //.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span>/<span class="id" title="var">leP</span>; <span class="id" title="tactic">move</span>/<span class="id" title="var">leP</span> : <span class="id" title="var">isdecl'</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">rewrite</span> !<span class="id" title="var">mul2n</span> <span class="id" title="var">doubleS</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">move</span>⇒ <span class="id" title="var">isdecl''</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">congr</span> (<span class="id" title="var">decl_type</span> <span class="id" title="var">_</span>); <span class="id" title="tactic">apply</span>: <span class="id" title="var">eq_safe_nth</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">plusE</span> <span class="id" title="var">addn0</span> <span class="id" title="var">mul2n</span> -<span class="id" title="var">addnn</span> <span class="id" title="var">addnS</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">tsl_rec1_decl_type</span> (<span class="id" title="var">Γ</span> : <span class="id" title="keyword">context</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">E</span> : <span class="id" title="var">tsl_table</span>) <span class="id" title="var">p</span> <span class="id" title="var">p'</span><br/>
+&nbsp;&nbsp;(<span class="id" title="var">Γ'</span> := <span class="id" title="var">tsl_ctx</span> <span class="id" title="var">E</span> <span class="id" title="var">Γ</span>) :<br/>
+&nbsp;&nbsp;<span class="id" title="var">mkApps</span> (<span class="id" title="var">lift0</span> 1 (<span class="id" title="var">decl_type</span> (<span class="id" title="var">safe_nth</span> <span class="id" title="var">Γ'</span> ((2 × <span class="id" title="var">n</span>); <span class="id" title="var">p</span>)))) [<span class="id" title="var">tRel</span> 0] =<br/>
+&nbsp;&nbsp;<span class="id" title="var">decl_type</span> (<span class="id" title="var">safe_nth</span> <span class="id" title="var">Γ'</span> (2 × <span class="id" title="var">n</span>; <span class="id" title="var">p'</span>)).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">subst</span> <span class="id" title="var">Γ'</span>; <span class="id" title="tactic">elim</span>: <span class="id" title="var">Γ</span> ⇒ [|<span class="id" title="var">a</span> <span class="id" title="var">Γ</span> <span class="id" title="var">IHΓ</span>] <span class="id" title="tactic">in</span> <span class="id" title="var">n</span> <span class="id" title="var">p</span> <span class="id" title="var">p'</span> ×.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">inversion</span> <span class="id" title="var">p</span>.<br/>
+<span class="comment">(*&nbsp;simpl.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;case:&nbsp;n&nbsp;=&gt;&nbsp;<span class="inlinecode">|<span class="id" title="var">n</span></span>&nbsp;//=&nbsp;in&nbsp;p&nbsp;p'&nbsp;*.&nbsp;*)</span><br/>
+
+<br/>
+<span class="comment">(*&nbsp;rewrite&nbsp;/=.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;rewrite&nbsp;addn1&nbsp;/=&nbsp;in&nbsp;p'&nbsp;*.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;rewrite&nbsp;IHΓ&nbsp;addn1&nbsp;//.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;apply/leP;&nbsp;move/leP&nbsp;:&nbsp;p'.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;by&nbsp;rewrite&nbsp;!mul2n&nbsp;doubleS.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;move=&gt;&nbsp;p''.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;congr&nbsp;(decl_type&nbsp;_);&nbsp;apply:&nbsp;eq_safe_nth.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;by&nbsp;rewrite&nbsp;plusE&nbsp;addn0&nbsp;mul2n&nbsp;-addnn&nbsp;addnS.&nbsp;*)</span><br/>
+<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Qed.&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="var">Admitted</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Lemma&nbsp;tsl_rec1_decl_type&nbsp;(Γ&nbsp;:&nbsp;context)&nbsp;(n&nbsp;:&nbsp;nat)&nbsp;(isdecl&nbsp;:&nbsp;(n&nbsp;&lt;&nbsp;|Γ|%term)%coq_nat) (E : tsl_table) (isdecl' : (2 * n + 1 < |tsl_ctx&nbsp;E&nbsp;Γ|coq_nat)&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;tsl_rec1&nbsp;E&nbsp;(decl_type&nbsp;(safe_nth&nbsp;Γ&nbsp;(n;&nbsp;isdecl)))&nbsp;=&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decl_type&nbsp;(safe_nth&nbsp;(tsl_ctx&nbsp;E&nbsp;Γ)&nbsp;(2&nbsp;*&nbsp;n&nbsp;+&nbsp;1;&nbsp;isdecl')).&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <span class="id" title="var">tsl_correct</span> <span class="id" title="var">Σ</span> <span class="id" title="var">Γ</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span> (<span class="id" title="var">H</span> : <span class="id" title="var">Σ</span> ;;; <span class="id" title="var">Γ</span> |-- <span class="id" title="var">t</span> : <span class="id" title="var">T</span>)<br/>
+&nbsp;&nbsp;: <span class="id" title="keyword">∀</span> <span class="id" title="var">E</span>, <span class="id" title="var">tsl_table_correct</span> <span class="id" title="var">Σ</span> <span class="id" title="var">E</span> →<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">Γ'</span> := <span class="id" title="var">tsl_ctx</span> <span class="id" title="var">E</span> <span class="id" title="var">Γ</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">t0</span> := <span class="id" title="var">tsl_rec0</span> 0 <span class="id" title="var">t</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">t1</span> := <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> 0 <span class="id" title="var">t</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">T0</span> := <span class="id" title="var">tsl_rec0</span> 0 <span class="id" title="var">T</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">T1</span> := <span class="id" title="var">tsl_rec1</span> <span class="id" title="var">E</span> 0 <span class="id" title="var">T</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Σ</span> ;;; <span class="id" title="var">Γ'</span> |-- <span class="id" title="var">t0</span> : <span class="id" title="var">T0</span> ∧ <span class="id" title="var">Σ</span> ;;; <span class="id" title="var">Γ'</span> |-- <span class="id" title="var">t1</span> : <span class="id" title="var">mkApps</span> <span class="id" title="var">T1</span> [<span class="id" title="var">t0</span>].<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">elim</span>/<span class="id" title="var">typing_ind</span>: <span class="id" title="var">H</span> ⇒ {<span class="id" title="var">Γ</span> <span class="id" title="var">t</span> <span class="id" title="var">T</span>} <span class="id" title="var">Γ</span>.<br/>
+- <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">n</span> <span class="id" title="var">isdecl</span> <span class="id" title="var">E</span> <span class="id" title="var">X</span> <span class="id" title="var">Γ'</span> /=.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">tsl_rec0_lift</span> <span class="id" title="var">mulnS</span> <span class="id" title="var">add2n</span> (<span class="id" title="var">tsl_rec0_decl_type</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">E</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">tsl_ctx_length</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span>/<span class="id" title="var">leP</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">addn1</span> <span class="id" title="var">mul2n</span> -<span class="id" title="var">doubleS</span> -<span class="id" title="var">mul2n</span> <span class="id" title="var">leq_mul2l</span>; <span class="id" title="tactic">apply</span>/<span class="id" title="var">leP</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> !<span class="id" title="var">addn1</span>; <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">isdecl'</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">split</span>; <span class="id" title="tactic">first</span> <span class="id" title="tactic">exact</span>: <span class="id" title="var">type_Rel</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">have</span> := <span class="id" title="var">type_Rel</span> <span class="id" title="var">Σ</span> <span class="id" title="var">Γ'</span> (2 × <span class="id" title="var">n</span>) <span class="id" title="var">_</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">evar</span> (<span class="id" title="var">l</span> : (2 × <span class="id" title="var">n</span> &lt; #|<span class="id" title="var">Γ'</span>|%<span class="id" title="var">term</span>)%<span class="id" title="var">coq_nat</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">move</span>⇒ /(<span class="id" title="var">_</span> <span class="id" title="var">l</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> -<span class="id" title="var">tsl_rec1_decl_type</span> /=.<br/>
+&nbsp;&nbsp;<span class="id" title="var">admit</span>.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;rewrite&nbsp;simpl_lift_rec;&nbsp;do&nbsp;?easy.&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;by&nbsp;rewrite&nbsp;plusE&nbsp;addn0&nbsp;addn1.&nbsp;*)</span><br/>
+
+<br/>
+- <span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="var">admit</span>.<br/>
+- <span class="id" title="tactic">rewrite</span> /= ⇒ <span class="id" title="var">t</span> <span class="id" title="var">l</span> <span class="id" title="var">t'</span> <span class="id" title="var">t''</span> <span class="id" title="var">tt'</span> <span class="id" title="var">IHt'</span> <span class="id" title="var">spine</span> <span class="id" title="var">E</span> <span class="id" title="var">ΣE_correct</span>; <span class="id" title="tactic">rewrite</span> /<span class="id" title="var">mkApps</span>; <span class="id" title="tactic">split</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span>: <span class="id" title="var">type_App</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">have</span> [] := <span class="id" title="var">IHt'</span> <span class="id" title="var">_</span> <span class="id" title="var">ΣE_correct</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">move</span>⇒ <span class="id" title="var">t0_ty</span> ?; <span class="id" title="tactic">exact</span>: <span class="id" title="var">t0_ty</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">admit</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span>: <span class="id" title="var">type_App</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">have</span> [] := <span class="id" title="var">IHt'</span> <span class="id" title="var">_</span> <span class="id" title="var">ΣE_correct</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">by</span> <span class="id" title="tactic">move</span>⇒ ? <span class="id" title="var">t1_ty</span>; <span class="id" title="tactic">exact</span>: <span class="id" title="var">t1_ty</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">admit</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> /<span class="id" title="var">Γ'</span> ⇒ <span class="id" title="var">isdecl'</span>; <span class="id" title="tactic">clear</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">case</span>: <span class="id" title="var">Γ</span> <span class="id" title="var">isdecl</span> <span class="id" title="var">isdecl'</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Vector</span>.<br/>
+<span class="comment">(*&nbsp;MetaRocq&nbsp;Run&nbsp;(ΣE&nbsp;&lt;-&nbsp;tTranslate&nbsp;(<span class="inlinecode"></span>,<span class="inlinecode"></span>)&nbsp;"nat"&nbsp;;;&nbsp;*)</span><br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

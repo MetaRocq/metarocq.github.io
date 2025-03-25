@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.Utils.MRTactics.UniquePose</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Utils.MRTactics.FindHyp.html#"><span class="id" title="library">MRTactics.FindHyp</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="tactic">pose</span></span> <span class="inlinecode"><span class="id" title="var">proof</span></span> <span class="inlinecode"><span class="id" title="var">defn</span></span>, but only if no hypothesis of the same type exists.
+    most useful for proofs of a proposition 
+</div>
+<div class="code">
+<span class="id" title="keyword">Tactic Notation</span> "unique" "pose" "proof" <span class="id" title="keyword">constr</span>(<span class="id" title="var">defn</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">T</span> := <span class="id" title="keyword">type</span> <span class="id" title="keyword">of</span> <span class="id" title="var">defn</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="var">tryif</span> <span class="id" title="keyword">let</span> <span class="id" title="var">H</span> := <span class="id" title="var">find_hyp</span> <span class="id" title="var">T</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">fail</span> 2 "Already a hypothesis" <span class="id" title="var">H</span> "of type" <span class="id" title="var">T</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">then</span> <span class="id" title="tactic">fail</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="tactic">pose</span> <span class="id" title="var">proof</span> <span class="id" title="var">defn</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="tactic">pose</span></span> <span class="inlinecode"><span class="id" title="var">defn</span></span>, but only if that hypothesis doesn't exist 
+</div>
+<div class="code">
+<span class="id" title="keyword">Tactic Notation</span> "unique" "pose" <span class="id" title="keyword">constr</span>(<span class="id" title="var">defn</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">tryif</span> <span class="id" title="keyword">let</span> <span class="id" title="var">H</span> := <span class="id" title="var">find_hyp_with_body</span> <span class="id" title="var">defn</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">fail</span> 2 "Already a hypothesis" <span class="id" title="var">H</span> "with body" <span class="id" title="var">defn</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">then</span> <span class="id" title="tactic">fail</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="tactic">pose</span> <span class="id" title="var">defn</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="tactic">assert</span></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.demo.html#T"><span class="id" title="inductive">T</span></a></span>, but only if no hypothesis of the same type exists.
+    most useful for proofs of a proposition 
+</div>
+<div class="code">
+<span class="id" title="keyword">Tactic Notation</span> "unique" "assert" <span class="id" title="keyword">constr</span>(<span class="id" title="var">T</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">tryif</span> <span class="id" title="keyword">let</span> <span class="id" title="var">H</span> := <span class="id" title="var">find_hyp</span> <span class="id" title="var">T</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">fail</span> 2 "Already a hypothesis" <span class="id" title="var">H</span> "of type" <span class="id" title="var">T</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">then</span> <span class="id" title="tactic">fail</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="tactic">assert</span> <span class="id" title="var">T</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="tactic">assert</span></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.demo.html#T"><span class="id" title="inductive">T</span></a></span>, but only if no hypothesis of the same type exists.
+    most useful for proofs of a proposition 
+</div>
+<div class="code">
+<span class="id" title="keyword">Tactic Notation</span> "unique" "assert" <span class="id" title="keyword">constr</span>(<span class="id" title="var">T</span>) "by" <span class="id" title="var">tactic3</span>(<span class="id" title="var">tac</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">tryif</span> <span class="id" title="keyword">let</span> <span class="id" title="var">H</span> := <span class="id" title="var">find_hyp</span> <span class="id" title="var">T</span> <span class="id" title="tactic">in</span> <span class="id" title="tactic">fail</span> 2 "Already a hypothesis" <span class="id" title="var">H</span> "of type" <span class="id" title="var">T</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">then</span> <span class="id" title="tactic">fail</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="tactic">assert</span> <span class="id" title="var">T</span> <span class="id" title="tactic">by</span> <span class="id" title="var">tac</span>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

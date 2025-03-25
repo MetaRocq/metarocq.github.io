@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.Utils.MRPrelude</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Ascii</span> <span class="id" title="library">String</span> <span class="id" title="library">ZArith</span> <span class="id" title="library">Lia</span> <span class="id" title="library">Morphisms</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Transparent</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Do&nbsp;not&nbsp;change,&nbsp;<span class="inlinecode"><span class="id" title="var">ascii_dec</span></span>&nbsp;and&nbsp;<span class="inlinecode"><span class="id" title="var">string_dec</span></span>&nbsp;are&nbsp;extracted&nbsp;specifically&nbsp;*)</span><br/>
+<span class="id" title="keyword">Global Instance</span> <a id="ascii_eqdec" class="idref" href="#ascii_eqdec"><span class="id" title="instance">ascii_eqdec</span></a> : <span class="id" title="class">EqDec</span> <span class="id" title="inductive">ascii</span> := <span class="id" title="definition">ascii_dec</span>.<br/>
+<span class="id" title="keyword">Global Instance</span> <a id="string_eqdec" class="idref" href="#string_eqdec"><span class="id" title="instance">string_eqdec</span></a> : <span class="id" title="class">EqDec</span> <span class="id" title="inductive">string</span> := <span class="id" title="definition">string_dec</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="keyword">for</span> <span class="id" title="inductive">ascii</span> <span class="id" title="inductive">string</span>.<br/>
+<span class="id" title="keyword">Derive</span> <span class="id" title="var">NoConfusion</span> <span class="id" title="var">EqDec</span> <span class="id" title="keyword">for</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Numbers.BinNums.html#positive"><span class="id" title="inductive">positive</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">metarocq_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We cannot use ssrbool currently as it breaks extraction. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Coercion</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#is_true"><span class="id" title="definition">is_true</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#is_true"><span class="id" title="definition">:</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#is_true"><span class="id" title="definition">bool</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#is_true"><span class="id" title="definition">&gt;-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#is_true"><span class="id" title="definition">Sortclass</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id=":::'eta_compose'" class="idref" href="#:::'eta_compose'"><span class="id" title="notation">&quot;</span></a>'eta_compose'" := (<span class="id" title="keyword">fun</span> <a id="g:1" class="idref" href="#g:1"><span class="id" title="binder">g</span></a> <a id="f:2" class="idref" href="#f:2"><span class="id" title="binder">f</span></a> <a id="x:3" class="idref" href="#x:3"><span class="id" title="binder">x</span></a> ⇒ <a class="idref" href="MetaRocq.Utils.MRPrelude.html#g:1"><span class="id" title="variable">g</span></a> (<a class="idref" href="MetaRocq.Utils.MRPrelude.html#f:2"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#x:3"><span class="id" title="variable">x</span></a>)).<br/>
+
+<br/>
+<span class="comment">(*&nbsp;\circ&nbsp;*)</span><br/>
+<span class="id" title="keyword">Notation</span> <a id="c90061783c20674b3a3a6b46d343da03" class="idref" href="#c90061783c20674b3a3a6b46d343da03"><span class="id" title="notation">&quot;</span></a>g ∘ f" := (<a class="idref" href="MetaRocq.Utils.MRPrelude.html#:::'eta_compose'"><span class="id" title="notation">eta_compose</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#:::'eta_compose'"><span class="id" title="notation">g</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#:::'eta_compose'"><span class="id" title="notation">f</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="e84fb7acee35c3a3e9011a828267ff4e" class="idref" href="#e84fb7acee35c3a3e9011a828267ff4e"><span class="id" title="notation">&quot;</span></a> ! " := (@<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#False_rect"><span class="id" title="definition">False_rect</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) : <span class="id" title="var">metarocq_scope</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Use&nbsp;\sum&nbsp;to&nbsp;input&nbsp;∑&nbsp;in&nbsp;Company&nbsp;Rocq&nbsp;(it&nbsp;is&nbsp;not&nbsp;a&nbsp;sigma&nbsp;Σ).&nbsp;*)</span><br/>
+<span class="id" title="keyword">Notation</span> <a id="cd4bc1b07c8b3bdc9f3bbc7941b56107" class="idref" href="#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">&quot;</span></a>'∑' x .. y , p" := (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#sigT"><span class="id" title="inductive">sigT</span></a> (<span class="id" title="keyword">fun</span> <a id="x:4" class="idref" href="#x:4"><span class="id" title="binder">x</span></a> ⇒ .. (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#sigT"><span class="id" title="inductive">sigT</span></a> (<span class="id" title="keyword">fun</span> <a id="y:5" class="idref" href="#y:5"><span class="id" title="binder">y</span></a> ⇒ <span class="id" title="var">p</span>%<span class="id" title="keyword">type</span>)) ..))<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 200, <span class="id" title="var">x</span> <span class="id" title="var">binder</span>, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">format</span> "'[' '∑'  '/  ' x  ..  y ,  '/  ' p ']'")<br/>
+&nbsp;&nbsp;: <span class="id" title="var">type_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="7957360534ce47b451efaf295515cd1d" class="idref" href="#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">&quot;</span></a>( x ; y )" := (@<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#existT"><span class="id" title="constructor">existT</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>).<br/>
+<span class="id" title="keyword">Notation</span> <a id="cdd198d55a4475b214740b8083e472ab" class="idref" href="#cdd198d55a4475b214740b8083e472ab"><span class="id" title="notation">&quot;</span></a>( x ; y ; z )" := <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><span class="id" title="var">x</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a> <span class="id" title="var">y</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <span class="id" title="var">z</span><a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">))</span></a>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="10ad76a80d07304ebf924e74a1314ea7" class="idref" href="#10ad76a80d07304ebf924e74a1314ea7"><span class="id" title="notation">&quot;</span></a>( x ; y ; z ; t )" := <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><span class="id" title="var">x</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a> <span class="id" title="var">y</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><span class="id" title="var">z</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <span class="id" title="var">t</span><a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">)))</span></a>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="b33d2714c4564aaa9d9a20b4e40fd775" class="idref" href="#b33d2714c4564aaa9d9a20b4e40fd775"><span class="id" title="notation">&quot;</span></a>( x ; y ; z ; t ; u )" := <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><span class="id" title="var">x</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a> <span class="id" title="var">y</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><span class="id" title="var">z</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><span class="id" title="var">t</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <span class="id" title="var">u</span><a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">))))</span></a>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="5e8199556fae977bef533c8c83816eb1" class="idref" href="#5e8199556fae977bef533c8c83816eb1"><span class="id" title="notation">&quot;</span></a>( x ; y ; z ; t ; u ; v )" := <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><span class="id" title="var">x</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a> <span class="id" title="var">y</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><span class="id" title="var">z</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><span class="id" title="var">t</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">(</span></a><span class="id" title="var">u</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">;</span></a> <span class="id" title="var">v</span><a class="idref" href="MetaRocq.Utils.MRPrelude.html#7957360534ce47b451efaf295515cd1d"><span class="id" title="notation">)))))</span></a>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="9068efa82fa7bcf30341b045859b1c5b" class="idref" href="#9068efa82fa7bcf30341b045859b1c5b"><span class="id" title="notation">&quot;</span></a>x .π1" := (@<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#projT1"><span class="id" title="definition">projT1</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">x</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 3, <span class="id" title="var">format</span> "x '.π1'").<br/>
+<span class="id" title="keyword">Notation</span> <a id="777d545f3df7a0e7c9a56d33a4f5d56c" class="idref" href="#777d545f3df7a0e7c9a56d33a4f5d56c"><span class="id" title="notation">&quot;</span></a>x .π2" := (@<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#projT2"><span class="id" title="definition">projT2</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">x</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 3, <span class="id" title="var">format</span> "x '.π2'").<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Shorthand for pointwise equality relation in Proper signatures 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="1554d3df40addf893543592a515f020a" class="idref" href="#1554d3df40addf893543592a515f020a"><span class="id" title="notation">&quot;</span></a>`=1`" := (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#pointwise_relation"><span class="id" title="definition">pointwise_relation</span></a> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
+<span class="id" title="keyword">Infix</span> <a id="44b19bd81f7a1388073ea8a65e6fa993" class="idref" href="#44b19bd81f7a1388073ea8a65e6fa993"><span class="id" title="notation">&quot;</span></a>=1" := (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#pointwise_relation"><span class="id" title="definition">pointwise_relation</span></a> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 70) : <span class="id" title="var">type_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a id="50c236bc22b68b42aab5a050cb4c4c6d" class="idref" href="#50c236bc22b68b42aab5a050cb4c4c6d"><span class="id" title="notation">&quot;</span></a>`=2`" := (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#pointwise_relation"><span class="id" title="definition">pointwise_relation</span></a> <span class="id" title="var">_</span> (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#pointwise_relation"><span class="id" title="definition">pointwise_relation</span></a> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a>)) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
+<span class="id" title="keyword">Infix</span> <a id="fe2a1a98339f5fcdd989ce8af348292e" class="idref" href="#fe2a1a98339f5fcdd989ce8af348292e"><span class="id" title="notation">&quot;</span></a>=2" := (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#pointwise_relation"><span class="id" title="definition">pointwise_relation</span></a> <span class="id" title="var">_</span> (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#pointwise_relation"><span class="id" title="definition">pointwise_relation</span></a> <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a>)) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 70) : <span class="id" title="var">type_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Higher-order lemma to simplify Proper proofs. 
+</div>
+<div class="code">
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <a id="proper_ext_eq" class="idref" href="#proper_ext_eq"><span class="id" title="instance">proper_ext_eq</span></a> {<a id="A:6" class="idref" href="#A:6"><span class="id" title="binder">A</span></a> <a id="B:7" class="idref" href="#B:7"><span class="id" title="binder">B</span></a>} : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="MetaRocq.Utils.MRPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#iff"><span class="id" title="definition">iff</span></a>) (@<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#pointwise_relation"><span class="id" title="definition">pointwise_relation</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#A:6"><span class="id" title="variable">A</span></a> <span class="id" title="var">_</span> (@<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#B:7"><span class="id" title="variable">B</span></a>)).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">f</span> <span class="id" title="var">f'</span> <span class="id" title="var">Hff'</span> <span class="id" title="var">g</span> <span class="id" title="var">g'</span> <span class="id" title="var">Hgg'</span>. <span class="id" title="tactic">split</span>; <span class="id" title="tactic">intros</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> &lt;- <span class="id" title="var">Hff'</span>, &lt;- <span class="id" title="var">Hgg'</span>.<br/>
+&nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>. <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">Hff'</span>, <span class="id" title="var">Hgg'</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <a id="id_proper_proxy" class="idref" href="#id_proper_proxy"><span class="id" title="instance">id_proper_proxy</span></a> {<a id="A:8" class="idref" href="#A:8"><span class="id" title="binder">A</span></a>} : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#ProperProxy"><span class="id" title="class">ProperProxy</span></a> (<a class="idref" href="MetaRocq.Utils.MRPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a>) (@<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#A:8"><span class="id" title="variable">A</span></a>).<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <a id="pointwise_subrelation" class="idref" href="#pointwise_subrelation"><span class="id" title="instance">pointwise_subrelation</span></a> {<a id="A:9" class="idref" href="#A:9"><span class="id" title="binder">A</span></a> <a id="B:10" class="idref" href="#B:10"><span class="id" title="binder">B</span></a>} : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.RelationClasses.html#subrelation"><span class="id" title="class">subrelation</span></a> (<a class="idref" href="MetaRocq.Utils.MRPrelude.html#1554d3df40addf893543592a515f020a"><span class="id" title="notation">`=1`</span></a>) (@<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#A:9"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> @<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#B:10"><span class="id" title="variable">B</span></a>)%<span class="id" title="var">signature</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">Hfg</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> →. <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">Hfg</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Instance</span> <a id="pointwise_subrelation2" class="idref" href="#pointwise_subrelation2"><span class="id" title="instance">pointwise_subrelation2</span></a> {<a id="A:11" class="idref" href="#A:11"><span class="id" title="binder">A</span></a> <a id="B:12" class="idref" href="#B:12"><span class="id" title="binder">B</span></a> <a id="C:13" class="idref" href="#C:13"><span class="id" title="binder">C</span></a>} : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.RelationClasses.html#subrelation"><span class="id" title="class">subrelation</span></a> (<a class="idref" href="MetaRocq.Utils.MRPrelude.html#50c236bc22b68b42aab5a050cb4c4c6d"><span class="id" title="notation">`=2`</span></a>) (@<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#A:11"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> @<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#B:12"><span class="id" title="variable">B</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Classes.Morphisms.html#8dc5652698a6e16f72dd37bd17d3b973"><span class="id" title="notation">==&gt;</span></a> @<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#C:13"><span class="id" title="variable">C</span></a>)%<span class="id" title="var">signature</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> <span class="id" title="var">Hfg</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> → ? ? →. <span class="id" title="var">now</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">Hfg</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Common abbreviations 
+</div>
+<div class="code">
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">tas</span> := <span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">tea</span> := <span class="id" title="tactic">try</span> <span class="id" title="var">eassumption</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">trea</span> := <span class="id" title="tactic">try</span> <span class="id" title="tactic">reflexivity</span>; <span class="id" title="tactic">try</span> <span class="id" title="var">eassumption</span>.<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">tc</span> := <span class="id" title="tactic">try</span> <span class="id" title="var">typeclasses</span> <span class="id" title="tactic">eauto</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Create HintDb</span> <span class="id" title="var">terms</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This tactic helps rewrite with all the length lemmas available
+  in the library 
+</div>
+<div class="code">
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">len</span> := <span class="id" title="tactic">autorewrite</span> <span class="id" title="keyword">with</span> <span class="id" title="var">len</span>; <span class="id" title="var">cbn</span>.<br/>
+<span class="id" title="keyword">Tactic Notation</span> "len" "in" <span class="id" title="var">hyp</span>(<span class="id" title="var">cl</span>) := <span class="id" title="tactic">autorewrite</span> <span class="id" title="keyword">with</span> <span class="id" title="var">len</span> <span class="id" title="tactic">in</span> <span class="id" title="var">cl</span>.<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>] <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Rewrite</span> <span class="id" title="lemma">Nat.add_0_r</span> : <span class="id" title="var">len</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">arith_congr</span> := <span class="id" title="tactic">repeat</span> (<span class="id" title="tactic">try</span> <span class="id" title="var">lia</span>; <span class="id" title="tactic">progress</span> <span class="id" title="tactic">f_equal</span>).<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">lia_f_equal</span> := <span class="id" title="tactic">repeat</span> (<span class="id" title="var">lia</span> || <span class="id" title="tactic">f_equal</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">easy0</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="keyword">rec</span> <span class="id" title="var">use_hyp</span> <span class="id" title="var">H</span> :=<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">match</span> <span class="id" title="keyword">type</span> <span class="id" title="keyword">of</span> <span class="id" title="var">H</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">exact</span> <span class="id" title="var">H</span> || <span class="id" title="var">destruct_hyp</span> <span class="id" title="var">H</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Peano.html#ea2ff3d561159081cea6fb2e8113cc54"><span class="id" title="notation">×</span></a> <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">exact</span> <span class="id" title="var">H</span> || <span class="id" title="var">destruct_hyp</span> <span class="id" title="var">H</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">try</span> (<span class="id" title="tactic">solve</span> [ <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span> ])<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">with</span> <span class="id" title="var">do_intro</span> := (<span class="id" title="keyword">let</span> <span class="id" title="var">H</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">H</span>; <span class="id" title="var">use_hyp</span> <span class="id" title="var">H</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">with</span> <span class="id" title="var">destruct_hyp</span> <span class="id" title="var">H</span> := (<span class="id" title="tactic">case</span> <span class="id" title="var">H</span>; <span class="id" title="tactic">clear</span> <span class="id" title="var">H</span>; <span class="id" title="var">do_intro</span>; <span class="id" title="var">do_intro</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="keyword">rec</span> <span class="id" title="var">use_hyps</span> :=<br/>
+&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">H</span>:<span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"><span class="id" title="notation">∧</span></a> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">exact</span> <span class="id" title="var">H</span> || (<span class="id" title="var">destruct_hyp</span> <span class="id" title="var">H</span>; <span class="id" title="var">use_hyps</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">H</span>:<span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">×</span></a> <span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">exact</span> <span class="id" title="var">H</span> || (<span class="id" title="var">destruct_hyp</span> <span class="id" title="var">H</span>; <span class="id" title="var">use_hyps</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">H</span>:<span class="id" title="var">_</span> |- <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">solve</span> [ <span class="id" title="tactic">inversion</span> <span class="id" title="var">H</span> ]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">idtac</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">do_atom</span> := (<span class="id" title="tactic">solve</span> [ <span class="id" title="tactic">trivial</span> <span class="id" title="keyword">with</span> <span class="id" title="var">eq_true</span> | <span class="id" title="tactic">reflexivity</span> | <span class="id" title="tactic">symmetry</span>; <span class="id" title="tactic">trivial</span> | <span class="id" title="var">contradiction</span> | <span class="id" title="tactic">congruence</span>]) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="keyword">rec</span> <span class="id" title="var">do_ccl</span> := (<span class="id" title="tactic">try</span> <span class="id" title="var">do_atom</span>; <span class="id" title="tactic">repeat</span> (<span class="id" title="var">do_intro</span>; <span class="id" title="tactic">try</span> <span class="id" title="var">do_atom</span>); <span class="id" title="tactic">try</span> <span class="id" title="var">arith_congr</span>; (<span class="id" title="tactic">solve</span> [ <span class="id" title="tactic">split</span>; <span class="id" title="var">do_ccl</span> ])) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">solve</span> [ <span class="id" title="var">do_atom</span> | <span class="id" title="var">use_hyps</span>; <span class="id" title="var">do_ccl</span> ]) || <span class="id" title="tactic">fail</span> "Cannot solve this goal".<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>]<br/>
+<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Extern</span> 10 (<span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Peano.html#::nat_scope:x_'&lt;'_x"><span class="id" title="notation">&lt;</span></a> <span class="id" title="var">_</span>)%<span class="id" title="var">nat</span> ⇒ <span class="id" title="var">lia</span> : <span class="id" title="var">terms</span>.<br/>
+#[<span class="id" title="var">global</span>]<br/>
+<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Extern</span> 10 (<span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Peano.html#cb53cf0ee22c036a03b4a9281c68b5a3"><span class="id" title="notation">≤</span></a> <span class="id" title="var">_</span>)%<span class="id" title="var">nat</span> ⇒ <span class="id" title="var">lia</span> : <span class="id" title="var">terms</span>.<br/>
+#[<span class="id" title="var">global</span>]<br/>
+<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Extern</span> 10 (@<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#eq"><span class="id" title="inductive">eq</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <span class="id" title="var">_</span> <span class="id" title="var">_</span>) ⇒ <span class="id" title="var">lia</span> : <span class="id" title="var">terms</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">easy</span> ::= <span class="id" title="var">easy0</span> || <span class="id" title="tactic">solve</span> [<span class="id" title="tactic">intuition</span> <span class="id" title="tactic">eauto</span> 3 <span class="id" title="keyword">with</span> <span class="id" title="var">core</span> <span class="id" title="var">terms</span>].<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="library">btauto.Algebra</span>.<br/>
+
+<br/>
+#[<span class="id" title="var">global</span>]<br/>
+<span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Extern</span> 5 ⇒ <span class="id" title="tactic">progress</span> <span class="id" title="var">Algebra.bool</span> : <span class="id" title="var">core</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">inv</span> <span class="id" title="var">H</span> := <span class="id" title="tactic">inversion_clear</span> <span class="id" title="var">H</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Turns a subterm of the goal into an evar + equality subgoal
+  for easier lemma application. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Tactic Notation</span> "relativize" <span class="id" title="var">open_constr</span>(<span class="id" title="var">c</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">ty</span> := <span class="id" title="keyword">type</span> <span class="id" title="keyword">of</span> <span class="id" title="var">c</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">x</span> := <span class="id" title="tactic">fresh</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">evar</span> (<span class="id" title="var">x</span> : <span class="id" title="var">ty</span>); <span class="id" title="tactic">replace</span> <span class="id" title="var">c</span> <span class="id" title="keyword">with</span> <span class="id" title="var">x</span>; <span class="id" title="tactic">subst</span> <span class="id" title="var">x</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;A&nbsp;version&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">sig</span></span>&nbsp;that&nbsp;avoids&nbsp;extraction&nbsp;errors&nbsp;about&nbsp;informative&nbsp;Prop&nbsp;instances,&nbsp;while&nbsp;not&nbsp;suffering&nbsp;from&nbsp;the&nbsp;lack&nbsp;of&nbsp;projections&nbsp;that&nbsp;plague&nbsp;<span class="inlinecode"><span class="id" title="var">ex</span></span>&nbsp;*)</span><br/>
+<span class="id" title="keyword">Record</span> <a id="sigP" class="idref" href="#sigP"><span class="id" title="record">sigP</span></a> {<a id="A:14" class="idref" href="#A:14"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Prop</span>} {<a id="B:15" class="idref" href="#B:15"><span class="id" title="binder">B</span></a> : <a class="idref" href="MetaRocq.Utils.MRPrelude.html#A:14"><span class="id" title="variable">A</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>} := <span class="id" title="var">existP</span> { <a id="projP1" class="idref" href="#projP1"><span class="id" title="projection">projP1</span></a> : <a class="idref" href="MetaRocq.Utils.MRPrelude.html#A:14"><span class="id" title="variable">A</span></a> ; <a id="projP2" class="idref" href="#projP2"><span class="id" title="projection">projP2</span></a> : <a class="idref" href="MetaRocq.Utils.MRPrelude.html#B:15"><span class="id" title="variable">B</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#projP1:17"><span class="id" title="method">projP1</span></a> }.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#sigP"><span class="id" title="record">sigP</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">B</span>.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#existP"><span class="id" title="constructor">existP</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">B</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.PCUIC.PCUICTypedAst</h1>
+
+<div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Morphisms</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <span class="id" title="var">utils</span> <span class="id" title="keyword">Universes</span> <span class="id" title="var">BasicAst</span> <span class="id" title="var">Environment</span> <span class="id" title="var">Reflect</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="var">EnvironmentTyping</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <span class="id" title="var">PCUICPrimitive</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="keyword">Equations</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="var">Vector</span> <span class="id" title="var">Fin</span>.<br/>
+<span class="comment">(*<br/>
+Section&nbsp;Branch.<br/>
+&nbsp;&nbsp;Context&nbsp;{term&nbsp;:&nbsp;nat&nbsp;-&gt;&nbsp;Type}.<br/>
+&nbsp;&nbsp;<span class="comment">(*&nbsp;Parameterized&nbsp;by&nbsp;term&nbsp;types&nbsp;as&nbsp;they&nbsp;are&nbsp;not&nbsp;yet&nbsp;defined.&nbsp;*)</span><br/>
+&nbsp;&nbsp;Record&nbsp;branch&nbsp;:=&nbsp;mk_branch&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;bcontext&nbsp;:&nbsp;list&nbsp;(context_decl&nbsp;term);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Context&nbsp;of&nbsp;binders&nbsp;of&nbsp;the&nbsp;branch,&nbsp;including&nbsp;lets.&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;bbody&nbsp;:&nbsp;term;&nbsp;<span class="comment">(*&nbsp;The&nbsp;branch&nbsp;body&nbsp;*)</span>&nbsp;}.<br/>
+&nbsp;&nbsp;Derive&nbsp;NoConfusion&nbsp;for&nbsp;branch.<br/>
+End&nbsp;Branch.<br/>
+Arguments&nbsp;branch&nbsp;:&nbsp;clear&nbsp;implicits.<br/>
+<br/>
+<span class="comment">(*&nbsp;Defined&nbsp;here&nbsp;since&nbsp;BasicAst&nbsp;does&nbsp;not&nbsp;have&nbsp;access&nbsp;to&nbsp;universe&nbsp;instances.<br/>
+&nbsp;&nbsp;Parameterized&nbsp;by&nbsp;term&nbsp;types&nbsp;as&nbsp;they&nbsp;are&nbsp;not&nbsp;yet&nbsp;defined.&nbsp;*)</span><br/>
+Record&nbsp;predicate&nbsp;{term}&nbsp;:=&nbsp;mk_predicate&nbsp;{<br/>
+&nbsp;&nbsp;pparams&nbsp;:&nbsp;list&nbsp;term;&nbsp;<span class="comment">(*&nbsp;The&nbsp;parameters&nbsp;*)</span><br/>
+&nbsp;&nbsp;puinst&nbsp;:&nbsp;Instance.t;&nbsp;<span class="comment">(*&nbsp;The&nbsp;universe&nbsp;instance&nbsp;*)</span><br/>
+&nbsp;&nbsp;pcontext&nbsp;:&nbsp;list&nbsp;(context_decl&nbsp;term);&nbsp;<span class="comment">(*&nbsp;The&nbsp;predicate&nbsp;context,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;initially&nbsp;built&nbsp;from&nbsp;params&nbsp;and&nbsp;puinst&nbsp;*)</span><br/>
+&nbsp;&nbsp;preturn&nbsp;:&nbsp;term;&nbsp;<span class="comment">(*&nbsp;The&nbsp;return&nbsp;type&nbsp;*)</span>&nbsp;}.<br/>
+&nbsp;&nbsp;Derive&nbsp;NoConfusion&nbsp;for&nbsp;predicate.<br/>
+Arguments&nbsp;predicate&nbsp;:&nbsp;clear&nbsp;implicits.<br/>
+Arguments&nbsp;mk_predicate&nbsp;{_}.<br/>
+&nbsp;&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="keyword">context</span> (<span class="id" title="var">P</span> : <span class="id" title="var">nat</span> → <span class="id" title="keyword">Type</span>) : <span class="id" title="var">nat</span> → <span class="id" title="keyword">Type</span> :=<br/>
+| <span class="id" title="var">tnil</span> : <span class="id" title="keyword">context</span> <span class="id" title="var">P</span> 0<br/>
+| <span class="id" title="var">tcons</span> {<span class="id" title="var">n</span>} : <span class="id" title="var">P</span> <span class="id" title="var">n</span> → <span class="id" title="keyword">context</span> <span class="id" title="var">P</span> <span class="id" title="var">n</span> → <span class="id" title="keyword">context</span> <span class="id" title="var">P</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">context_decl</span> (<span class="id" title="var">term</span> : <span class="id" title="var">nat</span> → <span class="id" title="keyword">Type</span>) : <span class="id" title="var">nat</span> → <span class="id" title="keyword">Type</span> :=<br/>
+| <span class="id" title="var">vass</span> {<span class="id" title="var">n</span>} (<span class="id" title="var">na</span> : <span class="id" title="var">aname</span>) (<span class="id" title="var">ty</span> : <span class="id" title="var">term</span> <span class="id" title="var">n</span>) : <span class="id" title="var">context_decl</span> <span class="id" title="var">term</span> <span class="id" title="var">n</span><br/>
+| <span class="id" title="var">vdef</span> {<span class="id" title="var">n</span>} (<span class="id" title="var">na</span> : <span class="id" title="var">aname</span>) (<span class="id" title="var">ty</span> : <span class="id" title="var">term</span> <span class="id" title="var">n</span>) (<span class="id" title="var">body</span> : <span class="id" title="var">term</span> <span class="id" title="var">n</span>) : <span class="id" title="var">context_decl</span> <span class="id" title="var">term</span> <span class="id" title="var">n</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">context_gen</span> (<span class="id" title="var">term</span> : <span class="id" title="var">nat</span> → <span class="id" title="keyword">Type</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">context</span> (<span class="id" title="var">context_decl</span> <span class="id" title="var">term</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">shift</span> <span class="id" title="var">n</span> (<span class="id" title="var">f</span> : <span class="id" title="var">nat</span> → <span class="id" title="keyword">Type</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">i</span> ⇒ <span class="id" title="var">f</span> (<span class="id" title="var">n</span> + <span class="id" title="var">i</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Variant</span> <span class="id" title="var">FixCoFix</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" title="keyword">Fix</span> | <span class="id" title="var">CoFix</span>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Terms&nbsp;are&nbsp;well-scoped&nbsp;in&nbsp;a&nbsp;global&nbsp;environment&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Variant</span> <span class="id" title="var">global_reference</span> :=<br/>
+&nbsp;&nbsp;| <span class="id" title="var">ConstRef</span> (<span class="id" title="var">kn</span> : <span class="id" title="var">kername</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">IndRef</span> (<span class="id" title="var">ind</span> : <span class="id" title="var">inductive</span>)<br/>
+&nbsp;&nbsp;| <span class="id" title="var">ConstructRef</span> (<span class="id" title="var">ind</span> : <span class="id" title="var">inductive</span>) (<span class="id" title="var">k</span> : <span class="id" title="var">nat</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">global_env</span> (<span class="id" title="var">term</span> : <span class="id" title="var">nat</span> → <span class="id" title="keyword">Type</span>) := <span class="id" title="var">list</span> (<span class="id" title="var">kername</span> × <span class="id" title="var">term</span> 0).<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">lookup_env</span> {<span class="id" title="var">term</span>} (<span class="id" title="var">Σ</span> : <span class="id" title="var">global_env</span> <span class="id" title="var">term</span>) (<span class="id" title="var">kn</span> : <span class="id" title="var">kername</span>) : <span class="id" title="var">option</span> (<span class="id" title="var">term</span> 0) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">Σ</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">nil</span> ⇒ <span class="id" title="var">None</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">d</span> :: <span class="id" title="var">tl</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">eq_kername</span> <span class="id" title="var">kn</span> <span class="id" title="var">d</span>.1 <span class="id" title="keyword">then</span> <span class="id" title="var">Some</span> <span class="id" title="var">d</span>.2<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">else</span> <span class="id" title="var">lookup_env</span> <span class="id" title="var">tl</span> <span class="id" title="var">kn</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">declared_constant</span> {<span class="id" title="var">term</span>} (<span class="id" title="var">Σ</span> : <span class="id" title="var">global_env</span> <span class="id" title="var">term</span>) (<span class="id" title="var">id</span> : <span class="id" title="var">kername</span>) : <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;∑ <span class="id" title="var">decl</span>, <span class="id" title="var">lookup_env</span> <span class="id" title="var">Σ</span> <span class="id" title="var">id</span> = <span class="id" title="var">Some</span> <span class="id" title="var">decl</span>.<br/>
+<span class="comment">(*<br/>
+Definition&nbsp;declared_minductive&nbsp;Σ&nbsp;mind&nbsp;decl&nbsp;:=<br/>
+&nbsp;&nbsp;lookup_env&nbsp;Σ&nbsp;mind&nbsp;=&nbsp;Some&nbsp;(InductiveDecl&nbsp;decl).<br/>
+<br/>
+Definition&nbsp;declared_inductive&nbsp;Σ&nbsp;ind&nbsp;mdecl&nbsp;decl&nbsp;:=<br/>
+&nbsp;&nbsp;declared_minductive&nbsp;Σ&nbsp;(inductive_mind&nbsp;ind)&nbsp;mdecl&nbsp;/\<br/>
+&nbsp;&nbsp;List.nth_error&nbsp;mdecl.(ind_bodies)&nbsp;(inductive_ind&nbsp;ind)&nbsp;=&nbsp;Some&nbsp;decl.<br/>
+<br/>
+Definition&nbsp;declared_constructor&nbsp;Σ&nbsp;cstr&nbsp;mdecl&nbsp;idecl&nbsp;cdecl&nbsp;:&nbsp;Prop&nbsp;:=<br/>
+&nbsp;&nbsp;declared_inductive&nbsp;Σ&nbsp;(fst&nbsp;cstr)&nbsp;mdecl&nbsp;idecl&nbsp;/\<br/>
+&nbsp;&nbsp;List.nth_error&nbsp;idecl.(ind_ctors)&nbsp;(snd&nbsp;cstr)&nbsp;=&nbsp;Some&nbsp;cdecl.&nbsp;*)</span><br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">term</span> {<span class="id" title="var">k</span> : <span class="id" title="var">nat</span>} : <span class="id" title="keyword">Type</span> :=<br/>
+| <span class="id" title="var">tRel</span> (<span class="id" title="var">f</span> : <span class="id" title="var">Fin.t</span> <span class="id" title="var">k</span>)<br/>
+| <span class="id" title="var">tVar</span> (<span class="id" title="var">i</span> : <span class="id" title="var">ident</span>) <span class="comment">(*&nbsp;For&nbsp;free&nbsp;variables&nbsp;(e.g.&nbsp;in&nbsp;a&nbsp;goal)&nbsp;*)</span><br/>
+| <span class="id" title="var">tEvar</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">term</span>)<br/>
+| <span class="id" title="var">tSort</span> (<span class="id" title="var">u</span> : <span class="id" title="var">sort</span>)<br/>
+| <span class="id" title="var">tProd</span> (<span class="id" title="var">na</span> : <span class="id" title="var">aname</span>) (<span class="id" title="var">A</span> : <span class="id" title="var">term</span>) (<span class="id" title="var">B</span> : @<span class="id" title="var">term</span> <span class="id" title="var">Σ</span> (<span class="id" title="var">S</span> <span class="id" title="var">k</span>))<br/>
+| <span class="id" title="var">tLambda</span> (<span class="id" title="var">na</span> : <span class="id" title="var">aname</span>) (<span class="id" title="var">A</span> : <span class="id" title="var">term</span>) (<span class="id" title="var">B</span> : @<span class="id" title="var">term</span> <span class="id" title="var">Σ</span> (<span class="id" title="var">S</span> <span class="id" title="var">k</span>))<br/>
+| <span class="id" title="var">tLetIn</span> (<span class="id" title="var">na</span> : <span class="id" title="var">aname</span>) (<span class="id" title="var">b</span> <span class="id" title="var">B</span> : <span class="id" title="var">term</span>) (<span class="id" title="var">t</span> : @<span class="id" title="var">term</span> <span class="id" title="var">Σ</span> (<span class="id" title="var">S</span> <span class="id" title="var">k</span>))<br/>
+| <span class="id" title="var">tApp</span> (<span class="id" title="var">u</span> <span class="id" title="var">v</span> : <span class="id" title="var">term</span>)<br/>
+| <span class="id" title="var">tConst</span> (<span class="id" title="var">kn</span> : <span class="id" title="var">kername</span>) (<span class="id" title="var">ui</span> : <span class="id" title="var">Instance.t</span>)<br/>
+&nbsp;&nbsp;(<span class="id" title="var">declared_constant</span> <span class="id" title="var">Σ</span> <span class="id" title="var">kn</span>)<br/>
+<span class="comment">(*&nbsp;|&nbsp;tInd&nbsp;ind&nbsp;:&nbsp;inductive)&nbsp;(ui&nbsp;:&nbsp;Instance.t)&nbsp;*)</span><br/>
+| <span class="id" title="var">tConstruct</span> (<span class="id" title="var">ind</span> : <span class="id" title="var">inductive</span>) (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">ui</span> : <span class="id" title="var">Instance.t</span>)<br/>
+| <span class="id" title="var">tCase</span> {<span class="id" title="var">plen</span>} (<span class="id" title="var">indn</span> : <span class="id" title="var">case_info</span>) (<span class="id" title="var">pparams</span> : <span class="id" title="var">list</span> <span class="id" title="var">term</span>) (<span class="id" title="var">puinst</span> : <span class="id" title="var">Instance.t</span>)<br/>
+&nbsp;&nbsp;(<span class="id" title="var">pcontext</span> : <span class="id" title="var">context_gen</span> (<span class="id" title="var">shift</span> <span class="id" title="var">k</span> (@<span class="id" title="var">term</span> <span class="id" title="var">Σ</span>)) <span class="id" title="var">plen</span>)<br/>
+&nbsp;&nbsp;(<span class="id" title="var">c</span> : <span class="id" title="var">term</span>)<br/>
+&nbsp;&nbsp;(<span class="id" title="var">brs</span> : <span class="id" title="var">list</span> (∑ <span class="id" title="var">brlen</span> (<span class="id" title="var">ctx</span> : <span class="id" title="var">context_gen</span> (@<span class="id" title="var">term</span> <span class="id" title="var">Σ</span>) <span class="id" title="var">brlen</span>), @<span class="id" title="var">term</span> <span class="id" title="var">Σ</span> (<span class="id" title="var">brlen</span> + <span class="id" title="var">k</span>)))<br/>
+| <span class="id" title="var">tProj</span> (<span class="id" title="var">p</span> : <span class="id" title="var">projection</span>) (<span class="id" title="var">c</span> : <span class="id" title="var">term</span>)<br/>
+| <span class="id" title="var">tFix</span> (<span class="id" title="var">e</span> : <span class="id" title="var">FixCoFix</span>) {<span class="id" title="var">n</span>} (<span class="id" title="var">mfix</span> : <span class="id" title="var">Vector.t</span> (<span class="id" title="var">def</span> <span class="id" title="var">term</span>) <span class="id" title="var">n</span>) (<span class="id" title="var">idx</span> : <span class="id" title="var">Fin.t</span> <span class="id" title="var">n</span>)<br/>
+</div>
+
+<div class="doc">
+We use faithful models of primitive type values in PCUIC 
+</div>
+<div class="code">
+| <span class="id" title="var">tPrim</span> (<span class="id" title="var">prim</span> : <span class="id" title="var">prim_val</span> <span class="id" title="var">term</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">with</span> <span class="id" title="var">branch</span> {<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>} := <span class="id" title="keyword">Type</span> :=<br/>
+| <span class="id" title="var">vass</span> (<span class="id" title="var">na</span> : <span class="id" title="var">aname</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">term</span> <span class="id" title="var">k</span>)<br/>
+<br/>
+<span class="id" title="keyword">with</span> <span class="id" title="var">global_env</span> : <span class="id" title="keyword">Type</span> :=<br/>
+.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

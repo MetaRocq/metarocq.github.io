@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.PCUIC.Syntax.PCUICRenameDef</h1>
+
+<div class="code">
+<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Morphisms</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Common.config.html#"><span class="id" title="library">config</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.PCUIC</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.PCUIC.PCUICAst.html#"><span class="id" title="library">PCUICAst</span></a> <a class="idref" href="MetaRocq.PCUIC.utils.PCUICAstUtils.html#"><span class="id" title="library">PCUICAstUtils</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICCases.html#"><span class="id" title="library">PCUICCases</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICInduction.html#"><span class="id" title="library">PCUICInduction</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICLiftSubst.html#"><span class="id" title="library">PCUICLiftSubst</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICUnivSubst.html#"><span class="id" title="library">PCUICUnivSubst</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICOnFreeVars.html#"><span class="id" title="library">PCUICOnFreeVars</span></a><br/>
+&nbsp;&nbsp;<a class="idref" href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#"><span class="id" title="library">PCUICSigmaCalculus</span></a> <a class="idref" href="MetaRocq.PCUIC.PCUICTyping.html#"><span class="id" title="library">PCUICTyping</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">ssreflect</span> <span class="id" title="library">ssrbool</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Equations</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Equations.Prop</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">DepElim</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="keyword">Equations</span> <span class="id" title="var">With</span> <span class="id" title="var">UIP</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab149"></a><h1 class="section">Type preservation for σ-calculus operations</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">sigma_scope</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Keyed</span> <span class="id" title="var">Unification</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Default</span> <span class="id" title="keyword">Goal</span> <span class="id" title="var">Selector</span> "!".<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a id="Renaming" class="idref" href="#Renaming"><span class="id" title="section">Renaming</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Context</span> `{<a id="Renaming.cf" class="idref" href="#Renaming.cf"><span class="id" title="variable">cf</span></a> : <a class="idref" href="MetaRocq.Common.config.html#checker_flags"><span class="id" title="class">checker_flags</span></a>}.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Notion&nbsp;of&nbsp;valid&nbsp;renaming&nbsp;without&nbsp;typing&nbsp;information.&nbsp;*)</span><br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We might want to relax this to allow "renamings" that change e.g.
+  the universes or names, but should generalize the renaming operation at
+  the same time  Remark: renaming allows instantiating an assumption with a well-typed body 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="urenaming" class="idref" href="#urenaming"><span class="id" title="definition">urenaming</span></a> (<a id="P:2" class="idref" href="#P:2"><span class="id" title="binder">P</span></a> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>) <a id="55485d85e29df2faa6748490a2d4cd13" class="idref" href="#55485d85e29df2faa6748490a2d4cd13"><span class="id" title="binder">Γ</span></a> <a id="da6ca2c01a250c64cd5274c398b7e0e7" class="idref" href="#da6ca2c01a250c64cd5274c398b7e0e7"><span class="id" title="binder">Δ</span></a> <a id="f:5" class="idref" href="#f:5"><span class="id" title="binder">f</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">∀</span> <a id="i:6" class="idref" href="#i:6"><span class="id" title="binder">i</span></a> <a id="decl:7" class="idref" href="#decl:7"><span class="id" title="binder">decl</span></a>, <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#P:2"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#i:6"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="definition">nth_error</span> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#55485d85e29df2faa6748490a2d4cd13"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#i:6"><span class="id" title="variable">i</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#decl:7"><span class="id" title="variable">decl</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Utils.MRPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">∑</span></a> <a id="decl':8" class="idref" href="#decl':8"><span class="id" title="binder">decl'</span></a><a class="idref" href="MetaRocq.Utils.MRPrelude.html#cd4bc1b07c8b3bdc9f3bbc7941b56107"><span class="id" title="notation">,</span></a> <a class="idref" href="MetaRocq.Utils.MRProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">(</span></a><span class="id" title="definition">nth_error</span> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#da6ca2c01a250c64cd5274c398b7e0e7"><span class="id" title="variable">Δ</span></a> (<a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#f:5"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#i:6"><span class="id" title="variable">i</span></a>) <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#decl':8"><span class="id" title="variable">decl'</span></a><a class="idref" href="MetaRocq.Utils.MRProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">)</span></a> <a class="idref" href="MetaRocq.Utils.MRProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Utils.MRProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">(</span></a><a class="idref" href="MetaRocq.Common.BasicAst.html#eq_binder_annot"><span class="id" title="definition">eq_binder_annot</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#decl:7"><span class="id" title="variable">decl</span></a>.(<a class="idref" href="MetaRocq.Common.BasicAst.html#decl_name"><span class="id" title="projection">decl_name</span></a>) <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#decl':8"><span class="id" title="variable">decl'</span></a>.(<a class="idref" href="MetaRocq.Common.BasicAst.html#decl_name"><span class="id" title="projection">decl_name</span></a>) <a class="idref" href="MetaRocq.Utils.MRProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Utils.MRProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">((</span></a><a class="idref" href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#rename"><span class="id" title="definition">rename</span></a> (<a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#f:5"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#c90061783c20674b3a3a6b46d343da03"><span class="id" title="notation">∘</span></a> <a class="idref" href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#rshiftk"><span class="id" title="definition">rshiftk</span></a> (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#i:6"><span class="id" title="variable">i</span></a>)) <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#decl:7"><span class="id" title="variable">decl</span></a>.(<a class="idref" href="MetaRocq.Common.BasicAst.html#decl_type"><span class="id" title="projection">decl_type</span></a>) <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#rename"><span class="id" title="definition">rename</span></a> (<a class="idref" href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#rshiftk"><span class="id" title="definition">rshiftk</span></a> (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#f:5"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#i:6"><span class="id" title="variable">i</span></a>))) <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#decl':8"><span class="id" title="variable">decl'</span></a>.(<a class="idref" href="MetaRocq.Common.BasicAst.html#decl_type"><span class="id" title="projection">decl_type</span></a>)<a class="idref" href="MetaRocq.Utils.MRProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">)</span></a> <a class="idref" href="MetaRocq.Utils.MRProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Utils.MROption.html#on_Some_or_None"><span class="id" title="definition">on_Some_or_None</span></a> (<span class="id" title="keyword">fun</span> <a id="body:9" class="idref" href="#body:9"><span class="id" title="binder">body</span></a> ⇒ <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> (<a class="idref" href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#rename"><span class="id" title="definition">rename</span></a> (<a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#f:5"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaRocq.Utils.MRPrelude.html#c90061783c20674b3a3a6b46d343da03"><span class="id" title="notation">∘</span></a> <a class="idref" href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#rshiftk"><span class="id" title="definition">rshiftk</span></a> (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#i:6"><span class="id" title="variable">i</span></a>)) <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#body:9"><span class="id" title="variable">body</span></a>) <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#option_map"><span class="id" title="definition">option_map</span></a> (<a class="idref" href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#rename"><span class="id" title="definition">rename</span></a> (<a class="idref" href="MetaRocq.PCUIC.PCUICSigmaCalculus.html#rshiftk"><span class="id" title="definition">rshiftk</span></a> (<a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#f:5"><span class="id" title="variable">f</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#i:6"><span class="id" title="variable">i</span></a>)))) <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#decl':8"><span class="id" title="variable">decl'</span></a>.(<a class="idref" href="MetaRocq.Common.BasicAst.html#decl_body"><span class="id" title="projection">decl_body</span></a>)) <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#decl:7"><span class="id" title="variable">decl</span></a>.(<a class="idref" href="MetaRocq.Common.BasicAst.html#decl_body"><span class="id" title="projection">decl_body</span></a>)<a class="idref" href="MetaRocq.Utils.MRProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">))</span></a>.<br/>
+
+<br/>
+<span class="comment">(*&nbsp;Definition&nbsp;of&nbsp;a&nbsp;good&nbsp;renaming&nbsp;with&nbsp;respect&nbsp;to&nbsp;typing&nbsp;*)</span><br/>
+<span class="id" title="keyword">Definition</span> <a id="renaming" class="idref" href="#renaming"><span class="id" title="definition">renaming</span></a> <a id="P:10" class="idref" href="#P:10"><span class="id" title="binder">P</span></a> <a id="0628ce849eb43988c0c2962e2467d294" class="idref" href="#0628ce849eb43988c0c2962e2467d294"><span class="id" title="binder">Σ</span></a> <a id="7adcac760179e19a0bb37c9e1720bc22" class="idref" href="#7adcac760179e19a0bb37c9e1720bc22"><span class="id" title="binder">Γ</span></a> <a id="e0faa87657dc21b78591e155da331111" class="idref" href="#e0faa87657dc21b78591e155da331111"><span class="id" title="binder">Δ</span></a> <a id="f:14" class="idref" href="#f:14"><span class="id" title="binder">f</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaRocq.PCUIC.PCUICTyping.html#:::'wf_local'_x_x"><span class="id" title="notation">wf_local</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#0628ce849eb43988c0c2962e2467d294"><span class="id" title="variable">Σ</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#e0faa87657dc21b78591e155da331111"><span class="id" title="variable">Δ</span></a> <a class="idref" href="MetaRocq.Utils.MRProd.html#52eddd74560fa276f934634af83eeaf4"><span class="id" title="notation">×</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#urenaming"><span class="id" title="definition">urenaming</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#P:10"><span class="id" title="variable">P</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#7adcac760179e19a0bb37c9e1720bc22"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#e0faa87657dc21b78591e155da331111"><span class="id" title="variable">Δ</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#f:14"><span class="id" title="variable">f</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a id="renaming_closed" class="idref" href="#renaming_closed"><span class="id" title="definition">renaming_closed</span></a> <a id="918d7ebace48bcbe2bb5610a4828654d" class="idref" href="#918d7ebace48bcbe2bb5610a4828654d"><span class="id" title="binder">Γ</span></a> <a id="f5ddf4e5d97f392810d7e18338a1aed6" class="idref" href="#f5ddf4e5d97f392810d7e18338a1aed6"><span class="id" title="binder">Δ</span></a> <a id="f:17" class="idref" href="#f:17"><span class="id" title="binder">f</span></a> := <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#urenaming"><span class="id" title="definition">urenaming</span></a> (<a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICOnFreeVars.html#closedP"><span class="id" title="definition">closedP</span></a> <a class="idref" href="MetaRocq.Utils.MRList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">#|</span></a><a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#918d7ebace48bcbe2bb5610a4828654d"><span class="id" title="variable">Γ</span></a><a class="idref" href="MetaRocq.Utils.MRList.html#50abc9bd1bb81dce67ffb7e42f8ed4c9"><span class="id" title="notation">|</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.ssr.ssrbool.html#xpredT"><span class="id" title="abbreviation">xpredT</span></a>) <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#918d7ebace48bcbe2bb5610a4828654d"><span class="id" title="variable">Γ</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#f5ddf4e5d97f392810d7e18338a1aed6"><span class="id" title="variable">Δ</span></a> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#f:17"><span class="id" title="variable">f</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="MetaRocq.PCUIC.Syntax.PCUICRenameDef.html#Renaming"><span class="id" title="section">Renaming</span></a>.<br/>
+
+<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>
