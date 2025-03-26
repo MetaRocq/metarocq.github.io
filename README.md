@@ -1,7 +1,7 @@
 # MetaRocq
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/MetaRocq/metarocq.github.io/main/assets/LOGO.png" alt="MetaRocq" width="50px"/>
+<img src="https://github.com/MetaRocq/metarocq.github.io/raw/master/assets/LOGO.png" alt="MetaRocq" width="50px"/>
 </p>
 
 [![Build status](https://github.com/MetaRocq/metarocq/actions/workflows/build.yml/badge.svg)](https://github.com/MetaRocq/metarocq/actions) [![MetaRocq Chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://rocq-prover.zulipchat.com)
