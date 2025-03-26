@@ -1,4 +1,4 @@
 ---
 permalink: /metacoq
-redirect_to: 'https://metacoq.github.io'
+redirect_to: 'https://metarocq.github.io'
 ---

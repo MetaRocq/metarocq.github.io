@@ -1,4 +1,4 @@
-title: MetaCoq
+title: MetaRocq
 theme: jekyll-theme-cayman
 plugins:
   - jekyll-redirect-from
