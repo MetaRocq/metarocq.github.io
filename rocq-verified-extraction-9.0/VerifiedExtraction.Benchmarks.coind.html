@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library VerifiedExtraction.Benchmarks.coind</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Streams</span> <span class="id" title="var">StreamMemo</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">ZArith</span>.<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">Z_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">tfact</span> (<span class="id" title="var">n</span>: <span class="id" title="var">nat</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">O</span> ⇒ 1<br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n1</span> ⇒ <span class="id" title="var">Z.of_nat</span> <span class="id" title="var">n</span> × <span class="id" title="var">tfact</span> <span class="id" title="var">n1</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">lfact_list</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">dimemo_list</span> <span class="id" title="var">_</span> <span class="id" title="var">tfact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">n</span> <span class="id" title="var">z</span> ⇒ (<span class="id" title="var">Z.of_nat</span> (<span class="id" title="var">S</span>  <span class="id" title="var">n</span>) × <span class="id" title="var">z</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">lfact</span> <span class="id" title="var">n</span> := <span class="id" title="var">dmemo_get</span> <span class="id" title="var">_</span> <span class="id" title="var">tfact</span> <span class="id" title="var">n</span> <span class="id" title="var">lfact_list</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">lfact_correct</span> <span class="id" title="var">n</span>: <span class="id" title="var">lfact</span> <span class="id" title="var">n</span> = <span class="id" title="var">tfact</span> <span class="id" title="var">n</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">lfact</span>, <span class="id" title="var">lfact_list</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> <span class="id" title="var">dimemo_get_correct</span>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">lazy_factorial</span> := <span class="id" title="var">lfact</span> 3.<br/>
+
+<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="keyword">vm_compute</span> <span class="id" title="tactic">in</span> <span class="id" title="var">lazy_factorial</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">CoFixpoint</span> <span class="id" title="var">from</span> (<span class="id" title="var">x</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">Stream</span> <span class="id" title="var">nat</span> := <span class="id" title="var">Cons</span> <span class="id" title="var">x</span> (<span class="id" title="var">from</span> (<span class="id" title="var">S</span> (<span class="id" title="var">S</span> <span class="id" title="var">x</span>))).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">get_from</span> := <span class="id" title="var">Str_nth</span> 10 (<span class="id" title="var">from</span> 0).<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

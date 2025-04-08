@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library VerifiedExtraction.Plugin.PrimInt63</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">VerifiedExtraction</span> <span class="id" title="keyword">Require</span> <span class="id" title="var">Loader</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Corelib</span> <span class="id" title="keyword">Require</span> <span class="id" title="var">Int63.PrimInt63</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Primitive ints 
+</div>
+<div class="code">
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constants</span> [<br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.int</span> <span class="id" title="var">erased</span>,<br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.add</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.add",<br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.sub</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.sub", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.mul</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.mul", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.div</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.div", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.mod</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.rem", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.lsl</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.l_sl", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.lsr</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.l_sr", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.land</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.l_and",<br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.lxor</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.l_xor",<br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.lor</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.l_or",<br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.asr</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.a_sr",<br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.head0</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.head0", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.tail0</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.tail0", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.eqb</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.equal",<br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.compare</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.compare", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.compares</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.compares", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.addc</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.addc", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.addcarryc</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.addcarryc", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.subc</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.subc",<br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.subcarryc</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.subcarryc", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.mulc</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.mulc", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.divs</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.divs", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.mods</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.rems", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.diveucl_21</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.div21", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.diveucl</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.diveucl", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.addmuldiv</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.addmuldiv", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.leb</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.le", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.ltb</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.lt", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.ltsb</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.lts", <br/>
+&nbsp;&nbsp;<span class="id" title="var">Corelib.Numbers.Cyclic.Int63.PrimInt63.lesb</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__Uint63.les"<br/>
+]<br/>
+<span class="id" title="var">Packages</span> [ "rocq_verified_extraction_ocaml_ffi" ].<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library Malfunction.Examples.simple.Tests</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">String</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Ceres</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Ceres</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-masking-absolute-name".<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Malfunction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Pipeline</span> <span class="id" title="var">Serialize</span> <span class="id" title="var">CeresFormat</span> <span class="id" title="var">CeresSerialize</span> <span class="id" title="var">Interpreter</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">ETransform</span> <span class="id" title="var">Common.Transform</span> <span class="id" title="var">Utils.bytestring</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">All</span> <span class="id" title="var">Loader</span> <span class="id" title="var">TemplateMonad</span>.<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">bs</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">Transform</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">Mlet_</span> '(<span class="id" title="var">l</span>, <span class="id" title="var">b</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">nil</span> ⇒ <span class="id" title="var">b</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">Malfunction.Mlet</span> (<span class="id" title="var">l</span>, <span class="id" title="var">b</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local Existing Instance</span> <span class="id" title="var">SemanticsSpec.CanonicalPointer</span>.<br/>
+<span class="id" title="keyword">Local Existing Instance</span> <span class="id" title="var">SemanticsSpec.CanonicalHeap</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_malfunction</span> (<span class="id" title="var">cf</span> := <span class="id" title="var">config.extraction_checker_flags</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">Ast.Env.program</span>)<br/>
+&nbsp;&nbsp;: <span class="id" title="var">string</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">p'</span> := <span class="id" title="var">run</span> (<span class="id" title="var">malfunction_pipeline</span> <span class="id" title="var">Pipeline.default_malfunction_config</span>) (<span class="id" title="var">nil</span>, <span class="id" title="var">p</span>) (<span class="id" title="var">MRUtils.todo</span> "wf_env and welltyped term"%<span class="id" title="var">bs</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">t</span> := <span class="id" title="var">Mlet_</span> (<span class="id" title="var">MRList.rev_map</span> <span class="id" title="var">Malfunction.Named</span> (<span class="id" title="var">List.flat_map</span> (<span class="id" title="keyword">fun</span> '(<span class="id" title="var">x</span>, <span class="id" title="var">d</span>) ⇒ <span class="id" title="keyword">match</span> <span class="id" title="var">d</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Some</span> <span class="id" title="var">b</span> ⇒ <span class="id" title="var">cons</span> (<span class="id" title="var">x</span>,<span class="id" title="var">b</span>) <span class="id" title="var">nil</span> | <span class="id" title="var">None</span> ⇒ <span class="id" title="var">nil</span> <span class="id" title="keyword">end</span>) (<span class="id" title="var">fst</span> <span class="id" title="var">p'</span>)), <span class="id" title="var">snd</span> <span class="id" title="var">p'</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="var">time</span> "Pretty printing"%<span class="id" title="var">bs</span> (@<span class="id" title="var">to_string</span> <span class="id" title="var">_</span> <span class="id" title="var">Serialize_t</span>) <span class="id" title="var">t</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_malfunction_sexp</span> (<span class="id" title="var">cf</span> := <span class="id" title="var">config.extraction_checker_flags</span>) (<span class="id" title="var">p</span> : <span class="id" title="var">Ast.Env.program</span>)<br/>
+&nbsp;&nbsp;: <span class="id" title="var">Malfunction.t</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">p'</span> := <span class="id" title="var">run</span> (<span class="id" title="var">malfunction_pipeline</span> <span class="id" title="var">default_malfunction_config</span>) (<span class="id" title="var">nil</span>,<span class="id" title="var">p</span>) (<span class="id" title="var">MRUtils.todo</span> "wf_env and welltyped term"%<span class="id" title="var">bs</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">t</span> := <span class="id" title="var">Mlet_</span> (<span class="id" title="var">MRList.rev_map</span> <span class="id" title="var">Malfunction.Named</span> (<span class="id" title="var">List.flat_map</span> (<span class="id" title="keyword">fun</span> '(<span class="id" title="var">x</span>, <span class="id" title="var">d</span>) ⇒ <span class="id" title="keyword">match</span> <span class="id" title="var">d</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Some</span> <span class="id" title="var">b</span> ⇒ <span class="id" title="var">cons</span> (<span class="id" title="var">x</span>,<span class="id" title="var">b</span>) <span class="id" title="var">nil</span> | <span class="id" title="var">None</span> ⇒ <span class="id" title="var">nil</span> <span class="id" title="keyword">end</span>) (<span class="id" title="var">fst</span> <span class="id" title="var">p'</span>)), <span class="id" title="var">snd</span> <span class="id" title="var">p'</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="var">time</span> "Pretty printing"%<span class="id" title="var">bs</span> <span class="id" title="var">id</span> <span class="id" title="var">t</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <span class="id" title="var">something</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">Loader</span> <span class="id" title="keyword">All</span>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">MRMonadNotation</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">extract</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">a</span> : <span class="id" title="var">A</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">t</span> &lt;- <span class="id" title="var">tmQuoteRec</span> <span class="id" title="var">a</span> ;;<br/>
+&nbsp;&nbsp;<span class="id" title="var">s</span> &lt;- <span class="id" title="var">tmEval</span> <span class="id" title="tactic">lazy</span> (<span class="id" title="var">eval_malfunction</span> <span class="id" title="var">t</span>) ;;<br/>
+&nbsp;&nbsp;<span class="id" title="var">tmMsg</span> <span class="id" title="var">s</span> ;; <span class="id" title="var">tmReturn</span> <span class="id" title="var">tt</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">extract_def</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">a</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">nm</span> : <span class="id" title="var">string</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">t</span> &lt;- <span class="id" title="var">tmQuoteRec</span> <span class="id" title="var">a</span> ;;<br/>
+&nbsp;&nbsp;<span class="id" title="var">s</span> &lt;- <span class="id" title="var">tmEval</span> <span class="id" title="tactic">lazy</span> (<span class="id" title="var">eval_malfunction_sexp</span> <span class="id" title="var">t</span>) ;;<br/>
+&nbsp;&nbsp;<span class="id" title="var">tmDefinition</span> <span class="id" title="var">nm</span> <span class="id" title="var">s</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">something</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> &quot;'Extraction' a" :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">extract</span> <span class="id" title="var">a</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 1, <span class="id" title="var">a</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 2).<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">three</span> := <span class="id" title="var">ZERO</span> | <span class="id" title="var">ONE</span> | <span class="id" title="var">TWO</span> | <span class="id" title="var">THREE</span>.<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> <span class="id" title="keyword">Extraction</span> (<span class="id" title="keyword">match</span> <span class="id" title="var">cons</span> <span class="id" title="var">THREE</span> <span class="id" title="var">nil</span> <span class="id" title="keyword">with</span> <span class="id" title="var">cons</span> <span class="id" title="var">x</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">x</span> | <span class="id" title="var">_</span> ⇒ <span class="id" title="var">ONE</span> <span class="id" title="keyword">end</span>).<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">plus</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">ack</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span>:<span class="id" title="var">nat</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">n</span>} : <span class="id" title="var">nat</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <span class="id" title="var">S</span> <span class="id" title="var">m</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">p</span> ⇒ <span class="id" title="keyword">let</span> <span class="id" title="keyword">fix</span> <span class="id" title="var">ackn</span> (<span class="id" title="var">m</span>:<span class="id" title="var">nat</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">m</span>} :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">m</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <span class="id" title="var">ack</span> <span class="id" title="var">p</span> 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">q</span> ⇒ <span class="id" title="var">ack</span> <span class="id" title="var">p</span> (<span class="id" title="var">ackn</span> <span class="id" title="var">q</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">in</span> <span class="id" title="var">ackn</span> <span class="id" title="var">m</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> <span class="id" title="keyword">Extraction</span> (<span class="id" title="var">ack</span> 3 5).<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> <span class="id" title="keyword">Extraction</span> (@<span class="id" title="var">exist</span> <span class="id" title="var">nat</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="var">x</span> = 0) 0 (@<span class="id" title="var">eq_refl</span> <span class="id" title="var">_</span> 0)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">vplus</span> {<span class="id" title="var">n</span>:<span class="id" title="var">nat</span>} :<br/>
+&nbsp;&nbsp;<span class="id" title="var">Vector.t</span> <span class="id" title="var">nat</span> <span class="id" title="var">n</span> → <span class="id" title="var">Vector.t</span> <span class="id" title="var">nat</span> <span class="id" title="var">n</span> → <span class="id" title="var">Vector.t</span> <span class="id" title="var">nat</span> <span class="id" title="var">n</span> := (<span class="id" title="var">Vector.map2</span> <span class="id" title="var">plus</span>).<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">v01</span> : <span class="id" title="var">Vector.t</span> <span class="id" title="var">nat</span> 2 :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">Vector.cons</span> <span class="id" title="var">nat</span> 0 1 (<span class="id" title="var">Vector.cons</span> <span class="id" title="var">nat</span> 1 0 (<span class="id" title="var">Vector.nil</span> <span class="id" title="var">nat</span>))).<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">v23</span> : <span class="id" title="var">Vector.t</span> <span class="id" title="var">nat</span> 2 :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">Vector.cons</span> <span class="id" title="var">nat</span> 2 1 (<span class="id" title="var">Vector.cons</span> <span class="id" title="var">nat</span> 3 0 (<span class="id" title="var">Vector.nil</span> <span class="id" title="var">nat</span>))).<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">vplus0123</span> := <span class="id" title="var">Vector.hd</span> (<span class="id" title="var">vplus</span> <span class="id" title="var">v01</span> <span class="id" title="var">v23</span>).<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">vplus0123</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">tree</span> (<span class="id" title="var">A</span>:<span class="id" title="keyword">Set</span>) : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">node</span> : <span class="id" title="var">A</span> → <span class="id" title="var">forest</span> <span class="id" title="var">A</span> → <span class="id" title="var">tree</span> <span class="id" title="var">A</span><br/>
+<span class="id" title="keyword">with</span> <span class="id" title="var">forest</span> (<span class="id" title="var">A</span>:<span class="id" title="keyword">Set</span>) : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">leaf</span> : <span class="id" title="var">A</span> → <span class="id" title="var">forest</span> <span class="id" title="var">A</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">fcons</span> : <span class="id" title="var">tree</span> <span class="id" title="var">A</span> → <span class="id" title="var">forest</span> <span class="id" title="var">A</span> → <span class="id" title="var">forest</span> <span class="id" title="var">A</span>.<br/>
+<span class="id" title="keyword">Arguments</span> <span class="id" title="var">leaf</span> {<span class="id" title="var">A</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <span class="id" title="var">fcons</span> {<span class="id" title="var">A</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <span class="id" title="var">node</span> {<span class="id" title="var">A</span>}.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">tree_size</span> (<span class="id" title="var">t</span>:<span class="id" title="var">tree</span> <span class="id" title="var">bool</span>) : <span class="id" title="var">nat</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">node</span> <span class="id" title="var">a</span> <span class="id" title="var">f</span> ⇒ <span class="id" title="var">S</span> (<span class="id" title="var">forest_size</span> <span class="id" title="var">f</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+<span class="id" title="keyword">with</span> <span class="id" title="var">forest_size</span> (<span class="id" title="var">f</span>:<span class="id" title="var">forest</span> <span class="id" title="var">bool</span>) : <span class="id" title="var">nat</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">f</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">leaf</span> <span class="id" title="var">b</span> ⇒ 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">fcons</span> <span class="id" title="var">t</span> <span class="id" title="var">f1</span> ⇒ (<span class="id" title="var">tree_size</span> <span class="id" title="var">t</span> + <span class="id" title="var">forest_size</span> <span class="id" title="var">f1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">arden</span>: <span class="id" title="var">forest</span> <span class="id" title="var">bool</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">fcons</span> (<span class="id" title="var">node</span> <span class="id" title="var">true</span> (<span class="id" title="var">fcons</span> (<span class="id" title="var">node</span> <span class="id" title="var">true</span> (<span class="id" title="var">leaf</span> <span class="id" title="var">false</span>)) (<span class="id" title="var">leaf</span> <span class="id" title="var">true</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">fcons</span> (<span class="id" title="var">node</span> <span class="id" title="var">true</span> (<span class="id" title="var">fcons</span> (<span class="id" title="var">node</span> <span class="id" title="var">true</span> (<span class="id" title="var">leaf</span> <span class="id" title="var">false</span>)) (<span class="id" title="var">leaf</span> <span class="id" title="var">true</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">leaf</span> <span class="id" title="var">false</span>)).<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> <span class="id" title="keyword">Extraction</span> (<span class="id" title="var">forest_size</span> <span class="id" title="var">arden</span>).<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

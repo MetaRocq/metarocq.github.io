@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library VerifiedExtraction.Benchmarks.end_to_end</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Template.Ast</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Arith</span> <span class="id" title="var">List</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab2"></a><h1 class="section">VST specs for compiled Rocq programs</h1>
+
+
+<div class="paragraph"> </div>
+
+    The idea is that we want to derive a proof in Verifiable C (VST's separation
+    logic) for compiled Rocq programs. These specifications will relate the
+    original Rocq function (rather than L1g abstract syntax) with the compiled C
+    code.
+
+<div class="paragraph"> </div>
+
+    Let <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="var">B</span></span> be a Rocq function and <span class="inlinecode"><span class="id" title="var">f_in_C</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">compcert.exp</span></span> its
+    translation. Then we want:
+
+<div class="paragraph"> </div>
+
+    forall (a: A) (v : compcert.val),
+      <a href=" rep_A a v "> rep_A a v </a> f_in_C(v)  <a href="ret. rep_B (f a) ret ">ret. rep_B (f a) ret </a>
+
+<div class="paragraph"> </div>
+
+    The separation logic predicate rep_A describes how Rocq values of type A are
+    laid out as a C data structure.
+
+<div class="paragraph"> </div>
+
+    For instance, if for simplicity we assume that Rocq values of type <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">A</span></span>
+    will be represented as a null terminated linked lists, then rep_list will,
+    very roughly, be
+
+<div class="paragraph"> </div>
+
+    Fixpoint rep_list (l: list A) (p: compcert.val) : mpred :=
+      match l with
+      |  h :: l' =&gt; rep_A h p ∗ rep_list l' (offset p 4)
+               |  nil =&gt; !! (p = null) &amp;&amp; emp
+    end.
+
+<div class="paragraph"> </div>
+
+    Then a C program may call f_in_C, and also we may use the above spec when we
+    prove it correct in VST!
+
+<div class="paragraph"> </div>
+
+    To obtain this triple for a compiled program we'll make use of the
+    semantic definition of the triple that (again very roughly) says
+
+<div class="paragraph"> </div>
+
+    <a href=" pre "> pre </a> e <a href=" post "> post </a> iff forall h, pre h -&gt; exists v h', eval (e, h) (v, h') /\ post v h'
+
+<div class="paragraph"> </div>
+
+    That is, to obtain the top-level theorem we need
+
+<div class="paragraph"> </div>
+
+    forall (a: A) (v : compcert.val) (h : heap),
+       rep_A a v h -&gt; exists v' h', eval (app e v, h) (v', h') /\ rep_B (f a) v'
+
+<div class="paragraph"> </div>
+
+   It should be possible to obtain a similar theorem for L1 -&gt; C light just from
+   our compiler correctness theorem.
+
+<div class="paragraph"> </div>
+
+   The following explains how can we obtain such a theorem for Rocq -&gt; L1 to
+   eventually compose the two and derive the desired theorem.
+
+<div class="paragraph"> </div>
+
+  This idea seems to be similar with the one presented in
+  https://pdfs.semanticscholar.org/58bb/00b882700d67779871a6208f288f68a0b71c.pdf
+  where they verify an HOL -&gt; ML extractor.
+
+<div class="paragraph"> </div>
+
+ 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Axiom</span> (<span class="id" title="tactic">eval</span> : <span class="id" title="var">Ast.term</span> → <span class="id" title="var">Ast.term</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Class</span> <span class="id" title="var">Rep</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) :=<br/>
+&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">rep</span> : <span class="id" title="var">A</span> → <span class="id" title="var">Ast.term</span> → <span class="id" title="keyword">Prop</span><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">nat_rep</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">v</span> : <span class="id" title="var">Ast.term</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">O</span> ⇒ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">v</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Ast.tConstruct</span> (<span class="id" title="var">Ast.mkInd</span> "Stdlib.Init.Datatypes.nat" 0) 0 ⇒ <span class="id" title="var">True</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">False</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">v</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Ast.tApp</span> (<span class="id" title="var">Ast.tConstruct</span> (<span class="id" title="var">Ast.mkInd</span> "Stdlib.Init.Datatypes.nat" 0) 1) [<span class="id" title="var">x</span>] ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">nat_rep</span> <span class="id" title="var">n</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">False</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <span class="id" title="var">NatRep</span> : <span class="id" title="var">Rep</span> <span class="id" title="var">nat</span> := { <span class="id" title="var">rep</span> <span class="id" title="var">n</span> <span class="id" title="var">v</span> := <span class="id" title="var">nat_rep</span> <span class="id" title="var">n</span> (<span class="id" title="tactic">eval</span> <span class="id" title="var">v</span>) }.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">list_rep</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} `{<span class="id" title="var">Rep</span> <span class="id" title="var">A</span>} (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span>) (<span class="id" title="var">v</span> : <span class="id" title="var">Ast.term</span>) : <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| [] ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">v</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Ast.tConstruct</span> (<span class="id" title="var">Ast.mkInd</span> "Stdlib.Init.Datatypes.list" 0) 0 ⇒ <span class="id" title="var">True</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">False</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">hd</span> :: <span class="id" title="var">tl</span> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">v</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Ast.tApp</span> (<span class="id" title="var">Ast.tConstruct</span> (<span class="id" title="var">Ast.mkInd</span> "Stdlib.Init.Datatypes.list" 0) 1) [<span class="id" title="var">typ</span>; <span class="id" title="var">vhd</span>; <span class="id" title="var">vtl</span>] ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">rep</span> <span class="id" title="var">hd</span> <span class="id" title="var">vhd</span> ∧ <span class="id" title="var">list_rep</span> <span class="id" title="var">tl</span> <span class="id" title="var">vtl</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">False</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <span class="id" title="var">ListRep</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} `{<span class="id" title="var">Rep</span> <span class="id" title="var">A</span>} : <span class="id" title="var">Rep</span> (<span class="id" title="var">list</span> <span class="id" title="var">A</span>) := { <span class="id" title="var">rep</span> <span class="id" title="var">l</span> <span class="id" title="var">v</span> := <span class="id" title="var">list_rep</span> <span class="id" title="var">l</span> (<span class="id" title="tactic">eval</span> <span class="id" title="var">v</span>) }.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <span class="id" title="var">ArrowRep</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} `{<span class="id" title="var">Rep</span> <span class="id" title="var">A</span>} `{<span class="id" title="var">Rep</span> <span class="id" title="var">B</span>} : <span class="id" title="var">Rep</span> (<span class="id" title="var">A</span> → <span class="id" title="var">B</span>) :=<br/>
+&nbsp;&nbsp;{ <span class="id" title="var">rep</span> <span class="id" title="var">f</span> <span class="id" title="var">t</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<span class="id" title="var">a</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">v</span> : <span class="id" title="var">Ast.term</span>), <span class="id" title="var">rep</span> <span class="id" title="var">a</span> <span class="id" title="var">v</span> → <span class="id" title="var">rep</span> (<span class="id" title="var">f</span> <span class="id" title="var">a</span>) (<span class="id" title="tactic">eval</span> (<span class="id" title="var">Ast.tApp</span> <span class="id" title="var">t</span> [<span class="id" title="var">v</span>]))<br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <span class="id" title="var">ProdRep</span> (<span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span> → <span class="id" title="keyword">Type</span>) `{<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">H</span> : <span class="id" title="var">Rep</span> <span class="id" title="var">A</span>), <span class="id" title="var">Rep</span> (<span class="id" title="var">B</span> <span class="id" title="var">A</span>)}<br/>
+: <span class="id" title="var">Rep</span> (<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>), <span class="id" title="var">B</span> <span class="id" title="var">A</span>) :=<br/>
+&nbsp;&nbsp;{ <span class="id" title="var">rep</span> <span class="id" title="var">f</span> <span class="id" title="var">t</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) `{<span class="id" title="var">Rep</span> <span class="id" title="var">A</span>}, <span class="id" title="var">rep</span> (<span class="id" title="var">f</span> <span class="id" title="var">A</span>) (<span class="id" title="tactic">eval</span> (<span class="id" title="var">Ast.tApp</span> <span class="id" title="var">t</span> [<span class="id" title="var">qUnit</span>]))<br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="var">Quote</span> <span class="id" title="keyword">Definition</span> <span class="id" title="var">qUnit</span> := <span class="id" title="var">tt</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <span class="id" title="var">ProdRep</span> (<span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span> → <span class="id" title="keyword">Type</span>) `{<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">H</span> : <span class="id" title="var">Rep</span> <span class="id" title="var">A</span>), <span class="id" title="var">Rep</span> (<span class="id" title="var">B</span> <span class="id" title="var">A</span>)}<br/>
+: <span class="id" title="var">Rep</span> (<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>), <span class="id" title="var">B</span> <span class="id" title="var">A</span>) :=<br/>
+&nbsp;&nbsp;{ <span class="id" title="var">rep</span> <span class="id" title="var">f</span> <span class="id" title="var">t</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) `{<span class="id" title="var">Rep</span> <span class="id" title="var">A</span>}, <span class="id" title="var">rep</span> (<span class="id" title="var">f</span> <span class="id" title="var">A</span>) (<span class="id" title="tactic">eval</span> (<span class="id" title="var">Ast.tApp</span> <span class="id" title="var">t</span> [<span class="id" title="var">qUnit</span>]))<br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <span class="id" title="var">ProdRep</span> (<span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span> → <span class="id" title="keyword">Type</span>) `{<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) (<span class="id" title="var">H</span> : <span class="id" title="var">Rep</span> <span class="id" title="var">A</span>), <span class="id" title="var">Rep</span> (<span class="id" title="var">B</span> <span class="id" title="var">A</span>)}<br/>
+: <span class="id" title="var">Rep</span> (<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>), <span class="id" title="var">B</span> <span class="id" title="var">A</span>) :=<br/>
+&nbsp;&nbsp;{ <span class="id" title="var">rep</span> <span class="id" title="var">f</span> <span class="id" title="var">t</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">∀</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) `{<span class="id" title="var">Rep</span> <span class="id" title="var">A</span>}, <span class="id" title="var">rep</span> (<span class="id" title="var">f</span> <span class="id" title="var">A</span>) (<span class="id" title="tactic">eval</span> (<span class="id" title="var">Ast.tApp</span> <span class="id" title="var">t</span> [<span class="id" title="var">qUnit</span>]))<br/>
+&nbsp;&nbsp;}.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

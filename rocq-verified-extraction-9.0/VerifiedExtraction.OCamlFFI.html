@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library VerifiedExtraction.OCamlFFI</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="https://metarocq.github.io/v1.4-9.0//MetaRocq.Utils.bytestring.html#"><span class="id" title="library">Utils.bytestring</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">VerifiedExtraction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="VerifiedExtraction.Extraction.html#"><span class="id" title="library">Extraction</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">VerifiedExtraction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="VerifiedExtraction.PrimInt63.html#"><span class="id" title="library">PrimInt63</span></a> <a class="idref" href="VerifiedExtraction.PrimFloat.html#"><span class="id" title="library">PrimFloat</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Axiom</span> (<a id="print_int" class="idref" href="#print_int"><span class="id" title="axiom">print_int</span></a> : <span class="id" title="var">PrimInt63.int</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a>).<br/>
+<span class="id" title="keyword">Axiom</span> (<a id="print_float" class="idref" href="#print_float"><span class="id" title="axiom">print_float</span></a> : <span class="id" title="var">Corelib.Floats.PrimFloat.float</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a>).<br/>
+<span class="id" title="keyword">Axiom</span> (<a id="print_string" class="idref" href="#print_string"><span class="id" title="axiom">print_string</span></a> : <a class="idref" href="https://metarocq.github.io/v1.4-9.0//MetaRocq.Utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a>).<br/>
+<span class="id" title="keyword">Axiom</span> (<a id="print_newline" class="idref" href="#print_newline"><span class="id" title="axiom">print_newline</span></a> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a>).<br/>
+<span class="id" title="keyword">Axiom</span> (<a id="print_endline" class="idref" href="#print_endline"><span class="id" title="axiom">print_endline</span></a> : <a class="idref" href="https://metarocq.github.io/v1.4-9.0//MetaRocq.Utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a>).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constants</span> [ <br/>
+&nbsp;&nbsp;<span class="id" title="var">print_int</span> ⇒ "Stdlib.print_int",<br/>
+&nbsp;&nbsp;<span class="id" title="var">print_float</span> ⇒ "Stdlib.print_float",<br/>
+&nbsp;&nbsp;<span class="id" title="var">print_string</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__OCaml_stdlib.print_string",<br/>
+&nbsp;&nbsp;<span class="id" title="var">print_newline</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__OCaml_stdlib.print_newline",<br/>
+&nbsp;&nbsp;<span class="id" title="var">print_endline</span> ⇒ "Rocq_verified_extraction_ocaml_ffi__OCaml_stdlib.print_endline" ]<br/>
+<span class="id" title="var">Packages</span> [ "rocq_verified_extraction_ocaml_ffi" ].<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

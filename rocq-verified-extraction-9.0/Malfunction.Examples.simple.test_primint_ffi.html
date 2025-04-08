@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library Malfunction.Examples.simple.test_primint_ffi</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">VerifiedExtraction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">OCamlFFI</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="keyword">All</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">bytestring</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Primitive</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Build</span> <span class="id" title="var">Directory</span> "_build".<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">PrimInt63</span> <span class="id" title="var">Uint63</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">foo</span> : <span class="id" title="var">int</span> := (300 / 80)%<span class="id" title="var">uint63</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-primitive-turned-into-axiom".<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">prog</span> := (<span class="id" title="var">print_int</span> <span class="id" title="var">foo</span>).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <span class="id" title="var">prog</span> "prim.mlf".<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">ZArith</span> <span class="id" title="var">PrimInt63</span> <span class="id" title="var">Sint63</span> <span class="id" title="var">Uint63</span>.<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">verbose</span> <span class="id" title="var">Sint63.min_int</span>.<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">verbose</span> <span class="id" title="var">Sint63.max_int</span>.<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">verbose</span> <span class="id" title="var">Uint63.max_int</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">uint0</span> := <span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">Uint63.of_Z</span> 0%<span class="id" title="var">Z</span>).<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">verbose</span> <span class="id" title="var">uint0</span>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

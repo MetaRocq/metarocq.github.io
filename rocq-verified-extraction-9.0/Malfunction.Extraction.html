@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library Malfunction.Extraction</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Ascii</span> <span class="id" title="library">FSets</span> <span class="id" title="library">ExtrOcamlBasic</span> <span class="id" title="library">ExtrOCamlFloats</span> <span class="id" title="library">ExtrOCamlInt63</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="https://metarocq.github.io/v1.4-9.0//MetaRocq.Utils.utils.html#"><span class="id" title="library">Utils.utils</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Malfunction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Malfunction.Pipeline.html#"><span class="id" title="library">Pipeline</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab1"></a><h1 class="section">Extraction setup for the erasure phase of template-coq.</h1>
+
+
+<div class="paragraph"> </div>
+
+    Any extracted code planning to link with the plugin
+    should use these same directives for consistency.
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="var">Blacklist</span> <span class="id" title="var">Classes</span> <span class="id" title="var">config</span> <span class="id" title="var">uGraph</span> <span class="id" title="keyword">Universes</span> <span class="id" title="var">Ast</span> <span class="id" title="var">String</span> <span class="id" title="var">List</span> <span class="id" title="var">Nat</span> <span class="id" title="var">Int</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">UnivSubst</span> <span class="id" title="var">Typing</span> <span class="id" title="var">Checker</span> <span class="id" title="var">Retyping</span> <span class="id" title="var">OrderedType</span> <span class="id" title="var">Logic</span> <span class="id" title="var">Common</span> <span class="id" title="var">ws_cumul_pb</span> <span class="id" title="var">Classes</span> <span class="id" title="var">Numeral</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Uint63</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-extraction-opaque-accessed".<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-extraction-reserved-identifier".<br/>
+
+<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Prop.Classes.noConfusion</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Prop.Logic.eq_elim</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Prop.Logic.eq_elim_r</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Prop.Logic.transport</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Prop.Logic.transport_r</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Prop.Logic.False_rect_dep</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Prop.Logic.True_rect_dep</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Init.pr1</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Init.pr2</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Init.hidebody</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Prop.DepElim.solution_left</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <span class="id" title="record">Equations.Init.sigma</span> ⇒ "( * )" ["(,)"].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Equations.Init.pr1</span> ⇒ "fst".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Equations.Init.pr2</span> ⇒ "snd".<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Init.pr1</span> <span class="id" title="var">Equations.Init.pr2</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">FFI.coq_msg_info</span> ⇒ "Rocq_verified_extraction_plugin__Rocq_ffi.msg_info".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">FFI.coq_user_error</span> ⇒ "Rocq_verified_extraction_plugin__Rocq_ffi.user_error".<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">FFI.coq_msg_info</span>.<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">FFI.coq_user_error</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Output</span> <span class="id" title="var">Directory</span> "plugin/plugin/extraction".<br/>
+
+<br/>
+<span class="id" title="var">Separate</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">compile_malfunction</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Stdlib.Strings.String</span> <span class="id" title="var">utils</span> <span class="id" title="var">Template.UnivSubst</span> <span class="id" title="var">ELiftSubst</span> <span class="id" title="var">EGlobalEnv</span>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

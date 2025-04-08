@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library Malfunction.Examples.simple.tutorial</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="var">ZArith</span> <span class="id" title="var">Vector</span> <span class="id" title="var">Streams.StreamMemo</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">String</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Malfunction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">PrintMli</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">VerifiedExtraction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Loader</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">OCamlFFI</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="keyword">All</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">rocq_true</span> := <span class="id" title="var">true</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+By default, the <span class="inlinecode"><span class="id" title="var">Verified</span></span> <span class="inlinecode"><span class="id" title="keyword">Extraction</span></span> command prints out the extracted malfunction code (to the notices channel). 
+</div>
+<div class="code">
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">rocq_true</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The generated code is 
+   (module (def_main rocq_true main rocq_true 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">rocq_true</span> "rocq_true.mlf".<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Build</span> <span class="id" title="var">Directory</span> "_build".<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The <span class="inlinecode">-<span class="id" title="var">fmt</span></span> option provides a somewhat clearer output: 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> <span class="id" title="var">rocq_true</span> "rocq_true.mlf".<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> <span class="id" title="keyword">Print</span> <span class="id" title="var">mli</span> <span class="id" title="var">rocq_true</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Copying this declaration in `rocq_true.mli`, one can then compile the files as follow:
+
+<div class="paragraph"> </div>
+
+     ocamlc rocq_true.mli
+    (* produces a .cmi file to be read by malfunction 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;# <span class="id" title="var">malfunction</span> <span class="id" title="var">rocq_true.mlf</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+*)<br/>
+<br/>
+</div>
+
+<div class="doc">
+In general, <span class="inlinecode"><span class="id" title="keyword">Print</span></span> <span class="inlinecode"><span class="id" title="var">Mli</span></span> can produce interfaces that contain types that are marked as unsupported 
+    in OCaml and replaced by `Obj.t`. We advise to not export such type definitions which can break 
+    interoperability but keep in the `.mli` interface only firstorder types, for which the correctness
+    guarantess of the extraction hold. 
+<div class="paragraph"> </div>
+
+ Besides producing standalone `.mlf` files, the plugin is also capable of compiling and running the 
+  extracted programs itself. To do so, it relies on an `opam` installation to be available in the running 
+  environment of the Rocq process, which should include the `malfunction` package. 
+</div>
+<div class="code">
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Opam</span> <span class="id" title="var">Path</span> "/usr/local/bin/opam".<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+For quick testing of extracted code, one can build the code as a plugin, which can be dynamically loaded 
+    with Rocq and run directly. The value of the program should be firstorder so that it can be read back as a 
+    Rocq value. This is the case of booleans. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">compile</span>-<span class="id" title="var">plugin</span> -<span class="id" title="var">run</span> <span class="id" title="var">rocq_true</span> "rocq_true.mlf".<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The plugin has a few diagnostics and customization flags:
+   The `-verbose` flag produces debug output (useful for tracking compilation issues),  
+   The `-time` flag reports the compilation and running times of the command.
+   The `-optimize` flag uses OCaml's -O2 option to compile the malfunction code.  
+</div>
+<div class="code">
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">time</span> -<span class="id" title="var">verbose</span> -<span class="id" title="var">optimize</span> -<span class="id" title="var">compile</span>-<span class="id" title="var">plugin</span> -<span class="id" title="var">run</span> <span class="id" title="var">rocq_true</span> "rocq_true.mlf".<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The Rocq programs can make use of axioms that are realised by ocaml libraries and linked to the resulting program.
+    By default, there is an `FFI` library allowing to access Rocq's info, notice and debug channels as well as raising 
+    Rocq errors (coq_user_error) that is realized by linking back with Rocq's code, as described in the RocqMsgFFI library. 
+</div>
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Malfunction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">FFI</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">VerifiedExtraction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">RocqMsgFFI</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The following definition prints out the string representation of true (`show` is a typeclass method for serializing to a string) 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">msg_true</span> := <span class="id" title="var">coq_msg_info</span> (<span class="id" title="var">show</span> <span class="id" title="var">true</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Running the plugin produces as side effect a call to <span class="inlinecode"><span class="id" title="var">coq_msg_info</span></span>, printing to the <span class="inlinecode"><span class="id" title="tactic">info</span></span> pannel of your IDE. 
+</div>
+<div class="code">
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">compile</span>-<span class="id" title="var">plugin</span> -<span class="id" title="var">run</span> <span class="id" title="var">msg_true</span> "rocq_true.mlf".<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The FFI support is used to bind primitive type operations to implementations in OCaml as well. For example 
+    one can compute with primitive integers. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">PrimInt63</span> <span class="id" title="var">Sint63</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">test_primint</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">_</span> := <span class="id" title="var">coq_msg_info</span> ("Min int is " ++ <span class="id" title="var">show</span> (<span class="id" title="var">wrap_int</span> <span class="id" title="var">Sint63.min_int</span>)) <span class="id" title="tactic">in</span> <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">_</span> := <span class="id" title="var">coq_msg_info</span> ("Max int is " ++ <span class="id" title="var">show</span> (<span class="id" title="var">wrap_int</span> <span class="id" title="var">Sint63.max_int</span>)) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="var">tt</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We disable this warning of MetaRocq as all primitive axioms are properly bound to OCaml code during compilation 
+</div>
+<div class="code">
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-primitive-turned-into-axiom".<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">compile</span>-<span class="id" title="var">plugin</span> -<span class="id" title="var">run</span> <span class="id" title="var">test_primint</span> "test_primint.mlf".<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> <span class="id" title="var">Sint63.min_int</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Module</span> <span class="id" title="var">CoInd</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Primitive</span> <span class="id" title="var">Projections</span>.<br/>
+<span class="id" title="keyword">CoInductive</span> <span class="id" title="var">stream</span> := <span class="id" title="var">Cons</span> { <span class="id" title="var">head</span> : <span class="id" title="var">nat</span>; <span class="id" title="var">tail</span> : <span class="id" title="var">stream</span> }.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">take</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">s</span> : <span class="id" title="var">stream</span>) : <span class="id" title="var">list</span> <span class="id" title="var">nat</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| 0 ⇒ []<br/>
+&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n</span> ⇒ <span class="id" title="var">s</span>.(<span class="id" title="var">head</span>) :: <span class="id" title="var">take</span> <span class="id" title="var">n</span> <span class="id" title="var">s</span>.(<span class="id" title="var">tail</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">CoFixpoint</span> <span class="id" title="var">ones</span> : <span class="id" title="var">stream</span> := {| <span class="id" title="var">head</span> := 1; <span class="id" title="var">tail</span> := <span class="id" title="var">ones</span> |}.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">test_ones</span> := <span class="id" title="var">print_string</span> (<span class="id" title="var">show</span> (<span class="id" title="var">take</span> 10 <span class="id" title="var">ones</span>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Here instead of building a plugin, we build a standalone ocaml program using `-compile-with-coq` 
+    and rely on a small OCaml FFI for printing strings/integers or floats defined in the `OCamlFFI` library.
+    The `-run` flag runs the program and relays the stdout and stderr channels of the standalone process to 
+    Rocq's notices channels. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <span class="id" title="var">test_ones</span> "ones.mlf".<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">CoInd</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Verified extraction has a -typed variant which uses type information to be able to remove unused arguments of
+    constants and constructors. With this option we can unbox existential types for example, which the 
+    standard verified extraction would just keep around an extra erased argument for the constructor
+    (identifiable as `(let (rec (
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sub</span> : { <span class="id" title="var">x</span> : <span class="id" title="var">nat</span> | <span class="id" title="var">x</span> = 0 } := @<span class="id" title="var">exist</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> 0 <span class="id" title="var">eq_refl</span>.<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">sub</span>.<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">typed</span> <span class="id" title="var">sub</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Here the typed extraction completely removes the use of the `exist` constructor, and the `eq_refl` proof argument hence disappears.
+    Beware that the `Print mli` metaprogram does not (yet) expect `-typed` to be used and might produce an interface that is incorrect for an implementation
+    extracted with `-typed`. One should remove erasable types entirely and unbox constructors accordingly in the interface. 
+<div class="paragraph"> </div>
+
+ This closes the tutorial. See the README.md file for more information about the `Verified Extraction` commands and optional flags. 
+</div>
+<div class="code">
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

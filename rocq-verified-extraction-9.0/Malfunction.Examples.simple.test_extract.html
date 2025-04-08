@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library Malfunction.Examples.simple.test_extract</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="keyword">Equations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="keyword">Equations</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Malfunction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">FFI</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">VerifiedExtraction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">OCamlFFI</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="keyword">All</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="var">ZArith</span> <span class="id" title="var">Streams.StreamMemo</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">String</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="var">Vector</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">PrimInt63</span> <span class="id" title="var">Sint63</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">test_primint</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">_</span> := <span class="id" title="var">print_int</span> <span class="id" title="var">Sint63.min_int</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">_</span> := <span class="id" title="var">print_newline</span> <span class="id" title="var">tt</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">_</span> := <span class="id" title="var">print_int</span> <span class="id" title="var">Sint63.max_int</span> <span class="id" title="tactic">in</span> <span class="id" title="var">tt</span>.<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> <span class="id" title="var">test_primint</span>.<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> (<span class="id" title="var">plus</span>, <span class="id" title="var">mult</span>).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <span class="id" title="var">test_primint</span> "test_primint.mlf".<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">PrimFloat</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">test_floats</span> := <span class="id" title="var">print_float</span> (100.5)%<span class="id" title="var">float</span>.<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> <span class="id" title="var">test_floats</span>.<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <span class="id" title="var">test_floats</span> "test_floats.mlf".<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Module</span> <span class="id" title="var">NegativeCoind</span>.<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Primitive</span> <span class="id" title="var">Projections</span>.<br/>
+<span class="id" title="keyword">CoInductive</span> <span class="id" title="var">stream</span> := <span class="id" title="var">Cons</span><br/>
+&nbsp;&nbsp;{ <span class="id" title="var">head</span> : <span class="id" title="var">nat</span>; <span class="id" title="var">tail</span> : <span class="id" title="var">stream</span> }.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">take</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">s</span> : <span class="id" title="var">stream</span>) : <span class="id" title="var">list</span> <span class="id" title="var">nat</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| 0 ⇒ []<br/>
+&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n</span> ⇒ <span class="id" title="var">s</span>.(<span class="id" title="var">head</span>) :: <span class="id" title="var">take</span> <span class="id" title="var">n</span> <span class="id" title="var">s</span>.(<span class="id" title="var">tail</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">CoFixpoint</span> <span class="id" title="var">ones</span> : <span class="id" title="var">stream</span> := {| <span class="id" title="var">head</span> := 1; <span class="id" title="var">tail</span> := <span class="id" title="var">ones</span> |}.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">test_ones</span> := <span class="id" title="var">print_string</span> (<span class="id" title="var">show</span> (<span class="id" title="var">take</span> 10 <span class="id" title="var">ones</span>)).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <span class="id" title="var">test_ones</span> "ones.mlf".<br/>
+
+<br/>
+<span class="id" title="keyword">CoFixpoint</span> <span class="id" title="var">naturals</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">stream</span> := <br/>
+&nbsp;&nbsp;{| <span class="id" title="var">head</span> := <span class="id" title="var">n</span>; <span class="id" title="var">tail</span> := <span class="id" title="var">naturals</span> (<span class="id" title="var">S</span> <span class="id" title="var">n</span>) |}.<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">unsafe</span> <span class="id" title="var">naturals</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">test_take</span> := <span class="id" title="var">print_string</span> (<span class="id" title="var">show</span> (<span class="id" title="var">take</span> 10 (<span class="id" title="var">naturals</span> 0))).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <span class="id" title="var">test_take</span> "naturals.mlf".<br/>
+
+<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">ZArith</span> <span class="id" title="var">Streams.StreamMemo</span>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">Z_scope</span>.<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">tfact</span> (<span class="id" title="var">n</span>: <span class="id" title="var">nat</span>) :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">O</span> ⇒ 1<br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n1</span> ⇒ <span class="id" title="var">Z.of_nat</span> <span class="id" title="var">n</span> × <span class="id" title="var">tfact</span> <span class="id" title="var">n1</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">lfact_list</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">dimemo_list</span> <span class="id" title="var">_</span> <span class="id" title="var">tfact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">n</span> <span class="id" title="var">z</span> ⇒ (<span class="id" title="var">Z.of_nat</span> (<span class="id" title="var">S</span>  <span class="id" title="var">n</span>) × <span class="id" title="var">z</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">lfact</span> <span class="id" title="var">n</span> := <span class="id" title="var">dmemo_get</span> <span class="id" title="var">_</span> <span class="id" title="var">tfact</span> <span class="id" title="var">n</span> <span class="id" title="var">lfact_list</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Theorem</span> <span class="id" title="var">lfact_correct</span> <span class="id" title="var">n</span>: <span class="id" title="var">lfact</span> <span class="id" title="var">n</span> = <span class="id" title="var">tfact</span> <span class="id" title="var">n</span>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+<span class="id" title="tactic">unfold</span> <span class="id" title="var">lfact</span>, <span class="id" title="var">lfact_list</span>.<br/>
+<span class="id" title="tactic">rewrite</span> <span class="id" title="var">dimemo_get_correct</span>; <span class="id" title="tactic">auto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">nop</span> <span class="id" title="var">p</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">p</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">xH</span> ⇒ 0<br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">xI</span> <span class="id" title="var">p1</span> ⇒ <span class="id" title="var">nop</span> <span class="id" title="var">p1</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">xO</span> <span class="id" title="var">p1</span> ⇒ <span class="id" title="var">nop</span> <span class="id" title="var">p1</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">test</span> <span class="id" title="var">z</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">z</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Z0</span> ⇒ 0<br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Zpos</span> <span class="id" title="var">p1</span> ⇒ <span class="id" title="var">nop</span> <span class="id" title="var">p1</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Zneg</span> <span class="id" title="var">p1</span> ⇒ <span class="id" title="var">nop</span> <span class="id" title="var">p1</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Arguments</span> <span class="id" title="var">print_string</span> <span class="id" title="var">s</span>%<span class="id" title="var">bs</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">arg</span> := 1000%<span class="id" title="var">nat</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">test_lfact</span> := <span class="id" title="var">test</span> (<span class="id" title="var">lfact</span> <span class="id" title="var">arg</span>).<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">show_lfact</span> := <span class="id" title="var">print_string</span> ("test_lfact: " ++ <span class="id" title="var">show</span> (<span class="id" title="var">lfact</span> <span class="id" title="var">arg</span>)).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">time</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">typed</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <span class="id" title="var">test_lfact</span> "test_lfact_typed.mlf". <span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">time</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <span class="id" title="var">test_lfact</span> "test_lfact.mlf". <span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">optimize</span> -<span class="id" title="var">time</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">typed</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <br/>
+&nbsp;&nbsp;<span class="id" title="var">test_lfact</span> "test_lfact_typed_opt.mlf". 
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">time</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">typed</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <br/>
+&nbsp;&nbsp;<span class="id" title="var">show_lfact</span> "show_lfact_typed.mlf". <span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">time</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <br/>
+&nbsp;&nbsp;<span class="id" title="var">show_lfact</span> "show_lfact.mlf". 
+<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">NegativeCoind</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Module</span> <span class="id" title="var">Unboxed</span>.<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">t</span> := { <span class="id" title="var">x</span> : <span class="id" title="var">nat</span> | <span class="id" title="var">x</span> &lt; 3 }.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Program Definition</span> <span class="id" title="var">ex</span> : <span class="id" title="var">t</span> := 1.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Program Definition</span> <span class="id" title="var">test_ex</span> := <span class="id" title="var">coq_msg_info</span> (<span class="id" title="var">string_of_nat</span> <span class="id" title="var">ex</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">typed</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">compile</span>-<span class="id" title="var">plugin</span> -<span class="id" title="var">run</span> <span class="id" title="var">test_ex</span> "test_ex.mlf".<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">Unboxed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Typed extraction 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sub</span> : { <span class="id" title="var">x</span> : <span class="id" title="var">nat</span> | <span class="id" title="var">x</span> = 0 } := @<span class="id" title="var">exist</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> 0 <span class="id" title="var">eq_refl</span>.<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">sub</span>.<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">typed</span> <span class="id" title="var">sub</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Equations</span> <span class="id" title="var">idnat</span> (<span class="id" title="var">n</span> : <span class="id" title="var">nat</span>) : <span class="id" title="var">nat</span> <span class="id" title="tactic">by</span> <span class="id" title="keyword">wf</span> <span class="id" title="var">n</span> <span class="id" title="var">lt</span> :=<br/>
+&nbsp;| 0 ⇒ 0<br/>
+&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">n</span> ⇒ <span class="id" title="var">S</span> (<span class="id" title="var">idnat</span> <span class="id" title="var">n</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="var">idnat</span>.<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inline</span> [ <span class="id" title="var">Equations.Prop.Subterm.FixWf</span>, <span class="id" title="var">Corelib.Init.Wf.Fix</span>, <span class="id" title="var">Corelib.Init.Wf.Fix_F</span>, <span class="id" title="var">idnat_functional</span> ].<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">typed</span> <span class="id" title="var">idnat</span> "idnat.mlf".<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">three</span> := <span class="id" title="var">ZERO</span> | <span class="id" title="var">ONE</span> | <span class="id" title="var">TWO</span> | <span class="id" title="var">THREE</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">two</span> := <span class="id" title="var">TWO</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">bytestring</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">test_bytestring</span> (<span class="id" title="var">u</span> : <span class="id" title="var">unit</span>) := <span class="id" title="var">bytestring.String.compare</span> "" "bug".<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> <span class="id" title="var">test_bytestring</span> "test_bytestring.mlf".<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">two</span> "two.mlf".<br/>
+
+<br/>
+<span class="id" title="keyword">Axiom</span> <span class="id" title="var">axiom</span> : <span class="id" title="var">nat</span>.<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">axiom</span> "axiom.mlf".<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Malfunction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Compile</span> <span class="id" title="var">Pipeline</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">List</span>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Polymorphic Record</span> <span class="id" title="var">myprod@</span>{<span class="id" title="var">i</span> <span class="id" title="var">j</span>} (<span class="id" title="var">A</span> : <span class="id" title="var">Type@</span>{<span class="id" title="var">i</span>}) (<span class="id" title="var">B</span> : <span class="id" title="var">Type@</span>{<span class="id" title="var">j</span>}) := <span class="id" title="var">mypair</span> { <span class="id" title="var">fst</span> : <span class="id" title="var">A</span>; <span class="id" title="var">snd</span> : <span class="id" title="var">B</span> }.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> &quot;( x , y , .. , z )" := (<span class="id" title="var">mypair</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> .. (<span class="id" title="var">mypair</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) .. <span class="id" title="var">z</span>) : <span class="id" title="var">core_scope</span>.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">many_list_functions</span> : <span class="id" title="var">myprod</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> := (@<span class="id" title="var">List.firstn</span> <span class="id" title="var">nat</span>, @<span class="id" title="var">List.filter</span> <span class="id" title="var">nat</span>, @<span class="id" title="var">List.skipn</span> <span class="id" title="var">nat</span>).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">typed</span> <span class="id" title="var">many_list_functions</span> "list.mlf".<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">prf</span> := <span class="id" title="keyword">match</span> <span class="id" title="var">conj</span> <span class="id" title="var">I</span> <span class="id" title="var">I</span> <span class="id" title="keyword">with</span> <span class="id" title="var">conj</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> ⇒ (<span class="id" title="var">x</span>,0) <span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">prf</span> "proof.mlf".<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">blocks_until</span> "mcase.mlf".<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">test_add</span> := <span class="id" title="var">plus</span> 2 5.<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">test_add</span> "add.mlf".<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> (<span class="id" title="keyword">match</span> <span class="id" title="var">cons</span> <span class="id" title="var">THREE</span> <span class="id" title="var">nil</span> <span class="id" title="keyword">with</span> <span class="id" title="var">cons</span> <span class="id" title="var">x</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="var">x</span> | <span class="id" title="var">_</span> ⇒ <span class="id" title="var">ONE</span> <span class="id" title="keyword">end</span>).<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">help</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">ack</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span>:<span class="id" title="var">nat</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">n</span>} : <span class="id" title="var">nat</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">n</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <span class="id" title="var">S</span> <span class="id" title="var">m</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">p</span> ⇒ <span class="id" title="keyword">let</span> <span class="id" title="keyword">fix</span> <span class="id" title="var">ackn</span> (<span class="id" title="var">m</span>:<span class="id" title="var">nat</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">m</span>} :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">m</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0 ⇒ <span class="id" title="var">ack</span> <span class="id" title="var">p</span> 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">S</span> <span class="id" title="var">q</span> ⇒ <span class="id" title="var">ack</span> <span class="id" title="var">p</span> (<span class="id" title="var">ackn</span> <span class="id" title="var">q</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">in</span> <span class="id" title="var">ackn</span> <span class="id" title="var">m</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> (<span class="id" title="var">ack</span> 3 5).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> (@<span class="id" title="var">exist</span> <span class="id" title="var">nat</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="var">x</span> = 0) 0 (@<span class="id" title="var">eq_refl</span> <span class="id" title="var">_</span> 0)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">vplus</span> {<span class="id" title="var">n</span>:<span class="id" title="var">nat</span>} :<br/>
+&nbsp;&nbsp;<span class="id" title="var">Vector.t</span> <span class="id" title="var">nat</span> <span class="id" title="var">n</span> → <span class="id" title="var">Vector.t</span> <span class="id" title="var">nat</span> <span class="id" title="var">n</span> → <span class="id" title="var">Vector.t</span> <span class="id" title="var">nat</span> <span class="id" title="var">n</span> := (<span class="id" title="var">Vector.map2</span> <span class="id" title="var">plus</span>).<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">v01</span> : <span class="id" title="var">Vector.t</span> <span class="id" title="var">nat</span> 2 :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">Vector.cons</span> <span class="id" title="var">nat</span> 0 1 (<span class="id" title="var">Vector.cons</span> <span class="id" title="var">nat</span> 1 0 (<span class="id" title="var">Vector.nil</span> <span class="id" title="var">nat</span>))).<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">v23</span> : <span class="id" title="var">Vector.t</span> <span class="id" title="var">nat</span> 2 :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">Vector.cons</span> <span class="id" title="var">nat</span> 2 1 (<span class="id" title="var">Vector.cons</span> <span class="id" title="var">nat</span> 3 0 (<span class="id" title="var">Vector.nil</span> <span class="id" title="var">nat</span>))).<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">vplus0123</span> := <span class="id" title="var">Vector.hd</span> (<span class="id" title="var">vplus</span> <span class="id" title="var">v01</span> <span class="id" title="var">v23</span>).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">vplus0123</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">tree</span> (<span class="id" title="var">A</span>:<span class="id" title="keyword">Set</span>) : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">node</span> : <span class="id" title="var">A</span> → <span class="id" title="var">forest</span> <span class="id" title="var">A</span> → <span class="id" title="var">tree</span> <span class="id" title="var">A</span><br/>
+<span class="id" title="keyword">with</span> <span class="id" title="var">forest</span> (<span class="id" title="var">A</span>:<span class="id" title="keyword">Set</span>) : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">leaf</span> : <span class="id" title="var">A</span> → <span class="id" title="var">forest</span> <span class="id" title="var">A</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">fcons</span> : <span class="id" title="var">tree</span> <span class="id" title="var">A</span> → <span class="id" title="var">forest</span> <span class="id" title="var">A</span> → <span class="id" title="var">forest</span> <span class="id" title="var">A</span>.<br/>
+<span class="id" title="keyword">Arguments</span> <span class="id" title="var">leaf</span> {<span class="id" title="var">A</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <span class="id" title="var">fcons</span> {<span class="id" title="var">A</span>}.<br/>
+<span class="id" title="keyword">Arguments</span> <span class="id" title="var">node</span> {<span class="id" title="var">A</span>}.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">tree_size</span> (<span class="id" title="var">t</span>:<span class="id" title="var">tree</span> <span class="id" title="var">bool</span>) : <span class="id" title="var">nat</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">node</span> <span class="id" title="var">a</span> <span class="id" title="var">f</span> ⇒ <span class="id" title="var">S</span> (<span class="id" title="var">forest_size</span> <span class="id" title="var">f</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+<span class="id" title="keyword">with</span> <span class="id" title="var">forest_size</span> (<span class="id" title="var">f</span>:<span class="id" title="var">forest</span> <span class="id" title="var">bool</span>) : <span class="id" title="var">nat</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">f</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">leaf</span> <span class="id" title="var">b</span> ⇒ 1<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">fcons</span> <span class="id" title="var">t</span> <span class="id" title="var">f1</span> ⇒ (<span class="id" title="var">tree_size</span> <span class="id" title="var">t</span> + <span class="id" title="var">forest_size</span> <span class="id" title="var">f1</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">arden</span>: <span class="id" title="var">forest</span> <span class="id" title="var">bool</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">fcons</span> (<span class="id" title="var">node</span> <span class="id" title="var">true</span> (<span class="id" title="var">fcons</span> (<span class="id" title="var">node</span> <span class="id" title="var">true</span> (<span class="id" title="var">leaf</span> <span class="id" title="var">false</span>)) (<span class="id" title="var">leaf</span> <span class="id" title="var">true</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">fcons</span> (<span class="id" title="var">node</span> <span class="id" title="var">true</span> (<span class="id" title="var">fcons</span> (<span class="id" title="var">node</span> <span class="id" title="var">true</span> (<span class="id" title="var">leaf</span> <span class="id" title="var">false</span>)) (<span class="id" title="var">leaf</span> <span class="id" title="var">true</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">leaf</span> <span class="id" title="var">false</span>)).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> (<span class="id" title="var">forest_size</span> <span class="id" title="var">arden</span>).<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,898 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library VerifiedExtraction.Benchmarks.SqlQueries3</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+                                                                                                               The DataCert Library                                                                                                                                             LRI, CNRS &amp; Université Paris-Sud                                                                                                                          Copyright 2016 : Véronique Benzaken &amp; Évelyne Contejean                                                                                            
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Set Implicit Arguments</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Relations</span> <span class="id" title="var">SetoidList</span> <span class="id" title="var">List</span> <span class="id" title="var">String</span> <span class="id" title="var">Ascii</span> <span class="id" title="var">Bool</span> <span class="id" title="var">ZArith</span> <span class="id" title="var">NArith</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">FlatData</span> <span class="id" title="var">ListFacts</span> <span class="id" title="var">OrderedSet</span> <span class="id" title="var">FiniteSet</span> <span class="id" title="var">Tree</span> <span class="id" title="var">Formula</span> <span class="id" title="var">Sql</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <span class="id" title="var">Try</span>.<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">Tuple</span> <span class="id" title="var">Expression</span>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Values</span> <span class="id" title="var">Relnames</span> <span class="id" title="var">SortedAttributes</span> <span class="id" title="var">SortedTuples</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Defining functions and aggregates, and giving their interpretation 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">symbol</span> : <span class="id" title="keyword">Type</span> := <br/>
+&nbsp;&nbsp;| <span class="id" title="var">Symbol</span> : <span class="id" title="var">string</span> ⟶ <span class="id" title="var">symbol</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">CstVal</span> : <span class="id" title="var">value</span> ⟶ <span class="id" title="var">symbol</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">predicate</span> : <span class="id" title="keyword">Type</span> := <span class="id" title="var">Predicate</span> : <span class="id" title="var">string</span> ⟶ <span class="id" title="var">predicate</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">OP</span> : <span class="id" title="var">Oset.Rcd</span> <span class="id" title="var">predicate</span>.<br/>
+<span class="id" title="tactic">split</span> <span class="id" title="keyword">with</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> ⟹ <span class="id" title="keyword">match</span> <span class="id" title="var">x</span>, <span class="id" title="var">y</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Predicate</span> <span class="id" title="var">s1</span>, <span class="id" title="var">Predicate</span> <span class="id" title="var">s2</span> ⟹ <span class="id" title="var">string_compare</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> <span class="id" title="keyword">end</span>).<br/>
+- <span class="id" title="tactic">intros</span> [<span class="id" title="var">s1</span>] [<span class="id" title="var">s2</span>]; <span class="id" title="tactic">generalize</span> (<span class="id" title="var">Oset.eq_bool_ok</span> <span class="id" title="var">Ostring</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>); <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">case</span> (<span class="id" title="var">string_compare</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>).<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <span class="id" title="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">H1</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">injection</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">h</span> ⟹ <span class="id" title="var">h</span>).<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">H1</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">injection</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">h</span> ⟹ <span class="id" title="var">h</span>).<br/>
+- <span class="id" title="tactic">intros</span> [<span class="id" title="var">s1</span>] [<span class="id" title="var">s2</span>] [<span class="id" title="var">s3</span>]; <span class="id" title="tactic">apply</span> (<span class="id" title="var">Oset.compare_lt_trans</span> <span class="id" title="var">Ostring</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> <span class="id" title="var">s3</span>).<br/>
+- <span class="id" title="tactic">intros</span> [<span class="id" title="var">s1</span>] [<span class="id" title="var">s2</span>]; <span class="id" title="tactic">apply</span> (<span class="id" title="var">Oset.compare_lt_gt</span> <span class="id" title="var">Ostring</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">symbol_compare</span> (<span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <span class="id" title="var">symbol</span>) := <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">s1</span>, <span class="id" title="var">s2</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Symbol</span> <span class="id" title="var">s1</span>, <span class="id" title="var">Symbol</span> <span class="id" title="var">s2</span> ⟹ <span class="id" title="var">string_compare</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Symbol</span> <span class="id" title="var">_</span>, <span class="id" title="var">CstVal</span> <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Lt</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">CstVal</span> <span class="id" title="var">_</span>, <span class="id" title="var">Symbol</span> <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Gt</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">CstVal</span> <span class="id" title="var">v1</span>, <span class="id" title="var">CstVal</span> <span class="id" title="var">v2</span> ⟹ <span class="id" title="var">value_compare</span> <span class="id" title="var">v1</span> <span class="id" title="var">v2</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">OSymbol</span> : <span class="id" title="var">Oset.Rcd</span> <span class="id" title="var">symbol</span>.<br/>
+<span class="id" title="tactic">split</span> <span class="id" title="keyword">with</span> <span class="id" title="var">symbol_compare</span>.<br/>
+- <span class="id" title="tactic">intros</span> [<span class="id" title="var">s1</span> | <span class="id" title="var">s1</span>] [<span class="id" title="var">s2</span> | <span class="id" title="var">s2</span>]; <span class="id" title="tactic">simpl</span>; <span class="id" title="tactic">try</span> <span class="id" title="tactic">discriminate</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">generalize</span> (<span class="id" title="var">Oset.eq_bool_ok</span> <span class="id" title="var">Ostring</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>); <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">case</span> (<span class="id" title="var">string_compare</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">apply</span> <span class="id" title="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> <span class="id" title="var">H1</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">injection</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">h</span> ⟹ <span class="id" title="var">h</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> <span class="id" title="var">H1</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">injection</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">h</span> ⟹ <span class="id" title="var">h</span>).<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">generalize</span> (<span class="id" title="var">Oset.eq_bool_ok</span> <span class="id" title="var">OVal</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>); <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">case</span> (<span class="id" title="var">value_compare</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">apply</span> <span class="id" title="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> <span class="id" title="var">H1</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">injection</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">h</span> ⟹ <span class="id" title="var">h</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">intros</span> <span class="id" title="var">H1</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">injection</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">h</span> ⟹ <span class="id" title="var">h</span>).<br/>
+- <span class="id" title="tactic">intros</span> [<span class="id" title="var">s1</span> | <span class="id" title="var">s1</span>] [<span class="id" title="var">s2</span> | <span class="id" title="var">s2</span>] [<span class="id" title="var">s3</span> | <span class="id" title="var">s3</span>]; <span class="id" title="tactic">simpl</span>;<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">try</span> (<span class="id" title="tactic">apply</span> (<span class="id" title="var">Oset.compare_lt_trans</span> <span class="id" title="var">Ostring</span>) || <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">Oset.compare_lt_trans</span> <span class="id" title="var">OVal</span>) || <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">trivial</span> || <span class="id" title="tactic">discriminate</span>).<br/>
+- <span class="id" title="tactic">intros</span> [<span class="id" title="var">s1</span> | <span class="id" title="var">s1</span>] [<span class="id" title="var">s2</span> | <span class="id" title="var">s2</span>]; <span class="id" title="tactic">simpl</span>;<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">try</span> (<span class="id" title="tactic">apply</span> (<span class="id" title="var">Oset.compare_lt_gt</span> <span class="id" title="var">Ostring</span>) || <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">Oset.compare_lt_gt</span> <span class="id" title="var">OVal</span>) || <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">trivial</span> || <span class="id" title="tactic">discriminate</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">interp_symbol</span> <span class="id" title="var">f</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">f</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Symbol</span> "plus" ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Value_N</span> <span class="id" title="var">a1</span> :: <span class="id" title="var">Value_N</span> <span class="id" title="var">a2</span> :: <span class="id" title="var">nil</span> ⟹ <span class="id" title="var">Value_N</span> (<span class="id" title="var">Nplus</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Symbol</span> "mult" ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Value_N</span> <span class="id" title="var">a1</span> :: <span class="id" title="var">Value_N</span> <span class="id" title="var">a2</span> :: <span class="id" title="var">nil</span> ⟹ <span class="id" title="var">Value_N</span> (<span class="id" title="var">Nmult</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Symbol</span> "minus" ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Value_N</span> <span class="id" title="var">a1</span> :: <span class="id" title="var">Value_N</span> <span class="id" title="var">a2</span> :: <span class="id" title="var">nil</span> ⟹ <span class="id" title="var">Value_N</span> (<span class="id" title="var">Nminus</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Symbol</span> "opp" ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Value_N</span> <span class="id" title="var">a1</span> :: <span class="id" title="var">nil</span> ⟹ <span class="id" title="var">Value_N</span> (<span class="id" title="var">Nopp</span> <span class="id" title="var">a1</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">CstVal</span> <span class="id" title="var">v</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">nil</span> ⟹ <span class="id" title="var">v</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">default_value</span> (<span class="id" title="var">type_of_value</span> <span class="id" title="var">v</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">interp_predicate</span> <span class="id" title="var">p</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">p</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Predicate</span> "&lt;" ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Value_N</span> <span class="id" title="var">a1</span> :: <span class="id" title="var">Value_N</span> <span class="id" title="var">a2</span> :: <span class="id" title="var">nil</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">Ncompare</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Lt</span> ⟹ <span class="id" title="var">true</span> | <span class="id" title="var">_</span> ⟹ <span class="id" title="var">false</span> <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">false</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Predicate</span> "&lt;=" ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Value_N</span> <span class="id" title="var">a1</span> :: <span class="id" title="var">Value_N</span> <span class="id" title="var">a2</span> :: <span class="id" title="var">nil</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">Ncompare</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Gt</span> ⟹ <span class="id" title="var">false</span> | <span class="id" title="var">_</span> ⟹ <span class="id" title="var">true</span> <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">false</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Predicate</span> "&gt;" ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Value_N</span> <span class="id" title="var">a1</span> :: <span class="id" title="var">Value_N</span> <span class="id" title="var">a2</span> :: <span class="id" title="var">nil</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">Ncompare</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Gt</span> ⟹ <span class="id" title="var">true</span> | <span class="id" title="var">_</span> ⟹ <span class="id" title="var">false</span> <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">false</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Predicate</span> "&gt;=" ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Value_N</span> <span class="id" title="var">a1</span> :: <span class="id" title="var">Value_N</span> <span class="id" title="var">a2</span> :: <span class="id" title="var">nil</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">Ncompare</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Lt</span> ⟹ <span class="id" title="var">false</span> | <span class="id" title="var">_</span> ⟹ <span class="id" title="var">true</span> <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">false</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Predicate</span> "=" ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">l</span> ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">l</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Value_N</span> <span class="id" title="var">a1</span> :: <span class="id" title="var">Value_N</span> <span class="id" title="var">a2</span> :: <span class="id" title="var">nil</span> ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">Ncompare</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Eq</span> ⟹ <span class="id" title="var">true</span> | <span class="id" title="var">_</span> ⟹ <span class="id" title="var">false</span> <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Value_string</span> <span class="id" title="var">s1</span> :: <span class="id" title="var">Value_string</span> <span class="id" title="var">s2</span> :: <span class="id" title="var">nil</span> ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">string_compare</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Eq</span> ⟹ <span class="id" title="var">true</span> | <span class="id" title="var">_</span> ⟹ <span class="id" title="var">false</span> <span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">false</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⟹ <span class="id" title="var">false</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <span class="id" title="var">aggregate</span> : <span class="id" title="keyword">Type</span> := <br/>
+&nbsp;&nbsp;| <span class="id" title="var">Aggregate</span> : <span class="id" title="var">string</span> ⟶ <span class="id" title="var">aggregate</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">OAgg</span> : <span class="id" title="var">Oset.Rcd</span> <span class="id" title="var">aggregate</span>.<br/>
+<span class="id" title="tactic">split</span> <span class="id" title="keyword">with</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> ⟹ <span class="id" title="keyword">match</span> <span class="id" title="var">x</span>, <span class="id" title="var">y</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Aggregate</span> <span class="id" title="var">s1</span>, <span class="id" title="var">Aggregate</span> <span class="id" title="var">s2</span> ⟹ <span class="id" title="var">string_compare</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> <span class="id" title="keyword">end</span>).<br/>
+- <span class="id" title="tactic">intros</span> [<span class="id" title="var">s1</span>] [<span class="id" title="var">s2</span>]; <span class="id" title="tactic">generalize</span> (<span class="id" title="var">Oset.eq_bool_ok</span> <span class="id" title="var">Ostring</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>); <span class="id" title="tactic">simpl</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">case</span> (<span class="id" title="var">string_compare</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>).<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <span class="id" title="tactic">f_equal</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">H1</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">injection</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">h</span> ⟹ <span class="id" title="var">h</span>).<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">H1</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">apply</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">injection</span> <span class="id" title="var">H2</span>; <span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">h</span> ⟹ <span class="id" title="var">h</span>).<br/>
+- <span class="id" title="tactic">intros</span> [<span class="id" title="var">s1</span>] [<span class="id" title="var">s2</span>] [<span class="id" title="var">s3</span>]; <span class="id" title="tactic">apply</span> (<span class="id" title="var">Oset.compare_lt_trans</span> <span class="id" title="var">Ostring</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> <span class="id" title="var">s3</span>).<br/>
+- <span class="id" title="tactic">intros</span> [<span class="id" title="var">s1</span>] [<span class="id" title="var">s2</span>]; <span class="id" title="tactic">apply</span> (<span class="id" title="var">Oset.compare_lt_gt</span> <span class="id" title="var">Ostring</span> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>).<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">interp_aggregate</span> <span class="id" title="var">a</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">a</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Aggregate</span> "count" ⟹ <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> (<span class="id" title="var">Tuple.value</span> <span class="id" title="var">T</span>)) ⟹ <span class="id" title="var">Value_N</span> (<span class="id" title="var">N_of_nat</span> (<span class="id" title="var">List.length</span> <span class="id" title="var">l</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Aggregate</span> "sum" ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> (<span class="id" title="var">Tuple.value</span> <span class="id" title="var">T</span>)) ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Value_N</span> (<span class="id" title="var">fold_left</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">acc</span> <span class="id" title="var">x</span> ⟹ <span class="id" title="keyword">match</span> <span class="id" title="var">x</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Value_N</span> <span class="id" title="var">x</span> ⟹ (<span class="id" title="var">acc</span> + <span class="id" title="var">x</span>)%<span class="id" title="var">N</span> | <span class="id" title="var">_</span> ⟹ <span class="id" title="var">acc</span> <span class="id" title="keyword">end</span>) <span class="id" title="var">l</span> 0%<span class="id" title="var">N</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Aggregate</span> "avg" ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<span class="id" title="var">l</span> : <span class="id" title="var">list</span> (<span class="id" title="var">Tuple.value</span> <span class="id" title="var">T</span>)) ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Value_N</span> (<span class="id" title="keyword">let</span> <span class="id" title="var">sum</span> := <span class="id" title="var">fold_left</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">acc</span> <span class="id" title="var">x</span> ⟹ <span class="id" title="keyword">match</span> <span class="id" title="var">x</span> <span class="id" title="keyword">with</span> <span class="id" title="var">Value_N</span> <span class="id" title="var">x</span> ⟹ (<span class="id" title="var">acc</span> + <span class="id" title="var">x</span>)%<span class="id" title="var">N</span> | <span class="id" title="var">_</span> ⟹ <span class="id" title="var">acc</span> <span class="id" title="keyword">end</span>) <span class="id" title="var">l</span> 0%<span class="id" title="var">N</span> <span class="id" title="tactic">in</span> <span class="id" title="var">Ndiv</span> <span class="id" title="var">sum</span> (<span class="id" title="var">N_of_nat</span> (<span class="id" title="var">List.length</span> <span class="id" title="var">l</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Aggregate</span> <span class="id" title="var">_</span> ⟹ <span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Building a database instance, and updating it  
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">mk_tuple</span> <span class="id" title="var">la</span> <span class="id" title="var">f</span> := <span class="id" title="var">mk_tuple</span> <span class="id" title="var">T</span> (<span class="id" title="var">mk_set</span> <span class="id" title="var">FAN</span> <span class="id" title="var">la</span>) <span class="id" title="var">f</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">show_tuple</span> <span class="id" title="var">t</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">List.map</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⟹ (<span class="id" title="var">a</span>, <span class="id" title="var">dot</span> <span class="id" title="var">T</span> <span class="id" title="var">t</span> <span class="id" title="var">a</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Fset.elements</span> <span class="id" title="var">_</span> (<span class="id" title="var">support</span> <span class="id" title="var">_</span> <span class="id" title="var">t</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">show_tuples</span> <span class="id" title="var">x</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">List.map</span> <span class="id" title="var">show_tuple</span> (<span class="id" title="var">Feset.elements</span> (<span class="id" title="var">FTuple</span> <span class="id" title="var">T</span>) <span class="id" title="var">x</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Record</span> <span class="id" title="var">db_state</span> : <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">mk_state</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">_relnames</span> : <span class="id" title="var">list</span> <span class="id" title="var">relname</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">_basesort</span> : <span class="id" title="var">relname</span> ⟶ <span class="id" title="var">Fset.set</span> <span class="id" title="var">FAN</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">_instance</span> : <span class="id" title="var">relname</span> ⟶ <span class="id" title="var">Feset.set</span> (<span class="id" title="var">FTuple</span> <span class="id" title="var">T</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">show_state</span> (<span class="id" title="var">db</span> : <span class="id" title="var">db_state</span>) :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">_relnames</span> <span class="id" title="var">db</span>,<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">List.map</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">r</span> ⟹ (<span class="id" title="var">r</span>, <span class="id" title="var">Fset.elements</span> <span class="id" title="var">_</span> (<span class="id" title="var">_basesort</span> <span class="id" title="var">db</span> <span class="id" title="var">r</span>))) (<span class="id" title="var">_relnames</span> <span class="id" title="var">db</span>),<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="var">List.map</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">r</span> ⟹ (<span class="id" title="var">r</span>, <span class="id" title="var">show_tuples</span> (<span class="id" title="var">_instance</span> <span class="id" title="var">db</span> <span class="id" title="var">r</span>))) (<span class="id" title="var">_relnames</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">init_db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">mk_state</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">nil</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Fset.empty</span> <span class="id" title="var">FAN</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Feset.empty</span> (<span class="id" title="var">FTuple</span> <span class="id" title="var">T</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">create_table</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">db</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">t</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">st</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=<br/>
+&nbsp;&nbsp;<span class="id" title="var">mk_state</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">t</span> :: <span class="id" title="var">_relnames</span> <span class="id" title="var">db</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">Oset.compare</span> <span class="id" title="var">ORN</span> <span class="id" title="var">x</span> <span class="id" title="var">t</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Eq</span> ⟹ <span class="id" title="var">mk_set</span> <span class="id" title="var">FAN</span> <span class="id" title="var">st</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<span class="id" title="var">_</span> ⟹ <span class="id" title="var">_basesort</span> <span class="id" title="var">db</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_instance</span> <span class="id" title="var">db</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">insert_tuple_into</span>  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">db</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">tpl</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">tbl</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">if</span> <span class="id" title="var">Fset.equal</span> <span class="id" title="var">FAN</span> (<span class="id" title="var">support</span> <span class="id" title="var">T</span> <span class="id" title="var">tpl</span>) (<span class="id" title="var">_basesort</span> <span class="id" title="var">db</span> <span class="id" title="var">tbl</span>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">then</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">mk_state</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_relnames</span> <span class="id" title="var">db</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_basesort</span> <span class="id" title="var">db</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⟹<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">Oset.compare</span> <span class="id" title="var">ORN</span> <span class="id" title="var">x</span> <span class="id" title="var">tbl</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">Eq</span> ⟹ <span class="id" title="var">Feset.add</span> (<span class="id" title="var">FTuple</span> <span class="id" title="var">T</span>) <span class="id" title="var">tpl</span> (<span class="id" title="var">_instance</span> <span class="id" title="var">db</span> <span class="id" title="var">tbl</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<span class="id" title="var">_</span> ⟹ <span class="id" title="var">_instance</span> <span class="id" title="var">db</span> <span class="id" title="var">x</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>)<br/>
+&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">else</span>  <span class="id" title="var">db</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">insert_tuples_into</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">db</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">ltpl</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">tbl</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">ltpl</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">nil</span> ⟹ <span class="id" title="var">db</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">t</span> :: <span class="id" title="var">l</span> ⟹ <span class="id" title="var">insert_tuple_into</span> (<span class="id" title="var">insert_tuples_into</span> <span class="id" title="var">db</span> <span class="id" title="var">l</span> <span class="id" title="var">tbl</span>) <span class="id" title="var">t</span> <span class="id" title="var">tbl</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span> := <span class="id" title="var">DatabaseSchema.mk_R</span> (<span class="id" title="var">Tuple.A</span> <span class="id" title="var">T</span>) <span class="id" title="var">ORN</span> (<span class="id" title="var">_basesort</span> <span class="id" title="var">db</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Evaluation of SQL-COQ queries 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">db</span> : <span class="id" title="var">db_state</span>) <span class="id" title="var">q</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="var">eval_sql_query</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">DBS</span> := <span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>) <span class="id" title="var">interp_predicate</span> <span class="id" title="var">interp_symbol</span> <span class="id" title="var">interp_aggregate</span> (<span class="id" title="var">_instance</span> <span class="id" title="var">db</span>) <span class="id" title="var">q</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Some notations, to ease the readability 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">aa</span> := (<span class="id" title="var">Attr_N</span> 0 "a").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">bb</span> := (<span class="id" title="var">Attr_N</span> 0 "b").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">cc</span> := (<span class="id" title="var">Attr_N</span> 0 "c").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">ac</span> := (<span class="id" title="var">Attr_N</span> 0 "ac").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">cb</span> := (<span class="id" title="var">Attr_N</span> 0 "cb").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">b_plus_c</span> := (<span class="id" title="var">Attr_N</span> 0 "b_plus_c").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">a</span> := (<span class="id" title="var">Attr_N</span> 0 "a").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">b</span> := (<span class="id" title="var">Attr_N</span> 0 "b").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">c</span> := (<span class="id" title="var">Attr_N</span> 0 "c").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">a1</span> := (<span class="id" title="var">Attr_N</span> 0 "a1").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">b1</span> := (<span class="id" title="var">Attr_N</span> 0 "b1").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">c1</span> := (<span class="id" title="var">Attr_N</span> 0 "c1").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">a0</span> := (<span class="id" title="var">Attr_N</span> 0 "a0").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">b0</span> := (<span class="id" title="var">Attr_N</span> 0 "b0").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">c0</span> := (<span class="id" title="var">Attr_N</span> 0 "c0").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">a2</span> := (<span class="id" title="var">Attr_N</span> 0 "a2").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">b2</span> := (<span class="id" title="var">Attr_N</span> 0 "b2").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">c2</span> := (<span class="id" title="var">Attr_N</span> 0 "c2").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">a3</span> := (<span class="id" title="var">Attr_N</span> 0 "a3").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">b3</span> := (<span class="id" title="var">Attr_N</span> 0 "b3").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">c3</span> := (<span class="id" title="var">Attr_N</span> 0 "c3").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">a4</span> := (<span class="id" title="var">Attr_N</span> 0 "a4").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">b4</span> := (<span class="id" title="var">Attr_N</span> 0 "b4").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">c4</span> := (<span class="id" title="var">Attr_N</span> 0 "c4").<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">table0</span> :=  (<span class="id" title="var">Rel</span> "table0").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">t0</span> :=  (<span class="id" title="var">Rel</span> "t0").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">table1</span> :=  (<span class="id" title="var">Rel</span> "table1").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">t1</span> :=  (<span class="id" title="var">Rel</span> "t1").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">table2</span> :=  (<span class="id" title="var">Rel</span> "table2").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">t2</span> :=  (<span class="id" title="var">Rel</span> "t2").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">table3</span> :=  (<span class="id" title="var">Rel</span> "table3").<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">t3</span> :=  (<span class="id" title="var">Rel</span> "t3").<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Again, for the constructs of the SQL framework 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Select_Star</span> := (@<span class="id" title="var">Select_Star</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Select_List</span> := (@<span class="id" title="var">Select_List</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Select_As</span> := (@<span class="id" title="var">Select_As</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Att_Ren_Star</span> := (@<span class="id" title="var">Att_Ren_Star</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Att_Ren_List</span> := (@<span class="id" title="var">Att_Ren_List</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Att_As</span> := (@<span class="id" title="var">Att_As</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Sql_Table</span> <span class="id" title="var">db</span> := (@<span class="id" title="var">Sql_Table</span> <span class="id" title="var">predicate</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span> (<span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Sql_Select</span> <span class="id" title="var">db</span> := @<span class="id" title="var">Sql_Select</span> <span class="id" title="var">predicate</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span> (<span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_From_Item</span> <span class="id" title="var">db</span> := (@<span class="id" title="var">From_Item</span> <span class="id" title="var">predicate</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span> (<span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Sql_Atom</span> <span class="id" title="var">db</span> := (@<span class="id" title="var">Sql_Atom</span> <span class="id" title="var">predicate</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span> (<span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span> := (@<span class="id" title="var">Sql_True</span> <span class="id" title="var">predicate</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span> (<span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Sql_Not</span> <span class="id" title="var">db</span> := (@<span class="id" title="var">Sql_Not</span> <span class="id" title="var">predicate</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span> (<span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Sql_Conj</span> <span class="id" title="var">db</span> := (@<span class="id" title="var">Sql_Conj</span> <span class="id" title="var">predicate</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span> (<span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Group_Fine</span> := (@<span class="id" title="var">Group_Fine</span> <span class="id" title="var">symbol</span> <span class="id" title="var">T</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">__Sql_Dot</span> <span class="id" title="var">a</span> := (@<span class="id" title="var">F_Dot</span> <span class="id" title="var">T</span> <span class="id" title="var">symbol</span> <span class="id" title="var">a</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">a</span> := (@<span class="id" title="var">A_Expr</span> <span class="id" title="var">T</span> <span class="id" title="var">_</span> <span class="id" title="var">aggregate</span> (@<span class="id" title="var">F_Dot</span> <span class="id" title="var">T</span> <span class="id" title="var">symbol</span> <span class="id" title="var">a</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Sql_Pred</span> <span class="id" title="var">db</span> := (@<span class="id" title="var">Sql_Pred</span> <span class="id" title="var">predicate</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span> (<span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Sql_In</span> <span class="id" title="var">db</span> := (@<span class="id" title="var">Sql_In</span> <span class="id" title="var">predicate</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span> (<span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_Sql_Quant</span> <span class="id" title="var">db</span> := (@<span class="id" title="var">Sql_Quant</span> <span class="id" title="var">predicate</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span> <span class="id" title="var">T</span> (<span class="id" title="var">MyDBS</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_A_Expr</span> := (@<span class="id" title="var">A_Expr</span> <span class="id" title="var">T</span> <span class="id" title="var">symbol</span> <span class="id" title="var">aggregate</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_F_Expr</span> := (@<span class="id" title="var">F_Expr</span> <span class="id" title="var">T</span> <span class="id" title="var">symbol</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">_CstN</span> <span class="id" title="var">n</span> := (<span class="id" title="var">F_Constant</span> <span class="id" title="var">T</span> <span class="id" title="var">symbol</span> (<span class="id" title="var">Value_N</span> <span class="id" title="var">n</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">CstN</span> <span class="id" title="var">n</span> := (<span class="id" title="var">_A_Expr</span> (<span class="id" title="var">F_Constant</span> <span class="id" title="var">T</span> <span class="id" title="var">symbol</span> (<span class="id" title="var">Value_N</span> <span class="id" title="var">n</span>))).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">t123</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="var">mk_tuple</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">aa</span> :: <span class="id" title="var">bb</span> :: <span class="id" title="var">cc</span> :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⟹ <span class="id" title="keyword">match</span> <span class="id" title="var">x</span> <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">aa</span> ⟹ <span class="id" title="var">Value_N</span> 1 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">bb</span> ⟹ <span class="id" title="var">Value_N</span> 2 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">cc</span> ⟹ <span class="id" title="var">Value_N</span> 3 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <span class="id" title="keyword">end</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">t456</span> := <span class="id" title="var">mk_tuple</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">aa</span> :: <span class="id" title="var">bb</span> :: <span class="id" title="var">cc</span> :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⟹ <span class="id" title="keyword">match</span> <span class="id" title="var">x</span> <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">aa</span> ⟹ <span class="id" title="var">Value_N</span> 4 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">bb</span> ⟹ <span class="id" title="var">Value_N</span> 5 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">cc</span> ⟹ <span class="id" title="var">Value_N</span> 6 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <span class="id" title="keyword">end</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">t778</span> := <span class="id" title="var">mk_tuple</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">aa</span> :: <span class="id" title="var">bb</span> :: <span class="id" title="var">cc</span> :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⟹ <span class="id" title="keyword">match</span> <span class="id" title="var">x</span> <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">aa</span> ⟹ <span class="id" title="var">Value_N</span> 7<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">bb</span> ⟹ <span class="id" title="var">Value_N</span> 7 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">cc</span> ⟹ <span class="id" title="var">Value_N</span> 8 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <span class="id" title="keyword">end</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">t779</span> := <span class="id" title="var">mk_tuple</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">aa</span> :: <span class="id" title="var">bb</span> :: <span class="id" title="var">cc</span> :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⟹ <span class="id" title="keyword">match</span> <span class="id" title="var">x</span> <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">aa</span> ⟹ <span class="id" title="var">Value_N</span> 7<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">bb</span> ⟹ <span class="id" title="var">Value_N</span> 7 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">cc</span> ⟹ <span class="id" title="var">Value_N</span> 9 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <span class="id" title="keyword">end</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">db0</span> := <span class="id" title="var">init_db</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+
+<div class="paragraph"> </div>
+
+create table table1(a integer, b integer, c integer);
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">db1</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="var">create_table</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">create_table</span> <span class="id" title="var">db0</span> <span class="id" title="var">table0</span> (<span class="id" title="var">aa</span> :: <span class="id" title="var">bb</span> :: <span class="id" title="var">cc</span> :: <span class="id" title="var">nil</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">table1</span> (<span class="id" title="var">aa</span> :: <span class="id" title="var">bb</span> :: <span class="id" title="var">cc</span> :: <span class="id" title="var">nil</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+insert into table1 values (1,2,3);
+insert into table1 values (4,5,6);
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">db2</span> := <span class="id" title="var">insert_tuples_into</span> <span class="id" title="var">db1</span> (<span class="id" title="var">t123</span> :: <span class="id" title="var">t456</span> :: <span class="id" title="var">nil</span>) <span class="id" title="var">table1</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">db3</span> := <span class="id" title="var">insert_tuples_into</span> <span class="id" title="var">db2</span> (<span class="id" title="var">t778</span> :: <span class="id" title="var">t779</span> :: <span class="id" title="var">nil</span>) <span class="id" title="var">table1</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+insert into table1 values (4,5);
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">db4</span> := <br/>
+&nbsp;&nbsp;<span class="id" title="var">insert_tuple_into</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">db3</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">mk_tuple</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">aa</span> :: <span class="id" title="var">bb</span> :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⟹ <span class="id" title="keyword">match</span> <span class="id" title="var">x</span> <span class="id" title="keyword">with</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">aa</span> ⟹ <span class="id" title="var">Value_N</span> 4<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">bb</span> ⟹ <span class="id" title="var">Value_N</span> 5 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <span class="id" title="keyword">end</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">table1</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+select t5.a2 as a3 from table5 as t5(a2) 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql0</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">a1</span> := <span class="id" title="var">Attr_N</span> 0 "a1" <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">a2</span> := <span class="id" title="var">Attr_N</span> 0 "a2" <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">a3</span> := <span class="id" title="var">Attr_N</span> 0 "a3" <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">table5</span> := <span class="id" title="var">Rel</span> "table5" <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">tpl</span> <span class="id" title="var">n</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">mk_tuple</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">a1</span> :: <span class="id" title="var">nil</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⟹ <span class="id" title="keyword">match</span> <span class="id" title="var">x</span> <span class="id" title="keyword">with</span> <span class="id" title="var">a1</span> ⟹ <span class="id" title="var">Value_N</span> <span class="id" title="var">n</span> | <span class="id" title="var">_</span> ⟹ <span class="id" title="var">Value_N</span> 0 <span class="id" title="keyword">end</span>) <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">db1</span> := <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">insert_tuples_into</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">create_table</span> <span class="id" title="var">db0</span> <span class="id" title="var">table5</span> (<span class="id" title="var">a1</span> :: <span class="id" title="var">nil</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">tpl</span> 1 :: <span class="id" title="var">tpl</span> 2 :: <span class="id" title="var">tpl</span> 3 :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">table5</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">sql0</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Select_List</span> ((<span class="id" title="var">_Select_As</span> (<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">a2</span>) <span class="id" title="var">a3</span>) :: <span class="id" title="var">nil</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table5</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Att_Ren_List</span> ((<span class="id" title="var">Att_As</span> <span class="id" title="var">T</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span>) :: <span class="id" title="var">nil</span>))) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Group_Fine</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)) <span class="id" title="tactic">in</span><br/>
+<br/>
+&nbsp;&nbsp;<span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql0</span> <span class="id" title="var">db1</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql0</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+select * from table1; 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql1</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Select_Star</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql1</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql1</span> <span class="id" title="var">db2</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql1</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+select * from table1 where aa = bb 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql2</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Select_Star</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_Pred</span> <span class="id" title="var">db</span> (<span class="id" title="var">Predicate</span> "=") (<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">aa</span> :: <span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">bb</span> :: <span class="id" title="var">nil</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql2</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql2</span> <span class="id" title="var">db2</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql2</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Evalution of the same query in different states (that is instances) of the database 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql2'</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql2</span> <span class="id" title="var">db3</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql2'</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql1'</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql1</span> <span class="id" title="var">db3</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql1'</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql1''</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql1</span> <span class="id" title="var">db4</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql1''</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+(4,5) has not been inserted in db4, as specified by insert_tuple.
+ We COULD have made another choice, and null values in that case would correspond 
+ to an attribute which occurs in the sort of the query, but not in the support
+ of the tuple.
+<div class="paragraph"> </div>
+
+ SELECT a, b FROM table1; 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql5</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Select_List</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" title="var">_Select_As</span> (<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">aa</span>) <span class="id" title="var">aa</span>) :: <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Select_As</span> (<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">bb</span>) <span class="id" title="var">bb</span> ) :: <span class="id" title="var">nil</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql5</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql5</span> <span class="id" title="var">db4</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="keyword">vm_compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql5</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+SELECT a, b + c FROM table1; actully, we use
+   SELECT a, b + c AS bplusc FROM table1; 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql6</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Select_List</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" title="var">_Select_As</span> (<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">aa</span>) <span class="id" title="var">aa</span>) :: <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Select_As</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_A_Expr</span> ((<span class="id" title="var">_F_Expr</span> (<span class="id" title="var">Symbol</span> "plus")) ((<span class="id" title="var">__Sql_Dot</span> <span class="id" title="var">bb</span>) :: (<span class="id" title="var">__Sql_Dot</span> <span class="id" title="var">cc</span>) :: <span class="id" title="var">nil</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">b_plus_c</span> ) :: <span class="id" title="var">nil</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql6</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql6</span> <span class="id" title="var">db4</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="tactic">compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql6</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+explicit renaming of attributes
+      select * from table1 as t1(a1 , b1 , c1 ); 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql7</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Select_Star</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Att_Ren_List</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Att_As</span> <span class="id" title="var">aa</span> <span class="id" title="var">a1</span> :: <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">_Att_As</span> <span class="id" title="var">bb</span> <span class="id" title="var">b1</span> :: <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">_Att_As</span> <span class="id" title="var">cc</span> <span class="id" title="var">c1</span> :: <span class="id" title="var">nil</span>))) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql7</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql7</span> <span class="id" title="var">db4</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="keyword">vm_compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql7</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+select * from table1 as t1 where t1.a &lt; 4
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql8</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Select_Star</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Pred</span> <span class="id" title="var">db</span> (<span class="id" title="var">Predicate</span> "&lt;") <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">aa</span> :: <span class="id" title="var">CstN</span> 4 :: <span class="id" title="var">nil</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql8</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql8</span> <span class="id" title="var">db4</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="keyword">vm_compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql8</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+select * from table1 as t1 where t1.a &gt; 4
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql9</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Select_Star</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Pred</span> <span class="id" title="var">db</span> (<span class="id" title="var">Predicate</span> "&gt;") <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">aa</span> :: <span class="id" title="var">CstN</span> 4 :: <span class="id" title="var">nil</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql9</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql9</span> <span class="id" title="var">db4</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="keyword">vm_compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql9</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+select * from table1 as t1 where t1.a = 4
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql10</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Select_Star</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Pred</span> <span class="id" title="var">db</span> (<span class="id" title="var">Predicate</span> "=") <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">aa</span> :: <span class="id" title="var">CstN</span> 4 :: <span class="id" title="var">nil</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql10</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql10</span> <span class="id" title="var">db4</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="keyword">vm_compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql10</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+select * from table1 as t1 where t1.a &lt;&gt; 4
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql11</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Select_Star</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Not</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Atom</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Pred</span> <span class="id" title="var">db</span> (<span class="id" title="var">Predicate</span> "=") <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">aa</span> :: <span class="id" title="var">CstN</span> 4 :: <span class="id" title="var">nil</span>))))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql11</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql11</span> <span class="id" title="var">db4</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="keyword">vm_compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql11</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+select * from table1 as t1 where t1.a &lt; 4 or t1.a &gt;= 7
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql12</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Select_Star</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Conj</span> <span class="id" title="var">Or_F</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Atom</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Pred</span> <span class="id" title="var">db</span> (<span class="id" title="var">Predicate</span> "&lt;") <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">aa</span> :: <span class="id" title="var">CstN</span> 4 :: <span class="id" title="var">nil</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Atom</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Pred</span> <span class="id" title="var">db</span> (<span class="id" title="var">Predicate</span> "&gt;=") <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Dot</span> <span class="id" title="var">aa</span> :: <span class="id" title="var">CstN</span> 7 :: <span class="id" title="var">nil</span>))))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql12</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql12</span> <span class="id" title="var">db4</span>).<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="keyword">vm_compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql12</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+select * from table1 where 2 * a &lt; 12 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql13</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Select_Star</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Pred</span> <span class="id" title="var">db</span> (<span class="id" title="var">Predicate</span> "&lt;") <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_A_Expr</span> (((<span class="id" title="var">_F_Expr</span> (<span class="id" title="var">Symbol</span> "mult")) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_CstN</span> 2 :: <span class="id" title="var">__Sql_Dot</span> <span class="id" title="var">aa</span> :: <span class="id" title="var">nil</span>))) :: <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">CstN</span> 12) :: <span class="id" title="var">nil</span>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">eval_sql13</span> := <span class="id" title="var">eval_sql_query_in_state</span> (<span class="id" title="var">sql13</span> <span class="id" title="var">db4</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Eval</span> <span class="id" title="keyword">vm_compute</span> <span class="id" title="tactic">in</span> (<span class="id" title="var">show_tuples</span> <span class="id" title="var">eval_sql13</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">a_plus_b</span> := <br/>
+&nbsp;&nbsp;(<span class="id" title="var">_A_Expr</span> ((<span class="id" title="var">_F_Expr</span> (<span class="id" title="var">Symbol</span> "plus")) ((<span class="id" title="var">__Sql_Dot</span> <span class="id" title="var">a</span>) :: (<span class="id" title="var">__Sql_Dot</span> <span class="id" title="var">b</span>) :: <span class="id" title="var">nil</span>))).<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">a0_plus_c1</span> :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">_A_Expr</span> ((<span class="id" title="var">_F_Expr</span> (<span class="id" title="var">Symbol</span> "plus")) ((<span class="id" title="var">__Sql_Dot</span> <span class="id" title="var">a0</span>) :: (<span class="id" title="var">__Sql_Dot</span> <span class="id" title="var">c1</span>) :: <span class="id" title="var">nil</span>))).<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">rho0</span> := (<span class="id" title="var">Att_Ren_List</span> ((<span class="id" title="var">Att_As</span> <span class="id" title="var">T</span> <span class="id" title="var">a</span> <span class="id" title="var">a0</span>) :: (<span class="id" title="var">Att_As</span> <span class="id" title="var">T</span> <span class="id" title="var">b</span> <span class="id" title="var">b0</span>) ::  (<span class="id" title="var">Att_As</span> <span class="id" title="var">T</span> <span class="id" title="var">c</span> <span class="id" title="var">c0</span>) ::  <span class="id" title="var">nil</span>)).<br/>
+<span class="id" title="keyword">Notation</span> <span class="id" title="var">rho1</span> := (<span class="id" title="var">Att_Ren_List</span> ((<span class="id" title="var">Att_As</span> <span class="id" title="var">T</span> <span class="id" title="var">a</span> <span class="id" title="var">a1</span>) :: (<span class="id" title="var">Att_As</span> <span class="id" title="var">T</span> <span class="id" title="var">b</span> <span class="id" title="var">b1</span>) ::  (<span class="id" title="var">Att_As</span> <span class="id" title="var">T</span> <span class="id" title="var">c</span> <span class="id" title="var">c1</span>) ::  <span class="id" title="var">nil</span>)).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+select * from from tbl1<span class="inlinecode">[*]</span> where (a+b) &gt;= all (select (a0 + c1) as a0_plus_c1 from tbl0<span class="inlinecode">[<span class="id" title="var">rho0</span>]</span>, tbl1<span class="inlinecode">[<span class="id" title="var">rho1</span>]</span>) 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">sql17</span> <span class="id" title="var">db</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="var">_Sql_Select</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Select_Star</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; ((<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">_Att_Ren_Star</span>) :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Quant</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Forall_F</span> (<span class="id" title="var">db</span> := <span class="id" title="var">db</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Predicate</span> "&gt;=") (<span class="id" title="var">a_plus_b</span> :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Select</span> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Select_List</span> (<span class="id" title="var">_Select_As</span> <span class="id" title="var">a0_plus_c1</span> (<span class="id" title="var">Attr_N</span> 0 "a0_plus_c1") :: <span class="id" title="var">nil</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_From_Item</span> (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table0</span>) <span class="id" title="var">rho0</span> :: <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">_From_Item</span>  (<span class="id" title="var">_Sql_Table</span> <span class="id" title="var">table1</span>) <span class="id" title="var">rho1</span> :: <span class="id" title="var">nil</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">_Group_Fine</span>  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)))))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <span class="id" title="var">_Group_Fine</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; (<span class="id" title="var">_Sql_Atom</span> (<span class="id" title="var">_Sql_True</span> <span class="id" title="var">db</span>)).<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <span class="id" title="var">Try</span>.<br/>
+
+<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

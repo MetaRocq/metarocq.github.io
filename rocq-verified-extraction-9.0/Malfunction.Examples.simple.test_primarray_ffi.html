@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library Malfunction.Examples.simple.test_primarray_ffi</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">Malfunction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">utils_array</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="keyword">All</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">bytestring</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Primitive</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">VerifiedExtraction</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">OCamlFFI</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Build</span> <span class="id" title="var">Directory</span> "_build".<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">PrimInt63</span> <span class="id" title="var">Uint63</span> <span class="id" title="var">PArray</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">val</span> : <span class="id" title="var">array</span> <span class="id" title="var">nat</span> := <span class="id" title="var">PArray.make</span> 3 2.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">gettest</span> : <span class="id" title="var">nat</span> := <span class="id" title="var">PArray.get</span> <span class="id" title="var">val</span> 2.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">settest</span> : <span class="id" title="var">array</span> <span class="id" title="var">nat</span> := <span class="id" title="var">PArray.set</span> <span class="id" title="var">val</span> 2 1.<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">getsettest</span> : <span class="id" title="var">nat</span> := <span class="id" title="var">PArray.get</span> <span class="id" title="var">settest</span> 2.<br/>
+
+<br/>
+<span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-primitive-turned-into-axiom".<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">prim_array_get</span> := (<span class="id" title="var">print_int</span> (<span class="id" title="var">int_of_nat</span> <span class="id" title="var">gettest</span>)).<br/>
+<span class="id" title="keyword">Definition</span> <span class="id" title="var">prim_array_get_set</span> := (<span class="id" title="var">print_int</span> (<span class="id" title="var">int_of_nat</span> <span class="id" title="var">getsettest</span>)).<br/>
+
+<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">typed</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> <span class="id" title="var">val</span> "val.mlf".<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">typed</span> -<span class="id" title="var">unsafe</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <span class="id" title="var">prim_array_get</span> "prim_array_get.mlf".<br/>
+<span class="id" title="var">Verified</span> <span class="id" title="keyword">Extraction</span> -<span class="id" title="var">fmt</span> -<span class="id" title="var">typed</span> -<span class="id" title="var">compile</span>-<span class="id" title="keyword">with</span>-<span class="id" title="var">coq</span> -<span class="id" title="var">run</span> <span class="id" title="var">prim_array_get_set</span> "prim_array_get_set.mlf".<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>
