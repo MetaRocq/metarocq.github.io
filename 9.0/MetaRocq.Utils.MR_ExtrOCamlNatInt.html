@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.Utils.MR_ExtrOCamlNatInt</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Extraction of <span class="inlinecode"><span class="id" title="var">nat</span></span> into Ocaml's <span class="inlinecode"><span class="id" title="var">int</span></span> 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="var">Rocq.extraction.Extraction</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Arith</span> <span class="id" title="var">Even</span> <span class="id" title="var">Div2</span> <span class="id" title="var">EqNat</span> <span class="id" title="var">Euclid</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">ExtrOcamlBasic</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Disclaimer: trying to obtain efficient certified programs
+    by extracting <span class="inlinecode"><span class="id" title="var">nat</span></span> into <span class="inlinecode"><span class="id" title="var">int</span></span> is definitively *not* a good idea:
+
+<div class="paragraph"> </div>
+
+<ul class="doclist">
+<li> This is just a syntactic adaptation, many things can go wrong,
+
+</li>
+</ul>
+    such as name captures (e.g. if you have a constant named "int"
+    in your development, or a module named "Pervasives"). See bug 2878.
+
+    - Since [int] is bounded while [nat] is (theoretically) infinite,
+    you have to make sure by yourself that your program will not
+    manipulate numbers greater than [max_int]. Otherwise you should
+    consider the translation of [nat] into [big_int].
+
+    - Moreover, the mere translation of [nat] into [int] does not
+    change the complexity of functions. For instance, [mult] stays
+    quadratic. To mitigate this, we propose here a few efficient (but
+    uncertified) realizers for some common functions over [nat].
+
+    This file is hence provided mainly for testing / prototyping
+    purpose. For serious use of numbers in extracted programs,
+    you are advised to use either coq advanced representations
+    (positive, Z, N, BigN, BigZ) or modular/axiomatic representation.
+
+<div class="paragraph"> </div>
+
+ Mapping of <span class="inlinecode"><span class="id" title="var">nat</span></span> into <span class="inlinecode"><span class="id" title="var">int</span></span>. The last string corresponds to
+    a <span class="inlinecode"><span class="id" title="var">nat_case</span></span>, see documentation of <span class="inlinecode"><span class="id" title="keyword">Extract</span></span> <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <span class="id" title="var">nat</span> ⇒ <span class="id" title="var">int</span> [ "0" "Stdlib.succ" ]<br/>
+&nbsp;"(fun fO fS n -&gt; if n=0 then fO () else fS (n-1))".<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Efficient (but uncertified) versions for usual <span class="inlinecode"><span class="id" title="var">nat</span></span> functions 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">plus</span> ⇒ "(+)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">pred</span> ⇒ "fun n -&gt; Stdlib.max 0 (n-1)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">minus</span> ⇒ "fun n m -&gt; Stdlib.max 0 (n-m)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">mult</span> ⇒ "( * )".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">max</span> ⇒ "Stdlib.max".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">min</span> ⇒ "Stdlib.min".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Nat.eqb</span> ⇒ "(=)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">EqNat.eq_nat_decide</span> ⇒ "(=)".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Peano_dec.eq_nat_dec</span> ⇒ "(=)".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Nat.compare</span> ⇒<br/>
+&nbsp;"fun n m -&gt; if n=m then Eq else if n&lt;m then Lt else Gt".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Compare_dec.leb</span> ⇒ "(&lt;=)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Compare_dec.le_lt_dec</span> ⇒ "(&lt;=)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Compare_dec.lt_dec</span> ⇒ "(&lt;)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Compare_dec.lt_eq_lt_dec</span> ⇒<br/>
+&nbsp;"fun n m -&gt; if n&gt;m then None else Some (n&lt;m)".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Nat.Even_or_Odd</span> ⇒ "fun n -&gt; n mod 2 = 0".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Nat.div2</span> ⇒ "fun n -&gt; n/2".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <span class="id" title="var">Euclid.diveucl</span> ⇒ "(int * int)" [ "" ].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Euclid.eucl_dev</span> ⇒ "fun n m -&gt; (m/n, m mod n)".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Euclid.quotient</span> ⇒ "fun n m -&gt; m/n".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Euclid.modulo</span> ⇒ "fun n m -&gt; m mod n".<br/>
+
+<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

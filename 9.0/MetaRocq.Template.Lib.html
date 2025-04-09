@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.Template.Lib</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Common.uGraph.html#"><span class="id" title="library">uGraph</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Template.Ast.html#"><span class="id" title="library">Ast</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.html#"><span class="id" title="library">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.Loader.html#"><span class="id" title="library">Loader</span></a> <a class="idref" href="MetaRocq.Template.Checker.html#"><span class="id" title="library">Checker</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">local</span>] <span class="id" title="keyword">Set</span> <span class="id" title="var">Universe</span> <span class="id" title="var">Polymorphism</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab100"></a><h1 class="section">Commands.</h1>
+
+<div class="paragraph"> </div>
+
+ Quote a term. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="0faa74817474570c0775076c11731cac" class="idref" href="#0faa74817474570c0775076c11731cac"><span class="id" title="notation">&quot;</span></a>'$quote' x" :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:((<span class="id" title="keyword">let</span> <span class="id" title="var">p</span> <span class="id" title="var">y</span> := <span class="id" title="tactic">exact</span> <span class="id" title="var">y</span> <span class="id" title="tactic">in</span> <span class="id" title="var">quote_term</span> <span class="id" title="var">x</span> <span class="id" title="var">p</span>))<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Run a template program. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="040396ce57513fcdf456c9d2bddc4ffb" class="idref" href="#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">&quot;</span></a>'$run' f" :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">p</span> <span class="id" title="var">y</span> := <span class="id" title="tactic">exact</span> <span class="id" title="var">y</span> <span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">run_template_program</span> <span class="id" title="var">f</span> <span class="id" title="var">p</span><br/>
+&nbsp;&nbsp;) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quote and term and its environment. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="a208ccb1af5574713946f5573c9e998c" class="idref" href="#a208ccb1af5574713946f5573c9e998c"><span class="id" title="notation">&quot;</span></a>'$quote_rec' x" :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">$</span></a><a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">run</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">(</span></a><a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmQuoteRec"><span class="id" title="definition">tmQuoteRec</span></a> <span class="id" title="var">x</span><a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">)</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Unquote a term (using <span class="inlinecode"><span class="id" title="var">tmUnquote</span></span>). 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="7df597da2ab6bf04a810425fec36eb7a" class="idref" href="#7df597da2ab6bf04a810425fec36eb7a"><span class="id" title="notation">&quot;</span></a>'$unquote' x" :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">ltac</span>:(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">p</span> <span class="id" title="var">y</span> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">y</span> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#existT_typed_term"><span class="id" title="constructor">existT_typed_term</span></a> ?<span class="id" title="var">T</span> ?<span class="id" title="var">b</span> ⇒ <span class="id" title="tactic">exact</span> <span class="id" title="var">b</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">in</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">run_template_program</span> (<a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmUnquote"><span class="id" title="constructor">tmUnquote</span></a> <span class="id" title="var">x</span>) <span class="id" title="var">p</span><br/>
+&nbsp;&nbsp;) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Unquote a term (using <span class="inlinecode"><span class="id" title="var">tmUnquoteTyped</span></span>). 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="b9cf3833064a167eab200902bea2f40d" class="idref" href="#b9cf3833064a167eab200902bea2f40d"><span class="id" title="notation">&quot;</span></a>'$unquote' x : T" :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">$</span></a><a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">run</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">(</span></a><a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmUnquoteTyped"><span class="id" title="constructor">tmUnquoteTyped</span></a> <span class="id" title="var">T</span> <span class="id" title="var">x</span><a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">)</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">T</span> <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 100, <span class="id" title="var">x</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="var">unfold_toplevel</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> replaces the constant <span class="inlinecode"><span class="id" title="var">x</span></span> by its definition.
+    Fails if <span class="inlinecode"><span class="id" title="var">x</span></span> is not a constant. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="unfold_toplevel" class="idref" href="#unfold_toplevel"><span class="id" title="definition">unfold_toplevel</span></a> {<a id="A:1" class="idref" href="#A:1"><span class="id" title="binder">A</span></a>} (<a id="x:2" class="idref" href="#x:2"><span class="id" title="binder">x</span></a> : <a class="idref" href="MetaRocq.Template.Lib.html#A:1"><span class="id" title="variable">A</span></a>) : <a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#TemplateMonad"><span class="id" title="inductive">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#A:1"><span class="id" title="variable">A</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmBind"><span class="id" title="constructor">tmBind</span></a> (<a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmQuote"><span class="id" title="constructor">tmQuote</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#x:2"><span class="id" title="variable">x</span></a>) (<span class="id" title="keyword">fun</span> <a id="y:3" class="idref" href="#y:3"><span class="id" title="binder">y</span></a> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaRocq.Template.Lib.html#y:3"><span class="id" title="variable">y</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <a class="idref" href="MetaRocq.Template.Ast.html#tConst"><span class="id" title="constructor">tConst</span></a> <span class="id" title="var">na</span> <span class="id" title="var">_</span> ⇒ <a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmEval"><span class="id" title="constructor">tmEval</span></a> (<a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#unfold"><span class="id" title="constructor">Common.unfold</span></a> <span class="id" title="var">na</span>) <a class="idref" href="MetaRocq.Template.Lib.html#x:2"><span class="id" title="variable">x</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmFail"><span class="id" title="constructor">tmFail</span></a> "unfold_toplevel: not a constant"%<span class="id" title="var">bs</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Quote the <i>definition</i> of a constant. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="c533acd4cb5dcc5caa64cf9100e8038b" class="idref" href="#c533acd4cb5dcc5caa64cf9100e8038b"><span class="id" title="notation">&quot;</span></a>'$quote_def' x" :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">$</span></a><a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">run</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">(</span></a><a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmBind"><span class="id" title="constructor">tmBind</span></a> (<a class="idref" href="MetaRocq.Template.Lib.html#unfold_toplevel"><span class="id" title="definition">unfold_toplevel</span></a> <span class="id" title="var">x</span>) <a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmQuote"><span class="id" title="constructor">tmQuote</span></a><a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">)</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="var">get_kername</span></span> <span class="inlinecode"><span class="id" title="var">t</span></span> returns the kernel name of <span class="inlinecode"><span class="id" title="var">t</span></span>.
+    Fails if <span class="inlinecode"><span class="id" title="var">t</span></span> is not of the form <span class="inlinecode"><span class="id" title="var">tConst</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="get_kername" class="idref" href="#get_kername"><span class="id" title="definition">get_kername</span></a> (<a id="t:5" class="idref" href="#t:5"><span class="id" title="binder">t</span></a> : <a class="idref" href="MetaRocq.Template.Ast.html#term"><span class="id" title="inductive">term</span></a>) : <a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#TemplateMonad"><span class="id" title="inductive">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Common.Kernames.html#kername"><span class="id" title="definition">kername</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaRocq.Template.Lib.html#t:5"><span class="id" title="variable">t</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="MetaRocq.Template.Ast.html#tConst"><span class="id" title="constructor">tConst</span></a> <span class="id" title="var">c</span> <span class="id" title="var">u</span> ⇒ <a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmReturn"><span class="id" title="constructor">tmReturn</span></a> <span class="id" title="var">c</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmFail"><span class="id" title="constructor">tmFail</span></a> "get_kername: not a constant"%<span class="id" title="var">bs</span><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Get the kernel name of a constant. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="d6032e87490c49c1f0533ca80687e140" class="idref" href="#d6032e87490c49c1f0533ca80687e140"><span class="id" title="notation">&quot;</span></a>'$name' x" :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">$</span></a><a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">run</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">(</span></a><a class="idref" href="MetaRocq.Template.Lib.html#get_kername"><span class="id" title="definition">get_kername</span></a> (<a class="idref" href="MetaRocq.Template.Lib.html#0faa74817474570c0775076c11731cac"><span class="id" title="notation">$</span></a><a class="idref" href="MetaRocq.Template.Lib.html#0faa74817474570c0775076c11731cac"><span class="id" title="notation">quote</span></a> <span class="id" title="var">x</span>)<a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">)</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Recursively quote the <i>definition</i> of a constant. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="147b5a685e88058c2ef1ccf8b8c48c96" class="idref" href="#147b5a685e88058c2ef1ccf8b8c48c96"><span class="id" title="notation">&quot;</span></a>'$quote_def_rec' x" :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">$</span></a><a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">run</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">(</span></a><a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmBind"><span class="id" title="constructor">tmBind</span></a> (<a class="idref" href="MetaRocq.Template.Lib.html#unfold_toplevel"><span class="id" title="definition">unfold_toplevel</span></a> <span class="id" title="var">x</span>) <a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmQuoteRec"><span class="id" title="definition">tmQuoteRec</span></a><a class="idref" href="MetaRocq.Template.Lib.html#040396ce57513fcdf456c9d2bddc4ffb"><span class="id" title="notation">)</span></a>)<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab101"></a><h1 class="section">Useful shortcuts.</h1>
+
+<div class="paragraph"> </div>
+
+ <span class="inlinecode"><span class="id" title="var">term_eqb</span></span> <span class="inlinecode"><span class="id" title="var">t1</span></span> <span class="inlinecode"><span class="id" title="var">t2</span></span> checks if <span class="inlinecode"><span class="id" title="var">t1</span></span> and <span class="inlinecode"><span class="id" title="var">t2</span></span> are equal modulo alpha equivalence. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="term_eqb" class="idref" href="#term_eqb"><span class="id" title="definition">term_eqb</span></a> (<a id="t1:7" class="idref" href="#t1:7"><span class="id" title="binder">t1</span></a> <a id="t2:8" class="idref" href="#t2:8"><span class="id" title="binder">t2</span></a> : <a class="idref" href="MetaRocq.Template.Ast.html#term"><span class="id" title="inductive">term</span></a>) :=<br/>
+&nbsp;&nbsp;@<a class="idref" href="MetaRocq.Template.Checker.html#eq_term"><span class="id" title="definition">eq_term</span></a> <a class="idref" href="MetaRocq.Common.config.html#default_checker_flags"><span class="id" title="instance">config.default_checker_flags</span></a> <a class="idref" href="MetaRocq.Common.uGraph.html#init_graph"><span class="id" title="definition">init_graph</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#t1:7"><span class="id" title="variable">t1</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#t2:8"><span class="id" title="variable">t2</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Short-form notation for <span class="inlinecode"><span class="id" title="var">tLambda</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="tLam" class="idref" href="#tLam"><span class="id" title="abbreviation">tLam</span></a> <span class="id" title="var">x</span> <span class="id" title="var">A</span> <span class="id" title="var">b</span> :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="MetaRocq.Template.Ast.html#tLambda"><span class="id" title="constructor">tLambda</span></a> {| <a class="idref" href="MetaRocq.Common.BasicAst.html#binder_name"><span class="id" title="projection">binder_name</span></a> := <a class="idref" href="MetaRocq.Common.BasicAst.html#nNamed"><span class="id" title="constructor">nNamed</span></a> <span class="id" title="var">x</span>; <a class="idref" href="MetaRocq.Common.BasicAst.html#binder_relevance"><span class="id" title="projection">binder_relevance</span></a> := <a class="idref" href="MetaRocq.Common.BasicAst.html#Relevant"><span class="id" title="constructor">Relevant</span></a> |} <span class="id" title="var">A</span> <span class="id" title="var">b</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Short-form notation for <span class="inlinecode"><span class="id" title="var">tProd</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="tPro" class="idref" href="#tPro"><span class="id" title="abbreviation">tPro</span></a> <span class="id" title="var">x</span> <span class="id" title="var">A</span> <span class="id" title="var">b</span> :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="MetaRocq.Template.Ast.html#tProd"><span class="id" title="constructor">tProd</span></a> {| <a class="idref" href="MetaRocq.Common.BasicAst.html#binder_name"><span class="id" title="projection">binder_name</span></a> := <a class="idref" href="MetaRocq.Common.BasicAst.html#nNamed"><span class="id" title="constructor">nNamed</span></a> <span class="id" title="var">x</span>; <a class="idref" href="MetaRocq.Common.BasicAst.html#binder_relevance"><span class="id" title="projection">binder_relevance</span></a> := <a class="idref" href="MetaRocq.Common.BasicAst.html#Relevant"><span class="id" title="constructor">Relevant</span></a> |} <span class="id" title="var">A</span> <span class="id" title="var">b</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Short-form notation for <span class="inlinecode"><span class="id" title="var">tLetIn</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Notation</span> <a id="tLet" class="idref" href="#tLet"><span class="id" title="abbreviation">tLet</span></a> <span class="id" title="var">x</span> <span class="id" title="var">A</span> <span class="id" title="var">t</span> <span class="id" title="var">b</span> :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="MetaRocq.Template.Ast.html#tLetIn"><span class="id" title="constructor">tLetIn</span></a> {| <a class="idref" href="MetaRocq.Common.BasicAst.html#binder_name"><span class="id" title="projection">binder_name</span></a> := <a class="idref" href="MetaRocq.Common.BasicAst.html#nNamed"><span class="id" title="constructor">nNamed</span></a> <span class="id" title="var">x</span>; <a class="idref" href="MetaRocq.Common.BasicAst.html#binder_relevance"><span class="id" title="projection">binder_relevance</span></a> := <a class="idref" href="MetaRocq.Common.BasicAst.html#Relevant"><span class="id" title="constructor">Relevant</span></a> |} <span class="id" title="var">t</span> <span class="id" title="var">A</span> <span class="id" title="var">b</span>).<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id=":::'__'" class="idref" href="#:::'__'"><span class="id" title="notation">&quot;</span></a>'__'" := (<a class="idref" href="MetaRocq.Template.Ast.html#hole"><span class="id" title="definition">hole</span></a>) (<span class="id" title="keyword">no</span> <span class="id" title="keyword">associativity</span>, <span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab102"></a><h1 class="section">Monadic notations.</h1>
+
+<div class="paragraph"> </div>
+
+ These notations replace the default ones from Utils.monad_utils
+    by equivalent ones which are specialized to the TemplateMonad.
+    This helps avoid typeclass errors. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Module</span> <a id="TemplateMonadNotations" class="idref" href="#TemplateMonadNotations"><span class="id" title="module">TemplateMonadNotations</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Declare Scope</span> <span class="id" title="var">tm_scope</span>.<br/>
+<span class="id" title="keyword">Delimit</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">tm_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">tm</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="9710bfdedd7eb520ca890de64ce35698" class="idref" href="#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">&quot;</span></a>c &gt;&gt;= f" :=<br/>
+&nbsp;&nbsp;(<a class="idref" href="MetaRocq.Template.TemplateMonad.Core.html#tmBind"><span class="id" title="constructor">tmBind</span></a> <span class="id" title="var">c</span> <span class="id" title="var">f</span>)<br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 50, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">tm_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="5ab1ada1ba06cde2c3c49007987e2916" class="idref" href="#5ab1ada1ba06cde2c3c49007987e2916"><span class="id" title="notation">&quot;</span></a>f =&lt;&lt; c" :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">c</span> <a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">&gt;&gt;=</span></a> <span class="id" title="var">f</span>)%<span class="id" title="var">tm</span><br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 51, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">tm_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="8883113ce17cb8f4045d8ff530c26220" class="idref" href="#8883113ce17cb8f4045d8ff530c26220"><span class="id" title="notation">&quot;</span></a>'mlet' x &lt;- c1 ;; c2" :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">c1</span> <a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">&gt;&gt;=</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <a id="x:9" class="idref" href="#x:9"><span class="id" title="binder">x</span></a> ⇒ <span class="id" title="var">c2</span><a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">)</span></a>)%<span class="id" title="var">tm</span><br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 100, <span class="id" title="var">c1</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>, <span class="id" title="var">x</span> <span class="id" title="tactic">pattern</span>) : <span class="id" title="var">tm_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="507a5f367f1bf8073963725c99f880e4" class="idref" href="#507a5f367f1bf8073963725c99f880e4"><span class="id" title="notation">&quot;</span></a>'mlet' ' pat &lt;- c1 ;; c2" :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">c1</span> <a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">&gt;&gt;=</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <a id="x:10" class="idref" href="#x:10"><span class="id" title="binder">x</span></a> ⇒ <span class="id" title="keyword">match</span> <a class="idref" href="MetaRocq.Template.Lib.html#x:10"><span class="id" title="variable">x</span></a> <span class="id" title="keyword">with</span> <span class="id" title="var">pat</span> ⇒ <span class="id" title="var">c2</span> <span class="id" title="keyword">end</span><a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">)</span></a>)%<span class="id" title="var">tm</span><br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 100, <span class="id" title="var">pat</span> <span class="id" title="tactic">pattern</span>, <span class="id" title="var">c1</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">tm_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="619c272b4a8f068ff5144259944a5e93" class="idref" href="#619c272b4a8f068ff5144259944a5e93"><span class="id" title="notation">&quot;</span></a>x &lt;- c1 ;; c2" :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">c1</span> <a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">&gt;&gt;=</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <a id="x:12" class="idref" href="#x:12"><span class="id" title="binder">x</span></a> ⇒ <span class="id" title="var">c2</span><a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">)</span></a>)%<span class="id" title="var">tm</span><br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 100, <span class="id" title="var">c1</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">tm_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="89e56e6a422d676a3ba5b96f80e20d7e" class="idref" href="#89e56e6a422d676a3ba5b96f80e20d7e"><span class="id" title="notation">&quot;</span></a>' pat &lt;- c1 ;; c2" :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">c1</span> <a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">&gt;&gt;=</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">(</span></a><span class="id" title="keyword">fun</span> <a id="x:13" class="idref" href="#x:13"><span class="id" title="binder">x</span></a> ⇒ <span class="id" title="keyword">match</span> <a class="idref" href="MetaRocq.Template.Lib.html#x:13"><span class="id" title="variable">x</span></a> <span class="id" title="keyword">with</span> <span class="id" title="var">pat</span> ⇒ <span class="id" title="var">c2</span> <span class="id" title="keyword">end</span><a class="idref" href="MetaRocq.Template.Lib.html#9710bfdedd7eb520ca890de64ce35698"><span class="id" title="notation">)</span></a>)%<span class="id" title="var">tm</span><br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 100, <span class="id" title="var">pat</span> <span class="id" title="tactic">pattern</span>, <span class="id" title="var">c1</span> <span class="id" title="tactic">at</span> <span class="id" title="var">next</span> <span class="id" title="keyword">level</span>, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">tm_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a id="d79d2deefe3854164160ef72a5179f24" class="idref" href="#d79d2deefe3854164160ef72a5179f24"><span class="id" title="notation">&quot;</span></a>e1 ;; e2" :=<br/>
+&nbsp;&nbsp;(<span class="id" title="var">_</span> <a class="idref" href="MetaRocq.Template.Lib.html#619c272b4a8f068ff5144259944a5e93"><span class="id" title="notation">&lt;-</span></a> <span class="id" title="var">e1</span>%<span class="id" title="var">tm</span> <a class="idref" href="MetaRocq.Template.Lib.html#619c272b4a8f068ff5144259944a5e93"><span class="id" title="notation">;;</span></a> <span class="id" title="var">e2</span>%<span class="id" title="var">tm</span>)%<span class="id" title="var">tm</span><br/>
+&nbsp;&nbsp;(<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 100, <span class="id" title="tactic">right</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">tm_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="MetaRocq.Template.Lib.html#TemplateMonadNotations"><span class="id" title="module">TemplateMonadNotations</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a id="lab103"></a><h1 class="section">Packed inductives and constructors.</h1>
+
+<div class="paragraph"> </div>
+
+ In MetaRocq.Template the information related to an inductive type is spread accross
+    three different datatypes : <span class="inlinecode"><span class="id" title="var">inductive</span></span>, <span class="inlinecode"><span class="id" title="var">one_inductive_body</span></span> and <span class="inlinecode"><span class="id" title="var">mutual_inductive_body</span></span>.
+    One often needs access to all three : <span class="inlinecode"><span class="id" title="var">packed_inductive</span></span> packages them in a single datatype. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Record</span> <a id="packed_inductive" class="idref" href="#packed_inductive"><span class="id" title="record">packed_inductive</span></a> :=<br/>
+&nbsp;&nbsp;{ <a id="pi_ind" class="idref" href="#pi_ind"><span class="id" title="projection">pi_ind</span></a> : <a class="idref" href="MetaRocq.Common.Kernames.html#inductive"><span class="id" title="record">inductive</span></a><br/>
+&nbsp;&nbsp;; <a id="pi_body" class="idref" href="#pi_body"><span class="id" title="projection">pi_body</span></a> : <a class="idref" href="MetaRocq.Template.Ast.html#Env.one_inductive_body"><span class="id" title="record">one_inductive_body</span></a><br/>
+&nbsp;&nbsp;; <a id="pi_mbody" class="idref" href="#pi_mbody"><span class="id" title="projection">pi_mbody</span></a> : <a class="idref" href="MetaRocq.Template.Ast.html#Env.mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a> }.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Same as <span class="inlinecode"><span class="id" title="var">packed_inductive</span></span> but for constructors. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Record</span> <a id="packed_constructor" class="idref" href="#packed_constructor"><span class="id" title="record">packed_constructor</span></a> :=<br/>
+&nbsp;&nbsp;{ </div>
+
+<div class="doc">
+The inductive this constructor belongs to. 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<a id="pc_pi" class="idref" href="#pc_pi"><span class="id" title="projection">pc_pi</span></a> : <a class="idref" href="MetaRocq.Template.Lib.html#packed_inductive"><span class="id" title="record">packed_inductive</span></a><br/>
+&nbsp;&nbsp;; </div>
+
+<div class="doc">
+The index of this constructor. 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<a id="pc_idx" class="idref" href="#pc_idx"><span class="id" title="projection">pc_idx</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
+&nbsp;&nbsp;; </div>
+
+<div class="doc">
+The body of this constructor. 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<a id="pc_body" class="idref" href="#pc_body"><span class="id" title="projection">pc_body</span></a> : <a class="idref" href="MetaRocq.Template.Ast.html#Env.constructor_body"><span class="id" title="record">constructor_body</span></a> }.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="var">pi_ctors</span></span> <span class="inlinecode"><span class="id" title="var">pi</span></span> returns the list of <span class="inlinecode"><span class="id" title="var">packed_constructors</span></span> of the
+    packed inductive <span class="inlinecode"><span class="id" title="var">pi</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="pi_ctors" class="idref" href="#pi_ctors"><span class="id" title="definition">pi_ctors</span></a> (<a id="pi:23" class="idref" href="#pi:23"><span class="id" title="binder">pi</span></a> : <a class="idref" href="MetaRocq.Template.Lib.html#packed_inductive"><span class="id" title="record">packed_inductive</span></a>) : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#packed_constructor"><span class="id" title="record">packed_constructor</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaRocq.Utils.MRList.html#mapi"><span class="id" title="definition">mapi</span></a> (<span class="id" title="keyword">fun</span> <a id="i:24" class="idref" href="#i:24"><span class="id" title="binder">i</span></a> <a id="ctor:25" class="idref" href="#ctor:25"><span class="id" title="binder">ctor</span></a> ⇒ {| <a class="idref" href="MetaRocq.Template.Lib.html#pc_pi"><span class="id" title="projection">pc_pi</span></a> := <a class="idref" href="MetaRocq.Template.Lib.html#pi:23"><span class="id" title="variable">pi</span></a> ; <a class="idref" href="MetaRocq.Template.Lib.html#pc_idx"><span class="id" title="projection">pc_idx</span></a> := <a class="idref" href="MetaRocq.Template.Lib.html#i:24"><span class="id" title="variable">i</span></a> ; <a class="idref" href="MetaRocq.Template.Lib.html#pc_body"><span class="id" title="projection">pc_body</span></a> := <a class="idref" href="MetaRocq.Template.Lib.html#ctor:25"><span class="id" title="variable">ctor</span></a> |}) <a class="idref" href="MetaRocq.Template.Lib.html#pi:23"><span class="id" title="variable">pi</span></a>.(<a class="idref" href="MetaRocq.Template.Lib.html#pi_body"><span class="id" title="projection">pi_body</span></a>).(<a class="idref" href="MetaRocq.Template.Ast.html#Env.ind_ctors"><span class="id" title="projection">ind_ctors</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><span class="id" title="var">pi_block</span></span> <span class="inlinecode"><span class="id" title="var">pi</span></span> returns the list of packed inductives in the same block
+    as <span class="inlinecode"><span class="id" title="var">pi</span></span>, including <span class="inlinecode"><span class="id" title="var">pi</span></span> itself, ordered from first to last. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a id="pi_block" class="idref" href="#pi_block"><span class="id" title="definition">pi_block</span></a> (<a id="pi:26" class="idref" href="#pi:26"><span class="id" title="binder">pi</span></a> : <a class="idref" href="MetaRocq.Template.Lib.html#packed_inductive"><span class="id" title="record">packed_inductive</span></a>) : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaRocq.Template.Lib.html#packed_inductive"><span class="id" title="record">packed_inductive</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="MetaRocq.Utils.MRList.html#mapi"><span class="id" title="definition">mapi</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <a id="i:27" class="idref" href="#i:27"><span class="id" title="binder">i</span></a> <a id="body:28" class="idref" href="#body:28"><span class="id" title="binder">body</span></a> ⇒<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{| <a class="idref" href="MetaRocq.Template.Lib.html#pi_ind"><span class="id" title="projection">pi_ind</span></a> := {| <a class="idref" href="MetaRocq.Common.Kernames.html#inductive_mind"><span class="id" title="projection">inductive_mind</span></a> := <a class="idref" href="MetaRocq.Template.Lib.html#pi:26"><span class="id" title="variable">pi</span></a>.(<a class="idref" href="MetaRocq.Template.Lib.html#pi_ind"><span class="id" title="projection">pi_ind</span></a>).(<a class="idref" href="MetaRocq.Common.Kernames.html#inductive_mind"><span class="id" title="projection">inductive_mind</span></a>) ; <a class="idref" href="MetaRocq.Common.Kernames.html#inductive_ind"><span class="id" title="projection">inductive_ind</span></a> := <a class="idref" href="MetaRocq.Template.Lib.html#i:27"><span class="id" title="variable">i</span></a> |}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;  <a class="idref" href="MetaRocq.Template.Lib.html#pi_body"><span class="id" title="projection">pi_body</span></a> := <a class="idref" href="MetaRocq.Template.Lib.html#body:28"><span class="id" title="variable">body</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;  <a class="idref" href="MetaRocq.Template.Lib.html#pi_mbody"><span class="id" title="projection">pi_mbody</span></a> := <a class="idref" href="MetaRocq.Template.Lib.html#pi:26"><span class="id" title="variable">pi</span></a>.(<a class="idref" href="MetaRocq.Template.Lib.html#pi_mbody"><span class="id" title="projection">pi_mbody</span></a>) |})<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Lib.html#pi:26"><span class="id" title="variable">pi</span></a>.(<a class="idref" href="MetaRocq.Template.Lib.html#pi_mbody"><span class="id" title="projection">pi_mbody</span></a>).(<a class="idref" href="MetaRocq.Template.Ast.html#Env.ind_bodies"><span class="id" title="projection">ind_bodies</span></a>).<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

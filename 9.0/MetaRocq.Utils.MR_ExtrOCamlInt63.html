@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.Utils.MR_ExtrOCamlInt63</h1>
+
+<div class="code">
+
+<br/>
+</div>
+
+<div class="doc">
+Extraction to OCaml of native 63-bit machine integers. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.Numbers.Cyclic.Int63.Uint63.html#"><span class="id" title="library">Uint63</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.Numbers.Cyclic.Int63.Sint63.html#"><span class="id" title="library">Sint63</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.extraction.Extraction.html#"><span class="id" title="library">Extraction</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Basic data types used by some primitive operators. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ⇒ <span class="id" title="var">bool</span> [ <span class="id" title="var">true</span> <span class="id" title="var">false</span> ].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#prod"><span class="id" title="inductive">prod</span></a> ⇒ "( * )" [ "" ].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Numbers.Cyclic.Int63.CarryType.html#carry"><span class="id" title="inductive">DoubleType.carry</span></a> ⇒ "MRUint63.carry" [ "MRUint63.C0" "MRUint63.C1" ].<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Primitive types and operators. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.int</span> ⇒ "MRUint63.t".<br/>
+<span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Uint63.int</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.lsl</span> ⇒ "MRUint63.l_sl".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.lsr</span> ⇒ "MRUint63.l_sr".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.asr</span> ⇒ "MRUint63.a_sr".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.land</span> ⇒ "MRUint63.l_and".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.lor</span> ⇒ "MRUint63.l_or".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.lxor</span> ⇒ "MRUint63.l_xor".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.add</span> ⇒ "MRUint63.add".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.sub</span> ⇒ "MRUint63.sub".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.mul</span> ⇒ "MRUint63.mul".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.mulc</span> ⇒ "MRUint63.mulc".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.div</span> ⇒ "MRUint63.div".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.mod</span> ⇒ "MRUint63.rem".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.div</span> ⇒ "MRUint63.divs".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.rem</span> ⇒ "MRUint63.rems".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.eqb</span> ⇒ "MRUint63.equal".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.ltb</span> ⇒ "MRUint63.lt".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.leb</span> ⇒ "MRUint63.le".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.ltb</span> ⇒ "MRUint63.lts".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.leb</span> ⇒ "MRUint63.les".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.addc</span> ⇒ "MRUint63.addc".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.addcarryc</span> ⇒ "MRUint63.addcarryc".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.subc</span> ⇒ "MRUint63.subc".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.subcarryc</span> ⇒ "MRUint63.subcarryc".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.diveucl</span> ⇒ "MRUint63.diveucl".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.diveucl_21</span> ⇒ "MRUint63.div21".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.addmuldiv</span> ⇒ "MRUint63.addmuldiv".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.compare</span> ⇒<br/>
+&nbsp;&nbsp;"fun x y -&gt; match MRUint63.compare x y with 0 -&gt; Eq | c when c &lt; 0 -&gt; Lt | _ -&gt; Gt".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Sint63.compare</span> ⇒<br/>
+&nbsp;&nbsp;"fun x y -&gt; match MRUint63.compares x y with 0 -&gt; Eq | c when c &lt; 0 -&gt; Lt | _ -&gt; Gt".<br/>
+
+<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.head0</span> ⇒ "MRUint63.head0".<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.tail0</span> ⇒ "MRUint63.tail0".<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

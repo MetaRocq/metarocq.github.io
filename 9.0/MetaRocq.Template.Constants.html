@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.Template.Constants</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Utils.bytestring.html#"><span class="id" title="library">bytestring</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Common.BasicAst.html#"><span class="id" title="library">BasicAst</span></a> <a class="idref" href="MetaRocq.Common.uGraph.html#"><span class="id" title="library">uGraph</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Template.TemplateMonad.html#"><span class="id" title="library">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Extractable.html#"><span class="id" title="library">TemplateMonad.Extractable</span></a>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">bytestring.String.t</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.string.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">bytestring.String.EmptyString</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.string.nil</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">bytestring.String.String</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.string.cons</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Byte.byte</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.byte.type</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.nat</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.nat.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.O</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.nat.zero</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.S</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.nat.succ</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.bool</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.bool.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.true</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.bool.true</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.false</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.bool.false</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.option</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.option.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.None</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.option.none</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.Some</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.option.some</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.my_None</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.option_instance.none</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.my_Some</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.option_instance.some</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.list</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.list.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.nil</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.list.nil</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.cons</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.list.cons</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.prod</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.prod.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.pair</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.prod.intro</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.sum</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.sum.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.inl</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.sum.inl</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.inr</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.sum.inr</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.unit</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.unit.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Datatypes.tt</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.unit.intro</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Specif.sigT</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.sigma.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">Corelib.Init.Specif.existT</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.sigma.intro</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.existT_typed_term</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.sigma.typed_term</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">BinNums.positive</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.pos.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">BinNums.xI</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.pos.xI</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">BinNums.xO</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.pos.xO</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">BinNums.xH</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.pos.xH</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">BinNums.Z</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.Z.type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">BinNums.Zpos</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.Z.pos</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">BinNums.Zneg</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.Z.neg</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">BinNums.Z0</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.Z.zero</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.relevance</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.relevance</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.Relevant</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Relevant</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.Irrelevant</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Irrelevant</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.mkBindAnn</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mkBindAnn</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.aname</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.aname</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.nAnon</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.nAnon</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.nNamed</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.nNamed</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.ident</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.ident</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.kername</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.kername</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.modpath</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.modpath</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.MPfile</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.MPfile</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.MPbound</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.MPbound</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.MPdot</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.MPdot</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.inductive</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.inductive</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.mkInd</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mkInd</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.mkProjection</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mkProjection</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.global_reference</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.global_reference</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.VarRef</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.VarRef</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.ConstRef</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.ConstRef</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.IndRef</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.IndRef</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Kernames.ConstructRef</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.ConstructRef</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.name</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.name</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.def</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.def</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.mkdef</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mkdef</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.cast_kind</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.cast_kind</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.case_info</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.case_info</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.mk_case_info</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mk_case_info</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.VmCast</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.VmCast</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.NativeCast</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.NativeCast</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.Cast</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Cast</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.recursivity_kind</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.recursivity_kind</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.Finite</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Finite</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.CoFinite</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.CoFinite</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.BiFinite</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.BiFinite</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.fresh_evar_id</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.fresh_evar_id</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.allowed_eliminations</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.allowed_eliminations</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.fresh_level</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.fresh_level</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.fresh_universe</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.fresh_universe</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.IntoSProp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.IntoSProp</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.IntoPropSProp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.IntoPropSProp</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.IntoSetPropSProp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.IntoSetPropSProp</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.IntoAny</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.IntoAny</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintType.Lt</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.constraints.Lt</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintType.Le0</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.constraints.Le0</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintType.Le</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.constraints.Le</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintType.Eq</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.constraints.Eq</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Universe.t</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.universe.t</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Universe.make'</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.universe.make_of_level</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Universe.from_kernel_repr</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.universe.from_kernel_repr</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.LevelSetProp.of_list</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.universe.of_list</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Level.t</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.level.t</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Level.level</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.level.Level</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.PropLevel.t</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.level.prop_level_type</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.PropLevel.lProp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.level.lprop</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.PropLevel.lSProp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.level.lsprop</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Level.lzero</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.level.lzero</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Level.lvar</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.level.Var</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.LevelExprSet.Mkt</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.levelexprset.mkt</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Build_nonEmptyLevelExprSet</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.universe.build0</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Sort.sSProp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.sort.sprop</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Sort.sProp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.sort.prop</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Sort.sType</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.sort.type</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Variance.t</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.variance.t</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Variance.Irrelevant</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.variance.Irrelevant</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Variance.Covariant</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.variance.Covariant</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Variance.Invariant</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.variance.Invariant</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.universes_decl</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.universes_decl</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Monomorphic_ctx</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Monomorphic_ctx</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Polymorphic_ctx</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Polymorphic_ctx</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintSet.t_</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.ConstraintSet.t_</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintSet.empty</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.ConstraintSet.empty</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintSet.add</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.ConstraintSet.add</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintSet.elements</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.ConstraintSet.elements</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.UContext.t</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.UContext.t</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.UContext.make</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.UContext.make</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.AUContext.t</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.AUContext.t</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.AUContext.make</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.AUContext.make</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.LevelSet.t_</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.LevelSet.t</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.LevelSet.elements</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.LevelSet.elements</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.UnivConstraint.make</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.make_univ_constraint</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.uGraph.init_graph</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.graph.init</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.uGraph.gc_of_constraints</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.graph.add_global_constraints</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.predicate</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.predicate</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.mk_predicate</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mk_predicate</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.branch</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.branch</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.mk_branch</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mk_branch</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.term</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.term</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tRel</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tRel</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tVar</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tVar</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tEvar</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tEvar</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tSort</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tSort</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tCast</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tCast</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tProd</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tProd</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tLambda</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tLambda</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tLetIn</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tLetIn</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tApp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tApp</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tConst</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tConst</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tInd</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tInd</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tConstruct</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tConstruct</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tCase</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tCase</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tProj</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tProj</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tFix</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tFix</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tCoFix</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tCoFix</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tInt</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tInt</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tFloat</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tFloat</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tString</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tString</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tArray</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tArray</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.parameter_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.parameter_entry</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Build_parameter_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_parameter_entry</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.definition_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.definition_entry</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Build_definition_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_definition_entry</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Monomorphic_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Monomorphic_entry</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.Polymorphic_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Polymorphic_entry</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.constant_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.constant_entry</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.ParameterEntry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.ParameterEntry</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.DefinitionEntry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.DefinitionEntry</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.one_inductive_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.one_inductive_entry</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Build_one_inductive_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_one_inductive_entry</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.mutual_inductive_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mutual_inductive_entry</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Build_mutual_inductive_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_mutual_inductive_entry</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.context_decl</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.context_decl</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.mkdecl</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mkdecl</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.context</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.context</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.constructor_body</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.constructor_body</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.Build_constructor_body</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_constructor_body</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.Build_projection_body</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_projection_body</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.projection_body</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.projection_body</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.one_inductive_body</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.one_inductive_body</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.Build_one_inductive_body</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_one_inductive_body</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.mutual_inductive_body</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mutual_inductive_body</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.Build_mutual_inductive_body</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_mutual_inductive_body</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.constant_body</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.constant_body</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.Build_constant_body</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_constant_body</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.global_decl</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.global_decl</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.ConstantDecl</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.ConstantDecl</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.InductiveDecl</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.InductiveDecl</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Environment.Retroknowledge.mk_retroknowledge</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.mk_retroknowledge</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.mk_global_env</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_global_env</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.global_env</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.global_env</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.global_env_ext</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.global_env_ext</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.program</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.program</span>.<br/>
+
+<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.cbv</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.cbv</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.cbn</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.cbn</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.hnf</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.hnf</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.all</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.all</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.lazy</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.lazy</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.unfold</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.unfold</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.local</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.hints.local</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.export</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.hints.export</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.global</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.hints.global</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmReturn</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmReturn</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmBind</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmBind</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmPrint</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmPrint</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmMsg</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmMsg</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmFail</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmFail</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmEval</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmEval</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmVariable</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmVariable</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmLemma</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmLemma</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmDefinitionRed_</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmDefinitionRed_</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmAxiomRed</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmAxiomRed</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmMkDefinition</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmMkDefinition</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmMkInductive</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmMkInductive</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmFreshName</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmFreshName</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmLocate</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmLocate</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmLocateModule</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmLocateModule</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmLocateModType</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmLocateModType</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmCurrentModPath</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmCurrentModPath</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuote</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuote</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteRec</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteRec</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteRecTransp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteRecTransp</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteInductive</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteInductive</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteConstant</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteConstant</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteUniverses</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteUniverses</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteModule</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteModule</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteModFunctor</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteModFunctor</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteModType</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteModType</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmUnquote</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmUnquote</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmUnquoteTyped</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmUnquoteTyped</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmInferInstance</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmInferInstance</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmExistingInstance</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmExistingInstance</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmTestQuote</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmTestQuote</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmTestUnquote</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmTestUnquote</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteDefinition</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteDefinition</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteDefinitionRed</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteDefinitionRed</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteRecDefinition</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteRecDefinition</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmReturn</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmReturn</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmBind</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmBind</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmPrint</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmPrint</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmMsg</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmMsg</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmFail</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmFail</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmEval</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmEval</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmDefinition_</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmDefinition_</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmAxiom</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmAxiom</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmLemma</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmLemma</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmFreshName</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmFreshName</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmLocate</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmLocate</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmLocateModule</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmLocateModule</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmLocateModType</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmLocateModType</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmCurrentModPath</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmCurrentModPath</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmQuoteInductive</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmQuoteInductive</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmQuoteUniverses</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmQuoteUniverses</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmQuoteConstant</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmQuoteConstant</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmQuoteModule</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmQuoteModule</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmQuoteModFunctor</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmQuoteModFunctor</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmQuoteModType</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmQuoteModType</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmInductive</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmInductive</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmInferInstance</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmInferInstance</span>.<br/>
+<span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmExistingInstance</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmExistingInstance</span>.<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>

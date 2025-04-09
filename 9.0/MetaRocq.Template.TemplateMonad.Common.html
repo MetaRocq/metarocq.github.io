@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<link href="coqdocjs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript" src="coqdocjs.js"></script>
+</head>
+
+<body onload="document.getElementById('content').focus()">
+  <div id="header">
+    <span class="left">
+      <span class="modulename"> <script> document.write(document.title) </script> </span>
+    </span>
+
+    <span class="button" id="toggle-proofs"></span>
+
+    <span class="right">
+      <a href="../">Project Page</a>
+      <a href="./index.html"> Index </a>
+      <a href="./toc.html"> Table of Contents </a>
+    </span>
+</div>
+    <div id="content" tabindex="-1" onblur="document.getElementById('content').focus()">
+    <div id="main">
+<h1 class="libtitle">Library MetaRocq.Template.TemplateMonad.Common</h1>
+
+<div class="code">
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Template.Ast.html#"><span class="id" title="library">Ast</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Local</span> <span class="id" title="keyword">Set</span> <span class="id" title="var">Universe</span> <span class="id" title="var">Polymorphism</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Reduction strategy to apply, beware <span class="inlinecode"><span class="id" title="tactic">cbv</span></span>, <span class="inlinecode"><span class="id" title="var">cbn</span></span> and <span class="inlinecode"><span class="id" title="tactic">lazy</span></span> are <i>strong</i>. 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Monomorphic Variant</span> <a id="reductionStrategy" class="idref" href="#reductionStrategy"><span class="id" title="inductive">reductionStrategy</span></a> : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;<a id="cbv" class="idref" href="#cbv"><span class="id" title="constructor">cbv</span></a> | <a id="cbn" class="idref" href="#cbn"><span class="id" title="constructor">cbn</span></a> | <a id="hnf" class="idref" href="#hnf"><span class="id" title="constructor">hnf</span></a> | <a id="all" class="idref" href="#all"><span class="id" title="constructor">all</span></a> | <a id="lazy" class="idref" href="#lazy"><span class="id" title="constructor">lazy</span></a> | <a id="unfold" class="idref" href="#unfold"><span class="id" title="constructor">unfold</span></a> (<a id="i:3" class="idref" href="#i:3"><span class="id" title="binder">i</span></a> : <a class="idref" href="MetaRocq.Common.Kernames.html#kername"><span class="id" title="definition">kername</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Monomorphic Variant</span> <a id="hint_locality" class="idref" href="#hint_locality"><span class="id" title="inductive">hint_locality</span></a> : <span class="id" title="keyword">Set</span> :=<br/>
+&nbsp;&nbsp;<a id="local" class="idref" href="#local"><span class="id" title="constructor">local</span></a> | <a id="export" class="idref" href="#export"><span class="id" title="constructor">export</span></a> | <a id="global" class="idref" href="#global"><span class="id" title="constructor">global</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Record</span> <a id="typed_term" class="idref" href="#typed_term"><span class="id" title="record">typed_term</span></a> : <span class="id" title="keyword">Type</span> := <span class="id" title="var">existT_typed_term</span><br/>
+{ <a id="my_projT1" class="idref" href="#my_projT1"><span class="id" title="projection">my_projT1</span></a> : <span class="id" title="keyword">Type</span><br/>
+; <a id="my_projT2" class="idref" href="#my_projT2"><span class="id" title="projection">my_projT2</span></a> : <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#my_projT1:7"><span class="id" title="method">my_projT1</span></a><br/>
+}.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a id="option_instance" class="idref" href="#option_instance"><span class="id" title="definition, inductive"><span id="option_instance_rect" class="id"><span id="option_instance_ind" class="id"><span id="option_instance_rec" class="id"><span id="option_instance_sind" class="id">option_instance</span></span></span></span></span></a> (<a id="A:9" class="idref" href="#A:9"><span class="id" title="binder">A</span></a> : <span class="id" title="keyword">Type</span>) : <span class="id" title="keyword">Type</span> := <a id="my_Some" class="idref" href="#my_Some"><span class="id" title="constructor">my_Some</span></a> : <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#A:9"><span class="id" title="variable">A</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#option_instance:10"><span class="id" title="inductive">option_instance</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#A:9"><span class="id" title="variable">A</span></a> | <a id="my_None" class="idref" href="#my_None"><span class="id" title="constructor">my_None</span></a> : <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#option_instance:10"><span class="id" title="inductive">option_instance</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#A:9"><span class="id" title="variable">A</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> {<span class="id" title="var">A</span>} <span class="id" title="var">a</span>.<br/>
+<span class="id" title="keyword">Arguments</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a> {<span class="id" title="var">A</span>}.<br/>
+
+<br/>
+<span class="id" title="keyword">Record</span> <a id="TMInstance" class="idref" href="#TMInstance"><span class="id" title="record">TMInstance@</span></a>{<span class="id" title="var">t</span> <span class="id" title="var">u</span> <span class="id" title="var">r</span>} :=<br/>
+{ <a id="TemplateMonad" class="idref" href="#TemplateMonad"><span class="id" title="projection">TemplateMonad</span></a> : <span class="id" title="var">Type@</span>{<span class="id" title="var">t</span>} <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <span class="id" title="var">Type@</span>{<span class="id" title="var">r</span>}<br/>
+; <a id="tmReturn" class="idref" href="#tmReturn"><span class="id" title="projection">tmReturn</span></a> : <span class="id" title="keyword">∀</span> {<a id="A:14" class="idref" href="#A:14"><span class="id" title="binder">A</span></a>:<span class="id" title="var">Type@</span>{<span class="id" title="var">t</span>}}, <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#A:14"><span class="id" title="variable">A</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#A:14"><span class="id" title="variable">A</span></a><br/>
+; <a id="tmBind" class="idref" href="#tmBind"><span class="id" title="projection">tmBind</span></a> : <span class="id" title="keyword">∀</span> {<a id="A:16" class="idref" href="#A:16"><span class="id" title="binder">A</span></a> <a id="B:17" class="idref" href="#B:17"><span class="id" title="binder">B</span></a> : <span class="id" title="var">Type@</span>{<span class="id" title="var">t</span>}}, <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#A:16"><span class="id" title="variable">A</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">(</span></a><a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#A:16"><span class="id" title="variable">A</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#B:17"><span class="id" title="variable">B</span></a><a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">)</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#B:17"><span class="id" title="variable">B</span></a><br/>
+<br/>
+<br/>
+; <a id="tmFail" class="idref" href="#tmFail"><span class="id" title="projection">tmFail</span></a> : <span class="id" title="keyword">∀</span> {<a id="A:19" class="idref" href="#A:19"><span class="id" title="binder">A</span></a>:<span class="id" title="var">Type@</span>{<span class="id" title="var">t</span>}}, <a class="idref" href="MetaRocq.Utils.bytestring.html#string"><span class="id" title="abbreviation">string</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#A:19"><span class="id" title="variable">A</span></a><br/>
+<br/>
+<br/>
+; <a id="tmFreshName" class="idref" href="#tmFreshName"><span class="id" title="projection">tmFreshName</span></a> : <a class="idref" href="MetaRocq.Common.Kernames.html#ident"><span class="id" title="definition">ident</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Common.Kernames.html#ident"><span class="id" title="definition">ident</span></a><br/>
+<br/>
+; <a id="tmLocate" class="idref" href="#tmLocate"><span class="id" title="projection">tmLocate</span></a> : <a class="idref" href="MetaRocq.Common.Kernames.html#qualid"><span class="id" title="definition">qualid</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaRocq.Common.Kernames.html#global_reference"><span class="id" title="inductive">global_reference</span></a>)<br/>
+; <a id="tmLocateModule" class="idref" href="#tmLocateModule"><span class="id" title="projection">tmLocateModule</span></a> : <a class="idref" href="MetaRocq.Common.Kernames.html#qualid"><span class="id" title="definition">qualid</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaRocq.Common.Kernames.html#modpath"><span class="id" title="inductive">modpath</span></a>)<br/>
+; <a id="tmLocateModType" class="idref" href="#tmLocateModType"><span class="id" title="projection">tmLocateModType</span></a> : <a class="idref" href="MetaRocq.Common.Kernames.html#qualid"><span class="id" title="definition">qualid</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> (<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="MetaRocq.Common.Kernames.html#modpath"><span class="id" title="inductive">modpath</span></a>)<br/>
+; <a id="tmCurrentModPath" class="idref" href="#tmCurrentModPath"><span class="id" title="projection">tmCurrentModPath</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Common.Kernames.html#modpath"><span class="id" title="inductive">modpath</span></a><br/>
+<br/>
+<br/>
+; <a id="tmQuoteInductive" class="idref" href="#tmQuoteInductive"><span class="id" title="projection">tmQuoteInductive</span></a> : <a class="idref" href="MetaRocq.Common.Kernames.html#kername"><span class="id" title="definition">kername</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.Ast.html#Env.mutual_inductive_body"><span class="id" title="record">mutual_inductive_body</span></a><br/>
+; <a id="tmQuoteUniverses" class="idref" href="#tmQuoteUniverses"><span class="id" title="projection">tmQuoteUniverses</span></a> : <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Common.Universes.html#ConstraintSet.t"><span class="id" title="definition">ConstraintSet.t</span></a><br/>
+; <a id="tmQuoteConstant" class="idref" href="#tmQuoteConstant"><span class="id" title="projection">tmQuoteConstant</span></a> : <a class="idref" href="MetaRocq.Common.Kernames.html#kername"><span class="id" title="definition">kername</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>  <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.Ast.html#Env.constant_body"><span class="id" title="record">constant_body</span></a><br/>
+<br/>
+<br/>
+; <a id="tmMkInductive" class="idref" href="#tmMkInductive"><span class="id" title="projection">tmMkInductive</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>  <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.Ast.html#mutual_inductive_entry"><span class="id" title="record">mutual_inductive_entry</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a><br/>
+<br/>
+; <a id="tmExistingInstance" class="idref" href="#tmExistingInstance"><span class="id" title="projection">tmExistingInstance</span></a> : <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#hint_locality"><span class="id" title="inductive">hint_locality</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Common.Kernames.html#global_reference"><span class="id" title="inductive">global_reference</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"><span class="id" title="notation">→</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#TemplateMonad:13"><span class="id" title="method">TemplateMonad</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#unit"><span class="id" title="inductive">unit</span></a><br/>
+}.<br/>
+
+<br/>
+<span class="id" title="keyword">Monomorphic Variant</span> <a id="import_status" class="idref" href="#import_status"><span class="id" title="inductive">import_status</span></a> : <span class="id" title="keyword">Set</span> :=<br/>
+| <a id="ImportDefaultBehavior" class="idref" href="#ImportDefaultBehavior"><span class="id" title="constructor">ImportDefaultBehavior</span></a><br/>
+| <a id="ImportNeedQualified" class="idref" href="#ImportNeedQualified"><span class="id" title="constructor">ImportNeedQualified</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Monomorphic Variant</span> <a id="locality" class="idref" href="#locality"><span class="id" title="inductive">locality</span></a> :=<br/>
+| <a id="Discharge" class="idref" href="#Discharge"><span class="id" title="constructor">Discharge</span></a><br/>
+| <a id="Global" class="idref" href="#Global"><span class="id" title="constructor">Global</span></a> (<span class="id" title="var">_</span> : <a class="idref" href="MetaRocq.Template.TemplateMonad.Common.html#import_status"><span class="id" title="inductive">import_status</span></a>).<br/>
+</div>
+</div>
+<div id="footer">
+  Generated by <a href="http://coq.inria.fr/">coqdoc</a> and improved with <a href="https://github.com/tebbi/coqdocjs">CoqdocJS</a>
+</div>
+</div>
+</body>
+
+</html>
