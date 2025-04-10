@@ -28,29 +28,27 @@
 <h1 class="libtitle">Library MetaRocq.Template.All</h1>
 
 <div class="code">
-<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Utils.monad_utils.html#"><span class="id" title="library">monad_utils</span></a>   <span class="comment">(*&nbsp;Monadic&nbsp;notations&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Utils.MRUtils.html#"><span class="id" title="library">MRUtils</span></a>. <span class="comment">(*&nbsp;Utility&nbsp;functions&nbsp;*)</span><br/>
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Utils.monad_utils.html#"><span class="id" title="library">monad_utils</span></a>   <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Utils.MRUtils.html#"><span class="id" title="library">MRUtils</span></a>. 
 <br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Common.uGraph.html#"><span class="id" title="library">uGraph</span></a>        <span class="comment">(*&nbsp;The&nbsp;graph&nbsp;of&nbsp;universes&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Common.BasicAst.html#"><span class="id" title="library">BasicAst</span></a>      <span class="comment">(*&nbsp;The&nbsp;basic&nbsp;AST&nbsp;structures&nbsp;*)</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Common.uGraph.html#"><span class="id" title="library">uGraph</span></a>        <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Common.BasicAst.html#"><span class="id" title="library">BasicAst</span></a>      .<br/>
 
 <br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Ast.html#"><span class="id" title="library">Ast</span></a>           <span class="comment">(*&nbsp;The&nbsp;term&nbsp;AST&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.AstUtils.html#"><span class="id" title="library">AstUtils</span></a>      <span class="comment">(*&nbsp;Utilities&nbsp;on&nbsp;the&nbsp;AST&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Induction.html#"><span class="id" title="library">Induction</span></a>     <span class="comment">(*&nbsp;Induction&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.LiftSubst.html#"><span class="id" title="library">LiftSubst</span></a>     <span class="comment">(*&nbsp;Lifting&nbsp;and&nbsp;substitution&nbsp;for&nbsp;terms&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.UnivSubst.html#"><span class="id" title="library">UnivSubst</span></a>     <span class="comment">(*&nbsp;Substitution&nbsp;of&nbsp;universe&nbsp;instances&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Typing.html#"><span class="id" title="library">Typing</span></a>        <span class="comment">(*&nbsp;Typing&nbsp;judgment&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.TemplateMonad.html#"><span class="id" title="library">TemplateMonad</span></a> <span class="comment">(*&nbsp;The&nbsp;TemplateMonad&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Loader.html#"><span class="id" title="library">Loader</span></a>        <span class="comment">(*&nbsp;The&nbsp;plugin&nbsp;*)</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Lib.html#"><span class="id" title="library">Lib</span></a>           <span class="comment">(*&nbsp;Meta-programming&nbsp;facilities&nbsp;*)</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Ast.html#"><span class="id" title="library">Ast</span></a>           <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.AstUtils.html#"><span class="id" title="library">AstUtils</span></a>      <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Induction.html#"><span class="id" title="library">Induction</span></a>     <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.LiftSubst.html#"><span class="id" title="library">LiftSubst</span></a>     <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.UnivSubst.html#"><span class="id" title="library">UnivSubst</span></a>     <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Typing.html#"><span class="id" title="library">Typing</span></a>        <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.TemplateMonad.html#"><span class="id" title="library">TemplateMonad</span></a> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Loader.html#"><span class="id" title="library">Loader</span></a>        <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="MetaRocq.Template.Lib.html#"><span class="id" title="library">Lib</span></a>           .<br/>
 </div>
 </div>
 <div id="footer">

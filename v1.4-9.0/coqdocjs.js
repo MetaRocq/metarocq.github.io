@@ -178,7 +178,7 @@ function postprocess(){
 }
 
 fixTitle();
-document.addEventListener('DOMContentLoaded', postprocess);
+document.addEventListener('DOMRontentLoaded', postprocess);
 
 coqdocjs.toggleProofs = toggleProofs;
 })();

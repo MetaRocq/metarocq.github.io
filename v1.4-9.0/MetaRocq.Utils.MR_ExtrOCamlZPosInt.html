@@ -30,34 +30,34 @@
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Extraction</span> <span class="id" title="library">NArith</span> <span class="id" title="library">ZArith</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.extraction.Extraction.html#"><span class="id" title="library">Extraction</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.NArith.NArith.html#"><span class="id" title="library">NArith</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.ZArith.ZArith.html#"><span class="id" title="library">ZArith</span></a>.<br/>
 
 <br/>
 </div>
 
 <div class="doc">
 Disclaimer: trying to obtain efficient certified programs
-    by extracting <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a></span> into <span class="inlinecode"><span class="id" title="abbreviation">int</span></span> is definitively *not* a good idea.
+    by extracting <span class="inlinecode"><span class="id" title="var">Z</span></span> into <span class="inlinecode"><span class="id" title="var">int</span></span> is definitively *not* a good idea.
     See the Disclaimer in <span class="inlinecode"><span class="id" title="var">ExtrOcamlNatInt</span></span>. 
 <div class="paragraph"> </div>
 
- Mapping of <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.String2pos.html#positive"><span class="id" title="inductive">positive</span></a></span>, <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a></span>, <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Numbers.BinNums.html#N"><span class="id" title="inductive">N</span></a></span> into <span class="inlinecode"><span class="id" title="abbreviation">int</span></span>. The last strings
+ Mapping of <span class="inlinecode"><span class="id" title="var">positive</span></span>, <span class="inlinecode"><span class="id" title="var">Z</span></span>, <span class="inlinecode"><span class="id" title="var">N</span></span> into <span class="inlinecode"><span class="id" title="var">int</span></span>. The last strings
     emulate the matching, see documentation of <span class="inlinecode"><span class="id" title="keyword">Extract</span></span> <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>. 
 </div>
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Numbers.BinNums.html#positive"><span class="id" title="inductive">positive</span></a> ⇒ <span class="id" title="var">int</span><br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Numbers.BinNums.html#positive"><span class="id" title="inductive">positive</span></a> ⇒ <span class="id" title="var">int</span><br/>
 [ "(fun p-&gt;1+2*p)" "(fun p-&gt;2*p)" "1" ]<br/>
 "(fun f2p1 f2p f1 p -&gt;
     if p&lt;=1 then f1 () else if p mod 2 = 0 then f2p (p/2) else f2p1 (p/2))".<br/>
 
 <br/>
-<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> ⇒ <span class="id" title="var">int</span> [ "0" "" "(~-)" ]<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Numbers.BinNums.html#Z"><span class="id" title="inductive">Z</span></a> ⇒ <span class="id" title="var">int</span> [ "0" "" "(~-)" ]<br/>
 "(fun f0 fp fn z -&gt; if z=0 then f0 () else if z&gt;0 then fp z else fn (-z))".<br/>
 
 <br/>
-<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Numbers.BinNums.html#N"><span class="id" title="inductive">N</span></a> ⇒ <span class="id" title="var">int</span> [ "0" "" ]<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Numbers.BinNums.html#N"><span class="id" title="inductive">N</span></a> ⇒ <span class="id" title="var">int</span> [ "0" "" ]<br/>
 "(fun f0 fp n -&gt; if n=0 then f0 () else fp n)".<br/>
 
 <br/>

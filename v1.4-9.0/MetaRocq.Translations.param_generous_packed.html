@@ -28,7 +28,6 @@
 <h1 class="libtitle">Library MetaRocq.Translations.param_generous_packed</h1>
 
 <div class="code">
-<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden".<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">utils</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">Checker</span> <span class="id" title="keyword">All</span>.<br/>
@@ -84,7 +83,6 @@
 #[<span class="id" title="var">export</span>] <span class="id" title="var">Existing</span> <span class="id" title="keyword">Instance</span> <span class="id" title="var">Checker.default_fuel</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;if&nbsp;b&nbsp;it&nbsp;is&nbsp;the&nbsp;first&nbsp;translation,&nbsp;else&nbsp;the&nbsp;second&nbsp;*)</span><br/>
 <span class="id" title="keyword">Fixpoint</span> <span class="id" title="var">tsl_rec</span> (<span class="id" title="var">fuel</span> : <span class="id" title="var">nat</span>) (<span class="id" title="var">Σ</span> : <span class="id" title="var">global_env_ext</span>) (<span class="id" title="var">E</span> : <span class="id" title="var">tsl_table</span>) (<span class="id" title="var">Γ</span> : <span class="id" title="keyword">context</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">b</span> : <span class="id" title="var">bool</span>) (<span class="id" title="var">t</span> : <span class="id" title="var">term</span>) {<span class="id" title="keyword">struct</span> <span class="id" title="var">fuel</span>} : <span class="id" title="var">tsl_result</span> <span class="id" title="var">term</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <span class="id" title="var">fuel</span> <span class="id" title="keyword">with</span><br/>
@@ -201,9 +199,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmDefinition</span> "TC" <span class="id" title="var">TC</span>).<br/>
 <span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">econstructor</span>.<br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;A&nbsp;B.&nbsp;refine&nbsp;(sigma&nbsp;(El&nbsp;A)&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;sigma&nbsp;(B.1&nbsp;x)&nbsp;(B.2&nbsp;x))).&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;cbn.&nbsp;intros&nbsp;A&nbsp;B&nbsp;X.&nbsp;exact&nbsp;unit.&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>. <span class="id" title="tactic">refine</span> (@<span class="id" title="var">sigT</span> (<span class="id" title="var">El</span> <span class="id" title="var">A</span>) <span class="id" title="var">B</span>.1).<br/>
 &nbsp;&nbsp;- <span class="id" title="var">cbn</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span>. <span class="id" title="tactic">refine</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒ <span class="id" title="var">B</span>.2 <span class="id" title="var">x</span>.1 <span class="id" title="var">x</span>.2).<br/>
 <span class="id" title="keyword">Defined</span>.<br/>
@@ -213,9 +208,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmDefinition</span> "TC'" <span class="id" title="var">TC</span>).<br/>
 <span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">econstructor</span>.<br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;A&nbsp;B&nbsp;x&nbsp;y.&nbsp;econstructor.&nbsp;exact&nbsp;y.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;A&nbsp;B&nbsp;π1&nbsp;H.&nbsp;constructor.&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>. <span class="id" title="tactic">econstructor</span>. <span class="id" title="tactic">exact</span> <span class="id" title="var">y</span>.1.<br/>
 &nbsp;&nbsp;- <span class="id" title="var">cbn</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>. <span class="id" title="tactic">exact</span> <span class="id" title="var">y</span>.2.<br/>
 <span class="id" title="keyword">Defined</span>.<br/>
@@ -225,9 +217,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmDefinition</span> "TC''" <span class="id" title="var">TC</span>).<br/>
 <span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">econstructor</span>.<br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;A&nbsp;B&nbsp;P&nbsp;<span class="inlinecode"><span class="id" title="var">X1</span></span> <span class="inlinecode"><span class="id" title="var">X2</span></span>&nbsp;<span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">[]</span>.&nbsp;apply&nbsp;X1.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;A&nbsp;B&nbsp;P&nbsp;<span class="inlinecode"><span class="id" title="var">X1</span></span> <span class="inlinecode"><span class="id" title="var">X2</span></span>&nbsp;<span class="inlinecode"><span class="id" title="var">s</span></span> <span class="inlinecode">[]</span>.&nbsp;apply&nbsp;X2.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">P</span> [<span class="id" title="var">X1</span> <span class="id" title="var">X2</span>] [<span class="id" title="var">s</span> <span class="id" title="var">s'</span>]. <span class="id" title="tactic">apply</span> (<span class="id" title="var">X1</span> <span class="id" title="var">s</span>.1 (<span class="id" title="var">s</span>.2; <span class="id" title="var">s'</span>)).<br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">intros</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">P</span> [<span class="id" title="var">X1</span> <span class="id" title="var">X2</span>] [<span class="id" title="var">s</span> <span class="id" title="var">s'</span>]. <span class="id" title="tactic">apply</span> (<span class="id" title="var">X2</span> <span class="id" title="var">s</span>.1 (<span class="id" title="var">s</span>.2; <span class="id" title="var">s'</span>)).<br/>
 <span class="id" title="keyword">Defined</span>.<br/>
@@ -331,33 +320,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tmDefinition</span> "TC7" <span class="id" title="var">TC</span>).<br/>
 
 <br/>
-<span class="comment">(*&nbsp;244s&nbsp;(~&nbsp;4&nbsp;min)&nbsp;to&nbsp;execute&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Time<br/>
-MetaRocq&nbsp;Run&nbsp;(H&nbsp;&lt;-&nbsp;Implement&nbsp;TC7&nbsp;"notUnivalence"<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(exists&nbsp;A&nbsp;B,&nbsp;(equiv&nbsp;A&nbsp;B)&nbsp;×&nbsp;exists&nbsp;P,&nbsp;P&nbsp;A&nbsp;×&nbsp;((P&nbsp;B)&nbsp;-&gt;&nbsp;False))&nbsp;;;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmPrint&nbsp;"done").<br/>
-Check&nbsp;"proof".<br/>
-Next&nbsp;Obligation.<br/>
-&nbsp;&nbsp;unshelve&nbsp;econstructor.<br/>
-&nbsp;&nbsp;-&nbsp;exists&nbsp;(bool;&nbsp;fun&nbsp;_=&gt;&nbsp;unit).<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;(unit;&nbsp;fun&nbsp;_=&gt;&nbsp;bool).<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;cbn.&nbsp;unshelve&nbsp;econstructor.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;unshelve&nbsp;econstructor.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unshelve&nbsp;econstructor.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;tt).&nbsp;exact&nbsp;pr1.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unshelve&nbsp;econstructor.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;pr2.&nbsp;exact&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;tt).<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;split;&nbsp;<span class="inlinecode">|<span class="id" title="tactic">intros</span></span> <span class="inlinecode">[[]</span> <span class="inlinecode"><span class="id" title="var">x</span>];</span> <span class="inlinecode"><span class="id" title="tactic">reflexivity</span></span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unshelve&nbsp;econstructor;&nbsp;<span class="inlinecode"><span class="id" title="tactic">reflexivity</span>|</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;<span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">[]</span>;&nbsp;reflexivity.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cbn.&nbsp;intros&nbsp;<span class="inlinecode">[]</span> <span class="inlinecode"><span class="id" title="var">x</span></span>;&nbsp;reflexivity.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;unshelve&nbsp;econstructor.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exists&nbsp;(fun&nbsp;T&nbsp;=&gt;&nbsp;exists&nbsp;(x&nbsp;y&nbsp;:&nbsp;T.1),&nbsp;x&nbsp;=&nbsp;y&nbsp;-&gt;&nbsp;False).&nbsp;exact&nbsp;(fun&nbsp;_&nbsp;_&nbsp;=&gt;&nbsp;unit).<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cbn;&nbsp;split.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;refine&nbsp;((true;&nbsp;(false;&nbsp;_));&nbsp;tt).&nbsp;intro&nbsp;e;&nbsp;inversion&nbsp;e.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;<span class="inlinecode">[[]</span> <span class="inlinecode">[[]</span> <span class="inlinecode"><span class="id" title="var">H</span>]]</span> <span class="inlinecode"><span class="id" title="var">_</span></span>.&nbsp;apply&nbsp;H;&nbsp;reflexivity.<br/>
-&nbsp;&nbsp;-&nbsp;cbn.&nbsp;intros&nbsp;<span class="inlinecode">[[]</span> <span class="inlinecode">[[]</span> <span class="inlinecode"><span class="id" title="var">H</span>]]</span> <span class="inlinecode"><span class="id" title="var">_</span></span>.&nbsp;apply&nbsp;H;&nbsp;reflexivity.<br/>
-Defined.&nbsp;*)</span><br/>
 </div>
 </div>
 <div id="footer">

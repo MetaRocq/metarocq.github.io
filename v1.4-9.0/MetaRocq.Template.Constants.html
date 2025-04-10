@@ -28,13 +28,11 @@
 <h1 class="libtitle">Library MetaRocq.Template.Constants</h1>
 
 <div class="code">
-<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Utils.bytestring.html#"><span class="id" title="library">bytestring</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Common</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Common.BasicAst.html#"><span class="id" title="library">BasicAst</span></a> <a class="idref" href="MetaRocq.Common.uGraph.html#"><span class="id" title="library">uGraph</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Template.TemplateMonad.html#"><span class="id" title="library">TemplateMonad</span></a> <a class="idref" href="MetaRocq.Template.TemplateMonad.Extractable.html#"><span class="id" title="library">TemplateMonad.Extractable</span></a>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Base&nbsp;types&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">bytestring.String.t</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.string.type</span>.<br/>
@@ -97,7 +95,6 @@
 <span class="id" title="keyword">Register</span> <span class="id" title="var">BinNums.Z0</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.Z.zero</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Ast&nbsp;*)</span><br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.relevance</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.relevance</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.Relevant</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Relevant</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.Irrelevant</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Irrelevant</span>.<br/>
@@ -139,7 +136,6 @@
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.BasicAst.fresh_evar_id</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.fresh_evar_id</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Universes&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.allowed_eliminations</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.allowed_eliminations</span>.<br/>
@@ -149,7 +145,6 @@
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.IntoPropSProp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.IntoPropSProp</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.IntoSetPropSProp</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.IntoSetPropSProp</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.IntoAny</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.IntoAny</span>.<br/>
-<span class="comment">(*&nbsp;We&nbsp;convert&nbsp;from&nbsp;simple&nbsp;constraints&nbsp;to&nbsp;ones&nbsp;in&nbsp;Z&nbsp;*)</span><br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintType.Lt</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.constraints.Lt</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintType.Le0</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.constraints.Le0</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.Universes.ConstraintType.Le</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.constraints.Le</span>.<br/>
@@ -203,11 +198,9 @@
 
 <br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.uGraph.init_graph</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.graph.init</span>.<br/>
-<span class="comment">(*&nbsp;FIXME&nbsp;wrong!&nbsp;*)</span><br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Common.uGraph.gc_of_constraints</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.graph.add_global_constraints</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Terms&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.predicate</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.predicate</span>.<br/>
@@ -239,7 +232,6 @@
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.tArray</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.tArray</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Local&nbsp;and&nbsp;global&nbsp;declarations&nbsp;*)</span><br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.parameter_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.parameter_entry</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Build_parameter_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.Build_parameter_entry</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.definition_entry</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.definition_entry</span>.<br/>
@@ -288,7 +280,6 @@
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.Ast.Env.program</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.ast.program</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Template&nbsp;monad&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.cbv</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.cbv</span>.<br/>
@@ -304,7 +295,6 @@
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Common.global</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.template.hints.global</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Prop&nbsp;*)</span><br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmReturn</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmReturn</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmBind</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmBind</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmPrint</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmPrint</span>.<br/>
@@ -350,7 +340,6 @@
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Core.tmQuoteRecDefinition</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.prop.tmQuoteRecDefinition</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Type&nbsp;*)</span><br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmReturn</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmReturn</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmBind</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmBind</span>.<br/>
 <span class="id" title="keyword">Register</span> <span class="id" title="var">MetaRocq.Template.TemplateMonad.Extractable.tmPrint</span> <span class="id" title="keyword">as</span> <span class="id" title="var">metarocq.templatemonad.type.tmPrint</span>.<br/>

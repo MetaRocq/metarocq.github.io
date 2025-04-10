@@ -28,21 +28,12 @@
 <h1 class="libtitle">Library MetaRocq.Utils.MR_ExtrOCamlNatInt</h1>
 
 <div class="code">
-<span class="comment">(************************************************************************)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;The&nbsp;Rocq&nbsp;Proof&nbsp;Assistant&nbsp;/&nbsp;The&nbsp;Rocq&nbsp;Development&nbsp;Team&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;INRIA,&nbsp;CNRS&nbsp;and&nbsp;contributors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&lt;O___,,&nbsp;*&nbsp;(see&nbsp;version&nbsp;control&nbsp;and&nbsp;CREDITS&nbsp;file&nbsp;for&nbsp;authors&nbsp;&amp;&nbsp;dates)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;\VV/&nbsp;&nbsp;**************************************************************)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;file&nbsp;is&nbsp;distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;Lesser&nbsp;General&nbsp;Public&nbsp;License&nbsp;Version&nbsp;2.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;LICENSE&nbsp;file&nbsp;for&nbsp;the&nbsp;text&nbsp;of&nbsp;the&nbsp;license)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(************************************************************************)</span><br/>
 
 <br/>
 </div>
 
 <div class="doc">
-Extraction of <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a></span> into Ocaml's <span class="inlinecode"><span class="id" title="abbreviation">int</span></span> 
+Extraction of <span class="inlinecode"><span class="id" title="var">nat</span></span> into Ocaml's <span class="inlinecode"><span class="id" title="var">int</span></span> 
 </div>
 <div class="code">
 
@@ -58,7 +49,7 @@ Extraction of <span class="inlinecode"><a class="idref" href="http://coq.inria.f
 
 <div class="doc">
 Disclaimer: trying to obtain efficient certified programs
-    by extracting <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a></span> into <span class="inlinecode"><span class="id" title="abbreviation">int</span></span> is definitively *not* a good idea:
+    by extracting <span class="inlinecode"><span class="id" title="var">nat</span></span> into <span class="inlinecode"><span class="id" title="var">int</span></span> is definitively *not* a good idea:
 
 <div class="paragraph"> </div>
 
@@ -87,7 +78,7 @@ Disclaimer: trying to obtain efficient certified programs
 
 <div class="paragraph"> </div>
 
- Mapping of <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a></span> into <span class="inlinecode"><span class="id" title="abbreviation">int</span></span>. The last string corresponds to
+ Mapping of <span class="inlinecode"><span class="id" title="var">nat</span></span> into <span class="inlinecode"><span class="id" title="var">int</span></span>. The last string corresponds to
     a <span class="inlinecode"><span class="id" title="var">nat_case</span></span>, see documentation of <span class="inlinecode"><span class="id" title="keyword">Extract</span></span> <span class="inlinecode"><span class="id" title="keyword">Inductive</span></span>. 
 </div>
 <div class="code">
@@ -100,7 +91,7 @@ Disclaimer: trying to obtain efficient certified programs
 </div>
 
 <div class="doc">
-Efficient (but uncertified) versions for usual <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a></span> functions 
+Efficient (but uncertified) versions for usual <span class="inlinecode"><span class="id" title="var">nat</span></span> functions 
 </div>
 <div class="code">
 
@@ -111,7 +102,6 @@ Efficient (but uncertified) versions for usual <span class="inlinecode"><a class
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">mult</span> ⇒ "( * )".<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">max</span> ⇒ "Stdlib.max".<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">min</span> ⇒ "Stdlib.min".<br/>
-<span class="comment">(*Extract&nbsp;Inlined&nbsp;Constant&nbsp;nat_beq&nbsp;=&gt;&nbsp;"(=)".*)</span><br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Nat.eqb</span> ⇒ "(=)".<br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Inlined</span> <span class="id" title="var">Constant</span> <span class="id" title="var">EqNat.eq_nat_decide</span> ⇒ "(=)".<br/>
 
@@ -138,13 +128,6 @@ Efficient (but uncertified) versions for usual <span class="inlinecode"><a class
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Euclid.modulo</span> ⇒ "fun n m -&gt; m mod n".<br/>
 
 <br/>
-<span class="comment">(*<br/>
-Definition&nbsp;test&nbsp;n&nbsp;m&nbsp;(H:m&gt;0)&nbsp;:=<br/>
-&nbsp;let&nbsp;(q,r,_,_)&nbsp;:=&nbsp;eucl_dev&nbsp;m&nbsp;H&nbsp;n&nbsp;in<br/>
-&nbsp;nat_compare&nbsp;n&nbsp;(q*m+r).<br/>
-<br/>
-Recursive&nbsp;Extraction&nbsp;test&nbsp;fact.<br/>
-*)</span><br/>
 </div>
 </div>
 <div id="footer">

@@ -28,8 +28,7 @@
 <h1 class="libtitle">Library MetaRocq.ErasurePlugin.Extraction</h1>
 
 <div class="code">
-<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Ascii</span> <span class="id" title="library">FSets</span> <span class="id" title="library">ExtrOcamlBasic</span> <span class="id" title="library">ExtrOCamlFloats</span> <span class="id" title="library">ExtrOCamlInt63</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.Strings.Ascii.html#"><span class="id" title="library">Ascii</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.FSets.FSets.html#"><span class="id" title="library">FSets</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.extraction.ExtrOcamlBasic.html#"><span class="id" title="library">ExtrOcamlBasic</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.extraction.ExtrOCamlFloats.html#"><span class="id" title="library">ExtrOCamlFloats</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.extraction.ExtrOCamlInt63.html#"><span class="id" title="library">ExtrOCamlInt63</span></a>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="MetaRocq.Utils.utils.html#"><span class="id" title="library">utils</span></a>.<br/>
 
 <br/>
@@ -78,15 +77,13 @@
 <span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Equations.Init.pr1</span> <span class="id" title="var">Equations.Init.pr2</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Extract&nbsp;Constant&nbsp;PCUICWfEnvImpl.guard_impl&nbsp;=&gt;&nbsp;"(fun&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;-&gt;&nbsp;true)".<br/>
-Extract&nbsp;Constant&nbsp;PCUICTyping.guard_checking&nbsp;=&gt;&nbsp;"(fun&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;-&gt;&nbsp;true)".&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">Output</span> <span class="id" title="var">Directory</span> "src".<br/>
 
 <br/>
 <span class="id" title="var">Separate</span> <span class="id" title="keyword">Extraction</span> <span class="id" title="var">ErasureFunction.erase</span> <span class="id" title="var">Erasure</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;The&nbsp;following&nbsp;directives&nbsp;ensure&nbsp;separate&nbsp;extraction&nbsp;does&nbsp;not&nbsp;produce&nbsp;name&nbsp;clashes&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">Stdlib.Strings.String</span> <span class="id" title="var">utils</span> <span class="id" title="var">Template.UnivSubst</span> <span class="id" title="var">ELiftSubst</span> <span class="id" title="var">EGlobalEnv</span>.<br/>
 
 <br/>

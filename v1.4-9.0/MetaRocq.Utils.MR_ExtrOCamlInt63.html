@@ -28,15 +28,6 @@
 <h1 class="libtitle">Library MetaRocq.Utils.MR_ExtrOCamlInt63</h1>
 
 <div class="code">
-<span class="comment">(************************************************************************)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;The&nbsp;Rocq&nbsp;Proof&nbsp;Assistant&nbsp;/&nbsp;The&nbsp;Rocq&nbsp;Development&nbsp;Team&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copyright&nbsp;INRIA,&nbsp;CNRS&nbsp;and&nbsp;contributors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&lt;O___,,&nbsp;*&nbsp;(see&nbsp;version&nbsp;control&nbsp;and&nbsp;CREDITS&nbsp;file&nbsp;for&nbsp;authors&nbsp;&amp;&nbsp;dates)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;\VV/&nbsp;&nbsp;**************************************************************)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;file&nbsp;is&nbsp;distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;Lesser&nbsp;General&nbsp;Public&nbsp;License&nbsp;Version&nbsp;2.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;LICENSE&nbsp;file&nbsp;for&nbsp;the&nbsp;text&nbsp;of&nbsp;the&nbsp;license)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*)</span><br/>
-<span class="comment">(************************************************************************)</span><br/>
 
 <br/>
 </div>
@@ -47,7 +38,7 @@ Extraction to OCaml of native 63-bit machine integers.
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="library">Uint63</span> <span class="id" title="library">Sint63</span> <span class="id" title="library">Extraction</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.Numbers.Cyclic.Int63.Uint63.html#"><span class="id" title="library">Uint63</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.Numbers.Cyclic.Int63.Sint63.html#"><span class="id" title="library">Sint63</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.extraction.Extraction.html#"><span class="id" title="library">Extraction</span></a>.<br/>
 
 <br/>
 </div>
@@ -58,9 +49,9 @@ Basic data types used by some primitive operators.
 <div class="code">
 
 <br/>
-<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ⇒ <span class="id" title="var">bool</span> [ <span class="id" title="var">true</span> <span class="id" title="var">false</span> ].<br/>
-<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Datatypes.html#prod"><span class="id" title="inductive">prod</span></a> ⇒ "( * )" [ "" ].<br/>
-<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Numbers.Cyclic.Int63.CarryType.html#carry"><span class="id" title="inductive">DoubleType.carry</span></a> ⇒ "MRUint63.carry" [ "MRUint63.C0" "MRUint63.C1" ].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a> ⇒ <span class="id" title="var">bool</span> [ <span class="id" title="var">true</span> <span class="id" title="var">false</span> ].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Datatypes.html#prod"><span class="id" title="inductive">prod</span></a> ⇒ "( * )" [ "" ].<br/>
+<span class="id" title="keyword">Extract</span> <span class="id" title="keyword">Inductive</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Numbers.Cyclic.Int63.CarryType.html#carry"><span class="id" title="inductive">DoubleType.carry</span></a> ⇒ "MRUint63.carry" [ "MRUint63.C0" "MRUint63.C1" ].<br/>
 
 <br/>
 </div>
@@ -71,7 +62,6 @@ Primitive types and operators.
 <div class="code">
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.int</span> ⇒ "MRUint63.t".<br/>
 <span class="id" title="keyword">Extraction</span> <span class="id" title="keyword">Inline</span> <span class="id" title="var">Uint63.int</span>.<br/>
-<span class="comment">(*&nbsp;Otherwise,&nbsp;the&nbsp;name&nbsp;conflicts&nbsp;with&nbsp;the&nbsp;primitive&nbsp;OCaml&nbsp;type&nbsp;<span class="inlinecode"><span class="id" title="var">int</span></span>&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Extract</span> <span class="id" title="var">Constant</span> <span class="id" title="var">Uint63.lsl</span> ⇒ "MRUint63.l_sl".<br/>

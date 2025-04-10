@@ -28,11 +28,9 @@
 <h1 class="libtitle">Library MetaRocq.Utils.ByteCompare</h1>
 
 <div class="code">
-<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="library">Strings.Byte</span> <span class="id" title="library">NArith.BinNat</span>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Stdlib</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.Strings.Byte.html#"><span class="id" title="library">Strings.Byte</span></a> <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.NArith.BinNat.html#"><span class="id" title="library">NArith.BinNat</span></a>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;To&nbsp;make&nbsp;byte&nbsp;comparison&nbsp;more&nbsp;efficient&nbsp;and&nbsp;avoid&nbsp;reallocating&nbsp;the&nbsp;same&nbsp;number<br/>
-&nbsp;&nbsp;many&nbsp;times,&nbsp;we&nbsp;precompute&nbsp;the&nbsp;representation&nbsp;in&nbsp;N.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Module</span> <a id="ByteN" class="idref" href="#ByteN"><span class="id" title="module">ByteN</span></a>.<br/>
@@ -294,7 +292,7 @@
 <span class="id" title="keyword">Definition</span> <a id="ByteN.N255" class="idref" href="#ByteN.N255"><span class="id" title="definition">N255</span></a> := 255%<span class="id" title="var">N</span>.<br/>
 
 <br/>
-<span class="id" title="keyword">Definition</span> <a id="ByteN.to_N" class="idref" href="#ByteN.to_N"><span class="id" title="definition">to_N</span></a> (<a id="x:1" class="idref" href="#x:1"><span class="id" title="binder">x</span></a> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a>) :=<br/>
+<span class="id" title="keyword">Definition</span> <a id="ByteN.to_N" class="idref" href="#ByteN.to_N"><span class="id" title="definition">to_N</span></a> (<a id="x:1" class="idref" href="#x:1"><span class="id" title="binder">x</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a>) :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="MetaRocq.Utils.ByteCompare.html#x:1"><span class="id" title="variable">x</span></a> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;| "000"%<span class="id" title="var">byte</span> ⇒ <a class="idref" href="MetaRocq.Utils.ByteCompare.html#ByteN.N0"><span class="id" title="definition">N0</span></a><br/>
 &nbsp;&nbsp;| "001"%<span class="id" title="var">byte</span> ⇒ <a class="idref" href="MetaRocq.Utils.ByteCompare.html#ByteN.N1"><span class="id" title="definition">N1</span></a><br/>
@@ -556,12 +554,12 @@
 <span class="id" title="keyword">End</span> <a class="idref" href="MetaRocq.Utils.ByteCompare.html#ByteN"><span class="id" title="module">ByteN</span></a>.<br/>
 
 <br/>
-<span class="id" title="keyword">Definition</span> <a id="eqb" class="idref" href="#eqb"><span class="id" title="definition">eqb</span></a> (<a id="x:3" class="idref" href="#x:3"><span class="id" title="binder">x</span></a> <a id="y:4" class="idref" href="#y:4"><span class="id" title="binder">y</span></a> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a>) :=<br/>
-&nbsp;&nbsp;<span class="id" title="definition">N.eqb</span> (<a class="idref" href="MetaRocq.Utils.ByteCompare.html#to_N"><span class="id" title="definition">ByteN.to_N</span></a> <a class="idref" href="MetaRocq.Utils.ByteCompare.html#x:3"><span class="id" title="variable">x</span></a>) (<a class="idref" href="MetaRocq.Utils.ByteCompare.html#to_N"><span class="id" title="definition">ByteN.to_N</span></a> <a class="idref" href="MetaRocq.Utils.ByteCompare.html#y:4"><span class="id" title="variable">y</span></a>).<br/>
+<span class="id" title="keyword">Definition</span> <a id="eqb" class="idref" href="#eqb"><span class="id" title="definition">eqb</span></a> (<a id="x:3" class="idref" href="#x:3"><span class="id" title="binder">x</span></a> <a id="y:4" class="idref" href="#y:4"><span class="id" title="binder">y</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.NArith.BinNat.html#N.eqb"><span class="id" title="definition">N.eqb</span></a> (<a class="idref" href="MetaRocq.Utils.ByteCompare.html#to_N"><span class="id" title="definition">ByteN.to_N</span></a> <a class="idref" href="MetaRocq.Utils.ByteCompare.html#x:3"><span class="id" title="variable">x</span></a>) (<a class="idref" href="MetaRocq.Utils.ByteCompare.html#to_N"><span class="id" title="definition">ByteN.to_N</span></a> <a class="idref" href="MetaRocq.Utils.ByteCompare.html#y:4"><span class="id" title="variable">y</span></a>).<br/>
 
 <br/>
-<span class="id" title="keyword">Definition</span> <a id="compare" class="idref" href="#compare"><span class="id" title="definition">compare</span></a> (<a id="x:5" class="idref" href="#x:5"><span class="id" title="binder">x</span></a> <a id="y:6" class="idref" href="#y:6"><span class="id" title="binder">y</span></a> : <a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a>) :=<br/>
-&nbsp;&nbsp;<span class="id" title="definition">N.compare</span> (<a class="idref" href="MetaRocq.Utils.ByteCompare.html#to_N"><span class="id" title="definition">ByteN.to_N</span></a> <a class="idref" href="MetaRocq.Utils.ByteCompare.html#x:5"><span class="id" title="variable">x</span></a>) (<a class="idref" href="MetaRocq.Utils.ByteCompare.html#to_N"><span class="id" title="definition">ByteN.to_N</span></a> <a class="idref" href="MetaRocq.Utils.ByteCompare.html#y:6"><span class="id" title="variable">y</span></a>).<br/>
+<span class="id" title="keyword">Definition</span> <a id="compare" class="idref" href="#compare"><span class="id" title="definition">compare</span></a> (<a id="x:5" class="idref" href="#x:5"><span class="id" title="binder">x</span></a> <a id="y:6" class="idref" href="#y:6"><span class="id" title="binder">y</span></a> : <a class="idref" href="https://rocq-prover.org/doc/V9.0.0/corelib/Corelib.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a>) :=<br/>
+&nbsp;&nbsp;<a class="idref" href="https://rocq-prover.org/doc/V9.0.0/stdlib/Stdlib.NArith.BinNat.html#N.compare"><span class="id" title="definition">N.compare</span></a> (<a class="idref" href="MetaRocq.Utils.ByteCompare.html#to_N"><span class="id" title="definition">ByteN.to_N</span></a> <a class="idref" href="MetaRocq.Utils.ByteCompare.html#x:5"><span class="id" title="variable">x</span></a>) (<a class="idref" href="MetaRocq.Utils.ByteCompare.html#to_N"><span class="id" title="definition">ByteN.to_N</span></a> <a class="idref" href="MetaRocq.Utils.ByteCompare.html#y:6"><span class="id" title="variable">y</span></a>).<br/>
 </div>
 </div>
 <div id="footer">

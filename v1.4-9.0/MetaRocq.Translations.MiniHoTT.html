@@ -54,13 +54,8 @@
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;sigT&nbsp;:&nbsp;forall&nbsp;A,&nbsp;(A&nbsp;-&gt;&nbsp;Type)&nbsp;-&gt;&nbsp;Type&nbsp;:=&nbsp;@sigT.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;existT&nbsp;:&nbsp;forall&nbsp;A&nbsp;P&nbsp;x,&nbsp;P&nbsp;x&nbsp;-&gt;&nbsp;sigT&nbsp;A&nbsp;P&nbsp;:=&nbsp;@existT.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;sigT_ind&nbsp;:&nbsp;forall&nbsp;A&nbsp;P&nbsp;(Q&nbsp;:&nbsp;sigT&nbsp;A&nbsp;P&nbsp;-&gt;&nbsp;Type),&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(forall&nbsp;x&nbsp;p,&nbsp;Q&nbsp;(existT&nbsp;A&nbsp;P&nbsp;x&nbsp;p))&nbsp;-&gt;&nbsp;forall&nbsp;s,&nbsp;Q&nbsp;s&nbsp;:=&nbsp;sigT_rect.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;***********************************************&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Arguments</span> <span class="id" title="var">sigT</span> {<span class="id" title="var">A</span>}%<span class="id" title="var">_type</span> <span class="id" title="var">P</span>%<span class="id" title="var">_type</span>.<br/>
@@ -177,18 +172,10 @@
 <span class="id" title="keyword">Notation</span> &quot;g 'o' f" := (<span class="id" title="var">compose</span> <span class="id" title="var">g</span>%<span class="id" title="var">function</span> <span class="id" title="var">f</span>%<span class="id" title="var">function</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">function_scope</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Instance&nbsp;iff_compose&nbsp;:&nbsp;Transitive&nbsp;iff&nbsp;|&nbsp;1&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;fun&nbsp;A&nbsp;B&nbsp;C&nbsp;f&nbsp;g&nbsp;=&gt;&nbsp;(fst&nbsp;g&nbsp;o&nbsp;fst&nbsp;f&nbsp;,&nbsp;snd&nbsp;f&nbsp;o&nbsp;snd&nbsp;g).&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Arguments&nbsp;iff_compose&nbsp;{A&nbsp;B&nbsp;C}&nbsp;f&nbsp;g&nbsp;:&nbsp;rename.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Instance&nbsp;iff_inverse&nbsp;:&nbsp;Symmetric&nbsp;iff&nbsp;|&nbsp;1&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;fun&nbsp;A&nbsp;B&nbsp;f&nbsp;=&gt;&nbsp;(snd&nbsp;f&nbsp;,&nbsp;fst&nbsp;f).&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Arguments&nbsp;iff_inverse&nbsp;{A&nbsp;B}&nbsp;f&nbsp;:&nbsp;rename.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Instance&nbsp;iff_reflexive&nbsp;:&nbsp;Reflexive&nbsp;iff&nbsp;|&nbsp;1&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;fun&nbsp;A&nbsp;=&gt;&nbsp;(idmap&nbsp;,&nbsp;idmap).&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">composeD</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span>} (<span class="id" title="var">g</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">b</span>, <span class="id" title="var">C</span> <span class="id" title="var">b</span>) (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> → <span class="id" title="var">B</span>) := <span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> : <span class="id" title="var">A</span> ⇒ <span class="id" title="var">g</span> (<span class="id" title="var">f</span> <span class="id" title="var">x</span>).<br/>
@@ -239,7 +226,6 @@
 
 <br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">concat</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">x</span> <span class="id" title="var">y</span> <span class="id" title="var">z</span> : <span class="id" title="var">A</span>} (<span class="id" title="var">p</span> : <span class="id" title="var">x</span> = <span class="id" title="var">y</span>) (<span class="id" title="var">q</span> : <span class="id" title="var">y</span> = <span class="id" title="var">z</span>) : <span class="id" title="var">x</span> = <span class="id" title="var">z</span>.<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;:=&nbsp;transport&nbsp;(paths&nbsp;_&nbsp;x)&nbsp;q&nbsp;(transport&nbsp;(fun&nbsp;y&nbsp;=&gt;&nbsp;x&nbsp;=&nbsp;y)&nbsp;p&nbsp;1).&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">destruct</span> <span class="id" title="var">p</span>, <span class="id" title="var">q</span>.<br/>
 <span class="id" title="keyword">Defined</span>.<br/>
 
@@ -389,7 +375,6 @@
 <span class="id" title="keyword">Global Arguments</span> <span class="id" title="var">path_forall2</span> {<span class="id" title="var">_</span>} {<span class="id" title="var">A</span> <span class="id" title="var">B</span>}%<span class="id" title="var">_type_scope</span> {<span class="id" title="var">P</span>} (<span class="id" title="var">f</span> <span class="id" title="var">g</span>)%<span class="id" title="var">_function_scope</span> <span class="id" title="var">_</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;PathGroupoid.v&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">concat_p1</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>} (<span class="id" title="var">p</span> : <span class="id" title="var">x</span> = <span class="id" title="var">y</span>) :<br/>
@@ -1217,14 +1202,14 @@
 </div>
 
 <div class="doc">
-Sometimes, it's useful to have the goal be in terms of <span class="inlinecode"><span class="id" title="var">ap</span></span>, so we can use lemmas about <span class="inlinecode"><span class="id" title="var">ap</span></span>.  However, we can't just <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode">!<span class="id" title="var">transport_idmap_ap</span></span>, as that's likely to loop.  So, instead, we provide a tactic <span class="inlinecode"><span class="id" title="var">transport_to_ap</span></span>, that replaces all <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.MREquality.html#transport"><span class="id" title="definition">transport</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.All_Forall.html#alli.p"><span class="id" title="variable">p</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.u"><span class="id" title="variable">u</span></a></span> with <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.MREquality.html#transport"><span class="id" title="definition">transport</span></a></span> <span class="inlinecode"><span class="id" title="var">idmap</span></span> <span class="inlinecode">(<span class="id" title="var">ap</span></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.All_Forall.html#alli.p"><span class="id" title="variable">p</span></a>)</span> <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.u"><span class="id" title="variable">u</span></a></span> for non-<span class="inlinecode"><span class="id" title="var">idmap</span></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span>. 
+Sometimes, it's useful to have the goal be in terms of <span class="inlinecode"><span class="id" title="var">ap</span></span>, so we can use lemmas about <span class="inlinecode"><span class="id" title="var">ap</span></span>.  However, we can't just <span class="inlinecode"><span class="id" title="tactic">rewrite</span></span> <span class="inlinecode">!<span class="id" title="var">transport_idmap_ap</span></span>, as that's likely to loop.  So, instead, we provide a tactic <span class="inlinecode"><span class="id" title="var">transport_to_ap</span></span>, that replaces all <span class="inlinecode"><span class="id" title="var">transport</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode"><span class="id" title="var">u</span></span> with <span class="inlinecode"><span class="id" title="var">transport</span></span> <span class="inlinecode"><span class="id" title="var">idmap</span></span> <span class="inlinecode">(<span class="id" title="var">ap</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">p</span>)</span> <span class="inlinecode"><span class="id" title="var">u</span></span> for non-<span class="inlinecode"><span class="id" title="var">idmap</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">transport_to_ap</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="keyword">match</span> <span class="id" title="keyword">goal</span> <span class="id" title="keyword">with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| [ |- <span class="id" title="keyword">context</span>[<span class="id" title="var">transport</span> ?<span class="id" title="var">P</span> ?<span class="id" title="var">p</span> ?<span class="id" title="var">u</span>] ]<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⇒ <span class="id" title="keyword">match</span> <span class="id" title="var">P</span> <span class="id" title="keyword">with</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">idmap</span> ⇒ <span class="id" title="tactic">fail</span> 1 <span class="comment">(*&nbsp;we&nbsp;don't&nbsp;want&nbsp;to&nbsp;turn&nbsp;<span class="inlinecode"><span class="id" title="var">transport</span></span> <span class="inlinecode"><span class="id" title="var">idmap</span></span> <span class="inlinecode">(<span class="id" title="var">ap</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span>)</span>&nbsp;into&nbsp;<span class="inlinecode"><span class="id" title="var">transport</span></span> <span class="inlinecode"><span class="id" title="var">idmap</span></span> <span class="inlinecode">(<span class="id" title="var">ap</span></span> <span class="inlinecode"><span class="id" title="var">idmap</span></span> <span class="inlinecode">(<span class="id" title="var">ap</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">_</span>))</span>&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">idmap</span> ⇒ <span class="id" title="tactic">fail</span> 1 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">idtac</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">progress</span> <span class="id" title="tactic">rewrite</span> (<span class="id" title="var">transport_idmap_ap</span> <span class="id" title="var">_</span> <span class="id" title="var">P</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">p</span> <span class="id" title="var">u</span>)<br/>
@@ -1579,14 +1564,14 @@ Sometimes, it's useful to have the goal be in terms of <span class="inlinecode">
 <span class="id" title="keyword">Hint</span> <span class="id" title="keyword">Rewrite</span><br/>
 @<span class="id" title="var">concat_p1</span><br/>
 @<span class="id" title="var">concat_1p</span><br/>
-@<span class="id" title="var">concat_p_pp</span> <span class="comment">(*&nbsp;there&nbsp;is&nbsp;a&nbsp;choice&nbsp;here&nbsp;!*)</span><br/>
+@<span class="id" title="var">concat_p_pp</span> <br/>
 @<span class="id" title="var">concat_pV</span><br/>
 @<span class="id" title="var">concat_Vp</span><br/>
 @<span class="id" title="var">concat_V_pp</span><br/>
 @<span class="id" title="var">concat_p_Vp</span><br/>
 @<span class="id" title="var">concat_pp_V</span><br/>
 @<span class="id" title="var">concat_pV_p</span><br/>
-<span class="comment">(*@inv_pp*)</span> <span class="comment">(*&nbsp;I&nbsp;am&nbsp;not&nbsp;sure&nbsp;about&nbsp;this&nbsp;one&nbsp;*)</span><br/>
+ <br/>
 @<span class="id" title="var">inv_V</span><br/>
 @<span class="id" title="var">moveR_Mp</span><br/>
 @<span class="id" title="var">moveR_pM</span><br/>
@@ -1597,14 +1582,12 @@ Sometimes, it's useful to have the goal be in terms of <span class="inlinecode">
 @<span class="id" title="var">moveR_M1</span><br/>
 @<span class="id" title="var">moveR_1M</span><br/>
 @<span class="id" title="var">ap_1</span><br/>
-<span class="comment">(*&nbsp;@ap_pp<br/>
-@ap_p_pp&nbsp;?*)</span><br/>
+<br/>
 @<span class="id" title="var">inverse_ap</span><br/>
 @<span class="id" title="var">ap_idmap</span><br/>
-<span class="comment">(*&nbsp;@ap_compose<br/>
-@ap_compose'*)</span><br/>
+<br/>
 @<span class="id" title="var">ap_const</span><br/>
-<span class="comment">(*&nbsp;Unsure&nbsp;about&nbsp;naturality&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">ap</span></span>,&nbsp;was&nbsp;absent&nbsp;in&nbsp;the&nbsp;old&nbsp;implementation*)</span><br/>
+<br/>
 @<span class="id" title="var">apD10_1</span><br/>
 :<span class="id" title="var">paths</span>.<br/>
 
@@ -1613,7 +1596,6 @@ Sometimes, it's useful to have the goal be in terms of <span class="inlinecode">
 &nbsp;&nbsp;<span class="id" title="tactic">autorewrite</span> <span class="id" title="keyword">with</span> <span class="id" title="var">paths</span> <span class="id" title="tactic">in</span> × |- × ; <span class="id" title="tactic">auto</span> <span class="id" title="keyword">with</span> <span class="id" title="var">path_hints</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Contractible.v&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -1679,7 +1661,6 @@ Also, the total space of any based path space is contractible.  We define the <s
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;???&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">path_basedpaths'</span> {<span class="id" title="var">X</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">X</span>} (<span class="id" title="var">p</span> : <span class="id" title="var">y</span> = <span class="id" title="var">x</span>)<br/>
 : @<span class="id" title="var">existT</span> <span class="id" title="var">_</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">z</span> ⇒ @<span class="id" title="var">paths</span> <span class="id" title="var">X</span> <span class="id" title="var">z</span> <span class="id" title="var">x</span>) <span class="id" title="var">x</span> 1 = (<span class="id" title="var">y</span>; <span class="id" title="var">p</span>).<br/>
 <span class="id" title="keyword">Proof</span>.<br/>
@@ -1739,7 +1720,6 @@ If the domain is contractible, the function is propositionally constant.
 &nbsp;&nbsp;:= <span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> ⇒ <span class="id" title="var">ap</span> <span class="id" title="var">f</span> ((<span class="id" title="var">contr</span> <span class="id" title="var">x</span>)^ @ <span class="id" title="var">contr</span> <span class="id" title="var">y</span>).<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Equivalences.v&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Global Instance</span> <span class="id" title="var">isequiv_idmap</span> (<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>) : <span class="id" title="var">IsEquiv</span> <span class="id" title="var">idmap</span> | 0 :=<br/>
@@ -1782,7 +1762,6 @@ The composition of equivalences is an equivalence.
 &nbsp;&nbsp;&nbsp;&nbsp;).<br/>
 
 <br/>
-<span class="comment">(*&nbsp;An&nbsp;alias&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">isequiv_compose</span></span>,&nbsp;with&nbsp;some&nbsp;arguments&nbsp;explicit;&nbsp;often&nbsp;convenient&nbsp;when&nbsp;type&nbsp;class&nbsp;search&nbsp;fails.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">isequiv_compose'</span><br/>
 &nbsp;&nbsp;{<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> → <span class="id" title="var">B</span>) (<span class="id" title="var">_</span> : <span class="id" title="var">IsEquiv</span> <span class="id" title="var">f</span>)<br/>
 &nbsp;&nbsp;{<span class="id" title="var">C</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">g</span> : <span class="id" title="var">B</span> → <span class="id" title="var">C</span>) (<span class="id" title="var">_</span> : <span class="id" title="var">IsEquiv</span> <span class="id" title="var">g</span>)<br/>
@@ -1804,13 +1783,12 @@ The composition of equivalences is an equivalence.
 </div>
 
 <div class="doc">
-We put <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.html#MonadOperations.g"><span class="id" title="variable">g</span></a></span> and <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span> in <span class="inlinecode"><span class="id" title="var">equiv_scope</span></span> explcitly.  This is a partial work-around for https://coq.inria.fr/bugs/show_bug.cgi?id=3990, which is that implicitly bound scopes don't nest well. 
+We put <span class="inlinecode"><span class="id" title="var">g</span></span> and <span class="inlinecode"><span class="id" title="var">f</span></span> in <span class="inlinecode"><span class="id" title="var">equiv_scope</span></span> explcitly.  This is a partial work-around for https://coq.inria.fr/bugs/show_bug.cgi?id=3990, which is that implicitly bound scopes don't nest well. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Notation</span> &quot;g 'oE' f" := (<span class="id" title="var">equiv_compose'</span> <span class="id" title="var">g</span>%<span class="id" title="var">equiv</span> <span class="id" title="var">f</span>%<span class="id" title="var">equiv</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 40, <span class="id" title="tactic">left</span> <span class="id" title="keyword">associativity</span>) : <span class="id" title="var">equiv_scope</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;The&nbsp;TypeClass&nbsp;<span class="inlinecode"><span class="id" title="var">Transitive</span></span>&nbsp;has&nbsp;a&nbsp;different&nbsp;order&nbsp;of&nbsp;parameters&nbsp;than&nbsp;<span class="inlinecode"><span class="id" title="var">equiv_compose</span></span>.&nbsp;&nbsp;Thus&nbsp;in&nbsp;declaring&nbsp;the&nbsp;instance&nbsp;we&nbsp;have&nbsp;to&nbsp;switch&nbsp;the&nbsp;order&nbsp;of&nbsp;arguments.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Global Instance</span> <span class="id" title="var">transitive_equiv</span> : <span class="id" title="var">Transitive</span> <span class="id" title="var">Equiv</span> | 0 :=<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span> ⇒ <span class="id" title="var">equiv_compose</span> <span class="id" title="var">g</span> <span class="id" title="var">f</span>.<br/>
 
@@ -1833,7 +1811,6 @@ Anything homotopic to an equivalence is an equivalence.
 &nbsp;&nbsp;<span class="id" title="keyword">Let</span> <span class="id" title="var">retr</span> := (<span class="id" title="keyword">fun</span> <span class="id" title="var">a</span>:<span class="id" title="var">A</span> ⇒ (<span class="id" title="var">ap</span> <span class="id" title="var">f</span>^-1 (<span class="id" title="var">h</span> <span class="id" title="var">a</span>))^ @ <span class="id" title="var">eissect</span> <span class="id" title="var">f</span> <span class="id" title="var">a</span>).<br/>
 
 <br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;We&nbsp;prove&nbsp;the&nbsp;triangle&nbsp;identity&nbsp;with&nbsp;rewrite&nbsp;tactics.&nbsp;&nbsp;Since&nbsp;we&nbsp;lose&nbsp;control&nbsp;over&nbsp;the&nbsp;proof&nbsp;term&nbsp;that&nbsp;way,&nbsp;we&nbsp;make&nbsp;the&nbsp;result&nbsp;opaque&nbsp;with&nbsp;"Qed".&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Let</span> <span class="id" title="var">adj</span> (<span class="id" title="var">a</span> : <span class="id" title="var">A</span>) : <span class="id" title="var">sect</span> (<span class="id" title="var">g</span> <span class="id" title="var">a</span>) = <span class="id" title="var">ap</span> <span class="id" title="var">g</span> (<span class="id" title="var">retr</span> <span class="id" title="var">a</span>).<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <span class="id" title="var">sect</span>, <span class="id" title="var">retr</span>.<br/>
@@ -1845,7 +1822,6 @@ Anything homotopic to an equivalence is an equivalence.
 &nbsp;&nbsp;<span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;This&nbsp;should&nbsp;not&nbsp;be&nbsp;an&nbsp;instance;&nbsp;it&nbsp;can&nbsp;cause&nbsp;the&nbsp;unifier&nbsp;to&nbsp;spin&nbsp;forever&nbsp;searching&nbsp;for&nbsp;functions&nbsp;to&nbsp;be&nbsp;hoomotpic&nbsp;to.&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <span class="id" title="var">isequiv_homotopic</span> : <span class="id" title="var">IsEquiv</span> <span class="id" title="var">g</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;:= <span class="id" title="var">BuildIsEquiv</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">g</span> (<span class="id" title="var">f</span> ^-1) <span class="id" title="var">sect</span> <span class="id" title="var">retr</span> <span class="id" title="var">adj</span>.<br/>
 
@@ -1871,7 +1847,6 @@ The inverse of an equivalence is an equivalence.
 <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <span class="id" title="var">other_adj</span> (<span class="id" title="var">b</span> : <span class="id" title="var">B</span>) : <span class="id" title="var">eissect</span> <span class="id" title="var">f</span> (<span class="id" title="var">f</span>^-1 <span class="id" title="var">b</span>) = <span class="id" title="var">ap</span> <span class="id" title="var">f</span>^-1 (<span class="id" title="var">eisretr</span> <span class="id" title="var">f</span> <span class="id" title="var">b</span>).<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Proof</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;First&nbsp;we&nbsp;set&nbsp;up&nbsp;the&nbsp;mess.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<span class="id" title="var">concat_1p</span> (<span class="id" title="var">eissect</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<span class="id" title="var">concat_Vp</span> (<span class="id" title="var">ap</span> <span class="id" title="var">f</span>^-1 (<span class="id" title="var">eisretr</span> <span class="id" title="var">f</span> (<span class="id" title="var">f</span> (<span class="id" title="var">f</span>^-1 <span class="id" title="var">b</span>))))).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">whiskerR</span> (<span class="id" title="var">inverse2</span> (<span class="id" title="var">ap02</span> <span class="id" title="var">f</span>^-1 (<span class="id" title="var">eisadj</span> <span class="id" title="var">f</span> (<span class="id" title="var">f</span>^-1 <span class="id" title="var">b</span>)))) <span class="id" title="var">_</span>).<br/>
@@ -1881,7 +1856,6 @@ The inverse of an equivalence is an equivalence.
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<span class="id" title="var">concat_pV</span> (<span class="id" title="var">ap</span> <span class="id" title="var">f</span>^-1 (<span class="id" title="var">eisretr</span> <span class="id" title="var">f</span> (<span class="id" title="var">f</span> (<span class="id" title="var">f</span>^-1 <span class="id" title="var">b</span>))))).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">moveL_M1</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">repeat</span> <span class="id" title="tactic">rewrite</span> <span class="id" title="var">concat_p_pp</span>.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;Now&nbsp;we&nbsp;apply&nbsp;lots&nbsp;of&nbsp;naturality&nbsp;and&nbsp;cancel&nbsp;things.&nbsp;*)</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<span class="id" title="var">concat_pp_A1</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⇒ (<span class="id" title="var">eissect</span> <span class="id" title="var">f</span> <span class="id" title="var">a</span>)^) <span class="id" title="var">_</span> <span class="id" title="var">_</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> (<span class="id" title="var">ap_compose'</span> <span class="id" title="var">f</span> <span class="id" title="var">f</span>^-1).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">rewrite</span> &lt;- (<span class="id" title="var">ap_p_pp</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<span class="id" title="var">ap</span> <span class="id" title="var">f</span> (<span class="id" title="var">ap</span> <span class="id" title="var">f</span>^-1 (<span class="id" title="var">eisretr</span> <span class="id" title="var">f</span> (<span class="id" title="var">f</span> (<span class="id" title="var">f</span>^-1 <span class="id" title="var">b</span>))))) <span class="id" title="var">_</span>).<br/>
@@ -1919,7 +1893,7 @@ If the goal is <span class="inlinecode"><span class="id" title="var">IsEquiv</sp
 </div>
 
 <div class="doc">
-<span class="inlinecode"><a class="idref" href="MetaRocq.Utils.MRFSets.html#W.Equiv"><span class="id" title="definition">Equiv</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.B"><span class="id" title="variable">B</span></a></span> is a symmetric relation. 
+<span class="inlinecode"><span class="id" title="var">Equiv</span></span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode"><span class="id" title="var">B</span></span> is a symmetric relation. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Theorem</span> <span class="id" title="var">equiv_inverse</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Type</span>} : (<span class="id" title="var">A</span> &lt;~&gt; <span class="id" title="var">B</span>) → (<span class="id" title="var">B</span> &lt;~&gt; <span class="id" title="var">A</span>).<br/>
@@ -1939,7 +1913,7 @@ If the goal is <span class="inlinecode"><span class="id" title="var">IsEquiv</sp
 </div>
 
 <div class="doc">
-If <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.html#MonadOperations.g"><span class="id" title="variable">g</span></a></span> <span class="inlinecode">\<a class="idref" href="MetaRocq.Erasure.EProgram.html#TransformExt.Opt.o"><span class="id" title="variable">o</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span> and <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span> are equivalences, so is <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.html#MonadOperations.g"><span class="id" title="variable">g</span></a></span>.  This is not an Instance because it would require Rocq to guess <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span>. 
+If <span class="inlinecode"><span class="id" title="var">g</span></span> <span class="inlinecode">\<span class="id" title="var">o</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> and <span class="inlinecode"><span class="id" title="var">f</span></span> are equivalences, so is <span class="inlinecode"><span class="id" title="var">g</span></span>.  This is not an Instance because it would require Rocq to guess <span class="inlinecode"><span class="id" title="var">f</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">cancelR_isequiv</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span>} (<span class="id" title="var">f</span> : <span class="id" title="var">A</span> → <span class="id" title="var">B</span>) {<span class="id" title="var">g</span> : <span class="id" title="var">B</span> → <span class="id" title="var">C</span>}<br/>
@@ -1958,7 +1932,7 @@ If <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.ht
 </div>
 
 <div class="doc">
-If <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.html#MonadOperations.g"><span class="id" title="variable">g</span></a></span> <span class="inlinecode">\<a class="idref" href="MetaRocq.Erasure.EProgram.html#TransformExt.Opt.o"><span class="id" title="variable">o</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span> and <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.html#MonadOperations.g"><span class="id" title="variable">g</span></a></span> are equivalences, so is <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span>. 
+If <span class="inlinecode"><span class="id" title="var">g</span></span> <span class="inlinecode">\<span class="id" title="var">o</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span> and <span class="inlinecode"><span class="id" title="var">g</span></span> are equivalences, so is <span class="inlinecode"><span class="id" title="var">f</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">cancelL_isequiv</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">C</span>} (<span class="id" title="var">g</span> : <span class="id" title="var">B</span> → <span class="id" title="var">C</span>) {<span class="id" title="var">f</span> : <span class="id" title="var">A</span> → <span class="id" title="var">B</span>}<br/>
@@ -2049,7 +2023,6 @@ In all the above cases, we were able to directly construct all the structure of 
 &nbsp;&nbsp;<span class="id" title="keyword">Context</span> (<span class="id" title="var">isretr</span> : <span class="id" title="var">Sect</span> <span class="id" title="var">g</span> <span class="id" title="var">f</span>) (<span class="id" title="var">issect</span> : <span class="id" title="var">Sect</span> <span class="id" title="var">f</span> <span class="id" title="var">g</span>).<br/>
 
 <br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;This&nbsp;is&nbsp;the&nbsp;modified&nbsp;<span class="inlinecode"><span class="id" title="var">eissect</span></span>.&nbsp;*)</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Let</span> <span class="id" title="var">issect'</span> := <span class="id" title="keyword">fun</span> <span class="id" title="var">x</span> ⇒<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ap</span> <span class="id" title="var">g</span> (<span class="id" title="var">ap</span> <span class="id" title="var">f</span> (<span class="id" title="var">issect</span> <span class="id" title="var">x</span>)^)  @  <span class="id" title="var">ap</span> <span class="id" title="var">g</span> (<span class="id" title="var">isretr</span> (<span class="id" title="var">f</span> <span class="id" title="var">x</span>))  @  <span class="id" title="var">issect</span> <span class="id" title="var">x</span>.<br/>
 
@@ -2258,19 +2231,12 @@ Conversely, if pre- or post-composing with a function is always an equivalence, 
 <span class="id" title="keyword">Qed</span>.<br/>
 
 <br/>
-<span class="comment">(*<br/>
-Definition&nbsp;isequiv_isequiv_postcompose&nbsp;{A&nbsp;B&nbsp;:&nbsp;Type}&nbsp;(f&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;B)<br/>
-&nbsp;&nbsp;(postcomp&nbsp;:=&nbsp;(fun&nbsp;(C&nbsp;:&nbsp;Type)&nbsp;(h&nbsp;:&nbsp;C&nbsp;-&gt;&nbsp;A)&nbsp;=&gt;&nbsp;f&nbsp;o&nbsp;h))<br/>
-&nbsp;&nbsp;(feq&nbsp;:&nbsp;forall&nbsp;C:Type,&nbsp;IsEquiv&nbsp;(postcomp&nbsp;C))<br/>
-&nbsp;&nbsp;:&nbsp;IsEquiv&nbsp;f.<br/>
-<span class="comment">(*&nbsp;TODO&nbsp;*)</span><br/>
-*)</span><br/>
 
 <br/>
 </div>
 
 <div class="doc">
-If <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span> is an equivalence, then so is <span class="inlinecode"><span class="id" title="var">ap</span></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span>.  We are lazy and use <span class="inlinecode"><span class="id" title="var">adjointify</span></span>. 
+If <span class="inlinecode"><span class="id" title="var">f</span></span> is an equivalence, then so is <span class="inlinecode"><span class="id" title="var">ap</span></span> <span class="inlinecode"><span class="id" title="var">f</span></span>.  We are lazy and use <span class="inlinecode"><span class="id" title="var">adjointify</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Global Instance</span> <span class="id" title="var">isequiv_ap</span> `{<span class="id" title="var">IsEquiv</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">f</span>} (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>)<br/>
@@ -2296,11 +2262,11 @@ If <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries
 </div>
 
 <div class="doc">
-The function <span class="inlinecode"><span class="id" title="var">equiv_ind</span></span> says that given an equivalence <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> <span class="inlinecode">&lt;~&gt;</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.B"><span class="id" title="variable">B</span></a></span>, and a hypothesis from <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.B"><span class="id" title="variable">B</span></a></span>, one may always assume that the hypothesis is in the image of <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.html#MonadOperations.e"><span class="id" title="variable">e</span></a></span>.
+The function <span class="inlinecode"><span class="id" title="var">equiv_ind</span></span> says that given an equivalence <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">&lt;~&gt;</span> <span class="inlinecode"><span class="id" title="var">B</span></span>, and a hypothesis from <span class="inlinecode"><span class="id" title="var">B</span></span>, one may always assume that the hypothesis is in the image of <span class="inlinecode"><span class="id" title="var">e</span></span>.
 
 <div class="paragraph"> </div>
 
-In fibrational terms, if we have a fibration over <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.B"><span class="id" title="variable">B</span></a></span> which has a section once pulled back along an equivalence <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> <span class="inlinecode">&lt;~&gt;</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.B"><span class="id" title="variable">B</span></a></span>, then it has a section over all of <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.B"><span class="id" title="variable">B</span></a></span>.  
+In fibrational terms, if we have a fibration over <span class="inlinecode"><span class="id" title="var">B</span></span> which has a section once pulled back along an equivalence <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">&lt;~&gt;</span> <span class="inlinecode"><span class="id" title="var">B</span></span>, then it has a section over all of <span class="inlinecode"><span class="id" title="var">B</span></span>.  
 </div>
 <div class="code">
 
@@ -2349,7 +2315,6 @@ Using <span class="inlinecode"><span class="id" title="var">equiv_ind</span></sp
 &nbsp;&nbsp;:= <span class="id" title="var">equiv_compose'</span> <span class="id" title="var">g</span> <span class="id" title="var">f</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Shouldn't&nbsp;this&nbsp;become&nbsp;transitivity&nbsp;mid&nbsp;?&nbsp;*)</span><br/>
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">equiv_via</span> <span class="id" title="var">mid</span> :=<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">apply</span> @<span class="id" title="var">equiv_composeR'</span> <span class="id" title="keyword">with</span> (<span class="id" title="var">B</span> := <span class="id" title="var">mid</span>).<br/>
 
@@ -2357,7 +2322,7 @@ Using <span class="inlinecode"><span class="id" title="var">equiv_ind</span></sp
 </div>
 
 <div class="doc">
-It's often convenient when constructing a chain of equivalences to use <span class="inlinecode"><span class="id" title="var">equiv_compose'</span></span>, etc.  But when we treat an <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.MRFSets.html#W.Equiv"><span class="id" title="definition">Equiv</span></a></span> object constructed in that way as a function, via the coercion <span class="inlinecode"><span class="id" title="var">equiv_fun</span></span>, Rocq sometimes needs a little help to realize that the result is the same as ordinary composition.  This tactic provides that help. 
+It's often convenient when constructing a chain of equivalences to use <span class="inlinecode"><span class="id" title="var">equiv_compose'</span></span>, etc.  But when we treat an <span class="inlinecode"><span class="id" title="var">Equiv</span></span> object constructed in that way as a function, via the coercion <span class="inlinecode"><span class="id" title="var">equiv_fun</span></span>, Rocq sometimes needs a little help to realize that the result is the same as ordinary composition.  This tactic provides that help. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Ltac</span> <span class="id" title="var">ev_equiv</span> :=<br/>
@@ -2371,7 +2336,6 @@ It's often convenient when constructing a chain of equivalences to use <span cla
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Types/Paths.v&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">transport_paths_l</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} {<span class="id" title="var">x1</span> <span class="id" title="var">x2</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>} (<span class="id" title="var">p</span> : <span class="id" title="var">x1</span> = <span class="id" title="var">x2</span>) (<span class="id" title="var">q</span> : <span class="id" title="var">x1</span> = <span class="id" title="var">y</span>)<br/>
@@ -2482,7 +2446,6 @@ It's often convenient when constructing a chain of equivalences to use <span cla
 &nbsp;&nbsp;:= <span class="id" title="var">equiv_ap</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;TODO:&nbsp;Is&nbsp;this&nbsp;really&nbsp;necessary?&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">equiv_inj</span> `(<span class="id" title="var">f</span> : <span class="id" title="var">A</span> → <span class="id" title="var">B</span>) `{<span class="id" title="var">IsEquiv</span> <span class="id" title="var">A</span> <span class="id" title="var">B</span> <span class="id" title="var">f</span>} {<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>}<br/>
 &nbsp;&nbsp;: (<span class="id" title="var">f</span> <span class="id" title="var">x</span> = <span class="id" title="var">f</span> <span class="id" title="var">y</span>) → (<span class="id" title="var">x</span> = <span class="id" title="var">y</span>)<br/>
 &nbsp;&nbsp;:= (<span class="id" title="var">ap</span> <span class="id" title="var">f</span>)^-1.<br/>
@@ -2968,7 +2931,7 @@ In particular, all of the <span class="inlinecode"><span class="id" title="tacti
 
 <div class="paragraph"> </div>
 
- Usually, a dependent path over <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.All_Forall.html#alli.p"><span class="id" title="variable">p</span></a>:<span class="id" title="var">x1</span>=<span class="id" title="var">x2</span></span> in <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a>:<a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a>→<span class="id" title="keyword">Type</span></span> between <span class="inlinecode"><span class="id" title="var">y1</span>:<a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><span class="id" title="var">x1</span></span> and <span class="inlinecode"><span class="id" title="var">y2</span>:<a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><span class="id" title="var">x2</span></span> is a path <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.MREquality.html#transport"><span class="id" title="definition">transport</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.All_Forall.html#alli.p"><span class="id" title="variable">p</span></a></span> <span class="inlinecode"><span class="id" title="var">y1</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">y2</span></span> in <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><span class="id" title="var">x2</span></span>.  However, when <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> is a path space, these dependent paths have a more convenient description: rather than transporting the left side both forwards and backwards, we transport both sides of the equation forwards, forming a sort of "naturality square".
+ Usually, a dependent path over <span class="inlinecode"><span class="id" title="var">p</span>:<span class="id" title="var">x1</span>=<span class="id" title="var">x2</span></span> in <span class="inlinecode"><span class="id" title="var">P</span>:<span class="id" title="var">A</span>→<span class="id" title="keyword">Type</span></span> between <span class="inlinecode"><span class="id" title="var">y1</span>:<span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x1</span></span> and <span class="inlinecode"><span class="id" title="var">y2</span>:<span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x2</span></span> is a path <span class="inlinecode"><span class="id" title="var">transport</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode"><span class="id" title="var">y1</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">y2</span></span> in <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x2</span></span>.  However, when <span class="inlinecode"><span class="id" title="var">P</span></span> is a path space, these dependent paths have a more convenient description: rather than transporting the left side both forwards and backwards, we transport both sides of the equation forwards, forming a sort of "naturality square".
 
 <div class="paragraph"> </div>
 
@@ -3118,7 +3081,6 @@ In particular, all of the <span class="inlinecode"><span class="id" title="tacti
 &nbsp;&nbsp;:= <span class="id" title="var">BuildEquiv</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<span class="id" title="var">paths_ind</span> <span class="id" title="var">a</span> <span class="id" title="var">P</span>) <span class="id" title="var">_</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Types/Forall.v&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Section</span> <span class="id" title="var">AssumeFunext</span>.<br/>
@@ -3132,7 +3094,7 @@ In particular, all of the <span class="inlinecode"><span class="id" title="tacti
 
 <div class="paragraph"> </div>
 
- Paths <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.All_Forall.html#alli.p"><span class="id" title="variable">p</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode">=</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.html#MonadOperations.g"><span class="id" title="variable">g</span></a></span> in a function type <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a>:<a class="idref" href="MetaRocq.Erasure.Typed.Utils.html#bigprod.X"><span class="id" title="variable">X</span></a>,</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span> are equivalent to functions taking values in path types, <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a>:<a class="idref" href="MetaRocq.Erasure.Typed.Utils.html#bigprod.X"><span class="id" title="variable">X</span></a>,</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode">=</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.html#MonadOperations.g"><span class="id" title="variable">g</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span>, or concisely, <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode">==</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.html#MonadOperations.g"><span class="id" title="variable">g</span></a></span>.
+ Paths <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">g</span></span> in a function type <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">x</span>:<span class="id" title="var">X</span>,</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> are equivalent to functions taking values in path types, <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="keyword">∀</span></span> <span class="inlinecode"><span class="id" title="var">x</span>:<span class="id" title="var">X</span>,</span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">g</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>, or concisely, <span class="inlinecode"><span class="id" title="var">H</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode">==</span> <span class="inlinecode"><span class="id" title="var">g</span></span>.
 
 <div class="paragraph"> </div>
 
@@ -3250,8 +3212,8 @@ The identification of the path space of a dependent function space, up to equiva
 </div>
 
 <div class="doc">
-A special case of <span class="inlinecode"><span class="id" title="var">transport_forall</span></span> where the type <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> does not depend on <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span>,
-    and so it is just a fixed type <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.COMBINE.B"><span class="id" title="variable">B</span></a></span>. 
+A special case of <span class="inlinecode"><span class="id" title="var">transport_forall</span></span> where the type <span class="inlinecode"><span class="id" title="var">P</span></span> does not depend on <span class="inlinecode"><span class="id" title="var">A</span></span>,
+    and so it is just a fixed type <span class="inlinecode"><span class="id" title="var">B</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">transport_forall_constant</span><br/>
@@ -3323,7 +3285,7 @@ The action of maps given by lambda.
 
 <div class="paragraph"> </div>
 
- Usually, a dependent path over <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.All_Forall.html#alli.p"><span class="id" title="variable">p</span></a>:<span class="id" title="var">x1</span>=<span class="id" title="var">x2</span></span> in <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a>:<a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a>→<span class="id" title="keyword">Type</span></span> between <span class="inlinecode"><span class="id" title="var">y1</span>:<a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><span class="id" title="var">x1</span></span> and <span class="inlinecode"><span class="id" title="var">y2</span>:<a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><span class="id" title="var">x2</span></span> is a path <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.MREquality.html#transport"><span class="id" title="definition">transport</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.All_Forall.html#alli.p"><span class="id" title="variable">p</span></a></span> <span class="inlinecode"><span class="id" title="var">y1</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">y2</span></span> in <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><span class="id" title="var">x2</span></span>.  However, when <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> is a function space, these dependent paths have a more convenient description: rather than transporting the argument of <span class="inlinecode"><span class="id" title="var">y1</span></span> forwards and backwards, we transport only forwards but on both sides of the equation, yielding a "naturality square". 
+ Usually, a dependent path over <span class="inlinecode"><span class="id" title="var">p</span>:<span class="id" title="var">x1</span>=<span class="id" title="var">x2</span></span> in <span class="inlinecode"><span class="id" title="var">P</span>:<span class="id" title="var">A</span>→<span class="id" title="keyword">Type</span></span> between <span class="inlinecode"><span class="id" title="var">y1</span>:<span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x1</span></span> and <span class="inlinecode"><span class="id" title="var">y2</span>:<span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x2</span></span> is a path <span class="inlinecode"><span class="id" title="var">transport</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode"><span class="id" title="var">y1</span></span> <span class="inlinecode">=</span> <span class="inlinecode"><span class="id" title="var">y2</span></span> in <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x2</span></span>.  However, when <span class="inlinecode"><span class="id" title="var">P</span></span> is a function space, these dependent paths have a more convenient description: rather than transporting the argument of <span class="inlinecode"><span class="id" title="var">y1</span></span> forwards and backwards, we transport only forwards but on both sides of the equation, yielding a "naturality square". 
 </div>
 <div class="code">
 
@@ -3408,7 +3370,7 @@ The action of maps given by lambda.
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">functor_forall</span> (<span class="id" title="var">f</span>^-1)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> (<span class="id" title="var">x</span>:<span class="id" title="var">A</span>) (<span class="id" title="var">y</span>:<span class="id" title="var">Q</span> (<span class="id" title="var">f</span>^-1 <span class="id" title="var">x</span>)) ⇒ <span class="id" title="var">eisretr</span> <span class="id" title="var">f</span> <span class="id" title="var">x</span> # (<span class="id" title="var">g</span> (<span class="id" title="var">f</span>^-1 <span class="id" title="var">x</span>))^-1 <span class="id" title="var">y</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)) <span class="id" title="var">_</span> <span class="id" title="var">_</span>);<br/>
-&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>; <span class="comment">(*&nbsp;https://coq.inria.fr/bugs/show_bug.cgi?id=3848&nbsp;*)</span><br/>
+&nbsp;&nbsp;<span class="id" title="tactic">try</span> <span class="id" title="tactic">assumption</span>; <br/>
 &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">h</span>.<br/>
 &nbsp;&nbsp;- <span class="id" title="tactic">abstract</span> (<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">path_forall</span>; <span class="id" title="tactic">intros</span> <span class="id" title="var">b</span>; <span class="id" title="tactic">unfold</span> <span class="id" title="var">functor_forall</span>;<br/>
@@ -3522,16 +3484,6 @@ There is another way to make forall functorial that acts on on equivalences only
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;trunc_forall&nbsp;`{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;`{forall&nbsp;a,&nbsp;IsTrunc&nbsp;n&nbsp;(P&nbsp;a)}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;IsTrunc&nbsp;n&nbsp;(forall&nbsp;a,&nbsp;P&nbsp;a)&nbsp;|&nbsp;100.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;generalize&nbsp;dependent&nbsp;P.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;simple_induction&nbsp;n&nbsp;n&nbsp;IH;&nbsp;simpl;&nbsp;intros&nbsp;P&nbsp;?.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;case&nbsp;<span class="inlinecode"><span class="id" title="var">n</span></span> <span class="inlinecode">=</span> <span class="inlinecode">-2</span>,&nbsp;i.e.&nbsp;contractibility&nbsp;*)</span>&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;exact&nbsp;_.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;<span class="comment">(*&nbsp;case&nbsp;n&nbsp;=&nbsp;n'.+1&nbsp;*)</span>&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;-&nbsp;intros&nbsp;f&nbsp;g;&nbsp;apply&nbsp;(trunc_equiv&nbsp;_&nbsp;(apD10&nbsp;^-1)).&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -3567,7 +3519,7 @@ There is another way to make forall functorial that acts on on equivalences only
 
 <div class="paragraph"> </div>
 
-Note: not sure if <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> will usually be deducible, or whether it would be better explicit. 
+Note: not sure if <span class="inlinecode"><span class="id" title="var">P</span></span> will usually be deducible, or whether it would be better explicit. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">flip</span> `{<span class="id" title="var">P</span> : <span class="id" title="var">A</span> → <span class="id" title="var">B</span> → <span class="id" title="keyword">Type</span>}<br/>
@@ -3595,28 +3547,27 @@ Note: not sure if <span class="inlinecode"><a class="idref" href="MetaRocq.Utils
 <span class="id" title="keyword">End</span> <span class="id" title="var">AssumeFunext</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Types/Sigma.v&nbsp;*)</span><br/>
 
 <br/>
 </div>
 
 <div class="doc">
-In homotopy type theory, We think of elements of <span class="inlinecode"><span class="id" title="keyword">Type</span></span> as spaces, homotopy types, or weak omega-groupoids. A type family <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Type</span></span> corresponds to a fibration whose base is <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> and whose fiber over <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span> is <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span>.
+In homotopy type theory, We think of elements of <span class="inlinecode"><span class="id" title="keyword">Type</span></span> as spaces, homotopy types, or weak omega-groupoids. A type family <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">→</span> <span class="inlinecode"><span class="id" title="keyword">Type</span></span> corresponds to a fibration whose base is <span class="inlinecode"><span class="id" title="var">A</span></span> and whose fiber over <span class="inlinecode"><span class="id" title="var">x</span></span> is <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>.
 
 <div class="paragraph"> </div>
 
-From such a <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> we can build a total space over the base space <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> so that the fiber over <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> is <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span>. This is just Rocq's dependent sum construction, written as <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#sigT"><span class="id" title="inductive">sigT</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> or <span class="inlinecode">{<a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> <span class="inlinecode">&amp;</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a>}</span>. The elements of <span class="inlinecode">{<a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> <span class="inlinecode">&amp;</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a>}</span> are pairs, written <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#existT"><span class="id" title="constructor">existT</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.y"><span class="id" title="variable">y</span></a></span> in Rocq, where <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> and <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.y"><span class="id" title="variable">y</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span>.  In <span class="inlinecode"><span class="id" title="var">Common.v</span></span> we defined the notation <span class="inlinecode">(<a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a>;<a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.y"><span class="id" title="variable">y</span></a>)</span> to mean <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#existT"><span class="id" title="constructor">existT</span></a></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.y"><span class="id" title="variable">y</span></a></span>.
+From such a <span class="inlinecode"><span class="id" title="var">P</span></span> we can build a total space over the base space <span class="inlinecode"><span class="id" title="var">A</span></span> so that the fiber over <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> is <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>. This is just Rocq's dependent sum construction, written as <span class="inlinecode"><span class="id" title="var">sigT</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> or <span class="inlinecode">{<span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">&amp;</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span>}</span>. The elements of <span class="inlinecode">{<span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">&amp;</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span>}</span> are pairs, written <span class="inlinecode"><span class="id" title="var">existT</span></span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span> in Rocq, where <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> and <span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span>.  In <span class="inlinecode"><span class="id" title="var">Common.v</span></span> we defined the notation <span class="inlinecode">(<span class="id" title="var">x</span>;<span class="id" title="var">y</span>)</span> to mean <span class="inlinecode"><span class="id" title="var">existT</span></span> <span class="inlinecode"><span class="id" title="var">_</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span>.
 
 <div class="paragraph"> </div>
 
-The base and fiber components of a point in the total space are extracted with the two projections <span class="inlinecode"><span class="id" title="projection">pr1</span></span> and <span class="inlinecode"><span class="id" title="projection">pr2</span></span>. 
+The base and fiber components of a point in the total space are extracted with the two projections <span class="inlinecode"><span class="id" title="var">pr1</span></span> and <span class="inlinecode"><span class="id" title="var">pr2</span></span>. 
 <div class="paragraph"> </div>
 
 <a id="lab184"></a><h2 class="section">Unpacking</h2>
 
 <div class="paragraph"> </div>
 
- Sometimes we would like to prove <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.monad_utils.html#MonadAllAll.Q"><span class="id" title="variable">Q</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.u"><span class="id" title="variable">u</span></a></span> where <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.u"><span class="id" title="variable">u</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode">{<a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a></span> <span class="inlinecode">:</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Examples.add_constructor.html#A"><span class="id" title="module">A</span></a></span> <span class="inlinecode">&amp;</span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.canonicaltries.CanonicalTries.html#PTree.TREE_IND.P"><span class="id" title="variable">P</span></a></span> <span class="inlinecode"><a class="idref" href="MetaRocq.Utils.wGraph.html#WeightedGraph.RelabelWrtEdge.RelabelWrtEdge.RelabelCoefs.x"><span class="id" title="variable">x</span></a>}</span> by writing <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.u"><span class="id" title="variable">u</span></a></span> as a pair <span class="inlinecode">(<span class="id" title="projection">pr1</span></span> <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.u"><span class="id" title="variable">u</span></a></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="projection">pr2</span></span> <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.u"><span class="id" title="variable">u</span></a>)</span>. This is accomplished by <span class="inlinecode"><span class="id" title="var">sigT_unpack</span></span>. We want tight control over the proof, so we just write it down even though is looks a bit scary. 
+ Sometimes we would like to prove <span class="inlinecode"><span class="id" title="var">Q</span></span> <span class="inlinecode"><span class="id" title="var">u</span></span> where <span class="inlinecode"><span class="id" title="var">u</span></span> <span class="inlinecode">:</span> <span class="inlinecode">{<span class="id" title="var">x</span></span> <span class="inlinecode">:</span> <span class="inlinecode"><span class="id" title="var">A</span></span> <span class="inlinecode">&amp;</span> <span class="inlinecode"><span class="id" title="var">P</span></span> <span class="inlinecode"><span class="id" title="var">x</span>}</span> by writing <span class="inlinecode"><span class="id" title="var">u</span></span> as a pair <span class="inlinecode">(<span class="id" title="var">pr1</span></span> <span class="inlinecode"><span class="id" title="var">u</span></span> <span class="inlinecode">;</span> <span class="inlinecode"><span class="id" title="var">pr2</span></span> <span class="inlinecode"><span class="id" title="var">u</span>)</span>. This is accomplished by <span class="inlinecode"><span class="id" title="var">sigT_unpack</span></span>. We want tight control over the proof, so we just write it down even though is looks a bit scary. 
 </div>
 <div class="code">
 
@@ -3674,7 +3625,7 @@ The base and fiber components of a point in the total space are extracted with t
  A path in a total space is commonly shown component wise. Because we use this over and over, we write down the proofs by hand to make sure they are what we think they should be. 
 <div class="paragraph"> </div>
 
- With this version of the function, we often have to give <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.u"><span class="id" title="variable">u</span></a></span> and <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.v"><span class="id" title="variable">v</span></a></span> explicitly, so we make them explicit arguments. 
+ With this version of the function, we often have to give <span class="inlinecode"><span class="id" title="var">u</span></span> and <span class="inlinecode"><span class="id" title="var">v</span></span> explicitly, so we make them explicit arguments. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">path_sigma_uncurried</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">P</span> : <span class="id" title="var">A</span> → <span class="id" title="keyword">Type</span>) (<span class="id" title="var">u</span> <span class="id" title="var">v</span> : <span class="id" title="var">sigT</span> <span class="id" title="var">P</span>)<br/>
@@ -3712,7 +3663,7 @@ A contravariant instance of <span class="inlinecode"><span class="id" title="var
 </div>
 
 <div class="doc">
-A variant of <span class="inlinecode"><span class="id" title="var">Forall.dpath_forall</span></span> from which uses dependent sums to package things. It cannot go into <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Lists.ListDef.html#Forall"><span class="id" title="inductive">Forall</span></a></span> because <span class="inlinecode"><a class="idref" href="MetaRocq.PCUIC.Conversion.PCUICInstConv.html#Sigma"><span class="id" title="section">Sigma</span></a></span> depends on <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Lists.ListDef.html#Forall"><span class="id" title="inductive">Forall</span></a></span>. 
+A variant of <span class="inlinecode"><span class="id" title="var">Forall.dpath_forall</span></span> from which uses dependent sums to package things. It cannot go into <span class="inlinecode"><span class="id" title="var">Forall</span></span> because <span class="inlinecode"><span class="id" title="var">Sigma</span></span> depends on <span class="inlinecode"><span class="id" title="var">Forall</span></span>. 
 </div>
 <div class="code">
 
@@ -3754,7 +3705,6 @@ Projections of paths from a total space.
 : <span class="id" title="var">u</span>.1 = <span class="id" title="var">v</span>.1<br/>
 &nbsp;&nbsp;:=<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ap</span> <span class="id" title="var">pr1</span> <span class="id" title="var">p</span>.<br/>
-<span class="comment">(*&nbsp;match&nbsp;p&nbsp;with&nbsp;idpath&nbsp;=&gt;&nbsp;1&nbsp;end.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Notation</span> &quot;p ..1" := (<span class="id" title="var">pr1_path</span> <span class="id" title="var">p</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 3) : <span class="id" title="var">fibration_scope</span>.<br/>
@@ -3825,7 +3775,6 @@ Now we show how these things compute.
 &nbsp;&nbsp;:= <span class="id" title="var">pr1_path_sigma_uncurried</span> (<span class="id" title="var">p</span>; <span class="id" title="var">q</span>).<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Writing&nbsp;it&nbsp;the&nbsp;other&nbsp;way&nbsp;can&nbsp;help&nbsp;<span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">ap_pr1_path_sigma</span> {<span class="id" title="var">A</span>:<span class="id" title="keyword">Type</span>} {<span class="id" title="var">P</span> : <span class="id" title="var">A</span> → <span class="id" title="keyword">Type</span>} {<span class="id" title="var">u</span> <span class="id" title="var">v</span> : <span class="id" title="var">sigT</span> <span class="id" title="var">P</span>}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">p</span> : <span class="id" title="var">u</span>.1 = <span class="id" title="var">v</span>.1) (<span class="id" title="var">q</span> : <span class="id" title="var">p</span> # <span class="id" title="var">u</span>.2 = <span class="id" title="var">v</span>.2)<br/>
 &nbsp;&nbsp;: <span class="id" title="var">ap</span> <span class="id" title="var">pr1</span> (<span class="id" title="var">path_sigma</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span>) = <span class="id" title="var">p</span><br/>
@@ -3881,7 +3830,6 @@ This lets us identify the path space of a sigma-type, up to equivalence.
 &nbsp;&nbsp;:= <span class="id" title="var">BuildEquiv</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<span class="id" title="var">path_sigma_uncurried</span> <span class="id" title="var">P</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span>) <span class="id" title="var">_</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;A&nbsp;contravariant&nbsp;version&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">isequiv_path_sigma'</span></span>&nbsp;*)</span><br/>
 <span class="id" title="keyword">Global Instance</span> <span class="id" title="var">isequiv_path_sigma_contra</span> `{<span class="id" title="var">P</span> : <span class="id" title="var">A</span> → <span class="id" title="keyword">Type</span>} {<span class="id" title="var">u</span> <span class="id" title="var">v</span> : <span class="id" title="var">sigT</span> <span class="id" title="var">P</span>}<br/>
 &nbsp;&nbsp;: <span class="id" title="var">IsEquiv</span> (<span class="id" title="var">path_sigma_uncurried_contra</span> <span class="id" title="var">P</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span>) | 0.<br/>
 &nbsp;&nbsp;<span class="id" title="var">unshelve</span> <span class="id" title="tactic">eapply</span> (<span class="id" title="var">isequiv_adjointify</span> (<span class="id" title="var">path_sigma_uncurried_contra</span> <span class="id" title="var">P</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span>)).<br/>
@@ -3894,7 +3842,6 @@ This lets us identify the path space of a sigma-type, up to equivalence.
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;A&nbsp;contravariant&nbsp;version&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">equiv_path_sigma</span></span>&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">equiv_path_sigma_contra</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} `(<span class="id" title="var">P</span> : <span class="id" title="var">A</span> → <span class="id" title="keyword">Type</span>) (<span class="id" title="var">u</span> <span class="id" title="var">v</span> : <span class="id" title="var">sigT</span> <span class="id" title="var">P</span>)<br/>
 &nbsp;&nbsp;: {<span class="id" title="var">p</span> : <span class="id" title="var">u</span>.1 = <span class="id" title="var">v</span>.1 &amp; <span class="id" title="var">u</span>.2 = <span class="id" title="var">p</span>^ # <span class="id" title="var">v</span>.2} &lt;~&gt; (<span class="id" title="var">u</span> = <span class="id" title="var">v</span>)<br/>
 &nbsp;&nbsp;:= <span class="id" title="var">BuildEquiv</span> <span class="id" title="var">_</span> <span class="id" title="var">_</span> (<span class="id" title="var">path_sigma_uncurried_contra</span> <span class="id" title="var">P</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span>) <span class="id" title="var">_</span>.<br/>
@@ -3969,7 +3916,7 @@ This identification respects path concatenation.
 </div>
 
 <div class="doc">
-Applying <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/doc/V9.0.0/stdlib//Corelib.Init.Specif.html#existT"><span class="id" title="constructor">existT</span></a></span> to one argument is the same as <span class="inlinecode"><span class="id" title="var">path_sigma</span></span> with reflexivity in the first place. 
+Applying <span class="inlinecode"><span class="id" title="var">existT</span></span> to one argument is the same as <span class="inlinecode"><span class="id" title="var">path_sigma</span></span> with reflexivity in the first place. 
 </div>
 <div class="code">
 
@@ -4008,17 +3955,6 @@ Applying a two variable function to a <span class="inlinecode"><span class="id" 
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;ap_path_sigma&nbsp;{A&nbsp;B}&nbsp;(P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type)&nbsp;(F&nbsp;:&nbsp;forall&nbsp;a&nbsp;:&nbsp;A,&nbsp;P&nbsp;a&nbsp;-&gt;&nbsp;B)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{x&nbsp;x'&nbsp;:&nbsp;A}&nbsp;{y&nbsp;:&nbsp;P&nbsp;x}&nbsp;{y'&nbsp;:&nbsp;P&nbsp;x'}&nbsp;(p&nbsp;:&nbsp;x&nbsp;=&nbsp;x')&nbsp;(q&nbsp;:&nbsp;p&nbsp; y = y') *)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;ap&nbsp;(fun&nbsp;w&nbsp;=&gt;&nbsp;F&nbsp;w.1&nbsp;w.2)&nbsp;(path_sigma'&nbsp;P&nbsp;p&nbsp;q)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;ap&nbsp;_&nbsp;(moveL_transport_V&nbsp;_&nbsp;p&nbsp;_&nbsp;_&nbsp;q)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;(transport_arrow_toconst&nbsp;_&nbsp;_&nbsp;_)^&nbsp;@&nbsp;ap10&nbsp;(apD&nbsp;F&nbsp;p)&nbsp;y'.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;destruct&nbsp;p,&nbsp;q;&nbsp;reflexivity.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Remark:&nbsp;this&nbsp;is&nbsp;also&nbsp;equal&nbsp;to:&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;ap10&nbsp;(apD&nbsp;F&nbsp;p^)^&nbsp;y&nbsp;@&nbsp;transport_arrow_toconst&nbsp;_&nbsp;_&nbsp;_&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;ap&nbsp;(F&nbsp;x')&nbsp;(transport2&nbsp;_&nbsp;(inv_V&nbsp;p)&nbsp;y&nbsp;@&nbsp;q).&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -4043,20 +3979,8 @@ Applying a function constructed with <span class="inlinecode"><span class="id" t
 <div class="code">
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;ap_sigT_rec_path_sigma&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;(P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type)&nbsp;{Q&nbsp;:&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x1&nbsp;x2:A)&nbsp;(p:x1=x2)&nbsp;(y1:P&nbsp;x1)&nbsp;(y2:P&nbsp;x2)&nbsp;(q:p&nbsp; y1 = y2) *)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(d&nbsp;:&nbsp;forall&nbsp;a,&nbsp;P&nbsp;a&nbsp;-&gt;&nbsp;Q)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;ap&nbsp;(sigT_ind&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;Q)&nbsp;d)&nbsp;(path_sigma'&nbsp;P&nbsp;p&nbsp;q)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;=&nbsp;(transport_const&nbsp;p&nbsp;_)^&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;(ap&nbsp;((transport&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;Q)&nbsp;p)&nbsp;o&nbsp;(d&nbsp;x1))&nbsp;(transport_Vp&nbsp;_&nbsp;p&nbsp;y1))^&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;(transport_arrow&nbsp;p&nbsp;_&nbsp;_)^&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;ap10&nbsp;(apD&nbsp;d&nbsp;p)&nbsp;(p&nbsp; y1) *)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;ap&nbsp;(d&nbsp;x2)&nbsp;q.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;destruct&nbsp;p.&nbsp;destruct&nbsp;q.&nbsp;reflexivity.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
 </div>
@@ -4065,7 +3989,7 @@ Applying a function constructed with <span class="inlinecode"><span class="id" t
 A path between paths in a total space is commonly shown component wise. 
 <div class="paragraph"> </div>
 
- With this version of the function, we often have to give <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.u"><span class="id" title="variable">u</span></a></span> and <span class="inlinecode"><a class="idref" href="MetaRocq.ErasurePlugin.ErasureCorrectness.html#pipeline_theorem.v"><span class="id" title="variable">v</span></a></span> explicitly, so we make them explicit arguments. 
+ With this version of the function, we often have to give <span class="inlinecode"><span class="id" title="var">u</span></span> and <span class="inlinecode"><span class="id" title="var">v</span></span> explicitly, so we make them explicit arguments. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">path_path_sigma_uncurried</span> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Type</span>} (<span class="id" title="var">P</span> : <span class="id" title="var">A</span> → <span class="id" title="keyword">Type</span>) (<span class="id" title="var">u</span> <span class="id" title="var">v</span> : <span class="id" title="var">sigT</span> <span class="id" title="var">P</span>)<br/>
@@ -4306,209 +4230,56 @@ Lemma 3.11.9(ii): Dually, summing up over a contractible type does nothing.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="keyword">fun</span> <span class="id" title="var">_</span> ⇒ 1)).<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigma_prod&nbsp;`(Q&nbsp;:&nbsp;(A&nbsp;*&nbsp;B)&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;{b&nbsp;:&nbsp;B&nbsp;&amp;&nbsp;Q&nbsp;(a,b)}}&nbsp;&lt;~&gt;&nbsp;sigT&nbsp;Q&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;@BuildEquiv&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;_&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(@BuildIsEquiv&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;{b&nbsp;:&nbsp;B&nbsp;&amp;&nbsp;Q&nbsp;(a,b)}}&nbsp;(sigT&nbsp;Q)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;apq&nbsp;=&gt;&nbsp;((apq.1,&nbsp;apq.2.1);&nbsp;apq.2.2))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;apq&nbsp;=&gt;&nbsp;(fst&nbsp;apq.1;&nbsp;(snd&nbsp;apq.1;&nbsp;apq.2)))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)).&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigma_prod0&nbsp;A&nbsp;B&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;B}&nbsp;&lt;~&gt;&nbsp;A&nbsp;*&nbsp;B&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildEquiv&nbsp;_&nbsp;_&nbsp;_&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(BuildIsEquiv&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;B}&nbsp;(A&nbsp;*&nbsp;B)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;(ab&nbsp;:&nbsp;{a:A&nbsp;&amp;&nbsp;B})&nbsp;=&gt;&nbsp;(ab.1&nbsp;,&nbsp;ab.2))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;(ab&nbsp;:&nbsp;A*B)&nbsp;=&gt;&nbsp;(fst&nbsp;ab&nbsp;;&nbsp;snd&nbsp;ab))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)).&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;**&nbsp;Symmetry&nbsp;*)</span>&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigma_symm&nbsp;`(P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;B&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;{b&nbsp;:&nbsp;B&nbsp;&amp;&nbsp;P&nbsp;a&nbsp;b}}&nbsp;&lt;~&gt;&nbsp;{b&nbsp;:&nbsp;B&nbsp;&amp;&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;P&nbsp;a&nbsp;b}}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;((equiv_sigma_prod&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;P&nbsp;(snd&nbsp;x)&nbsp;(fst&nbsp;x)))^-1)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oE&nbsp;(equiv_functor_sigma'&nbsp;(equiv_prod_symm&nbsp;A&nbsp;B)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;equiv_idmap&nbsp;(P&nbsp;(fst&nbsp;x)&nbsp;(snd&nbsp;x))))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;oE&nbsp;(equiv_sigma_prod&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;P&nbsp;(fst&nbsp;x)&nbsp;(snd&nbsp;x))).&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigma_symm0&nbsp;(A&nbsp;B&nbsp;:&nbsp;Type)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;{a&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;B}&nbsp;&lt;~&gt;&nbsp;{b&nbsp;:&nbsp;B&nbsp;&amp;&nbsp;A}.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;refine&nbsp;(BuildEquiv&nbsp;_&nbsp;_&nbsp;(fun&nbsp;(w:{a:A&nbsp;&amp;&nbsp;B})&nbsp;=&gt;&nbsp;(w.2&nbsp;;&nbsp;w.1))&nbsp;_).&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;simple&nbsp;refine&nbsp;(BuildIsEquiv&nbsp;_&nbsp;_&nbsp;_&nbsp;(fun&nbsp;(z:{b:B&nbsp;&amp;&nbsp;A})&nbsp;=&gt;&nbsp;(z.2&nbsp;;&nbsp;z.1))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;_);&nbsp;intros&nbsp;<span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">y</span></span>;&nbsp;reflexivity.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;**&nbsp;Universal&nbsp;mapping&nbsp;properties&nbsp;*)</span>&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;***&nbsp;The&nbsp;positive&nbsp;universal&nbsp;property.&nbsp;*)</span>&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;isequiv_sigT_ind&nbsp;`{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Q&nbsp;:&nbsp;sigT&nbsp;P&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;IsEquiv&nbsp;(sigT_ind&nbsp;Q)&nbsp;|&nbsp;0&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildIsEquiv&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sigT_ind&nbsp;Q)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;f&nbsp;x&nbsp;y&nbsp;=&gt;&nbsp;f&nbsp;(x;y))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1).&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigT_ind&nbsp;`{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Q&nbsp;:&nbsp;sigT&nbsp;P&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;(forall&nbsp;(x:A)&nbsp;(y:P&nbsp;x),&nbsp;Q&nbsp;(x;y))&nbsp;&lt;~&gt;&nbsp;(forall&nbsp;xy,&nbsp;Q&nbsp;xy)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildEquiv&nbsp;_&nbsp;_&nbsp;(sigT_ind&nbsp;Q)&nbsp;_.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;***&nbsp;The&nbsp;negative&nbsp;universal&nbsp;property.&nbsp;*)</span>&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;sigT_coind_uncurried&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{A&nbsp;:&nbsp;X&nbsp;-&gt;&nbsp;Type}&nbsp;(P&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;{&nbsp;f&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;&amp;&nbsp;forall&nbsp;x,&nbsp;P&nbsp;x&nbsp;(f&nbsp;x)&nbsp;}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;-&gt;&nbsp;(forall&nbsp;x,&nbsp;sigT&nbsp;(P&nbsp;x))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;fun&nbsp;fg&nbsp;=&gt;&nbsp;fun&nbsp;x&nbsp;=&gt;&nbsp;(fg.1&nbsp;x&nbsp;;&nbsp;fg.2&nbsp;x).&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;sigT_coind&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{A&nbsp;:&nbsp;X&nbsp;-&gt;&nbsp;Type}&nbsp;(P&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(f&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x)&nbsp;(g&nbsp;:&nbsp;forall&nbsp;x,&nbsp;P&nbsp;x&nbsp;(f&nbsp;x))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;(forall&nbsp;x,&nbsp;sigT&nbsp;(P&nbsp;x))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;sigT_coind_uncurried&nbsp;P&nbsp;(f;g).&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;isequiv_sigT_coind&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{A&nbsp;:&nbsp;X&nbsp;-&gt;&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;IsEquiv&nbsp;(sigT_coind_uncurried&nbsp;P)&nbsp;|&nbsp;0&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildIsEquiv&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(sigT_coind_uncurried&nbsp;P)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;h&nbsp;=&gt;&nbsp;existT&nbsp;(fun&nbsp;f&nbsp;=&gt;&nbsp;forall&nbsp;x,&nbsp;P&nbsp;x&nbsp;(f&nbsp;x))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;(h&nbsp;x).1)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;(h&nbsp;x).2))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(fun&nbsp;_&nbsp;=&gt;&nbsp;1).&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;equiv_sigT_coind&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`(A&nbsp;:&nbsp;X&nbsp;-&gt;&nbsp;Type)&nbsp;(P&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;-&gt;&nbsp;Type)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;{&nbsp;f&nbsp;:&nbsp;forall&nbsp;x,&nbsp;A&nbsp;x&nbsp;&amp;&nbsp;forall&nbsp;x,&nbsp;P&nbsp;x&nbsp;(f&nbsp;x)&nbsp;}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;~&gt;&nbsp;(forall&nbsp;x,&nbsp;sigT&nbsp;(P&nbsp;x))&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildEquiv&nbsp;_&nbsp;_&nbsp;(sigT_coind_uncurried&nbsp;P)&nbsp;_.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;**&nbsp;Sigmas&nbsp;preserve&nbsp;truncation&nbsp;*)</span>&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;trunc_sigma&nbsp;`{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{IsTrunc&nbsp;n&nbsp;A}&nbsp;`{forall&nbsp;a,&nbsp;IsTrunc&nbsp;n&nbsp;(P&nbsp;a)}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;IsTrunc&nbsp;n&nbsp;(sigT&nbsp;P)&nbsp;|&nbsp;100.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;generalize&nbsp;dependent&nbsp;A.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;induction&nbsp;n;&nbsp;simpl;&nbsp;intros&nbsp;A&nbsp;P&nbsp;ac&nbsp;Pc.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;{&nbsp;exists&nbsp;(center&nbsp;A;&nbsp;center&nbsp;(P&nbsp;(center&nbsp;A))).&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;intros&nbsp;<span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode">?</span>.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;refine&nbsp;(path_sigma'&nbsp;P&nbsp;(contr&nbsp;a)&nbsp;(path_contr&nbsp;_&nbsp;_)).&nbsp;}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;{&nbsp;intros&nbsp;u&nbsp;v.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;refine&nbsp;(trunc_equiv&nbsp;_&nbsp;(path_sigma_uncurried&nbsp;P&nbsp;u&nbsp;v)).&nbsp;}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;The&nbsp;sigma&nbsp;of&nbsp;an&nbsp;arbitrary&nbsp;family&nbsp;of&nbsp;*disjoint*&nbsp;hprops&nbsp;is&nbsp;an&nbsp;hprop.&nbsp;*)</span>&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;ishprop_sigma_disjoint&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;`{forall&nbsp;a,&nbsp;IsHProp&nbsp;(P&nbsp;a)}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;(forall&nbsp;x&nbsp;y,&nbsp;P&nbsp;x&nbsp;-&gt;&nbsp;P&nbsp;y&nbsp;-&gt;&nbsp;x&nbsp;=&nbsp;y)&nbsp;-&gt;&nbsp;IsHProp&nbsp;{&nbsp;x&nbsp;:&nbsp;A&nbsp;&amp;&nbsp;P&nbsp;x&nbsp;}.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;intros&nbsp;dj;&nbsp;apply&nbsp;hprop_allpath;&nbsp;intros&nbsp;<span class="inlinecode"><span class="id" title="var">x</span></span> <span class="inlinecode"><span class="id" title="var">px</span></span>&nbsp;<span class="inlinecode"><span class="id" title="var">y</span></span> <span class="inlinecode"><span class="id" title="var">py</span></span>.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;refine&nbsp;(path_sigma'&nbsp;P&nbsp;(dj&nbsp;x&nbsp;y&nbsp;px&nbsp;py)&nbsp;_).&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;apply&nbsp;path_ishprop.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;**&nbsp;Subtypes&nbsp;(sigma&nbsp;types&nbsp;whose&nbsp;second&nbsp;components&nbsp;are&nbsp;hprops)&nbsp;*)</span>&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;To&nbsp;prove&nbsp;equality&nbsp;in&nbsp;a&nbsp;subtype,&nbsp;we&nbsp;only&nbsp;need&nbsp;equality&nbsp;of&nbsp;the&nbsp;first&nbsp;component.&nbsp;*)</span>&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;path_sigma_hprop&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;u.1&nbsp;=&nbsp;v.1&nbsp;-&gt;&nbsp;u&nbsp;=&nbsp;v&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;path_sigma_uncurried&nbsp;P&nbsp;u&nbsp;v&nbsp;o&nbsp;pr1^-1.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Global&nbsp;Instance&nbsp;isequiv_path_sigma_hprop&nbsp;{A&nbsp;P}&nbsp;`{forall&nbsp;x&nbsp;:&nbsp;A,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;{u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;IsEquiv&nbsp;(@path_sigma_hprop&nbsp;A&nbsp;P&nbsp;_&nbsp;u&nbsp;v)&nbsp;|&nbsp;100&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;isequiv_compose.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Hint&nbsp;Immediate&nbsp;isequiv_path_sigma_hprop&nbsp;:&nbsp;typeclass_instances.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;equiv_path_sigma_hprop&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{HP&nbsp;:&nbsp;forall&nbsp;a,&nbsp;IsHProp&nbsp;(P&nbsp;a)}&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;(u.1&nbsp;=&nbsp;v.1)&nbsp;&lt;~&gt;&nbsp;(u&nbsp;=&nbsp;v)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;BuildEquiv&nbsp;_&nbsp;_&nbsp;(path_sigma_hprop&nbsp;_&nbsp;_)&nbsp;_.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;isequiv_pr1_path_hprop&nbsp;{A}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;a,&nbsp;IsHProp&nbsp;(P&nbsp;a)}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;y&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;IsEquiv&nbsp;(@pr1_path&nbsp;A&nbsp;P&nbsp;x&nbsp;y)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;_&nbsp;:&nbsp;IsEquiv&nbsp;(path_sigma_hprop&nbsp;x&nbsp;y)^-1.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Hint&nbsp;Immediate&nbsp;isequiv_pr1_path_hprop&nbsp;:&nbsp;typeclass_instances.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;We&nbsp;define&nbsp;this&nbsp;for&nbsp;ease&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">SearchAbout</span></span> <span class="inlinecode"><span class="id" title="var">IsEquiv</span></span> <span class="inlinecode"><span class="id" title="var">ap</span></span> <span class="inlinecode"><span class="id" title="var">pr1</span></span>&nbsp;*)</span>&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;isequiv_ap_pr1_hprop&nbsp;{A}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;a,&nbsp;IsHProp&nbsp;(P&nbsp;a)}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;y&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;IsEquiv&nbsp;(@ap&nbsp;_&nbsp;_&nbsp;(@pr1&nbsp;A&nbsp;P)&nbsp;x&nbsp;y)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;_.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;path_sigma_hprop_1&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;(u&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;path_sigma_hprop&nbsp;u&nbsp;u&nbsp;1&nbsp;=&nbsp;1.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Proof.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;unfold&nbsp;path_sigma_hprop.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;unfold&nbsp;isequiv_pr1_contr;&nbsp;simpl.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;<span class="comment">(**&nbsp;Ugh&nbsp;*)</span>&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;refine&nbsp;(ap&nbsp;(fun&nbsp;p&nbsp;=&gt;&nbsp;match&nbsp;p&nbsp;in&nbsp;(_&nbsp;=&nbsp;v2)&nbsp;return&nbsp;(u&nbsp;=&nbsp;(u.1;&nbsp;v2))&nbsp;with&nbsp;1&nbsp;=&gt;&nbsp;1&nbsp;end)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(contr&nbsp;(idpath&nbsp;u.2))).&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Defined.&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;<span class="comment">(**&nbsp;The&nbsp;inverse&nbsp;of&nbsp;<span class="inlinecode"><span class="id" title="var">path_sigma_hprop</span></span>&nbsp;has&nbsp;its&nbsp;own&nbsp;name,&nbsp;so&nbsp;we&nbsp;give&nbsp;special&nbsp;names&nbsp;to&nbsp;the&nbsp;section&nbsp;and&nbsp;retraction&nbsp;homotopies&nbsp;to&nbsp;help&nbsp;<span class="inlinecode"><span class="id" title="tactic">rewrite</span></span>&nbsp;out.&nbsp;*)</span>&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;path_sigma_hprop_ap_pr1&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;(p&nbsp;:&nbsp;u&nbsp;=&nbsp;v)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;path_sigma_hprop&nbsp;u&nbsp;v&nbsp;(ap&nbsp;pr1&nbsp;p)&nbsp;=&nbsp;p&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;eisretr&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v)&nbsp;p.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;path_sigma_hprop_pr1_path&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;(p&nbsp;:&nbsp;u&nbsp;=&nbsp;v)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;path_sigma_hprop&nbsp;u&nbsp;v&nbsp;p..1&nbsp;=&nbsp;p&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;eisretr&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v)&nbsp;p.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;ap_pr1_path_sigma_hprop&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;(p&nbsp;:&nbsp;u.1&nbsp;=&nbsp;v.1)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;ap&nbsp;pr1&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v&nbsp;p)&nbsp;=&nbsp;p&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;eissect&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v)&nbsp;p.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;pr1_path_path_sigma_hprop&nbsp;{A&nbsp;:&nbsp;Type}&nbsp;{P&nbsp;:&nbsp;A&nbsp;-&gt;&nbsp;Type}&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`{forall&nbsp;x,&nbsp;IsHProp&nbsp;(P&nbsp;x)}&nbsp;(u&nbsp;v&nbsp;:&nbsp;sigT&nbsp;P)&nbsp;(p&nbsp;:&nbsp;u.1&nbsp;=&nbsp;v.1)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;:&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v&nbsp;p)..1&nbsp;=&nbsp;p&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;eissect&nbsp;(path_sigma_hprop&nbsp;u&nbsp;v)&nbsp;p.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">path_unit</span> (<span class="id" title="var">z</span> <span class="id" title="var">z'</span> : <span class="id" title="var">unit</span>) : <span class="id" title="var">z</span> = <span class="id" title="var">z'</span>.<br/>

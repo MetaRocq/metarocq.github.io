@@ -28,7 +28,6 @@
 <h1 class="libtitle">Library MetaRocq.Translations.standard_model</h1>
 
 <div class="code">
-<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Utils</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">utils</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Template</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="keyword">All</span>.<br/>
 <span class="id" title="keyword">From</span> <span class="id" title="var">MetaRocq.Translations</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <span class="id" title="var">translation_utils</span> <span class="id" title="var">sigma</span>.<br/>
@@ -77,7 +76,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ret</span> (<span class="id" title="var">tLambda</span> (<span class="id" title="var">nNamed</span> "γ") <span class="id" title="var">Γ'</span> (<span class="id" title="var">tSort</span> <span class="id" title="var">s</span>))<br/>
 &nbsp;&nbsp;| <span class="id" title="var">tRel</span> <span class="id" title="var">k</span> ⇒ <span class="id" title="var">Γ'</span> &lt;- <span class="id" title="var">tsl_ctx</span> <span class="id" title="var">ΣE</span> <span class="id" title="var">Γ</span> ;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ret</span> (<span class="id" title="var">tLambda</span> (<span class="id" title="var">nNamed</span> "γ") <span class="id" title="var">Γ'</span> (<span class="id" title="var">proj2</span> (<span class="id" title="var">kproj</span> <span class="id" title="var">k</span> (<span class="id" title="var">tRel</span> 0))))<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;|&nbsp;tEvar&nbsp;k&nbsp;ts&nbsp;=&gt;&nbsp;tEvar&nbsp;k&nbsp;(map&nbsp;(tsl_rec0&nbsp;n)&nbsp;ts)&nbsp;*)</span><br/>
+&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;| <span class="id" title="var">tCast</span> <span class="id" title="var">t</span> <span class="id" title="var">c</span> <span class="id" title="var">A</span> ⇒ <span class="id" title="var">Γ'</span> &lt;- <span class="id" title="var">tsl_ctx</span> <span class="id" title="var">ΣE</span> <span class="id" title="var">Γ</span> ;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t'</span> &lt;- <span class="id" title="var">tsl</span> <span class="id" title="var">ΣE</span> <span class="id" title="var">Γ</span> <span class="id" title="var">t</span> ;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">A'</span> &lt;- <span class="id" title="var">tsl</span> <span class="id" title="var">ΣE</span> <span class="id" title="var">Γ</span> <span class="id" title="var">A</span> ;;<br/>
@@ -104,10 +103,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t'</span> &lt;- <span class="id" title="var">tsl</span> <span class="id" title="var">ΣE</span> <span class="id" title="var">Γ</span> <span class="id" title="var">t</span> ;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">lu'</span> &lt;- <span class="id" title="var">monad_map</span> (<span class="id" title="var">tsl</span> <span class="id" title="var">ΣE</span> <span class="id" title="var">Γ</span>) <span class="id" title="var">lu</span> ;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ret</span> (<span class="id" title="var">tLambda</span> (<span class="id" title="var">nNamed</span> "γ") <span class="id" title="var">Γ'</span> (<span class="id" title="var">mkApps</span> (<span class="id" title="var">app0</span> <span class="id" title="var">t'</span>) (<span class="id" title="var">map</span> <span class="id" title="var">app0</span> <span class="id" title="var">lu'</span>)))<br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;|&nbsp;tCase&nbsp;ik&nbsp;t&nbsp;u&nbsp;br&nbsp;=&gt;&nbsp;tCase&nbsp;ik&nbsp;(tsl_rec0&nbsp;n&nbsp;t)&nbsp;(tsl_rec0&nbsp;n&nbsp;u)&nbsp;*)</span><br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(map&nbsp;(fun&nbsp;x&nbsp;=&gt;&nbsp;(fst&nbsp;x,&nbsp;tsl_rec0&nbsp;n&nbsp;(snd&nbsp;x)))&nbsp;br)&nbsp;*)</span><br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;|&nbsp;tFix&nbsp;:&nbsp;mfixpoint&nbsp;term&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;term&nbsp;*)</span><br/>
-&nbsp;&nbsp;<span class="comment">(*&nbsp;|&nbsp;tCoFix&nbsp;:&nbsp;mfixpoint&nbsp;term&nbsp;-&gt;&nbsp;nat&nbsp;-&gt;&nbsp;term&nbsp;*)</span><br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;| <span class="id" title="var">tConst</span> <span class="id" title="var">s</span> <span class="id" title="var">univs</span> ⇒ <span class="id" title="var">Γ'</span> &lt;- <span class="id" title="var">tsl_ctx</span> <span class="id" title="var">ΣE</span> <span class="id" title="var">Γ</span> ;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">t'</span> &lt;- <span class="id" title="var">lookup_tsl_table'</span> (<span class="id" title="var">snd</span> <span class="id" title="var">ΣE</span>) (<span class="id" title="var">ConstRef</span> <span class="id" title="var">s</span>) ;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ret</span> (<span class="id" title="var">tLambda</span> (<span class="id" title="var">nNamed</span> "γ") <span class="id" title="var">Γ'</span> (<span class="id" title="var">subst_app</span> <span class="id" title="var">t'</span> [<span class="id" title="var">ttt</span>]))<br/>
@@ -138,7 +137,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">tsl_ind</span> := <span class="id" title="var">todo</span> "tsl" |}.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;toto&nbsp;:=&nbsp;((fun&nbsp;A&nbsp;(x&nbsp;:&nbsp;A)&nbsp;=&gt;&nbsp;x)&nbsp;(Type&nbsp;:&nbsp;Type)).&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">toto</span> := <span class="id" title="keyword">fun</span> (<span class="id" title="var">f</span> : <span class="id" title="keyword">∀</span> <span class="id" title="var">A</span>, <span class="id" title="var">A</span> → <span class="id" title="var">A</span>) ⇒ <span class="id" title="var">f</span> <span class="id" title="keyword">Type</span>.<br/>
 <span class="id" title="var">MetaRocq</span> <span class="id" title="var">Run</span> (<span class="id" title="var">Translate</span> <span class="id" title="var">emptyTC</span> "toto").<br/>
 <span class="id" title="keyword">Check</span> (<span class="id" title="var">toto</span>ᵗ : <span class="id" title="var">unit</span> → (<span class="id" title="keyword">∀</span> <span class="id" title="var">A</span>, <span class="id" title="var">A</span> → <span class="id" title="var">A</span>) → <span class="id" title="keyword">Type</span> → <span class="id" title="keyword">Type</span>).<br/>

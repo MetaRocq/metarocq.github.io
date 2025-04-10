@@ -28,7 +28,6 @@
 <h1 class="libtitle">Library MetaRocq.Translations.times_bool_fun</h1>
 
 <div class="code">
-<span class="comment">(*&nbsp;Distributed&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;MIT&nbsp;license.&nbsp;*)</span><br/>
 <span class="id" title="keyword">Set</span> <span class="id" title="var">Warnings</span> "-notation-overridden".<br/>
 
 <br/>
@@ -132,15 +131,11 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">dbody</span> := <span class="id" title="var">b'</span>; <span class="id" title="var">rarg</span> := <span class="id" title="var">r</span> |})<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">bodies</span> ;;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ret</span> (<span class="id" title="var">tFix</span> <span class="id" title="var">bodies'</span> <span class="id" title="var">n</span>)<br/>
-&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">raise</span> <span class="id" title="var">TranslationNotHandeled</span> <span class="comment">(*&nbsp;var&nbsp;evar&nbsp;meta&nbsp;case&nbsp;cofix&nbsp;*)</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">raise</span> <span class="id" title="var">TranslationNotHandeled</span> <br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span><br/>
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Definition&nbsp;recompose_prod&nbsp;(nas&nbsp;:&nbsp;list&nbsp;name)&nbsp;(ts&nbsp;:&nbsp;list&nbsp;term)&nbsp;(u&nbsp;:&nbsp;term)&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:&nbsp;term&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;:=&nbsp;let&nbsp;nats&nbsp;:=&nbsp;List.combine&nbsp;nas&nbsp;ts&nbsp;in&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List.fold_right&nbsp;(fun&nbsp;t&nbsp;u&nbsp;=&gt;&nbsp;tProd&nbsp;(fst&nbsp;t)&nbsp;(snd&nbsp;t)&nbsp;u)&nbsp;u&nbsp;nats.&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">combine'</span> {<span class="id" title="var">A</span> <span class="id" title="var">B</span>} (<span class="id" title="var">p</span> : <span class="id" title="var">list</span> <span class="id" title="var">A</span> × <span class="id" title="var">list</span> <span class="id" title="var">B</span>) : <span class="id" title="var">list</span> (<span class="id" title="var">A</span> × <span class="id" title="var">B</span>)<br/>
@@ -157,7 +152,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">replace</span> (<span class="id" title="var">up</span> <span class="id" title="var">pat</span>) (<span class="id" title="var">up</span> <span class="id" title="var">u</span>) <span class="id" title="var">B</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">tApp</span> <span class="id" title="var">t</span> <span class="id" title="var">us</span> ⇒ <span class="id" title="var">tApp</span> (<span class="id" title="tactic">replace</span> <span class="id" title="var">pat</span> <span class="id" title="var">u</span> <span class="id" title="var">t</span>) (<span class="id" title="var">List.map</span> (<span class="id" title="tactic">replace</span> <span class="id" title="var">pat</span> <span class="id" title="var">u</span>) <span class="id" title="var">us</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">tProj</span> <span class="id" title="var">p</span> <span class="id" title="var">t</span> ⇒ <span class="id" title="var">tProj</span> <span class="id" title="var">p</span> (<span class="id" title="tactic">replace</span> <span class="id" title="var">pat</span> <span class="id" title="var">u</span> <span class="id" title="var">t</span>)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">t</span> <span class="comment">(*&nbsp;todo&nbsp;*)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">_</span> ⇒ <span class="id" title="var">t</span> <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
@@ -169,8 +164,6 @@
 &nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;If&nbsp;tm&nbsp;of&nbsp;type&nbsp;typ&nbsp;=&nbsp;Π&nbsp;<span class="inlinecode"><span class="id" title="var">A0</span></span>&nbsp;<span class="inlinecode"><span class="id" title="var">A1</span></span>&nbsp;...&nbsp;.&nbsp;<span class="inlinecode"><span class="id" title="var">B</span></span>,&nbsp;returns&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;a&nbsp;term&nbsp;of&nbsp;type&nbsp;<span class="inlinecode"><span class="id" title="var">Π</span></span> <span class="inlinecode"><span class="id" title="var">A0</span></span> <span class="inlinecode"><span class="id" title="var">A1</span></span> <span class="inlinecode">...</span> <span class="inlinecode">.</span> <span class="inlinecode"><span class="id" title="var">B</span></span>&nbsp;*)</span><br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">pouet</span> (<span class="id" title="var">tm</span> <span class="id" title="var">typ</span> : <span class="id" title="var">term</span>) : <span class="id" title="var">term</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">simple</span> <span class="id" title="tactic">refine</span> (<span class="id" title="keyword">let</span> '((<span class="id" title="var">names</span>, <span class="id" title="var">types</span>), <span class="id" title="var">last</span>) := <span class="id" title="var">decompose_prod</span> <span class="id" title="var">typ</span> <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">L'</span> := <span class="id" title="var">List.fold_left</span> <span class="id" title="var">_</span> (<span class="id" title="var">List.combine</span> <span class="id" title="var">names</span> <span class="id" title="var">types</span>) [] <span class="id" title="tactic">in</span> <span class="id" title="var">_</span>).<br/>
@@ -198,8 +191,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_params</span> := <span class="id" title="var">_</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_bodies</span> := <span class="id" title="var">snd</span> <span class="id" title="var">LI</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_universes</span> := <span class="id" title="var">mind</span>.(<span class="id" title="var">ind_universes</span>);<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_variance</span> := <span class="id" title="var">mind</span>.(<span class="id" title="var">ind_variance</span>)|}])). <span class="comment">(*&nbsp;FIXME&nbsp;always&nbsp;ok?&nbsp;*)</span><br/>
-&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">i</span> <span class="id" title="var">ind</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_variance</span> := <span class="id" title="var">mind</span>.(<span class="id" title="var">ind_variance</span>)|}])). &nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">i</span> <span class="id" title="var">ind</span>.<br/>
 &nbsp;&nbsp;<span class="id" title="tactic">simple</span> <span class="id" title="tactic">refine</span> (<span class="id" title="keyword">let</span> <span class="id" title="var">ind_type'</span> := <span class="id" title="var">_</span> <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">let</span> <span class="id" title="var">ctors'</span> := <span class="id" title="var">List.split</span> (<span class="id" title="var">mapi</span> <span class="id" title="var">_</span> <span class="id" title="var">ind</span>.(<span class="id" title="var">ind_ctors</span>)) <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">_</span> :: <span class="id" title="var">fst</span> <span class="id" title="var">ctors'</span>,<br/>
@@ -211,13 +203,13 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_ctors</span> := <span class="id" title="var">snd</span> <span class="id" title="var">ctors'</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_projs</span> := [];<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">ind_relevance</span> := <span class="id" title="var">ind</span>.(<span class="id" title="var">ind_relevance</span>) |})).<br/>
-&nbsp;&nbsp;+ <span class="comment">(*&nbsp;arity&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="keyword">let</span> <span class="id" title="var">L</span> := <span class="id" title="var">decompose_prod</span> <span class="id" title="var">ind</span>.(<span class="id" title="var">ind_type</span>) <span class="id" title="tactic">in</span> <span class="id" title="var">_</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simple</span> <span class="id" title="tactic">refine</span> (<span class="id" title="keyword">let</span> <span class="id" title="var">L'</span> := <span class="id" title="var">List.fold_left</span> <span class="id" title="var">_</span> (<span class="id" title="var">combine'</span> (<span class="id" title="var">fst</span> <span class="id" title="var">L</span>)) [] <span class="id" title="tactic">in</span> <span class="id" title="var">_</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">Γ'</span> <span class="id" title="var">A</span> ⇒ <span class="id" title="var">Γ'</span> ,, <span class="id" title="var">vass</span> (<span class="id" title="var">fst</span> <span class="id" title="var">A</span>) (<span class="id" title="var">tsl</span> <span class="id" title="var">Γ'</span> (<span class="id" title="var">snd</span> <span class="id" title="var">A</span>))).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">List.fold_left</span> <span class="id" title="var">_</span> <span class="id" title="var">L'</span> (<span class="id" title="var">snd</span> <span class="id" title="var">L</span>)).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">t</span> <span class="id" title="var">decl</span> ⇒ <span class="id" title="var">tProd</span> <span class="id" title="var">decl</span>.(<span class="id" title="var">decl_name</span>) <span class="id" title="var">decl</span>.(<span class="id" title="var">decl_type</span>) <span class="id" title="var">t</span>).<br/>
-&nbsp;&nbsp;+ <span class="comment">(*&nbsp;constructors&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">k</span> [<span class="id" title="var">name</span> <span class="id" title="var">argctx</span> <span class="id" title="var">indices</span> <span class="id" title="var">typ</span> <span class="id" title="var">nargs</span>].<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simple</span> <span class="id" title="tactic">refine</span> (<span class="id" title="keyword">let</span> <span class="id" title="var">ctor_type'</span> := <span class="id" title="var">_</span> <span class="id" title="tactic">in</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((<span class="id" title="var">ConstructRef</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">kn</span> <span class="id" title="var">i</span>) <span class="id" title="var">k</span>,<br/>
@@ -237,10 +229,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span>).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;× <span class="id" title="tactic">refine</span> (<span class="id" title="var">fold_left_i</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">t</span> <span class="id" title="var">l</span> <span class="id" title="var">_</span> ⇒ <span class="id" title="tactic">replace</span> (<span class="id" title="var">tRel</span> <span class="id" title="var">l</span>) (<span class="id" title="var">tInd</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">kn'</span> <span class="id" title="var">i</span>) []) <span class="id" title="var">t</span>)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">mind</span>.(<span class="id" title="var">ind_bodies</span>) <span class="id" title="var">ctor_type'</span>).<br/>
-&nbsp;&nbsp;+ <span class="comment">(*&nbsp;table&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="var">IndRef</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">kn</span> <span class="id" title="var">i</span>), <span class="id" title="var">pouet</span> (<span class="id" title="var">tInd</span> (<span class="id" title="var">mkInd</span> <span class="id" title="var">kn'</span> <span class="id" title="var">i</span>) []) <span class="id" title="var">ind_type'</span>).<br/>
 &nbsp;&nbsp;+ <span class="id" title="tactic">exact</span> <span class="id" title="var">mind</span>.(<span class="id" title="var">ind_finite</span>).<br/>
-&nbsp;&nbsp;+ <span class="comment">(*&nbsp;parameters&nbsp;*)</span><br/>
+&nbsp;&nbsp;+ <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">simple</span> <span class="id" title="tactic">refine</span> (<span class="id" title="var">List.fold_right</span> <span class="id" title="var">_</span> [] (<span class="id" title="var">mind</span>.(<span class="id" title="var">ind_params</span>))).<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">exact</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">A</span> <span class="id" title="var">Γ'</span> ⇒ <span class="id" title="var">Γ'</span> ,, <span class="id" title="var">vass</span> (<span class="id" title="var">decl_name</span> <span class="id" title="var">A</span>) (<span class="id" title="var">tsl</span> <span class="id" title="var">Γ'</span> (<span class="id" title="var">decl_type</span> <span class="id" title="var">A</span>))).<br/>
 <span class="id" title="keyword">Defined</span>.<br/>
@@ -312,17 +304,8 @@
 <span class="id" title="keyword">Defined</span>.<br/>
 
 <br/>
-<span class="comment">(*&nbsp;Require&nbsp;Import&nbsp;Vector&nbsp;Even.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;SS&nbsp;:=&nbsp;S.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;MetaRocq&nbsp;Run&nbsp;(TC&nbsp;&lt;-&nbsp;Translate&nbsp;emptyTC&nbsp;"nat"&nbsp;;;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TC&nbsp;&lt;-&nbsp;Translate&nbsp;TC&nbsp;"even"&nbsp;;;&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmDefinition&nbsp;"TC2"&nbsp;TC).&nbsp;*)</span><br/>
 
 <br/>
-<span class="comment">(*&nbsp;Inductive&nbsp;foo&nbsp;:=&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;|&nbsp;bar&nbsp;:&nbsp;(nat&nbsp;-&gt;&nbsp;foo)&nbsp;-&gt;&nbsp;foo.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;Definition&nbsp;bar'&nbsp;:=&nbsp;bar.&nbsp;*)</span><br/>
-<span class="comment">(*&nbsp;MetaRocq&nbsp;Run&nbsp;(TranslateRec&nbsp;TC2&nbsp;bar').&nbsp;*)</span><br/>
 
 <br/>
 <span class="id" title="keyword">Definition</span> <span class="id" title="var">UIP</span> := <span class="id" title="keyword">∀</span> <span class="id" title="var">A</span> (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <span class="id" title="var">A</span>) (<span class="id" title="var">p</span> <span class="id" title="var">q</span> : <span class="id" title="var">x</span> = <span class="id" title="var">y</span>), <span class="id" title="var">p</span> = <span class="id" title="var">q</span>.<br/>
